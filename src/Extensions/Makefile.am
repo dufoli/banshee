@@ -14,6 +14,7 @@ SUBDIRS = \
 	Banshee.InternetRadio \
 	Banshee.Lastfm \
 	Banshee.LastfmStreaming \
+	Banshee.Lastfm.Fingerprint \
 	Banshee.LibraryWatcher \
 	Banshee.MiniMode \
 	Banshee.MiroGuide \

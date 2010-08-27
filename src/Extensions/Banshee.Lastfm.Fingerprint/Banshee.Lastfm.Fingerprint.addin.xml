@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Addin 
+    id="Banshee.Lastfm.Fingerprint"
+    version="1.0"
+    compatVersion="1.0"
+    copyright="© 2010 Licensed under the MIT X11 license."
+    name="Lastfm fingerprint"
+    category="Utilities"
+    description="Fetch metadata of the song from acoustic fingerprint."
+    author="Olivier Dufour"
+    url="http://banshee.fm/"
+    defaultEnabled="true">
+
+  <Dependencies>
+    <Addin id="Banshee.Services" version="1.0"/>
+    <Addin id="Banshee.ThickClient" version="1.0"/>
+    <Service name="InterfaceActionService"/>
+  </Dependencies>
+
+  <Extension path="/Banshee/ServiceManager/Service">
+    <Service class="Banshee.Lastfm.Fingerprint.LastfmFingerprintService"/>
+  </Extension>
+
+
+</Addin>

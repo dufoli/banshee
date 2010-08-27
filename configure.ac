@@ -348,6 +348,7 @@ src/Extensions/Banshee.Fixup/Makefile
 src/Extensions/Banshee.InternetRadio/Makefile
 src/Extensions/Banshee.Lastfm/Makefile
 src/Extensions/Banshee.LastfmStreaming/Makefile
+src/Extensions/Banshee.Lastfm.Fingerprint/Makefile
 src/Extensions/Banshee.LibraryWatcher/Makefile
 src/Extensions/Banshee.MiniMode/Makefile
 src/Extensions/Banshee.MiroGuide/Makefile
