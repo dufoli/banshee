@@ -6,7 +6,6 @@ INCLUDES = \
 	$(GLIB_CFLAGS) \
 	$(GSTREAMER_CFLAGS)
 
-if ENABLE_LASTFMFPBRIDGE
 noinst_PROGRAMS = lastfmfpbrigetest
 
 lastfmfpbrigelibdir = $(EXTENSION_DIR)
@@ -27,14 +26,13 @@ lastfmfpbrigetest_LDADD = \
 	liblastfmfpbrige.la \
 	$(GSTREAMER_LIBS)
 
-all: ../bin/liblastfmfpbrige.so
+all: $(top_builddir)/bin/liblastfmfpbrige.so
 
-../bin/liblastfmfpbrige.so: liblastfmfpbrige.la
-	mkdir -p ../bin
-	cp -f .libs/liblastfmfpbrige.so $@
-endif
+$(top_builddir)/bin/liblastfmfpbrige.so: liblastfmfpbrige.la
+	mkdir -p $(top_builddir)/bin
+	cp -f liblastfmfpbrige.so $@
 
-CLEANFILES = ../bin/liblastfmfpbrige.so
+CLEANFILES = $(top_builddir)/bin/liblastfmfpbrige.so
 MAINTAINERCLEANFILES = Makefile.in
 EXTRA_DIST = $(liblastfmfpbrige_la_SOURCES)
 
