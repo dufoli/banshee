@@ -42,6 +42,7 @@ AC_SUBST([ACLOCAL_AMFLAGS], ["-I build/m4/shamrock -I build/m4/banshee -I build/
 
 IT_PROG_INTLTOOL([0.35.0])
 AC_PROG_LIBTOOL
+AC_PROG_CXX
 AC_PROG_INSTALL
 
 dnl How to configure for distcheck
