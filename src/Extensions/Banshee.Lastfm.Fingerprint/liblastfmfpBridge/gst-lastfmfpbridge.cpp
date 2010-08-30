@@ -29,7 +29,27 @@
 #include <gst/gst.h>
 
 #include "gst-lastfmfpbridge.h"
+
+#include "Sha256File.h" // for SHA 256
+#include "mbid_mp3.h"   // for musicbrainz ID
+
 #include "FingerprintExtractor.h"
+#include "HTTPClient.h" // for connection
+#include <map>
+#include <cstring>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <cctype> // for tolower
+#include <algorithm>
+
+
+// hacky!
+#ifdef WIN32
+#define SLASH '\\'
+#else
+#define SLASH '/'
+#endif
 
 struct LastfmfpAudio {
 
@@ -44,20 +64,35 @@ struct LastfmfpAudio {
     gint filerate;
     gint seconds;
     gint winsize;
-    gint samples;
+    //gint samples;
 
+	std::string file;
+	
 	//input
-    float *data_in;
+    short *data_in;
     size_t input_frames;
     
     fingerprint::FingerprintExtractor extractor;
-    int fpid
+    int fpid;
 
     gboolean quit;
     gboolean invalidate;
 };
 
+
 static const int NUM_FRAMES_CLIENT = 32; // ~= 10 secs.
+const char FP_SERVER_NAME[]       = "ws.audioscrobbler.com/fingerprint/query/";
+const char HTTP_POST_DATA_NAME[]  = "fpdata";
+
+
+// just turn it into a string. Similar to boost::lexical_cast
+template <typename T>
+std::string toString(const T& val)
+{
+   std::ostringstream oss;
+   oss << val;
+   return oss.str();
+}
 
 #define SRC_BUFFERLENGTH 4096
 
@@ -112,28 +147,81 @@ Lastfmfp_cb_have_data(GstElement *element, GstBuffer *buffer, GstPad *pad, Lastf
     ma->input_frames = (size_t)(GST_BUFFER_SIZE(buffer)/sizeof(short));
 
     //extractor.process(const short* pPCM, size_t num_samples, bool end_of_stream = false);
-    if (extractor.process(ma->data_in, ma->input_frames, false))//TODO check parametters
+    if (ma->extractor.process(ma->data_in, ma->input_frames, false))//TODO check parametters
     {
         //we have the fingerprint
-        pair<const char*, size_t> fpData = fextr.getFingerprint();
+        std::pair<const char*, size_t> fpData = ma->extractor.getFingerprint();
         
-        // send the fingerprint data, and get the fingerprint ID
-        HTTPClient client;
-        string c = client.postRawObj( serverName, urlParams, 
-                                    fpData.first, fpData.second, 
-                                    HTTP_POST_DATA_NAME, false );
-        int fpid;
-        istringstream iss(c);
-        iss >> fpid;
+        std::map<std::string, std::string> urlParams;
         
+        // Musicbrainz ID
+        char mbid_ch[MBID_BUFFER_SIZE];
+        if ( getMP3_MBID(ma->file.c_str(), mbid_ch) != -1 )
+      		urlParams["mbid"] = std::string(mbid_ch);
+
+        size_t lastSlash = ma->file.find_last_of(SLASH);
+	    if ( lastSlash != std::string::npos )
+	       urlParams["filename"] = ma->file.substr(lastSlash+1);
+	    else
+	       urlParams["filename"] = ma->file;
+	
+		const int SHA_SIZE = 32;
+		unsigned char sha256[SHA_SIZE]; // 32 bytes
+		Sha256File::getHash(ma->file, sha256);
+		
+		urlParams["sha256"] = Sha256File::toHexString(sha256, SHA_SIZE);
+		
+		//TODO add map as params for tags and used it to fill urlparams
+		/*
+		// artist
+		addEntry( urlParams, "artist", string(pTag->artist().toCString(true)) );
+		
+		// album
+		addEntry( urlParams, "album", string(pTag->album().toCString(true)) );
+		
+		// title
+		addEntry( urlParams, "track", string(pTag->title().toCString(true)) );
+		
+		// track num
+		if ( pTag->track() > 0 )
+		addEntry( urlParams, "tracknum", toString(pTag->track()) );
+		
+		// year
+		if ( pTag->year() > 0 )
+		addEntry( urlParams, "year", toString(pTag->year()) );
+		
+		// genre
+		addEntry( urlParams, "genre", string(pTag->genre().toCString(true)) );
+		
+		
+		if ( forceDuration > 0 )
+		  urlParams["duration"] = toString(forceDuration);
+		else
+		  urlParams["duration"] = toString(duration); // this is absolutely mandatory
+		
+		urlParams["username"]   = PUBLIC_CLIENT_NAME; // replace with username if possible
+		urlParams["samplerate"] = toString(samplerate);
+		*/
+		size_t version = ma->extractor.getVersion();
+		// wow, that's odd.. If I god directly with getVersion I get a strange warning with VS2005.. :P
+		urlParams["fpversion"]  = toString( version ); 
+		
+		// send the fingerprint data, and get the fingerprint ID
+		HTTPClient client;
+		std::string c = client.postRawObj( FP_SERVER_NAME, urlParams, 
+		                            fpData.first, fpData.second, 
+		                            HTTP_POST_DATA_NAME, false );
+		std::istringstream iss(c);
+		iss >> ma->fpid;
+		
 		//stop the gstreamer loop to free all and return fpid
-        GstBus *bus = gst_pipeline_get_bus(GST_PIPELINE(ma->pipeline));
-        GstMessage* eosmsg = gst_message_new_eos(GST_OBJECT(ma->pipeline));
-        gst_bus_post(bus, eosmsg);
-        g_print("libmirageaudio: EOS Message sent\n");
-        gst_object_unref(bus);
-        ma->quit = TRUE;
-        return;
+		GstBus *bus = gst_pipeline_get_bus(GST_PIPELINE(ma->pipeline));
+		GstMessage* eosmsg = gst_message_new_eos(GST_OBJECT(ma->pipeline));
+		gst_bus_post(bus, eosmsg);
+		g_print("libmirageaudio: EOS Message sent\n");
+		gst_object_unref(bus);
+		ma->quit = TRUE;
+		return;
 
     }
     
@@ -151,7 +239,7 @@ Lastfmfp_initialize(gint rate, gint seconds, gint winsize)
     ma = g_new0(LastfmfpAudio, 1);
     ma->rate = rate;
     ma->seconds = seconds;
-    ma->extractor = new FingerprintExtractor ();
+    //ma->extractor = new fingerprint::FingerprintExtractor ();
 
     
     //TODO not sure if rate is good
@@ -180,7 +268,9 @@ Lastfmfp_initgstreamer(LastfmfpAudio *ma, const gchar *file)
 
     // Gstreamer decoder setup
     ma->pipeline = gst_pipeline_new("pipeline");
-
+	
+	ma->file = file;
+	
     // decoder
     src = gst_element_factory_make("filesrc", "source");
     g_object_set(G_OBJECT(src), "location", file, NULL);
@@ -285,7 +375,7 @@ Lastfmfp_decode(LastfmfpAudio *ma, const gchar *file, int* size, int* ret)
     *ret = 0;
     while (decoding) {
         GstMessage* message = gst_bus_timed_pop_filtered(bus, GST_MSECOND*100,
-                GST_MESSAGE_ERROR | GST_MESSAGE_EOS);
+               (GstMessageType) (GST_MESSAGE_ERROR | GST_MESSAGE_EOS));
 
         if (message == NULL)
             continue;

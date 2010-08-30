@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{701B2CAC-935F-47DB-A7F5-29DFDB4CAF8C}</ProjectGuid>
+    <Target>Bin</Target>
+    <Language>CPP</Language>
+    <Compiler>
+      <Compiler ctype="GppCompiler" />
+    </Compiler>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineSymbols>DEBUG MONODEVELOP</DefineSymbols>
+    <SourceDirectory>.</SourceDirectory>
+    <OutputName>liblastfmfpBridge</OutputName>
+    <CompileTarget>SharedLibrary</CompileTarget>
+    <Includes>
+      <Includes>
+        <Include>/usr/include/gstreamer-0.10</Include>
+        <Include>/usr/include/glib-2.0</Include>
+        <Include>/usr/lib/glib-2.0/include</Include>
+        <Include>/usr/include/libxml2</Include>
+      </Includes>
+    </Includes>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release</OutputPath>
+    <DefineSymbols>MONODEVELOP</DefineSymbols>
+    <SourceDirectory>.</SourceDirectory>
+    <OptimizationLevel>3</OptimizationLevel>
+    <OutputName>liblastfmfpBridge</OutputName>
+    <CompileTarget>SharedLibrary</CompileTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="FingerprintExtractor.h" />
+    <None Include="gst-lastfmfpbridge.h" />
+    <None Include="HTTPClient.h" />
+    <None Include="mbid_mp3.h" />
+    <None Include="Sha256.h" />
+    <None Include="Sha256File.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="gst-lastfmfpbridge.cpp" />
+    <Compile Include="HTTPClient.cpp" />
+    <Compile Include="Sha256.cpp" />
+    <Compile Include="Sha256File.cpp" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties>
+        <MonoDevelop.Autotools.MakefileInfo RelativeMakefileName="Makefile.am" IsAutotoolsProject="true" RelativeConfigureInPath="../../../..">
+          <BuildFilesVar Name="liblastfmfpbrige_la_SOURCES" />
+          <DeployFilesVar />
+          <ResourcesVar Name="INCLUDES" />
+          <OthersVar />
+          <GacRefVar />
+          <AsmRefVar />
+          <ProjectRefVar />
+          <MessageRegex Name="gcc" />
+        </MonoDevelop.Autotools.MakefileInfo>
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
+</Project>
