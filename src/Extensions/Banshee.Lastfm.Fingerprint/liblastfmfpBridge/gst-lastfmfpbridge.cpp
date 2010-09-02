@@ -66,11 +66,12 @@ struct LastfmfpAudio {
     gint winsize;
     //gint samples;
 
-	std::string file;
-	
-	//input
+    std::string file;
+    
+    //input
     short *data_in;
     size_t input_frames;
+    std::map<std::string, std::string> urlParams;
     
     fingerprint::FingerprintExtractor extractor;
     int fpid;
@@ -152,76 +153,45 @@ Lastfmfp_cb_have_data(GstElement *element, GstBuffer *buffer, GstPad *pad, Lastf
         //we have the fingerprint
         std::pair<const char*, size_t> fpData = ma->extractor.getFingerprint();
         
-        std::map<std::string, std::string> urlParams;
+        
         
         // Musicbrainz ID
         char mbid_ch[MBID_BUFFER_SIZE];
         if ( getMP3_MBID(ma->file.c_str(), mbid_ch) != -1 )
-      		urlParams["mbid"] = std::string(mbid_ch);
+              urlParams["mbid"] = std::string(mbid_ch);
 
         size_t lastSlash = ma->file.find_last_of(SLASH);
-	    if ( lastSlash != std::string::npos )
-	       urlParams["filename"] = ma->file.substr(lastSlash+1);
-	    else
-	       urlParams["filename"] = ma->file;
-	
-		const int SHA_SIZE = 32;
-		unsigned char sha256[SHA_SIZE]; // 32 bytes
-		Sha256File::getHash(ma->file, sha256);
-		
-		urlParams["sha256"] = Sha256File::toHexString(sha256, SHA_SIZE);
-		
-		//TODO add map as params for tags and used it to fill urlparams
-		/*
-		// artist
-		addEntry( urlParams, "artist", string(pTag->artist().toCString(true)) );
-		
-		// album
-		addEntry( urlParams, "album", string(pTag->album().toCString(true)) );
-		
-		// title
-		addEntry( urlParams, "track", string(pTag->title().toCString(true)) );
-		
-		// track num
-		if ( pTag->track() > 0 )
-		addEntry( urlParams, "tracknum", toString(pTag->track()) );
-		
-		// year
-		if ( pTag->year() > 0 )
-		addEntry( urlParams, "year", toString(pTag->year()) );
-		
-		// genre
-		addEntry( urlParams, "genre", string(pTag->genre().toCString(true)) );
-		
-		
-		if ( forceDuration > 0 )
-		  urlParams["duration"] = toString(forceDuration);
-		else
-		  urlParams["duration"] = toString(duration); // this is absolutely mandatory
-		
-		urlParams["username"]   = PUBLIC_CLIENT_NAME; // replace with username if possible
-		urlParams["samplerate"] = toString(samplerate);
-		*/
-		size_t version = ma->extractor.getVersion();
-		// wow, that's odd.. If I god directly with getVersion I get a strange warning with VS2005.. :P
-		urlParams["fpversion"]  = toString( version ); 
-		
-		// send the fingerprint data, and get the fingerprint ID
-		HTTPClient client;
-		std::string c = client.postRawObj( FP_SERVER_NAME, urlParams, 
-		                            fpData.first, fpData.second, 
-		                            HTTP_POST_DATA_NAME, false );
-		std::istringstream iss(c);
-		iss >> ma->fpid;
-		
-		//stop the gstreamer loop to free all and return fpid
-		GstBus *bus = gst_pipeline_get_bus(GST_PIPELINE(ma->pipeline));
-		GstMessage* eosmsg = gst_message_new_eos(GST_OBJECT(ma->pipeline));
-		gst_bus_post(bus, eosmsg);
-		g_print("libmirageaudio: EOS Message sent\n");
-		gst_object_unref(bus);
-		ma->quit = TRUE;
-		return;
+        if ( lastSlash != std::string::npos )
+           urlParams["filename"] = ma->file.substr(lastSlash+1);
+        else
+           urlParams["filename"] = ma->file;
+    
+        const int SHA_SIZE = 32;
+        unsigned char sha256[SHA_SIZE]; // 32 bytes
+        Sha256File::getHash(ma->file, sha256);
+        
+        urlParams["sha256"] = Sha256File::toHexString(sha256, SHA_SIZE);
+        
+        size_t version = ma->extractor.getVersion();
+        // wow, that's odd.. If I god directly with getVersion I get a strange warning with VS2005.. :P
+        urlParams["fpversion"]  = toString( version ); 
+        
+        // send the fingerprint data, and get the fingerprint ID
+        HTTPClient client;
+        std::string c = client.postRawObj( FP_SERVER_NAME, urlParams, 
+                                    fpData.first, fpData.second, 
+                                    HTTP_POST_DATA_NAME, false );
+        std::istringstream iss(c);
+        iss >> ma->fpid;
+        
+        //stop the gstreamer loop to free all and return fpid
+        GstBus *bus = gst_pipeline_get_bus(GST_PIPELINE(ma->pipeline));
+        GstMessage* eosmsg = gst_message_new_eos(GST_OBJECT(ma->pipeline));
+        gst_bus_post(bus, eosmsg);
+        g_print("libmirageaudio: EOS Message sent\n");
+        gst_object_unref(bus);
+        ma->quit = TRUE;
+        return;
 
     }
     
@@ -230,7 +200,7 @@ Lastfmfp_cb_have_data(GstElement *element, GstBuffer *buffer, GstPad *pad, Lastf
 }
 
 LastfmfpAudio*
-Lastfmfp_initialize(gint rate, gint seconds, gint winsize)
+Lastfmfp_initialize(gint rate, gint seconds, gint winsize, const gchar *artist, const gchar *album, const gchar *title, gint tracknum, gint year, const gchar *genre)
 {
     LastfmfpAudio *ma;
     gint i;
@@ -241,7 +211,35 @@ Lastfmfp_initialize(gint rate, gint seconds, gint winsize)
     ma->seconds = seconds;
     //ma->extractor = new fingerprint::FingerprintExtractor ();
 
+    //TODO if all work! remove the httpclient and tags urlparams
+    //and just return the finger print and let csharp done the 
     
+    // artist
+    addEntry( ma->urlParams, "artist", string(artist) );
+
+    // album
+    addEntry( ma->urlParams, "album", string(album) );
+
+    // title
+    addEntry( ma->urlParams, "track", string(title) );
+
+    // track num
+    if ( tracknum > 0 )
+    addEntry( ma->urlParams, "tracknum", toString(tracknum) );
+
+    // year
+    if ( year > 0 )
+    addEntry( ma->urlParams, "year", toString(year) );
+
+    // genre
+    addEntry( ma->urlParams, "genre", string(genre) );
+
+    urlParams["duration"] = toString(seconds);
+
+    urlParams["username"]   = PUBLIC_CLIENT_NAME; // replace with username if possible
+    urlParams["samplerate"] = toString(rate);
+    
+        
     //TODO not sure if rate is good
     //ma->extractor.initForQuery(int freq, int nchannels, int duration = -1);
     ma->extractor.initForQuery(rate, winsize, seconds);
@@ -268,9 +266,9 @@ Lastfmfp_initgstreamer(LastfmfpAudio *ma, const gchar *file)
 
     // Gstreamer decoder setup
     ma->pipeline = gst_pipeline_new("pipeline");
-	
-	ma->file = file;
-	
+    
+    ma->file = file;
+    
     // decoder
     src = gst_element_factory_make("filesrc", "source");
     g_object_set(G_OBJECT(src), "location", file, NULL);
