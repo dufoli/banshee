@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 using System;
 using System.Runtime.InteropServices;
+
 namespace Banshee.Lastfm.Fingerprint
 {
 
@@ -38,11 +39,11 @@ namespace Banshee.Lastfm.Fingerprint
 
     public class AudioDecoder
     {
-        [DllImport("liblastfmfpBridge")]
+        [DllImport("liblastfmfpBridge", CharSet=CharSet.Unicode)]
         static extern IntPtr Lastfmfp_initialize (int rate, int seconds, int winsize, string artist, string album, string title, int tracknum, int year, string genre);
 
         [DllImport("liblastfmfpBridge")]
-        static extern int Lastfmfp_decode (IntPtr ma, string file, ref int frames, ref int size, ref int ret);
+        static extern int Lastfmfp_decode (IntPtr ma, string file, ref int size, ref int ret);
 
         [DllImport("liblastfmfpBridge")]
         static extern IntPtr Lastfmfp_destroy (IntPtr ma);
@@ -50,11 +51,12 @@ namespace Banshee.Lastfm.Fingerprint
         [DllImport("liblastfmfpBridge")]
         static extern void Lastfmfp_canceldecode (IntPtr ma);
 
+
         IntPtr ma;
 
         public AudioDecoder (int rate, int seconds, int winsize, string artist, string album, string title, int tracknum, int year, string genre)
         {
-            ma = Lastfmfp_initialize (rate, seconds, winsize, artist, album, title, tracknum, year, genre);
+            ma = Lastfmfp_initialize (rate, seconds, winsize, artist??string.Empty, album??string.Empty, title??string.Empty, tracknum, year, genre??string.Empty);
         }
 
         public int Decode (string file)
@@ -62,7 +64,7 @@ namespace Banshee.Lastfm.Fingerprint
             int frames = 0;
             int size = 0;
             int ret = 0;
-            return Lastfmfp_decode (ma, file, ref frames, ref size, ref ret);
+            return Lastfmfp_decode (ma, file, ref size, ref ret);
         }
 
         ~AudioDecoder ()

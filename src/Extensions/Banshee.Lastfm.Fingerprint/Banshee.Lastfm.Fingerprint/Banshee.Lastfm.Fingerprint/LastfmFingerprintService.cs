@@ -33,6 +33,10 @@ using System.Threading;
 using Hyena.Jobs;
 using Hyena;
 using System.Runtime.InteropServices;
+using Banshee.Collection;
+using System.Net;
+using System.IO;
+using System.Xml;
 
 namespace Banshee.Lastfm.Fingerprint
 {
@@ -77,31 +81,86 @@ namespace Banshee.Lastfm.Fingerprint
 
         private void OnGetTagFromFingerprint (object sender, EventArgs args)
         {
+            Source source = ServiceManager.SourceManager.ActiveSource;
 
-            ThreadPool.QueueUserWorkItem (delegate {
+            UserJob job = new UserJob (Catalog.GetString ("Getting sound fingerprint"));
+            job.SetResources (Resource.Cpu, Resource.Disk, Resource.Database);
+            job.PriorityHints = PriorityHints.SpeedSensitive;
+            job.Status = Catalog.GetString ("Scanning...");
+            job.IconNames = new string [] { "system-search", "gtk-find" };
+            job.Register ();
 
-                Source source = ServiceManager.SourceManager.ActiveSource;
+            //ThreadPool.QueueUserWorkItem (delegate {
+            try {
 
-                UserJob job = new UserJob (Catalog.GetString ("Getting sound fingerprint"));
-                job.SetResources (Resource.Cpu, Resource.Disk, Resource.Database);
-                job.PriorityHints = PriorityHints.SpeedSensitive;
-                job.Status = Catalog.GetString ("Scanning...");
-                job.IconNames = new string [] { "system-search", "gtk-find" };
-                job.Register ();
-    
                 var selection = ((ITrackModelSource)source).TrackModel.Selection;
                 int total = selection.Count;
                 int count = 0;
 
-                foreach (int index in selection) {
-                    Thread.Sleep (index * 1000);
+                foreach (TrackInfo track in ((ITrackModelSource)source).TrackModel.SelectedItems) {
 
-                    //job.Status = String.Format ("{0} - {1}",
+                    AudioDecoder ad = new AudioDecoder(track.SampleRate, (int)track.Duration.TotalSeconds, 1024, track.ArtistName, track.AlbumTitle,
+                                                      track.TrackTitle, track.TrackNumber, track.Year, track.Genre);
+
+                    int fpid = ad.Decode (track.Uri.AbsolutePath);
+                    //TODO get metadata from id
+                    FetchMetadata (track, fpid);
+
                     job.Progress = (double)++count / (double)total;
                 }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine (e);
+            }
+            finally
+            {
                 job.Finish ();
-            });
+            }
+            //});
         }
+
+        void FetchMetadata (TrackInfo track, int fpid)
+        {
+            string query = string.Format("http://ws.audioscrobbler.com/2.0/?method=track.getfingerprintmetadata&fingerprintid={0}&api_key=2bfed60da64b96c16ea77adbf5fe1a82", fpid);
+            WebRequest request = WebRequest.Create (query);
+            WebResponse rsp =  request.GetResponse ();
+            XmlDocument doc = new XmlDocument();
+
+            using (Stream stream = rsp.GetResponseStream ())
+            {
+                //XmlTextReader reader = new XmlTextReader(Stream);
+                //reader.re
+                doc.Load (stream);
+                foreach (XmlNode node in doc.SelectNodes("/tracks/track"))
+                {
+                    if (!node.HasChildNodes)
+                        continue;
+
+                    track.TrackTitle = node["name"].Value;
+                    track.MusicBrainzId = node["mbid"].Value;
+                    track.MoreInfoUri = new SafeUri (node["url"].Value);
+
+                    //node["streamable"].Value;
+                    XmlNode anode = node["artist"];
+                    if (anode.HasChildNodes) {
+                        track.ArtistName = anode["name"].Value;
+                        track.ArtistMusicBrainzId = anode["mbid"].Value;
+                        //anode["url"].Value;//url of cover
+                    }
+
+                    //TODO Get cover
+                    //best is to use code of MetadataServiceJob.SaveHttpStreamCover
+                    //but hard to get it because protected... TODO find a way to reuse this code
+                    // size = small, medium, large or extralarge
+                    //node["image"].Value;//depend of size
+
+                }
+            }
+
+        }
+
 
         void UpdateActions ()
         {

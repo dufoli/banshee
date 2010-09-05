@@ -95,6 +95,51 @@ std::string toString(const T& val)
    return oss.str();
 }
 
+bool plain_isspace(char c)
+{
+   if ( c == ' ' || 
+        c == '\t' ||
+        c == '\n' ||
+        c == '\r' )
+   {
+      return true;
+   }
+   else
+   {
+      return false;
+   }
+}
+
+std::string simpleTrim( const std::string& str )
+{
+   if ( str.empty() )
+      return "";
+
+   // left trim
+   std::string::const_iterator lIt = str.begin();
+   for ( ; plain_isspace(*lIt) && lIt != str.end(); ++lIt );
+   if ( lIt == str.end() )
+      return str;
+
+   std::string::const_iterator rIt = str.end();
+   --rIt;
+
+   for ( ; plain_isspace(*rIt) && rIt != str.begin(); --rIt );
+   ++rIt;
+   
+   return std::string(lIt, rIt);
+}
+
+void addEntry ( std::map<std::string, std::string>& urlParams, const std::string& key, const std::string& val )
+{
+   if ( key.empty() || val.empty() )
+      return;
+   if ( urlParams.find(key) != urlParams.end() )
+      return; // do not add something that was already there
+
+   urlParams[key] = simpleTrim(val);
+}
+
 #define SRC_BUFFERLENGTH 4096
 
 static void
@@ -158,27 +203,27 @@ Lastfmfp_cb_have_data(GstElement *element, GstBuffer *buffer, GstPad *pad, Lastf
         // Musicbrainz ID
         char mbid_ch[MBID_BUFFER_SIZE];
         if ( getMP3_MBID(ma->file.c_str(), mbid_ch) != -1 )
-              urlParams["mbid"] = std::string(mbid_ch);
+              ma->urlParams["mbid"] = std::string(mbid_ch);
 
         size_t lastSlash = ma->file.find_last_of(SLASH);
         if ( lastSlash != std::string::npos )
-           urlParams["filename"] = ma->file.substr(lastSlash+1);
+           ma->urlParams["filename"] = ma->file.substr(lastSlash+1);
         else
-           urlParams["filename"] = ma->file;
+           ma->urlParams["filename"] = ma->file;
     
         const int SHA_SIZE = 32;
         unsigned char sha256[SHA_SIZE]; // 32 bytes
         Sha256File::getHash(ma->file, sha256);
         
-        urlParams["sha256"] = Sha256File::toHexString(sha256, SHA_SIZE);
+        ma->urlParams["sha256"] = Sha256File::toHexString(sha256, SHA_SIZE);
         
         size_t version = ma->extractor.getVersion();
         // wow, that's odd.. If I god directly with getVersion I get a strange warning with VS2005.. :P
-        urlParams["fpversion"]  = toString( version ); 
+        ma->urlParams["fpversion"]  = toString( version ); 
         
         // send the fingerprint data, and get the fingerprint ID
         HTTPClient client;
-        std::string c = client.postRawObj( FP_SERVER_NAME, urlParams, 
+        std::string c = client.postRawObj( FP_SERVER_NAME, ma->urlParams, 
                                     fpData.first, fpData.second, 
                                     HTTP_POST_DATA_NAME, false );
         std::istringstream iss(c);
@@ -215,29 +260,29 @@ Lastfmfp_initialize(gint rate, gint seconds, gint winsize, const gchar *artist, 
     //and just return the finger print and let csharp done the 
     
     // artist
-    addEntry( ma->urlParams, "artist", string(artist) );
+    addEntry(ma->urlParams, "artist", std::string(artist));
 
     // album
-    addEntry( ma->urlParams, "album", string(album) );
+    addEntry(ma->urlParams, "album", std::string(album));
 
     // title
-    addEntry( ma->urlParams, "track", string(title) );
+    addEntry(ma->urlParams, "track", std::string(title));
 
     // track num
     if ( tracknum > 0 )
-    addEntry( ma->urlParams, "tracknum", toString(tracknum) );
+    addEntry(ma->urlParams, "tracknum", toString(tracknum));
 
     // year
     if ( year > 0 )
-    addEntry( ma->urlParams, "year", toString(year) );
+    	addEntry(ma->urlParams, "year", toString(year));
 
     // genre
-    addEntry( ma->urlParams, "genre", string(genre) );
+    addEntry(ma->urlParams, "genre", genre);
 
-    urlParams["duration"] = toString(seconds);
+    ma->urlParams["duration"] = toString(seconds);
 
-    urlParams["username"]   = PUBLIC_CLIENT_NAME; // replace with username if possible
-    urlParams["samplerate"] = toString(rate);
+    ma->urlParams["username"]   = "banshee client";
+    ma->urlParams["samplerate"] = toString(rate);
     
         
     //TODO not sure if rate is good
@@ -465,3 +510,5 @@ Lastfmfp_canceldecode(LastfmfpAudio *ma)
         }
     }
 }
+
+

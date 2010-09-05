@@ -54,9 +54,9 @@
     <MonoDevelop>
       <Properties>
         <MonoDevelop.Autotools.MakefileInfo RelativeMakefileName="Makefile.am" IsAutotoolsProject="true" RelativeConfigureInPath="../../../..">
-          <BuildFilesVar Name="liblastfmfpbrige_la_SOURCES" />
+          <BuildFilesVar />
           <DeployFilesVar />
-          <ResourcesVar Name="INCLUDES" />
+          <ResourcesVar Sync="true" Name="INCLUDES" />
           <OthersVar />
           <GacRefVar />
           <AsmRefVar />
