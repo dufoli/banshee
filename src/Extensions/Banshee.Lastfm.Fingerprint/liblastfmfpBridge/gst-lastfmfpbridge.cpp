@@ -42,7 +42,7 @@
 #include <sstream>
 #include <cctype> // for tolower
 #include <algorithm>
-
+#include <string>
 
 // hacky!
 #ifdef WIN32
@@ -71,16 +71,17 @@ struct LastfmfpAudio {
     //input
     short *data_in;
     size_t input_frames;
-    std::map<std::string, std::string> urlParams;
+
     
-    fingerprint::FingerprintExtractor extractor;
     int fpid;
 
     gboolean quit;
     gboolean invalidate;
 };
 
-
+std::map<std::string, std::string> urlParams;
+fingerprint::FingerprintExtractor extractor;
+    
 static const int NUM_FRAMES_CLIENT = 32; // ~= 10 secs.
 const char FP_SERVER_NAME[]       = "ws.audioscrobbler.com/fingerprint/query/";
 const char HTTP_POST_DATA_NAME[]  = "fpdata";
@@ -94,7 +95,8 @@ std::string toString(const T& val)
    oss << val;
    return oss.str();
 }
-
+extern "C"
+{
 bool plain_isspace(char c)
 {
    if ( c == ' ' || 
@@ -137,7 +139,7 @@ void addEntry ( std::map<std::string, std::string>& urlParams, const std::string
    if ( urlParams.find(key) != urlParams.end() )
       return; // do not add something that was already there
 
-   urlParams[key] = simpleTrim(val);
+    urlParams[key] = simpleTrim(val);
 }
 
 #define SRC_BUFFERLENGTH 4096
@@ -193,37 +195,37 @@ Lastfmfp_cb_have_data(GstElement *element, GstBuffer *buffer, GstPad *pad, Lastf
     ma->input_frames = (size_t)(GST_BUFFER_SIZE(buffer)/sizeof(short));
 
     //extractor.process(const short* pPCM, size_t num_samples, bool end_of_stream = false);
-    if (ma->extractor.process(ma->data_in, ma->input_frames, false))//TODO check parametters
+    if (extractor.process(ma->data_in, ma->input_frames, false))//TODO check parametters
     {
         //we have the fingerprint
-        std::pair<const char*, size_t> fpData = ma->extractor.getFingerprint();
+        std::pair<const char*, size_t> fpData = extractor.getFingerprint();
         
         
         
         // Musicbrainz ID
         char mbid_ch[MBID_BUFFER_SIZE];
         if ( getMP3_MBID(ma->file.c_str(), mbid_ch) != -1 )
-              ma->urlParams["mbid"] = std::string(mbid_ch);
+              urlParams["mbid"] = std::string(mbid_ch);
 
         size_t lastSlash = ma->file.find_last_of(SLASH);
         if ( lastSlash != std::string::npos )
-           ma->urlParams["filename"] = ma->file.substr(lastSlash+1);
+           urlParams["filename"] = ma->file.substr(lastSlash+1);
         else
-           ma->urlParams["filename"] = ma->file;
+           urlParams["filename"] = ma->file;
     
         const int SHA_SIZE = 32;
         unsigned char sha256[SHA_SIZE]; // 32 bytes
         Sha256File::getHash(ma->file, sha256);
         
-        ma->urlParams["sha256"] = Sha256File::toHexString(sha256, SHA_SIZE);
+        urlParams["sha256"] = Sha256File::toHexString(sha256, SHA_SIZE);
         
-        size_t version = ma->extractor.getVersion();
+        size_t version = extractor.getVersion();
         // wow, that's odd.. If I god directly with getVersion I get a strange warning with VS2005.. :P
-        ma->urlParams["fpversion"]  = toString( version ); 
+        urlParams["fpversion"]  = toString( version ); 
         
         // send the fingerprint data, and get the fingerprint ID
         HTTPClient client;
-        std::string c = client.postRawObj( FP_SERVER_NAME, ma->urlParams, 
+        std::string c = client.postRawObj( FP_SERVER_NAME, urlParams, 
                                     fpData.first, fpData.second, 
                                     HTTP_POST_DATA_NAME, false );
         std::istringstream iss(c);
@@ -255,39 +257,41 @@ Lastfmfp_initialize(gint rate, gint seconds, gint winsize, const gchar *artist, 
     ma->rate = rate;
     ma->seconds = seconds;
     //ma->extractor = new fingerprint::FingerprintExtractor ();
+	
+	std::map<std::string, std::string> urlParams;
 
     //TODO if all work! remove the httpclient and tags urlparams
     //and just return the finger print and let csharp done the 
     
     // artist
-    addEntry(ma->urlParams, "artist", std::string(artist));
+    addEntry(urlParams, "artist", std::string(g_strdup(artist)));
 
     // album
-    addEntry(ma->urlParams, "album", std::string(album));
+    addEntry(urlParams, "album", std::string(g_strdup(album)));
 
     // title
-    addEntry(ma->urlParams, "track", std::string(title));
+    addEntry(urlParams, "track", "a");//g_strdup(title)
 
     // track num
     if ( tracknum > 0 )
-    addEntry(ma->urlParams, "tracknum", toString(tracknum));
+    addEntry(urlParams, "tracknum", toString(tracknum));
 
     // year
     if ( year > 0 )
-    	addEntry(ma->urlParams, "year", toString(year));
+    	addEntry(urlParams, "year", toString(year));
 
     // genre
-    addEntry(ma->urlParams, "genre", genre);
+    addEntry(urlParams, "genre", g_strdup(genre));
 
-    ma->urlParams["duration"] = toString(seconds);
+    urlParams["duration"] = toString(seconds);
 
-    ma->urlParams["username"]   = "banshee client";
-    ma->urlParams["samplerate"] = toString(rate);
+    urlParams["username"]   = "banshee client";
+    urlParams["samplerate"] = toString(rate);
     
         
     //TODO not sure if rate is good
     //ma->extractor.initForQuery(int freq, int nchannels, int duration = -1);
-    ma->extractor.initForQuery(rate, winsize, seconds);
+    extractor.initForQuery(rate, winsize, seconds);
     
     // cancel decoding mutex
     ma->decoding_mutex = g_mutex_new();
@@ -510,5 +514,5 @@ Lastfmfp_canceldecode(LastfmfpAudio *ma)
         }
     }
 }
-
+}
 

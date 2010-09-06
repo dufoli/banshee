@@ -39,7 +39,7 @@ namespace Banshee.Lastfm.Fingerprint
 
     public class AudioDecoder
     {
-        [DllImport("liblastfmfpBridge", CharSet=CharSet.Unicode)]
+        [DllImport("liblastfmfpBridge")]
         static extern IntPtr Lastfmfp_initialize (int rate, int seconds, int winsize, string artist, string album, string title, int tracknum, int year, string genre);
 
         [DllImport("liblastfmfpBridge")]

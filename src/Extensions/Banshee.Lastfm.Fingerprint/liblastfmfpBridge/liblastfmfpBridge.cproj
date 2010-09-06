@@ -11,10 +11,11 @@
     <Compiler>
       <Compiler ctype="GppCompiler" />
     </Compiler>
+    <ReleaseVersion>1.3</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Debug</OutputPath>
+    <OutputPath>..\..\..\..\bin</OutputPath>
     <DefineSymbols>DEBUG MONODEVELOP</DefineSymbols>
     <SourceDirectory>.</SourceDirectory>
     <OutputName>liblastfmfpBridge</OutputName>
