@@ -22,7 +22,6 @@
  */
 
 //#include <math.h>
-#include <string.h>
 #include <time.h>
 
 #include <glib.h>
@@ -95,8 +94,7 @@ std::string toString(const T& val)
    oss << val;
    return oss.str();
 }
-extern "C"
-{
+
 bool plain_isspace(char c)
 {
    if ( c == ' ' || 
@@ -142,6 +140,7 @@ void addEntry ( std::map<std::string, std::string>& urlParams, const std::string
     urlParams[key] = simpleTrim(val);
 }
 
+extern "C" {
 #define SRC_BUFFERLENGTH 4096
 
 static void
@@ -270,7 +269,7 @@ Lastfmfp_initialize(gint rate, gint seconds, gint winsize, const gchar *artist, 
     addEntry(urlParams, "album", std::string(g_strdup(album)));
 
     // title
-    addEntry(urlParams, "track", "a");//g_strdup(title)
+    addEntry(urlParams, "track", std::string(g_strdup(title)));
 
     // track num
     if ( tracknum > 0 )

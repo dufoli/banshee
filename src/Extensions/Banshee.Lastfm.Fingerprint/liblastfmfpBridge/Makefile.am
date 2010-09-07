@@ -1,16 +1,14 @@
-INCLUDES =  \
-	$(GLIB_CFLAGS) \
-	$(GSTREAMER_CFLAGS) \
-	-D_FORTIFY_SOURCE=2 \
-	-ggdb3 \
-	-I$(top_srcdir) \
-	-Wall
+INCLUDES =
 
 lastfmfpBridgelibdir = $(EXTENSION_DIR)
 lastfmfpBridgelib_LTLIBRARIES = liblastfmfpBridge.la
 
 liblastfmfpBridge_la_LDFLAGS = -avoid-version -module
-liblastfmfpBridge_la_SOURCES = gst-lastfmfpbridge.cpp
+liblastfmfpBridge_la_SOURCES =  \
+	gst-lastfmfpbridge.cpp \
+	HTTPClient.cpp \
+	Sha256.cpp \
+	Sha256File.cpp
 
 liblastfmfpBridge_la_LIBADD = \
 	$(GLIB_LIBS) \
@@ -18,11 +16,10 @@ liblastfmfpBridge_la_LIBADD = \
 
 all: $(top_builddir)/bin/liblastfmfpBridge.so
 
-$(top_builddir)/bin/liblastfmfp.so : liblastfmfp.la
+$(top_builddir)/bin/liblastfmfpBridge.so : liblastfmfpBridge.la
 	mkdir -p $(top_builddir)/bin
 	cp -f liblastfmfp.so $@
 
 CLEANFILES = $(top_builddir)/bin/liblastfmfpBridge.so
 MAINTAINERCLEANFILES = Makefile.in
 EXTRA_DIST = $(liblastfmfpBridge_la_SOURCES)
-

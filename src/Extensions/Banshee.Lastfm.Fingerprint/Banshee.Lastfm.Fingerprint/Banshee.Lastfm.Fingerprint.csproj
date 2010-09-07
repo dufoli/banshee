@@ -16,19 +16,21 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\bin</OutputPath>
+    <OutputPath>..\..\..\..\bin</OutputPath>
     <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\bin</OutputPath>
+    <OutputPath>..\..\..\..\bin</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Banshee.Lastfm.Fingerprint\" />
@@ -77,9 +79,9 @@
     <MonoDevelop>
       <Properties>
         <MonoDevelop.Autotools.MakefileInfo IntegrationEnabled="true" RelativeMakefileName="Makefile.am" IsAutotoolsProject="true" RelativeConfigureInPath="../../..">
-          <BuildFilesVar Sync="true" Name="SOURCES" />
+          <BuildFilesVar Name="liblastfmfpbrige_la_SOURCES" />
           <DeployFilesVar />
-          <ResourcesVar Sync="true" Name="RESOURCES" />
+          <ResourcesVar Name="RESOURCES" />
           <OthersVar />
           <GacRefVar Name="LINK" Prefix="-r:" />
           <AsmRefVar Name="LINK" Prefix="-r:" />
@@ -89,6 +91,8 @@
     </MonoDevelop>
   </ProjectExtensions>
   <ItemGroup>
-    <None Include="Banshee.Lastfm.Fingerprint.dll.config" />
+    <None Include="Banshee.Lastfm.Fingerprint.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

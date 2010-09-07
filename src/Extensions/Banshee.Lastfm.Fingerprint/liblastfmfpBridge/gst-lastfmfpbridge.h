@@ -25,17 +25,17 @@
 
 typedef struct LastfmfpAudio LastfmfpAudio;
 
- extern "C" LastfmfpAudio*
+extern "C" LastfmfpAudio*
 Lastfmfp_initialize(gint rate, gint seconds, gint winsize, const gchar *artist, const gchar *album, const gchar *title, gint tracknum, gint year, const gchar *genre);
 
- extern "C" int
+extern "C" int
 Lastfmfp_decode(LastfmfpAudio *ma, const gchar *file, int* size, int* ret);
 
- extern "C" LastfmfpAudio*
+extern "C" LastfmfpAudio*
 Lastfmfp_destroy(LastfmfpAudio *ma);
 
- extern "C" void
+extern "C" void
 Lastfmfp_canceldecode(LastfmfpAudio *ma);
 
- extern "C" void
+extern "C" void
 Lastfmfp_initgst();
