@@ -39,16 +39,16 @@ namespace Banshee.Lastfm.Fingerprint
 
     public class AudioDecoder
     {
-        [DllImport("liblastfmfpBridge.dll")]
+        [DllImport("liblastfmfpBridge")]
         static extern IntPtr Lastfmfp_initialize (int rate, int seconds, int winsize, string artist, string album, string title, int tracknum, int year, string genre);
 
-        [DllImport("liblastfmfpBridge.dll")]
+        [DllImport("liblastfmfpBridge")]
         static extern int Lastfmfp_decode (IntPtr ma, string file, ref int size, ref int ret);
 
-        [DllImport("liblastfmfpBridge.dll")]
+        [DllImport("liblastfmfpBridge")]
         static extern IntPtr Lastfmfp_destroy (IntPtr ma);
 
-        [DllImport("liblastfmfpBridge.dll")]
+        [DllImport("liblastfmfpBridge")]
         static extern void Lastfmfp_canceldecode (IntPtr ma);
 
 

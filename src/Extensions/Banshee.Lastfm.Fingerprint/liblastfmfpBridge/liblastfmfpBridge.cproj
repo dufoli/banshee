@@ -11,6 +11,7 @@
     <Compiler>
       <Compiler ctype="GppCompiler" />
     </Compiler>
+    <ReleaseVersion>1.3</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -25,8 +26,14 @@
         <Include>/usr/include/glib-2.0</Include>
         <Include>/usr/lib/glib-2.0/include</Include>
         <Include>/usr/include/libxml2</Include>
+        <Include>/home/dufoli/src/lastfm fingerprint/fplib/include</Include>
       </Includes>
     </Includes>
+    <Libs>
+      <Libs>
+        <Lib>/usr/lib/liblastfmfp.so</Lib>
+      </Libs>
+    </Libs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release</OutputPath>
@@ -37,7 +44,6 @@
     <CompileTarget>SharedLibrary</CompileTarget>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="FingerprintExtractor.h" />
     <None Include="gst-lastfmfpbridge.h" />
     <None Include="HTTPClient.h" />
     <None Include="mbid_mp3.h" />

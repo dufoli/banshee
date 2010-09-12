@@ -32,7 +32,8 @@
 #include "Sha256File.h" // for SHA 256
 #include "mbid_mp3.h"   // for musicbrainz ID
 
-#include "FingerprintExtractor.h"
+#include <FingerprintExtractor.h>
+
 #include "HTTPClient.h" // for connection
 #include <map>
 #include <cstring>
@@ -70,7 +71,7 @@ struct LastfmfpAudio {
     //input
     short *data_in;
     size_t input_frames;
-
+	fingerprint::FingerprintExtractor extractor;
     
     int fpid;
 
@@ -79,7 +80,7 @@ struct LastfmfpAudio {
 };
 
 std::map<std::string, std::string> urlParams;
-fingerprint::FingerprintExtractor extractor;
+
     
 static const int NUM_FRAMES_CLIENT = 32; // ~= 10 secs.
 const char FP_SERVER_NAME[]       = "ws.audioscrobbler.com/fingerprint/query/";
@@ -140,7 +141,7 @@ void addEntry ( std::map<std::string, std::string>& urlParams, const std::string
     urlParams[key] = simpleTrim(val);
 }
 
-extern "C" {
+
 #define SRC_BUFFERLENGTH 4096
 
 static void
@@ -194,10 +195,10 @@ Lastfmfp_cb_have_data(GstElement *element, GstBuffer *buffer, GstPad *pad, Lastf
     ma->input_frames = (size_t)(GST_BUFFER_SIZE(buffer)/sizeof(short));
 
     //extractor.process(const short* pPCM, size_t num_samples, bool end_of_stream = false);
-    if (extractor.process(ma->data_in, ma->input_frames, false))//TODO check parametters
+    if (ma->extractor.process(ma->data_in, ma->input_frames, false))//TODO check parametters
     {
         //we have the fingerprint
-        std::pair<const char*, size_t> fpData = extractor.getFingerprint();
+        std::pair<const char*, size_t> fpData = ma->extractor.getFingerprint();
         
         
         
@@ -218,7 +219,7 @@ Lastfmfp_cb_have_data(GstElement *element, GstBuffer *buffer, GstPad *pad, Lastf
         
         urlParams["sha256"] = Sha256File::toHexString(sha256, SHA_SIZE);
         
-        size_t version = extractor.getVersion();
+        size_t version = ma->extractor.getVersion();
         // wow, that's odd.. If I god directly with getVersion I get a strange warning with VS2005.. :P
         urlParams["fpversion"]  = toString( version ); 
         
@@ -245,7 +246,12 @@ Lastfmfp_cb_have_data(GstElement *element, GstBuffer *buffer, GstPad *pad, Lastf
     return;
 }
 
-LastfmfpAudio*
+void initForQuery(LastfmfpAudio *ma, int freq, int nchannels, int duration = -1)
+{
+	ma->extractor.initForQuery(freq, nchannels, duration);
+}
+
+extern "C" LastfmfpAudio*
 Lastfmfp_initialize(gint rate, gint seconds, gint winsize, const gchar *artist, const gchar *album, const gchar *title, gint tracknum, gint year, const gchar *genre)
 {
     LastfmfpAudio *ma;
@@ -290,7 +296,7 @@ Lastfmfp_initialize(gint rate, gint seconds, gint winsize, const gchar *artist, 
         
     //TODO not sure if rate is good
     //ma->extractor.initForQuery(int freq, int nchannels, int duration = -1);
-    extractor.initForQuery(rate, winsize, seconds);
+    initForQuery(ma, rate, winsize, seconds);
     
     // cancel decoding mutex
     ma->decoding_mutex = g_mutex_new();
@@ -387,7 +393,7 @@ Lastfmfp_initgstreamer(LastfmfpAudio *ma, const gchar *file)
     gst_object_unref(pad);
 }
 
-int
+extern "C" int
 Lastfmfp_decode(LastfmfpAudio *ma, const gchar *file, int* size, int* ret)
 {
     GstBus *bus;
@@ -471,7 +477,7 @@ Lastfmfp_decode(LastfmfpAudio *ma, const gchar *file, int* size, int* ret)
     return ma->fpid;
 }
 
-LastfmfpAudio*
+extern "C" LastfmfpAudio*
 Lastfmfp_destroy(LastfmfpAudio *ma)
 {
     g_print("libLastfmfp: destroy.\n");
@@ -484,13 +490,13 @@ Lastfmfp_destroy(LastfmfpAudio *ma)
     return NULL;
 }
 
-void
+extern "C" void
 Lastfmfp_initgst()
 {
     gst_init(NULL, NULL);
 }
 
-void
+extern "C" void
 Lastfmfp_canceldecode(LastfmfpAudio *ma)
 {
     if (GST_IS_ELEMENT(ma->pipeline)) {
@@ -513,5 +519,5 @@ Lastfmfp_canceldecode(LastfmfpAudio *ma)
         }
     }
 }
-}
+
 

@@ -52,6 +52,10 @@
       <Project>{2ADB831A-A050-47D0-B6B9-9C19D60233BB}</Project>
       <Name>Banshee.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\liblastfmfpBridge\liblastfmfpBridge.cproj">
+      <Project>{701B2CAC-935F-47DB-A7F5-29DFDB4CAF8C}</Project>
+      <Name>liblastfmfpBridge</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Banshee.Lastfm.Fingerprint\LastfmFingerprintService.cs" />
@@ -92,7 +96,7 @@
   </ProjectExtensions>
   <ItemGroup>
     <None Include="Banshee.Lastfm.Fingerprint.dll.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 </Project>
