@@ -26,14 +26,15 @@
         <Include>/usr/include/glib-2.0</Include>
         <Include>/usr/lib/glib-2.0/include</Include>
         <Include>/usr/include/libxml2</Include>
-        <Include>/home/dufoli/src/lastfm fingerprint/fplib/include</Include>
       </Includes>
     </Includes>
     <Libs>
       <Libs>
-        <Lib>/usr/lib/liblastfmfp.so</Lib>
+        <Lib>/usr/lib/libfftw3f.so</Lib>
+        <Lib>/usr/lib/libsamplerate.so</Lib>
       </Libs>
     </Libs>
+    <ExtraCompilerArguments>-lfftw</ExtraCompilerArguments>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release</OutputPath>
@@ -49,15 +50,21 @@
     <None Include="mbid_mp3.h" />
     <None Include="Sha256.h" />
     <None Include="Sha256File.h" />
-    <None Include="liblastfmfp.so">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <None Include="CircularArray.h" />
+    <None Include="Filter.h" />
+    <None Include="FingerprintExtractor.h" />
+    <None Include="FloatingAverage.h" />
+    <None Include="fp_helper_fun.h" />
+    <None Include="OptFFT.h" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gst-lastfmfpbridge.cpp" />
     <Compile Include="HTTPClient.cpp" />
     <Compile Include="Sha256.cpp" />
     <Compile Include="Sha256File.cpp" />
+    <Compile Include="Filter.cpp" />
+    <Compile Include="FingerprintExtractor.cpp" />
+    <Compile Include="OptFFT.cpp" />
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>

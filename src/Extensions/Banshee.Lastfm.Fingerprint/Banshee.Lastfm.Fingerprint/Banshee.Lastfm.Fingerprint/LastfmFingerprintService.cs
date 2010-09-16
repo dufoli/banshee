@@ -99,7 +99,8 @@ namespace Banshee.Lastfm.Fingerprint
 
                 foreach (TrackInfo track in ((ITrackModelSource)source).TrackModel.SelectedItems) {
 
-                    AudioDecoder ad = new AudioDecoder(track.SampleRate, (int)track.Duration.TotalSeconds, 1024, track.ArtistName, track.AlbumTitle,
+                    //TODO : hardcoded nchannels (stereo only )
+                    AudioDecoder ad = new AudioDecoder(track.SampleRate, (int)track.Duration.TotalSeconds, 2, track.ArtistName, track.AlbumTitle,
                                                       track.TrackTitle, track.TrackNumber, track.Year, track.Genre);
 
                     int fpid = ad.Decode (track.Uri.AbsolutePath);

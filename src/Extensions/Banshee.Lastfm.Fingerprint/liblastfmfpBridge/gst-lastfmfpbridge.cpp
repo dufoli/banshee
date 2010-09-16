@@ -32,7 +32,7 @@
 #include "Sha256File.h" // for SHA 256
 #include "mbid_mp3.h"   // for musicbrainz ID
 
-#include <FingerprintExtractor.h>
+#include "FingerprintExtractor.h"
 
 #include "HTTPClient.h" // for connection
 #include <map>
@@ -65,13 +65,13 @@ struct LastfmfpAudio {
     gint seconds;
     gint winsize;
     //gint samples;
-
-    std::string file;
     
+	fingerprint::FingerprintExtractor *extractor;
+	
     //input
     short *data_in;
     size_t input_frames;
-	fingerprint::FingerprintExtractor extractor;
+	
     
     int fpid;
 
@@ -80,13 +80,33 @@ struct LastfmfpAudio {
 };
 
 std::map<std::string, std::string> urlParams;
-
+std::string filename;
     
 static const int NUM_FRAMES_CLIENT = 32; // ~= 10 secs.
 const char FP_SERVER_NAME[]       = "ws.audioscrobbler.com/fingerprint/query/";
 const char HTTP_POST_DATA_NAME[]  = "fpdata";
 
+////ONLY FOR TEST
+//TODO Remove later
+/*
+gint
+main (gint   argc,
+      gchar *argv[])
+{
+  // init GStreamer
+  gst_init (&argc, &argv);
 
+
+  int size = 0;
+  int ret = 0;
+
+  LastfmfpAudio *ma = Lastfmfp_initialize(44100, 363, 2, "artist", "album", "title", 1, 2010, "Rock");
+  Lastfmfp_decode(ma, "", &size, &ret);
+  ma = Lastfmfp_destroy(ma);
+
+  return 0;
+}
+*/
 // just turn it into a string. Similar to boost::lexical_cast
 template <typename T>
 std::string toString(const T& val)
@@ -195,31 +215,31 @@ Lastfmfp_cb_have_data(GstElement *element, GstBuffer *buffer, GstPad *pad, Lastf
     ma->input_frames = (size_t)(GST_BUFFER_SIZE(buffer)/sizeof(short));
 
     //extractor.process(const short* pPCM, size_t num_samples, bool end_of_stream = false);
-    if (ma->extractor.process(ma->data_in, ma->input_frames, false))//TODO check parametters
+    if (ma->extractor->process(ma->data_in, ma->input_frames, false))//TODO check parametters
     {
         //we have the fingerprint
-        std::pair<const char*, size_t> fpData = ma->extractor.getFingerprint();
+        std::pair<const char*, size_t> fpData = ma->extractor->getFingerprint();
         
         
         
         // Musicbrainz ID
         char mbid_ch[MBID_BUFFER_SIZE];
-        if ( getMP3_MBID(ma->file.c_str(), mbid_ch) != -1 )
+        if ( getMP3_MBID(filename.c_str(), mbid_ch) != -1 )
               urlParams["mbid"] = std::string(mbid_ch);
 
-        size_t lastSlash = ma->file.find_last_of(SLASH);
+        size_t lastSlash = filename.find_last_of(SLASH);
         if ( lastSlash != std::string::npos )
-           urlParams["filename"] = ma->file.substr(lastSlash+1);
+           urlParams["filename"] = filename.substr(lastSlash+1);
         else
-           urlParams["filename"] = ma->file;
+           urlParams["filename"] = filename;
     
         const int SHA_SIZE = 32;
         unsigned char sha256[SHA_SIZE]; // 32 bytes
-        Sha256File::getHash(ma->file, sha256);
+        Sha256File::getHash(filename, sha256);
         
         urlParams["sha256"] = Sha256File::toHexString(sha256, SHA_SIZE);
         
-        size_t version = ma->extractor.getVersion();
+        size_t version = ma->extractor->getVersion();
         // wow, that's odd.. If I god directly with getVersion I get a strange warning with VS2005.. :P
         urlParams["fpversion"]  = toString( version ); 
         
@@ -248,10 +268,12 @@ Lastfmfp_cb_have_data(GstElement *element, GstBuffer *buffer, GstPad *pad, Lastf
 
 void initForQuery(LastfmfpAudio *ma, int freq, int nchannels, int duration = -1)
 {
-	ma->extractor.initForQuery(freq, nchannels, duration);
+    fingerprint::FingerprintExtractor extractor;
+	extractor.initForQuery(freq, nchannels, duration);
+	ma->extractor = &extractor;
 }
 
-extern "C" LastfmfpAudio*
+extern "C"  LastfmfpAudio*
 Lastfmfp_initialize(gint rate, gint seconds, gint winsize, const gchar *artist, const gchar *album, const gchar *title, gint tracknum, gint year, const gchar *genre)
 {
     LastfmfpAudio *ma;
@@ -261,7 +283,6 @@ Lastfmfp_initialize(gint rate, gint seconds, gint winsize, const gchar *artist, 
     ma = g_new0(LastfmfpAudio, 1);
     ma->rate = rate;
     ma->seconds = seconds;
-    //ma->extractor = new fingerprint::FingerprintExtractor ();
 	
 	std::map<std::string, std::string> urlParams;
 
@@ -293,7 +314,7 @@ Lastfmfp_initialize(gint rate, gint seconds, gint winsize, const gchar *artist, 
     urlParams["username"]   = "banshee client";
     urlParams["samplerate"] = toString(rate);
     
-        
+    
     //TODO not sure if rate is good
     //ma->extractor.initForQuery(int freq, int nchannels, int duration = -1);
     initForQuery(ma, rate, winsize, seconds);
@@ -321,7 +342,7 @@ Lastfmfp_initgstreamer(LastfmfpAudio *ma, const gchar *file)
     // Gstreamer decoder setup
     ma->pipeline = gst_pipeline_new("pipeline");
     
-    ma->file = file;
+    filename = std::string(g_strdup(file));
     
     // decoder
     src = gst_element_factory_make("filesrc", "source");
