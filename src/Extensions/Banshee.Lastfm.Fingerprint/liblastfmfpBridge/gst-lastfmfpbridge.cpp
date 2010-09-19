@@ -66,11 +66,11 @@ struct LastfmfpAudio {
     gint winsize;
     //gint samples;
     
-	fingerprint::FingerprintExtractor *extractor;
+    fingerprint::FingerprintExtractor *extractor;
 	
     //input
     short *data_in;
-    size_t input_frames;
+    size_t num_samples;
 	
     
     int fpid;
@@ -86,27 +86,6 @@ static const int NUM_FRAMES_CLIENT = 32; // ~= 10 secs.
 const char FP_SERVER_NAME[]       = "ws.audioscrobbler.com/fingerprint/query/";
 const char HTTP_POST_DATA_NAME[]  = "fpdata";
 
-////ONLY FOR TEST
-//TODO Remove later
-/*
-gint
-main (gint   argc,
-      gchar *argv[])
-{
-  // init GStreamer
-  gst_init (&argc, &argv);
-
-
-  int size = 0;
-  int ret = 0;
-
-  LastfmfpAudio *ma = Lastfmfp_initialize(44100, 363, 2, "artist", "album", "title", 1, 2010, "Rock");
-  Lastfmfp_decode(ma, "", &size, &ret);
-  ma = Lastfmfp_destroy(ma);
-
-  return 0;
-}
-*/
 // just turn it into a string. Similar to boost::lexical_cast
 template <typename T>
 std::string toString(const T& val)
@@ -212,15 +191,14 @@ Lastfmfp_cb_have_data(GstElement *element, GstBuffer *buffer, GstPad *pad, Lastf
         return;
 
     ma->data_in = (short*)GST_BUFFER_DATA(buffer);
-    ma->input_frames = (size_t)(GST_BUFFER_SIZE(buffer)/sizeof(short));
-
+    ma->num_samples = (size_t)(GST_BUFFER_OFFSET_END (buffer) - GST_BUFFER_OFFSET (buffer));
+	printf("before process \n");
     //extractor.process(const short* pPCM, size_t num_samples, bool end_of_stream = false);
-    if (ma->extractor->process(ma->data_in, ma->input_frames, false))//TODO check parametters
+    if (ma->extractor->process(ma->data_in, ma->num_samples, false))//TODO check parametters
     {
+	    //TODO move that code to eOS event or find a way to fill EOS param here.
         //we have the fingerprint
         std::pair<const char*, size_t> fpData = ma->extractor->getFingerprint();
-        
-        
         
         // Musicbrainz ID
         char mbid_ch[MBID_BUFFER_SIZE];
@@ -268,9 +246,8 @@ Lastfmfp_cb_have_data(GstElement *element, GstBuffer *buffer, GstPad *pad, Lastf
 
 void initForQuery(LastfmfpAudio *ma, int freq, int nchannels, int duration = -1)
 {
-    fingerprint::FingerprintExtractor extractor;
-	extractor.initForQuery(freq, nchannels, duration);
-	ma->extractor = &extractor;
+    ma->extractor = new fingerprint::FingerprintExtractor();
+    ma->extractor->initForQuery(freq, nchannels, duration);
 }
 
 extern "C"  LastfmfpAudio*
@@ -290,13 +267,13 @@ Lastfmfp_initialize(gint rate, gint seconds, gint winsize, const gchar *artist, 
     //and just return the finger print and let csharp done the 
     
     // artist
-    addEntry(urlParams, "artist", std::string(g_strdup(artist)));
+    addEntry(urlParams, "artist", std::string(g_strdup("")));//artist)));
 
     // album
-    addEntry(urlParams, "album", std::string(g_strdup(album)));
+    addEntry(urlParams, "album", std::string(g_strdup("")));//album
 
     // title
-    addEntry(urlParams, "track", std::string(g_strdup(title)));
+    addEntry(urlParams, "track", std::string(g_strdup("")));//title
 
     // track num
     if ( tracknum > 0 )
@@ -329,9 +306,9 @@ void
 Lastfmfp_initgstreamer(LastfmfpAudio *ma, const gchar *file)
 {
     GstPad *audiopad;
-    GstCaps *filter_float;
+    GstCaps *filter_short;
     GstCaps *filter_resample;
-    GstElement *cfilt_float;
+    GstElement *cfilt_short;
     GstElement *cfilt_resample;
     GstElement *dec;
     GstElement *src;
@@ -356,14 +333,18 @@ Lastfmfp_initgstreamer(LastfmfpAudio *ma, const gchar *file)
     ma->audio = gst_bin_new("audio");
 
     audioconvert = gst_element_factory_make("audioconvert", "conv");
-    filter_float = gst_caps_new_simple("audio/x-raw-float",
-         "width", G_TYPE_INT, 32,
+    filter_short = gst_caps_new_simple("audio/x-raw-int",
+         "channels", G_TYPE_INT, 2, 
+         "width", G_TYPE_INT, 16, 
+         "depth", G_TYPE_INT, 16, 
+         "endianness", G_TYPE_INT, 1234, 
+         "signed", G_TYPE_BOOLEAN, TRUE, 
          NULL);
-    cfilt_float = gst_element_factory_make("capsfilter", "cfilt_float");
-    g_object_set(G_OBJECT(cfilt_float), "caps", filter_float, NULL);
-    gst_caps_unref(filter_float);
+    cfilt_short = gst_element_factory_make("capsfilter", "cfilt_short");
+    g_object_set(G_OBJECT(cfilt_short), "caps", filter_short, NULL);
+    gst_caps_unref(filter_short);
 
-    audioresample = gst_element_factory_make("audioresample", "resample");
+    /*audioresample = gst_element_factory_make("audioresample", "resample");
 
     filter_resample =  gst_caps_new_simple("audio/x-raw-float",
           "channels", G_TYPE_INT, 1,
@@ -371,18 +352,18 @@ Lastfmfp_initgstreamer(LastfmfpAudio *ma, const gchar *file)
     cfilt_resample = gst_element_factory_make("capsfilter", "cfilt_resample");
     g_object_set(G_OBJECT(cfilt_resample), "caps", filter_resample, NULL);
     gst_caps_unref(filter_resample);
-
+*/
     sink = gst_element_factory_make("fakesink", "sink");
     g_object_set(G_OBJECT(sink), "signal-handoffs", TRUE, NULL);
     g_signal_connect(sink, "handoff", G_CALLBACK(Lastfmfp_cb_have_data), ma);
     
 
     gst_bin_add_many(GST_BIN(ma->audio),
-            audioconvert, audioresample,
-            cfilt_resample, cfilt_float,
+            audioconvert, /*audioresample,
+            cfilt_resample,*/ cfilt_short,
             sink, NULL);
-    gst_element_link_many(audioconvert, cfilt_float,
-           audioresample, cfilt_resample,
+    gst_element_link_many(audioconvert, cfilt_short,
+           /*audioresample, cfilt_resample,*/
            sink, NULL);
 
     audiopad = gst_element_get_pad(audioconvert, "sink");

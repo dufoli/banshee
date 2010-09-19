@@ -22,7 +22,7 @@
 
 #include <gst/gst.h>
 
-#include "gst-lastfmfp.h"
+#include "gst-lastfmfpbridge.h"
 
 gint
 main (gint   argc,
@@ -31,19 +31,17 @@ main (gint   argc,
   // init GStreamer
   gst_init (&argc, &argv);
 
-  // make sure we have input
-  if (argc != 2) {
-    g_print ("Usage: %s <filename>\n", argv[0]);
-    return -1;
-  }
-
   int size = 0;
-  int frames = 0;
   int ret = 0;
 
-  MirageAudio *ma = lastfmfp_initialize(11025, 135, 512);
-  lastfmfp_decode(ma, argv[1], &frames, &size, &ret);
-  ma = lastfmfp_destroy(ma);
+
+LastfmfpAudio *ma = Lastfmfp_initialize(44100, 215, 2, "", "", "", 0, 0, "");
+  
+int fpid = Lastfmfp_decode(ma, "/home/dufoli/Musique/music/Rock (Hard Pop)/PopRock En/hard metal/(MATRIX)  DEFTONES   my own summer .mp3", &size, &ret);
+
+  printf("return fpid: %d ret: %d ", fpid, ret);
+
+  ma = Lastfmfp_destroy(ma);
 
   return 0;
 }

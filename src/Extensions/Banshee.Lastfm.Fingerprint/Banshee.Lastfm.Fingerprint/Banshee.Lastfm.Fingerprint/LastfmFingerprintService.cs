@@ -104,6 +104,7 @@ namespace Banshee.Lastfm.Fingerprint
                                                       track.TrackTitle, track.TrackNumber, track.Year, track.Genre);
 
                     int fpid = ad.Decode (track.Uri.AbsolutePath);
+                    Console.WriteLine("fpid:{0}", fpid);
                     //TODO get metadata from id
                     FetchMetadata (track, fpid);
 
