@@ -63,7 +63,7 @@ struct LastfmfpAudio {
     gint rate;
     gint filerate;
     gint seconds;
-    gint winsize;
+    gint nchannels;
     //gint samples;
     
     fingerprint::FingerprintExtractor *extractor;
@@ -192,9 +192,9 @@ Lastfmfp_cb_have_data(GstElement *element, GstBuffer *buffer, GstPad *pad, Lastf
 
     ma->data_in = (short*)GST_BUFFER_DATA(buffer);
     ma->num_samples = (size_t)(GST_BUFFER_OFFSET_END (buffer) - GST_BUFFER_OFFSET (buffer));
-	printf("before process \n");
+
     //extractor.process(const short* pPCM, size_t num_samples, bool end_of_stream = false);
-    if (ma->extractor->process(ma->data_in, ma->num_samples, false))//TODO check parametters
+    if (ma->extractor->process(ma->data_in, ma->num_samples * ma->nchannels, false))//TODO check parametters
     {
 	    //TODO move that code to eOS event or find a way to fill EOS param here.
         //we have the fingerprint
@@ -251,7 +251,7 @@ void initForQuery(LastfmfpAudio *ma, int freq, int nchannels, int duration = -1)
 }
 
 extern "C"  LastfmfpAudio*
-Lastfmfp_initialize(gint rate, gint seconds, gint winsize, const gchar *artist, const gchar *album, const gchar *title, gint tracknum, gint year, const gchar *genre)
+Lastfmfp_initialize(gint rate, gint seconds, gint nchannels, const gchar *artist, const gchar *album, const gchar *title, gint tracknum, gint year, const gchar *genre)
 {
     LastfmfpAudio *ma;
     gint i;
@@ -260,6 +260,7 @@ Lastfmfp_initialize(gint rate, gint seconds, gint winsize, const gchar *artist, 
     ma = g_new0(LastfmfpAudio, 1);
     ma->rate = rate;
     ma->seconds = seconds;
+    ma->nchannels = nchannels;
 	
 	std::map<std::string, std::string> urlParams;
 
@@ -294,7 +295,7 @@ Lastfmfp_initialize(gint rate, gint seconds, gint winsize, const gchar *artist, 
     
     //TODO not sure if rate is good
     //ma->extractor.initForQuery(int freq, int nchannels, int duration = -1);
-    initForQuery(ma, rate, winsize, seconds);
+    initForQuery(ma, rate, nchannels, seconds);
     
     // cancel decoding mutex
     ma->decoding_mutex = g_mutex_new();
@@ -471,7 +472,7 @@ Lastfmfp_decode(LastfmfpAudio *ma, const gchar *file, int* size, int* ret)
         *size = 0;
         *ret = -2;
     } else {
-        *size = ma->winsize/2 + 1;
+        *size = ma->nchannels/2 + 1;
     }
 
     g_mutex_unlock(ma->decoding_mutex);
