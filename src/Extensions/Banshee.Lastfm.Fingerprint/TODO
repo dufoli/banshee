@@ -27,4 +27,4 @@ BUT NEED DEBUG
 	Done the job to call the C DLL
 
 
-
+READ http://cgit.freedesktop.org/gstreamer/gst-plugins-bad/tree/ext/ofa/gstofa.c

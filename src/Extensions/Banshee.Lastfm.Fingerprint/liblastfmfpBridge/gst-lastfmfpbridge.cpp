@@ -173,6 +173,41 @@ Lastfmfp_cb_newpad(GstElement *decodebin, GstPad *pad, gboolean last, LastfmfpAu
     gst_object_unref(audiopad);
 }
 
+static void FingerprintFound(LastfmfpAudio *ma)
+{
+	//we have the fingerprint
+    std::pair<const char*, size_t> fpData = ma->extractor->getFingerprint();
+    
+    // Musicbrainz ID
+    char mbid_ch[MBID_BUFFER_SIZE];
+    if ( getMP3_MBID(filename.c_str(), mbid_ch) != -1 )
+          urlParams["mbid"] = std::string(mbid_ch);
+
+    size_t lastSlash = filename.find_last_of(SLASH);
+    if ( lastSlash != std::string::npos )
+       urlParams["filename"] = filename.substr(lastSlash+1);
+    else
+       urlParams["filename"] = filename;
+
+    const int SHA_SIZE = 32;
+    unsigned char sha256[SHA_SIZE]; // 32 bytes
+    Sha256File::getHash(filename, sha256);
+    
+    urlParams["sha256"] = Sha256File::toHexString(sha256, SHA_SIZE);
+    
+    size_t version = ma->extractor->getVersion();
+    // wow, that's odd.. If I god directly with getVersion I get a strange warning with VS2005.. :P
+    urlParams["fpversion"]  = toString( version ); 
+    
+    // send the fingerprint data, and get the fingerprint ID
+    HTTPClient client;
+    std::string c = client.postRawObj( FP_SERVER_NAME, urlParams, 
+                                fpData.first, fpData.second, 
+                                HTTP_POST_DATA_NAME, false );
+    std::istringstream iss(c);
+    iss >> ma->fpid;
+}
+
 static void
 Lastfmfp_cb_have_data(GstElement *element, GstBuffer *buffer, GstPad *pad, LastfmfpAudio *ma)
 {
@@ -191,44 +226,15 @@ Lastfmfp_cb_have_data(GstElement *element, GstBuffer *buffer, GstPad *pad, Lastf
         return;
 
     ma->data_in = (short*)GST_BUFFER_DATA(buffer);
-    ma->num_samples = (size_t)(GST_BUFFER_OFFSET_END (buffer) - GST_BUFFER_OFFSET (buffer));
-
-    //extractor.process(const short* pPCM, size_t num_samples, bool end_of_stream = false);
-    if (ma->extractor->process(ma->data_in, ma->num_samples * ma->nchannels, false))//TODO check parametters
-    {
-	    //TODO move that code to eOS event or find a way to fill EOS param here.
-        //we have the fingerprint
-        std::pair<const char*, size_t> fpData = ma->extractor->getFingerprint();
-        
-        // Musicbrainz ID
-        char mbid_ch[MBID_BUFFER_SIZE];
-        if ( getMP3_MBID(filename.c_str(), mbid_ch) != -1 )
-              urlParams["mbid"] = std::string(mbid_ch);
-
-        size_t lastSlash = filename.find_last_of(SLASH);
-        if ( lastSlash != std::string::npos )
-           urlParams["filename"] = filename.substr(lastSlash+1);
-        else
-           urlParams["filename"] = filename;
+    //ma->num_samples = (size_t)(GST_BUFFER_OFFSET_END (buffer) - GST_BUFFER_OFFSET (buffer));
+    ma->num_samples = (size_t)(GST_BUFFER_SIZE (buffer) / sizeof(guint16));//TODO MAybe /Ma->nchannels too
     
-        const int SHA_SIZE = 32;
-        unsigned char sha256[SHA_SIZE]; // 32 bytes
-        Sha256File::getHash(filename, sha256);
-        
-        urlParams["sha256"] = Sha256File::toHexString(sha256, SHA_SIZE);
-        
-        size_t version = ma->extractor->getVersion();
-        // wow, that's odd.. If I god directly with getVersion I get a strange warning with VS2005.. :P
-        urlParams["fpversion"]  = toString( version ); 
-        
-        // send the fingerprint data, and get the fingerprint ID
-        HTTPClient client;
-        std::string c = client.postRawObj( FP_SERVER_NAME, urlParams, 
-                                    fpData.first, fpData.second, 
-                                    HTTP_POST_DATA_NAME, false );
-        std::istringstream iss(c);
-        iss >> ma->fpid;
-        
+	//printf("caps: %s\n", gst_caps_to_string(GST_BUFFER_CAPS(buffer)));
+	//printf(" offset : %llu size: %llu \n", (unsigned long long)GST_BUFFER_OFFSET (buffer), (unsigned long long)GST_BUFFER_OFFSET_END (buffer));
+	//GST_LOG ("caps are %" GST_PTR_FORMAT, GST_BUFFER_CAPS(buffer));
+    //extractor.process(const short* pPCM, size_t num_samples, bool end_of_stream = false);
+    if (ma->extractor->process(ma->data_in, ma->num_samples, false))//TODO check parametters
+    {
         //stop the gstreamer loop to free all and return fpid
         GstBus *bus = gst_pipeline_get_bus(GST_PIPELINE(ma->pipeline));
         GstMessage* eosmsg = gst_message_new_eos(GST_OBJECT(ma->pipeline));
@@ -335,10 +341,10 @@ Lastfmfp_initgstreamer(LastfmfpAudio *ma, const gchar *file)
 
     audioconvert = gst_element_factory_make("audioconvert", "conv");
     filter_short = gst_caps_new_simple("audio/x-raw-int",
-         "channels", G_TYPE_INT, 2, 
+         "channels", G_TYPE_INT, 1, //TODO MA->Nchannels
          "width", G_TYPE_INT, 16, 
          "depth", G_TYPE_INT, 16, 
-         "endianness", G_TYPE_INT, 1234, 
+         "endianness", G_TYPE_INT, BYTE_ORDER, //1234, 
          "signed", G_TYPE_BOOLEAN, TRUE, 
          NULL);
     cfilt_short = gst_element_factory_make("capsfilter", "cfilt_short");
@@ -450,6 +456,8 @@ Lastfmfp_decode(LastfmfpAudio *ma, const gchar *file, int* size, int* ret)
                 break;
             }
             case GST_MESSAGE_EOS: {
+	            ma->extractor->process(0, static_cast<size_t>(0), true);
+            	FingerprintFound(ma);
                 g_print("libLastfmfp: EOS Message received\n");
                 decoding = FALSE;
                 break;
