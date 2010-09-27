@@ -227,12 +227,13 @@ Lastfmfp_cb_have_data(GstElement *element, GstBuffer *buffer, GstPad *pad, Lastf
 
     ma->data_in = (short*)GST_BUFFER_DATA(buffer);
     //ma->num_samples = (size_t)(GST_BUFFER_OFFSET_END (buffer) - GST_BUFFER_OFFSET (buffer));
-    ma->num_samples = (size_t)(GST_BUFFER_SIZE (buffer) / sizeof(guint16));//TODO MAybe /Ma->nchannels too
+    ma->num_samples = (size_t)(GST_BUFFER_SIZE (buffer) / sizeof(guint16));
     
 	//printf("caps: %s\n", gst_caps_to_string(GST_BUFFER_CAPS(buffer)));
 	//printf(" offset : %llu size: %llu \n", (unsigned long long)GST_BUFFER_OFFSET (buffer), (unsigned long long)GST_BUFFER_OFFSET_END (buffer));
 	//GST_LOG ("caps are %" GST_PTR_FORMAT, GST_BUFFER_CAPS(buffer));
     //extractor.process(const short* pPCM, size_t num_samples, bool end_of_stream = false);
+    //printf("data: %d %d %d %d %d %d %d %d %d %d %d %d \n", ma->data_in[0], ma->data_in[1], ma->data_in[2], ma->data_in[3], ma->data_in[4], ma->data_in[5], ma->data_in[6], ma->data_in[7], ma->data_in[8], ma->data_in[9], ma->data_in[10], ma->data_in[11]);
     if (ma->extractor->process(ma->data_in, ma->num_samples, false))//TODO check parametters
     {
         //stop the gstreamer loop to free all and return fpid
@@ -274,13 +275,13 @@ Lastfmfp_initialize(gint rate, gint seconds, gint nchannels, const gchar *artist
     //and just return the finger print and let csharp done the 
     
     // artist
-    addEntry(urlParams, "artist", std::string(g_strdup("")));//artist)));
+    addEntry(urlParams, "artist", std::string(g_strdup(artist)));//artist)));
 
     // album
-    addEntry(urlParams, "album", std::string(g_strdup("")));//album
+    addEntry(urlParams, "album", std::string(g_strdup(album)));//album
 
     // title
-    addEntry(urlParams, "track", std::string(g_strdup("")));//title
+    addEntry(urlParams, "track", std::string(g_strdup(title)));//title
 
     // track num
     if ( tracknum > 0 )
@@ -299,8 +300,6 @@ Lastfmfp_initialize(gint rate, gint seconds, gint nchannels, const gchar *artist
     urlParams["samplerate"] = toString(rate);
     
     
-    //TODO not sure if rate is good
-    //ma->extractor.initForQuery(int freq, int nchannels, int duration = -1);
     initForQuery(ma, rate, nchannels, seconds);
     
     // cancel decoding mutex
@@ -341,10 +340,10 @@ Lastfmfp_initgstreamer(LastfmfpAudio *ma, const gchar *file)
 
     audioconvert = gst_element_factory_make("audioconvert", "conv");
     filter_short = gst_caps_new_simple("audio/x-raw-int",
-         "channels", G_TYPE_INT, 1, //TODO MA->Nchannels
+//         "channels", G_TYPE_INT, ma->nchannels,
          "width", G_TYPE_INT, 16, 
          "depth", G_TYPE_INT, 16, 
-         "endianness", G_TYPE_INT, BYTE_ORDER, //1234, 
+         "endianness", G_TYPE_INT, 1234,//BYTE_ORDER, //1234, 
          "signed", G_TYPE_BOOLEAN, TRUE, 
          NULL);
     cfilt_short = gst_element_factory_make("capsfilter", "cfilt_short");
