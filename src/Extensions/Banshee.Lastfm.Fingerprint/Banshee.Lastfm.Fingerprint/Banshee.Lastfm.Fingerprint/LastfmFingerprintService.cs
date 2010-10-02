@@ -129,36 +129,46 @@ namespace Banshee.Lastfm.Fingerprint
             WebRequest request = WebRequest.Create (query);
             WebResponse rsp =  request.GetResponse ();
             XmlDocument doc = new XmlDocument();
+            /*StreamReader reader = new StreamReader(rsp.GetResponseStream ());
+            string str = reader.ReadLine();
+            while(str != null)
+            {
+                Console.WriteLine(str);
+                str = reader.ReadLine();
+            }*/
 
+            editor_track = new EditorTrackInfo (sourceTrack);
             using (Stream stream = rsp.GetResponseStream ())
             {
                 //XmlTextReader reader = new XmlTextReader(Stream);
                 //reader.re
                 doc.Load (stream);
-                foreach (XmlNode node in doc.SelectNodes("/tracks/track"))
-                {
-                    if (!node.HasChildNodes)
-                        continue;
+                //get the first track (higher rank)
+                XmlNode node = doc.SelectSingleNode("/lfm/tracks/track");
 
-                    track.TrackTitle = node["name"].Value;
-                    track.MusicBrainzId = node["mbid"].Value;
-                    track.MoreInfoUri = new SafeUri (node["url"].Value);
+                if (!node.HasChildNodes)
+                    continue;
 
-                    //node["streamable"].Value;
-                    XmlNode anode = node["artist"];
-                    if (anode.HasChildNodes) {
-                        track.ArtistName = anode["name"].Value;
-                        track.ArtistMusicBrainzId = anode["mbid"].Value;
-                        //anode["url"].Value;//url of cover
-                    }
+                track.TrackTitle = node["name"].Value;
+                track.MusicBrainzId = node["mbid"].Value;
+                track.MoreInfoUri = new SafeUri (node["url"].Value);
 
-                    //TODO Get cover
-                    //best is to use code of MetadataServiceJob.SaveHttpStreamCover
-                    //but hard to get it because protected... TODO find a way to reuse this code
-                    // size = small, medium, large or extralarge
-                    //node["image"].Value;//depend of size
-
+                //node["streamable"].Value;
+                XmlNode anode = node["artist"];
+                if (anode.HasChildNodes) {
+                    track.ArtistName = anode["name"].Value;
+                    track.ArtistMusicBrainzId = anode["mbid"].Value;
+                    //anode["url"].Value;//more infor artiste
                 }
+
+                track.Save ();
+                ServiceManager.PlayerEngine.TrackInfoUpdated ();
+                //TODO Get cover
+                //best is to use code of MetadataServiceJob.SaveHttpStreamCover
+                //but hard to get it because protected... TODO find a way to reuse this code
+                // size = small, medium, large or extralarge
+                //node["image"].Value;//depend of size
+
             }
 
         }

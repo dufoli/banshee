@@ -240,7 +240,7 @@ Lastfmfp_cb_have_data(GstElement *element, GstBuffer *buffer, GstPad *pad, Lastf
         GstBus *bus = gst_pipeline_get_bus(GST_PIPELINE(ma->pipeline));
         GstMessage* eosmsg = gst_message_new_eos(GST_OBJECT(ma->pipeline));
         gst_bus_post(bus, eosmsg);
-        g_print("libmirageaudio: EOS Message sent\n");
+        g_print("libLastfmfp: EOS Message sent\n");
         gst_object_unref(bus);
         ma->quit = TRUE;
         return;
@@ -269,7 +269,7 @@ Lastfmfp_initialize(gint rate, gint seconds, gint nchannels, const gchar *artist
     ma->seconds = seconds;
     ma->nchannels = nchannels;
 	
-	std::map<std::string, std::string> urlParams;
+	//std::map<std::string, std::string> urlParams;
 
     //TODO if all work! remove the httpclient and tags urlparams
     //and just return the finger print and let csharp done the 
@@ -455,7 +455,7 @@ Lastfmfp_decode(LastfmfpAudio *ma, const gchar *file, int* size, int* ret)
                 break;
             }
             case GST_MESSAGE_EOS: {
-	            ma->extractor->process(0, static_cast<size_t>(0), true);
+	            //ma->extractor->process(0, static_cast<size_t>(0), true);
             	FingerprintFound(ma);
                 g_print("libLastfmfp: EOS Message received\n");
                 decoding = FALSE;
