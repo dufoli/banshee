@@ -92,7 +92,7 @@ namespace Banshee.Hardware.Gio
         {
             // Manually get the mount as gio-sharp translates it to the wrong managed object
             var mount = GLib.MountAdapter.GetObject ((GLib.Object) args.Args [0]);
-            if (mount.Volume == null || mount.Root == null || mount.Root.Path == null) {
+            if (mount.Volume == null) {
                 return;
             }
 
@@ -115,7 +115,10 @@ namespace Banshee.Hardware.Gio
             var h = DeviceRemoved;
             if (h != null) {
                 GUdev.Device device;
-                volume_device_map.TryGetValue (volume.Handle, out device);
+                if (!volume_device_map.TryGetValue (volume.Handle, out device)) {
+                    Hyena.Log.Debug (string.Format ("Tried to unmount {0}/{1} with no matching udev device", volume.Name, volume.Uuid));
+                    return;
+                }
                 var v = new RawVolume (volume,
                                           this,
                                           new GioVolumeMetadataSource (volume),

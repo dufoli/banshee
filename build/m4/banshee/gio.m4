@@ -11,8 +11,16 @@ AC_DEFUN([BANSHEE_CHECK_GIO_SHARP],
 			enable_gio=yes, enable_gio=no)
 
 		PKG_CHECK_MODULES(GIOSHARP,
-			gio-sharp-2.0 >= $GNOMESHARP_REQUIRED,
+			gio-sharp-2.0 >= 2.22,
 			enable_gio="$enable_gio", enable_gio=no)
+
+		asms="`$PKG_CONFIG --variable=Libraries gio-sharp-2.0` `$PKG_CONFIG --variable=Libraries gtk-sharp-beans-2.0`"
+		for asm in $asms; do
+			GIOSHARP_ASSEMBLIES="$GIOSHARP_ASSEMBLIES $asm"
+			[[ -r "$asm.config" ]] && GIOSHARP_ASSEMBLIES="$GIOSHARP_ASSEMBLIES $asm.config"
+			[[ -r "$asm.mdb" ]] && GIOSHARP_ASSEMBLIES="$GIOSHARP_ASSEMBLIES $asm.mdb"
+		done
+		AC_SUBST(GIOSHARP_ASSEMBLIES)
 
 		PKG_CHECK_MODULES(GLIB_2_22,
 			glib-2.0 >= 2.22,
@@ -24,7 +32,7 @@ AC_DEFUN([BANSHEE_CHECK_GIO_SHARP],
 				enable_gio_hardware="$enable_gio", enable_gio_hardware=no)
 
 			PKG_CHECK_MODULES(GKEYFILE_SHARP,
-				gkeyfile-sharp-1.0 >= 0.1,
+				gkeyfile-sharp >= 0.1,
 				enable_gio_hardware="$enable_gio_hardware", enable_gio_hardware=no)
 
 			if test "x$enable_gio_hardware" = "xno"; then

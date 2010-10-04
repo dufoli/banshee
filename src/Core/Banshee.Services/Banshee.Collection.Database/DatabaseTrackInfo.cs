@@ -168,6 +168,12 @@ namespace Banshee.Collection.Database
             Save (NotifySaved);
         }
 
+        public override void Update ()
+        {
+            PrimarySource.UpdateMetadata (this);
+            base.Update ();
+        }
+
         public override void UpdateLastPlayed ()
         {
             Refresh ();

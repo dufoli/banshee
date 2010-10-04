@@ -17,6 +17,7 @@ SUBDIRS = \
 	Banshee.Lastfm.Fingerprint \
 	Banshee.LibraryWatcher \
 	Banshee.MiniMode \
+	Banshee.Mpris \
 	Banshee.MiroGuide \
 	Banshee.MultimediaKeys \
 	Banshee.NotificationArea \

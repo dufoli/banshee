@@ -61,48 +61,57 @@ namespace Banshee.Dap.Ipod
 
         public IpodTrackInfo (TrackInfo track)
         {
+            CanSaveToDatabase = true;
+
             if (track is IpodTrackInfo) {
                 this.track = ((IpodTrackInfo)track).IpodTrack;
                 LoadFromIpodTrack ();
             } else {
-                AlbumArtist = track.AlbumArtist;
-                AlbumTitle = track.AlbumTitle;
-                ArtistName = track.ArtistName;
-                BitRate = track.BitRate;
-                SampleRate = track.SampleRate;
-                Bpm = track.Bpm;
-                Comment = track.Comment;
-                Composer = track.Composer;
-                Conductor = track.Conductor;
-                Copyright = track.Copyright;
-                DateAdded = track.DateAdded;
-                DiscCount = track.DiscCount;
-                DiscNumber = track.DiscNumber;
-                Duration = track.Duration;
-                FileSize = track.FileSize;
-                Genre = track.Genre;
-                Grouping = track.Grouping;
-                IsCompilation = track.IsCompilation ;
-                LastPlayed = track.LastPlayed;
-                LastSkipped = track.LastSkipped;
-                PlayCount = track.PlayCount;
-                Rating = track.Rating;
-                ReleaseDate = track.ReleaseDate;
-                SkipCount = track.SkipCount;
-                TrackCount = track.TrackCount;
-                TrackNumber = track.TrackNumber;
-                TrackTitle = track.TrackTitle;
-                Year = track.Year;
-                MediaAttributes = track.MediaAttributes;
+                UpdateInfo (track);
+            }
+        }
 
-                var podcast_info = track.ExternalObject as IPodcastInfo;
-                if (podcast_info != null) {
-                    description = podcast_info.Description;
-                    ReleaseDate = podcast_info.ReleaseDate;
-                }
+        public void UpdateInfo (TrackInfo track)
+        {
+            if (track is IpodTrackInfo) {
+                throw new ArgumentException ("Shouldn't update an IpodTrackInfo from an IpodTrackInfo");
             }
 
-            CanSaveToDatabase = true;
+            AlbumArtist = track.AlbumArtist;
+            AlbumTitle = track.AlbumTitle;
+            ArtistName = track.ArtistName;
+            BitRate = track.BitRate;
+            SampleRate = track.SampleRate;
+            Bpm = track.Bpm;
+            Comment = track.Comment;
+            Composer = track.Composer;
+            Conductor = track.Conductor;
+            Copyright = track.Copyright;
+            DateAdded = track.DateAdded;
+            DiscCount = track.DiscCount;
+            DiscNumber = track.DiscNumber;
+            Duration = track.Duration;
+            FileSize = track.FileSize;
+            Genre = track.Genre;
+            Grouping = track.Grouping;
+            IsCompilation = track.IsCompilation ;
+            LastPlayed = track.LastPlayed;
+            LastSkipped = track.LastSkipped;
+            PlayCount = track.PlayCount;
+            Rating = track.Rating;
+            ReleaseDate = track.ReleaseDate;
+            SkipCount = track.SkipCount;
+            TrackCount = track.TrackCount;
+            TrackNumber = track.TrackNumber;
+            TrackTitle = track.TrackTitle;
+            Year = track.Year;
+            MediaAttributes = track.MediaAttributes;
+
+            var podcast_info = track.ExternalObject as IPodcastInfo;
+            if (podcast_info != null) {
+                description = podcast_info.Description;
+                ReleaseDate = podcast_info.ReleaseDate;
+            }
         }
 
         private void LoadFromIpodTrack ()
@@ -207,7 +216,6 @@ namespace Banshee.Dap.Ipod
             //so we need to save it on Banshee db to be properly synced
             if (!update) {
                 Uri = new SafeUri (track.Uri);
-                Save ();
             }
 
             track.AlbumArtist = AlbumArtist;

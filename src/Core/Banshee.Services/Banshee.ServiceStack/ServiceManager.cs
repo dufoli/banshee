@@ -100,6 +100,9 @@ namespace Banshee.ServiceStack
             RegisterService<DBusCommandService> ();
             RegisterService<BansheeDbConnection> ();
             RegisterService<Banshee.Preferences.PreferenceService> ();
+            // HACK: the next line shouldn't be here, it's needed to work around
+            // a race in NDesk DBus. See bgo#627441.
+            RegisterService<Banshee.Networking.Network> ();
             RegisterService<SourceManager> ();
             RegisterService<MediaProfileManager> ();
             RegisterService<PlayerEngineService> ();
@@ -352,7 +355,7 @@ namespace Banshee.ServiceStack
             lock (self_mutex) {
                 Type type = typeof (T);
                 T service = Get (type.Name) as T;
-                if (service == null && type.GetInterface ("Banshee.ServiceStack.IRegisterOnDemandService") != null) {
+                if (service == null && typeof(IRegisterOnDemandService).IsAssignableFrom (type)) {
                     return RegisterService (type) as T;
                 }
 

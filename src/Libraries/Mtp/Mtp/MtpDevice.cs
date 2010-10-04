@@ -78,6 +78,10 @@ namespace Mtp
             get { return GetDeviceversion (Handle); }
         }
 
+        public string ModelName {
+            get; private set;
+        }
+
         public string Name {
             get { return name; }
             set {
@@ -124,6 +128,7 @@ namespace Mtp
             this.device = device;
             this.Handle = handle;
             this.name = GetFriendlyName(Handle);
+            this.ModelName = GetModelName (Handle);
             SetDefaultFolders ();
         }
         
@@ -190,9 +195,10 @@ namespace Mtp
             List<Track> tracks = new List<Track>();
             
             while (ptr != IntPtr.Zero) {
+                // Destroy the struct after we use it to avoid potential referencing of freed memory.
                 TrackStruct track = (TrackStruct)Marshal.PtrToStructure(ptr, typeof(TrackStruct));
-                Track.DestroyTrack (ptr);
                 tracks.Add (new Track (track, this));
+                Track.DestroyTrack (ptr);
                 ptr = track.next;
             }
             
@@ -340,6 +346,15 @@ namespace Mtp
             return success;
         }
 
+        internal static string GetModelName(MtpDeviceHandle handle)
+        {
+            IntPtr ptr = LIBMTP_Get_Modelname (handle);
+            if (ptr == IntPtr.Zero)
+                return null;
+
+            return StringFromIntPtr (ptr);
+        }
+
         internal static string GetSerialnumber(MtpDeviceHandle handle)
         {
             IntPtr ptr = LIBMTP_Get_Serialnumber(handle);
@@ -430,8 +445,8 @@ namespace Mtp
         [DllImport("libmtp.dll")]
         private static extern int LIBMTP_Get_Batterylevel (MtpDeviceHandle handle, out ushort maxLevel, out ushort currentLevel);
         
-        //[DllImportAttribute("libmtp.dll")]
-        //private static extern IntPtr LIBMTP_Get_Modelname (MtpDeviceHandle handle); // char *
+        [DllImportAttribute("libmtp.dll")]
+        private static extern IntPtr LIBMTP_Get_Modelname (MtpDeviceHandle handle); // char *
         
         [DllImportAttribute("libmtp.dll")]
         private static extern IntPtr LIBMTP_Get_Serialnumber (MtpDeviceHandle handle); // char *

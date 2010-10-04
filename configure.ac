@@ -1,11 +1,11 @@
 dnl Granularly define the version components
 dnl Remember to also update the Display Version
 m4_define([banshee_version_major], [1])
-m4_define([banshee_version_minor], [7])
-m4_define([banshee_version_micro], [4])
+m4_define([banshee_version_minor], [8])
+m4_define([banshee_version_micro], [0])
 
 dnl this can sometimes differ manually
-m4_define([banshee_display_version], ["1.7.4"])
+m4_define([banshee_display_version], ["1.8.0"])
 
 dnl set to 0 when doing an official release
 m4_define([banshee_version_pre_release], [0])
@@ -356,6 +356,7 @@ src/Extensions/Banshee.LibraryWatcher/Makefile
 src/Extensions/Banshee.MiniMode/Makefile
 src/Extensions/Banshee.MiroGuide/Makefile
 src/Extensions/Banshee.MeeGo/Makefile
+src/Extensions/Banshee.Mpris/Makefile
 src/Extensions/Banshee.MultimediaKeys/Makefile
 src/Extensions/Banshee.NotificationArea/Makefile
 src/Extensions/Banshee.NowPlaying/Makefile

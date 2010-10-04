@@ -116,7 +116,13 @@ namespace Banshee.Dap.Mtp
                 throw new InvalidDeviceException ();
             }
 
-            Name = mtp_device.Name;
+            // libmtp sometimes returns '?????'. I assume this is if the device does
+            // not supply a friendly name. In this case show the model name.
+            if (string.IsNullOrEmpty (mtp_device.Name) || mtp_device.Name == "?????")
+                Name = mtp_device.ModelName;
+            else
+                Name = mtp_device.Name;
+
             Initialize ();
 
             List<string> mimetypes = new List<string> ();
@@ -193,7 +199,7 @@ namespace Banshee.Dap.Mtp
                             PlaylistSource pl_src = new PlaylistSource (playlist.Name, this);
                             pl_src.Save ();
                             // TODO a transaction would make sense here (when the threading issue is fixed)
-                            foreach (int id in playlist.TrackIds) {
+                            foreach (uint id in playlist.TrackIds) {
                                 ServiceManager.DbConnection.Execute (insert_cmd, pl_src.DbId, this.DbId, id);
                             }
                             pl_src.UpdateCounts ();
@@ -236,11 +242,12 @@ namespace Banshee.Dap.Mtp
                 device_playlists.Clear ();
 
                 // Add playlists from Banshee to the device
-                foreach (Source child in Children) {
+                List<Source> children = new List<Source> (Children);
+                foreach (Source child in children) {
                     PlaylistSource from = child as PlaylistSource;
                     if (from != null && from.Count > 0) {
                         MTP.Playlist playlist = new MTP.Playlist (mtp_device, from.Name);
-                        foreach (int track_id in ServiceManager.DbConnection.QueryEnumerable<int> (String.Format (
+                        foreach (uint track_id in ServiceManager.DbConnection.QueryEnumerable<uint> (String.Format (
                             "SELECT CoreTracks.ExternalID FROM {0} WHERE {1}",
                             from.DatabaseTrackModel.ConditionFromFragment, from.DatabaseTrackModel.Condition)))
                         {
@@ -331,7 +338,11 @@ namespace Banshee.Dap.Mtp
                 if (!video) {
                     string key = MakeAlbumKey (track.AlbumArtist, track.AlbumTitle);
                     if (!album_cache.ContainsKey (key)) {
-                        Album album = new Album (mtp_device, track.AlbumTitle, track.AlbumArtist, track.Genre, track.Composer);
+                        // LIBMTP 1.0.3 BUG WORKAROUND
+                        // In libmtp.c the 'LIBMTP_Create_New_Album' function invokes 'create_new_abstract_list'.
+                        // The latter calls strlen on the 'name' parameter without null checking. If AlbumTitle is
+                        // null, this causes a sigsegv. Lets be safe and always pass non-null values.
+                        Album album = new Album (mtp_device, track.AlbumTitle ?? "", track.AlbumArtist ?? "", track.Genre ?? "", track.Composer ?? "");
                         album.AddTrack (mtp_track);
 
                         if (supports_jpegs && can_sync_albumart) {
@@ -368,10 +379,10 @@ namespace Banshee.Dap.Mtp
 
         private Folder GetFolderForTrack (TrackInfo track)
         {
-            if (track.HasAttribute (TrackMediaAttributes.Podcast)) {
-                return mtp_device.PodcastFolder;
-            } else if (track.HasAttribute (TrackMediaAttributes.VideoStream)) {
+            if (track.HasAttribute (TrackMediaAttributes.VideoStream)) {
                 return mtp_device.VideoFolder;
+            } else if (track.HasAttribute (TrackMediaAttributes.Podcast)) {
+                return mtp_device.PodcastFolder;
             } else {
                 return mtp_device.MusicFolder;
             }

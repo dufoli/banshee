@@ -36,7 +36,9 @@ using System.Threading;
 using Banshee.Hardware;
 using Banshee.Sources;
 using Banshee.I18n;
+using Hyena.Query;
 using Hyena;
+using Banshee.Playlist;
 
 namespace Banshee.Dap.AppleDevice
 {
@@ -66,6 +68,16 @@ namespace Banshee.Dap.AppleDevice
                 throw new InvalidDeviceException ();
             }
 
+            if (!Volume.IsMounted && device.MediaCapabilities != null && device.MediaCapabilities.IsType ("ipod")) {
+                Hyena.Log.Information ("Found potential unmounted iDevice, trying to mount it now");
+                Volume.Mount ();
+            }
+
+            if (!Volume.IsMounted) {
+                Hyena.Log.Information ("AppleDeviceSource is ignoring unmounted volume " + Volume.Name);
+                throw new InvalidOperationException ();
+            }
+            
             Device = new GPod.Device (Volume.MountPoint);
 
             if (GPod.ITDB.GetControlPath (Device) == null) {
@@ -92,8 +104,8 @@ namespace Banshee.Dap.AppleDevice
 
             // FIXME
             //AddDapProperty (Catalog.GetString ("Color"), "black");
-            AddDapProperty (Catalog.GetString ("Capacity"), string.Format ("{0:0.00}GB", BytesCapacity));
-            AddDapProperty (Catalog.GetString ("Available"), string.Format ("{0:0.00}GB", BytesAvailable));
+            AddDapProperty (Catalog.GetString ("Capacity"), string.Format ("{0:0.00}GB", BytesCapacity / 1024.0 / 1024.0 / 1024.0));
+            AddDapProperty (Catalog.GetString ("Available"), string.Format ("{0:0.00}GB", BytesAvailable / 1024.0 / 1024.0 / 1024.0));
             AddDapProperty (Catalog.GetString ("Serial number"), Volume.Serial);
             //AddDapProperty (Catalog.GetString ("Produced on"), ipod_device.ProductionInfo.DisplayDate);
             //AddDapProperty (Catalog.GetString ("Firmware"), ipod_device.FirmwareVersion);
@@ -155,7 +167,32 @@ namespace Banshee.Dap.AppleDevice
                 if (MediaDatabase != null)
                     MediaDatabase.Dispose ();
 
-                MediaDatabase = new GPod.ITDB (Device.Mountpoint);
+                try {
+                    MediaDatabase = new GPod.ITDB (Device.Mountpoint);
+                } catch (GLib.GException e) {
+                    Log.Exception ("iPod database could be loaded, creating a new one", e);
+                    if (GPod.ITDB.InitIpod (Volume.MountPoint, null, Volume.Name)) {
+                        // this may throw again. In the future we need to implement some kind of alert
+                        // mechanism to let the user know that something more serious is wrong with their
+                        // apple device a la the other iPod extension.
+                        MediaDatabase = new GPod.ITDB (Device.Mountpoint);
+                    } else {
+                        Log.Error ("Failed to init iPod database");
+                        return;
+                    }
+                }
+            }
+
+            if (MediaDatabase.MasterPlaylist == null) {
+                MediaDatabase.Playlists.Add (new GPod.Playlist (Name) {
+                    IsMaster = true
+                });
+            }
+
+            if (SupportsPodcasts && MediaDatabase.PodcastsPlaylist == null) {
+                MediaDatabase.Playlists.Add (new GPod.Playlist (Catalog.GetString ("Podcasts")) {
+                    IsPodcast = true
+                });
             }
 
             foreach (var ipod_track in MediaDatabase.Tracks) {
@@ -171,40 +208,24 @@ namespace Banshee.Dap.AppleDevice
                 }
             }
 
-//                Hyena.Data.Sqlite.HyenaSqliteCommand insert_cmd = new Hyena.Data.Sqlite.HyenaSqliteCommand (
-//                    @"INSERT INTO CorePlaylistEntries (PlaylistID, TrackID)
-//                        SELECT ?, TrackID FROM CoreTracks WHERE PrimarySourceID = ? AND ExternalID = ?");
-//                foreach (IPod.Playlist playlist in ipod_device.TrackDatabase.Playlists) {
-//                    if (playlist.IsOnTheGo) { // || playlist.IsPodcast) {
-//                        continue;
-//                    }
-//                    PlaylistSource pl_src = new PlaylistSource (playlist.Name, this);
-//                    pl_src.Save ();
-//                    // We use the IPod.Track.Id here b/c we just shoved it into ExternalID above when we loaded
-//                    // the tracks, however when we sync, the Track.Id values may/will change.
-//                    foreach (IPod.Track track in playlist.Tracks) {
-//                        ServiceManager.DbConnection.Execute (insert_cmd, pl_src.DbId, this.DbId, track.Id);
-//                    }
-//                    pl_src.UpdateCounts ();
-//                    AddChildSource (pl_src);
-//                }
-            /*else {
-                BuildDatabaseUnsupportedWidget ();
-            }*/
+            Hyena.Data.Sqlite.HyenaSqliteCommand insert_cmd = new Hyena.Data.Sqlite.HyenaSqliteCommand (
+                @"INSERT INTO CorePlaylistEntries (PlaylistID, TrackID)
+                    SELECT ?, TrackID FROM CoreTracks WHERE PrimarySourceID = ? AND ExternalID = ?");
+            foreach (var playlist in MediaDatabase.Playlists) {
+                if (playlist.IsMaster || playlist.IsPodcast)
+                    continue;
 
-            /*if(previous_database_supported != database_supported) {
-                OnPropertiesChanged();
-            }*/
+                PlaylistSource pl_src = new PlaylistSource (playlist.Name, this);
+                pl_src.Save ();
+                // We use the IPod.Track.Id here b/c we just shoved it into ExternalID above when we loaded
+                // the tracks, however when we sync, the Track.Id values may/will change.
+                foreach (var track in playlist.Tracks) {
+                    ServiceManager.DbConnection.Execute (insert_cmd, pl_src.DbId, this.DbId, track.DBID);
+                }
+                pl_src.UpdateCounts ();
+                AddChildSource (pl_src);
+            }
         }
-
-//        private void DestroyUnsupportedView ()
-//        {
-//            if (unsupported_view != null) {
-//                unsupported_view.Refresh -= OnRebuildDatabaseRefresh;
-//                unsupported_view.Destroy ();
-//                unsupported_view = null;
-//            }
-//        }
 
 #endregion
 
@@ -265,26 +286,16 @@ namespace Banshee.Dap.AppleDevice
 
         public override void Rename (string name)
         {
-            return;
-//            if (!CanRename) {
-//                return;
-//            }
-//
-//            try {
-//                if (name_path != null) {
-//                    Directory.CreateDirectory (Path.GetDirectoryName (name_path));
-//
-//                    using (StreamWriter writer = new StreamWriter (File.Open (name_path, FileMode.Create),
-//                        System.Text.Encoding.Unicode)) {
-//                        writer.Write (name);
-//                    }
-//                }
-//            } catch (Exception e) {
-//                Log.Exception (e);
-//            }
-//
-//            ipod_device.Name = name;
-//            base.Rename (name);
+            if (!CanRename) {
+                return;
+            }
+
+            try {
+                MediaDatabase.MasterPlaylist.Name = name;
+                base.Rename (name);
+            } catch (Exception e) {
+                Log.Exception ("Trying to change iPod name", e);
+            }
         }
 
         public override bool CanRename {
@@ -303,6 +314,27 @@ namespace Banshee.Dap.AppleDevice
 
 #region Syncing
 
+        public override void UpdateMetadata (DatabaseTrackInfo track)
+        {
+            lock (sync_mutex) {
+                AppleDeviceTrackInfo ipod_track;
+                if (!tracks_map.TryGetValue (track.TrackId, out ipod_track)) {
+                    return;
+                }
+
+                ipod_track.UpdateInfo (track);
+                tracks_to_update.Enqueue (ipod_track);
+            }
+        }
+
+        protected override void OnTracksChanged (params QueryField[] fields)
+        {
+            if (tracks_to_update.Count > 0 && !Sync.Syncing) {
+                QueueSync ();
+            }
+            base.OnTracksChanged (fields);
+        }
+
         protected override void OnTracksAdded ()
         {
             if (!IsAdding && tracks_to_add.Count > 0 && !Sync.Syncing) {
@@ -320,6 +352,7 @@ namespace Banshee.Dap.AppleDevice
         }
 
         private Queue<AppleDeviceTrackInfo> tracks_to_add = new Queue<AppleDeviceTrackInfo> ();
+        private Queue<AppleDeviceTrackInfo> tracks_to_update = new Queue<AppleDeviceTrackInfo> ();
         private Queue<AppleDeviceTrackInfo> tracks_to_remove = new Queue<AppleDeviceTrackInfo> ();
 
         private uint sync_timeout_id = 0;
@@ -382,7 +415,6 @@ namespace Banshee.Dap.AppleDevice
                 AppleDeviceTrackInfo ipod_track = new AppleDeviceTrackInfo (track);
                 ipod_track.Uri = fromUri;
                 ipod_track.PrimarySource = this;
-                ipod_track.Save (false);
 
                 tracks_to_add.Enqueue (ipod_track);
             }
@@ -468,26 +500,60 @@ namespace Banshee.Dap.AppleDevice
             }
         }
 
+        private void UpdateProgress (UserJob job, string message, int completed, int total)
+        {
+            job.Status = string.Format (message, completed, total);
+            job.Progress = completed / (double) total;
+        }
+
         private void PerformSyncThreadCycle ()
         {
-            OnIpodDatabaseSaveStarted (this, EventArgs.Empty);
+            Hyena.Log.Debug ("Starting AppleDevice sync thread cycle");
+
+            string message;
+            int total, i = 0;
+            var progressUpdater = new UserJob (Catalog.GetString ("Syncing iPod"),
+                                               Catalog.GetString ("Preparing to synchronize..."), GetIconNames ());
+            progressUpdater.Register ();
+            MediaDatabase.StartSync ();
+            message = Catalog.GetString ("Adding track {0} of {1}");
+            total = tracks_to_add.Count;
             while (tracks_to_add.Count > 0) {
                 AppleDeviceTrackInfo track = null;
                 lock (sync_mutex) {
+                    total = tracks_to_add.Count + i;
                     track = tracks_to_add.Dequeue ();
                 }
 
                 try {
-                    OnIpodDatabaseSaveProgressChanged (this, EventArgs.Empty);
+                    UpdateProgress (progressUpdater, message, ++i, total);
                     track.CommitToIpod (MediaDatabase);
+                    track.Save (false);
                     tracks_map[track.TrackId] = track;
                 } catch (Exception e) {
                     Log.Exception ("Cannot save track to iPod", e);
                 }
             }
+            if (total > 0) {
+                OnTracksAdded ();
+                OnUserNotifyUpdated ();
+            }
 
-            // TODO sync updated metadata to changed tracks
+            while (tracks_to_update.Count > 0) {
+                AppleDeviceTrackInfo track = null;
+                lock (sync_mutex) {
+                    track = tracks_to_update.Dequeue ();
+                }
 
+                try {
+                    track.CommitToIpod (MediaDatabase);
+                } catch (Exception e) {
+                    Log.Exception ("Cannot save track to iPod", e);
+                }
+            }
+
+            message = Catalog.GetString ("Removing track {0} of {1}");
+            total = tracks_to_remove.Count;
             while (tracks_to_remove.Count > 0) {
                 AppleDeviceTrackInfo track = null;
                 lock (sync_mutex) {
@@ -500,11 +566,19 @@ namespace Banshee.Dap.AppleDevice
 
                 try {
                     if (track.IpodTrack != null) {
-                        OnIpodDatabaseSaveProgressChanged (this, EventArgs.Empty);
-                        foreach (var playlist in MediaDatabase.Playlists)
+                        UpdateProgress (progressUpdater, message, total - tracks_to_remove.Count, total);
+
+                        foreach (var playlist in MediaDatabase.Playlists) {
                             playlist.Tracks.Remove (track.IpodTrack);
+                        }
+
+                        if (SupportsPodcasts && track.IpodTrack.MediaType == GPod.MediaType.Podcast) {
+                            MediaDatabase.PodcastsPlaylist.Tracks.Remove (track.IpodTrack);
+                        }
+
                         MediaDatabase.MasterPlaylist.Tracks.Remove (track.IpodTrack);
                         MediaDatabase.Tracks.Remove (track.IpodTrack);
+
                         Banshee.IO.File.Delete (new SafeUri (GPod.ITDB.GetLocalPath (Device, track.IpodTrack)));
                     } else {
                         Log.Error ("The ipod track was null");
@@ -514,93 +588,64 @@ namespace Banshee.Dap.AppleDevice
                 }
             }
 
-//            // Remove playlists on the device
-//            List<IPod.Playlist> device_playlists = new List<IPod.Playlist> (ipod_device.TrackDatabase.Playlists);
-//            foreach (IPod.Playlist playlist in device_playlists) {
-//                if (!playlist.IsOnTheGo) {
-//                    ipod_device.TrackDatabase.RemovePlaylist (playlist);
-//                }
-//            }
-//            device_playlists.Clear ();
-//
-//            if (SupportsPlaylists) {
-//                // Add playlists from Banshee to the device
-//                foreach (Source child in Children) {
-//                    PlaylistSource from = child as PlaylistSource;
-//                    if (from != null && from.Count > 0) {
-//                        IPod.Playlist playlist = ipod_device.TrackDatabase.CreatePlaylist (from.Name);
-//                        foreach (int track_id in ServiceManager.DbConnection.QueryEnumerable<int> (String.Format (
-//                            "SELECT CoreTracks.TrackID FROM {0} WHERE {1}",
-//                            from.DatabaseTrackModel.ConditionFromFragment, from.DatabaseTrackModel.Condition)))
-//                        {
-//                            if (tracks_map.ContainsKey (track_id)) {
-//                                playlist.AddTrack (tracks_map[track_id].IpodTrack);
-//                            }
-//                        }
-//                    }
-//                }
-//            }
+            if (SupportsPlaylists) {
+                // Remove playlists on the device
+                var device_playlists = new List<GPod.Playlist> (MediaDatabase.Playlists);
+                foreach (var playlist in device_playlists) {
+                    if (!playlist.IsMaster && !playlist.IsPodcast) {
+                        MediaDatabase.Playlists.Remove (playlist);
+                    }
+                }
+
+                // Add playlists from Banshee to the device
+                foreach (Source child in Children) {
+                    PlaylistSource from = child as PlaylistSource;
+                    if (from != null && from.Count > 0) {
+                        var playlist = new GPod.Playlist (from.Name);
+                        MediaDatabase.Playlists.Add (playlist);
+                        foreach (int track_id in ServiceManager.DbConnection.QueryEnumerable<int> (String.Format (
+                            "SELECT CoreTracks.TrackID FROM {0} WHERE {1}",
+                            from.DatabaseTrackModel.ConditionFromFragment, from.DatabaseTrackModel.Condition)))
+                        {
+                            if (tracks_map.ContainsKey (track_id)) {
+                                playlist.Tracks.Add (tracks_map[track_id].IpodTrack);
+                            }
+                        }
+                    }
+                }
+            }
 
             try {
-//                ipod_device.TrackDatabase.SaveStarted += OnIpodDatabaseSaveStarted;
-//                ipod_device.TrackDatabase.SaveEnded += OnIpodDatabaseSaveEnded;
-//                ipod_device.TrackDatabase.SaveProgressChanged += OnIpodDatabaseSaveProgressChanged;
+                message = Catalog.GetString ("Writing media database");
+                UpdateProgress (progressUpdater, message, 1, 1);
                 MediaDatabase.Write ();
                 Log.Information ("Wrote iPod database");
             } catch (Exception e) {
                 Log.Exception ("Failed to save iPod database", e);
-            } finally {
-                OnIpodDatabaseSaveEnded (this, EventArgs.Empty);
-//                ipod_device.TrackDatabase.SaveStarted -= OnIpodDatabaseSaveStarted;
-//                ipod_device.TrackDatabase.SaveEnded -= OnIpodDatabaseSaveEnded;
-//                ipod_device.TrackDatabase.SaveProgressChanged -= OnIpodDatabaseSaveProgressChanged;
             }
-        }
+            progressUpdater.Finish ();
 
-        private UserJob sync_user_job;
-
-        private void OnIpodDatabaseSaveStarted (object o, EventArgs args)
-        {
-            DisposeSyncUserJob ();
-
-            sync_user_job = new UserJob (Catalog.GetString ("Syncing iPod"),
-                Catalog.GetString ("Preparing to synchronize..."), GetIconNames ());
-            sync_user_job.Register ();
-        }
-
-        private void OnIpodDatabaseSaveEnded (object o, EventArgs args)
-        {
-            DisposeSyncUserJob ();
-        }
-
-        private void DisposeSyncUserJob ()
-        {
-            if (sync_user_job != null) {
-                sync_user_job.Finish ();
-                sync_user_job = null;
-            }
-        }
-
-        private void OnIpodDatabaseSaveProgressChanged (object o, EventArgs args)
-        {
-            string message = string.Format ("Copying track {0} of {1}", 1, tracks_to_add.Count + tracks_to_remove.Count);
-            double progress = 1.0 / (tracks_to_add.Count + tracks_to_remove.Count);
-             if (progress >= 0.99) {
-                 sync_user_job.Status = Catalog.GetString ("Flushing to disk...");
-                 sync_user_job.Progress = 0;
-             } else {
-                 sync_user_job.Status = message;
-                 sync_user_job.Progress = progress;
-             }
+            Hyena.Log.Debug ("Ending AppleDevice sync thread cycle");
         }
 
         public bool SyncNeeded {
             get {
                 lock (sync_mutex) {
-                    return tracks_to_add.Count > 0 || tracks_to_remove.Count > 0;
+                    return tracks_to_add.Count > 0 ||
+                        tracks_to_update.Count > 0 ||
+                        tracks_to_remove.Count > 0;
                 }
             }
         }
+
+        public override bool HasEditableTrackProperties {
+            get {
+                // we want child sources to be able to edit metadata and the
+                // savetrackmetadataservice to take in account this source
+                return true;
+            }
+        }
+
 #endregion
 
     }

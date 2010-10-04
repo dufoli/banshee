@@ -41,8 +41,8 @@ namespace Banshee.Dap.AppleDevice
             get; set;
         }
 
-        // Used for podcasts only
-        //private string description;
+        private string mimetype;
+        private string description; // Only used for podcasts.
 
         public AppleDeviceTrackInfo (GPod.Track track)
         {
@@ -53,48 +53,59 @@ namespace Banshee.Dap.AppleDevice
 
         public AppleDeviceTrackInfo (TrackInfo track)
         {
+            CanSaveToDatabase = true;
+
             if (track is AppleDeviceTrackInfo) {
                 IpodTrack = ((AppleDeviceTrackInfo)track).IpodTrack;
                 LoadFromIpodTrack ();
             } else {
-                IsCompilation = track.IsCompilation ;
-                AlbumArtist = track.AlbumArtist;
-                AlbumTitle = track.AlbumTitle;
-                ArtistName = track.ArtistName;
-                BitRate = track.BitRate;
-                SampleRate = track.SampleRate;
-                Bpm = track.Bpm;
-                Comment = track.Comment;
-                Composer = track.Composer;
-                Conductor = track.Conductor;
-                Copyright = track.Copyright;
-                DateAdded = track.DateAdded;
-                DiscCount = track.DiscCount;
-                DiscNumber = track.DiscNumber;
-                Duration = track.Duration;
-                FileSize = track.FileSize;
-                Genre = track.Genre;
-                Grouping = track.Grouping;
-                LastPlayed = track.LastPlayed;
-                LastSkipped = track.LastSkipped;
-                PlayCount = track.PlayCount;
-                Rating = track.Rating;
-                ReleaseDate = track.ReleaseDate;
-                SkipCount = track.SkipCount;
-                TrackCount = track.TrackCount;
-                TrackNumber = track.TrackNumber;
-                TrackTitle = track.TrackTitle;
-                Year = track.Year;
-                MediaAttributes = track.MediaAttributes;
+                UpdateInfo (track);
+            }
+        }
 
-                var podcast_info = track.ExternalObject as IPodcastInfo;
-                if (podcast_info != null) {
-                    //description = podcast_info.Description;
-                    ReleaseDate = podcast_info.ReleaseDate;
-                }
+        public void UpdateInfo (TrackInfo track)
+        {
+            if (track is AppleDeviceTrackInfo) {
+                throw new ArgumentException ("Shouldn't update an AppleDeviceTrackInfo from an AppleDeviceTrackInfo");
             }
 
-            CanSaveToDatabase = true;
+            IsCompilation = track.IsCompilation ;
+            AlbumArtist = track.AlbumArtist;
+            AlbumTitle = track.AlbumTitle;
+            ArtistName = track.ArtistName;
+            BitRate = track.BitRate;
+            SampleRate = track.SampleRate;
+            Bpm = track.Bpm;
+            Comment = track.Comment;
+            Composer = track.Composer;
+            Conductor = track.Conductor;
+            Copyright = track.Copyright;
+            DateAdded = track.DateAdded;
+            DiscCount = track.DiscCount;
+            DiscNumber = track.DiscNumber;
+            Duration = track.Duration;
+            FileSize = track.FileSize;
+            Genre = track.Genre;
+            Grouping = track.Grouping;
+            LastPlayed = track.LastPlayed;
+            LastSkipped = track.LastSkipped;
+            PlayCount = track.PlayCount;
+            Rating = track.Rating;
+            ReleaseDate = track.ReleaseDate;
+            SkipCount = track.SkipCount;
+            TrackCount = track.TrackCount;
+            TrackNumber = track.TrackNumber;
+            TrackTitle = track.TrackTitle;
+            Year = track.Year;
+            MediaAttributes = track.MediaAttributes;
+
+            var podcast_info = track.ExternalObject as IPodcastInfo;
+            if (podcast_info != null) {
+                description = podcast_info.Description;
+                ReleaseDate = podcast_info.ReleaseDate;
+            }
+
+            mimetype = track.MimeType;
         }
 
         private void LoadFromIpodTrack ()
@@ -131,7 +142,7 @@ namespace Banshee.Dap.AppleDevice
             TrackNumber = track.TrackNumber;
             TrackTitle = String.IsNullOrEmpty (track.Title) ? null : track.Title;
             Year = track.Year;
-            //description = track.Description;
+            description = track.Description;
             ReleaseDate = track.TimeReleased;
 
             rating = track.Rating > 5 ? 0 : (int) track.Rating;
@@ -140,36 +151,34 @@ namespace Banshee.Dap.AppleDevice
                 PlaybackError = StreamPlaybackError.Drm;
             }
 
-            MediaAttributes = TrackMediaAttributes.AudioStream | TrackMediaAttributes.Music;
-
-//            switch (track.Type) {
-//                case IPod.MediaType.Audio:
-//                    MediaAttributes |= TrackMediaAttributes.Music;
-//                    break;
-//                case IPod.MediaType.AudioVideo:
-//                case IPod.MediaType.Video:
-//                    MediaAttributes |= TrackMediaAttributes.VideoStream;
-//                    break;
-//                case IPod.MediaType.MusicVideo:
-//                    MediaAttributes |= TrackMediaAttributes.Music | TrackMediaAttributes.VideoStream;
-//                    break;
-//                case IPod.MediaType.Movie:
-//                    MediaAttributes |= TrackMediaAttributes.VideoStream | TrackMediaAttributes.Movie;
-//                    break;
-//                case IPod.MediaType.TVShow:
-//                    MediaAttributes |= TrackMediaAttributes.VideoStream | TrackMediaAttributes.TvShow;
-//                    break;
-//                case IPod.MediaType.VideoPodcast:
-//                    MediaAttributes |= TrackMediaAttributes.VideoStream | TrackMediaAttributes.Podcast;
-//                    break;
-//                case IPod.MediaType.Podcast:
-//                    MediaAttributes |= TrackMediaAttributes.Podcast;
-//                    // FIXME: persist URL on the track (track.PodcastUrl)
-//                    break;
-//                case IPod.MediaType.Audiobook:
-//                    MediaAttributes |= TrackMediaAttributes.AudioBook;
-//                    break;
-//            }
+            MediaAttributes = TrackMediaAttributes.AudioStream;
+            switch (track.MediaType) {
+            case GPod.MediaType.Audio:
+                MediaAttributes |= TrackMediaAttributes.Music;
+                break;
+            case GPod.MediaType.AudioVideo:
+                MediaAttributes |= TrackMediaAttributes.VideoStream;
+                break;
+            case GPod.MediaType.MusicVideo:
+                MediaAttributes |= TrackMediaAttributes.Music | TrackMediaAttributes.VideoStream;
+                break;
+            case GPod.MediaType.Movie:
+                MediaAttributes |= TrackMediaAttributes.VideoStream | TrackMediaAttributes.Movie;
+                break;
+            case GPod.MediaType.TVShow:
+                MediaAttributes |= TrackMediaAttributes.VideoStream | TrackMediaAttributes.TvShow;
+                break;
+            case GPod.MediaType.Podcast:
+                MediaAttributes |= TrackMediaAttributes.Podcast;
+                // FIXME: persist URL on the track (track.PodcastUrl)
+                break;
+            case GPod.MediaType.Audiobook:
+                MediaAttributes |= TrackMediaAttributes.AudioBook;
+                break;
+            case GPod.MediaType.MusicTVShow:
+                MediaAttributes |= TrackMediaAttributes.Music | TrackMediaAttributes.VideoStream | TrackMediaAttributes.TvShow;
+                break;
+            }
         }
 
         public void CommitToIpod (GPod.ITDB database)
@@ -187,102 +196,91 @@ namespace Banshee.Dap.AppleDevice
             track.BPM = (short)Bpm;
             track.Comment = Comment;
             track.Composer = Composer;
-            track.TimeAdded = DateAdded;
+            track.TimeAdded = DateTime.Now;
             track.CDs = DiscCount;
             track.CDNumber = DiscNumber;
             track.TrackLength = (int) Duration.TotalMilliseconds;
             track.Size = (int)FileSize;
             track.Grouping = Grouping;
-            track.TimePlayed = LastPlayed;
+            try {
+                track.TimePlayed = LastPlayed;
+            } catch {
+                Hyena.Log.InformationFormat ("Couldn't set TimePlayed to '{0}'", LastPlayed);
+            }
             track.PlayCount = (uint) PlayCount;
             track.Tracks = TrackCount;
             track.TrackNumber = TrackNumber;
             track.Year = Year;
-            track.TimeReleased = ReleaseDate;
-
+            try {
+                track.TimeReleased = ReleaseDate;
+            } catch {
+                Hyena.Log.InformationFormat ("Couldn't set TimeReleased to '{0}'", ReleaseDate);
+            }
             track.Album = AlbumTitle;
             track.Artist = ArtistName;
             track.Title = TrackTitle;
             track.Genre = Genre;
 
-            switch (Rating) {
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-                track.Rating = (uint) rating;
-                break;
-            default: track.Rating = 0;
-                break;
+            track.Rating = ((Rating >= 1) && (Rating <= 5)) ? (uint)Rating : 0;
+
+            if (HasAttribute (TrackMediaAttributes.Podcast)) {
+                track.Description = description;
+                track.RememberPlaybackPosition = true;
+                track.MarkUnplayed = (track.PlayCount == 0);
             }
 
-//            if (HasAttribute (TrackMediaAttributes.Podcast)) {
-//                track.DateReleased = ReleaseDate;
-//                track.Description = description;
-//                track.RememberPosition = true;
-//                track.NotPlayedMark = track.PlayCount == 0;
-//            }
-//
-//            if (HasAttribute (TrackMediaAttributes.VideoStream)) {
-//                if (HasAttribute (TrackMediaAttributes.Podcast)) {
-//                    track.Type = IPod.MediaType.VideoPodcast;
-//                } else if (HasAttribute (TrackMediaAttributes.Music)) {
-//                    track.Type = IPod.MediaType.MusicVideo;
-//                } else if (HasAttribute (TrackMediaAttributes.Movie)) {
-//                    track.Type = IPod.MediaType.Movie;
-//                } else if (HasAttribute (TrackMediaAttributes.TvShow)) {
-//                    track.Type = IPod.MediaType.TVShow;
-//                } else {
-//                    track.Type = IPod.MediaType.Video;
-//                }
-//            } else {
-//                if (HasAttribute (TrackMediaAttributes.Podcast)) {
-//                    track.Type = IPod.MediaType.Podcast;
-//                } else if (HasAttribute (TrackMediaAttributes.AudioBook)) {
-//                    track.Type = IPod.MediaType.Audiobook;
-//                } else if (HasAttribute (TrackMediaAttributes.Music)) {
-//                    track.Type = IPod.MediaType.Audio;
-//                } else {
-//                    track.Type = IPod.MediaType.Audio;
-//                }
-//            }
             track.MediaType = GPod.MediaType.Audio;
+            if (HasAttribute (TrackMediaAttributes.VideoStream)) {
+                if (HasAttribute (TrackMediaAttributes.Podcast)) {
+                    track.MediaType = GPod.MediaType.Podcast | GPod.MediaType.Movie;
+                } else if (HasAttribute (TrackMediaAttributes.Music)) {
+                    if (HasAttribute (TrackMediaAttributes.TvShow)) {
+                        track.MediaType = GPod.MediaType.MusicTVShow;
+                    } else {
+                        track.MediaType = GPod.MediaType.MusicVideo;
+                    }
+                } else if (HasAttribute (TrackMediaAttributes.Movie)) {
+                    track.MediaType = GPod.MediaType.Movie;
+                } else if (HasAttribute (TrackMediaAttributes.TvShow)) {
+                    track.MediaType = GPod.MediaType.TVShow;
+                } else {
+                    track.MediaType = GPod.MediaType.AudioVideo;
+                }
+            } else {
+                if (HasAttribute (TrackMediaAttributes.Podcast)) {
+                    track.MediaType = GPod.MediaType.Podcast;
+                } else if (HasAttribute (TrackMediaAttributes.AudioBook)) {
+                    track.MediaType = GPod.MediaType.Audiobook;
+                } else if (HasAttribute (TrackMediaAttributes.Music)) {
+                    track.MediaType = GPod.MediaType.Audio;
+                } else {
+                    track.MediaType = GPod.MediaType.Audio;
+                }
+            }
+
             if (addTrack) {
-                track.Filetype = "MP3-file";
+                track.Filetype = mimetype;
+
                 database.Tracks.Add (IpodTrack);
                 database.MasterPlaylist.Tracks.Add (IpodTrack);
+
+                if (HasAttribute (TrackMediaAttributes.Podcast) && database.Device.SupportsPodcast) {
+                    database.PodcastsPlaylist.Tracks.Add (IpodTrack);
+                }
+
                 database.CopyTrackToIPod (track, Uri.LocalPath);
+                Uri = new SafeUri (GPod.ITDB.GetLocalPath (database.Device, track));
                 ExternalId = (long) IpodTrack.DBID;
             }
-//            if (CoverArtSpec.CoverExists (ArtworkId)) {
-//                SetIpodCoverArt (device, track, CoverArtSpec.GetPath (ArtworkId));
-//            }
-        }
 
-        // FIXME: No reason for this to use GdkPixbuf - the file is on disk already in
-        // the artwork cache as a JPEG, so just shove the bytes from disk into the track
-        public static void SetIpodCoverArt (GPod.Device device, GPod.Track track, string path)
-        {
-//            try {
-//                Gdk.Pixbuf pixbuf = null;
-//                foreach (IPod.ArtworkFormat format in device.LookupArtworkFormats (IPod.ArtworkUsage.Cover)) {
-//                    if (!track.HasCoverArt (format)) {
-//                        // Lazily load the pixbuf
-//                        if (pixbuf == null) {
-//                            pixbuf = new Gdk.Pixbuf (path);
-//                        }
-//
-//                        track.SetCoverArt (format, IPod.ArtworkHelpers.ToBytes (format, pixbuf));
-//                    }
-//                }
-//
-//                if (pixbuf != null) {
-//                    pixbuf.Dispose ();
-//                }
-//            } catch (Exception e) {
-//                Log.Exception (String.Format ("Failed to set cover art on iPod from {0}", path), e);
-//            }
+            if (CoverArtSpec.CoverExists (ArtworkId)) {
+                string path = CoverArtSpec.GetPath (ArtworkId);
+                if (!track.ThumbnailsSet (path)) {
+                    Log.Error (String.Format ("Could not set cover art for {0}.", path));
+                }
+            } else {
+                track.ThumbnailsRemoveAll ();
+            }
         }
     }
 }

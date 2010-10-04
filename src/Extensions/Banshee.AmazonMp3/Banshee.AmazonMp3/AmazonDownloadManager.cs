@@ -1,5 +1,5 @@
 //
-// UserJobDownloadManager.cs
+// AmazonDownloadManager.cs
 //  
 // Author:
 //   Aaron Bockover <abockover@novell.com>
@@ -41,21 +41,35 @@ using Banshee.Base;
 
 namespace Banshee.AmazonMp3
 {
-    public class UserJobDownloadManager : DownloadManager
+    public class AmazonDownloadManager : DownloadManager
     {
-        private UserJob user_job;
-        private int total_count;
-        private int finished_count;
+        private DownloadManagerJob job;
         private LibraryImportManager import_manager;
+        private System.Threading.ManualResetEvent import_event = new System.Threading.ManualResetEvent (true);
 
         private int mp3_count;
         private List<TrackInfo> mp3_imported_tracks = new List<TrackInfo> ();
         private Queue<AmzMp3Downloader> non_mp3_queue = new Queue<AmzMp3Downloader> ();
 
-        public UserJobDownloadManager (string path)
+        public AmazonDownloadManager (string path)
         {
+            job = new DownloadManagerJob (this) {
+                Title = Catalog.GetString ("Amazon MP3 Purchases"),
+                Status = Catalog.GetString ("Contacting..."),
+                IconNames = new string [] { "amazon-mp3-source" }
+            };
+            job.Finished += delegate { ServiceManager.SourceManager.MusicLibrary.NotifyUser (); };
+
+            ServiceManager.Get<JobScheduler> ().Add (job);
+
+            import_manager = new LibraryImportManager (true) {
+                KeepUserJobHidden = true,
+                Debug = true,
+                Threaded = false
+            };
+            import_manager.ImportResult += OnImportManagerImportResult;
+
             var playlist = new AmzXspfPlaylist (path);
-            total_count = playlist.DownloadableTrackCount;
             foreach (var track in playlist.DownloadableTracks) {
                 var downloader = new AmzMp3Downloader (track);
                 if (downloader.FileExtension == "mp3") {
@@ -63,15 +77,6 @@ namespace Banshee.AmazonMp3
                 }
                 QueueDownloader (downloader);
             }
-
-            user_job = new UserJob (Catalog.GetString ("Amazon MP3 Purchases"),
-                Catalog.GetString ("Contacting..."), "amazon-mp3-source");
-            user_job.Register ();
-
-            import_manager = new LibraryImportManager (true) {
-                KeepUserJobHidden = true
-            };
-            import_manager.ImportResult += OnImportManagerImportResult;
         }
 
         private static TResult MostCommon<T, TResult> (IEnumerable<T> collection, Func<T, TResult> map)
@@ -86,12 +91,20 @@ namespace Banshee.AmazonMp3
 
         private void OnImportManagerImportResult (object o, DatabaseImportResultArgs args)
         {
+            Log.InformationFormat ("Amazon downloader: imported {0}", args.Track);
             mp3_imported_tracks.Add (args.Track);
+            TryToFixNonMp3Metadata ();
+            import_event.Set ();
+        }
 
-            if (mp3_imported_tracks.Count != mp3_count || non_mp3_queue.Count <= 0) {
+        private bool already_fixed;
+        private void TryToFixNonMp3Metadata ()
+        {
+            if (already_fixed || mp3_imported_tracks.Count != mp3_count || non_mp3_queue.Count <= 0) {
                 return;
             }
 
+            already_fixed = true;
             // FIXME: this is all pretty lame. Amazon doesn't have any metadata on the PDF
             // files, which is a shame. So I attempt to figure out the best common metadata
             // from the already imported tracks in the album, and then forcefully persist
@@ -152,57 +165,31 @@ namespace Banshee.AmazonMp3
         protected override void OnDownloaderStarted (HttpDownloader downloader)
         {
             var track = ((AmzMp3Downloader)downloader).Track;
+            base.OnDownloaderStarted (downloader);
             Log.InformationFormat ("Starting to download \"{0}\" by {1}", track.Title, track.Creator);
-        }
-
-        protected override void OnDownloaderProgress (HttpDownloader downloader)
-        {
-            lock (SyncRoot) {
-                double weight = 1.0 / total_count;
-                double progress = finished_count * weight;
-                double speed = 0;
-                int count = 0;
-                foreach (var active_downloader in ActiveDownloaders) {
-                    progress += weight * active_downloader.State.PercentComplete;
-                    speed = active_downloader.State.TransferRate;
-                    count++;
-                }
-                user_job.Progress = progress;
-
-                var human_speed = new Hyena.Query.FileSizeQueryValue ((long)Math.Round (speed)).ToUserQuery ();
-                if (PendingDownloadCount == 0) {
-                    user_job.Status = String.Format (
-                        Catalog.GetPluralString (
-                            "{0} download at {1}/s",
-                            "{0} downloads at {1}/s",
-                            count),
-                        count, human_speed
-                    );
-                } else {
-                    user_job.Status = String.Format (
-                        Catalog.GetPluralString (
-                            "{0} download at {1}/s ({2} pending)",
-                            "{0} downloads at {1}/s ({2} pending)",
-                            count),
-                        count, human_speed, PendingDownloadCount
-                    );
-                }
-            }
         }
 
         protected override void OnDownloaderFinished (HttpDownloader downloader)
         {
-            base.OnDownloaderFinished (downloader);
-
             var amz_downloader = (AmzMp3Downloader)downloader;
             var track = amz_downloader.Track;
+
+            bool last_file = (TotalDownloadCount == 1);
 
             if (downloader.State.Success) {
                 switch (amz_downloader.FileExtension) {
                     case "mp3":
                     case "wmv":
                     case "mp4":
+                        if (last_file) {
+                            import_event.Reset ();
+                        }
+                        Log.InformationFormat ("Finished downloading \"{0}\" by {1}; adding to import queue", track.Title, track.Creator);
+                        try {
                         import_manager.Enqueue (amz_downloader.LocalPath);
+                        } catch (Exception e) {
+                            Log.Exception ("Trying to queue amz file", e);
+                        }
                         break;
                     default:
                         non_mp3_queue.Enqueue (amz_downloader);
@@ -210,15 +197,21 @@ namespace Banshee.AmazonMp3
                 }
             }
 
-            Log.InformationFormat ("Finished downloading \"{0}\" by {1}", track.Title, track.Creator);
-
-            lock (SyncRoot) {
-                finished_count++;
-
-                if (TotalDownloadCount <= 0) {
-                    user_job.Finish ();
-                }
+            // This is the final download; ensure the non-MP3 items have their metadata
+            // updated and are imported, and wait until the import_manager is done before
+            // calling base.OnDownloaderFinished since that will make the Job finished which will
+            // mean all references to the manager are gone and it may be garbage collected.
+            if (last_file) {
+                Log.InformationFormat ("Amazon downloader: waiting for last file to be imported");
+                TryToFixNonMp3Metadata ();
+                import_event.WaitOne ();
+                Log.InformationFormat ("Amazon downloader: last file imported; finishing");
             }
+
+            base.OnDownloaderFinished (downloader);
+
+            //Log.InformationFormat ("Finished downloading \"{0}\" by {1}; Success? {2} File: {3}", track.Title, track.Creator,
+                //downloader.State.Success, amz_downloader.LocalPath);
         }
     }
 }

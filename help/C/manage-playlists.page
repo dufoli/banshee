@@ -58,10 +58,12 @@
     of your playlist.
     </p>
     
-    <note>
-      <p>You can not re-order a playlist.  As you add songs to the playlist,
-      they will played in the order in which you added them to the playlist.</p>
-    </note> 
+    <p>You can change the order of the playlist by dragging and dropping the
+    song to the new position in the playlist.  Songs can only be re-ordered
+    in the playlist when none of the columns are sorted.  To unsort a column,
+    press the column until the up or down arrow is no longer showing and
+    the column is blank and then re-order the playlist.
+    </p>
     
     <p>To remove a track from the playlist, select the track(s) you wish to 
     remove.  Press the <key>Delete</key>, from the menu choose 
@@ -77,5 +79,69 @@
     on a number of pre-set variables.  You can quickly create a new playlist
     based on a specific artist, favorites or more.  
     </p>
-  </section> 
+    
+    <p>To create a new Smart Playlist, from the menu choose <guiseq>
+    <gui>Media</gui><gui>New Smart Playlist</gui></guiseq>.  You will be 
+    presented with a dialog to create a new Smart Playlist.  Enter
+    the name of your playlist and then choose the criteria your playlist 
+    should be based on.  You can choose from any field included in the song's 
+    meatadata, such as Album, Artist or Year.  Choose the criteria and then
+    choose from one of the following:
+    </p>
+    
+    <list>
+      <item><p>is</p></item>
+      <item><p>is not</p></item>  
+      <item><p>less than</p></item>
+      <item><p>more than</p></item>  
+      <item><p>at most</p></item>
+      <item><p>at least</p></item>  
+    </list>
+    
+    <p>You can also press the <gui>+</gui> button to add an addition query
+    to the Smart Playlist.  For example, you could create a smart playlist
+    that includes all songs from 2010 that you rated 5 stars.  To create this
+    playlist you would choose:
+    </p>
+    
+  <table frame="all" rules="rows" shade="rows">
+  <tr>
+    <td><p><gui>Year</gui></p></td> <td><p><gui>is</gui></p> </td> 
+    <td><p><gui>2010</gui></p></td>
+  </tr>
+  <tr>
+    <td><p><gui>Rating</gui></p></td> <td><p><gui>is</gui></p></td> 
+    <td><p><gui></gui>5 stars</p></td>
+  </tr>
+  </table>
+    
+    <p>You can then optionally select how many songs are included by pressing
+    the <gui>Limit</gui> to checkbox and choosing the number of songs to be
+    included.
+    </p>
+  
+  <p>Banshee also includes smart playlists already created for 
+  you.  Press the <gui>Open in editor</gui> button to view how the playlist
+  created was or to modify it.  If you press <gui>Create and save</gui> the 
+  playlist will be automatically generated and saved for you.  The following
+  playlists are included:
+  </p>
+  
+  <list>
+    <title>Banshee Smart Playlists</title>
+    <item><p>Favorites (Songs rated four and five stars)</p></item>
+    <item><p>Recent Favorites (Songs listened to often in the past week)
+    </p></item>  
+    <item><p>Recently Added (Songs imported within the last week</p></item>
+    <item><p>Unheard (Songs that have not been played or skipped)</p></item>
+    <item><p>Neglected Favorites (Favorites not played in over two months)
+    </p></item>
+    <item><p>700 MB of Favorites (A data CD worth of favorite songs)</p></item>
+    <item><p>80 Minutes of Favorites (An audio CD worth of favorite songs)
+    </p></item>
+    <item><p>Unrated (Songs that haven't been rated)</p></item>
+  </list>
+ 
+   </section> 
+ 
 </page>

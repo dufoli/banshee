@@ -35,6 +35,7 @@ using Mono.Unix;
 using IPod;
 
 using Hyena;
+using Hyena.Query;
 using Banshee.Base;
 using Banshee.ServiceStack;
 using Banshee.Sources;
@@ -401,6 +402,27 @@ namespace Banshee.Dap.Ipod
 
 #region Syncing
 
+        public override void UpdateMetadata (DatabaseTrackInfo track)
+        {
+            lock (sync_mutex) {
+                IpodTrackInfo ipod_track;
+                if (!tracks_map.TryGetValue (track.TrackId, out ipod_track)) {
+                    return;
+                }
+
+                ipod_track.UpdateInfo (track);
+                tracks_to_update.Enqueue (ipod_track);
+            }
+        }
+
+        protected override void OnTracksChanged (params QueryField[] fields)
+        {
+            if (tracks_to_update.Count > 0 && !Sync.Syncing) {
+                QueueSync ();
+            }
+            base.OnTracksChanged (fields);
+        }
+
         protected override void OnTracksAdded ()
         {
             if (!IsAdding && tracks_to_add.Count > 0 && !Sync.Syncing) {
@@ -418,6 +440,7 @@ namespace Banshee.Dap.Ipod
         }
 
         private Queue<IpodTrackInfo> tracks_to_add = new Queue<IpodTrackInfo> ();
+        private Queue<IpodTrackInfo> tracks_to_update = new Queue<IpodTrackInfo> ();
         private Queue<IpodTrackInfo> tracks_to_remove = new Queue<IpodTrackInfo> ();
 
         private uint sync_timeout_id = 0;
@@ -468,10 +491,10 @@ namespace Banshee.Dap.Ipod
                     throw new Exception (Catalog.GetString ("Track duration is zero"));
                 }
 
-                IpodTrackInfo ipod_track = new IpodTrackInfo (track);
-                ipod_track.Uri = fromUri;
-                ipod_track.PrimarySource = this;
-                ipod_track.Save (false);
+                var ipod_track = new IpodTrackInfo (track) {
+                    Uri = fromUri,
+                    PrimarySource = this,
+                };
 
                 tracks_to_add.Enqueue (ipod_track);
             }
@@ -559,21 +582,45 @@ namespace Banshee.Dap.Ipod
 
         private void PerformSyncThreadCycle ()
         {
+            Hyena.Log.Debug ("Starting iPod sync thread cycle");
+
+            CreateNewSyncUserJob ();
+            var i = 0;
+            var total = tracks_to_add.Count;
             while (tracks_to_add.Count > 0) {
                 IpodTrackInfo track = null;
                 lock (sync_mutex) {
+                    total = tracks_to_add.Count + i;
                     track = tracks_to_add.Dequeue ();
                 }
+
+                ChangeSyncProgress (track.ArtistName, track.TrackTitle, ++i / total);
 
                 try {
                     track.CommitToIpod (ipod_device);
                     tracks_map[track.TrackId] = track;
+                    track.Save (false);
                 } catch (Exception e) {
                     Log.Exception ("Cannot save track to iPod", e);
                 }
             }
+            if (total > 0) {
+                OnTracksAdded ();
+                OnUserNotifyUpdated ();
+            }
 
-            // TODO sync updated metadata to changed tracks
+            while (tracks_to_update.Count > 0) {
+                IpodTrackInfo track = null;
+                lock (sync_mutex) {
+                    track = tracks_to_update.Dequeue ();
+                }
+
+                try {
+                    track.CommitToIpod (ipod_device);
+                } catch (Exception e) {
+                    Log.Exception ("Cannot save track to iPod", e);
+                }
+            }
 
             while (tracks_to_remove.Count > 0) {
                 IpodTrackInfo track = null;
@@ -626,7 +673,6 @@ namespace Banshee.Dap.Ipod
             }
 
             try {
-                ipod_device.TrackDatabase.SaveStarted += OnIpodDatabaseSaveStarted;
                 ipod_device.TrackDatabase.SaveEnded += OnIpodDatabaseSaveEnded;
                 ipod_device.TrackDatabase.SaveProgressChanged += OnIpodDatabaseSaveProgressChanged;
                 ipod_device.Save ();
@@ -635,18 +681,16 @@ namespace Banshee.Dap.Ipod
             } catch (Exception e) {
                 Log.Exception ("Failed to save iPod database", e);
             } finally {
-                ipod_device.TrackDatabase.SaveStarted -= OnIpodDatabaseSaveStarted;
                 ipod_device.TrackDatabase.SaveEnded -= OnIpodDatabaseSaveEnded;
                 ipod_device.TrackDatabase.SaveProgressChanged -= OnIpodDatabaseSaveProgressChanged;
+                Hyena.Log.Debug ("Ending iPod sync thread cycle");
             }
         }
 
         private UserJob sync_user_job;
 
-        private void OnIpodDatabaseSaveStarted (object o, EventArgs args)
+        private void CreateNewSyncUserJob ()
         {
-            DisposeSyncUserJob ();
-
             sync_user_job = new UserJob (Catalog.GetString ("Syncing iPod"),
                 Catalog.GetString ("Preparing to synchronize..."), GetIconNames ());
             sync_user_job.Register ();
@@ -667,25 +711,44 @@ namespace Banshee.Dap.Ipod
 
         private void OnIpodDatabaseSaveProgressChanged (object o, IPod.TrackSaveProgressArgs args)
         {
-            double progress = args.CurrentTrack == null ? 0.0 : args.TotalProgress;
-            string message = args.CurrentTrack == null
-                    ? Catalog.GetString ("Updating...")
-                    : String.Format ("{0} - {1}", args.CurrentTrack.Artist, args.CurrentTrack.Title);
+            if (args.CurrentTrack == null) {
+                ChangeSyncProgress (null, null, 0.0);
+            } else {
+                ChangeSyncProgress (args.CurrentTrack.Artist, args.CurrentTrack.Title, args.TotalProgress);
+            }
+        }
 
-             if (progress >= 0.99) {
-                 sync_user_job.Status = Catalog.GetString ("Flushing to disk...");
-                 sync_user_job.Progress = 0;
-             } else {
-                 sync_user_job.Status = message;
-                 sync_user_job.Progress = progress;
-             }
+        private void ChangeSyncProgress (string artist, string title, double progress)
+        {
+            string message = (artist == null && title == null)
+                    ? Catalog.GetString ("Updating...")
+                    : String.Format ("{0} - {1}", artist, title);
+
+            if (progress >= 0.99) {
+                sync_user_job.Status = Catalog.GetString ("Flushing to disk...");
+                sync_user_job.Progress = 0;
+            } else {
+                sync_user_job.Status = message;
+                sync_user_job.Progress = progress;
+            }
         }
 
         public bool SyncNeeded {
             get {
                 lock (sync_mutex) {
-                    return tracks_to_add.Count > 0 || tracks_to_remove.Count > 0;
+                    return tracks_to_add.Count > 0 ||
+                        tracks_to_update.Count > 0 ||
+                        tracks_to_remove.Count > 0;
+
                 }
+            }
+        }
+
+        public override bool HasEditableTrackProperties {
+            get {
+                // we want child sources to be able to edit metadata and the
+                // savetrackmetadataservice to take in account this source
+                return true;
             }
         }
 

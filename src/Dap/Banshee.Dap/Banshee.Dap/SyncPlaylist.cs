@@ -1,21 +1,21 @@
-//
-// DiskDevice.cs
-//
+// 
+// SyncPlaylist.cs
+// 
 // Author:
-//   Alex Launi <alex.launi@gmail.com>
-//
-// Copyright (c) 2010 Alex Launi
-//
+//   Andrés G. Aragoneses <knocte@gmail.com>
+// 
+// Copyright (c) 2010 Andrés G. Aragoneses
+// 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-//
+// 
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-//
+// 
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -24,35 +24,29 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#if ENABLE_GIO_HARDWARE
 using System;
+using Banshee.Playlist;
+using Banshee.Sources;
 
-using Banshee.Hardware;
-using System.Collections.Generic;
-
-namespace Banshee.Hardware.Gio
+namespace Banshee.Dap
 {
-    class DiskDevice : BlockDevice, IDiskDevice
+    public class SyncPlaylist : PlaylistSource
     {
-        // This tells us the actual type of the block device
-        // i.e. 'disk' == HD. 'cd' == dvd/cd drive
-        const string DeviceType = "ID_TYPE";
-
-        public static new IDiskDevice Resolve (IDevice device)
+        public SyncPlaylist (string name, PrimarySource parent, DapLibrarySync libsync) : base (name, parent)
         {
-            var raw = device as IRawDevice;
-            if (raw != null) {
-                if (raw.Device.UdevMetadata.GetPropertyString ("ID_TYPE") == "disk") {
-                    return new DiskDevice (raw.Device);
-                }
-            }
-            return null;
+            this.libsync = libsync;
         }
 
-        DiskDevice (RawDevice device)
-            : base (device)
-        {
+        private DapLibrarySync libsync;
+
+        public override bool HasEditableTrackProperties {
+            get {
+                // we don't want the user editing the target of a sync, but the origin
+                return !libsync.Enabled;
+                // NOTE: we could have implemented this simply as "return false" because
+                // when switching from AutoSync to ManualSync the playlists are nuked,
+                // but it's not clear if it's the intended behavior! (check out BGO#626113)
+            }
         }
     }
 }
-#endif
