@@ -137,7 +137,6 @@ namespace Banshee.Lastfm.Fingerprint
                 str = reader.ReadLine();
             }*/
 
-            editor_track = new EditorTrackInfo (sourceTrack);
             using (Stream stream = rsp.GetResponseStream ())
             {
                 //XmlTextReader reader = new XmlTextReader(Stream);
