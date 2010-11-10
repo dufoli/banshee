@@ -89,6 +89,29 @@ bp_video_find_xoverlay (BansheePlayer *player)
 
 #endif /* GDK_WINDOWING_X11 || GDK_WINDOWING_WIN32 */
 
+P_INVOKE int
+bp_get_subtitle_count (BansheePlayer *player)
+{
+    g_return_val_if_fail (IS_BANSHEE_PLAYER (player), 0);
+
+    int n_text;
+    g_object_get (G_OBJECT (player->playbin), "n-text", &n_text, NULL);
+    return n_text;
+}
+
+P_INVOKE void
+bp_set_subtitle (BansheePlayer *player, int index)
+{
+    g_return_if_fail (IS_BANSHEE_PLAYER (player));
+
+    int n_text = bp_get_subtitle_count (player);
+
+    if (n_text == 0 || index < 0 || index >= n_text)
+        return;
+
+    g_object_set (G_OBJECT (player->playbin), "current-text", index, NULL);
+}
+
 static void
 bp_video_sink_element_added (GstBin *videosink, GstElement *element, BansheePlayer *player)
 {

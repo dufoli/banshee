@@ -49,6 +49,41 @@ bp_pipeline_set_state (BansheePlayer *player, GstState state)
     }
 }
 
+static void
+bp_lookup_for_subtitle (BansheePlayer *player, const gchar *uri)
+{
+    gchar *scheme, *filename, *subfile, *dot, *suburi;
+    int j;
+    bp_debug ("[subtitle]: lookup for subtitle for video file.");
+    scheme = g_uri_parse_scheme (uri);
+    static gchar *subtitle_extensions[] = { ".srt", ".sub", ".smi", ".txt", ".mpl", ".dks", ".qtx" };
+    if (scheme == NULL || strcmp (scheme, "file") != 0) {
+        g_free (scheme);
+        return;
+    }
+    g_free (scheme);
+
+    dot = g_strrstr (uri, ".");
+    if (dot == NULL)
+        return;
+    filename = g_filename_from_uri (g_strndup (uri, dot - uri), NULL, NULL);
+
+    for (j = 0; j < G_N_ELEMENTS (subtitle_extensions); j++) {
+        subfile = g_strconcat (filename, subtitle_extensions[j], NULL);
+        if (g_file_test (subfile, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_REGULAR)) {
+            bp_debug ("[subtitle]: Found srt file: %s", subfile);
+            suburi = g_filename_to_uri (subfile, NULL, NULL);
+            g_object_set (G_OBJECT (player->playbin), "suburi", suburi, NULL);
+            g_free (suburi);
+            g_free (subfile);
+            g_free (filename);
+            return;
+        }
+        g_free (subfile);
+    }
+    g_free (filename);
+}
+
 // ---------------------------------------------------------------------------
 // Public Functions
 // ---------------------------------------------------------------------------
@@ -128,6 +163,9 @@ bp_open (BansheePlayer *player, const gchar *uri)
     // Pass the request off to playbin
     g_object_set (G_OBJECT (player->playbin), "uri", uri, NULL);
     
+    // Lookup for subtitle files with same name/folder
+    bp_lookup_for_subtitle (player, uri);
+
     player->in_gapless_transition = FALSE;
     
     return TRUE;
@@ -172,6 +210,7 @@ bp_set_next_track (BansheePlayer *player, const gchar *uri)
     g_return_val_if_fail (IS_BANSHEE_PLAYER (player), FALSE);
     g_return_val_if_fail (player->playbin != NULL, FALSE);
     g_object_set (G_OBJECT (player->playbin), "uri", uri, NULL);
+    bp_lookup_for_subtitle (player, uri);
     return TRUE;
 }
 
@@ -372,4 +411,36 @@ P_INVOKE void
 bp_set_about_to_finish_callback (BansheePlayer *player, BansheePlayerAboutToFinishCallback cb)
 {
     SET_CALLBACK (about_to_finish_cb);
+}
+
+P_INVOKE void
+bp_set_subtitle_uri (BansheePlayer *player, const gchar *uri)
+{
+    g_return_if_fail (IS_BANSHEE_PLAYER (player));
+    g_object_set (G_OBJECT (player->playbin), "suburi", uri, NULL);
+}
+
+P_INVOKE gchar *
+bp_get_subtitle_uri (BansheePlayer *player)
+{
+    gchar *uri = '\0';
+    g_return_val_if_fail (IS_BANSHEE_PLAYER (player), "");
+    g_object_get (G_OBJECT (player->playbin), "suburi", &uri, NULL);
+    return uri;
+}
+
+P_INVOKE gchar *
+bp_get_subtitle_description (BansheePlayer *player, int i)
+{
+    gchar *desc = NULL;
+    GstTagList *tags = NULL;
+    
+    g_return_val_if_fail (IS_BANSHEE_PLAYER (player), desc);
+    
+    g_signal_emit_by_name (G_OBJECT (player->playbin), "get-text-tags", i, &tags);
+    if (G_LIKELY(tags)) {
+	    gst_tag_list_get_string (tags, GST_TAG_LANGUAGE_CODE, &desc);
+    }
+    
+    return desc;
 }
