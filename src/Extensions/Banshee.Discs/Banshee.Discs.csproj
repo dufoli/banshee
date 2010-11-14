@@ -59,18 +59,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\bin\bin\taglib-sharp.dll</HintPath>
     </Reference>
-    <Reference Include="Mono.Addins">
-      <HintPath>..\..\..\bin\bin\Mono.Addins.dll</HintPath>
-    </Reference>
     <Reference Include="Mono.Posix">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\bin\bin\Mono.Posix.dll</HintPath>
     </Reference>
-    <ProjectReference Include="..\..\Hyena\Hyena.Data.Sqlite\Hyena.Data.Sqlite.csproj">
-      <Project>{95374549-9553-4C1E-9D89-667755F90E13}</Project>
-      <Name>Hyena.Data.Sqlite</Name>
-      <Private>False</Private>
-    </ProjectReference>
     <ProjectReference Include="..\..\Hyena\Hyena\Hyena.csproj">
       <Project>{95374549-9553-4C1E-9D89-667755F90E12}</Project>
       <Name>Hyena</Name>
@@ -98,12 +90,14 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Banshee.AudioCd\AudioCdService.cs" />
-    <Compile Include="Banshee.AudioCd\AudioCdSource.cs" />
-    <Compile Include="Banshee.AudioCd\AudioCdDiscModel.cs" />
-    <Compile Include="Banshee.AudioCd\AudioCdTrackInfo.cs" />
-    <Compile Include="Banshee.AudioCd\AudioCdRipper.cs" />
-    <Compile Include="Banshee.AudioCd\AudioCdDuplicator.cs" />
+    <Compile Include="Banshee.Discs\AbstractDiscService.cs" />
+    <Compile Include="Banshee.Discs\AbstractDiscSource.cs" />
+    <Compile Include="Banshee.Discs.AudioCd\AudioCdDiscModel.cs" />
+    <Compile Include="Banshee.Discs.AudioCd\AudioCdDuplicator.cs" />
+    <Compile Include="Banshee.Discs.AudioCd\AudioCdRipper.cs" />
+    <Compile Include="Banshee.Discs.AudioCd\AudioCdService.cs" />
+    <Compile Include="Banshee.Discs.AudioCd\AudioCdSource.cs" />
+    <Compile Include="Banshee.Discs.AudioCd\AudioCdTrackInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
@@ -121,4 +115,11 @@
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
+  <ItemGroup>
+    <Folder Include="Banshee.Discs\" />
+    <Folder Include="Banshee.Diskcs.Dvd\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Banshee.Discs.addin.xml" />
+  </ItemGroup>
 </Project>

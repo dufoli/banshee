@@ -96,7 +96,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banshee.Wikipedia", "src\Ex
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banshee.NowPlaying", "src\Extensions\Banshee.NowPlaying\Banshee.NowPlaying.csproj", "{16FB0D3A-53FA-4B8E-B02B-4AF66E87829A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banshee.AudioCd", "src\Extensions\Banshee.AudioCd\Banshee.AudioCd.csproj", "{F38B53BA-8F85-4DC6-9B94-029C1CF96F24}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banshee.Discs", "src\Extensions\Banshee.Discs\Banshee.Discs.csproj", "{F38B53BA-8F85-4DC6-9B94-029C1CF96F24}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banshee.LibraryWatcher", "src\Extensions\Banshee.LibraryWatcher\Banshee.LibraryWatcher.csproj", "{49CA3F27-0BB6-428d-8B3A-20232493652E}"
 EndProject

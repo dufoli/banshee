@@ -38,11 +38,11 @@ using Banshee.Preferences;
 using Banshee.Hardware;
 using Banshee.Gui;
 
-namespace Banshee.AudioCd
+namespace Banshee.Disks
 {
-    public class AudioCdService : IExtensionService, IDisposable
+    public class AbstractDiskService : IExtensionService, IDisposable
     {
-        private Dictionary<string, AudioCdSource> sources;
+        private Dictionary<string, AbstractDiskSource> sources;
         private List<DeviceCommand> unhandled_device_commands;
         private SourcePage pref_page;
         private Section pref_section;
@@ -52,7 +52,7 @@ namespace Banshee.AudioCd
         {
         }
 
-        public void Initialize ()
+        public virtual void Initialize ()
         {
             if (ServiceManager.HardwareManager == null) {
                 throw new NotSupportedException ("AudioCdService cannot work when no HardwareManager is available");
@@ -61,7 +61,7 @@ namespace Banshee.AudioCd
             lock (this) {
                 InstallPreferences ();
 
-                sources = new Dictionary<string, AudioCdSource> ();
+                sources = new Dictionary<string, AbstractDiskSource> ();
 
                 foreach (ICdromDevice device in ServiceManager.HardwareManager.GetAllCdromDevices ()) {
                     MapCdromDevice (device);
@@ -152,23 +152,9 @@ namespace Banshee.AudioCd
             }
         }
 
-        private void OnHardwareDeviceAdded (object o, DeviceAddedArgs args)
-        {
-            lock (this) {
-                if (args.Device is ICdromDevice) {
-                    MapCdromDevice ((ICdromDevice)args.Device);
-                } else if (args.Device is IDiscVolume) {
-                    MapDiscVolume ((IDiscVolume)args.Device);
-                }
-            }
-        }
+        protected abstract void OnHardwareDeviceAdded (object o, DeviceAddedArgs args);
 
-        private void OnHardwareDeviceRemoved (object o, DeviceRemovedArgs args)
-        {
-            lock (this) {
-                UnmapDiscVolume (args.DeviceUuid);
-            }
-        }
+        protected abstract void OnHardwareDeviceRemoved (object o, DeviceRemovedArgs args);
 
 #region DeviceCommand Handling
 
@@ -202,7 +188,7 @@ namespace Banshee.AudioCd
             }
         }
 
-        private void OnDeviceCommand (object o, DeviceCommand command)
+        protected virtual void OnDeviceCommand (object o, DeviceCommand command);
         {
             lock (this) {
                 // Check to see if we have an already mapped disc volume that should
