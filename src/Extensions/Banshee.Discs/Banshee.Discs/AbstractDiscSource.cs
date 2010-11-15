@@ -24,11 +24,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-namespace Banshee.Disks
+using Banshee.Sources;
+
+namespace Banshee.Discs
 {
-    public class AbstractDiscSource
+    public abstract class AbstractDiscSource : Source, IDisposable
     {
-        public AbstractDiscSource ()
+        public AbstractDiscSource (string genericName, string name, int order)
+            : base (genericName, name, order)
+        {
+        }
+
+        public virtual void Dispose ()
         {
         }
     }
