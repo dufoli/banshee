@@ -74,6 +74,19 @@ namespace Banshee.Hardware.Gio
         {
             throw new NotImplementedException ();
         }
+
+        private string content_type;
+        public string MediaContentType {
+            get {
+                if (Volume.MountInstance == null) {
+                    content_type = "";
+                } else if (String.IsNullOrEmpty (content_type)) {
+                    content_type = this.Volume.MountInstance.GuessContentTypeSync (false, null);
+                }
+
+                return content_type;
+            }
+        }
     }
 }
 

@@ -1,4 +1,4 @@
-ASSEMBLY = Banshee.AudioCd
+ASSEMBLY = Banshee.Discs
 TARGET = library
 LINK = $(REF_EXTENSION_AUDIOCD)
 INSTALL_DIR = $(EXTENSIONS_INSTALL_DIR)
@@ -10,10 +10,12 @@ SOURCES =  \
 	Banshee.Discs.AudioCd/AudioCdService.cs \
 	Banshee.Discs.AudioCd/AudioCdSource.cs \
 	Banshee.Discs.AudioCd/AudioCdTrackInfo.cs \
+	Banshee.Discs.Dvd/DvdSource.cs \
 	Banshee.Discs/AbstractDiscService.cs \
 	Banshee.Discs/AbstractDiscSource.cs
 
 RESOURCES =  \
+	Banshee.Discs.addin.xml \
 	Resources/ActiveSourceUI.xml \
 	Resources/GlobalUI.xml
 

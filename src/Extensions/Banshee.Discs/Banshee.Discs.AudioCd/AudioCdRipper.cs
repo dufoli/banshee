@@ -42,7 +42,7 @@ using Banshee.Collection;
 using Banshee.Collection.Database;
 using Banshee.MediaEngine;
 
-namespace Banshee.AudioCd
+namespace Banshee.Discs.AudioCd
 {
     public class AudioCdRipper : IDisposable
     {

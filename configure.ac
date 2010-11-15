@@ -317,11 +317,11 @@ src/Extensions/Makefile
 src/Extensions/Banshee.AmazonMp3/Makefile
 src/Extensions/Banshee.AmazonMp3.Store/Makefile
 src/Extensions/Banshee.Audiobook/Makefile
-src/Extensions/Banshee.AudioCd/Makefile
 src/Extensions/Banshee.BooScript/Makefile
 src/Extensions/Banshee.Bpm/Makefile
 src/Extensions/Banshee.CoverArt/Makefile
 src/Extensions/Banshee.Daap/Makefile
+src/Extensions/Banshee.Discs/Makefile
 src/Extensions/Banshee.Emusic/Makefile
 src/Extensions/Banshee.Emusic.Store/Makefile
 src/Extensions/Banshee.FileSystemQueue/Makefile

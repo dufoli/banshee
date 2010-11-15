@@ -1,5 +1,5 @@
 // 
-// AbstractDiscSource.cs
+// DvdSource.cs
 // 
 // Author:
 //   Alex Launi <alex.launi@gmail.com>
@@ -24,18 +24,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-using Banshee.Sources;
-
-namespace Banshee.Discs
+namespace Banshee.Discs.Dvd
 {
-    public abstract class AbstractDiscSource : Source, IDisposable
+    public class DvdSource 
     {
-        public AbstractDiscSource (string genericName, string name, int order)
-            : base (genericName, name, order)
-        {
-        }
-
-        public virtual void Dispose ()
+        public DvdSource ()
         {
         }
     }

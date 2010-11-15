@@ -69,6 +69,11 @@ internal static class AddinXmlStringCatalog
         Catalog.GetString (@"Browse, search, and purchase music and audiobooks from eMusic");
         Catalog.GetString (@"Online Sources");
 
+        // ../src/Extensions/Banshee.Discs/Banshee.Discs.addin.xml
+        Catalog.GetString (@"DVD and Audio CD Support");
+        Catalog.GetString (@"Watch DVDs; listen to and rip Audio CDs.");
+        Catalog.GetString (@"Core");
+
         // ../src/Extensions/Banshee.Emusic/Banshee.Emusic.addin.xml
         Catalog.GetString (@"eMusic Import");
         Catalog.GetString (@"Download and import music purchased from eMusic.");

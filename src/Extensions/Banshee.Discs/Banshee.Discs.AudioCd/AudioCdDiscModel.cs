@@ -40,7 +40,7 @@ using Banshee.Hardware;
 using Banshee.Collection;
 using Banshee.Collection.Database;
 
-namespace Banshee.AudioCd
+namespace Banshee.Discs.AudioCd
 {
     public class AudioCdDiscModel : MemoryTrackListModel
     {

@@ -2,11 +2,11 @@ SUBDIRS = \
 	Banshee.AmazonMp3 \
 	Banshee.AmazonMp3.Store \
 	Banshee.Audiobook \
-	Banshee.AudioCd \
 	Banshee.BooScript \
 	Banshee.Bpm \
 	Banshee.CoverArt \
 	Banshee.Daap \
+	Banshee.Discs \
 	Banshee.Emusic \
 	Banshee.Emusic.Store \
 	Banshee.FileSystemQueue \

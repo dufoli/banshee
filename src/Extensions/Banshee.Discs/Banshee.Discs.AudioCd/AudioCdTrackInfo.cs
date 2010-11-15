@@ -33,7 +33,7 @@ using Hyena;
 using Banshee.Collection;
 using Banshee.Collection.Database;
 
-namespace Banshee.AudioCd
+namespace Banshee.Discs.AudioCd
 {
     public class AudioCdTrackInfo : DatabaseTrackInfo
     {

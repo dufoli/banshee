@@ -43,9 +43,9 @@ using Gtk;
 using Banshee.Gui;
 using Selection = Hyena.Collections.Selection;
 
-namespace Banshee.AudioCd
+namespace Banshee.Discs.AudioCd
 {
-    public class AudioCdSource : Source, ITrackModelSource, IUnmapableSource,
+    public class AudioCdSource : AbstractDiscSource, ITrackModelSource, IUnmapableSource,
         IImportSource, IDurationAggregator, IFileSizeAggregator, IDisposable
     {
         private AudioCdService service;
@@ -99,7 +99,7 @@ namespace Banshee.AudioCd
             }
         }
 
-        public void Dispose ()
+        public override void Dispose ()
         {
             ClearMessages ();
             disc_model.MetadataQueryStarted -= OnMetadataQueryStarted;

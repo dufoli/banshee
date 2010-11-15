@@ -26,6 +26,7 @@
 
 #if ENABLE_GIO_HARDWARE
 using System;
+using GLib;
 
 using Banshee.Hardware;
 
@@ -52,6 +53,12 @@ namespace Banshee.Hardware.Gio
         public bool HasData {
             get {
                 return PropertyExists ("ID_CDROM_MEDIA_TRACK_COUNT_DATA");
+            }
+        }
+
+        public bool HasVideo {
+            get {
+                return ((GioVolumeMetadataSource) this.device.GioMetadata).MediaContentType.Contains ("video-dvd");
             }
         }
 
