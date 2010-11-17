@@ -26,6 +26,7 @@
 
 #if ENABLE_GIO_HARDWARE
 using System;
+using System.Linq;
 
 namespace Banshee.Hardware.Gio
 {
@@ -75,16 +76,24 @@ namespace Banshee.Hardware.Gio
             throw new NotImplementedException ();
         }
 
-        private string content_type;
-        public string MediaContentType {
+        private string[] content_types;
+        public string[] MediaContentTypes {
             get {
                 if (Volume.MountInstance == null) {
-                    content_type = "";
-                } else if (String.IsNullOrEmpty (content_type)) {
-                    content_type = this.Volume.MountInstance.GuessContentTypeSync (false, null);
+                    content_types = new string[] {};
+                } else if (content_types == null) {
+                    content_types = Volume.MountInstance.GuessContentTypeSync (false, null);
                 }
 
-                return content_type;
+                Hyena.Log.WarningFormat ("there are {0} content types", content_types.Length);
+                foreach (string s in content_types) {
+                    if (s == null)
+                        Hyena.Log.Warning ("the s is null");
+                    else
+                        Hyena.Log.WarningFormat ("the s is {0}", s);
+                }
+
+                return content_types;
             }
         }
     }

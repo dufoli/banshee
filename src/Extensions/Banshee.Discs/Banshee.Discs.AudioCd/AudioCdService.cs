@@ -68,24 +68,6 @@ namespace Banshee.Discs.AudioCd
             }
         }
 
-        private void OnHardwareDeviceAdded (object o, DeviceAddedArgs args)
-        {
-            lock (this) {
-                if (args.Device is ICdromDevice) {
-                    MapCdromDevice ((ICdromDevice)args.Device);
-                } else if (args.Device is IDiscVolume) {
-                    MapDiscVolume ((IDiscVolume)args.Device);
-                }
-            }
-        }
-
-        private void OnHardwareDeviceRemoved (object o, DeviceRemovedArgs args)
-        {
-            lock (this) {
-                UnmapDiscVolume (args.DeviceUuid);
-            }
-        }
-
 #region DeviceCommand Handling
 
         protected override bool DeviceCommandMatchesSource (AudioCdSource source, DeviceCommand command)
