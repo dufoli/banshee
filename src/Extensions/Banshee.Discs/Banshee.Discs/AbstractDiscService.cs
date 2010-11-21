@@ -55,7 +55,7 @@ namespace Banshee.Discs
             lock (this) {
                 // This says Cdrom, but really it means Cdrom in the general Disc device sense.
                 foreach (ICdromDevice device in ServiceManager.HardwareManager.GetAllCdromDevices ()) {
-                    MapCdromDevice (device);
+                    MapDiscDevice (device);
                 }
 
                 ServiceManager.HardwareManager.DeviceAdded += OnHardwareDeviceAdded;
@@ -85,7 +85,7 @@ namespace Banshee.Discs
             get; private set;
         }
 
-        protected virtual void MapCdromDevice (ICdromDevice device)
+        protected virtual void MapDiscDevice (ICdromDevice device)
         {
             lock (this) {
                 foreach (IVolume volume in device) {
@@ -110,7 +110,7 @@ namespace Banshee.Discs
                     source = new AudioCd.AudioCdSource (this as AudioCd.AudioCdService, new AudioCd.AudioCdDiscModel (volume));
                 } else if (volume.HasVideo) {
                     Log.Debug ("Mapping dvd");
-                    source = new AudioCd.AudioCdSource (this as AudioCd.AudioCdService, new AudioCd.AudioCdDiscModel (volume));
+                    source = new Dvd.DvdSource (this as Dvd.DvdService);
                 } else {
                     Log.Debug ("Neither :(");
                     return;
@@ -138,7 +138,7 @@ namespace Banshee.Discs
                     Log.Exception (e);
                 }
 
-                Log.DebugFormat ("Mapping audio CD ({0})", volume.Uuid);
+                Log.DebugFormat ("Mapping disc ({0})", volume.Uuid);
             }
         }
 
@@ -159,7 +159,7 @@ namespace Banshee.Discs
         {
             lock (this) {
                 if (args.Device is ICdromDevice) {
-                    MapCdromDevice ((ICdromDevice)args.Device);
+                    MapDiscDevice ((ICdromDevice)args.Device);
                 } else if (args.Device is IDiscVolume) {
                     MapDiscVolume ((IDiscVolume)args.Device);
                 }

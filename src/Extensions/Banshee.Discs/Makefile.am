@@ -20,7 +20,6 @@ SOURCES =  \
 	Banshee.Discs/DiscTrackInfo.cs
 
 RESOURCES =  \
-	Banshee.Discs.addin.xml \
 	Resources/ActiveSourceUI.xml \
 	Resources/GlobalUI.xml
 
