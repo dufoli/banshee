@@ -99,6 +99,7 @@
     <Compile Include="Banshee.Discs.AudioCd\AudioCdSource.cs" />
     <Compile Include="Banshee.Discs.AudioCd\AudioCdTrackInfo.cs" />
     <Compile Include="Banshee.Discs.Dvd\DvdSource.cs" />
+    <Compile Include="Banshee.Discs.Dvd\DvdService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

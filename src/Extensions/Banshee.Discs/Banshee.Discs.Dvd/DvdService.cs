@@ -1,5 +1,5 @@
 // 
-// DvdSource.cs
+// DvdService.cs
 // 
 // Author:
 //   Alex Launi <alex.launi@gmail.com>
@@ -25,14 +25,11 @@
 // THE SOFTWARE.
 using System;
 
-using Mono.Unix;
-
 namespace Banshee.Discs.Dvd
 {
-    public class DvdSource : AbstractDiscSource
+    public class DvdService : AbstractDiscService
     {
-        public DvdSource (DvdService service)
-            : base (Catalog.GetString ("Dvd"), "DVD title", 400)
+        public DvdService ()
         {
         }
     }
