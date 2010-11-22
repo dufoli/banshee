@@ -2,7 +2,7 @@
 // DvdSource.cs
 // 
 // Author:
-//   Alex Launi <alex.launi@gmail.com>
+//   Alex Launi <alex.launi@canonical.com>
 // 
 // Copyright 2010 Alex Launi
 // 
@@ -29,12 +29,34 @@ using Mono.Unix;
 
 namespace Banshee.Discs.Dvd
 {
-    public class DvdSource : AbstractDiscSource
+    public class DvdSource : DiscSource
     {
-        public DvdSource (DvdService service)
-            : base (Catalog.GetString ("Dvd"), "DVD title", 400)
+        public DvdSource (DiscService service, DvdModel model)
+            : base (service, (DiscModel) model, Catalog.GetString ("Dvd"), model.Title, 400)
         {
+            SetupGui ();
+            model.LoadModelFromDisc ();
         }
+
+#region DiscSource
+
+        public override bool CanRepeat {
+            get { return false;}
+        }
+
+        public override bool CanShuffle {
+            get { return false; }
+        }
+
+#endregion
+
+#region GUI/ThickClient
+
+        private void SetupGui ()
+        {
+            Properties.SetStringList ("Icon.Name", "media-dvd", "gnome-dev-dvd");
+        }
+#endregion
     }
 }
 

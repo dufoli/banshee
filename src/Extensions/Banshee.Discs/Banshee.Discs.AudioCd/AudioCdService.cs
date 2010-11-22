@@ -3,6 +3,7 @@
 //
 // Author:
 //   Aaron Bockover <abockover@novell.com>
+//   Alex Launi <alex.launi@canonical.com>
 //
 // Copyright (C) 2008 Novell, Inc.
 //
@@ -40,7 +41,7 @@ using Banshee.Gui;
 
 namespace Banshee.Discs.AudioCd
 {
-    public class AudioCdService : AbstractDiscService, IService
+    public class AudioCdService : DiscService, IService
     {
         private SourcePage pref_page;
         private Section pref_section;
@@ -70,9 +71,11 @@ namespace Banshee.Discs.AudioCd
 
 #region DeviceCommand Handling
 
-        protected override bool DeviceCommandMatchesSource (AudioCdSource source, DeviceCommand command)
+        protected override bool DeviceCommandMatchesSource (DiscSource source, DeviceCommand command)
         {
-            if (command.DeviceId.StartsWith ("cdda:")) {
+            AudioCdSource cdSource = source as AudioCdSource;
+
+            if (cdSource != null && command.DeviceId.StartsWith ("cdda:")) {
                 try {
                     Uri uri = new Uri (command.DeviceId);
                     string match_device_node = String.Format ("{0}{1}", uri.Host,
@@ -84,20 +87,6 @@ namespace Banshee.Discs.AudioCd
             }
 
             return false;
-        }
-
-        private void HandleDeviceCommand (AudioCdSource source, DeviceCommandAction action)
-        {
-            if ((action & DeviceCommandAction.Activate) != 0) {
-                ServiceManager.SourceManager.SetActiveSource (source);
-            }
-
-            if ((action & DeviceCommandAction.Play) != 0) {
-                ServiceManager.PlaybackController.NextSource = source;
-                if (!ServiceManager.PlayerEngine.IsPlaying ()) {
-                    ServiceManager.PlaybackController.Next ();
-                }
-            }
         }
 
 #endregion

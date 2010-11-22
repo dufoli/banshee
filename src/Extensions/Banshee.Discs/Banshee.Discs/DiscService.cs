@@ -1,10 +1,10 @@
 //
-// AudioCdService.cs
+// DiscService.cs
 //
 // Author:
-//   Aaron Bockover <abockover@novell.com>
+//   Alex Launi <alex.launi@canonical.com>
 //
-// Copyright (C) 2008 Novell, Inc.
+// Copyright (C) 2010 Alex Launi
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -40,11 +40,11 @@ using Banshee.Gui;
 
 namespace Banshee.Discs
 {
-    public class AbstractDiscService : IExtensionService, IDisposable
+    public abstract class DiscService : IExtensionService, IDisposable
     {
         private List<DeviceCommand> unhandled_device_commands;
 
-        public AbstractDiscService ()
+        public DiscService ()
         {
         }
 
@@ -57,8 +57,9 @@ namespace Banshee.Discs
             lock (this) {
                 InstallPreferences ();
 
-                sources = new Dictionary<string, AbstractDiskSource> ();
+                sources = new Dictionary<string, DiscSource> ();
 
+                // This says Cdrom, but really it means Cdrom in the general Disc device sense.
                 foreach (ICdromDevice device in ServiceManager.HardwareManager.GetAllCdromDevices ()) {
                     MapDiscDevice (device);
                 }
@@ -76,9 +77,9 @@ namespace Banshee.Discs
                 ServiceManager.HardwareManager.DeviceRemoved -= OnHardwareDeviceRemoved;
                 ServiceManager.HardwareManager.DeviceCommand -= OnDeviceCommand;
 
-                foreach (AbstractDiscSource source in Sources.Values) {
-                    source.Dispose ();
+                foreach (DiscSource source in Sources.Values) {
                     ServiceManager.SourceManager.RemoveSource (source);
+                    source.Dispose ();
                 }
 
                 Sources.Clear ();
@@ -86,7 +87,7 @@ namespace Banshee.Discs
             }
         }
 
-        protected Dictionary<string, AbstractDiscSource> Sources {
+        protected Dictionary<string, DiscSource> Sources {
             get; private set;
         }
 
@@ -103,8 +104,7 @@ namespace Banshee.Discs
 
         protected virtual void MapDiscVolume (IDiscVolume volume)
         {
-            AbstractDiscSource source = null;
-            Log.DebugFormat ("Mapping disc volume", volume.Name);
+            DiscSource source = null;
 
             lock (this) {
                 if (Sources.ContainsKey (volume.Uuid)) {
@@ -115,7 +115,7 @@ namespace Banshee.Discs
                     source = new AudioCd.AudioCdSource (this as AudioCd.AudioCdService, new AudioCd.AudioCdDiscModel (volume));
                 } else if (volume.HasVideo) {
                     Log.Debug ("Mapping dvd");
-                    source = new Dvd.DvdSource (this as Dvd.DvdService);
+                    source = new Dvd.DvdSource (this, new Dvd.DvdModel (volume));
                 } else {
                     Log.Debug ("Neither :(");
                     return;
@@ -129,8 +129,8 @@ namespace Banshee.Discs
                 try {
                     if (unhandled_device_commands != null) {
                         foreach (DeviceCommand command in unhandled_device_commands) {
-                            if (DeviceCommandMatchesSource (source as AudioCd.AudioCdSource, command)) {
-                                HandleDeviceCommand (source as AudioCd.AudioCdSource, command.Action);
+                            if (DeviceCommandMatchesSource (source, command)) {
+                                HandleDeviceCommand (source, command.Action);
                                 unhandled_device_commands.Remove (command);
                                 if (unhandled_device_commands.Count == 0) {
                                     unhandled_device_commands = null;
@@ -151,11 +151,11 @@ namespace Banshee.Discs
         {
             lock (this) {
                 if (Sources.ContainsKey (uuid)) {
-                    AudioCd.AudioCdSource source = (AudioCd.AudioCdSource) Sources[uuid];
+                    DiscSource source = Sources[uuid];
                     source.StopPlayingDisc ();
                     ServiceManager.SourceManager.RemoveSource (source);
                     Sources.Remove (uuid);
-                    Log.DebugFormat ("Unmapping audio CD ({0})", uuid);
+                    Log.DebugFormat ("Unmapping disc ({0})", uuid);
                 }
             }
         }
@@ -180,23 +180,28 @@ namespace Banshee.Discs
 
 #region DeviceCommand Handling
 
-        protected virtual bool DeviceCommandMatchesSource (AudioCd.AudioCdSource source, DeviceCommand command)
-        {
-            if (command.DeviceId.StartsWith ("cdda:")) {
-                try {
-                    Uri uri = new Uri (command.DeviceId);
-                    string match_device_node = String.Format ("{0}{1}", uri.Host,
-                        uri.AbsolutePath).TrimEnd ('/', '\\');
-                    string device_node = source.DiscModel.Volume.DeviceNode;
-                    return device_node.EndsWith (match_device_node);
-                } catch {
-                }
-            }
+        protected abstract bool DeviceCommandMatchesSource (DiscSource source, DeviceCommand command);
 
-            return false;
+        protected virtual void OnDeviceCommand (object o, DeviceCommand command)
+        {
+            lock (this) {
+                // Check to see if we have an already mapped disc volume that should
+                // handle this incoming command; if not, queue it for later discs
+                foreach (var source in Sources.Values) {
+                    if (DeviceCommandMatchesSource (source, command)) {
+                        HandleDeviceCommand (source, command.Action);
+                        return;
+                    }
+                }
+
+                if (unhandled_device_commands == null) {
+                    unhandled_device_commands = new List<DeviceCommand> ();
+                }
+                unhandled_device_commands.Add (command);
+            }
         }
 
-        private void HandleDeviceCommand (AudioCd.AudioCdSource source, DeviceCommandAction action)
+        protected virtual void HandleDeviceCommand (DiscSource source, DeviceCommandAction action)
         {
             if ((action & DeviceCommandAction.Activate) != 0) {
                 ServiceManager.SourceManager.SetActiveSource (source);
@@ -207,25 +212,6 @@ namespace Banshee.Discs
                 if (!ServiceManager.PlayerEngine.IsPlaying ()) {
                     ServiceManager.PlaybackController.Next ();
                 }
-            }
-        }
-
-        protected virtual void OnDeviceCommand (object o, DeviceCommand command)
-        {
-            lock (this) {
-                // Check to see if we have an already mapped disc volume that should
-                // handle this incoming command; if not, queue it for later discs
-                foreach (var source in Sources.Values) {
-                    if (DeviceCommandMatchesSource ((AudioCd.AudioCdSource) source, command)) {
-                        HandleDeviceCommand ((AudioCd.AudioCdSource) source, command.Action);
-                        return;
-                    }
-                }
-
-                if (unhandled_device_commands == null) {
-                    unhandled_device_commands = new List<DeviceCommand> ();
-                }
-                unhandled_device_commands.Add (command);
             }
         }
 #endregion

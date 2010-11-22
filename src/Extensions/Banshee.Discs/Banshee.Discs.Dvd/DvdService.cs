@@ -2,7 +2,7 @@
 // DvdService.cs
 // 
 // Author:
-//   Alex Launi <alex.launi@gmail.com>
+//   Alex Launi <alex.launi@canonical.com>
 // 
 // Copyright 2010 Alex Launi
 // 
@@ -25,12 +25,20 @@
 // THE SOFTWARE.
 using System;
 
+using Banshee.Hardware;
+
 namespace Banshee.Discs.Dvd
 {
-    public class DvdService : AbstractDiscService
+    public class DvdService : DiscService
     {
         public DvdService ()
         {
+        }
+
+        // FIXME Implement DVD device command matching
+        protected override bool DeviceCommandMatchesSource (DiscSource source, DeviceCommand command)
+        {
+            return false;
         }
     }
 }
