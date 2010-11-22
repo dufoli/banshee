@@ -7,7 +7,7 @@
     <ProjectGuid>{F38B53BA-8F85-4DC6-9B94-029C1CF96F24}</ProjectGuid>
     <OutputType>Library</OutputType>
     <UseParentDirectoryAsNamespace>true</UseParentDirectoryAsNamespace>
-    <AssemblyName>Banshee.AudioCd</AssemblyName>
+    <AssemblyName>Banshee.Discs</AssemblyName>
     <SchemaVersion>2.0</SchemaVersion>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <Optimize>true</Optimize>
@@ -89,7 +89,7 @@
       <LogicalName>GlobalUI.xml</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Banshee.Discs.addin.xml">
-      <LogicalName>Banshee.AudioCd.Banshee.Discs.addin.xml</LogicalName>
+      <LogicalName>Banshee.Discs.addin.xml</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
