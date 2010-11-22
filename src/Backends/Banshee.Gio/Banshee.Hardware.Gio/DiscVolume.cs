@@ -35,6 +35,8 @@ namespace Banshee.Hardware.Gio
 {
     class DiscVolume : Volume, IDiscVolume
     {
+        private static string[] video_mime_types;
+
         public static new IDiscVolume Resolve (IDevice device)
         {
             var raw = device as IRawDevice;
@@ -43,6 +45,14 @@ namespace Banshee.Hardware.Gio
             }
 
             return null;
+        }
+
+        static DiscVolume ()
+        {
+            video_mime_types = new string[] {"x-content/video-dvd",
+                "x-content/video-vcd",
+                "x-content/video-svcd"
+            };
         }
 
         public bool HasAudio {
@@ -59,7 +69,9 @@ namespace Banshee.Hardware.Gio
 
         public bool HasVideo {
             get {
-                return ((GioVolumeMetadataSource) this.device.GioMetadata).MediaContentTypes.Any (t => t.Contains ("video-dvd"));
+                return ((GioVolumeMetadataSource) this.device.GioMetadata).MediaContentTypes
+                    .Intersect (video_mime_types)
+                    .Any ();
             }
         }
 

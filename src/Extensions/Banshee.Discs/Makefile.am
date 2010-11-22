@@ -10,6 +10,7 @@ SOURCES =  \
 	Banshee.Discs.AudioCd/AudioCdService.cs \
 	Banshee.Discs.AudioCd/AudioCdSource.cs \
 	Banshee.Discs.AudioCd/AudioCdTrackInfo.cs \
+	Banshee.Discs.Dvd/DvdService.cs \
 	Banshee.Discs.Dvd/DvdSource.cs \
 	Banshee.Discs/AbstractDiscService.cs \
 	Banshee.Discs/AbstractDiscSource.cs
