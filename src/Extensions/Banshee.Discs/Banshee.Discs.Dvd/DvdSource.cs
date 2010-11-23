@@ -34,6 +34,8 @@ namespace Banshee.Discs.Dvd
         public DvdSource (DiscService service, DvdModel model)
             : base (service, (DiscModel) model, Catalog.GetString ("Dvd"), model.Title, 400)
         {
+            TypeUniqueId = "";
+
             SetupGui ();
             model.LoadModelFromDisc ();
         }
