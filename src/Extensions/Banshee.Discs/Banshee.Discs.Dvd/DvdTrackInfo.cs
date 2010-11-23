@@ -38,7 +38,10 @@ namespace Banshee.Discs.Dvd
             : base (model)
         {
             Uri = new SafeUri (String.Format ("dvd://{0}", deviceNode));
-            Log.Debug ("Setting dvd uri to dvd://{0}", deviceNode);
+        }
+
+        public override TrackMediaAttributes MediaAttributes {
+            get { return TrackMediaAttributes.VideoStream; }
         }
     }
 }

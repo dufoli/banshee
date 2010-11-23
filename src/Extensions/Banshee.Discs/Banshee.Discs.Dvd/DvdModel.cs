@@ -25,6 +25,8 @@
 // THE SOFTWARE.
 using System;
 
+using Mono.Unix;
+
 using Banshee.Collection;
 using Banshee.Hardware;
 
@@ -38,6 +40,7 @@ namespace Banshee.Discs.Dvd
 
         public override void LoadModelFromDisc ()
         {
+            Add (new DvdTrackInfo (this, Volume.DeviceNode));
         }
     }
 }
