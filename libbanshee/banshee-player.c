@@ -417,7 +417,24 @@ P_INVOKE void
 bp_set_subtitle_uri (BansheePlayer *player, const gchar *uri)
 {
     g_return_if_fail (IS_BANSHEE_PLAYER (player));
+    gint64 pos = -1;
+    GstState state;
+    GstFormat format = GST_FORMAT_BYTES;
+    
+    // Gstreamer playbin do not support to set suburi during playback
+    // so have to stop/play and seek
+    gst_element_get_state (player->playbin, &state, NULL, 0);
+    if (state >= GST_STATE_PAUSED) {
+	    gst_element_query_position (player->playbin, &format, &pos);
+        gst_element_set_state (player->playbin, GST_STATE_READY);
+    }
+    
     g_object_set (G_OBJECT (player->playbin), "suburi", uri, NULL);
+    gst_element_set_state (player->playbin, GST_STATE_PLAYING);
+    
+    if (pos != -1) {
+    	gst_element_seek_simple (player->playbin, format, GST_SEEK_FLAG_FLUSH | GST_SEEK_FLAG_KEY_UNIT, pos);
+    }
 }
 
 P_INVOKE gchar *
