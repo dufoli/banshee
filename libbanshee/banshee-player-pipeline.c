@@ -413,6 +413,7 @@ _bp_pipeline_construct (BansheePlayer *player)
 
     // Now allow specialized pipeline setups
     _bp_cdda_pipeline_setup (player);
+    _bp_dvd_pipeline_setup (player);
     _bp_video_pipeline_setup (player, bus);
 
     return TRUE;

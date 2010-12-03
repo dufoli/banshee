@@ -147,6 +147,7 @@ struct BansheePlayer {
     GstState target_state;
     gboolean buffering;
     gchar *cdda_device;
+    gchar *dvd_device;
     gboolean in_gapless_transition;
     gboolean audiosink_has_volume;
     
