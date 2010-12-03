@@ -85,14 +85,6 @@ namespace Banshee.Hardware.Gio
                     content_types = Volume.MountInstance.GuessContentTypeSync (false, null);
                 }
 
-                Hyena.Log.WarningFormat ("there are {0} content types", content_types.Length);
-                foreach (string s in content_types) {
-                    if (s == null)
-                        Hyena.Log.Warning ("the s is null");
-                    else
-                        Hyena.Log.WarningFormat ("the s is {0}", s);
-                }
-
                 return content_types;
             }
         }
