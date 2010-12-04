@@ -675,7 +675,7 @@ namespace Banshee.GStreamer
             bp_equalizer_set_gain (handle, band, gain);
         }
 
-        private static string [] source_capabilities = { "file", "http", "cdda" };
+        private static string [] source_capabilities = { "file", "http", "cdda", "dvd", "vcd" };
         public override IEnumerable SourceCapabilities {
             get { return source_capabilities; }
         }
