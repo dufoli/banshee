@@ -6,4 +6,11 @@
         <separator/>
         <menuitem name="UnmapSource" action="UnmapSourceAction"/>
     </popup>
+    <popup name="DvdContextMenu">
+        <menuitem name="GoToMenu" action="GoToMenuAction"/>
+        <menuitem name="NextChapter" action="NextChapterAction"/>
+        <menuitem name="PreviousChapter" action="PreviousChapterAction"/>
+        <separator/>
+        <menuitem name="UnmapSource" action="UnmapSourceAction"/>
+    </popup>
 </ui>

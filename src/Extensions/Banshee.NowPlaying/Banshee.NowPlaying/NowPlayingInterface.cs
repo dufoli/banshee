@@ -56,13 +56,47 @@ namespace Banshee.NowPlaying
             primary_window = service.PrimaryWindow;
 
             Contents = new NowPlayingContents ();
+            Contents.CanFocus = true;
             Contents.ButtonPressEvent += (o, a) => {
-                if (a.Event.Type == Gdk.EventType.TwoButtonPress) {
+                switch (a.Event.Type) {
+                case Gdk.EventType.TwoButtonPress:
                     var iaservice = ServiceManager.Get<InterfaceActionService> ();
                     var action = iaservice.ViewActions["FullScreenAction"] as Gtk.ToggleAction;
                     if (action != null && action.Sensitive) {
                         action.Active = !action.Active;
                     }
+                    break;
+                case Gdk.EventType.ButtonPress:
+                    ServiceManager.PlayerEngine.NotifyMouseButtonPressed ((int)a.Event.Button, a.Event.X, a.Event.Y);
+                    break;
+                case Gdk.EventType.ButtonRelease:
+                    ServiceManager.PlayerEngine.NotifyMouseButtonReleased ((int)a.Event.Button, a.Event.X, a.Event.Y);
+                    break;
+                }
+            };
+
+            Contents.MotionNotifyEvent += (o, args) => {
+                ServiceManager.PlayerEngine.NotifyMouseMove (args.Event.X, args.Event.Y);
+            };
+
+            Contents.KeyPressEvent += delegate(object o, KeyPressEventArgs args) {
+                switch (args.Event.Key) {
+                    case Gdk.Key.leftarrow:
+                        ServiceManager.PlayerEngine.NavigateToLeftMenu ();
+                        break;
+                    case Gdk.Key.rightarrow:
+                        ServiceManager.PlayerEngine.NavigateToRightMenu ();
+                        break;
+                    case Gdk.Key.uparrow:
+                        ServiceManager.PlayerEngine.NavigateToUpMenu ();
+                        break;
+                    case Gdk.Key.downarrow:
+                        ServiceManager.PlayerEngine.NavigateToDownMenu ();
+                        break;
+                    case Gdk.Key.Break:
+                    case Gdk.Key.KP_Enter:
+                        ServiceManager.PlayerEngine.ActivateCurrentMenu ();
+                        break;
                 }
             };
 

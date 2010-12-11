@@ -42,6 +42,7 @@
 #include <gst/fft/gstfftf32.h>
 #include <gst/pbutils/pbutils.h>
 #include <gst/tag/tag.h>
+#include <gst/interfaces/navigation.h>
 
 #if defined(GDK_WINDOWING_X11)
 #  include <gdk/gdkx.h>
@@ -196,6 +197,9 @@ struct BansheePlayer {
     // http://replaygain.hydrogenaudio.org/player_scale.html
     gdouble rg_gain_history[10];
     gint history_size;
+    
+    //dvd navigation
+    GstNavigation *navigation;
 };
 
 #endif /* _BANSHEE_PLAYER_PRIVATE_H */

@@ -26,10 +26,13 @@
 using System;
 
 using Banshee.Hardware;
+using Banshee.Gui;
+using Banshee.ServiceStack;
+using Mono.Unix;
 
 namespace Banshee.Discs.Dvd
 {
-    public class DvdService : DiscService
+    public class DvdService : DiscService, IService
     {
         public DvdService ()
         {
@@ -39,6 +42,74 @@ namespace Banshee.Discs.Dvd
         protected override bool DeviceCommandMatchesSource (DiscSource source, DeviceCommand command)
         {
             return false;
+        }
+
+        public override void Initialize()
+        {
+            lock (this) {
+                //InstallPreferences ();
+                base.Initialize ();
+                SetupActions ();
+            }
+
+        }
+
+        public override void Dispose ()
+        {
+            lock (this) {
+                //UninstallPreferences ();
+                base.Dispose ();
+                DisposeActions ();
+            }
+        }
+
+        #region UI Actions
+
+        private void SetupActions ()
+        {
+            InterfaceActionService uia_service = ServiceManager.Get<InterfaceActionService> ();
+            if (uia_service == null) {
+                return;
+            }
+
+            uia_service.GlobalActions.AddImportant (new Gtk.ActionEntry [] {
+                new Gtk.ActionEntry ("GoToMenuAction", null,
+                    Catalog.GetString ("Go to Menu"), null,
+                    Catalog.GetString ("Naviguate to menu"),
+                    (object o, EventArgs args) => { ServiceManager.PlayerEngine.NavigateToMenu (); })
+            });
+
+            uia_service.GlobalActions.AddImportant (
+                new Gtk.ActionEntry ("NextChapterAction", null,
+                    Catalog.GetString ("Go to next Chapter"), null,
+                    Catalog.GetString ("Seek to the next chapter of the DVD"),
+                    (object o, EventArgs args) => { ServiceManager.PlayerEngine.GoToNextChapter (); })
+            );
+
+            uia_service.GlobalActions.AddImportant (
+                new Gtk.ActionEntry ("PreviousChapterAction", null,
+                    Catalog.GetString ("Go to previous Chapter"), null,
+                    Catalog.GetString ("Seek to the previous chapter of the DVD"),
+                    (object o, EventArgs args) => { ServiceManager.PlayerEngine.GoToPreviousChapter (); })
+            );
+        }
+
+        private void DisposeActions ()
+        {
+            InterfaceActionService uia_service = ServiceManager.Get<InterfaceActionService> ();
+            if (uia_service == null) {
+                return;
+            }
+
+            uia_service.GlobalActions.Remove ("GoToMenuAction");
+            uia_service.GlobalActions.Remove ("NextChapterAction");
+            uia_service.GlobalActions.Remove ("PreviousChapterAction");
+        }
+
+        #endregion
+
+        string IService.ServiceName {
+            get { return "DvdService"; }
         }
     }
 }

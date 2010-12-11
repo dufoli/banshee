@@ -335,5 +335,21 @@ namespace Banshee.MediaEngine
             set;
             get;
         }
+
+        public abstract void NotifyMouseMove (double x, double y);
+        public abstract void NotifyMouseButtonPressed (int button, double x, double y);
+        public abstract void NotifyMouseButtonReleased (int button, double x, double y);
+
+        public abstract void NavigateToLeftMenu ();
+        public abstract void NavigateToRightMenu ();
+        public abstract void NavigateToUpMenu ();
+        public abstract void NavigateToDownMenu ();
+        public abstract void NavigateToMenu ();
+
+        public abstract void ActivateCurrentMenu ();
+
+        public abstract void GoToNextChapter ();
+        public abstract void GoToPreviousChapter ();
+
     }
 }

@@ -302,6 +302,61 @@ namespace Banshee.GStreamer
             return null;
         }
 
+        public override void NotifyMouseMove (double x, double y)
+        {
+            bp_dvd_mouse_move_notify (handle, x, y);
+        }
+
+        public override void NotifyMouseButtonPressed (int button, double x, double y)
+        {
+            bp_dvd_mouse_button_pressed_notify (handle, button, x, y);
+        }
+
+        public override void NotifyMouseButtonReleased (int button, double x, double y)
+        {
+            bp_dvd_mouse_button_released_notify (handle, button, x, y);
+        }
+
+        public override void NavigateToLeftMenu ()
+        {
+            bp_dvd_left_notify (handle);
+        }
+
+        public override void NavigateToRightMenu ()
+        {
+            bp_dvd_right_notify (handle);
+        }
+
+        public override void NavigateToUpMenu ()
+        {
+            bp_dvd_up_notify (handle);
+        }
+
+        public override void NavigateToDownMenu ()
+        {
+            bp_dvd_down_notify (handle);
+        }
+
+        public override void NavigateToMenu ()
+        {
+            bp_dvd_go_to_menu (handle);
+        }
+
+        public override void ActivateCurrentMenu ()
+        {
+            bp_dvd_activate_notify (handle);
+        }
+
+        public override void GoToNextChapter ()
+        {
+            bp_dvd_go_to_next_chapter (handle);
+        }
+
+        public override void GoToPreviousChapter ()
+        {
+            bp_dvd_go_to_previous_chapter (handle);
+        }
+
         private void OnEos (IntPtr player)
         {
             StopIterating ();
@@ -1025,5 +1080,38 @@ namespace Banshee.GStreamer
 
         [DllImport ("libbanshee.dll")]
         private static extern string gstreamer_version_string ();
+
+        [DllImport ("libbanshee.dll")]
+        private static extern void bp_dvd_mouse_move_notify (HandleRef player, double x, double y);
+
+        [DllImport ("libbanshee.dll")]
+        private static extern void bp_dvd_mouse_button_pressed_notify (HandleRef player, int button, double x, double y);
+
+        [DllImport ("libbanshee.dll")]
+        private static extern void bp_dvd_mouse_button_released_notify (HandleRef player, int button, double x, double y);
+
+        [DllImport ("libbanshee.dll")]
+        private static extern void bp_dvd_left_notify (HandleRef player);
+
+        [DllImport ("libbanshee.dll")]
+        private static extern void bp_dvd_right_notify (HandleRef player);
+
+        [DllImport ("libbanshee.dll")]
+        private static extern void bp_dvd_up_notify (HandleRef player);
+
+        [DllImport ("libbanshee.dll")]
+        private static extern void bp_dvd_down_notify (HandleRef player);
+
+        [DllImport ("libbanshee.dll")]
+        private static extern void bp_dvd_activate_notify (HandleRef player);
+
+        [DllImport ("libbanshee.dll")]
+        private static extern void bp_dvd_go_to_menu (HandleRef player);
+
+        [DllImport ("libbanshee.dll")]
+        private static extern void bp_dvd_go_to_next_chapter (HandleRef player);
+
+        [DllImport ("libbanshee.dll")]
+        private static extern void bp_dvd_go_to_previous_chapter (HandleRef player);
    }
 }

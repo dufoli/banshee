@@ -52,7 +52,7 @@ namespace Banshee.HalBackend
         }
 
         public bool HasVideo {
-            get { throw new NotImplementedException (); }
+            get { return HalDevice.GetPropertyBoolean ("volume.disc.is_videodvd"); }
         }
 
         public bool IsBlank {

@@ -33,5 +33,7 @@
 
 void      _bp_dvd_pipeline_setup    (BansheePlayer *player);
 gboolean  _bp_dvd_handle_uri        (BansheePlayer *player, const gchar *uri);
+void      _bp_dvd_find_navigation   (BansheePlayer *player);
+
 
 #endif /* _BANSHEE_PLAYER_DVD_H */

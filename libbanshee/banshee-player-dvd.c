@@ -28,6 +28,7 @@
 
 #include "banshee-player-dvd.h"
 
+
 // ---------------------------------------------------------------------------
 // Private Functions
 // ---------------------------------------------------------------------------
@@ -155,7 +156,7 @@ _bp_dvd_handle_uri (BansheePlayer *player, const gchar *uri)
         bp_debug2 ("bp_dvd: fast seeking to track on already playing device (%s)", player->dvd_device);
         
         //return bp_dvd_source_seek_to_track (player->playbin, track_num);
-	return FALSE;
+        return FALSE;
     }
     
     // We were already playing some DVD, but switched to a different device node, 
@@ -165,4 +166,131 @@ _bp_dvd_handle_uri (BansheePlayer *player, const gchar *uri)
     player->dvd_device = g_strdup (new_dvd_device);
     
     return FALSE;
+}
+
+//get navigation when videosink changed as done on video
+void _bp_dvd_find_navigation (BansheePlayer *player)
+{
+    GstElement *video_sink = NULL;
+    GstElement *navigation = NULL;
+    GstNavigation *previous_navigation;
+
+    previous_navigation = player->navigation;
+    g_object_get (player->playbin, "video-sink", &video_sink, NULL);
+
+    if (video_sink == NULL) {
+        player->navigation = NULL;
+        if (previous_navigation != NULL) {
+            gst_object_unref (previous_navigation);
+        } 
+    }
+
+    navigation = GST_IS_BIN (video_sink)
+        ? gst_bin_get_by_interface (GST_BIN (video_sink), GST_TYPE_NAVIGATION)
+        : video_sink;
+
+    player->navigation = GST_IS_NAVIGATION (navigation) ? GST_NAVIGATION (navigation) : NULL;
+
+    if (previous_navigation != NULL) {
+        gst_object_unref (previous_navigation);
+    }
+    gst_object_unref (video_sink);
+}
+
+//mouse event
+
+P_INVOKE void
+bp_dvd_mouse_move_notify (BansheePlayer *player, double x, double y)
+{
+    if (player->navigation) {
+        gst_navigation_send_mouse_event (player->navigation, "mouse-move", 0, x, y);
+    }        
+}
+
+P_INVOKE void
+bp_dvd_mouse_button_pressed_notify (BansheePlayer *player, int button, double x, double y)
+{
+    if (player->navigation) {
+        gst_navigation_send_mouse_event (player->navigation, "mouse-button-press", button, x, y);
+    }        
+}
+
+P_INVOKE void
+bp_dvd_mouse_button_released_notify (BansheePlayer *player, int button, double x, double y)
+{
+    if (player->navigation) {
+        gst_navigation_send_mouse_event (player->navigation, "mouse-button-release", button, x, y);
+    }        
+}
+
+//keyboard event
+
+P_INVOKE void 
+bp_dvd_left_notify (BansheePlayer *player)
+{
+    if (player->navigation) {
+        gst_navigation_send_command (player->navigation, GST_NAVIGATION_COMMAND_LEFT);
+    }
+}
+
+P_INVOKE void 
+bp_dvd_right_notify (BansheePlayer *player)
+{
+    if (player->navigation) {
+        gst_navigation_send_command (player->navigation, GST_NAVIGATION_COMMAND_RIGHT);
+    }
+}
+
+P_INVOKE void 
+bp_dvd_up_notify (BansheePlayer *player)
+{
+    if (player->navigation) {
+        gst_navigation_send_command (player->navigation, GST_NAVIGATION_COMMAND_UP);
+    }
+}
+
+P_INVOKE void 
+bp_dvd_down_notify (BansheePlayer *player)
+{
+    if (player->navigation) {
+        gst_navigation_send_command (player->navigation, GST_NAVIGATION_COMMAND_DOWN);
+    }
+}
+
+P_INVOKE void 
+bp_dvd_activate_notify (BansheePlayer *player)
+{
+    if (player->navigation) {
+        gst_navigation_send_command (player->navigation, GST_NAVIGATION_COMMAND_ACTIVATE);
+    }
+}
+
+//command
+
+P_INVOKE void 
+bp_dvd_go_to_menu (BansheePlayer *player)
+{
+    if (player->navigation) {
+        gst_navigation_send_command (player->navigation, GST_NAVIGATION_COMMAND_DVD_MENU);
+    }
+}
+
+P_INVOKE void 
+bp_dvd_go_to_next_chapter (BansheePlayer *player)
+{
+    gint64 index;
+    GstFormat format = gst_format_get_by_nick ("chapter");
+    gst_element_query_position (player->playbin, &format, &index);
+    gst_element_seek (player->playbin, 1.0, format, GST_SEEK_FLAG_FLUSH,
+        GST_SEEK_TYPE_SET, index + 1, GST_SEEK_TYPE_NONE, 0);
+}
+
+P_INVOKE void 
+bp_dvd_go_to_previous_chapter (BansheePlayer *player)
+{
+    gint64 index;
+    GstFormat format = gst_format_get_by_nick ("chapter");
+    gst_element_query_position (player->playbin, &format, &index);
+    gst_element_seek (player->playbin, 1.0, format, GST_SEEK_FLAG_FLUSH,
+        GST_SEEK_TYPE_SET, index - 1, GST_SEEK_TYPE_NONE, 0);
 }

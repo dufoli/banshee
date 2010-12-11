@@ -54,11 +54,43 @@ namespace Banshee.Discs.Dvd
 
 #region GUI/ThickClient
 
+        private bool actions_loaded = false;
+
         private void SetupGui ()
         {
             Properties.SetStringList ("Icon.Name", "media-dvd", "gnome-dev-dvd");
+            Properties.SetString ("ActiveSourceUIResource", "ActiveSourceUI.xml");
+            Properties.SetString ("GtkActionPath", "/DvdContextMenu");
+            actions_loaded = true;
+
+            UpdateActions ();
+        }
+
+        private void UpdateActions ()
+        {
+            // TODO Update dvd actions
+        }
+
+        protected override void OnUpdated ()
+        {
+            if (actions_loaded) {
+                UpdateActions ();
+            }
+
+            base.OnUpdated ();
         }
 #endregion
+                /*        public abstract void NotifyMouseMove (double x, double y);
+        public abstract void NotifyMouseButtonPressed (int button, double x, double y);
+        public abstract void NotifyMouseButtonReleased (int button, double x, double y);
+
+        public abstract void NavigateToLeftMenu ();
+        public abstract void NavigateToRightMenu ();
+        public abstract void NavigateToUpMenu ();
+        public abstract void NavigateToDownMenu ();
+
+        public abstract void ActivateCurrentMenu ();
+*/
     }
 }
 

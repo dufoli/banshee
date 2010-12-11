@@ -30,6 +30,7 @@
 
 #include "banshee-player-pipeline.h"
 #include "banshee-player-cdda.h"
+#include "banshee-player-dvd.h"
 #include "banshee-player-video.h"
 #include "banshee-player-equalizer.h"
 #include "banshee-player-missing-elements.h"
@@ -415,7 +416,7 @@ _bp_pipeline_construct (BansheePlayer *player)
     _bp_cdda_pipeline_setup (player);
     _bp_dvd_pipeline_setup (player);
     _bp_video_pipeline_setup (player, bus);
-
+    _bp_dvd_find_navigation (player);
     return TRUE;
 }
 
