@@ -58,6 +58,8 @@ namespace Banshee.NowPlaying
             table.NoShowAll = true;
             CanFocus = true;
 
+            this.Events = Gdk.EventMask.ButtonPressMask | Gdk.EventMask.ButtonMotionMask | Gdk.EventMask.KeyPressMask;
+
             CreateVideoDisplay ();
 
             IVideoDisplay ivideo_display = video_display as IVideoDisplay;
@@ -110,8 +112,6 @@ namespace Banshee.NowPlaying
         {
             base.OnShown ();
             this.GrabFocus ();
-            this.HasFocus = true;
-            Gtk.Grab.Add (this);
             // Ugly hack to ensure the video window is mapped/realized
             if (!video_display_initial_shown) {
                 video_display_initial_shown = true;
@@ -133,7 +133,6 @@ namespace Banshee.NowPlaying
         protected override void OnHidden ()
         {
             base.OnHidden ();
-            Gtk.Grab.Remove (this);
             video_display.Hide ();
         }
 
