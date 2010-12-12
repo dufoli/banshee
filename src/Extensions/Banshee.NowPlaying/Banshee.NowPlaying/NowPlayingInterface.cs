@@ -91,19 +91,28 @@ namespace Banshee.NowPlaying
                 }
                 switch (args.Event.Key) {
                     case Gdk.Key.leftarrow:
+                    case Gdk.Key.KP_Left:
+                    case Gdk.Key.Left:
                         ServiceManager.PlayerEngine.NavigateToLeftMenu ();
                         break;
                     case Gdk.Key.rightarrow:
+                    case Gdk.Key.KP_Right:
+                    case Gdk.Key.Right:
                         ServiceManager.PlayerEngine.NavigateToRightMenu ();
                         break;
                     case Gdk.Key.uparrow:
+                    case Gdk.Key.KP_Up:
+                    case Gdk.Key.Up:
                         ServiceManager.PlayerEngine.NavigateToUpMenu ();
                         break;
                     case Gdk.Key.downarrow:
+                    case Gdk.Key.KP_Down:
+                    case Gdk.Key.Down:
                         ServiceManager.PlayerEngine.NavigateToDownMenu ();
                         break;
                     case Gdk.Key.Break:
                     case Gdk.Key.KP_Enter:
+                    case Gdk.Key.Return:
                         ServiceManager.PlayerEngine.ActivateCurrentMenu ();
                         break;
                 }

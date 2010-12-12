@@ -176,7 +176,7 @@ void _bp_dvd_find_navigation (BansheePlayer *player)
 
     previous_navigation = player->navigation;
     g_object_get (player->playbin, "video-sink", &video_sink, NULL);
-
+    
     if (video_sink == NULL) {
         player->navigation = NULL;
         if (previous_navigation != NULL) {
@@ -207,6 +207,9 @@ bp_dvd_is_menu (BansheePlayer *player)
 P_INVOKE void
 bp_dvd_mouse_move_notify (BansheePlayer *player, double x, double y)
 {
+    if (!player->navigation) {
+        _bp_dvd_find_navigation (player);
+    }
     if (player->navigation) {
         gst_navigation_send_mouse_event (player->navigation, "mouse-move", 0, x, y);
     }        
@@ -215,6 +218,9 @@ bp_dvd_mouse_move_notify (BansheePlayer *player, double x, double y)
 P_INVOKE void
 bp_dvd_mouse_button_pressed_notify (BansheePlayer *player, int button, double x, double y)
 {
+    if (!player->navigation) {
+        _bp_dvd_find_navigation (player);
+    }
     if (player->navigation) {
         gst_navigation_send_mouse_event (player->navigation, "mouse-button-press", button, x, y);
     }        
@@ -223,6 +229,9 @@ bp_dvd_mouse_button_pressed_notify (BansheePlayer *player, int button, double x,
 P_INVOKE void
 bp_dvd_mouse_button_released_notify (BansheePlayer *player, int button, double x, double y)
 {
+    if (!player->navigation) {
+        _bp_dvd_find_navigation (player);
+    }
     if (player->navigation) {
         gst_navigation_send_mouse_event (player->navigation, "mouse-button-release", button, x, y);
     }        
@@ -233,6 +242,9 @@ bp_dvd_mouse_button_released_notify (BansheePlayer *player, int button, double x
 P_INVOKE void 
 bp_dvd_left_notify (BansheePlayer *player)
 {
+    if (!player->navigation) {
+        _bp_dvd_find_navigation (player);
+    }
     if (player->navigation) {
         gst_navigation_send_command (player->navigation, GST_NAVIGATION_COMMAND_LEFT);
     }
@@ -241,6 +253,9 @@ bp_dvd_left_notify (BansheePlayer *player)
 P_INVOKE void 
 bp_dvd_right_notify (BansheePlayer *player)
 {
+    if (!player->navigation) {
+        _bp_dvd_find_navigation (player);
+    }
     if (player->navigation) {
         gst_navigation_send_command (player->navigation, GST_NAVIGATION_COMMAND_RIGHT);
     }
@@ -249,6 +264,9 @@ bp_dvd_right_notify (BansheePlayer *player)
 P_INVOKE void 
 bp_dvd_up_notify (BansheePlayer *player)
 {
+    if (!player->navigation) {
+        _bp_dvd_find_navigation (player);
+    }
     if (player->navigation) {
         gst_navigation_send_command (player->navigation, GST_NAVIGATION_COMMAND_UP);
     }
@@ -257,6 +275,9 @@ bp_dvd_up_notify (BansheePlayer *player)
 P_INVOKE void 
 bp_dvd_down_notify (BansheePlayer *player)
 {
+    if (!player->navigation) {
+        _bp_dvd_find_navigation (player);
+    }
     if (player->navigation) {
         gst_navigation_send_command (player->navigation, GST_NAVIGATION_COMMAND_DOWN);
     }
@@ -265,6 +286,9 @@ bp_dvd_down_notify (BansheePlayer *player)
 P_INVOKE void 
 bp_dvd_activate_notify (BansheePlayer *player)
 {
+    if (!player->navigation) {
+        _bp_dvd_find_navigation (player);
+    }
     if (player->navigation) {
         gst_navigation_send_command (player->navigation, GST_NAVIGATION_COMMAND_ACTIVATE);
     }
@@ -275,6 +299,9 @@ bp_dvd_activate_notify (BansheePlayer *player)
 P_INVOKE void 
 bp_dvd_go_to_menu (BansheePlayer *player)
 {
+    if (!player->navigation) {
+        _bp_dvd_find_navigation (player);
+    }
     if (player->navigation) {
         gst_navigation_send_command (player->navigation, GST_NAVIGATION_COMMAND_DVD_MENU);
     }

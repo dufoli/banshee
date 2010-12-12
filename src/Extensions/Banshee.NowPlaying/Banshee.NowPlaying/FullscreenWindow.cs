@@ -122,7 +122,7 @@ namespace Banshee.NowPlaying
                     break;
                 case Gdk.Key.uparrow:
                 case Gdk.Key.Up:
-                case Gdk.Key.KP_Down:
+                case Gdk.Key.KP_Up:
                     if (ServiceManager.PlayerEngine.IsMenu) {
                        ServiceManager.PlayerEngine.NavigateToUpMenu ();
                     }
