@@ -56,7 +56,6 @@ namespace Banshee.NowPlaying
             primary_window = service.PrimaryWindow;
 
             Contents = new NowPlayingContents ();
-            Contents.CanFocus = true;
             Contents.ButtonPressEvent += (o, a) => {
                 switch (a.Event.Type) {
                 case Gdk.EventType.TwoButtonPress:
@@ -67,19 +66,29 @@ namespace Banshee.NowPlaying
                     }
                     break;
                 case Gdk.EventType.ButtonPress:
-                    ServiceManager.PlayerEngine.NotifyMouseButtonPressed ((int)a.Event.Button, a.Event.X, a.Event.Y);
+                    if (ServiceManager.PlayerEngine.IsMenu) {
+                        ServiceManager.PlayerEngine.NotifyMouseButtonPressed ((int)a.Event.Button, a.Event.X, a.Event.Y);
+                    }
                     break;
                 case Gdk.EventType.ButtonRelease:
-                    ServiceManager.PlayerEngine.NotifyMouseButtonReleased ((int)a.Event.Button, a.Event.X, a.Event.Y);
+                    if (ServiceManager.PlayerEngine.IsMenu) {
+                        ServiceManager.PlayerEngine.NotifyMouseButtonReleased ((int)a.Event.Button, a.Event.X, a.Event.Y);
+                    }
                     break;
                 }
             };
 
+            //TODO stop tracking mouse when no more in menu
             Contents.MotionNotifyEvent += (o, args) => {
-                ServiceManager.PlayerEngine.NotifyMouseMove (args.Event.X, args.Event.Y);
+                if (ServiceManager.PlayerEngine.IsMenu) {
+                    ServiceManager.PlayerEngine.NotifyMouseMove (args.Event.X, args.Event.Y);
+                }
             };
 
             Contents.KeyPressEvent += delegate(object o, KeyPressEventArgs args) {
+                if (!ServiceManager.PlayerEngine.IsMenu) {
+                    return;
+                }
                 switch (args.Event.Key) {
                     case Gdk.Key.leftarrow:
                         ServiceManager.PlayerEngine.NavigateToLeftMenu ();

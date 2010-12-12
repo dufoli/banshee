@@ -106,6 +106,10 @@ namespace Banshee.MediaEngine
             get { return null; }
         }
 
+        public override bool IsMenu {
+            get { return false; }
+        }
+
         public override string GetSubtitleDescription (int index)
         {
             return string.Empty;

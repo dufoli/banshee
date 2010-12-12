@@ -197,6 +197,12 @@ void _bp_dvd_find_navigation (BansheePlayer *player)
     gst_object_unref (video_sink);
 }
 
+P_INVOKE gboolean
+bp_dvd_is_menu (BansheePlayer *player)
+{
+    return player->is_menu;
+}
+
 //mouse event
 
 P_INVOKE void

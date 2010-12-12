@@ -56,6 +56,7 @@ namespace Banshee.NowPlaying
             Child = table = new Table (1, 1, false) { Visible = true };
 
             table.NoShowAll = true;
+            CanFocus = true;
 
             CreateVideoDisplay ();
 
@@ -108,7 +109,9 @@ namespace Banshee.NowPlaying
         protected override void OnShown ()
         {
             base.OnShown ();
-
+            this.GrabFocus ();
+            this.HasFocus = true;
+            Gtk.Grab.Add (this);
             // Ugly hack to ensure the video window is mapped/realized
             if (!video_display_initial_shown) {
                 video_display_initial_shown = true;
@@ -130,6 +133,7 @@ namespace Banshee.NowPlaying
         protected override void OnHidden ()
         {
             base.OnHidden ();
+            Gtk.Grab.Remove (this);
             video_display.Hide ();
         }
 

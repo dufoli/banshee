@@ -718,6 +718,10 @@ namespace Banshee.MediaEngine
             get { return active_engine.SubtitleUri; }
         }
 
+        public bool IsMenu {
+            get { return active_engine.IsMenu; }
+        }
+
         public VideoDisplayContextType VideoDisplayContextType {
             get { return active_engine.VideoDisplayContextType; }
         }

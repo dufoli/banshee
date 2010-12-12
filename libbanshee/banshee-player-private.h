@@ -200,6 +200,7 @@ struct BansheePlayer {
     
     //dvd navigation
     GstNavigation *navigation;
+    gboolean is_menu;
 };
 
 #endif /* _BANSHEE_PLAYER_PRIVATE_H */

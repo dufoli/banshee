@@ -861,6 +861,10 @@ namespace Banshee.GStreamerSharp
             }
         }
 
+        public override bool IsMenu {
+            get { return false; }
+        }
+
         public override SafeUri SubtitleUri {
             set {
                 long pos = -1;

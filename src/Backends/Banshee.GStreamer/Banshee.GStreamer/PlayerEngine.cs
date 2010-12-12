@@ -805,6 +805,10 @@ namespace Banshee.GStreamer
             }
         }
 
+        public override bool IsMenu {
+            get { return bp_dvd_is_menu (handle); }
+        }
+
 #region ISupportClutter
 
         private IntPtr clutter_video_sink;
@@ -1080,6 +1084,9 @@ namespace Banshee.GStreamer
 
         [DllImport ("libbanshee.dll")]
         private static extern string gstreamer_version_string ();
+
+        [DllImport ("libbanshee.dll")]
+        private static extern bool bp_dvd_is_menu (HandleRef player);
 
         [DllImport ("libbanshee.dll")]
         private static extern void bp_dvd_mouse_move_notify (HandleRef player, double x, double y);

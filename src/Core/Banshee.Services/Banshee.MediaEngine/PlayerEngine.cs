@@ -336,6 +336,10 @@ namespace Banshee.MediaEngine
             get;
         }
 
+        public abstract bool IsMenu {
+            get;
+        }
+
         public abstract void NotifyMouseMove (double x, double y);
         public abstract void NotifyMouseButtonPressed (int button, double x, double y);
         public abstract void NotifyMouseButtonReleased (int button, double x, double y);
