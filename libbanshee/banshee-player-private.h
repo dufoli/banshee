@@ -197,7 +197,7 @@ struct BansheePlayer {
     // http://replaygain.hydrogenaudio.org/player_scale.html
     gdouble rg_gain_history[10];
     gint history_size;
-    
+
     //dvd navigation
     GstNavigation *navigation;
     gboolean is_menu;

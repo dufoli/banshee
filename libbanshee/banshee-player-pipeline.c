@@ -210,14 +210,15 @@ bp_pipeline_bus_callback (GstBus *bus, GstMessage *message, gpointer userdata)
         case GST_MESSAGE_ELEMENT: {
             const GstStructure *messageStruct;
             messageStruct = gst_message_get_structure (message);
-            if (GST_MESSAGE_SRC (message) == GST_OBJECT (player->playbin) && gst_structure_has_name (messageStruct, "playbin2-stream-changed")) {
+            if (GST_MESSAGE_SRC (message) == GST_OBJECT (player->playbin)
+                    && gst_structure_has_name (messageStruct, "playbin2-stream-changed")) {
                 bp_next_track_starting (player);
             }
             if ( gst_navigation_message_get_type (message) == GST_NAVIGATION_MESSAGE_COMMANDS_CHANGED) {
                 player->is_menu = FALSE;
                 // Get available command to know if player is in menu
                 GstQuery *query = gst_navigation_query_new_commands();
-                
+
                 //execute query over playbin or navigation ?
                 if (gst_element_query (player->playbin, query)) {
                     guint n_cmds, i;
@@ -239,7 +240,6 @@ bp_pipeline_bus_callback (GstBus *bus, GstMessage *message, gpointer userdata)
                             }
                         }
                     }
-                    
                 }
                 gst_query_unref (query);
             }

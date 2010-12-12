@@ -120,7 +120,7 @@ namespace Banshee.Discs
                     Log.Debug ("Neither :(");
                     return;
                 }
-                
+
                 Sources.Add (volume.Uuid, source);
                 ServiceManager.SourceManager.AddSource (source);
 
