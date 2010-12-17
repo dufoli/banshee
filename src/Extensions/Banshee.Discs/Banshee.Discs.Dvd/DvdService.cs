@@ -35,6 +35,8 @@ namespace Banshee.Discs.Dvd
 {
     public class DvdService : DiscService, IService
     {
+        private uint global_interface_id;
+        
         public DvdService ()
         {
         }
@@ -80,19 +82,7 @@ namespace Banshee.Discs.Dvd
                     (object o, EventArgs args) => { ServiceManager.PlayerEngine.NavigateToMenu (); })
             });
 
-            uia_service.GlobalActions.AddImportant (
-                new Gtk.ActionEntry ("NextChapterAction", null,
-                    Catalog.GetString ("Go to next Chapter"), null,
-                    Catalog.GetString ("Seek to the next chapter of the DVD"),
-                    (object o, EventArgs args) => { ServiceManager.PlayerEngine.GoToNextChapter (); })
-            );
-
-            uia_service.GlobalActions.AddImportant (
-                new Gtk.ActionEntry ("PreviousChapterAction", null,
-                    Catalog.GetString ("Go to previous Chapter"), null,
-                    Catalog.GetString ("Seek to the previous chapter of the DVD"),
-                    (object o, EventArgs args) => { ServiceManager.PlayerEngine.GoToPreviousChapter (); })
-            );
+            global_interface_id = uia_service.UIManager.AddUiFromResource ("GlobalUIDvd.xml");
         }
 
         private void DisposeActions ()
@@ -103,8 +93,7 @@ namespace Banshee.Discs.Dvd
             }
 
             uia_service.GlobalActions.Remove ("GoToMenuAction");
-            uia_service.GlobalActions.Remove ("NextChapterAction");
-            uia_service.GlobalActions.Remove ("PreviousChapterAction");
+            uia_service.UIManager.RemoveUi (global_interface_id);
         }
 
         #endregion

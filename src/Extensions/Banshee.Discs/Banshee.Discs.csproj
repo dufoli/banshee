@@ -91,6 +91,9 @@
     <EmbeddedResource Include="Banshee.Discs.addin.xml">
       <LogicalName>Banshee.Discs.addin.xml</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\GlobalUIDvd.xml">
+      <LogicalName>GlobalUIDvd.xml</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Banshee.Discs.AudioCd\AudioCdDiscModel.cs" />

@@ -66,6 +66,7 @@ namespace Banshee.NowPlaying
                     }
                     break;
                 case Gdk.EventType.ButtonPress:
+                    Contents.GrabFocus ();
                     if (ServiceManager.PlayerEngine.IsMenu) {
                         ServiceManager.PlayerEngine.NotifyMouseButtonPressed ((int)a.Event.Button, a.Event.X, a.Event.Y);
                     }
@@ -85,38 +86,7 @@ namespace Banshee.NowPlaying
                 }
             };
 
-            Contents.KeyPressEvent += delegate(object o, KeyPressEventArgs args) {
-                if (!ServiceManager.PlayerEngine.IsMenu) {
-                    return;
-                }
-                switch (args.Event.Key) {
-                    case Gdk.Key.leftarrow:
-                    case Gdk.Key.KP_Left:
-                    case Gdk.Key.Left:
-                        ServiceManager.PlayerEngine.NavigateToLeftMenu ();
-                        break;
-                    case Gdk.Key.rightarrow:
-                    case Gdk.Key.KP_Right:
-                    case Gdk.Key.Right:
-                        ServiceManager.PlayerEngine.NavigateToRightMenu ();
-                        break;
-                    case Gdk.Key.uparrow:
-                    case Gdk.Key.KP_Up:
-                    case Gdk.Key.Up:
-                        ServiceManager.PlayerEngine.NavigateToUpMenu ();
-                        break;
-                    case Gdk.Key.downarrow:
-                    case Gdk.Key.KP_Down:
-                    case Gdk.Key.Down:
-                        ServiceManager.PlayerEngine.NavigateToDownMenu ();
-                        break;
-                    case Gdk.Key.Break:
-                    case Gdk.Key.KP_Enter:
-                    case Gdk.Key.Return:
-                        ServiceManager.PlayerEngine.ActivateCurrentMenu ();
-                        break;
-                }
-            };
+            Contents.KeyPressEvent += OnKeyPress;
 
             // This is my really sweet hack - it's where the video widget
             // is sent when the source is not active. This keeps the video
@@ -138,6 +108,46 @@ namespace Banshee.NowPlaying
             fullscreen_adapter = new FullscreenAdapter ();
             fullscreen_adapter.SuggestUnfullscreen += OnAdapterSuggestUnfullscreen;
             screensaver = new ScreensaverManager ();
+        }
+
+        [GLib.ConnectBefore]
+        void OnKeyPress (object o, KeyPressEventArgs args)
+        {
+            if (!ServiceManager.PlayerEngine.IsMenu) {
+                    return;
+                }
+                switch (args.Event.Key) {
+                    case Gdk.Key.leftarrow:
+                    case Gdk.Key.KP_Left:
+                    case Gdk.Key.Left:
+                        ServiceManager.PlayerEngine.NavigateToLeftMenu ();
+                        args.RetVal = true;
+                        break;
+                    case Gdk.Key.rightarrow:
+                    case Gdk.Key.KP_Right:
+                    case Gdk.Key.Right:
+                        ServiceManager.PlayerEngine.NavigateToRightMenu ();
+                        args.RetVal = true;
+                        break;
+                    case Gdk.Key.uparrow:
+                    case Gdk.Key.KP_Up:
+                    case Gdk.Key.Up:
+                        ServiceManager.PlayerEngine.NavigateToUpMenu ();
+                        args.RetVal = true;
+                        break;
+                    case Gdk.Key.downarrow:
+                    case Gdk.Key.KP_Down:
+                    case Gdk.Key.Down:
+                        ServiceManager.PlayerEngine.NavigateToDownMenu ();
+                        args.RetVal = true;
+                        break;
+                    case Gdk.Key.Break:
+                    case Gdk.Key.KP_Enter:
+                    case Gdk.Key.Return:
+                        ServiceManager.PlayerEngine.ActivateCurrentMenu ();
+                        args.RetVal = true;
+                        break;
+                }
         }
 
         public override void Dispose ()

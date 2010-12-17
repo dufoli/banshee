@@ -27,10 +27,12 @@
 using System;
 
 using Mono.Unix;
+using Banshee.PlaybackController;
+using Banshee.ServiceStack;
 
 namespace Banshee.Discs.Dvd
 {
-    public class DvdSource : DiscSource
+    public class DvdSource : DiscSource, IBasicPlaybackController
     {
         public DvdSource (DiscService service, DvdModel model)
             : base (service, (DiscModel) model, Catalog.GetString ("Dvd"), model.Title, 400)
@@ -81,17 +83,35 @@ namespace Banshee.Discs.Dvd
             base.OnUpdated ();
         }
 #endregion
-                /*        public abstract void NotifyMouseMove (double x, double y);
-        public abstract void NotifyMouseButtonPressed (int button, double x, double y);
-        public abstract void NotifyMouseButtonReleased (int button, double x, double y);
 
-        public abstract void NavigateToLeftMenu ();
-        public abstract void NavigateToRightMenu ();
-        public abstract void NavigateToUpMenu ();
-        public abstract void NavigateToDownMenu ();
+#region IBasicPlaybackController implementation
 
-        public abstract void ActivateCurrentMenu ();
-*/
+        public bool First ()
+        {
+            // TODO expected behaviour ?
+            // Go to menu ?
+            ServiceManager.PlayerEngine.NavigateToMenu ();
+            return true;
+        }
+
+        public bool Next (bool restart, bool changeImmediately)
+        {
+            if (!ServiceManager.PlayerEngine.IsMenu) {
+                ServiceManager.PlayerEngine.GoToNextChapter ();
+            }
+            // Do nothing if not in menu
+            return true;
+        }
+
+        public bool Previous (bool restart)
+        {
+            if (!ServiceManager.PlayerEngine.IsMenu) {
+                ServiceManager.PlayerEngine.GoToPreviousChapter ();
+            }
+            // Do nothing if not in menu
+            return true;
+        }
+#endregion
     }
 }
 
