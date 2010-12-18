@@ -102,6 +102,8 @@ namespace Banshee.Discs
             }
         }
 
+        protected abstract DiscSource GetDiscSource  (IDiscVolume volume);
+
         protected virtual void MapDiscVolume (IDiscVolume volume)
         {
             DiscSource source = null;
@@ -110,16 +112,12 @@ namespace Banshee.Discs
                 if (Sources.ContainsKey (volume.Uuid)) {
                     Log.Debug ("Already mapped");
                     return;
-                } else if  (volume.HasAudio) {
-                    Log.Debug ("Mapping audio cd");
-                    source = new AudioCd.AudioCdSource (this as AudioCd.AudioCdService, new AudioCd.AudioCdDiscModel (volume));
-                } else if (volume.HasVideo) {
-                    Log.Debug ("Mapping dvd");
-                    source = new Dvd.DvdSource (this, new Dvd.DvdModel (volume));
-                } else {
-                    Log.Debug ("Neither :(");
-                    return;
                 }
+
+                source =  GetDiscSource (volume);
+
+                if (source == null)
+                    return;
 
                 Sources.Add (volume.Uuid, source);
                 ServiceManager.SourceManager.AddSource (source);

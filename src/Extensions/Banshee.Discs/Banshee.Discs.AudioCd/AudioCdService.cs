@@ -245,6 +245,21 @@ namespace Banshee.Discs.AudioCd
 
 #endregion
 
+#region implemented abstract members of Banshee.Discs.DiscService
+
+        protected override DiscSource GetDiscSource (IDiscVolume volume)
+        {
+            if  (volume.HasAudio) {
+                Log.Debug ("Mapping audio cd");
+                return new AudioCdSource (this, new AudioCdDiscModel (volume));
+            } else {
+                Log.Debug ("Can not map to audio cd source.");
+                return null;
+            }
+        }
+        
+#endregion
+
         string IService.ServiceName {
             get { return "AudioCdService"; }
         }

@@ -30,6 +30,7 @@ using Banshee.Hardware;
 using Banshee.Gui;
 using Banshee.ServiceStack;
 using Mono.Unix;
+using Hyena;
 
 namespace Banshee.Discs.Dvd
 {
@@ -41,9 +42,21 @@ namespace Banshee.Discs.Dvd
         {
         }
 
-        // FIXME Implement DVD device command matching
         protected override bool DeviceCommandMatchesSource (DiscSource source, DeviceCommand command)
         {
+            DvdSource dvdSource = source as DvdSource;
+
+            if (dvdSource != null && command.DeviceId.StartsWith ("dvd:")) {
+                try {
+                    Uri uri = new Uri (command.DeviceId);
+                    string match_device_node = String.Format ("{0}{1}", uri.Host,
+                        uri.AbsolutePath).TrimEnd ('/', '\\');
+                    string device_node = source.DiscModel.Volume.DeviceNode;
+                    return device_node.EndsWith (match_device_node);
+                } catch {
+                }
+            }
+
             return false;
         }
 
@@ -66,7 +79,7 @@ namespace Banshee.Discs.Dvd
             }
         }
 
-        #region UI Actions
+#region UI Actions
 
         private void SetupActions ()
         {
@@ -96,7 +109,22 @@ namespace Banshee.Discs.Dvd
             uia_service.UIManager.RemoveUi (global_interface_id);
         }
 
-        #endregion
+#endregion
+
+#region implemented abstract members of Banshee.Discs.DiscService
+
+        protected override DiscSource GetDiscSource (IDiscVolume volume)
+        {
+            if (volume.HasVideo) {
+                Log.Debug ("Mapping dvd");
+                return new DvdSource (this, new DvdModel (volume));
+            } else {
+                Log.Debug ("Can not map to dvd source.");
+                return null;
+            }
+        }
+        
+#endregion
 
         string IService.ServiceName {
             get { return "DvdService"; }
