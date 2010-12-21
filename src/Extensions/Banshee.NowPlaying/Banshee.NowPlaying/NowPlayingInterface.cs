@@ -31,10 +31,10 @@ using System;
 using Mono.Unix;
 using Gtk;
 
-using Banshee.ServiceStack;
-using Banshee.PlatformServices;
-using Banshee.Sources;
 using Banshee.Gui;
+using Banshee.PlatformServices;
+using Banshee.ServiceStack;
+using Banshee.Sources;
 using Banshee.Sources.Gui;
 
 namespace Banshee.NowPlaying
@@ -56,16 +56,7 @@ namespace Banshee.NowPlaying
             primary_window = service.PrimaryWindow;
 
             Contents = new NowPlayingContents ();
-            Contents.ButtonPressEvent += OnButtonPress;
 
-            //TODO stop tracking mouse when no more in menu
-            Contents.MotionNotifyEvent += (o, args) => {
-                if (ServiceManager.PlayerEngine.IsMenu) {
-                    ServiceManager.PlayerEngine.NotifyMouseMove (args.Event.X, args.Event.Y);
-                }
-            };
-
-            Contents.KeyPressEvent += OnKeyPress;
 
             // This is my really sweet hack - it's where the video widget
             // is sent when the source is not active. This keeps the video
@@ -87,71 +78,6 @@ namespace Banshee.NowPlaying
             fullscreen_adapter = new FullscreenAdapter ();
             fullscreen_adapter.SuggestUnfullscreen += OnAdapterSuggestUnfullscreen;
             screensaver = new ScreensaverManager ();
-        }
-
-        [GLib.ConnectBefore]
-        void OnButtonPress (object o, ButtonPressEventArgs args)
-        {
-            switch (args.Event.Type) {
-                case Gdk.EventType.TwoButtonPress:
-                    var iaservice = ServiceManager.Get<InterfaceActionService> ();
-                    var action = iaservice.ViewActions["FullScreenAction"] as Gtk.ToggleAction;
-                    if (action != null && action.Sensitive) {
-                        action.Active = !action.Active;
-                    }
-                    break;
-                case Gdk.EventType.ButtonPress:
-                    Contents.GrabFocus ();
-                    if (ServiceManager.PlayerEngine.IsMenu) {
-                        ServiceManager.PlayerEngine.NotifyMouseButtonPressed ((int)args.Event.Button, args.Event.X, args.Event.Y);
-                    }
-                    break;
-                case Gdk.EventType.ButtonRelease:
-                    if (ServiceManager.PlayerEngine.IsMenu) {
-                        ServiceManager.PlayerEngine.NotifyMouseButtonReleased ((int)args.Event.Button, args.Event.X, args.Event.Y);
-                    }
-                    break;
-            }
-        }
-
-        [GLib.ConnectBefore]
-        void OnKeyPress (object o, KeyPressEventArgs args)
-        {
-            if (!ServiceManager.PlayerEngine.IsMenu) {
-                return;
-            }
-            switch (args.Event.Key) {
-                case Gdk.Key.leftarrow:
-                case Gdk.Key.KP_Left:
-                case Gdk.Key.Left:
-                    ServiceManager.PlayerEngine.NavigateToLeftMenu ();
-                    args.RetVal = true;
-                    break;
-                case Gdk.Key.rightarrow:
-                case Gdk.Key.KP_Right:
-                case Gdk.Key.Right:
-                    ServiceManager.PlayerEngine.NavigateToRightMenu ();
-                    args.RetVal = true;
-                    break;
-                case Gdk.Key.uparrow:
-                case Gdk.Key.KP_Up:
-                case Gdk.Key.Up:
-                    ServiceManager.PlayerEngine.NavigateToUpMenu ();
-                    args.RetVal = true;
-                    break;
-                case Gdk.Key.downarrow:
-                case Gdk.Key.KP_Down:
-                case Gdk.Key.Down:
-                    ServiceManager.PlayerEngine.NavigateToDownMenu ();
-                    args.RetVal = true;
-                    break;
-                case Gdk.Key.Break:
-                case Gdk.Key.KP_Enter:
-                case Gdk.Key.Return:
-                    ServiceManager.PlayerEngine.ActivateCurrentMenu ();
-                    args.RetVal = true;
-                    break;
-            }
         }
 
         public override void Dispose ()
