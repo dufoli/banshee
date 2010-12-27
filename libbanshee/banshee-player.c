@@ -31,6 +31,7 @@
 #include "banshee-player-private.h"
 #include "banshee-player-pipeline.h"
 #include "banshee-player-cdda.h"
+#include "banshee-player-dvd.h"
 #include "banshee-player-missing-elements.h"
 #include "banshee-player-replaygain.h"
 
