@@ -100,7 +100,7 @@ _bp_dvd_handle_uri (BansheePlayer *player, const gchar *uri)
         // device and allow playbin to begin playing it
         player->dvd_device = g_strdup (new_dvd_device);
         bp_debug2 ("bp_dvd: storing device node (%s)", player->dvd_device);
-        return TRUE;
+        return FALSE;
     }
 
     if (strcmp (new_dvd_device, player->dvd_device) == 0) {
@@ -114,7 +114,7 @@ _bp_dvd_handle_uri (BansheePlayer *player, const gchar *uri)
     g_free (player->dvd_device);
     player->dvd_device = g_strdup (new_dvd_device);
 
-    return TRUE;
+    return FALSE;
 }
 
 //get navigation when videosink changed as done on video
