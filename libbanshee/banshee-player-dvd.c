@@ -56,44 +56,6 @@ bp_dvd_on_notify_source (GstElement *playbin, gpointer unknown, BansheePlayer *p
     g_object_unref (dvd_src);
 }
 
-/*
-static gboolean
-bp_dvd_source_seek_to_track (GstElement *playbin, guint track)
-{
-    static GstFormat format = GST_FORMAT_UNDEFINED;
-    GstElement *dvd_src = NULL;
-    GstState state;
-
-    format = gst_format_get_by_nick ("track");
-    if (G_UNLIKELY (format == GST_FORMAT_UNDEFINED)) {
-        return FALSE;
-    }
-
-    gst_element_get_state (playbin, &state, NULL, 0);
-    if (state < GST_STATE_PAUSED) {
-        // We can only seek if the pipeline is playing or paused, otherwise
-        // we just allow playbin to do its thing, which will re-start the
-        // device and start at the desired track
-        return FALSE;
-    }
-
-    cdda_src = bp_cdda_get_cdda_source (playbin);
-    if (G_UNLIKELY (cdda_src == NULL)) {
-        return FALSE;
-    }
-
-    if (gst_element_seek (playbin, 1.0, format, GST_SEEK_FLAG_FLUSH, 
-        GST_SEEK_TYPE_SET, track - 1, GST_SEEK_TYPE_NONE, -1)) {
-        bp_debug2 ("bp_cdda: seeking to track %d, avoiding playbin", track);
-        g_object_unref (cdda_src);
-        return TRUE;
-    }
-
-    g_object_unref (cdda_src);
-    return FALSE;
-}
-*/
-
 // ---------------------------------------------------------------------------
 // Internal Functions
 // ---------------------------------------------------------------------------
@@ -129,33 +91,21 @@ _bp_dvd_handle_uri (BansheePlayer *player, const gchar *uri)
         return FALSE;
     }
 
-    GError *error = NULL;
+    // 6 is the size of "dvd://"
+    // so we skip this part to only get the device
     new_dvd_device = uri + 6;
-    if (error != NULL) {
-        bp_debug2 ("bp_dvd: error converting uri to filename: %s", error->message);
-        g_error_free (error);
-        return FALSE;
-    }
-
+    
     if (player->dvd_device == NULL) {
         // If we weren't already playing from a DVD, cache the
         // device and allow playbin to begin playing it
         player->dvd_device = g_strdup (new_dvd_device);
-        bp_debug2 ("bp_dvd: storing device node for fast seeks (%s)", player->dvd_device);
-        return FALSE;
+        bp_debug2 ("bp_dvd: storing device node (%s)", player->dvd_device);
+        return TRUE;
     }
 
     if (strcmp (new_dvd_device, player->dvd_device) == 0) {
-        // Parse the track number from the URI and seek directly to it
-        // since we are already playing from the device; prevent playbin
-        // from stopping/starting the DVD, which can take many many seconds
-        gchar *chapter_str = g_strndup (uri + 7, strlen (uri) - strlen (new_dvd_device) - 8);
-        //gint chapter_num = atoi (chapter_str);
-        g_free (chapter_str);
-        bp_debug2 ("bp_dvd: fast seeking to track on already playing device (%s)", player->dvd_device);
-
-        //return bp_dvd_source_seek_to_track (player->playbin, track_num);
-        return FALSE;
+        bp_debug2 ("bp_dvd: Already playing device (%s)", player->dvd_device);
+        return TRUE;
     }
 
     // We were already playing some DVD, but switched to a different device node, 
@@ -164,7 +114,7 @@ _bp_dvd_handle_uri (BansheePlayer *player, const gchar *uri)
     g_free (player->dvd_device);
     player->dvd_device = g_strdup (new_dvd_device);
 
-    return FALSE;
+    return TRUE;
 }
 
 //get navigation when videosink changed as done on video

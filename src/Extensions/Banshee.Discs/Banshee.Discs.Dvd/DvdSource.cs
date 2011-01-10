@@ -64,32 +64,14 @@ namespace Banshee.Discs.Dvd
             Properties.SetStringList ("Icon.Name", "media-dvd", "gnome-dev-dvd");
             Properties.SetString ("ActiveSourceUIResource", "ActiveSourceUI.xml");
             Properties.SetString ("GtkActionPath", "/DvdContextMenu");
-            actions_loaded = true;
-
-            UpdateActions ();
         }
 
-        private void UpdateActions ()
-        {
-            // TODO Update dvd actions
-        }
-
-        protected override void OnUpdated ()
-        {
-            if (actions_loaded) {
-                UpdateActions ();
-            }
-
-            base.OnUpdated ();
-        }
 #endregion
 
 #region IBasicPlaybackController implementation
 
         public bool First ()
         {
-            // TODO expected behaviour ?
-            // Go to menu ?
             ServiceManager.PlayerEngine.NavigateToMenu ();
             return true;
         }
@@ -99,7 +81,7 @@ namespace Banshee.Discs.Dvd
             if (!ServiceManager.PlayerEngine.IsMenu) {
                 ServiceManager.PlayerEngine.GoToNextChapter ();
             }
-            // Do nothing if not in menu
+            // Do nothing if in the menu
             return true;
         }
 
@@ -108,10 +90,12 @@ namespace Banshee.Discs.Dvd
             if (!ServiceManager.PlayerEngine.IsMenu) {
                 ServiceManager.PlayerEngine.GoToPreviousChapter ();
             }
-            // Do nothing if not in menu
+            // Do nothing if in the menu
             return true;
         }
+
 #endregion
+
     }
 }
 

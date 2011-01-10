@@ -49,7 +49,8 @@ namespace Banshee.Hardware.Gio
 
         static DiscVolume ()
         {
-            video_mime_types = new string[] {"x-content/video-dvd",
+            video_mime_types = new string[] {
+                "x-content/video-dvd",
                 "x-content/video-vcd",
                 "x-content/video-svcd"
             };
