@@ -214,7 +214,6 @@
     <Compile Include="Banshee.Sources\SourceMessage.cs" />
     <Compile Include="Banshee.Sources\MessageAction.cs" />
     <Compile Include="Banshee.Library\MusicLibrarySource.cs" />
-    <Compile Include="Banshee.Library\VideoLibrarySource.cs" />
     <Compile Include="Banshee.ServiceStack\Client.cs" />
     <Compile Include="Banshee.Collection.Database\DatabaseArtistInfo.cs" />
     <Compile Include="Banshee.Hardware\HardwareManager.cs" />

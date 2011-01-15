@@ -206,11 +206,7 @@ namespace Banshee.Playlist
                             SafeUri uri1 = new SafeUri (uris[0]);
                             var track = new TrackInfo ();
                             StreamTagger.TrackInfoMerge (track, uri1);
-
-                            if (track.HasAttribute (TrackMediaAttributes.VideoStream))
-                                source = ServiceManager.SourceManager.VideoLibrary;
-                            else
-                                source = ServiceManager.SourceManager.MusicLibrary;
+                            source = ServiceManager.SourceManager.GetBestSourceForTrack (track);
                         }
                     }
 

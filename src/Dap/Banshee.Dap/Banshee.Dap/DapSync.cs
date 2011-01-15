@@ -46,6 +46,10 @@ using Banshee.Query;
 using Banshee.Preferences;
 
 using Banshee.Dap.Gui;
+using Banshee.Gui;
+using Hyena.Widgets;
+using Gtk;
+using Banshee.Collection;
 
 namespace Banshee.Dap
 {
@@ -264,11 +268,7 @@ namespace Banshee.Dap
                     //return a.Order.CompareTo (b.Order);
                 //});
 
-            if (!dap.SupportsVideo && library == ServiceManager.SourceManager.VideoLibrary) {
-                return null;
-            }
-
-            if (!dap.SupportsPodcasts && library.UniqueId == "PodcastSource-PodcastLibrary") {
+            if (!dap.SupportsVideo && (library.MediaTypes & TrackMediaAttributes.VideoStream) != 0) {
                 return null;
             }
 

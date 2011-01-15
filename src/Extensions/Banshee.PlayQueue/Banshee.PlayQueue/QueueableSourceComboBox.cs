@@ -31,6 +31,7 @@ using Banshee.Library;
 using Banshee.ServiceStack;
 using Banshee.Sources;
 using Banshee.Sources.Gui;
+using Banshee.Collection;
 
 namespace Banshee.PlayQueue
 {
@@ -95,9 +96,11 @@ namespace Banshee.PlayQueue
 
         private bool IsQueueable (Source source)
         {
-            return source != null && (
-                source is MusicLibrarySource || source.Parent is MusicLibrarySource ||
-                source is VideoLibrarySource || source.Parent is VideoLibrarySource);
+            LibrarySource lib_source = source as LibrarySource;
+            return lib_source != null && (
+                (lib_source.MediaTypes & (TrackMediaAttributes.Music | TrackMediaAttributes.VideoStream)) != 0 ||
+                (lib_source.Parent != null && lib_source.Parent is LibrarySource &&
+                (((LibrarySource)lib_source.Parent).MediaTypes & (TrackMediaAttributes.Music | TrackMediaAttributes.VideoStream)) != 0));
         }
 
         private TreeIter FindSource (string name, TreeIter iter)

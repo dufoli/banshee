@@ -61,7 +61,6 @@ namespace Banshee.Sources
         private Source active_source;
         private Source default_source;
         private MusicLibrarySource music_library;
-        private VideoLibrarySource video_library;
 
         public event SourceEventHandler SourceUpdated;
         public event SourceAddedHandler SourceAdded;
@@ -103,7 +102,6 @@ namespace Banshee.Sources
                 active_source = null;
                 default_source = null;
                 music_library = null;
-                video_library = null;
 
                 // Do dispose extension sources
                 foreach (Source source in extension_sources.Values) {
@@ -176,8 +174,6 @@ namespace Banshee.Sources
 
             if (source is MusicLibrarySource) {
                 music_library = source as MusicLibrarySource;
-            } else if (source is VideoLibrarySource) {
-                video_library = source as VideoLibrarySource;
             }
 
             SourceAdded.SafeInvoke (new SourceAddedArgs () {
@@ -292,6 +288,21 @@ namespace Banshee.Sources
             });
         }
 
+        public LibrarySource GetBestSourceForTrack(Banshee.Collection.TrackInfo track)
+        {
+            foreach (Source source in sources) {
+                LibrarySource lib = source as LibrarySource;
+                if (lib == null) {
+                    continue;
+                }
+                if (track.HasAttribute (lib.MediaTypes) &&
+                    !track.HasAttribute (lib.NotMediaTypes)) {
+                    return lib;
+                }
+            }
+            return null;
+        }
+
         private void OnChildSourceAdded(SourceEventArgs args)
         {
             AddSource (args.Source);
@@ -361,10 +372,6 @@ namespace Banshee.Sources
 
         public MusicLibrarySource MusicLibrary {
             get { return music_library; }
-        }
-
-        public VideoLibrarySource VideoLibrary {
-            get { return video_library; }
         }
 
         public Source ActiveSource {

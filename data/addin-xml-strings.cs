@@ -164,6 +164,11 @@ internal static class AddinXmlStringCatalog
         Catalog.GetString (@"This extension grants access to the Ubuntu One Music Store, powered by 7digital.");
         Catalog.GetString (@"Online Sources");
 
+        // ../src/Extensions/Banshee.Video/Banshee.Video.addin.xml
+        Catalog.GetString (@"Video library");
+        Catalog.GetString (@"Browse and manage your video library.");
+        Catalog.GetString (@"Core");
+
         // ../src/Extensions/Banshee.Wikipedia/Banshee.Wikipedia.addin.xml
         Catalog.GetString (@"Wikipedia");
         Catalog.GetString (@"View artist information from Wikipedia in the context pane.");

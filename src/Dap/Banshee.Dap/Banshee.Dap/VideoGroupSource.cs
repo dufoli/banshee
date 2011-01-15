@@ -38,8 +38,8 @@ namespace Banshee.Dap
         public VideoGroupSource (DapSource parent) : base (parent, Catalog.GetString ("Videos"))
         {
             Properties.Remove ("Icon.Name");
-            Properties.SetStringList ("Icon.Name", Banshee.ServiceStack.ServiceManager.SourceManager.VideoLibrary.Properties.GetStringList ("Icon.Name"));
-            ConditionSql = Banshee.ServiceStack.ServiceManager.SourceManager.VideoLibrary.AttributesCondition;
+            Properties.SetStringList ("Icon.Name", "video-x-generic", "video", "source-library");
+            ConditionSql = String.Format ("((CoreTracks.Attributes & {0}) == {0} AND (CoreTracks.Attributes & {1}) == 0)", (int)TrackMediaAttributes.VideoStream, (int)TrackMediaAttributes.Podcast);
             AutoHide = true;
         }
     }

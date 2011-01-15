@@ -106,7 +106,6 @@ namespace Banshee.ServiceStack
             ServiceManager.Run ();
 
             ServiceManager.SourceManager.AddSource (new MusicLibrarySource (), true);
-            ServiceManager.SourceManager.AddSource (new VideoLibrarySource (), false);
             ServiceManager.SourceManager.LoadExtensionSources ();
         }
 

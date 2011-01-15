@@ -87,8 +87,14 @@ namespace Banshee.Gui
             chooser.AddButton (Stock.Cancel, ResponseType.Cancel);
             chooser.AddButton (Catalog.GetString ("L_oad"), ResponseType.Ok);
 
+            List<string> lst = new List<string> ();
+            foreach (var library in ServiceManager.SourceManager.FindSources<Library.LibrarySource> ()) {
+                if ((library.MediaTypes & TrackMediaAttributes.VideoStream) != 0)
+                    lst.Add (library.BaseDirectory);
+            }
+
             Hyena.Gui.GtkUtilities.SetChooserShortcuts (chooser,
-                ServiceManager.SourceManager.VideoLibrary.BaseDirectory
+                lst.ToArray ()
             );
 
             var filter = new FileFilter();

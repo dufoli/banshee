@@ -63,10 +63,11 @@ namespace Banshee.Library
         protected override int [] PrimarySourceIds {
             get {
                 if (base.PrimarySourceIds == null) {
-                    base.PrimarySourceIds = new int [] {
-                        ServiceManager.SourceManager.VideoLibrary.DbId,
-                        ServiceManager.SourceManager.MusicLibrary.DbId
-                    };
+                    List<int> ids = new List<int> ();
+                    foreach (var src in ServiceManager.SourceManager.FindSources<LibrarySource> ()) {
+                            ids.Add (src.DbId);
+                    }
+                    base.PrimarySourceIds = ids.ToArray ();
                 }
 
                 return base.PrimarySourceIds;
@@ -79,11 +80,8 @@ namespace Banshee.Library
 
         protected static PrimarySource DefaultTrackPrimarySourceChooser (DatabaseTrackInfo track)
         {
-            if ((track.MediaAttributes & TrackMediaAttributes.VideoStream) != 0) {
-                return ServiceManager.SourceManager.VideoLibrary;
-            } else {
-                return ServiceManager.SourceManager.MusicLibrary;
-            }
+            LibrarySource src = ServiceManager.SourceManager.GetBestSourceForTrack (track);
+            return src ?? ServiceManager.SourceManager.MusicLibrary;
         }
 
         string IService.ServiceName {

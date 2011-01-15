@@ -34,8 +34,9 @@ using Mono.Unix;
 
 using Banshee.SmartPlaylist;
 using Banshee.Collection;
+using Banshee.Library;
 
-namespace Banshee.Library
+namespace Banshee.Video
 {
     public class VideoLibrarySource : LibrarySource
     {

@@ -43,6 +43,7 @@ using Banshee.Sources;
 using Banshee.Collection;
 using Banshee.Collection.Database;
 using Banshee.Streaming;
+using Banshee.Library;
 
 // MIGRATION NOTE: Return true if the step should allow the driver to continue
 //                 Return false if the step should terminate driver
@@ -1364,18 +1365,18 @@ namespace Banshee.Database
         {
             if (args.Service is JobScheduler) {
                 ServiceManager.ServiceStarted -= OnServiceStarted;
+
                 if (ServiceManager.SourceManager.MusicLibrary != null) {
                     RefreshMetadataDelayed ();
-                } else {
-                    ServiceManager.SourceManager.SourceAdded += OnSourceAdded;
                 }
+
+                ServiceManager.SourceManager.SourceAdded += OnSourceAdded;
             }
         }
 
         private void OnSourceAdded (SourceAddedArgs args)
         {
-            if (ServiceManager.SourceManager.MusicLibrary != null && ServiceManager.SourceManager.VideoLibrary != null) {
-                ServiceManager.SourceManager.SourceAdded -= OnSourceAdded;
+            if (args.Source is Library.LibrarySource) {
                 RefreshMetadataDelayed ();
             }
         }

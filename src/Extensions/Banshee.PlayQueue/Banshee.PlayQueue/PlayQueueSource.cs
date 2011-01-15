@@ -101,10 +101,10 @@ namespace Banshee.PlayQueue
             Properties.SetString ("GtkActionPath", "/PlayQueueContextMenu");
 
             // TODO listen to all primary sources, and handle transient primary sources
-            ServiceManager.SourceManager.MusicLibrary.TracksChanged += HandleTracksChanged;
-            ServiceManager.SourceManager.MusicLibrary.TracksDeleted += HandleTracksDeleted;
-            ServiceManager.SourceManager.VideoLibrary.TracksChanged += HandleTracksChanged;
-            ServiceManager.SourceManager.VideoLibrary.TracksDeleted += HandleTracksDeleted;
+            foreach (var library in ServiceManager.SourceManager.FindSources<LibrarySource> ()) {
+                library.TracksChanged += HandleTracksChanged;
+                library.TracksDeleted += HandleTracksDeleted;
+            }
 
             populate_from = ServiceManager.SourceManager.Sources.FirstOrDefault (
                 source => source.Name == populate_from_name) as DatabaseSource;

@@ -53,26 +53,11 @@ namespace Banshee.LibraryWatcher
 
         public void DelayedInitialize ()
         {
-            // FIXME: Support sources other than the music and the video library (e.g. podcasts, audiobooks, etc)
-            // The SourceWatcher uses LibraryImportManager which is specific to music/video.
-            // To support other sources we need a separate importer for each of them.
-            /*
             ServiceManager.SourceManager.SourceAdded += OnSourceAdded;
             ServiceManager.SourceManager.SourceRemoved += OnSourceRemoved;
 
             foreach (var library in ServiceManager.SourceManager.FindSources<LibrarySource> ()) {
                 AddLibrary (library);
-            }
-            */
-            AddLibrary (ServiceManager.SourceManager.MusicLibrary);
-            AddLibrary (ServiceManager.SourceManager.VideoLibrary);
-
-            if (ServiceManager.SourceManager.MusicLibrary.Count == 0) {
-                new Banshee.Collection.RescanPipeline (ServiceManager.SourceManager.MusicLibrary);
-            }
-
-            if (ServiceManager.SourceManager.VideoLibrary.Count == 0) {
-                new Banshee.Collection.RescanPipeline (ServiceManager.SourceManager.VideoLibrary);
             }
         }
 
@@ -86,7 +71,6 @@ namespace Banshee.LibraryWatcher
             }
         }
 
-        /*
         private void OnSourceAdded (SourceAddedArgs args)
         {
             var library = args.Source as LibrarySource;
@@ -102,7 +86,6 @@ namespace Banshee.LibraryWatcher
                 RemoveLibrary (library);
             }
         }
-        */
 
         private void AddLibrary (LibrarySource library)
         {
@@ -126,9 +109,11 @@ namespace Banshee.LibraryWatcher
                     }
                 }
             }
+            if (library.Count == 0) {
+                new Banshee.Collection.RescanPipeline (library);
+            }
         }
 
-        /*
         private void RemoveLibrary (LibrarySource library)
         {
             lock (watchers) {
@@ -138,6 +123,5 @@ namespace Banshee.LibraryWatcher
                 }
             }
         }
-        */
     }
 }

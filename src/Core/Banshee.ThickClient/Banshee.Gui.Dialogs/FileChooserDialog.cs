@@ -27,6 +27,7 @@
 //
 
 using System;
+using System.Collections.Generic;
 using Gtk;
 
 using Banshee.Configuration;
@@ -51,13 +52,14 @@ namespace Banshee.Gui.Dialogs
             chooser.AddButton (Stock.Cancel, ResponseType.Cancel);
             // Translators: verb
             chooser.AddButton (Mono.Unix.Catalog.GetString("I_mport"), ResponseType.Ok);
+            List<string> lst = new List<string> ();
+            foreach (var library in ServiceManager.SourceManager.FindSources<Library.LibrarySource> ()) {
+                lst.Add (library.BaseDirectory);
+            }
+            lst.Add (GetPhotosFolder ());
 
-            // FIXME: this dialog should be library-specific, and so these shortcuts should be
-            // library-specific too
             Hyena.Gui.GtkUtilities.SetChooserShortcuts (chooser,
-                ServiceManager.SourceManager.MusicLibrary.BaseDirectory,
-                ServiceManager.SourceManager.VideoLibrary.BaseDirectory,
-                GetPhotosFolder ()
+                lst.ToArray ()
             );
 
             return chooser;

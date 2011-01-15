@@ -94,7 +94,6 @@ SOURCES =  \
 	Banshee.Library/MusicLibrarySource.cs \
 	Banshee.Library/Tests/FileNamePatternTests.cs \
 	Banshee.Library/ThreadPoolImportSource.cs \
-	Banshee.Library/VideoLibrarySource.cs \
 	Banshee.MediaEngine/IAudioCdRipper.cs \
 	Banshee.MediaEngine/IBpmDetector.cs \
 	Banshee.MediaEngine/IEqualizer.cs \

@@ -76,15 +76,15 @@ namespace Banshee.Library
         }
 
         private TrackMediaAttributes media_types;
-        protected TrackMediaAttributes MediaTypes {
+        public TrackMediaAttributes MediaTypes {
             get { return media_types; }
-            set { media_types = value; }
+            protected set { media_types = value; }
         }
 
         private TrackMediaAttributes not_media_types = TrackMediaAttributes.None;
-        protected TrackMediaAttributes NotMediaTypes {
+        public TrackMediaAttributes NotMediaTypes {
             get { return not_media_types; }
-            set { not_media_types = value; }
+            protected set { not_media_types = value; }
         }
 
         public override string PreferencesPageId {
