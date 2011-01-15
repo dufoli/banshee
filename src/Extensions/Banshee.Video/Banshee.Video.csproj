@@ -31,9 +31,6 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Mono.Addins, Version=0.5.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\Core\Banshee.Core\Banshee.Core.csproj">
       <Project>{2ADB831A-A050-47D0-B6B9-9C19D60233BB}</Project>
       <Name>Banshee.Core</Name>
@@ -70,6 +67,8 @@
   <ItemGroup>
     <Compile Include="Banshee.Video\VideoService.cs" />
     <Compile Include="Banshee.Video\VideoLibrarySource.cs" />
+    <Compile Include="Banshee.Video\TvShowGroupSource.cs" />
+    <Compile Include="Banshee.Video\MovieGroupSource.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

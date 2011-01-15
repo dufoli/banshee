@@ -1,5 +1,5 @@
 // 
-// VideoService.cs
+// TvShowSource.cs
 // 
 // Author:
 //   Olivier Dufour <olivier (dot) duff (at) gmail (dot) com>
@@ -23,34 +23,25 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
+
 using System;
-using Banshee.ServiceStack;
-using Banshee.MediaEngine;
+
+using Banshee.SmartPlaylist;
+using Banshee.Collection;
+using Banshee.Sources;
+using Banshee.I18n;
 
 namespace Banshee.Video
 {
-    public class VideoService : IExtensionService
+    public class TvShowGroupSource : SmartPlaylistSource
     {
-        public VideoService ()
+        public TvShowGroupSource (PrimarySource parent) : base (Catalog.GetString ("TvShows"), parent)
         {
+            Properties.Remove ("Icon.Name");
+            Properties.SetStringList ("Icon.Name", "tshow");
+            ConditionSql = String.Format ("(CoreTracks.Attributes & {0}) != 0", (int)TrackMediaAttributes.TvShow);
+            Save ();
         }
-
-        private VideoLibrarySource source;
-
-        public void Initialize ()
-        {
-            source = new VideoLibrarySource ();
-            source.AddChildSource (new TvShowGroupSource (source));
-            source.AddChildSource (new MovieGroupSource (source));
-            ServiceManager.SourceManager.AddSource (source);
-        }
-
-        public void Dispose ()
-        {
-            ServiceManager.SourceManager.RemoveSource (source);
-        }
-
-        public string ServiceName {get{ return "VideoService";} }
     }
 }
 

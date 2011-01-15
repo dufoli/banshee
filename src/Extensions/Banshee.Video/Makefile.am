@@ -4,6 +4,8 @@ LINK = $(LINK_BANSHEE_THICKCLIENT_DEPS)
 INSTALL_DIR = $(EXTENSIONS_INSTALL_DIR)
 
 SOURCES =  \
+	Banshee.Video/MovieGroupSource.cs \
+	Banshee.Video/TvShowGroupSource.cs \
 	Banshee.Video/VideoLibrarySource.cs \
 	Banshee.Video/VideoService.cs
 	
