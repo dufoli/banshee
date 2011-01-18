@@ -1,8 +1,8 @@
 // 
-// TvShowSource.cs
+// CastingMember.cs
 // 
 // Author:
-//   Olivier Dufour <olivier (dot) duff (at) gmail (dot) com>
+//   Olivier Dufour <olivier.duff@gmail.com>
 // 
 // Copyright 2011 
 // 
@@ -23,25 +23,48 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-
 using System;
 
-using Banshee.SmartPlaylist;
 using Banshee.Collection;
-using Banshee.Sources;
-using Banshee.I18n;
+
+using Hyena.Data;
+using Hyena.Data.Sqlite;
 
 namespace Banshee.Video
 {
-    public class TvShowGroupSource : SmartPlaylistSource
+    public class CastingMember : CacheableItem
     {
-        public TvShowGroupSource (PrimarySource parent) : base (Catalog.GetString ("TvShows"), parent)
-        {
-            //Properties.Remove ("Icon.Name");
-            //Properties.SetStringList ("Icon.Name", "tshow");
-            ConditionSql = String.Format ("(CoreTracks.Attributes & {0}) != 0", (int)TrackMediaAttributes.TvShow);
-            Save ();
+        //Foreign key to video db table
+        [DatabaseColumn("VideoID")]
+        private int dbid;
+        public int DbId {
+            get { return dbid; }
+        }
+
+        private string name;
+        private string character;
+        private string job;
+
+        [DatabaseColumn]
+        public string Name {
+            get { return name; }
+            set { name = value; }
+        }
+
+        //role
+        [DatabaseColumn]
+        public string Character {
+            get { return character; }
+            set { character = value; }
+        }
+
+        //director, actor, author, special guest...
+        [DatabaseColumn]
+        public string Job {
+            get { return job; }
+            set { job = value; }
         }
     }
 }
+
 

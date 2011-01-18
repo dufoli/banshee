@@ -69,21 +69,26 @@
     <Compile Include="Banshee.Video\VideoLibrarySource.cs" />
     <Compile Include="Banshee.Video\TvShowGroupSource.cs" />
     <Compile Include="Banshee.Video\MovieGroupSource.cs" />
+    <Compile Include="Banshee.Video\VideoInfo.cs" />
+    <Compile Include="Banshee.Video\CastingMember.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <MonoDevelop>
       <Properties>
-        <MonoDevelop.Autotools.MakefileInfo IntegrationEnabled="true" RelativeMakefileName="Makefile" SyncReferences="true" IsAutotoolsProject="true" RelativeConfigureInPath="../../..">
+        <MonoDevelop.Autotools.MakefileInfo IntegrationEnabled="true" RelativeMakefileName="Makefile" IsAutotoolsProject="true" RelativeConfigureInPath="../../..">
           <BuildFilesVar Sync="true" Name="SOURCES" />
           <DeployFilesVar />
           <ResourcesVar Sync="true" Name="RESOURCES" />
           <OthersVar />
-          <GacRefVar Sync="true" Name="BOO_LIBS" Prefix="-r:" />
-          <AsmRefVar Sync="true" Name="BOO_LIBS" Prefix="-r:" />
-          <ProjectRefVar Sync="true" Name="BOO_LIBS" Prefix="-r:" />
+          <GacRefVar Name="BOO_LIBS" Prefix="-r:" />
+          <AsmRefVar Name="BOO_LIBS" Prefix="-r:" />
+          <ProjectRefVar Name="BOO_LIBS" Prefix="-r:" />
         </MonoDevelop.Autotools.MakefileInfo>
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
 </Project>

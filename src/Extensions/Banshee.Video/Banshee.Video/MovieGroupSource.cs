@@ -37,8 +37,8 @@ namespace Banshee.Video
     {
         public MovieGroupSource (PrimarySource parent) : base (Catalog.GetString ("Movies"), parent)
         {
-            Properties.Remove ("Icon.Name");
-            Properties.SetStringList ("Icon.Name", "movie");
+            //Properties.Remove ("Icon.Name");
+            //Properties.SetStringList ("Icon.Name", "movie");
             ConditionSql = String.Format ("(CoreTracks.Attributes & {0}) != 0", (int)TrackMediaAttributes.Movie);
             Save ();
         }

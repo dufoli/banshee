@@ -43,6 +43,23 @@ namespace Banshee.Video
             source.AddChildSource (new TvShowGroupSource (source));
             source.AddChildSource (new MovieGroupSource (source));
             ServiceManager.SourceManager.AddSource (source);
+            RefreshTracks ();
+            source.TracksAdded += OnTracksAdded;
+        }
+
+        void OnTracksAdded (Sources.Source sender, Sources.TrackEventArgs args)
+        {
+            RefreshTracks ();
+        }
+
+        void RefreshTracks ()
+        {
+            //TODO filter to get only track with no infos
+            //source.DatabaseTrackModel
+            //DatabaseTackInfo tra;
+            //TODO get all tracks which have not artwork/data
+            //source.DatabaseTrackModel.
+            // Use custom 
         }
 
         public void Dispose ()
