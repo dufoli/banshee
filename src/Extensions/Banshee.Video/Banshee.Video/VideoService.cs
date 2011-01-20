@@ -49,7 +49,7 @@ namespace Banshee.Video
             return digest == null ? null : String.Format ("video-{0}", digest);
         }
 
-        private VideoInfo GetExternalObject (DatabaseTrackInfo track)
+        public VideoInfo GetExternalObject (DatabaseTrackInfo track)
         {
             return VideoInfo.Provider.FetchFirstMatching ("VideoID = ?", source.DbId, track.ExternalId);
         }

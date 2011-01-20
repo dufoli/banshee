@@ -8,8 +8,9 @@ using Hyena.Data.Sqlite;
 
 using Banshee.Database;
 using Banshee.ServiceStack;
+using Banshee.Collection;
 
-namespace Banshee.Collection.Database
+namespace Banshee.Video
 {
     public class VideoInfo : CacheableItem
     {

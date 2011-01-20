@@ -35,6 +35,7 @@ using Mono.Unix;
 using Banshee.SmartPlaylist;
 using Banshee.Collection;
 using Banshee.Library;
+using Banshee.Collection.Database;
 
 namespace Banshee.Video
 {
@@ -45,6 +46,8 @@ namespace Banshee.Video
         {
             MediaTypes = TrackMediaAttributes.VideoStream;
             NotMediaTypes = TrackMediaAttributes.Podcast;
+            TrackExternalObjectHandler = GetVideoInfoObject;
+            TrackArtworkIdHandler = GetTrackArtworkId;
             Properties.SetStringList ("Icon.Name", "video-x-generic", "video", "source-library");
             Properties.Set<string> ("SearchEntryDescription", Catalog.GetString ("Search your videos"));
             Properties.SetString ("TrackView.ColumnControllerXml", String.Format (@"
@@ -64,6 +67,18 @@ namespace Banshee.Video
                   </column>
                 </column-controller>
             ", Catalog.GetString ("Produced By")));
+        }
+
+        public object GetVideoInfoObject (DatabaseTrackInfo track)
+        {
+            VideoService service = ServiceStack.ServiceManager.Get<VideoService> ();
+            return service.GetExternalObject (track);
+        }
+
+        public string GetTrackArtworkId (DatabaseTrackInfo track)
+        {
+            VideoService service = ServiceStack.ServiceManager.Get<VideoService> ();
+            return service.ArtworkIdFor (track);
         }
 
         public override string GetPluralItemCountString (int count)
