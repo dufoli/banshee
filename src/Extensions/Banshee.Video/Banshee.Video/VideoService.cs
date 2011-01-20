@@ -40,6 +40,20 @@ namespace Banshee.Video
         {
         }
 
+
+        public string ArtworkIdFor (DatabaseTrackInfo track)
+        {
+            VideoInfo vi = GetExternalObject (track);
+            if (vi == null) return null;
+            string digest = Banshee.Base.CoverArtSpec.Digest (vi.Title);
+            return digest == null ? null : String.Format ("video-{0}", digest);
+        }
+
+        private VideoInfo GetExternalObject (DatabaseTrackInfo track)
+        {
+            return VideoInfo.Provider.FetchFirstMatching ("VideoID = ?", source.DbId, track.ExternalId);
+        }
+
         private readonly Regex regexp = new Regex (@"(.*)[._][\[]?[s]?([0-9]+)[\]]?[._]?[\[]?[-EeXx]([0-9]+)[\]]?[._].*");
         private readonly Regex regexp2 = new Regex (@"(.*)[._]([0-9])([0-9][0-9])[._].*");
 

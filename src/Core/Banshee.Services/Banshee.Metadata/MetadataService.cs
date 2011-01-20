@@ -40,7 +40,7 @@ namespace Banshee.Metadata
 {
     public class MetadataService : BaseMetadataProvider
     {
-        private static MetadataService instance;
+        protected static MetadataService instance;
 
         public static MetadataService Instance {
             get {
