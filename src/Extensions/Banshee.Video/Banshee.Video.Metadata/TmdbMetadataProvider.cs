@@ -2,7 +2,7 @@
 // TmdbMetadataProvider.cs
 // 
 // Author:
-//   Olivier Dufour <olivier (dot) duff (at) gmail (dot) com>
+//   Olivier Dufour <olivier.duff@gmail.com>
 // 
 // Copyright 2011 
 // 
@@ -24,23 +24,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-using Banshee.Metadata;
+using Banshee.Collection;
 namespace Banshee.Video.Metadata
 {
-    public class TmdbMetadataProvider : MetadataServiceJob
+    public class TmdbMetadataProvider : BaseMetadataProvider
     {
         public TmdbMetadataProvider ()
         {
         }
-        
-        public override void Run()
-        {
-            //http://www.themoviedb.org/
-            // api key : 0e4632ee0881dce13dfc053ec42b819b
 
-            //get detail and image url from file name
-            //http://api.themoviedb.org/2.1/methods/Movie.search
-            //http://api.themoviedb.org/2.1/Movie.search/en/xml/APIKEY/Transformers
+        public override IMetadataLookupJob CreateJob (IBasicTrackInfo track)
+        {
+            return new TmdbMetadataJob (track);
         }
     }
 }

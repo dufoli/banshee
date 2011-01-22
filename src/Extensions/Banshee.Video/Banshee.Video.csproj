@@ -75,7 +75,9 @@
     <Compile Include="Banshee.Video.Metadata\ImdbMetadataProvider.cs" />
     <Compile Include="Banshee.Video.Metadata\TmdbMetadataProvider.cs" />
     <Compile Include="Banshee.Video.Metadata\TvdbMetadataProvider.cs" />
-    <Compile Include="Banshee.Video.Metadata\VideoMetadataService.cs" />
+    <Compile Include="Banshee.Video.Metadata\TmdbMetadataJob.cs" />
+    <Compile Include="Banshee.Video.Metadata\TvdbMetadataJob.cs" />
+    <Compile Include="Banshee.Video.Metadata\ImdbMetadataJob.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

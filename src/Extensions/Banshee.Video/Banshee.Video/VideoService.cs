@@ -30,6 +30,7 @@ using Banshee.Collection.Database;
 using Banshee.Collection;
 using Banshee.MediaEngine;
 using Banshee.ServiceStack;
+using Banshee.Metadata;
 
 
 namespace Banshee.Video
@@ -67,12 +68,18 @@ namespace Banshee.Video
             ServiceManager.SourceManager.AddSource (source);
             RefreshTracks ();
             source.TracksAdded += OnTracksAdded;
+
+            // Use regular MetadataService. It is very complicated for a small task and need a refactor to have provider by
+            // trackMediaAttibute with priority because video do not need music provider and reverse
+            // and tvshow will use tvdb in priority ...
+            MetadataService.Instance.AddProvider (new TmdbMetadataProvider (track));
+            MetadataService.Instance.AddProvider (new TvdbMetadataProvider (track));
+            MetadataService.Instance.AddProvider (new ImdbMetadataProvider (track));
         }
 
         void OnTracksAdded (Sources.Source sender, Sources.TrackEventArgs args)
         {
             RefreshTracks ();
-            UpdateMetadata ();
         }
 
         void RefreshTracks ()
@@ -94,7 +101,7 @@ namespace Banshee.Video
             Match match = regexp.Match (name);
             if (match.Success) {
                 track.ArtistName = match.Captures[0].Value;
-                track.AlbumTitle = String.Format ("Season {0}", match.Captures[1].Value);
+                track.AlbumTitle = match.Captures[1].Value;
                 Int32.TryParse (match.Captures[2].Value, out episode);
                 track.TrackNumber = episode;
                 track.MediaAttributes |= TrackMediaAttributes.TvShow;
@@ -104,7 +111,7 @@ namespace Banshee.Video
                 match = regexp2.Match (name);
                 if (match.Success) {
                     track.ArtistName = match.Captures[0].Value;
-                    track.AlbumTitle = String.Format ("Season {0}", match.Captures[1].Value);
+                    track.AlbumTitle = match.Captures[1].Value;
                     Int32.TryParse (match.Captures[2].Value, out episode);
                     track.TrackNumber = episode;
                     track.MediaAttributes |= TrackMediaAttributes.TvShow;
@@ -134,13 +141,6 @@ namespace Banshee.Video
             foo.1x01.1x02.1x03.1x04.*
             */
 
-        }
-
-        void UpdateMetadata ()
-        {
-
-            //TODO call metadate service
-            //ServiceStack.ServiceManager.JobScheduler.Add (job);
         }
 
         public void Dispose ()

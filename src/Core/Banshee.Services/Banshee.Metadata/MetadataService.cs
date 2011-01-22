@@ -58,14 +58,19 @@ namespace Banshee.Metadata
 
         public MetadataService ()
         {
+            AddDefaultProviders ();
+
+            Scheduler.JobFinished += OnSchedulerJobFinished;
+            Scheduler.JobUnscheduled += OnSchedulerJobUnscheduled;
+        }
+
+        public void AddDefaultProviders ()
+        {
             AddProvider (new Banshee.Metadata.Embedded.EmbeddedMetadataProvider ());
             AddProvider (new Banshee.Metadata.FileSystem.FileSystemMetadataProvider ());
             AddProvider (new Banshee.Metadata.Rhapsody.RhapsodyMetadataProvider ());
             AddProvider (new Banshee.Metadata.MusicBrainz.MusicBrainzMetadataProvider ());
             AddProvider (new Banshee.Metadata.LastFM.LastFMMetadataProvider ());
-
-            Scheduler.JobFinished += OnSchedulerJobFinished;
-            Scheduler.JobUnscheduled += OnSchedulerJobUnscheduled;
         }
 
         public override IMetadataLookupJob CreateJob (IBasicTrackInfo track)

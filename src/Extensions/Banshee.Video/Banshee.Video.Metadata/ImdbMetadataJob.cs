@@ -1,8 +1,8 @@
 // 
-// VideoMetadataService.cs
+// ImdbMetadataJob.cs
 // 
 // Author:
-//   Olivier Dufour <olivier (dot) duff (at) gmail (dot) com>
+//   Olivier Dufour <olivier.duff@gmail.com>
 // 
 // Copyright 2011 
 // 
@@ -27,22 +27,17 @@ using System;
 using Banshee.Metadata;
 namespace Banshee.Video.Metadata
 {
-    public class VideoMetadataService : MetadataService
+    public class ImdbMetadataJob : MetadataServiceJob
     {
-        public new static MetadataService Instance {
-            get {
-                if (instance == null) {
-                    instance = new VideoMetadataService ();
-                }
-
-                return instance;
-            }
+        public ImdbMetadataJob (IBasicTrackInfo track)
+        {
         }
 
-        /*public override void AddDefaultProvider ()
+        public override void Run()
         {
-            // TODO AddProvider (new
-        }*/
+            //http://www.imdb.com/
+
+        }
     }
 }
 

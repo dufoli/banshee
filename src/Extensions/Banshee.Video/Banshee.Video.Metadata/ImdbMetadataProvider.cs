@@ -25,18 +25,19 @@
 // THE SOFTWARE.
 using System;
 using Banshee.Metadata;
+using Banshee.Collection;
 
 namespace Banshee.Video.Metadata
 {
-    public class ImdbMetadataProvider : MetadataServiceJob
+    public class ImdbMetadataProvider : BaseMetadataProvider
     {
         public ImdbMetadataProvider ()
         {
         }
 
-        public override void Run()
+        public override IMetadataLookupJob CreateJob (IBasicTrackInfo track)
         {
-            //http://www.imdb.com/
+            return new ImdbMetadataJob (track);
         }
     }
 }
