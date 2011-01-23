@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 using System;
 using Banshee.Collection;
+using Banshee.Metadata;
 namespace Banshee.Video.Metadata
 {
     public class TvdbMetadataProvider : BaseMetadataProvider

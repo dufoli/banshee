@@ -25,6 +25,8 @@
 // THE SOFTWARE.
 using System;
 using Banshee.Metadata;
+using Banshee.Collection;
+
 namespace Banshee.Video.Metadata
 {
     public class TmdbMetadataJob : MetadataServiceJob

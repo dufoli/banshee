@@ -29,16 +29,33 @@ using Banshee.Collection;
 
 using Hyena.Data;
 using Hyena.Data.Sqlite;
+using Banshee.Database;
+using Banshee.ServiceStack;
 
 namespace Banshee.Video
 {
     public class CastingMember : CacheableItem
     {
-        //Foreign key to video db table
-        [DatabaseColumn("VideoID")]
+        private static BansheeModelProvider<CastingMember> provider = new BansheeModelProvider<CastingMember> (
+            ServiceManager.DbConnection, "CastingMembers"
+        );
+
+        public static BansheeModelProvider<CastingMember> Provider {
+            get { return provider; }
+        }
+
+        [DatabaseColumn("CastingMemberID", Constraints = DatabaseColumnConstraints.PrimaryKey)]
         private int dbid;
         public int DbId {
             get { return dbid; }
+        }
+
+        //Foreign key to video db table
+        [DatabaseColumn("VideoID")]
+        private int video_id;
+        public int VideoID {
+            get { return video_id; }
+            set { video_id = value; }
         }
 
         private string name;
@@ -63,6 +80,11 @@ namespace Banshee.Video
         public string Job {
             get { return job; }
             set { job = value; }
+        }
+
+        public void Save ()
+        {
+            Provider.Save (this);
         }
     }
 }

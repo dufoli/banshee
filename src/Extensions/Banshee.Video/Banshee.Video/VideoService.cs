@@ -31,6 +31,7 @@ using Banshee.Collection;
 using Banshee.MediaEngine;
 using Banshee.ServiceStack;
 using Banshee.Metadata;
+using Banshee.Video.Metadata;
 
 
 namespace Banshee.Video
@@ -52,7 +53,7 @@ namespace Banshee.Video
 
         public VideoInfo GetExternalObject (DatabaseTrackInfo track)
         {
-            return VideoInfo.Provider.FetchFirstMatching ("VideoID = ?", source.DbId, track.ExternalId);
+            return VideoInfo.Provider.FetchFirstMatching ("VideoID = ?", track.ExternalId);
         }
 
         private readonly Regex regexp = new Regex (@"(.*)[._][\[]?[s]?([0-9]+)[\]]?[._]?[\[]?[-EeXx]([0-9]+)[\]]?[._].*");
@@ -72,9 +73,9 @@ namespace Banshee.Video
             // Use regular MetadataService. It is very complicated for a small task and need a refactor to have provider by
             // trackMediaAttibute with priority because video do not need music provider and reverse
             // and tvshow will use tvdb in priority ...
-            MetadataService.Instance.AddProvider (new TmdbMetadataProvider (track));
-            MetadataService.Instance.AddProvider (new TvdbMetadataProvider (track));
-            MetadataService.Instance.AddProvider (new ImdbMetadataProvider (track));
+            MetadataService.Instance.AddProvider (new TmdbMetadataProvider ());
+            MetadataService.Instance.AddProvider (new TvdbMetadataProvider ());
+            MetadataService.Instance.AddProvider (new ImdbMetadataProvider ());
         }
 
         void OnTracksAdded (Sources.Source sender, Sources.TrackEventArgs args)
@@ -100,8 +101,8 @@ namespace Banshee.Video
             int episode;
             Match match = regexp.Match (name);
             if (match.Success) {
-                track.ArtistName = match.Captures[0].Value;
-                track.AlbumTitle = match.Captures[1].Value;
+                track.ArtistName = match.Captures[0].Value;//name of serie
+                track.AlbumTitle = match.Captures[1].Value;//season
                 Int32.TryParse (match.Captures[2].Value, out episode);
                 track.TrackNumber = episode;
                 track.MediaAttributes |= TrackMediaAttributes.TvShow;
@@ -111,7 +112,7 @@ namespace Banshee.Video
                 match = regexp2.Match (name);
                 if (match.Success) {
                     track.ArtistName = match.Captures[0].Value;
-                    track.AlbumTitle = match.Captures[1].Value;
+                    track.AlbumTitle = match.Captures[1].Value;//season
                     Int32.TryParse (match.Captures[2].Value, out episode);
                     track.TrackNumber = episode;
                     track.MediaAttributes |= TrackMediaAttributes.TvShow;

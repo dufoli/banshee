@@ -32,6 +32,7 @@ using System.Collections.Generic;
 using Banshee.Base;
 using Banshee.Web;
 using Banshee.Metadata;
+using Banshee.Collection;
 using Banshee.Collection.Database;
 
 using Hyena.Json;
@@ -77,7 +78,7 @@ namespace Banshee.Video.Metadata
             zipfile = 4
         }
 
-        private struct Mirror
+        private class Mirror
         {
             public Mirror (string url, serverCapability capability)
             {
@@ -93,13 +94,13 @@ namespace Banshee.Video.Metadata
         {
             HttpRequest request = new HttpRequest (string.Format ("http://www.thetvdb.com/api/{0}/mirrors.xml", API_KEY));
             request.GetResponse ();
-            Stream s = request.GetResponseStream ();
+            Stream stream = request.GetResponseStream ();
             Deserializer deserializer = new Deserializer (stream);
             object obj = deserializer.Deserialize ();
             JsonObject json_obj = obj as Hyena.Json.JsonObject;
 
             if (json_obj == null)
-                return string.Empty;
+                return;
 
             var items = json_obj["Mirrors"] as JsonObject;
             var obj_item = items["Mirror"];
@@ -108,12 +109,12 @@ namespace Banshee.Video.Metadata
             if (obj_item is JsonArray) {
                 foreach (object o in ((JsonArray)obj_item)) {
                     json_item = (JsonObject)o;
-                    mirrors.Add (new Mirror(json_item["mirrorpath"] as string, Int32.Parse(json_item["typemask"])));
+                    mirrors.Add (new Mirror (json_item["mirrorpath"] as string, (serverCapability)Int32.Parse(json_item["typemask"] as string)));
                 }
             }
             else if (obj_item is JsonObject) {
                 json_item = (JsonObject)obj_item;
-                mirrors.Add (new Mirror(json_item["mirrorpath"] as string, Int32.Parse(json_item["typemask"])));
+                mirrors.Add (new Mirror (json_item["mirrorpath"] as string, (serverCapability)Int32.Parse(json_item["typemask"] as string)));
             }
         }
 
@@ -158,7 +159,7 @@ namespace Banshee.Video.Metadata
             }
 
             //TODO get title from videoInfo.title to remove season/episode part
-            HttpRequest request = new HttpRequest (string.Format("http://www.thetvdb.com/api/GetSeries.php?seriesname={0}&language={1}", track.TrackTitle, lang));
+            HttpRequest request = new HttpRequest (string.Format("http://www.thetvdb.com/api/GetSeries.php?seriesname={0}&language={1}", track.ArtistName, lang));
             try {
                 Stream stream = request.GetResponseStream ();
                 Deserializer deserializer = new Deserializer (stream);
@@ -186,7 +187,7 @@ namespace Banshee.Video.Metadata
             }
         }
 
-        private string GetSerieMetadata (DatabaseTrackInfo track, string seriesid)
+        private VideoInfo GetSerieMetadata (DatabaseTrackInfo track, string seriesid)
         {
             HttpRequest request = new HttpRequest (string.Format("http://www.thetvdb.com/api/{0}/series/{1}/language.xml", API_KEY, seriesid));
             try {
@@ -197,31 +198,44 @@ namespace Banshee.Video.Metadata
                 JsonObject json_obj = obj as Hyena.Json.JsonObject;
 
                 if (json_obj == null)
-                    return string.Empty;
+                    return null;
 
                 var json_item = json_obj["Series"] as JsonObject;
-//TODO update parent video info and not episode video info
 
-                //store imdbid in musicbrainzid
-                //track.MusicBrainzId = json_item["Actors"] as string;//piped actor list
-                //((VideoInfo)track.ExternalObject).ReleaseDate = json_item["FirstAired"]
+                //create a new one as parent for serie
+                VideoInfo video_info = new VideoInfo ();
+
                 //json_item["Genre"] //piped genre
-                //json_item["IMDB_ID"]
-                ((VideoInfo)track.ExternalObject).Studios = json_item["Network"];
-                ((VideoInfo)track.ExternalObject).Summary = json_item["Overview"];
-                ((VideoInfo)track.ExternalObject).Title = json_item["SeriesName"];
-                ((VideoInfo)track.ExternalObject).Language = json_item["Language"];
+                //video_info.SerieId = seriesid;
+                video_info.Studios = json_item["Network"] as string;
+                video_info.Summary = json_item["Overview"] as string;
+                video_info.Title = json_item["SeriesName"] as string;
+                video_info.Language = json_item["Language"] as string;
+                video_info.ImDbId = json_item["IMDB_ID"] as string;
+                video_info.ReleaseDate = DateTime.ParseExact (json_item["FirstAired"] as string, "yyyy-MM-dd", CultureInfo.InvariantCulture.DateTimeFormat);
 
-                track.Save ();
-                return track.MusicBrainzId;
+                video_info.Save ();
+
+                string actors = json_item["Actors"] as string;
+                if (actors != null) {
+                    foreach (string actor in actors.Split(new string[] {"|"}, StringSplitOptions.RemoveEmptyEntries)) {
+                        CastingMember member = new CastingMember ();
+                        member.VideoID = video_info.DbId;
+                        member.Name = actor;
+                        member.Job = "actor";
+                        member.Save ();
+                    }
+                }
+
+                return video_info;
             }
             catch (Exception e) {
                Log.DebugException (e);
-               return string.Empty;
+               return null;
             }
         }
 
-        private string GetEpisodeMetadata (DatabaseTrackInfo track, string seriesid)
+        private void GetEpisodeMetadata (DatabaseTrackInfo track, string seriesid, int parentid)
         {
             HttpRequest request = new HttpRequest (string.Format("http://www.thetvdb.com/api/{0}/series/{1}/default/{2}/{3}/language.xml", API_KEY, seriesid, track.AlbumTitle, track.TrackNumber));
             try {
@@ -232,40 +246,65 @@ namespace Banshee.Video.Metadata
                 JsonObject json_obj = obj as Hyena.Json.JsonObject;
 
                 if (json_obj == null)
-                    return string.Empty;
-//TODO
-            /* <Episode>
-    <id>332179</id>
-    <DVD_chapter></DVD_chapter>
-    <DVD_discid></DVD_discid>
-    <DVD_episodenumber></DVD_episodenumber>
-    <DVD_season></DVD_season>
-    <Director>|Joseph McGinty Nichol|</Director>
-    <EpisodeName>Chuck Versus the World</EpisodeName>
-    <EpisodeNumber>1</EpisodeNumber>
-    <FirstAired>2007-09-24</FirstAired>
-    <GuestStars>|Julia Ling|Vik Sahay|Mieko Hillman|</GuestStars>
-    <IMDB_ID></IMDB_ID>
-    <Language>English</Language>
-    <Overview>Chuck Bartowski is an average computer geek...</Overview>
-    <ProductionCode></ProductionCode>
-    <Rating>9.0</Rating>
-    <SeasonNumber>1</SeasonNumber>
-    <Writer>|Josh Schwartz|Chris Fedak|</Writer>
-    <absolute_number></absolute_number>
-    <airsafter_season></airsafter_season>
-    <airsbefore_episode></airsbefore_episode>
-    <airsbefore_season></airsbefore_season>
-    <filename>episodes/80348-332179.jpg</filename>
-    <lastupdated>1201292806</lastupdated>
-    <seasonid>27985</seasonid>
-    <seriesid>80348</seriesid>
-</Episode>*/
+                    return;
+
+                var json_item = json_obj["Episode"] as JsonObject;
+
+                //track.TrackNumber
+                VideoInfo video_info = (VideoInfo)track.ExternalObject;
+                video_info.Title = json_item["EpisodeName"] as string;
+                video_info.Language = json_item["Language"] as string;
+                video_info.ImDbId = json_item["IMDB_ID"] as string;
+                video_info.ReleaseDate = DateTime.ParseExact (json_item["FirstAired"] as string, "yyyy-MM-dd", CultureInfo.InvariantCulture.DateTimeFormat);
+                video_info.Summary = json_item["Overview"] as string;
+                video_info.Title = json_item["EpisodeName"] as string;
+                video_info.IsMainSerie = false;
+                video_info.SerieId = json_item["seriesid"] as string;
+                video_info.ParentId = parentid;
+                video_info.Save ();
+
+                CastingMember member;
+                string members = json_item["Director"] as string;
+                if (members != null) {
+                    foreach (string director_name in members.Split(new string[] {"|"}, StringSplitOptions.RemoveEmptyEntries)) {
+                        member = new CastingMember ();
+                        member.VideoID = video_info.DbId;
+                        member.Name = director_name;
+                        member.Job = "Director";
+                        member.Save ();
+                    }
+                }
+
+                members = json_item["GuestStars"] as string;
+                if (members != null) {
+                    foreach (string guest_name in members.Split(new string[] {"|"}, StringSplitOptions.RemoveEmptyEntries)) {
+                        member = new CastingMember ();
+                        member.VideoID = video_info.DbId;
+                        member.Name = guest_name;
+                        member.Job = "GuestStar";
+                        member.Save ();
+                    }
+                }
+
+                members = json_item["Writer"] as string;
+                if (members != null) {
+                    foreach (string writer_name in members.Split(new string[] {"|"}, StringSplitOptions.RemoveEmptyEntries)) {
+                        member = new CastingMember ();
+                        member.VideoID = video_info.DbId;
+                        member.Name = writer_name;
+                        member.Job = "Writer";
+                        member.Save ();
+                    }
+                }
+                //not needed because ever done by regexp
+                //track.TrackNumber = json_item["EpisodeNumber"] as string;
+                //track.AlbumTitle = json_item["SeasonNumber"] as string;
+                //TODO
+                // <filename>episodes/80348-332179.jpg</filename>
 
             }
             catch (Exception e) {
                Log.DebugException (e);
-               return string.Empty;
             }
         }
 
@@ -280,7 +319,7 @@ namespace Banshee.Video.Metadata
                 JsonObject json_obj = obj as Hyena.Json.JsonObject;
 
                 if (json_obj == null)
-                    return string.Empty;
+                    return;
 //TODO
             /*imageUrl = string.Empty;
             if (SaveHttpStreamCover (new Uri (imageUrl), cover_art_id, null)) {
@@ -294,17 +333,22 @@ namespace Banshee.Video.Metadata
             }
             catch (Exception e) {
                Log.DebugException (e);
-               return string.Empty;
             }
         }
 
         void GetMetadata (DatabaseTrackInfo track)
         {
-            //string imageUrl;
             string seriesid = GetSerieId (track);
-            GetSerieMetadata (track, seriesid);
+
+            int parentid;
+            VideoInfo parent = VideoInfo.Provider.FetchFirstMatching ("SerieId = {0} AND IsMainSerie = TRUE", seriesid);
+            if (parent == null) {
+                parent = GetSerieMetadata (track, seriesid);
+            }
+            parentid = parent.DbId;
+            GetEpisodeMetadata (track, seriesid, parentid);
             GetBanners (track, seriesid);
-            GetEpisodeMetadata (track);
+
         }
     }
 }

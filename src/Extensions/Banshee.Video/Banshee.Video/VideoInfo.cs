@@ -205,6 +205,8 @@ namespace Banshee.Video
         private string studios;
         private string country;
         private int parent;
+        private string serie_id;
+        private bool is_main_serie;
 
         [DatabaseColumn("VideoID", Constraints = DatabaseColumnConstraints.PrimaryKey)]
         private int dbid;
@@ -290,6 +292,18 @@ namespace Banshee.Video
         public int ParentId {
             get { return parent; }
             set { parent = value; }
+        }
+
+        [DatabaseColumn]
+        public string SerieId {
+            get { return serie_id; }
+            set { serie_id = value; }
+        }
+
+        [DatabaseColumn]
+        public bool IsMainSerie {
+            get { return is_main_serie; }
+            set { is_main_serie = value; }
         }
 
         public override string ToString ()
