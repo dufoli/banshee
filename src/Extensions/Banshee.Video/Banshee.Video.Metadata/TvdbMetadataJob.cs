@@ -24,7 +24,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-using System.Net;
 using System.IO;
 using System.Globalization;
 using System.Collections.Generic;
@@ -34,10 +33,10 @@ using Banshee.Web;
 using Banshee.Metadata;
 using Banshee.Collection;
 using Banshee.Collection.Database;
+using Banshee.ServiceStack;
 
 using Hyena.Json;
 using Hyena;
-using ICSharpCode.SharpZipLib.Zip;
 
 namespace Banshee.Video.Metadata
 {
@@ -65,7 +64,10 @@ namespace Banshee.Video.Metadata
                 return;
             }
 
-            GetMetadata (track);
+            if ((track.MediaAttributes & TrackMediaAttributes.TvShow) == 0)
+                return;
+
+            GetMetadata (track, cover_art_id);
 
         }
 
@@ -166,10 +168,14 @@ namespace Banshee.Video.Metadata
                 object obj = deserializer.Deserialize ();
                 JsonObject json_obj = obj as Hyena.Json.JsonObject;
 
-                if (json_obj == null)
+                if (json_obj == null || !json_obj.ContainsKey ("Items"))
                     return string.Empty;
 
                 var items = json_obj["Items"] as JsonObject;
+
+                if (items == null || !items.ContainsKey ("Item"))
+                    return string.Empty;
+
                 var obj_item = items["Item"];
                 JsonObject json_item = null;
 
@@ -197,10 +203,13 @@ namespace Banshee.Video.Metadata
                 object obj = deserializer.Deserialize ();
                 JsonObject json_obj = obj as Hyena.Json.JsonObject;
 
-                if (json_obj == null)
+                if (json_obj == null || !json_obj.ContainsKey ("Series"))
                     return null;
 
                 var json_item = json_obj["Series"] as JsonObject;
+
+                if (json_item == null)
+                    return null;
 
                 //create a new one as parent for serie
                 VideoInfo video_info = new VideoInfo ();
@@ -212,6 +221,7 @@ namespace Banshee.Video.Metadata
                 video_info.Title = json_item["SeriesName"] as string;
                 video_info.Language = json_item["Language"] as string;
                 video_info.ImDbId = json_item["IMDB_ID"] as string;
+                video_info.VideoType = (int)videoType.Serie;
                 video_info.ReleaseDate = DateTime.ParseExact (json_item["FirstAired"] as string, "yyyy-MM-dd", CultureInfo.InvariantCulture.DateTimeFormat);
 
                 video_info.Save ();
@@ -245,7 +255,7 @@ namespace Banshee.Video.Metadata
                 object obj = deserializer.Deserialize ();
                 JsonObject json_obj = obj as Hyena.Json.JsonObject;
 
-                if (json_obj == null)
+                if (json_obj == null || !json_obj.ContainsKey ("Episode"))
                     return;
 
                 var json_item = json_obj["Episode"] as JsonObject;
@@ -258,8 +268,8 @@ namespace Banshee.Video.Metadata
                 video_info.ReleaseDate = DateTime.ParseExact (json_item["FirstAired"] as string, "yyyy-MM-dd", CultureInfo.InvariantCulture.DateTimeFormat);
                 video_info.Summary = json_item["Overview"] as string;
                 video_info.Title = json_item["EpisodeName"] as string;
-                video_info.IsMainSerie = false;
-                video_info.SerieId = json_item["seriesid"] as string;
+                video_info.VideoType = (int)videoType.SerieEpisode;
+                video_info.ExternalVideoId = json_item["seriesid"] as string;
                 video_info.ParentId = parentid;
                 video_info.Save ();
 
@@ -308,7 +318,7 @@ namespace Banshee.Video.Metadata
             }
         }
 
-        private void GetBanners (DatabaseTrackInfo track, string seriesid)
+        private void GetBanners (DatabaseTrackInfo track, string seriesid, string coverArtId)
         {
             HttpRequest request = new HttpRequest (string.Format("http://www.thetvdb.com/api/{0}/series/{1}/banners.xml", API_KEY, seriesid));
             try {
@@ -320,34 +330,62 @@ namespace Banshee.Video.Metadata
 
                 if (json_obj == null)
                     return;
-//TODO
-            /*imageUrl = string.Empty;
-            if (SaveHttpStreamCover (new Uri (imageUrl), cover_art_id, null)) {
-                Banshee.Sources.Source src = ServiceManager.SourceManager.ActiveSource;
-                if (src != null && (src is VideoLibrarySource || src.Parent is VideoLibrarySource)) {
-                    (src as Banshee.Sources.DatabaseSource).Reload ();
-                }
-                return;
-            }*/
 
+                if (json_obj == null || !json_obj.ContainsKey ("Banners"))
+                    return;
+
+                var json_item = json_obj["Banners"] as JsonObject;
+
+                var obj_item = json_item["Banner"];
+                json_item = null;
+
+                if (obj_item is JsonArray) {
+                    foreach (object o in (JsonArray)obj_item) {
+                        if (LoadImage ((JsonObject)o, coverArtId))
+                            break;
+                    }
+                } else if (obj_item is JsonObject)
+                    LoadImage ((JsonObject)obj_item, coverArtId);
             }
             catch (Exception e) {
                Log.DebugException (e);
             }
         }
 
-        void GetMetadata (DatabaseTrackInfo track)
+        private bool LoadImage (JsonObject obj, string cover_art_id)
+        {
+            string image_type = obj["BannerType"] as string;
+            string image_size = obj["BannerType2"] as string;
+            string image_url = obj["BannerPath"] as string;
+
+            if (image_type != "season" && image_size != "season")
+                return false;
+
+            if (SaveHttpStreamCover (new Uri (image_url), cover_art_id, null)) {
+                Banshee.Sources.Source src = ServiceManager.SourceManager.ActiveSource;
+                if (src != null && (src is VideoLibrarySource || src.Parent is VideoLibrarySource)) {
+                    (src as Banshee.Sources.DatabaseSource).Reload ();
+                }
+                return true;
+            }
+            return false;
+        }
+
+        void GetMetadata (DatabaseTrackInfo track, string coverArtId)
         {
             string seriesid = GetSerieId (track);
 
             int parentid;
-            VideoInfo parent = VideoInfo.Provider.FetchFirstMatching ("SerieId = {0} AND IsMainSerie = TRUE", seriesid);
+            VideoInfo parent = VideoInfo.Provider.FetchFirstMatching ("SerieId = {0} AND VideoType = {1}", seriesid, videoType.Serie);
             if (parent == null) {
                 parent = GetSerieMetadata (track, seriesid);
+                if (parent == null) {
+                    return;
+                }
             }
             parentid = parent.DbId;
             GetEpisodeMetadata (track, seriesid, parentid);
-            GetBanners (track, seriesid);
+            GetBanners (track, seriesid, coverArtId);
 
         }
     }

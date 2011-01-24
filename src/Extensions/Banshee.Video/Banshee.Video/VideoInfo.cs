@@ -12,6 +12,14 @@ using Banshee.Collection;
 
 namespace Banshee.Video
 {
+    public enum videoType : int {
+        SerieEpisode = 0,
+        SerieSaison = 1,
+        Serie = 2,
+        Movie = 3,
+        Other = 4
+    }
+
     public class VideoInfo : CacheableItem
     {
         private static BansheeModelProvider<VideoInfo> provider = new BansheeModelProvider<VideoInfo> (
@@ -205,8 +213,8 @@ namespace Banshee.Video
         private string studios;
         private string country;
         private int parent;
-        private string serie_id;
-        private bool is_main_serie;
+        private string external_video_id;
+        private int video_type;
 
         [DatabaseColumn("VideoID", Constraints = DatabaseColumnConstraints.PrimaryKey)]
         private int dbid;
@@ -295,15 +303,15 @@ namespace Banshee.Video
         }
 
         [DatabaseColumn]
-        public string SerieId {
-            get { return serie_id; }
-            set { serie_id = value; }
+        public string ExternalVideoId {
+            get { return external_video_id; }
+            set { external_video_id = value; }
         }
 
         [DatabaseColumn]
-        public bool IsMainSerie {
-            get { return is_main_serie; }
-            set { is_main_serie = value; }
+        public int VideoType {
+            get { return video_type; }
+            set { video_type = value; }
         }
 
         public override string ToString ()
