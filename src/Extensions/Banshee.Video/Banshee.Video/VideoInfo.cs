@@ -31,13 +31,13 @@ namespace Banshee.Video
         }
 
         private static HyenaSqliteCommand default_select_command = new HyenaSqliteCommand (String.Format (
-            "SELECT {0} FROM {1} WHERE {2} AND CoreVideos.Title = ?",
+            "SELECT {0} FROM {1} WHERE {2} AND Videos.Title = ?",
             provider.Select, provider.From,
             (String.IsNullOrEmpty (provider.Where) ? "1=1" : provider.Where)
         ));
 
         private static HyenaSqliteCommand select_command_with_imdb_id = new HyenaSqliteCommand (String.Format (
-            "SELECT {0} FROM {1} WHERE {2} AND CoreVideos.Title = ? AND CoreVideos.ImDbId = ? ",
+            "SELECT {0} FROM {1} WHERE {2} AND Videos.Title = ? AND Videos.ImDbId = ? ",
             provider.Select, provider.From,
             (String.IsNullOrEmpty (provider.Where) ? "1=1" : provider.Where)
         ));

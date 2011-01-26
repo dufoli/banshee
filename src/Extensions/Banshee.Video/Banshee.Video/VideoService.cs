@@ -32,6 +32,8 @@ using Banshee.MediaEngine;
 using Banshee.ServiceStack;
 using Banshee.Metadata;
 using Banshee.Video.Metadata;
+using Hyena.Query;
+using Banshee.I18n;
 
 
 namespace Banshee.Video
@@ -149,7 +151,15 @@ namespace Banshee.Video
             ServiceManager.SourceManager.RemoveSource (source);
         }
 
-        public string ServiceName {get{ return "VideoService";} }
+        public string ServiceName {get{ return "VideoService";}}
+
+        public static QueryField VideoField = new QueryField (
+            "video", "DisplayVideoTitle",
+            Catalog.GetString ("Video"), "Videos.Title", true,
+            // Translators: These are unique search aliases for "album". You can use CSV for synonyms. Please, no spaces. Blank ok.
+            Catalog.GetString ("video"), Catalog.GetString ("on"), Catalog.GetString ("from"),
+            "on", "video", "from", "albumtitle"
+        );
     }
 }
 

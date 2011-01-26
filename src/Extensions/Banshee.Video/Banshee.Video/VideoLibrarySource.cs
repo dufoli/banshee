@@ -36,6 +36,8 @@ using Banshee.SmartPlaylist;
 using Banshee.Collection;
 using Banshee.Library;
 using Banshee.Collection.Database;
+using Banshee.Sources.Gui;
+using Banshee.ServiceStack;
 
 namespace Banshee.Video
 {
@@ -67,6 +69,8 @@ namespace Banshee.Video
                   </column>
                 </column-controller>
             ", Catalog.GetString ("Produced By")));
+            Properties.Set<ISourceContents> ("Nereid.SourceContents", new LazyLoadSourceContents<VideoSourceContents> ());
+            Properties.Set<bool> ("Nereid.SourceContentsPropagate", true);
         }
 
         public object GetVideoInfoObject (DatabaseTrackInfo track)
@@ -84,6 +88,13 @@ namespace Banshee.Video
         public override string GetPluralItemCountString (int count)
         {
             return Catalog.GetPluralString ("{0} video", "{0} videos", count);
+        }
+
+        VideoInfoModel video_model;
+        protected override IEnumerable<IFilterListModel> CreateFiltersFor (Sources.DatabaseSource src)
+        {
+            video_model = new VideoInfoModel (src, src.DatabaseTrackModel, ServiceManager.DbConnection, src.UniqueId);
+            yield return video_model;
         }
 
         public override bool ShowBrowser {
