@@ -9,6 +9,7 @@ using Hyena.Data.Sqlite;
 using Banshee.Database;
 using Banshee.ServiceStack;
 using Banshee.Collection;
+using Hyena;
 
 namespace Banshee.Video
 {
@@ -22,15 +23,19 @@ namespace Banshee.Video
 
     public class VideoInfo : CacheableItem
     {
-        private static BansheeModelProvider<VideoInfo> provider = new BansheeModelProvider<VideoInfo> (
-            ServiceManager.DbConnection, "Videos"
-        );
+        private static SqliteModelProvider<VideoInfo> provider;
 
-        public static BansheeModelProvider<VideoInfo> Provider {
+        public static void Init() {
+            provider= new SqliteModelProvider<VideoInfo> (ServiceManager.DbConnection, "Videos", true);
+        }
+
+        public static SqliteModelProvider<VideoInfo> Provider {
             get { return provider; }
         }
 
-        private static HyenaSqliteCommand default_select_command = new HyenaSqliteCommand (String.Format (
+        public static readonly string UnknownTitle = Catalog.GetString ("Unknown Title");
+
+/*        private static HyenaSqliteCommand default_select_command = new HyenaSqliteCommand (String.Format (
             "SELECT {0} FROM {1} WHERE {2} AND Videos.Title = ?",
             provider.Select, provider.From,
             (String.IsNullOrEmpty (provider.Where) ? "1=1" : provider.Where)
@@ -43,13 +48,13 @@ namespace Banshee.Video
         ));
 
         private static VideoInfo last_Video;
-
+        */
         public static void Reset ()
         {
-            last_Video = null;
+            //last_Video = null;
         }
 
-        public static VideoInfo FindOrCreate (string title, VideoInfo parent)
+/*        public static VideoInfo FindOrCreate (string title, VideoInfo parent)
         {
             return FindOrCreate (title, parent, null);
         }
@@ -190,8 +195,8 @@ namespace Banshee.Video
             }
             return Video;
         }
-
-        public VideoInfo () : base ()
+         */
+        public VideoInfo ()
         {
         }
 
@@ -246,16 +251,31 @@ namespace Banshee.Video
             set { title = value; }
         }
 
+        [DatabaseColumn(Select = false)]
+        internal string TitleLowered {
+            get { return Hyena.StringUtil.SearchKey (Title); }
+        }
+
         [DatabaseColumn]
         public string OriginalTitle {
             get { return original_title; }
             set { original_title = value; }
         }
 
+        [DatabaseColumn(Select = false)]
+        internal string OriginalTitleLowered {
+            get { return Hyena.StringUtil.SearchKey (OriginalTitle); }
+        }
+
         [DatabaseColumn]
         public string AlternativeTitle {
             get { return alternative_title; }
             set { alternative_title = value; }
+        }
+
+        [DatabaseColumn(Select = false)]
+        internal string AlternativeTitleLowered {
+            get { return Hyena.StringUtil.SearchKey (AlternativeTitle); }
         }
 
         [DatabaseColumn]
@@ -314,9 +334,20 @@ namespace Banshee.Video
             set { video_type = value; }
         }
 
+        public string DisplayTrackTitle {
+            get { return StringUtil.MaybeFallback (Title, UnknownTitle); }
+        }
+
         public override string ToString ()
         {
             return String.Format ("<LibraryVideoInfo Title={0} DbId={1}>", Title, DbId);
+        }
+
+        public string ArtworkId {
+            get {
+                string digest = Banshee.Base.CoverArtSpec.Digest (Title);
+                return digest == null ? null : String.Format ("video-{0}", digest);
+            }
         }
     }
 }
@@ -326,26 +357,6 @@ namespace Banshee.Video
 /*
 trackmediaattribute //add episode flag
 categories (like tags) crime, thriller, drama, comedy, ... //map to genre
-artworkid //generate from id
-season //map to album
-episode number //map to tracknumber
-??? parent for tvshow // map to artist?
-
-
-DatabaseTrackListModel
-DatabaseFilterListModel
-
-//TODO 
-Handle Video track added and add externalid item and link it.
-Maybe can be done with source.TrackExternalObjectHandler to add external object add search for data.
-==> TODO migrate old video track with 
-
-on call to TrackExternalObjectHandler load the VideoInfo with ExternalId.
-
-On track added: RefreshMetadata ();
-
-launch a query to load all track with no externalid in the videosource as RescanPipeline
-and add an external object when found and this one will contain 
 
 delete orphelan videoInfo.
 

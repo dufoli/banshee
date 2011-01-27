@@ -37,23 +37,26 @@ namespace Banshee.Video
             : base ("Video", Catalog.GetString ("Video"),
                     source, trackModel, connection, VideoInfo.Provider, new VideoInfo (), uuid)
         {
-            QueryFields = new QueryFieldSet (VideoService.VideoField);
+            QueryFields = new QueryFieldSet (VideoService.VideoTitleField, VideoService.VideoOriginalTitleField, VideoService.VideoAlternativeTitleField );
+
+            //int video_library_dbid = (source as VideoLibrarySource ?? source.Parent as VideoLibrarySource).DbId;
             ReloadFragmentFormat = @"
-                FROM Videos WHERE Videos.VideoID IN
-                        (SELECT Videos.VideoID FROM Videos, CoreTracks
-                            WHERE PrimarySourceID = {0} AND ParentId = 0
-                                  CoreTracks.ExternalID = Videos.VideoID
-                                    )
-                        OR Videos.VideoID IN
-                        (SELECT a.VideoID FROM Videos a, CoreTracks, Videos b
-                            WHERE PrimarySourceID = {0} AND b.ParentId = a.VideoID
-                                  CoreTracks.ExternalID = b.VideoID
-                                    )
+                    FROM Videos WHERE EXISTS
+                        (SELECT * FROM CoreTracks AS t
+                            WHERE Videos.ParentId IS NULL
+                            AND   t.ExternalID = Videos.VideoID
+                        )
+                        OR EXISTS
+                        (SELECT * FROM Videos AS episode, CoreTracks AS tt
+                            WHERE episode.ParentId IS NOT NULL
+                            AND   episode.ParentId = Videos.VideoID
+                            AND   tt.ExternalID = episode.VideoID
+                        )
                     ORDER BY Videos.Title";
         }
 
         public override string FilterColumn {
-            get { return "CoreTracks.AlbumID"; }
+            get { return "CoreTracks.ExternalId"; }
         }
 
         protected override string ItemToFilterValue (object item)

@@ -49,8 +49,12 @@ namespace Banshee.Video
         {
             VideoInfo vi = GetExternalObject (track);
             if (vi == null) return null;
-            string digest = Banshee.Base.CoverArtSpec.Digest (vi.Title);
-            return digest == null ? null : String.Format ("video-{0}", digest);
+            if ((track.MediaAttributes & TrackMediaAttributes.TvShow) != 0 ) {
+                //get serie
+                vi = VideoInfo.Provider.FetchSingle (vi.ParentId);
+                if (vi == null) return null;
+            }
+            return vi.ArtworkId;
         }
 
         public VideoInfo GetExternalObject (DatabaseTrackInfo track)
@@ -65,6 +69,8 @@ namespace Banshee.Video
 
         public void Initialize ()
         {
+            VideoInfo.Init ();
+
             source = new VideoLibrarySource ();
             source.AddChildSource (new TvShowGroupSource (source));
             source.AddChildSource (new MovieGroupSource (source));
@@ -153,12 +159,26 @@ namespace Banshee.Video
 
         public string ServiceName {get{ return "VideoService";}}
 
-        public static QueryField VideoField = new QueryField (
-            "video", "DisplayVideoTitle",
-            Catalog.GetString ("Video"), "Videos.Title", true,
-            // Translators: These are unique search aliases for "album". You can use CSV for synonyms. Please, no spaces. Blank ok.
-            Catalog.GetString ("video"), Catalog.GetString ("on"), Catalog.GetString ("from"),
-            "on", "video", "from", "albumtitle"
+        public static QueryField VideoTitleField = new QueryField (
+            "title", "VideoTitle",
+            Catalog.GetString ("Name"), "Videos.Title", true,
+            // Translators: These are unique search fields. You can use CSV for synonyms. Please, no spaces. Blank ok.
+            Catalog.GetString ("title"), Catalog.GetString ("titled"), Catalog.GetString ("name"), Catalog.GetString ("named"),
+            "title", "titled", "name", "named"
+        );
+        public static QueryField VideoOriginalTitleField = new QueryField (
+            "originaltitle", "VideoOriginalTitle",
+            Catalog.GetString ("Name"), "Videos.OriginalTitleLowered", true,
+            // Translators: These are unique search fields. You can use CSV for synonyms. Please, no spaces. Blank ok.
+            Catalog.GetString ("title"), Catalog.GetString ("titled"), Catalog.GetString ("name"), Catalog.GetString ("named"),
+            "title", "titled", "name", "named"
+        );
+        public static QueryField VideoAlternativeTitleField = new QueryField (
+            "alternativetitle", "VideoAlternativeTrackTitle",
+            Catalog.GetString ("Name"), "Videos.AlternativeTitleLowered", true,
+            // Translators: These are unique search fields. You can use CSV for synonyms. Please, no spaces. Blank ok.
+            Catalog.GetString ("title"), Catalog.GetString ("titled"), Catalog.GetString ("name"), Catalog.GetString ("named"),
+            "title", "titled", "name", "named"
         );
     }
 }
