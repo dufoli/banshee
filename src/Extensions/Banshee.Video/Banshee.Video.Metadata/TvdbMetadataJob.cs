@@ -46,12 +46,16 @@ namespace Banshee.Video.Metadata
 
         public TvdbMetadataJob (IBasicTrackInfo track) : base ()
         {
-            this.track = (DatabaseTrackInfo)track;
+            this.track = track as DatabaseTrackInfo;
         }
-        //http://thetvdb.com/
 
         public override void Run()
         {
+            Log.Debug ("tv metadata job");
+            if (track == null || (track.MediaAttributes & TrackMediaAttributes.Podcast) != 0
+                              || (track.MediaAttributes & TrackMediaAttributes.VideoStream) == 0)
+                return;
+
             VideoService service = ServiceStack.ServiceManager.Get<VideoService> ();
 
             string cover_art_id = service.ArtworkIdFor (track);
@@ -68,7 +72,6 @@ namespace Banshee.Video.Metadata
                 return;
 
             GetMetadata (track, cover_art_id);
-
         }
 
         private readonly string API_KEY = "897F1CA903D4703A";
@@ -160,10 +163,12 @@ namespace Banshee.Video.Metadata
                 lang = "All";
             }
 
-            //TODO get title from videoInfo.title to remove season/episode part
-            HttpRequest request = new HttpRequest (string.Format("http://www.thetvdb.com/api/GetSeries.php?seriesname={0}&language={1}", track.ArtistName, lang));
+            string serieName = track.ArtistName.Replace ('.', ' ').Replace ('_', ' ').Replace ('-', ' ');
+            HttpRequest request = new HttpRequest (string.Format("http://www.thetvdb.com/api/GetSeries.php?seriesname={0}&language={1}", serieName, lang));
             try {
+                request.GetResponse ();
                 Stream stream = request.GetResponseStream ();
+
                 Deserializer deserializer = new Deserializer (stream);
                 object obj = deserializer.Deserialize ();
                 JsonObject json_obj = obj as Hyena.Json.JsonObject;
@@ -197,6 +202,7 @@ namespace Banshee.Video.Metadata
         {
             HttpRequest request = new HttpRequest (string.Format("http://www.thetvdb.com/api/{0}/series/{1}/language.xml", API_KEY, seriesid));
             try {
+                request.GetResponse ();
                 Stream response_stream = request.GetResponseStream ();
 
                 Deserializer deserializer = new Deserializer (response_stream);
@@ -249,6 +255,7 @@ namespace Banshee.Video.Metadata
         {
             HttpRequest request = new HttpRequest (string.Format("http://www.thetvdb.com/api/{0}/series/{1}/default/{2}/{3}/language.xml", API_KEY, seriesid, track.AlbumTitle, track.TrackNumber));
             try {
+                request.GetResponse ();
                 Stream response_stream = request.GetResponseStream ();
 
                 Deserializer deserializer = new Deserializer (response_stream);
@@ -322,6 +329,7 @@ namespace Banshee.Video.Metadata
         {
             HttpRequest request = new HttpRequest (string.Format("http://www.thetvdb.com/api/{0}/series/{1}/banners.xml", API_KEY, seriesid));
             try {
+                request.GetResponse ();
                 Stream response_stream = request.GetResponseStream ();
 
                 Deserializer deserializer = new Deserializer (response_stream);
@@ -374,7 +382,10 @@ namespace Banshee.Video.Metadata
         void GetMetadata (DatabaseTrackInfo track, string coverArtId)
         {
             string seriesid = GetSerieId (track);
+            if (String.IsNullOrEmpty (seriesid))
+                return;
 
+            Log.Debug ("tv metadata job: serie id : " + seriesid);
             int parentid;
             VideoInfo parent = VideoInfo.Provider.FetchFirstMatching ("SerieId = {0} AND VideoType = {1}", seriesid, videoType.Serie);
             if (parent == null) {
@@ -384,6 +395,7 @@ namespace Banshee.Video.Metadata
                 }
             }
             parentid = parent.DbId;
+            Log.Debug ("tv metadata job: parent id : " + parentid);
             GetEpisodeMetadata (track, seriesid, parentid);
             GetBanners (track, seriesid, coverArtId);
 

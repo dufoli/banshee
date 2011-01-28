@@ -59,7 +59,7 @@ namespace Banshee.Video
         }
 
         protected override string ForcePosition {
-            get { return "Top"; }
+            get { return "top"; }
         }
 
         #region Implement ISourceContents

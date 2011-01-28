@@ -45,11 +45,15 @@ namespace Banshee.Video.Metadata
 
         public TmdbMetadataJob (IBasicTrackInfo track)
         {
-            this.track = (DatabaseTrackInfo)track;
+            this.track = track as DatabaseTrackInfo;
         }
         
         public override void Run()
         {
+            if (track == null || (track.MediaAttributes & TrackMediaAttributes.Podcast) != 0
+                              || (track.MediaAttributes & TrackMediaAttributes.VideoStream) == 0)
+                return;
+
             VideoService service = ServiceStack.ServiceManager.Get<VideoService> ();
 
             string cover_art_id = service.ArtworkIdFor (track);
@@ -62,9 +66,6 @@ namespace Banshee.Video.Metadata
                 return;
             }
 
-            if ((track.MediaAttributes & TrackMediaAttributes.Movie) == 0)
-                return;
-
             string tmdb_id = SearchMovie (track, cover_art_id);
             GetInfo (track, tmdb_id);
         }
@@ -75,7 +76,9 @@ namespace Banshee.Video.Metadata
         {
             HttpRequest request = new HttpRequest (string.Format("http://api.themoviedb.org/2.1/Movie.search/{0}/xml/{1}/{2}", CultureInfo.CurrentCulture.Name, API_KEY, track.TrackTitle));
             try {
+                request.GetResponse ();
                 Stream stream = request.GetResponseStream ();
+                request.DumpResponseStream ();
                 Deserializer deserializer = new Deserializer (stream);
                 object obj = deserializer.Deserialize ();
                 JsonObject json_obj = obj as Hyena.Json.JsonObject;

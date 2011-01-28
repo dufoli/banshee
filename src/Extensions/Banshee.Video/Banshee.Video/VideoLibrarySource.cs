@@ -56,19 +56,22 @@ namespace Banshee.Video
                 <column-controller>
                   <add-all-defaults />
                   <remove-default column=""DiscColumn"" />
-                  <remove-default column=""AlbumColumn"" />
                   <remove-default column=""ComposerColumn"" />
                   <remove-default column=""AlbumArtistColumn"" />
                   <remove-default column=""ConductorColumn"" />
                   <remove-default column=""ComposerColumn"" />
                   <remove-default column=""BpmColumn"" />
                   <sort-column direction=""asc"">track_title</sort-column>
-                  <column modify-default=""ArtistColumn"">
+                  <column modify-default=""AlbumColumn"">
                     <title>{0}</title>
                     <long-title>{0}</long-title>
                   </column>
+                  <column modify-default=""TrackNumberAndCountColumn"">
+                    <title>{1}</title>
+                    <long-title>{1}</long-title>
+                  </column>
                 </column-controller>
-            ", Catalog.GetString ("Produced By")));
+            ", Catalog.GetString ("Season"), Catalog.GetString ("Episode")));
             Properties.Set<ISourceContents> ("Nereid.SourceContents", new LazyLoadSourceContents<VideoSourceContents> ());
             Properties.Set<bool> ("Nereid.SourceContentsPropagate", true);
         }

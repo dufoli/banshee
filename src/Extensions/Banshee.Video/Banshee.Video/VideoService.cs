@@ -34,6 +34,7 @@ using Banshee.Metadata;
 using Banshee.Video.Metadata;
 using Hyena.Query;
 using Banshee.I18n;
+using Hyena;
 
 
 namespace Banshee.Video
@@ -48,11 +49,17 @@ namespace Banshee.Video
         public string ArtworkIdFor (DatabaseTrackInfo track)
         {
             VideoInfo vi = GetExternalObject (track);
-            if (vi == null) return null;
-            if ((track.MediaAttributes & TrackMediaAttributes.TvShow) != 0 ) {
+            if (vi == null) {
+                Log.Debug ("can not get artworkid");
+                return null;
+            }
+            if (vi.ParentId > 0 ) {
                 //get serie
                 vi = VideoInfo.Provider.FetchSingle (vi.ParentId);
-                if (vi == null) return null;
+                if (vi == null) {
+                    Log.Debug ("can not get artworkid");
+                    return null;
+                }
             }
             return vi.ArtworkId;
         }
@@ -62,7 +69,7 @@ namespace Banshee.Video
             return VideoInfo.Provider.FetchFirstMatching ("VideoID = ?", track.ExternalId);
         }
 
-        private readonly Regex regexp = new Regex (@"(.*)[._][\[]?[s]?([0-9]+)[\]]?[._]?[\[]?[-EeXx]([0-9]+)[\]]?[._].*");
+        private readonly Regex regexp = new Regex (@"(.*)[._][\[]?[sS]?([0-9]+)[\]]?[._]?[\[]?[-EeXx]([0-9]+)[\]]?[._].*");
         private readonly Regex regexp2 = new Regex (@"(.*)[._]([0-9])([0-9][0-9])[._].*");
 
         private VideoLibrarySource source;
@@ -70,11 +77,15 @@ namespace Banshee.Video
         public void Initialize ()
         {
             VideoInfo.Init ();
-
+            VideoInfo.Provider.Delete ("1 = 1");
             source = new VideoLibrarySource ();
             source.AddChildSource (new TvShowGroupSource (source));
             source.AddChildSource (new MovieGroupSource (source));
             ServiceManager.SourceManager.AddSource (source);
+            foreach (DatabaseTrackInfo track in DatabaseTrackInfo.Provider.FetchAllMatching ("PrimarySourceID = ? AND ExternalID != 0", source.DbId)) {
+                track.ExternalId = 0;
+                track.Save ();
+            }
             RefreshTracks ();
             source.TracksAdded += OnTracksAdded;
 
@@ -93,11 +104,13 @@ namespace Banshee.Video
 
         void RefreshTracks ()
         {
+            Log.Debug ("Refreshtrack");
             foreach (DatabaseTrackInfo track in DatabaseTrackInfo.Provider.FetchAllMatching ("PrimarySourceID = ? AND ExternalID = 0", source.DbId)) {
                 var video = new VideoInfo ();
+                Log.Debug (String.Format ("Create videoinfo : {0}",track.TrackTitle));
                 // Temporary set title but will be updated by webservice
                 video.Title = track.TrackTitle;
-                ParseName (track, video, track.TrackTitle);
+                ParseName (track, video, System.IO.Path.GetFileName (SafeUri.UriToFilename (track.Uri)));
                 video.Save ();
                 track.ExternalId = video.DbId;
                 track.Save ();
@@ -109,9 +122,12 @@ namespace Banshee.Video
             int episode;
             Match match = regexp.Match (name);
             if (match.Success) {
-                track.ArtistName = match.Captures[0].Value;//name of serie
-                track.AlbumTitle = match.Captures[1].Value;//season
-                Int32.TryParse (match.Captures[2].Value, out episode);
+                Log.Debug ("videoinfo is tv show");
+                foreach (Group s in match.Groups)
+                    Log.Debug (s.Value);
+                track.ArtistName = match.Groups[1].Value;//name of serie
+                track.AlbumTitle = match.Groups[2].Value;//season
+                Int32.TryParse (match.Groups[3].Value, out episode);
                 track.TrackNumber = episode;
                 track.MediaAttributes |= TrackMediaAttributes.TvShow;
                 return;
@@ -119,14 +135,16 @@ namespace Banshee.Video
             else {
                 match = regexp2.Match (name);
                 if (match.Success) {
-                    track.ArtistName = match.Captures[0].Value;
-                    track.AlbumTitle = match.Captures[1].Value;//season
-                    Int32.TryParse (match.Captures[2].Value, out episode);
+                    Log.Debug ("videoinfo is tv show");
+                    track.ArtistName = match.Groups[1].Value;
+                    track.AlbumTitle = match.Groups[2].Value;//season
+                    Int32.TryParse (match.Groups[3].Value, out episode);
                     track.TrackNumber = episode;
                     track.MediaAttributes |= TrackMediaAttributes.TvShow;
                     return;
                 }
             }
+            Log.Debug ("videoinfo is movie");
             //by default video is movie if not tv show
             track.MediaAttributes |= TrackMediaAttributes.Movie;
 
