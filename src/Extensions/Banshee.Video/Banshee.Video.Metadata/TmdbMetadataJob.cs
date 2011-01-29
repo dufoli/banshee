@@ -28,6 +28,7 @@ using System.Globalization;
 using System.IO;
 using System.Xml;
 using System.Net;
+using System.Web;
 
 using Banshee.Base;
 using Banshee.Collection;
@@ -75,8 +76,10 @@ namespace Banshee.Video.Metadata
 
         private string SearchMovie (DatabaseTrackInfo track, string coverArtId)
         {
-            HttpRequest request = new HttpRequest (string.Format("http://api.themoviedb.org/2.1/Movie.search/{0}/xml/{1}/{2}", CultureInfo.CurrentCulture.Name, API_KEY, track.TrackTitle));
-            XmlDocument doc = new XmlDocument();
+            string url = string.Format("http://api.themoviedb.org/2.1/Movie.search/{0}/xml/{1}/{2}", CultureInfo.CurrentCulture.Name, API_KEY, HttpUtility.UrlEncode (track.TrackTitle));
+            Log.Debug (url);
+            HttpRequest request = new HttpRequest (url);
+            XmlDocument doc = new XmlDocument();                //http://api.themoviedb.org/2.1/Movie.search/en/xml/APIKEY/Transformers+2007
             try {
                 request.GetResponse ();
 

@@ -29,6 +29,7 @@ using System.Globalization;
 using System.Collections.Generic;
 using System.Xml;
 using System.Net;
+using System.Web;
 
 using Banshee.Base;
 using Banshee.Web;
@@ -136,7 +137,8 @@ namespace Banshee.Video.Metadata
             }
             Log.Debug ("GetSerieId");
             string serieName = track.ArtistName.Replace ('.', ' ').Replace ('_', ' ').Replace ('-', ' ');
-            string url = string.Format("http://www.thetvdb.com/api/GetSeries.php?seriesname={0}&language={1}", serieName, lang);
+            string url = string.Format("http://www.thetvdb.com/api/GetSeries.php?seriesname={0}&language={1}", HttpUtility.UrlEncode (serieName), lang);
+            Log.Debug (url);
             HttpRequest request = new HttpRequest (url);
             Log.Debug (url);
             XmlDocument doc = new XmlDocument();
@@ -213,7 +215,9 @@ namespace Banshee.Video.Metadata
 
         private void GetEpisodeMetadata (DatabaseTrackInfo track, string seriesid, int parentid)
         {
-            HttpRequest request = new HttpRequest (string.Format("http://www.thetvdb.com/api/{0}/series/{1}/default/{2}/{3}/language.xml", API_KEY, seriesid, track.AlbumTitle, track.TrackNumber));
+            string url = string.Format("http://www.thetvdb.com/api/{0}/series/{1}/default/{2}/{3}/language.xml", API_KEY, seriesid, HttpUtility.UrlEncode (track.AlbumTitle), track.TrackNumber);
+            Log.Debug (url);
+            HttpRequest request = new HttpRequest (url);
             try {
                 request.GetResponse ();
                 XmlDocument doc = new XmlDocument();
@@ -327,7 +331,7 @@ namespace Banshee.Video.Metadata
                 return;
 
             int parentid;
-            VideoInfo parent = VideoInfo.Provider.FetchFirstMatching ("ExternalVideoId = ? AND VideoType = ?", seriesid, videoType.Serie);
+            VideoInfo parent = VideoInfo.Provider.FetchFirstMatching ("ExternalVideoId = ? AND VideoType = ?", seriesid, (int)videoType.Serie);
             if (parent == null) {
                 parent = GetSerieMetadata (track, seriesid);
                 if (parent == null) {
