@@ -140,7 +140,6 @@ namespace Banshee.Video.Metadata
             string url = string.Format("http://www.thetvdb.com/api/GetSeries.php?seriesname={0}&language={1}", HttpUtility.UrlEncode (serieName), lang);
             Log.Debug (url);
             HttpRequest request = new HttpRequest (url);
-            Log.Debug (url);
             XmlDocument doc = new XmlDocument();
             try {
                 request.GetResponse ();
@@ -150,7 +149,6 @@ namespace Banshee.Video.Metadata
                 }
 
                 XmlNode item_node = doc.DocumentElement.SelectSingleNode ("/Data/Series");
-                Log.Debug (item_node.InnerXml);
 
                 return item_node["seriesid"].InnerXml;
             } catch (WebException ex) {
@@ -165,7 +163,13 @@ namespace Banshee.Video.Metadata
 
         private VideoInfo GetSerieMetadata (DatabaseTrackInfo track, string seriesid)
         {
-            HttpRequest request = new HttpRequest (string.Format("http://www.thetvdb.com/api/{0}/series/{1}/language.xml", API_KEY, seriesid));
+            string lang;
+            if (languages.Contains (CultureInfo.CurrentCulture.TwoLetterISOLanguageName)) {
+                lang = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
+            } else {
+                lang = "en";
+            }
+            HttpRequest request = new HttpRequest (string.Format("http://www.thetvdb.com/api/{0}/series/{1}/{2}.xml", API_KEY, seriesid, lang));
             try {
                 request.GetResponse ();
 
@@ -215,7 +219,13 @@ namespace Banshee.Video.Metadata
 
         private void GetEpisodeMetadata (DatabaseTrackInfo track, string seriesid, int parentid)
         {
-            string url = string.Format("http://www.thetvdb.com/api/{0}/series/{1}/default/{2}/{3}/language.xml", API_KEY, seriesid, HttpUtility.UrlEncode (track.AlbumTitle), track.TrackNumber);
+            string lang;
+            if (languages.Contains (CultureInfo.CurrentCulture.TwoLetterISOLanguageName)) {
+                lang = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
+            } else {
+                lang = "en";
+            }
+            string url = string.Format("http://www.thetvdb.com/api/{0}/series/{1}/default/{2}/{3}/{4}.xml", API_KEY, seriesid, HttpUtility.UrlEncode (track.AlbumTitle), track.TrackNumber, lang);
             Log.Debug (url);
             HttpRequest request = new HttpRequest (url);
             try {
@@ -225,7 +235,7 @@ namespace Banshee.Video.Metadata
                     doc.Load (stream);
                 }
 
-                XmlNode episode_node = doc.DocumentElement.SelectSingleNode ("/Episode");
+                XmlNode episode_node = doc.DocumentElement.SelectSingleNode ("/Data/Episode");
 
                 //track.TrackNumber
                 VideoInfo video_info = (VideoInfo)track.ExternalObject;
@@ -313,6 +323,8 @@ namespace Banshee.Video.Metadata
             if (image_type != "season" && image_size != "season")
                 return false;
 
+            image_url = "http://www.thetvdb.com/banners/" + image_url;
+            Log.Debug (image_url);
             if (SaveHttpStreamCover (new Uri (image_url), cover_art_id, null)) {
                 Banshee.Sources.Source src = ServiceManager.SourceManager.ActiveSource;
                 if (src != null && (src is VideoLibrarySource || src.Parent is VideoLibrarySource)) {
@@ -333,8 +345,10 @@ namespace Banshee.Video.Metadata
             int parentid;
             VideoInfo parent = VideoInfo.Provider.FetchFirstMatching ("ExternalVideoId = ? AND VideoType = ?", seriesid, (int)videoType.Serie);
             if (parent == null) {
+                Log.Debug ("no parent in db...");
                 parent = GetSerieMetadata (track, seriesid);
                 if (parent == null) {
+                    Log.Debug ("Serie can not been created!");
                     return;
                 }
             }

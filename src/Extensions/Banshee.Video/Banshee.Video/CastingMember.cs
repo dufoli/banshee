@@ -36,11 +36,13 @@ namespace Banshee.Video
 {
     public class CastingMember : CacheableItem
     {
-        private static BansheeModelProvider<CastingMember> provider = new BansheeModelProvider<CastingMember> (
-            ServiceManager.DbConnection, "CastingMembers"
-        );
+        private static SqliteModelProvider<CastingMember> provider;
 
-        public static BansheeModelProvider<CastingMember> Provider {
+        public static void Init() {
+            provider= new SqliteModelProvider<CastingMember> (ServiceManager.DbConnection, "CastingMembers", true);
+        }
+
+        public static SqliteModelProvider<CastingMember> Provider {
             get { return provider; }
         }
 
