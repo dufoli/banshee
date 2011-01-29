@@ -76,16 +76,19 @@ namespace Banshee.Video.Metadata
 
         private string SearchMovie (DatabaseTrackInfo track, string coverArtId)
         {
-            string url = string.Format("http://api.themoviedb.org/2.1/Movie.search/{0}/xml/{1}/{2}", CultureInfo.CurrentCulture.Name, API_KEY, HttpUtility.UrlEncode (track.TrackTitle));
+            //TODO remove all not needed part or parasit char
+            string name = track.TrackTitle.Replace ('.', ' ').Replace ('_', ' ');
+            string url = string.Format("http://api.themoviedb.org/2.1/Movie.search/{0}/xml/{1}/{2}", CultureInfo.CurrentCulture.Name, API_KEY, HttpUtility.UrlEncode (name));
             Log.Debug (url);
             HttpRequest request = new HttpRequest (url);
-            XmlDocument doc = new XmlDocument();                //http://api.themoviedb.org/2.1/Movie.search/en/xml/APIKEY/Transformers+2007
+            XmlDocument doc = new XmlDocument();
             try {
                 request.GetResponse ();
 
                 using (Stream stream = request.GetResponseStream ()) {
                     doc.Load (stream);
                 }
+                Log.Debug (doc.OuterXml);
 
                 XmlNode movie_node = doc.DocumentElement.SelectSingleNode ("/OpenSearchDescription/movies/movie");
                 if (movie_node == null) {
@@ -104,7 +107,7 @@ namespace Banshee.Video.Metadata
                 video_info.ExternalVideoId = movie_node["id"].InnerXml;
                 video_info.Save ();
 
-                foreach (XmlNode n in movie_node.SelectNodes ("/images")) {
+                foreach (XmlNode n in movie_node.SelectNodes ("//image")) {
                     if (LoadImage (n, coverArtId))
                         break;
                 }
@@ -128,7 +131,7 @@ namespace Banshee.Video.Metadata
 
             if (image_type != "poster" && image_size != "thumb")
                 return false;
-
+            Log.Debug ("Load movie image");
             if (SaveHttpStreamCover (new Uri (image_url), cover_art_id, null)) {
                 Banshee.Sources.Source src = ServiceManager.SourceManager.ActiveSource;
                 if (src != null && (src is VideoLibrarySource || src.Parent is VideoLibrarySource)) {
