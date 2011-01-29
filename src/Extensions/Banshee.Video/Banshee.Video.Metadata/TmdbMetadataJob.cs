@@ -26,6 +26,8 @@
 using System;
 using System.Globalization;
 using System.IO;
+using System.Xml;
+using System.Net;
 
 using Banshee.Base;
 using Banshee.Collection;
@@ -35,7 +37,6 @@ using Banshee.Metadata;
 using Banshee.Web;
 
 using Hyena;
-using Hyena.Json;
 
 namespace Banshee.Video.Metadata
 {
@@ -75,83 +76,52 @@ namespace Banshee.Video.Metadata
         private string SearchMovie (DatabaseTrackInfo track, string coverArtId)
         {
             HttpRequest request = new HttpRequest (string.Format("http://api.themoviedb.org/2.1/Movie.search/{0}/xml/{1}/{2}", CultureInfo.CurrentCulture.Name, API_KEY, track.TrackTitle));
+            XmlDocument doc = new XmlDocument();
             try {
                 request.GetResponse ();
-                Stream stream = request.GetResponseStream ();
-                request.DumpResponseStream ();
-                Deserializer deserializer = new Deserializer (stream);
-                object obj = deserializer.Deserialize ();
-                JsonObject json_obj = obj as Hyena.Json.JsonObject;
 
-                if (json_obj == null || !json_obj.ContainsKey ("OpenSearchDescription"))
-                    return string.Empty;
+                using (Stream stream = request.GetResponseStream ()) {
+                    doc.Load (stream);
+                }
 
-                var head = json_obj["OpenSearchDescription"] as JsonObject;
-
-                if (head == null || !head.ContainsKey ("movies"))
-                    return string.Empty;
-
-                var movies_item = head["movies"] as JsonObject;
-
-                if (movies_item == null || !movies_item.ContainsKey ("movie"))
-                    return string.Empty;
-
-                var obj_item = movies_item["movie"];
-
-                if (obj_item == null)
-                    return string.Empty;
-
-                JsonObject json_item = null;
-
-                if (obj_item is JsonArray)
-                    json_item = (JsonObject) (((JsonArray)obj_item)[0]);
-                else if (obj_item is JsonObject)
-                    json_item = (JsonObject)obj_item;
-
+                XmlNode movie_node = doc.DocumentElement.SelectSingleNode ("/OpenSearchDescription/movies/movie");
+                if (movie_node == null) {
+                    return String.Empty;
+                }
                 VideoInfo video_info = (VideoInfo)track.ExternalObject;
-                video_info.Title = json_item["name"] as string;
-                video_info.OriginalTitle = json_item["original_name"] as string;
-                video_info.AlternativeTitle = json_item["alternative_name"] as string;
-                video_info.Language = json_item["language"] as string;
-                video_info.InfoUrl = json_item["url"] as string;
-                video_info.ImDbId = json_item["imdb_id"] as string;
-                video_info.ReleaseDate = DateTime.ParseExact (json_item["released"] as string, "yyyy-MM-dd", CultureInfo.InvariantCulture.DateTimeFormat);
-                video_info.Summary = json_item["overview"] as string;
+                video_info.Title = movie_node["name"].InnerXml;
+                video_info.OriginalTitle = movie_node["original_name"].InnerXml;
+                video_info.AlternativeTitle = movie_node["alternative_name"].InnerXml;
+                video_info.Language = movie_node["language"].InnerXml;
+                video_info.InfoUrl = movie_node["url"].InnerXml;
+                video_info.ImDbId = movie_node["imdb_id"].InnerXml;
+                video_info.ReleaseDate = DateTime.ParseExact (movie_node["released"].InnerXml, "yyyy-MM-dd", CultureInfo.InvariantCulture.DateTimeFormat);
+                video_info.Summary = movie_node["overview"].InnerXml;
                 video_info.VideoType = (int)videoType.Movie;
-                video_info.ExternalVideoId = json_item["id"] as string;
+                video_info.ExternalVideoId = movie_node["id"].InnerXml;
                 video_info.Save ();
 
-                json_item = (JsonObject)json_item["images"];
-                obj_item = json_item["image"];
+                foreach (XmlNode n in movie_node.SelectNodes ("/images")) {
+                    if (LoadImage (n, coverArtId))
+                        break;
+                }
 
-                if (obj_item == null)
-                    return string.Empty;
-
-                json_item = null;
-
-                if (obj_item is JsonArray) {
-                    foreach (object o in (JsonArray)obj_item) {
-                        if (LoadImage ((JsonObject)o, coverArtId))
-                            break;
-                    }
-                } else if (obj_item is JsonObject)
-                    LoadImage ((JsonObject)obj_item, coverArtId);
-
-                return json_item["id"] as string;
-            }
-            catch (Exception e) {
+                return movie_node["id"].InnerXml;
+            } catch (WebException ex) {
+                Log.Error (ex.Status.ToString ());
+                Log.DebugException (ex);
+            } catch (Exception e) {
+               Log.Error (doc.InnerXml);
                Log.DebugException (e);
-               return string.Empty;
             }
+            return String.Empty;
         }
 
-        private bool LoadImage (JsonObject obj, string cover_art_id)
+        private bool LoadImage (XmlNode obj, string cover_art_id)
         {
-            var attr = (JsonObject)obj["@attr"];
-
-            string image_type = attr["type"] as string;
-            string image_size = attr["size"] as string;
-            string image_url = attr["url"] as string;
+            string image_type = obj.Attributes["type"].Value;
+            string image_size = obj.Attributes["size"].Value;
+            string image_url = obj.Attributes["url"].Value;
 
             if (image_type != "poster" && image_size != "thumb")
                 return false;
@@ -170,11 +140,13 @@ namespace Banshee.Video.Metadata
         {
             /*HttpRequest request = new HttpRequest (string.Format("http://api.themoviedb.org/2.1/Movie.getInfo/{0}/xml/{1}/{2}", CultureInfo.CurrentCulture.TwoLetterISOLanguageName, API_KEY, tmdb_id));
             try {
-                Stream response_stream = request.GetResponseStream ();
+                XmlDocument doc = new XmlDocument();
+                using (Stream stream = request.GetResponseStream ()) {
+                    doc.Load (stream);
+                }
 
-                Deserializer deserializer = new Deserializer (response_stream);
-                object obj = deserializer.Deserialize ();
-                JsonObject json_obj = obj as Hyena.Json.JsonObject;
+                XmlNode movie_node = doc.DocumentElement.SelectSingleNode ("TODO");
+
 
             //TODO to get casting and few other things...
                 

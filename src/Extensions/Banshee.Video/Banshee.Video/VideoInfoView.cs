@@ -29,6 +29,7 @@ using Banshee.Collection.Gui;
 
 using Hyena.Data.Gui;
 using Hyena.Gui.Canvas;
+using Banshee.ServiceStack;
 
 namespace Banshee.Video
 {
@@ -40,7 +41,7 @@ namespace Banshee.Video
                 Fill = true,
                 ChildAllocator = () => {
                     DataViewChildImage img = new DataViewChildImage () {
-                        ImageSize = 115
+                        ImageSize = 90
                     };
                     return new StackPanel () {
                         Margin = new Thickness (5),

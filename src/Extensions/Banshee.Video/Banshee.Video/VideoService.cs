@@ -77,15 +77,10 @@ namespace Banshee.Video
         public void Initialize ()
         {
             VideoInfo.Init ();
-            VideoInfo.Provider.Delete ("1 = 1");
             source = new VideoLibrarySource ();
             source.AddChildSource (new TvShowGroupSource (source));
             source.AddChildSource (new MovieGroupSource (source));
             ServiceManager.SourceManager.AddSource (source);
-            foreach (DatabaseTrackInfo track in DatabaseTrackInfo.Provider.FetchAllMatching ("PrimarySourceID = ? AND ExternalID != 0", source.DbId)) {
-                track.ExternalId = 0;
-                track.Save ();
-            }
             RefreshTracks ();
             source.TracksAdded += OnTracksAdded;
 
@@ -123,8 +118,6 @@ namespace Banshee.Video
             Match match = regexp.Match (name);
             if (match.Success) {
                 Log.Debug ("videoinfo is tv show");
-                foreach (Group s in match.Groups)
-                    Log.Debug (s.Value);
                 track.ArtistName = match.Groups[1].Value;//name of serie
                 track.AlbumTitle = match.Groups[2].Value;//season
                 Int32.TryParse (match.Groups[3].Value, out episode);

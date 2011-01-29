@@ -27,6 +27,8 @@ using System;
 using System.IO;
 using System.Globalization;
 using System.Collections.Generic;
+using System.Xml;
+using System.Net;
 
 using Banshee.Base;
 using Banshee.Web;
@@ -35,7 +37,6 @@ using Banshee.Collection;
 using Banshee.Collection.Database;
 using Banshee.ServiceStack;
 
-using Hyena.Json;
 using Hyena;
 
 namespace Banshee.Video.Metadata
@@ -99,27 +100,12 @@ namespace Banshee.Video.Metadata
         {
             HttpRequest request = new HttpRequest (string.Format ("http://www.thetvdb.com/api/{0}/mirrors.xml", API_KEY));
             request.GetResponse ();
-            Stream stream = request.GetResponseStream ();
-            Deserializer deserializer = new Deserializer (stream);
-            object obj = deserializer.Deserialize ();
-            JsonObject json_obj = obj as Hyena.Json.JsonObject;
-
-            if (json_obj == null)
-                return;
-
-            var items = json_obj["Mirrors"] as JsonObject;
-            var obj_item = items["Mirror"];
-            JsonObject json_item = null;
-
-            if (obj_item is JsonArray) {
-                foreach (object o in ((JsonArray)obj_item)) {
-                    json_item = (JsonObject)o;
-                    mirrors.Add (new Mirror (json_item["mirrorpath"] as string, (serverCapability)Int32.Parse(json_item["typemask"] as string)));
-                }
+            XmlDocument doc = new XmlDocument();
+            using (Stream stream = request.GetResponseStream ()) {
+                doc.Load (stream);
             }
-            else if (obj_item is JsonObject) {
-                json_item = (JsonObject)obj_item;
-                mirrors.Add (new Mirror (json_item["mirrorpath"] as string, (serverCapability)Int32.Parse(json_item["typemask"] as string)));
+            foreach (XmlNode mirror_node in doc.DocumentElement.SelectNodes("/Mirrors/Mirror")) {
+                mirrors.Add (new Mirror (mirror_node["mirrorpath"].InnerXml, (serverCapability)Int32.Parse(mirror_node["typemask"].InnerXml)));
             }
         }
 
@@ -130,27 +116,13 @@ namespace Banshee.Video.Metadata
         {
             HttpRequest request = new HttpRequest (string.Format ("http://www.thetvdb.com/api/{0}/languages.xml", API_KEY));
             request.GetResponse ();
-            Stream s = request.GetResponseStream ();
-            Deserializer deserializer = new Deserializer (stream);
-            object obj = deserializer.Deserialize ();
-            JsonObject json_obj = obj as Hyena.Json.JsonObject;
-
-            if (json_obj == null)
-                return string.Empty;
-
-            var items = json_obj["Languages"] as JsonObject;
-            var obj_item = items["Language"];
-            JsonObject json_item = null;
-
-            if (obj_item is JsonArray) {
-                foreach (object o in ((JsonArray)obj_item)) {
-                    json_item = (JsonObject)o;
-                    languages.Add (json_item["abbreviation"] as string);
-                }
+            XmlDocument doc = new XmlDocument();
+            using (Stream stream = request.GetResponseStream ()) {
+                doc.Load (stream);
             }
-            else if (obj_item is JsonObject) {
-                json_item = (JsonObject)obj_item;
-                languages.Add (json_item["abbreviation"] as string);
+
+            foreach (XmlNode item_node in doc.DocumentElement.SelectNodes ("/Languages/Language")) {
+                languages.Add (item_node["abbreviation"].InnerXml);
             }
         }*/
 
@@ -162,40 +134,31 @@ namespace Banshee.Video.Metadata
             } else {
                 lang = "All";
             }
-
+            Log.Debug ("GetSerieId");
             string serieName = track.ArtistName.Replace ('.', ' ').Replace ('_', ' ').Replace ('-', ' ');
-            HttpRequest request = new HttpRequest (string.Format("http://www.thetvdb.com/api/GetSeries.php?seriesname={0}&language={1}", serieName, lang));
+            string url = string.Format("http://www.thetvdb.com/api/GetSeries.php?seriesname={0}&language={1}", serieName, lang);
+            HttpRequest request = new HttpRequest (url);
+            Log.Debug (url);
+            XmlDocument doc = new XmlDocument();
             try {
                 request.GetResponse ();
-                Stream stream = request.GetResponseStream ();
+                using (Stream stream = request.GetResponseStream ()) {
+                    doc.Load (stream);
+                    Log.Debug (doc.InnerXml);
+                }
 
-                Deserializer deserializer = new Deserializer (stream);
-                object obj = deserializer.Deserialize ();
-                JsonObject json_obj = obj as Hyena.Json.JsonObject;
+                XmlNode item_node = doc.DocumentElement.SelectSingleNode ("/Data/Series");
+                Log.Debug (item_node.InnerXml);
 
-                if (json_obj == null || !json_obj.ContainsKey ("Items"))
-                    return string.Empty;
-
-                var items = json_obj["Items"] as JsonObject;
-
-                if (items == null || !items.ContainsKey ("Item"))
-                    return string.Empty;
-
-                var obj_item = items["Item"];
-                JsonObject json_item = null;
-
-                if (obj_item is JsonArray)
-                    json_item = (JsonObject) (((JsonArray)obj_item)[0]);
-                else if (obj_item is JsonObject)
-                    json_item = (JsonObject)obj_item;
-
-                //store imdbid in musicbrainzid
-                return json_item["seriesid"] as string;
-            }
-            catch (Exception e) {
+                return item_node["seriesid"].InnerXml;
+            } catch (WebException ex) {
+                Log.Debug (ex.Status.ToString ());
+                Log.DebugException (ex);
+            } catch (Exception e) {
+               Log.Error (doc.InnerXml);
                Log.DebugException (e);
-               return string.Empty;
             }
+            return string.Empty;
         }
 
         private VideoInfo GetSerieMetadata (DatabaseTrackInfo track, string seriesid)
@@ -203,36 +166,33 @@ namespace Banshee.Video.Metadata
             HttpRequest request = new HttpRequest (string.Format("http://www.thetvdb.com/api/{0}/series/{1}/language.xml", API_KEY, seriesid));
             try {
                 request.GetResponse ();
-                Stream response_stream = request.GetResponseStream ();
 
-                Deserializer deserializer = new Deserializer (response_stream);
-                object obj = deserializer.Deserialize ();
-                JsonObject json_obj = obj as Hyena.Json.JsonObject;
+                XmlDocument doc = new XmlDocument();
+                using (Stream stream = request.GetResponseStream ()) {
+                    doc.Load (stream);
+                }
 
-                if (json_obj == null || !json_obj.ContainsKey ("Series"))
+                XmlNode serie_node = doc.DocumentElement.SelectSingleNode ("/Data/Series");
+                if (serie_node == null) {
                     return null;
-
-                var json_item = json_obj["Series"] as JsonObject;
-
-                if (json_item == null)
-                    return null;
-
+                }
                 //create a new one as parent for serie
                 VideoInfo video_info = new VideoInfo ();
 
-                //json_item["Genre"] //piped genre
+                //serie_node["Genre"] //piped genre
                 //video_info.SerieId = seriesid;
-                video_info.Studios = json_item["Network"] as string;
-                video_info.Summary = json_item["Overview"] as string;
-                video_info.Title = json_item["SeriesName"] as string;
-                video_info.Language = json_item["Language"] as string;
-                video_info.ImDbId = json_item["IMDB_ID"] as string;
+                video_info.Studios = serie_node["Network"].InnerXml;
+                video_info.Summary = serie_node["Overview"].InnerXml;
+                video_info.Title = serie_node["SeriesName"].InnerXml;
+                video_info.Language = serie_node["Language"].InnerXml;
+                video_info.ImDbId = serie_node["IMDB_ID"].InnerXml;
                 video_info.VideoType = (int)videoType.Serie;
-                video_info.ReleaseDate = DateTime.ParseExact (json_item["FirstAired"] as string, "yyyy-MM-dd", CultureInfo.InvariantCulture.DateTimeFormat);
+                video_info.ExternalVideoId = seriesid;
+                video_info.ReleaseDate = DateTime.ParseExact (serie_node["FirstAired"].InnerXml, "yyyy-MM-dd", CultureInfo.InvariantCulture.DateTimeFormat);
 
                 video_info.Save ();
 
-                string actors = json_item["Actors"] as string;
+                string actors = serie_node["Actors"].InnerXml;
                 if (actors != null) {
                     foreach (string actor in actors.Split(new string[] {"|"}, StringSplitOptions.RemoveEmptyEntries)) {
                         CastingMember member = new CastingMember ();
@@ -256,32 +216,28 @@ namespace Banshee.Video.Metadata
             HttpRequest request = new HttpRequest (string.Format("http://www.thetvdb.com/api/{0}/series/{1}/default/{2}/{3}/language.xml", API_KEY, seriesid, track.AlbumTitle, track.TrackNumber));
             try {
                 request.GetResponse ();
-                Stream response_stream = request.GetResponseStream ();
+                XmlDocument doc = new XmlDocument();
+                using (Stream stream = request.GetResponseStream ()) {
+                    doc.Load (stream);
+                }
 
-                Deserializer deserializer = new Deserializer (response_stream);
-                object obj = deserializer.Deserialize ();
-                JsonObject json_obj = obj as Hyena.Json.JsonObject;
-
-                if (json_obj == null || !json_obj.ContainsKey ("Episode"))
-                    return;
-
-                var json_item = json_obj["Episode"] as JsonObject;
+                XmlNode episode_node = doc.DocumentElement.SelectSingleNode ("/Episode");
 
                 //track.TrackNumber
                 VideoInfo video_info = (VideoInfo)track.ExternalObject;
-                video_info.Title = json_item["EpisodeName"] as string;
-                video_info.Language = json_item["Language"] as string;
-                video_info.ImDbId = json_item["IMDB_ID"] as string;
-                video_info.ReleaseDate = DateTime.ParseExact (json_item["FirstAired"] as string, "yyyy-MM-dd", CultureInfo.InvariantCulture.DateTimeFormat);
-                video_info.Summary = json_item["Overview"] as string;
-                video_info.Title = json_item["EpisodeName"] as string;
+                video_info.Title = episode_node["EpisodeName"].InnerXml;
+                video_info.Language = episode_node["Language"].InnerXml;
+                video_info.ImDbId = episode_node["IMDB_ID"].InnerXml;
+                video_info.ReleaseDate = DateTime.ParseExact (episode_node["FirstAired"].InnerXml, "yyyy-MM-dd", CultureInfo.InvariantCulture.DateTimeFormat);
+                video_info.Summary = episode_node["Overview"].InnerXml;
+                video_info.Title = episode_node["EpisodeName"].InnerXml;
                 video_info.VideoType = (int)videoType.SerieEpisode;
-                video_info.ExternalVideoId = json_item["seriesid"] as string;
+                video_info.ExternalVideoId = episode_node["seriesid"].InnerXml;
                 video_info.ParentId = parentid;
                 video_info.Save ();
 
                 CastingMember member;
-                string members = json_item["Director"] as string;
+                string members = episode_node["Director"].InnerXml;
                 if (members != null) {
                     foreach (string director_name in members.Split(new string[] {"|"}, StringSplitOptions.RemoveEmptyEntries)) {
                         member = new CastingMember ();
@@ -292,7 +248,7 @@ namespace Banshee.Video.Metadata
                     }
                 }
 
-                members = json_item["GuestStars"] as string;
+                members = episode_node["GuestStars"].InnerXml;
                 if (members != null) {
                     foreach (string guest_name in members.Split(new string[] {"|"}, StringSplitOptions.RemoveEmptyEntries)) {
                         member = new CastingMember ();
@@ -303,7 +259,7 @@ namespace Banshee.Video.Metadata
                     }
                 }
 
-                members = json_item["Writer"] as string;
+                members = episode_node["Writer"].InnerXml;
                 if (members != null) {
                     foreach (string writer_name in members.Split(new string[] {"|"}, StringSplitOptions.RemoveEmptyEntries)) {
                         member = new CastingMember ();
@@ -314,8 +270,8 @@ namespace Banshee.Video.Metadata
                     }
                 }
                 //not needed because ever done by regexp
-                //track.TrackNumber = json_item["EpisodeNumber"] as string;
-                //track.AlbumTitle = json_item["SeasonNumber"] as string;
+                //track.TrackNumber = episode_node["EpisodeNumber"].InnerXml;
+                //track.AlbumTitle = episode_node["SeasonNumber"].InnerXml;
                 //TODO
                 // <filename>episodes/80348-332179.jpg</filename>
 
@@ -330,41 +286,25 @@ namespace Banshee.Video.Metadata
             HttpRequest request = new HttpRequest (string.Format("http://www.thetvdb.com/api/{0}/series/{1}/banners.xml", API_KEY, seriesid));
             try {
                 request.GetResponse ();
-                Stream response_stream = request.GetResponseStream ();
+                XmlDocument doc = new XmlDocument();
+                using (Stream stream = request.GetResponseStream ()) {
+                    doc.Load (stream);
+                }
 
-                Deserializer deserializer = new Deserializer (response_stream);
-                object obj = deserializer.Deserialize ();
-                JsonObject json_obj = obj as Hyena.Json.JsonObject;
-
-                if (json_obj == null)
-                    return;
-
-                if (json_obj == null || !json_obj.ContainsKey ("Banners"))
-                    return;
-
-                var json_item = json_obj["Banners"] as JsonObject;
-
-                var obj_item = json_item["Banner"];
-                json_item = null;
-
-                if (obj_item is JsonArray) {
-                    foreach (object o in (JsonArray)obj_item) {
-                        if (LoadImage ((JsonObject)o, coverArtId))
-                            break;
-                    }
-                } else if (obj_item is JsonObject)
-                    LoadImage ((JsonObject)obj_item, coverArtId);
+                foreach (XmlNode banner_node in doc.DocumentElement.SelectNodes ("/Banners/Banner")) {
+                    LoadImage (banner_node, coverArtId);
+                }
             }
             catch (Exception e) {
                Log.DebugException (e);
             }
         }
 
-        private bool LoadImage (JsonObject obj, string cover_art_id)
+        private bool LoadImage (XmlNode obj, string cover_art_id)
         {
-            string image_type = obj["BannerType"] as string;
-            string image_size = obj["BannerType2"] as string;
-            string image_url = obj["BannerPath"] as string;
+            string image_type = obj["BannerType"].InnerXml;
+            string image_size = obj["BannerType2"].InnerXml;
+            string image_url = obj["BannerPath"].InnerXml;
 
             if (image_type != "season" && image_size != "season")
                 return false;
@@ -382,12 +322,12 @@ namespace Banshee.Video.Metadata
         void GetMetadata (DatabaseTrackInfo track, string coverArtId)
         {
             string seriesid = GetSerieId (track);
+            Log.Debug ("tv metadata job: serie id : " + seriesid);
             if (String.IsNullOrEmpty (seriesid))
                 return;
 
-            Log.Debug ("tv metadata job: serie id : " + seriesid);
             int parentid;
-            VideoInfo parent = VideoInfo.Provider.FetchFirstMatching ("SerieId = {0} AND VideoType = {1}", seriesid, videoType.Serie);
+            VideoInfo parent = VideoInfo.Provider.FetchFirstMatching ("ExternalVideoId = ? AND VideoType = ?", seriesid, videoType.Serie);
             if (parent == null) {
                 parent = GetSerieMetadata (track, seriesid);
                 if (parent == null) {
