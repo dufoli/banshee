@@ -28,6 +28,7 @@ using Banshee.Collection.Database;
 using Banshee.Database;
 using Banshee.I18n;
 using Hyena.Query;
+using System.Text;
 namespace Banshee.Video
 {
     //TODO DatabaseVideoInfo, VideoInfo
@@ -57,13 +58,46 @@ namespace Banshee.Video
                     ORDER BY Videos.Title";
         }
 
-        public override string FilterColumn {
-            get { return "CoreTracks.ExternalId"; }
+        protected override string ItemToFilterValue (object o)
+        {
+            return null;
         }
 
-        protected override string ItemToFilterValue (object item)
+        public override string FilterColumn { get {return null;} }
+
+        public override string GetSqlFilter ()
         {
-            return (item is VideoInfo) ? (item as VideoInfo).DbId.ToString () : null;
+            if (Selection.AllSelected)
+                return null;
+
+            int count = 0;
+            StringBuilder builder = new StringBuilder ();
+
+            foreach (object item in GetSelectedObjects ()) {
+                VideoInfo video = item as VideoInfo;
+                if (video != null) {
+                    builder.AppendFormat ("{0}, ", video.DbId.ToString ());
+                    count++;
+                }
+            }
+
+            if(count > 0) {
+                // Remove the last comma
+                builder.Remove(builder.Length - 2, 1);
+                builder.Insert(0, @" EXISTS
+                        (SELECT * FROM Videos, Videos AS episode
+                            WHERE ( (Videos.ParentId = 0
+                            AND   CoreTracks.ExternalID = Videos.VideoID
+                            AND   episode.VideoID = Videos.VideoID)
+                            OR (  episode.ParentId != 0
+                            AND   episode.ParentId = Videos.VideoID
+                            AND   CoreTracks.ExternalID = episode.VideoID ) )
+                            AND Videos.VideoID in (");
+                builder.Append(") )");
+
+                return builder.ToString();
+            }
+            return " 1=1";
         }
 
         public override void UpdateSelectAllItem (long count)
