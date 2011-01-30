@@ -53,7 +53,6 @@ namespace Banshee.Video.Metadata
 
         public override void Run()
         {
-            Log.Debug ("tv metadata job");
             if (track == null || (track.MediaAttributes & TrackMediaAttributes.Podcast) != 0
                               || (track.MediaAttributes & TrackMediaAttributes.VideoStream) == 0)
                 return;
@@ -62,9 +61,7 @@ namespace Banshee.Video.Metadata
 
             string cover_art_id = service.ArtworkIdFor (track);
 
-            if (cover_art_id == null) {
-                return;
-            } else if (CoverArtSpec.CoverExists (cover_art_id)) {
+            if (CoverArtSpec.CoverExists (cover_art_id)) {
                 return;
             } else if (!InternetConnected) {
                 return;
@@ -73,11 +70,36 @@ namespace Banshee.Video.Metadata
             if ((track.MediaAttributes & TrackMediaAttributes.TvShow) == 0)
                 return;
 
-            GetMetadata (track, cover_art_id);
+            GetMetadata (track);
+        }
+
+        void GetMetadata (DatabaseTrackInfo track)
+        {
+            string seriesid = GetSerieId (track);
+            Log.Debug ("tv metadata job: serie id : " + seriesid);
+            if (String.IsNullOrEmpty (seriesid))
+                return;
+
+            int parentid;
+            VideoInfo parent = VideoInfo.Provider.FetchFirstMatching ("ExternalVideoId = ? AND VideoType = ?", seriesid, (int)videoType.Serie);
+            if (parent == null) {
+                Log.Debug ("no parent in db...");
+                parent = GetSerieMetadata (track, seriesid);
+                if (parent == null) {
+                    Log.Debug ("Serie can not been created!");
+                    return;
+                }
+            }
+            parentid = parent.DbId;
+            Log.Debug ("tv metadata job: parent id : " + parentid);
+            GetEpisodeMetadata (track, seriesid, parentid);
+            GetBanners (track, seriesid, parent.ArtworkId);
+
         }
 
         private readonly string API_KEY = "897F1CA903D4703A";
 
+ #region Mirror (unactived for moment)
         private enum serverCapability : int
         {
             xmlfile= 1,
@@ -109,6 +131,7 @@ namespace Banshee.Video.Metadata
                 mirrors.Add (new Mirror (mirror_node["mirrorpath"].InnerXml, (serverCapability)Int32.Parse(mirror_node["typemask"].InnerXml)));
             }
         }
+#endregion
 
         //rarely updated so hardcoded
         private List<string> languages = new List<string> () {"da", "fi", "nl", "de", "it", "es", "fr", "pl", "hu", "el", "tr",
@@ -194,6 +217,7 @@ namespace Banshee.Video.Metadata
                 video_info.ImDbId = serie_node["IMDB_ID"].InnerXml;
                 video_info.VideoType = (int)videoType.Serie;
                 video_info.ExternalVideoId = seriesid;
+                video_info.ParentId = 0;
                 video_info.ReleaseDate = DateTime.ParseExact (serie_node["FirstAired"].InnerXml, "yyyy-MM-dd", CultureInfo.InvariantCulture.DateTimeFormat);
 
                 video_info.Save ();
@@ -333,30 +357,6 @@ namespace Banshee.Video.Metadata
                 return true;
             }
             return false;
-        }
-
-        void GetMetadata (DatabaseTrackInfo track, string coverArtId)
-        {
-            string seriesid = GetSerieId (track);
-            Log.Debug ("tv metadata job: serie id : " + seriesid);
-            if (String.IsNullOrEmpty (seriesid))
-                return;
-
-            int parentid;
-            VideoInfo parent = VideoInfo.Provider.FetchFirstMatching ("ExternalVideoId = ? AND VideoType = ?", seriesid, (int)videoType.Serie);
-            if (parent == null) {
-                Log.Debug ("no parent in db...");
-                parent = GetSerieMetadata (track, seriesid);
-                if (parent == null) {
-                    Log.Debug ("Serie can not been created!");
-                    return;
-                }
-            }
-            parentid = parent.DbId;
-            Log.Debug ("tv metadata job: parent id : " + parentid);
-            GetEpisodeMetadata (track, seriesid, parentid);
-            GetBanners (track, seriesid, coverArtId);
-
         }
     }
 }

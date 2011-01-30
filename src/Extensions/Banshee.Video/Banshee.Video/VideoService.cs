@@ -61,6 +61,9 @@ namespace Banshee.Video
                     return null;
                 }
             }
+            if (String.IsNullOrEmpty (vi.ExternalVideoId)) {
+                return null;
+            }
             return vi.ArtworkId;
         }
 
@@ -83,13 +86,13 @@ namespace Banshee.Video
             source.AddChildSource (new MovieGroupSource (source));
             ServiceManager.SourceManager.AddSource (source);
             // To debug regexp uncoment this
-            /*VideoInfo.Provider.Delete ("1=1");
+            VideoInfo.Provider.Delete ("1=1");
             CastingMember.Provider.Delete ("1=1");
 
             foreach (DatabaseTrackInfo track in DatabaseTrackInfo.Provider.FetchAllMatching ("PrimarySourceID = ? AND ExternalID > 0", source.DbId)) {
                 track.ExternalId = 0;
                 track.Save ();
-            }*/
+            }
             RefreshTracks ();
             source.TracksAdded += OnTracksAdded;
 

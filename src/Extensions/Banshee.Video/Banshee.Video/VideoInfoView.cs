@@ -30,6 +30,7 @@ using Banshee.Collection.Gui;
 using Hyena.Data.Gui;
 using Hyena.Gui.Canvas;
 using Banshee.ServiceStack;
+using Hyena;
 
 namespace Banshee.Video
 {
@@ -46,7 +47,7 @@ namespace Banshee.Video
                     return new StackPanel () {
                         Margin = new Thickness (5),
                         Orientation = Orientation.Vertical,
-                        Width = 115,
+                        Width = 100,
                         Height = 150,
                         Spacing = 5,
                         Children = {
@@ -56,16 +57,10 @@ namespace Banshee.Video
                                     TextWrap = TextWrap.WordChar,
                                     TextGenerator = o => {
                                         var track = o as VideoInfo;
+                                        Log.Debug ("VIDEO VIEW :" + ((o == null)? "NULL" : o.ToString ()));
                                         if (track != null) {
-                                            //TODO Get VideoInfo
-                                            // for tv show get parent
-
-                                            //var episode = VideoInfo.From (track);
-                                            //if (episode != null) {
-                                                return string.Format ("<b>{0}</b>\n<small>{1}\n</small>",
-                                                    track.Title, track.ReleaseDate.ToShortDateString ()
-                                                );
-                                            //}
+                                            return string.Format ("<b>{0}</b>\n<small>{1}\n</small>",
+                                                    track.Title, track.ReleaseDate.ToShortDateString ());
                                         }
                                         return "";
                                     }

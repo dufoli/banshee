@@ -60,21 +60,19 @@ namespace Banshee.Video.Metadata
 
             string cover_art_id = service.ArtworkIdFor (track);
 
-            if (cover_art_id == null) {
-                return;
-            } else if (CoverArtSpec.CoverExists (cover_art_id)) {
+            if (CoverArtSpec.CoverExists (cover_art_id)) {
                 return;
             } else if (!InternetConnected) {
                 return;
             }
 
-            string tmdb_id = SearchMovie (track, cover_art_id);
+            string tmdb_id = SearchMovie (track);
             GetInfo (track, tmdb_id);
         }
 
         private readonly string API_KEY = "0e4632ee0881dce13dfc053ec42b819b";
 
-        private string SearchMovie (DatabaseTrackInfo track, string coverArtId)
+        private string SearchMovie (DatabaseTrackInfo track)
         {
             //TODO remove all not needed part or parasit char
             string name = track.TrackTitle.Replace ('.', ' ').Replace ('_', ' ');
@@ -105,10 +103,11 @@ namespace Banshee.Video.Metadata
                 video_info.Summary = movie_node["overview"].InnerXml;
                 video_info.VideoType = (int)videoType.Movie;
                 video_info.ExternalVideoId = movie_node["id"].InnerXml;
+                video_info.ParentId = 0;
                 video_info.Save ();
 
                 foreach (XmlNode n in movie_node.SelectNodes ("//image")) {
-                    if (LoadImage (n, coverArtId))
+                    if (LoadImage (n, video_info.ArtworkId))
                         break;
                 }
 

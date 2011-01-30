@@ -76,8 +76,10 @@ namespace Banshee.Video
             SetModel (track_view, track_source.TrackModel);
 
             foreach (IListModel model in track_source.CurrentFilters) {
-                if (model is VideoInfoModel)
+                if (model is VideoInfoModel) {
+                    Hyena.Log.Debug ("SET MODEL");
                     SetModel (video_view, (model as IListModel<VideoInfo>));
+                }
             }
 
             return true;

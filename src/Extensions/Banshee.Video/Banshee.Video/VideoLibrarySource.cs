@@ -43,7 +43,7 @@ namespace Banshee.Video
 {
     public class VideoLibrarySource : LibrarySource
     {
-        // Catalog.GetString ("Video Library")
+        //TODO delete orphelan videoInfo.
         public VideoLibrarySource () : base (Catalog.GetString ("Videos"), "VideoLibrary", 50)
         {
             MediaTypes = TrackMediaAttributes.VideoStream;
@@ -96,7 +96,9 @@ namespace Banshee.Video
         VideoInfoModel video_model;
         protected override IEnumerable<IFilterListModel> CreateFiltersFor (Sources.DatabaseSource src)
         {
-            video_model = new VideoInfoModel (src, src.DatabaseTrackModel, ServiceManager.DbConnection, src.UniqueId);
+            if (video_model == null) {
+                video_model = new VideoInfoModel (src, src.DatabaseTrackModel, ServiceManager.DbConnection, src.UniqueId);
+            }
             yield return video_model;
         }
 

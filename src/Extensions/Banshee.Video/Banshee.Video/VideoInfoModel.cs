@@ -34,7 +34,7 @@ namespace Banshee.Video
     public class VideoInfoModel : DatabaseFilterListModel<VideoInfo, VideoInfo>
     {
         public VideoInfoModel (Banshee.Sources.DatabaseSource source, DatabaseTrackListModel trackModel, BansheeDbConnection connection, string uuid)
-            : base ("Video", Catalog.GetString ("Video"),
+            : base ("Videos", Catalog.GetString ("Videos"),
                     source, trackModel, connection, VideoInfo.Provider, new VideoInfo (), uuid)
         {
             QueryFields = new QueryFieldSet (VideoService.VideoTitleField, VideoService.VideoOriginalTitleField, VideoService.VideoAlternativeTitleField );
@@ -42,15 +42,17 @@ namespace Banshee.Video
             //int video_library_dbid = (source as VideoLibrarySource ?? source.Parent as VideoLibrarySource).DbId;
             ReloadFragmentFormat = @"
                     FROM Videos WHERE EXISTS
-                        (SELECT * FROM CoreTracks AS t
-                            WHERE Videos.ParentId IS NULL
-                            AND   t.ExternalID = Videos.VideoID
+                        (SELECT * FROM CoreTracks, CoreCache{0}
+                            WHERE Videos.ParentId = 0
+                            AND   CoreTracks.ExternalID = Videos.VideoID
+                            AND   CoreCache.ModelID = {1} AND CoreCache.ItemId = {2} {3}
                         )
                         OR EXISTS
-                        (SELECT * FROM Videos AS episode, CoreTracks AS tt
-                            WHERE episode.ParentId IS NOT NULL
+                        (SELECT * FROM Videos AS episode, CoreTracks, CoreCache{0}
+                            WHERE episode.ParentId != 0
                             AND   episode.ParentId = Videos.VideoID
-                            AND   tt.ExternalID = episode.VideoID
+                            AND   CoreTracks.ExternalID = episode.VideoID
+                            AND   CoreCache.ModelID = {1} AND CoreCache.ItemId = {2} {3}
                         )
                     ORDER BY Videos.Title";
         }
