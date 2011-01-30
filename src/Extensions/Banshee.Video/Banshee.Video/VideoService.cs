@@ -35,6 +35,7 @@ using Banshee.Video.Metadata;
 using Hyena.Query;
 using Banshee.I18n;
 using Hyena;
+using Banshee.SmartPlaylist;
 
 
 namespace Banshee.Video
@@ -62,7 +63,9 @@ namespace Banshee.Video
                 }
             }
             if (String.IsNullOrEmpty (vi.ExternalVideoId)) {
-                return null;
+                //return that because do not want to find this file
+                //and do not return null because metadata job do not lookup in this case
+                return string.Empty;
             }
             return vi.ArtworkId;
         }
@@ -82,17 +85,33 @@ namespace Banshee.Video
             VideoInfo.Init ();
             CastingMember.Init ();
             source = new VideoLibrarySource ();
-            source.AddChildSource (new TvShowGroupSource (source));
-            source.AddChildSource (new MovieGroupSource (source));
+
+            SmartPlaylistSource tvshow_src = null;
+            SmartPlaylistSource movie_src = null;
+            foreach (SmartPlaylistSource child in source.Children) {
+                if (child.Name == Catalog.GetString ("TvShows")) {
+                    tvshow_src = child;
+                }
+                else if (child.Name == Catalog.GetString ("Movies")) {
+                    movie_src = child;
+                }
+            }
+            if (tvshow_src == null)
+                tvshow_src = new TvShowGroupSource (source);
+            source.AddChildSource (tvshow_src);
+            if (movie_src == null)
+                movie_src = new MovieGroupSource (source);
+            source.AddChildSource (movie_src);
+
             ServiceManager.SourceManager.AddSource (source);
             // To debug regexp uncoment this
-            VideoInfo.Provider.Delete ("1=1");
+            /*VideoInfo.Provider.Delete ("1=1");
             CastingMember.Provider.Delete ("1=1");
 
             foreach (DatabaseTrackInfo track in DatabaseTrackInfo.Provider.FetchAllMatching ("PrimarySourceID = ? AND ExternalID > 0", source.DbId)) {
                 track.ExternalId = 0;
                 track.Save ();
-            }
+            }*/
             RefreshTracks ();
             source.TracksAdded += OnTracksAdded;
 

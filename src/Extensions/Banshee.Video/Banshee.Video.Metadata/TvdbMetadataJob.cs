@@ -158,10 +158,9 @@ namespace Banshee.Video.Metadata
             } else {
                 lang = "All";
             }
-            Log.Debug ("GetSerieId");
             string serieName = track.ArtistName.Replace ('.', ' ').Replace ('_', ' ').Replace ('-', ' ');
             string url = string.Format("http://www.thetvdb.com/api/GetSeries.php?seriesname={0}&language={1}", HttpUtility.UrlEncode (serieName), lang);
-            Log.Debug (url);
+            Log.Debug ("tvdb webservice ; " + url);
             HttpRequest request = new HttpRequest (url);
             XmlDocument doc = new XmlDocument();
             try {

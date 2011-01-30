@@ -77,7 +77,7 @@ namespace Banshee.Video.Metadata
             //TODO remove all not needed part or parasit char
             string name = track.TrackTitle.Replace ('.', ' ').Replace ('_', ' ');
             string url = string.Format("http://api.themoviedb.org/2.1/Movie.search/{0}/xml/{1}/{2}", CultureInfo.CurrentCulture.Name, API_KEY, HttpUtility.UrlEncode (name));
-            Log.Debug (url);
+            Log.Debug ("tmdb webservice:" + url);
             HttpRequest request = new HttpRequest (url);
             XmlDocument doc = new XmlDocument();
             try {
