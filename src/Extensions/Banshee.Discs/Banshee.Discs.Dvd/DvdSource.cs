@@ -57,8 +57,6 @@ namespace Banshee.Discs.Dvd
 
 #region GUI/ThickClient
 
-        private bool actions_loaded = false;
-
         private void SetupGui ()
         {
             Properties.SetStringList ("Icon.Name", "media-dvd", "gnome-dev-dvd");
