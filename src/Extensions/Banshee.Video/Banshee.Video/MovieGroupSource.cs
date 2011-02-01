@@ -39,7 +39,7 @@ namespace Banshee.Video
         {
             //Properties.Remove ("Icon.Name");
             //Properties.SetStringList ("Icon.Name", "movie");
-            ConditionSql = String.Format ("(CoreTracks.Attributes & {0}) != 0", (int)TrackMediaAttributes.Movie);
+            ConditionSql = String.Format ("(CoreTracks.Attributes & {0}) == {0}", (int)TrackMediaAttributes.Movie);
             Save ();
         }
     }
