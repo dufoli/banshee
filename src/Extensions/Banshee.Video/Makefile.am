@@ -12,7 +12,7 @@ SOURCES =  \
 	Banshee.Video/VideoInfoView.cs \
 	Banshee.Video/VideoLibrarySource.cs \
 	Banshee.Video/VideoService.cs \
-	Banshee.Video/VideoSourceContents \
+	Banshee.Video/VideoSourceContents.cs \
     Banshee.Video.Metadata/ImdbMetadataJob.cs \
     Banshee.Video.Metadata/ImdbMetadataProvider.cs \
     Banshee.Video.Metadata/TmdbMetadataJob.cs \
