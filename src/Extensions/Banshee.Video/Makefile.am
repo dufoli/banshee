@@ -5,8 +5,10 @@ INSTALL_DIR = $(EXTENSIONS_INSTALL_DIR)
 
 SOURCES =  \
 	Banshee.Video/CastingMember.cs \
+	Banshee.Video/ContextPage.cs \
 	Banshee.Video/MovieGroupSource.cs \
 	Banshee.Video/TvShowGroupSource.cs \
+	Banshee.Video/VideoDetailPanel.cs \
 	Banshee.Video/VideoInfo.cs \
 	Banshee.Video/VideoInfoModel.cs \
 	Banshee.Video/VideoInfoView.cs \

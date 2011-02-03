@@ -20,5 +20,8 @@
     <Service class="Banshee.Video.VideoService"/>
   </Extension>
 
+  <Extension path="/Banshee/ThickClient/ContextPane">
+    <ContextPage class="Banshee.Video.ContextPage"/>
+  </Extension>
 </Addin>
 
