@@ -57,7 +57,6 @@ namespace Banshee.Video
                                     TextWrap = TextWrap.WordChar,
                                     TextGenerator = o => {
                                         var track = o as VideoInfo;
-                                        Log.Debug ("VIDEO VIEW :" + ((o == null)? "NULL" : o.ToString ()));
                                         if (track != null) {
                                             return string.Format ("<b>{0}</b>\n<small>{1}\n</small>",
                                                     track.Title, track.ReleaseDate.ToShortDateString ());

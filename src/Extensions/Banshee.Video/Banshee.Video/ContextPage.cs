@@ -45,7 +45,9 @@ namespace Banshee.Video
 
         public override void SetTrack (Banshee.Collection.TrackInfo track)
         {
-            view.VideoInfo = (VideoInfo)track.ExternalObject;
+            VideoInfo video = track.ExternalObject as VideoInfo;
+            view.VideoInfo = video;
+            view.Members = CastingMember.Provider.FetchAllMatching ("VideoID = ?", video.DbId);
             view.Refresh ();
         }
 
