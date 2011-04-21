@@ -75,7 +75,6 @@ SHAMROCK_CHECK_MONO_MODULE(1.9.1)
 SHAMROCK_FIND_MONO_2_0_COMPILER
 SHAMROCK_FIND_MONO_RUNTIME
 SHAMROCK_CHECK_MONO_2_0_GAC_ASSEMBLIES([	
-	Mono.Cairo
 	Mono.Posix
 	ICSharpCode.SharpZipLib
 ])
@@ -228,8 +227,10 @@ AC_SUBST(ENABLE_RELEASE)
 if test "x$enable_release" = "xyes"; then
 	GMCS_FLAGS="-define:RELEASE"
 else
-	GMCS_FLAGS="-warnaserror"
+	GMCS_FLAGS=""
 fi
+#FIXME: add "-warnaserror" back above!
+
 AC_SUBST(GMCS_FLAGS)
 
 AM_CONDITIONAL(HYENA_PKG_CONFIG, false)

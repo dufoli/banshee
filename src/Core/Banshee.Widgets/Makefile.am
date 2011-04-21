@@ -1,6 +1,7 @@
 ASSEMBLY = Banshee.Widgets
 TARGET = library
-ASSEMBLY_BUILD_FLAGS = -unsafe
+#FIXME: not hardcode cairo-sharp here!
+ASSEMBLY_BUILD_FLAGS = -unsafe -r:/usr/lib/mono/gtk-sharp-3.0/cairo-sharp.dll
 LINK = $(REF_BANSHEE_WIDGETS)
 SOURCES =  \
 	Banshee.Widgets/CustomActionProxy.cs \

@@ -9,7 +9,7 @@ EXTENSIONS_INSTALL_DIR = $(DEFAULT_INSTALL_DIR)/Extensions
 
 # External libraries to link against, generated from configure
 LINK_SYSTEM = -r:System
-LINK_CAIRO = -r:Mono.Cairo
+LINK_CAIRO = -r:/opt/mono-2.10/lib/mono/gtk-sharp-3.0/cairo-sharp.dll
 LINK_MONO_POSIX = -r:Mono.Posix
 LINK_ICSHARP_ZIP_LIB = -r:ICSharpCode.SharpZipLib
 LINK_MONO_ZEROCONF = $(MONO_ZEROCONF_LIBS)
