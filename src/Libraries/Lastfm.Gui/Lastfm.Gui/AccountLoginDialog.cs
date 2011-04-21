@@ -47,7 +47,6 @@ namespace Lastfm.Gui
         public AccountLoginDialog (Account account, bool addCloseButton) : base ()
         {
             Title = Catalog.GetString ("Log in to Last.fm");
-            HasSeparator = false;
             BorderWidth = 5;
 
             IconName = "gtk-dialog-authentication";
@@ -90,15 +89,15 @@ namespace Lastfm.Gui
 
             vbox.PackStart (login_form, true, true, 0);
 
-            VBox.PackStart (hbox, true, true, 0);
-            VBox.Remove (ActionArea);
-            VBox.Spacing = 10;
+            ContentArea.PackStart (hbox, true, true, 0);
+            ContentArea.Remove (ActionArea);
+            ContentArea.Spacing = 10;
 
             HBox bottom_box = new HBox ();
             bottom_box.PackStart (new Badge (account), true, true, 5);
             bottom_box.PackStart (ActionArea, false, false, 0);
             bottom_box.ShowAll ();
-            VBox.PackEnd (bottom_box, false, false, 0);
+            ContentArea.PackEnd (bottom_box, false, false, 0);
 
             if (addCloseButton) {
                 AddButton (Stock.Cancel, ResponseType.Cancel);

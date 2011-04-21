@@ -54,7 +54,7 @@ namespace Bacon
         private const int SCALE_SIZE = 100;
         private const int CLICK_TIMEOUT = 250;
 
-        private Tooltips tooltips = new Tooltips();
+        private Tooltip tooltip = new Tooltip ();
 
         private Window dock;
         private VolumeScale slider;
@@ -98,7 +98,7 @@ namespace Bacon
             WidgetEventAfter += OnWidgetEventAfter;
         }
 
-        public override void Dispose()
+        protected override void Dispose(bool disposing)
         {
             if(dock != null) {
                 dock.Destroy();
@@ -134,7 +134,7 @@ namespace Bacon
             dock.Hidden += OnDockHidden;
 
             Frame frame = new Frame();
-            frame.Shadow = ShadowType.Out;
+            frame.ShadowType = ShadowType.Out;
             frame.Show();
 
             dock.Add(frame);
@@ -553,7 +553,7 @@ namespace Bacon
                     (slider.Adjustment.Upper - slider.Adjustment.Lower) * 100.0));
             }
 
-            tooltips.SetTip(this, tip, null);
+            tooltip.Text = tip;
         }
 
         private bool AdjustVolume(int direction)

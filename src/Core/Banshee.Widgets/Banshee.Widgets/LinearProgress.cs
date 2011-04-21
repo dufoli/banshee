@@ -35,7 +35,7 @@ namespace Banshee.Widgets
     public class LinearProgress : Gtk.DrawingArea
     {
         private double fraction;
-        private static Gdk.GC bar_gc = null;
+        private static Cairo.Context bar_gc = null;
 
         public LinearProgress()
         {
@@ -44,10 +44,10 @@ namespace Banshee.Widgets
             QueueDraw();
         }
 
-        protected override bool OnExposeEvent(Gdk.EventExpose evnt)
+        protected override bool OnDrawn (Cairo.Context cr)
         {
             if(bar_gc == null) {
-                bar_gc = new Gdk.GC(GdkWindow);
+                bar_gc = Gdk.CairoHelper.Create (GdkWindow);
                 Gdk.Color color = Hyena.Gui.GtkUtilities.ColorBlend(Style.Background(StateType.Normal),
                     Style.Foreground(StateType.Normal));
                 bar_gc.Background = color;

@@ -255,9 +255,9 @@ namespace Banshee.Widgets
             return base.OnKeyPressEvent (evnt);
         }
 
-        protected override bool OnExposeEvent(Gdk.EventExpose evnt)
+        protected override bool OnDrawn (Cairo.Context cr)
         {
-            Style.PaintFlatBox (entry.Style, GdkWindow, State, ShadowType.None, evnt.Area, this,
+            Style.PaintFlatBox (entry.Style, cr, State, ShadowType.None, this,
                 "entry_bg", 0, 0, Allocation.Width, Allocation.Height);
             PropagateExpose(Child, evnt);
             Style.PaintShadow(entry.Style, GdkWindow, StateType.Normal,
@@ -459,7 +459,7 @@ namespace Banshee.Widgets
             private Gdk.Window text_window;
             private SearchEntry parent;
             private Pango.Layout layout;
-            private Gdk.GC text_gc;
+            private Cairo.Context text_gc;
 
             public FramelessEntry(SearchEntry parent) : base()
             {
@@ -482,14 +482,14 @@ namespace Banshee.Widgets
                     return;
                 }
 
-                text_gc = new Gdk.GC(text_window);
+                text_gc = Gdk.CairoHelper.Create (text_window);
                 text_gc.Copy(Style.TextGC(StateType.Normal));
                 Gdk.Color color_a = parent.Style.Base(StateType.Normal);
                 Gdk.Color color_b = parent.Style.Text(StateType.Normal);
                 text_gc.RgbFgColor = Hyena.Gui.GtkUtilities.ColorBlend(color_a, color_b);
             }
 
-            protected override bool OnExposeEvent(Gdk.EventExpose evnt)
+            protected override bool OnDrawn (Cairo.Context cr)
             {
                 // The Entry's GdkWindow is the top level window onto which
                 // the frame is drawn; the actual text entry is drawn into a

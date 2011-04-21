@@ -147,14 +147,14 @@ namespace Banshee.Widgets
             return base.OnButtonReleaseEvent(evnt);
         }
 
-        protected override bool OnExposeEvent(Gdk.EventExpose evnt)
+        protected override bool OnDrawn (Cairo.Context cr)
         {
-            base.OnExposeEvent(evnt);
+            base.OnDrawn (cr);
 
             PropagateExpose(Child, evnt);
 
             if(HasFocus && draw_focus) {
-                Style.PaintFocus(Style, GdkWindow, StateType.Normal, evnt.Area, this, "button",
+                Style.PaintFocus(Style, cr, StateType.Normal, this, "button",
                     0, 0, Allocation.Width, Allocation.Height);
             }
 
