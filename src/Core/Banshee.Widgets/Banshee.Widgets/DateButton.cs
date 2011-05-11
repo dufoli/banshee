@@ -56,7 +56,7 @@ namespace Banshee.Widgets
 			popup.Screen = this.Screen;
 
 			Frame frame = new Frame();
-			frame.Shadow = ShadowType.Out;
+			frame.ShadowType = ShadowType.Out;
 			frame.Show();
 
 			popup.Add(frame);
