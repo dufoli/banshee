@@ -282,6 +282,7 @@ namespace Banshee.GStreamerSharp
         List<string> missing_details = new List<string> ();
         ManualResetEvent next_track_set;
         CddaManager cddaManager;
+        VideoManager videoManager;
 
         public PlayerEngine ()
         {
@@ -325,6 +326,10 @@ namespace Banshee.GStreamerSharp
             playbin.AboutToFinish += OnAboutToFinish;
 
             cddaManager = new CddaManager (playbin);
+            videoManager = new VideoManager (playbin);
+            videoManager.PrepareWindow += OnVideoPrepareWindow;
+            videoManager.Initialize ();
+
             OnStateChanged (PlayerState.Ready);
         }
 
@@ -345,6 +350,21 @@ namespace Banshee.GStreamerSharp
         {
             UninstallPreferences ();
             base.Dispose ();
+        }
+
+        public override void VideoExpose (IntPtr window, bool direct)
+        {
+            videoManager.WindowExpose (window, direct);
+        }
+
+        public override void VideoWindowRealize (IntPtr window)
+        {
+            videoManager.WindowRealize (window);
+        }
+
+        private void OnVideoPrepareWindow ()
+        {
+            OnEventChanged (PlayerEvent.PrepareVideoWindow);
         }
 
         void OnAboutToFinish (object o, Gst.GLib.SignalArgs args)
@@ -439,6 +459,14 @@ namespace Banshee.GStreamerSharp
                         Install.InstallPlugins (missing_details.ToArray (), install_context, OnInstallPluginsReturn);
                     } else if (msg.Src == playbin && msg.Structure.Name == "playbin2-stream-changed") {
                         HandleStreamChanged ();
+                    }
+                    break;
+                case MessageType.Application:
+                    string name;
+                    Structure s = msg.Structure;
+                    name = s.Name;
+                    if (String.IsNullOrEmpty (name) && name == "stream-changed") {
+                        videoManager.ParseStreamInfo ();
                     }
                     break;
             }
@@ -716,7 +744,15 @@ namespace Banshee.GStreamerSharp
         }
 
         public override VideoDisplayContextType VideoDisplayContextType {
-            get { return VideoDisplayContextType.Unsupported; }
+            get { return videoManager != null ? videoManager.VideoDisplayContextType : VideoDisplayContextType.Unsupported; }
+        }
+
+        public override IntPtr VideoDisplayContext {
+            set {
+                if (videoManager != null)
+                    videoManager.VideoDisplayContext = value;
+            }
+            get { return videoManager != null ? videoManager.VideoDisplayContext : IntPtr.Zero; }
         }
 
         public override int SubtitleCount {

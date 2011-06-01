@@ -74,6 +74,8 @@
     <Compile Include="Banshee.GStreamerSharp\BpmDetector.cs" />
     <Compile Include="Banshee.GStreamerSharp\AudioCdRipper.cs" />
     <Compile Include="Banshee.GStreamerSharp\Transcoder.cs" />
+    <Compile Include="Banshee.GStreamerSharp\VideoManager.cs" />
+    <Compile Include="Banshee.GStreamerSharp\CddaManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
