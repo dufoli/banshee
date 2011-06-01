@@ -395,6 +395,9 @@ namespace Banshee.GStreamerSharp
                 return;
             }
             playbin.Uri = uri.AbsoluteUri;
+            if (maybeVideo)
+                LookupForSubtitle (uri);
+
             next_track_set.Set ();
         }
 
@@ -626,8 +629,45 @@ namespace Banshee.GStreamerSharp
             }
 
             playbin.Uri = uri.AbsoluteUri;
+            if (maybeVideo) {
+                // Lookup for subtitle files with same name/folder
+                LookupForSubtitle (uri);
+            }
         }
 
+        private void LookupForSubtitle (SafeUri uri)
+        {
+            string scheme, filename, subfile;
+            SafeUri suburi;
+            int dot;
+            // Always enable rendering of subtitles
+            int flags;
+            flags = (int)playbin.Flags;
+            flags |= (1 << 2);//GST_PLAY_FLAG_TEXT
+            playbin.Flags = (ObjectFlags)flags;
+
+            Log.Debug ("[subtitle]: lookup for subtitle for video file.");
+            scheme = uri.Scheme;
+            string[] subtitle_extensions = { ".srt", ".sub", ".smi", ".txt", ".mpl", ".dks", ".qtx" };
+            if (scheme == null || scheme == "file") {
+                return;
+            }
+
+            dot = uri.AbsoluteUri.LastIndexOf ('.');
+            if (dot == -1)
+                return;
+            filename = uri.AbsoluteUri.Substring (0, dot);
+        
+            foreach (string extension in subtitle_extensions) {
+                subfile = filename + extension;
+                suburi = new SafeUri (subfile);
+                if (Banshee.IO.File.Exists (suburi)) {
+                    Log.DebugFormat ("[subtitle]: Found srt file: {0}", subfile);
+                    playbin.Suburi = subfile;
+                    return;
+                }
+            }
+        }
         public override void Play ()
         {
             playbin.SetState (Gst.State.Playing);
@@ -761,14 +801,49 @@ namespace Banshee.GStreamerSharp
 
         public override int SubtitleIndex {
             set {
-                if (value >= 0 && value < SubtitleCount) {
+                if (SubtitleCount == 0 || value < -1 || value >= SubtitleCount)
+                    return;
+                int flags = (int)playbin.Flags;
+
+                if (value == -1) {
+                    flags &= ~(1 << 2);//GST_PLAY_FLAG_TEXT
+                    playbin.Flags = (ObjectFlags)flags;
+                } else {
+                    flags |= (1 << 2);//GST_PLAY_FLAG_TEXT
+                    playbin.Flags = (ObjectFlags)flags;
                     playbin.CurrentText = value;
                 }
             }
         }
 
         public override SafeUri SubtitleUri {
-            set { playbin.Suburi = value.AbsoluteUri; }
+            set {
+                long pos = -1;
+                State state;
+                Format format = Format.Bytes;
+                bool paused = false;
+
+                // Gstreamer playbin do not support to set suburi during playback
+                // so have to stop/play and seek
+                playbin.GetState (out state, 0);
+                paused = (state == State.Paused);
+                if (state >= State.Paused) {
+                    playbin.QueryPosition (ref format, out pos);
+                    playbin.SetState (State.Ready);
+                    // Force to wait asynch operation
+                    playbin.GetState (out state, 0);
+                }
+
+                playbin.Suburi = value.AbsoluteUri;
+                playbin.SetState (paused ? State.Paused : State.Playing);
+
+                // Force to wait asynch operation
+                playbin.GetState (out state, 0);
+
+                if (pos != -1) {
+                    playbin.Seek (format, SeekFlags.Flush | SeekFlags.KeyUnit, pos);
+                }
+            }
             get { return new SafeUri (playbin.Suburi); }
         }
 

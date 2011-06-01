@@ -71,7 +71,8 @@ namespace Banshee.GStreamerSharp
                     return;
                 }
             }
-            #if GDK_WINDOWING_X11 || GDK_WINDOWING_WIN32
+
+#if GDK_WINDOWING_X11 || GDK_WINDOWING_WIN32
 
             video_display_context_type = VideoDisplayContextType.GdkWindow;
             
@@ -96,22 +97,19 @@ namespace Banshee.GStreamerSharp
                 ((Bin)videosink).ElementAdded += OnVideoSinkElementAdded;
             }
             
-            #else
+#else
             
             video_display_context_type = VideoDisplayContextType.Unsupported;
 
-            #if WIN32
-
-            videosink = ElementFactory.Make ("fakesink", "videosink");
-            if (videosink != NULL) {
-                 videosink ["sync"] = true;
+            if (PlatformDetection.IsWindows) {
+                videosink = ElementFactory.Make ("fakesink", "videosink");
+                if (videosink != null) {
+                     videosink ["sync"] = true;
+                }
+                playbin ["video-sink"] = videosink;
             }
             
-            playbin ["video-sink"] = videosink;
-
-            #endif
-            
-            #endif
+#endif
 
             if (PrepareWindow != null) {
                 PrepareWindow ();
@@ -133,7 +131,7 @@ namespace Banshee.GStreamerSharp
             if (message.Type != MessageType.Element)
                 return;
             
-            #if GDK_WINDOWING_X11 || GDK_WINDOWING_WIN32
+#if GDK_WINDOWING_X11 || GDK_WINDOWING_WIN32
 
             if (message.Structure == null || !message.Structure.HasName ("prepare-xwindow-id")) {
                 return;
@@ -145,14 +143,14 @@ namespace Banshee.GStreamerSharp
                 xoverlay.XwindowId = video_window_xid;
             }
 
-            #endif
+#endif
         }
 
         private void OnVideoSinkElementAdded (object o, ElementAddedArgs args)
         {
-            #if GDK_WINDOWING_X11 || GDK_WINDOWING_WIN32
+#if GDK_WINDOWING_X11 || GDK_WINDOWING_WIN32
             FindXOverlay ();
-            #endif
+#endif
         }
         private bool FindXOverlay ()
         {
