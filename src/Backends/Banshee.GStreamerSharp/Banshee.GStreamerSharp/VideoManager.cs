@@ -72,8 +72,6 @@ namespace Banshee.GStreamerSharp
                 }
             }
 
-#if GDK_WINDOWING_X11 || GDK_WINDOWING_WIN32
-
             video_display_context_type = VideoDisplayContextType.GdkWindow;
             
             videosink = ElementFactory.Make ("gconfvideosink", "videosink");
@@ -90,27 +88,13 @@ namespace Banshee.GStreamerSharp
             
             playbin ["video-sink"] = videosink;
             
-            bus.SyncHandler = bus.SyncSignalHandler;
-            bus.SyncMessage += OnSyncMessage;
+            playbin.Bus.SyncHandler = (bus, message) => {return playbin.Bus.SyncSignalHandler (message); };
+            playbin.Bus.SyncMessage += OnSyncMessage;
                 
             if (videosink is Bin) {
                 ((Bin)videosink).ElementAdded += OnVideoSinkElementAdded;
             }
             
-#else
-            
-            video_display_context_type = VideoDisplayContextType.Unsupported;
-
-            if (PlatformDetection.IsWindows) {
-                videosink = ElementFactory.Make ("fakesink", "videosink");
-                if (videosink != null) {
-                     videosink ["sync"] = true;
-                }
-                playbin ["video-sink"] = videosink;
-            }
-            
-#endif
-
             if (PrepareWindow != null) {
                 PrepareWindow ();
             }
@@ -130,10 +114,8 @@ namespace Banshee.GStreamerSharp
 
             if (message.Type != MessageType.Element)
                 return;
-            
-#if GDK_WINDOWING_X11 || GDK_WINDOWING_WIN32
 
-            if (message.Structure == null || !message.Structure.HasName ("prepare-xwindow-id")) {
+            if (message.Structure == null || message.Structure.Name != "prepare-xwindow-id") {
                 return;
             }
 
@@ -143,15 +125,13 @@ namespace Banshee.GStreamerSharp
                 xoverlay.XwindowId = video_window_xid;
             }
 
-#endif
         }
 
         private void OnVideoSinkElementAdded (object o, ElementAddedArgs args)
         {
-#if GDK_WINDOWING_X11 || GDK_WINDOWING_WIN32
             FindXOverlay ();
-#endif
         }
+
         private bool FindXOverlay ()
         {
             Element video_sink = null;
@@ -174,12 +154,12 @@ namespace Banshee.GStreamerSharp
             
             xoverlay = xoverlay_element as XOverlay;
 
-#if !GDK_WINDOWING_WIN32
-            // We can't rely on aspect ratio from dshowvideosink
-            if (xoverlay != null && xoverlay_element.HasProperty ("force-aspect-ratio")) {
-                xoverlay_element ["force-aspect-ratio"] = true;
+            if (!PlatformDetection.IsWindows) {
+                // We can't rely on aspect ratio from dshowvideosink
+                if (xoverlay != null && xoverlay_element.HasProperty ("force-aspect-ratio")) {
+                    xoverlay_element ["force-aspect-ratio"] = true;
+                }
             }
-#endif
             
             if (xoverlay != null && xoverlay_element.HasProperty ("handle-events")) {
                 xoverlay_element ["handle-events"] = false;
