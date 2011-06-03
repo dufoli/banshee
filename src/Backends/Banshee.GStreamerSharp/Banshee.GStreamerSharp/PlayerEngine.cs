@@ -51,7 +51,7 @@ using Banshee.Preferences;
 
 namespace Banshee.GStreamerSharp
 {
-    public class PlayerEngine : Banshee.MediaEngine.PlayerEngine, IEqualizer
+    public class PlayerEngine : Banshee.MediaEngine.PlayerEngine, IEqualizer, IVisualizationDataSource
     {
         private class AudioSinkBin : Bin
         {
@@ -62,6 +62,7 @@ namespace Banshee.GStreamerSharp
             Element preamp;
             Element first;
             GhostPad visible_sink;
+            Element audiotee;
             object pipeline_lock = new object ();
 
             public AudioSinkBin (string elementName) : base(elementName)
@@ -69,6 +70,12 @@ namespace Banshee.GStreamerSharp
                 hw_audio_sink = SelectAudioSink ();
                 Add (hw_audio_sink);
                 first = hw_audio_sink;
+
+                // Our audio sink is a tee, so plugins can attach their own pipelines
+                audiotee = ElementFactory.Make ("tee", "audiotee");
+                if (audiotee == null) {
+                    Log.Error ("Can not create audio tee!");
+                }
 
                 volume = FindVolumeProvider (hw_audio_sink);
                 if (volume != null) {
@@ -95,6 +102,13 @@ namespace Banshee.GStreamerSharp
                     first = eq_audioconvert;
                     Log.Debug ("Built and linked Equalizer");
                 }
+
+                // Link the first tee pad to the primary audio sink queue
+                Pad sinkpad = first.GetStaticPad ("sink");
+                Pad pad = audiotee.GetRequestPad ("src%d");
+                audiotee ["alloc-pad"] = pad;
+                pad.Link (sinkpad);
+                first = audiotee;
 
                 visible_sink = new GhostPad ("sink", first.GetStaticPad ("sink"));
                 AddPad (visible_sink);
@@ -273,6 +287,10 @@ namespace Banshee.GStreamerSharp
                 }
             }
 
+            public Pad RequestTeePad ()
+            {
+                return audiotee.GetRequestPad ("src%d");
+            }
         }
 
 
@@ -283,6 +301,7 @@ namespace Banshee.GStreamerSharp
         ManualResetEvent next_track_set;
         CddaManager cddaManager;
         VideoManager videoManager;
+        Visualization visualization;
 
         public PlayerEngine ()
         {
@@ -321,6 +340,9 @@ namespace Banshee.GStreamerSharp
                 Volume = (ushort)PlayerEngineService.VolumeSchema.Get ();
             }
 
+            Pad teepad = audio_sink.RequestTeePad ();
+            visualization = new Visualization (audio_sink, teepad);
+
             playbin.AddNotification ("volume", OnVolumeChanged);
             playbin.Bus.AddWatch (OnBusMessage);
             playbin.AboutToFinish += OnAboutToFinish;
@@ -350,6 +372,16 @@ namespace Banshee.GStreamerSharp
         {
             UninstallPreferences ();
             base.Dispose ();
+        }
+
+        public event VisualizationDataHandler DataAvailable {
+            add {
+                visualization.DataAvailable += value;
+            }
+
+            remove {
+                visualization.DataAvailable -= value;
+            }
         }
 
         public override void VideoExpose (IntPtr window, bool direct)
