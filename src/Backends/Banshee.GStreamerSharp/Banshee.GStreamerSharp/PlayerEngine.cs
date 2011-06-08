@@ -65,6 +65,11 @@ namespace Banshee.GStreamerSharp
             Element audiotee;
             object pipeline_lock = new object ();
 
+            public AudioSinkBin (IntPtr o) : base(o)
+            {
+
+            }
+
             public AudioSinkBin (string elementName) : base(elementName)
             {
                 hw_audio_sink = SelectAudioSink ();

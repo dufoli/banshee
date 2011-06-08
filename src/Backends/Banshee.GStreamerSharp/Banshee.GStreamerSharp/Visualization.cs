@@ -68,16 +68,16 @@ namespace Banshee.GStreamerSharp
           Blackman
         }
 
-        [DllImport ("libgstbase-0.10.dll")]
+        [DllImport ("libgstfft-0.10.dll")]
         private static extern GstFFTF32 gst_fft_f32_new (int len, bool inverse);
 
-        [DllImport ("libgstbase-0.10.dll")]
+        [DllImport ("libgstfft-0.10.dll")]
         private static extern void gst_fft_f32_window (GstFFTF32 self, [MarshalAs (UnmanagedType.LPArray)] float [] timedata, FFTWindow window);
 
-        [DllImport ("libgstbase-0.10.dll")]
+        [DllImport ("libgstfft-0.10.dll")]
         private static extern void gst_fft_f32_fft (GstFFTF32 self, [MarshalAs (UnmanagedType.LPArray)] float [] timedata, [MarshalAs (UnmanagedType.LPArray, ArraySubType=UnmanagedType.Struct)] GstFFTF32Complex [] freqdata);
 
-        [DllImport ("libgstbase-0.10.dll")]
+        [DllImport ("libgstfft-0.10.dll")]
         private static extern void gst_fft_f32_free (GstFFTF32 self);
 
         public Visualization (Bin audiobin, Pad teepad)
@@ -85,7 +85,8 @@ namespace Banshee.GStreamerSharp
             // The basic pipeline we're constructing is:
             // .audiotee ! queue ! audioresample ! audioconvert ! fakesink
         
-            Element converter, resampler, audiosinkqueue;
+            Element converter, resampler;
+            Queue audiosinkqueue;
             Pad pad;
 
             vis_buffer = null;
@@ -94,7 +95,7 @@ namespace Banshee.GStreamerSharp
             vis_fft_sample_buffer = new float [SLICE_SIZE];
             
             // Core elements, if something fails here, it's the end of the world
-            audiosinkqueue = ElementFactory.Make ("queue", "vis-queue");
+            audiosinkqueue = (Queue)ElementFactory.Make ("queue", "vis-queue");
         
             pad = audiosinkqueue.GetStaticPad ("sink");
             pad.AddEventProbe (new PadEventProbeCallback (EventProbe));
@@ -113,27 +114,27 @@ namespace Banshee.GStreamerSharp
         
             // Keep around the 5 most recent seconds of audio so that when resuming
             // visualization we have something to show right away.
-            audiosinkqueue ["leaky"] = 2;
-            audiosinkqueue ["max-size-buffers"] = 0;
-            audiosinkqueue ["max-size-bytes"] = 0;
-            audiosinkqueue ["max-size-time"] = Clock.Second * 5;
+            audiosinkqueue.Leaky = Queue.LeakyType.Downstream;
+            audiosinkqueue.MaxSizeBuffers = 0;
+            audiosinkqueue.MaxSizeBytes = 0;
+            audiosinkqueue.MaxSizeTime = Clock.Second * 5;
             
             fakesink.Handoff += PCMHandoff;
         
         
             // This enables the handoff signal.
-            fakesink ["signal-handoffs"] = true;
+            fakesink.SignalHandoffs = true;
             // Synchronize so we see vis at the same time as we hear it.
-            fakesink ["sync"] = true;
+            fakesink.Sync = true;
             // Drop buffers if they come in too late.  This is mainly used when
             // thawing the vis pipeline.
-            fakesink ["max-lateness"] = Clock.Second / 120;
+            fakesink.MaxLateness = (long)(Clock.Second / 120);
             // Deliver buffers one frame early.  This allows for rendering
             // time.  (TODO: It would be great to calculate this on-the-fly so
             // we match the rendering time.
-            fakesink ["ts-offset"] = -(long)(Clock.Second / 60);
+            fakesink.TsOffset = -(long)(Clock.Second / 60);
             // Don't go to PAUSED when we freeze the pipeline.
-            fakesink ["async"] = false;
+            fakesink.Async = false;
             
             audiobin.Add (audiosinkqueue, resampler, converter, fakesink);
             
@@ -152,7 +153,12 @@ namespace Banshee.GStreamerSharp
             // Disable the pipeline till we hear otherwise from managed land.
             Blocked = true;
         }
-        
+
+        ~Visualization ()
+        {
+            gst_fft_f32_free (vis_fft);
+        }
+
         public bool Active
         {
             set {
