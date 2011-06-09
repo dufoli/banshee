@@ -28,7 +28,6 @@
 //
 
 using System;
-using System.Threading;
 using System.Runtime.InteropServices;
 using Mono.Unix;
 
@@ -48,6 +47,11 @@ namespace Banshee.GStreamerSharp
     {
         private class AudioSinkBin : Bin
         {
+
+            public AudioSinkBin (IntPtr o) : base(o)
+            {
+
+            }
 
             public AudioSinkBin (string elementName, string encoder_pipeline, string output_uri) : base(elementName)
             {
