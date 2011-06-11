@@ -131,7 +131,7 @@ namespace Banshee.GStreamerSharp
             string new_cdda_device;
             int p;
 
-            if (playbin == null || String.IsNullOrEmpty (uri) || uri.StartsWith ("cdda://")) {
+            if (playbin == null || String.IsNullOrEmpty (uri) || !uri.StartsWith ("cdda://")) {
                 // Something is hosed or the URI isn't actually CDDA
                 if (Device != null) {
                     Log.WarningFormat ("cdda: finished using device ({0})", Device);
