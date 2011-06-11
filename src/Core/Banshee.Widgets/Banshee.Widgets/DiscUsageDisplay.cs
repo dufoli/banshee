@@ -104,13 +104,13 @@ namespace Banshee.Widgets
             base.OnSizeAllocated(rect);
         }
 
-        protected override bool OnExposeEvent(Gdk.EventExpose evnt)
+        protected override bool OnDrawn (Cairo.Context cr)
         {
             if(!IsRealized) {
                 return false;
             }
 
-            Cairo.Context cr = Gdk.CairoHelper.Create(GdkWindow);
+            CairoHelper.TransformToWindow (cr, this, GdkWindow);
 
             foreach(Gdk.Rectangle rect in evnt.Region.GetRectangles()) {
                 cr.Rectangle(rect.X, rect.Y, rect.Width, rect.Height);
@@ -118,7 +118,6 @@ namespace Banshee.Widgets
                 Draw(cr);
             }
 
-            CairoExtensions.DisposeContext (cr);
             return false;
         }
 

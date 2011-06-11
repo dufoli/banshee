@@ -102,7 +102,7 @@ namespace Banshee.Widgets
             }
         }
 
-        protected override bool OnExposeEvent(Gdk.EventExpose evnt)
+        protected override bool OnDrawn (Cairo.Context cr)
         {
             if(!IsDrawable) {
                 return false;
@@ -122,24 +122,37 @@ namespace Banshee.Widgets
             return false;
         }
 
-        protected override void OnSizeRequested (ref Requisition requisition)
+        protected override void OnGetPreferredHeight (out int minimum_height, out int natural_height)
         {
             if (label == null) {
-                base.OnSizeRequested (ref requisition);
+                base.OnGetPreferredWidth (out minimum_width, out natural_width);
                 return;
             }
 
-            requisition.Width = 0;
-            requisition.Height = 0;
+            minimum_height = natural_height = 0;
 
             Requisition child_requisition = label.SizeRequest ();
-            requisition.Width = Math.Max (requisition.Width, child_requisition.Width);
-            requisition.Height += child_requisition.Height;
+            natural_height += child_requisition.Height;
 
-            requisition.Width += ((int)BorderWidth + padding) * 2;
-            requisition.Height += ((int)BorderWidth + padding) * 2;
+            natural_height += ((int)BorderWidth + padding) * 2;
+            minimum_height = natural_height;
+        }
 
-            base.OnSizeRequested (ref requisition);
+        protected override void OnGetPreferredWidth (out int minimum_width, out int natural_width)
+        {
+            if (label == null) {
+                base.OnGetPreferredWidth (out minimum_width, out natural_width);
+                return;
+            }
+
+            minimum_width = natural_width = 0;
+
+            Requisition child_requisition = label.SizeRequest ();
+            natural_width = Math.Max (natural_width, child_requisition.Width);
+
+            natural_width += ((int)BorderWidth + padding) * 2;
+
+            minimum_width = natural_width;
         }
 
         protected override void OnSizeAllocated (Gdk.Rectangle allocation)

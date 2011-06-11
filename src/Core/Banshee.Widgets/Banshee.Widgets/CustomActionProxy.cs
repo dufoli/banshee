@@ -117,8 +117,9 @@ namespace Banshee.Widgets
                 }
             }
 
-            if (item != null) {
-                action.ConnectProxy (item);
+            var activatable = item as Activatable;
+            if (activatable != null) {
+                activatable.RelatedAction = action;
             }
         }
 

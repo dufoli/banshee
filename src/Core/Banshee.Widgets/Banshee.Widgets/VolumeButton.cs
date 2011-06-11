@@ -54,8 +54,6 @@ namespace Bacon
         private const int SCALE_SIZE = 100;
         private const int CLICK_TIMEOUT = 250;
 
-        private Tooltips tooltips = new Tooltips();
-
         private Window dock;
         private VolumeScale slider;
         private Image image;
@@ -98,7 +96,7 @@ namespace Bacon
             WidgetEventAfter += OnWidgetEventAfter;
         }
 
-        public override void Dispose()
+        protected override void Dispose(bool disposing)
         {
             if(dock != null) {
                 dock.Destroy();
@@ -134,7 +132,7 @@ namespace Bacon
             dock.Hidden += OnDockHidden;
 
             Frame frame = new Frame();
-            frame.Shadow = ShadowType.Out;
+            frame.ShadowType = ShadowType.Out;
             frame.Show();
 
             dock.Add(frame);
@@ -218,7 +216,7 @@ namespace Bacon
                 dock.Move(x + (Allocation.Width - dock.Allocation.Width) / 2, y - dock.Allocation.Height);
                 dock.ShowAll();
                 Relief = ReliefStyle.Normal;
-                State = StateType.Active;
+                this.SetStateFlags (Gtk.StateFlags.Active, true);
             } else {
                 y += Allocation.Y;
 
@@ -277,8 +275,10 @@ namespace Bacon
 
                 Gdk.EventButton evnt_copy = (Gdk.EventButton)Gdk.EventHelper.Copy(evnt);
                 m = slider.Allocation.Height - slider.MinSliderSize;
-                UpdateEventButton(evnt_copy, slider.GdkWindow, slider.Allocation.Width / 2,
-                    ((1.0 - v) * m) + slider.MinSliderSize / 2);
+                evnt_copy.X = slider.Allocation.Width / 2;
+                evnt_copy.Y = ((1.0 - v) * m) + slider.MinSliderSize / 2;
+                //UpdateEventButton(evnt_copy, slider.GdkWindow, slider.Allocation.Width / 2,
+                //    ((1.0 - v) * m) + slider.MinSliderSize / 2);
                 slider.ProcessEvent(evnt_copy);
                 Gdk.EventHelper.Free(evnt_copy);
             } else {
@@ -397,7 +397,7 @@ namespace Bacon
 
         private void OnDockHidden(object o, EventArgs args)
         {
-            State = StateType.Normal;
+            this.SetStateFlags (Gtk.StateFlags.Normal, true);
             Relief = ReliefStyle.None;
         }
 
@@ -483,7 +483,8 @@ namespace Bacon
 
             if(evnt is Gdk.EventButton) {
                 Gdk.EventButton evnt_copy = (Gdk.EventButton)Gdk.EventHelper.Copy(evnt);
-                UpdateEventButton(evnt_copy, GdkWindow, Gdk.EventType.ButtonRelease);
+                evnt_copy.Type = Gdk.EventType.ButtonRelease;
+                //UpdateEventButton(evnt_copy, GdkWindow, Gdk.EventType.ButtonRelease);
                 ProcessEvent(evnt_copy);
                 Gdk.EventHelper.Free(evnt_copy);
             }
@@ -553,7 +554,7 @@ namespace Bacon
                     (slider.Adjustment.Upper - slider.Adjustment.Lower) * 100.0));
             }
 
-            tooltips.SetTip(this, tip, null);
+            this.TooltipText = tip;
         }
 
         private bool AdjustVolume(int direction)
@@ -592,7 +593,7 @@ namespace Bacon
         // these objects is simply incomplete.
         // http://bugzilla.novell.com/show_bug.cgi?id=323373
 
-        private void UpdateEventButton(Gdk.EventButton evnt, Gdk.Window window, Gdk.EventType type)
+        /*private void UpdateEventButton(Gdk.EventButton evnt, Gdk.Window window, Gdk.EventType type)
         {
             Marshal.WriteInt32(evnt.Handle, 0, (int)type);
             UpdateEventButtonWindow(evnt, window);
@@ -617,7 +618,7 @@ namespace Bacon
             #pragma warning restore 0612
 
             Marshal.WriteIntPtr(evnt.Handle, IntPtr.Size, window.Handle);
-        }
+        }*/
 
         private void MarshalWriteDouble(IntPtr ptr, int offset, double value)
         {

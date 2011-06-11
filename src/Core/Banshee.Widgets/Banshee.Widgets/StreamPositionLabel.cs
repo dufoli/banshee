@@ -89,20 +89,31 @@ namespace Banshee.Widgets
             first_style_set = true;
         }
 
-        protected override void OnSizeRequested (ref Gtk.Requisition requisition)
+        protected override void OnGetPreferredHeight (out int minimum_height, out int natural_height)
         {
+            minimum_height = natural_height = default(int);
             if (!IsRealized || layout == null) {
                 return;
             }
 
             int width, height;
             layout.GetPixelSize (out width, out height);
-
-            requisition.Width = width;
-            requisition.Height = height;
+            minimum_height = natural_height = height;
         }
 
-        protected override bool OnExposeEvent (Gdk.EventExpose evnt)
+        protected override void OnGetPreferredWidth (out int minimum_width, out int natural_width)
+        {
+            minimum_width = natural_width = default(int);
+            if (!IsRealized || layout == null) {
+                return;
+            }
+
+            int width, height;
+            layout.GetPixelSize (out width, out height);
+            minimum_width = natural_width = width;
+        }
+
+        protected override bool OnDrawn (Cairo.Context cr)
         {
             int bar_width = (int)((double)Allocation.Width * buffering_progress);
             bool render_bar = false;

@@ -67,7 +67,10 @@ dnl Mono and gmcs
 SHAMROCK_CHECK_MONO_MODULE(2.4.3)
 SHAMROCK_FIND_MONO_2_0_COMPILER
 SHAMROCK_FIND_MONO_RUNTIME
-SHAMROCK_CHECK_MONO_2_0_GAC_ASSEMBLIES([Mono.Cairo Mono.Posix ICSharpCode.SharpZipLib])
+SHAMROCK_CHECK_MONO_2_0_GAC_ASSEMBLIES([
+	Mono.Posix
+	ICSharpCode.SharpZipLib
+])
 
 dnl Check for GNOME >= 2.28 to see if we should remove
 dnl 'Media Player' from the app Name, bgo#596242, except
@@ -197,8 +200,10 @@ AC_SUBST(ENABLE_RELEASE)
 if test "x$enable_release" = "xyes"; then
 	GMCS_FLAGS="-define:RELEASE"
 else
-	GMCS_FLAGS="-warnaserror"
+	GMCS_FLAGS=""
 fi
+#FIXME: add "-warnaserror" back above!
+
 AC_SUBST(GMCS_FLAGS)
 
 AM_CONDITIONAL(HYENA_PKG_CONFIG, false)

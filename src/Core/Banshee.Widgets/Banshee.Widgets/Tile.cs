@@ -76,8 +76,10 @@ namespace Banshee.Widgets
 
             StyleSet += delegate {
                 PrimaryLabel.ModifyFg (StateType.Normal, Style.Text (StateType.Normal));
-                SecondaryLabel.ModifyFg (StateType.Normal, Hyena.Gui.GtkUtilities.ColorBlend (
-                    Style.Foreground (StateType.Normal), Style.Background (StateType.Normal)));
+                Gdk.RGBA rgba;
+                StyleContext.GetColor (StateFlags.Normal, rgba);
+                SecondaryLabel.OverrideColor (StateFlags.Normal, Hyena.Gui.GtkUtilities.ColorBlend (
+                    rgba, StyleContext.GetBackgroundColor (StateFlags.Normal)));
             };
 
             Relief = ReliefStyle.None;
