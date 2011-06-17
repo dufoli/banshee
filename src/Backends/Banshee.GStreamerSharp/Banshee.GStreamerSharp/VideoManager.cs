@@ -88,7 +88,7 @@ namespace Banshee.GStreamerSharp
             
             playbin ["video-sink"] = videosink;
             
-            playbin.Bus.SyncHandler = (bus, message) => {return playbin.Bus.SyncSignalHandler (message); };
+            playbin.Bus.SyncHandler = (bus, message) => {return bus.SyncSignalHandler (message); };
             playbin.Bus.SyncMessage += OnSyncMessage;
                 
             if (videosink is Bin) {
