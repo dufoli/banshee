@@ -28,12 +28,15 @@
 
 using Gst;
 using Gst.Base;
+using Gst.CorePlugins;
 
 using Hyena;
 
 using Banshee.MediaEngine;
+
 using System.Runtime.InteropServices;
-using Gst.CorePlugins;
+using System;
+
 
 namespace Banshee.GStreamerSharp
 {
@@ -44,14 +47,10 @@ namespace Banshee.GStreamerSharp
         Adapter vis_buffer;
         bool active;
         bool vis_thawing;
-        GstFFTF32 vis_fft;
+        IntPtr vis_fft;
         GstFFTF32Complex[] vis_fft_buffer;
         float[] vis_fft_sample_buffer;
         uint wanted_size;
-
-        [StructLayout(LayoutKind.Sequential)]
-        struct GstFFTF32 {
-        };
 
         [StructLayout(LayoutKind.Sequential)]
         struct GstFFTF32Complex {
@@ -69,16 +68,16 @@ namespace Banshee.GStreamerSharp
         }
 
         [DllImport ("libgstfft-0.10.dll")]
-        private static extern GstFFTF32 gst_fft_f32_new (int len, bool inverse);
+        private static extern IntPtr gst_fft_f32_new (int len, bool inverse);
 
         [DllImport ("libgstfft-0.10.dll")]
-        private static extern void gst_fft_f32_window (GstFFTF32 self, [MarshalAs (UnmanagedType.LPArray)] float [] timedata, FFTWindow window);
+        private static extern void gst_fft_f32_window (IntPtr self, [MarshalAs (UnmanagedType.LPArray)] float [] timedata, FFTWindow window);
 
         [DllImport ("libgstfft-0.10.dll")]
-        private static extern void gst_fft_f32_fft (GstFFTF32 self, [MarshalAs (UnmanagedType.LPArray)] float [] timedata, [MarshalAs (UnmanagedType.LPArray, ArraySubType=UnmanagedType.Struct)] GstFFTF32Complex [] freqdata);
+        private static extern void gst_fft_f32_fft (IntPtr self, [MarshalAs (UnmanagedType.LPArray)] float [] timedata, [MarshalAs (UnmanagedType.LPArray, ArraySubType=UnmanagedType.Struct)] GstFFTF32Complex [] freqdata);
 
         [DllImport ("libgstfft-0.10.dll")]
-        private static extern void gst_fft_f32_free (GstFFTF32 self);
+        private static extern void gst_fft_f32_free (IntPtr self);
 
         public Visualization (Bin audiobin, Pad teepad)
         {
@@ -156,7 +155,8 @@ namespace Banshee.GStreamerSharp
 
         ~Visualization ()
         {
-            gst_fft_f32_free (vis_fft);
+            if (vis_fft != IntPtr.Zero)
+                gst_fft_f32_free (vis_fft);
         }
 
         public bool Active
@@ -218,7 +218,7 @@ namespace Banshee.GStreamerSharp
 
         private void PCMHandoff (object o, FakeSink.HandoffArgs args)
         {
-            Buffer data;
+            Gst.Buffer data;
         
             if (OnDataAvailable == null) {
                 return;
