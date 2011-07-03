@@ -159,7 +159,7 @@ namespace Banshee.Widgets
 
         private bool toggling = false;
 
-        private void OnMenuItemToggled(object o, EventArgs args)
+        private void OnMenuItemActivated(object o, EventArgs args)
         {
             if(toggling || !(o is FilterMenuItem)) {
                 return;
@@ -259,9 +259,9 @@ namespace Banshee.Widgets
         {
             Style.PaintFlatBox (entry.Style, cr, State, ShadowType.None, this,
                 "entry_bg", 0, 0, Allocation.Width, Allocation.Height);
-            PropagateExpose(Child, evnt);
-            Style.PaintShadow(entry.Style, GdkWindow, StateType.Normal,
-                ShadowType.In, evnt.Area, entry, "entry",
+            PropagateDraw(Child, cr);
+            Style.PaintShadow(entry.Style, cr, StateType.Normal,
+                ShadowType.In, entry, "entry",
                 0, 0, Allocation.Width, Allocation.Height);
             return true;
         }
@@ -303,11 +303,11 @@ namespace Banshee.Widgets
             }
 
             FilterMenuItem item = new FilterMenuItem(id, label);
-            item.Toggled += OnMenuItemToggled;
+            item.Activated += OnMenuItemActivated;
             menu.Append(item);
 
             if(ActiveFilterID < 0) {
-                item.Toggle();
+                item.Activate();
             }
 
             filter_button.Visible = true;
@@ -330,7 +330,7 @@ namespace Banshee.Widgets
         {
             FilterMenuItem item = FindFilterMenuItem(id);
             if(item != null) {
-                item.Toggle();
+                item.Activate();
             }
         }
 
@@ -456,37 +456,21 @@ namespace Banshee.Widgets
 
         private class FramelessEntry : Entry
         {
-            private Gdk.Window text_window;
             private SearchEntry parent;
             private Pango.Layout layout;
-            private Cairo.Context text_gc;
-
+ 
             public FramelessEntry(SearchEntry parent) : base()
             {
                 this.parent = parent;
                 HasFrame = false;
 
-                parent.StyleSet += OnParentStyleSet;
+                parent.StyleUpdated += OnParentStyleUpdated;
                 WidthChars = 1;
             }
 
-            private void OnParentStyleSet(object o, EventArgs args)
+            private void OnParentStyleUpdated (object o, EventArgs args)
             {
-                RefreshGC();
                 QueueDraw();
-            }
-
-            private void RefreshGC()
-            {
-                if(text_window == null) {
-                    return;
-                }
-
-                text_gc = Gdk.CairoHelper.Create (text_window);
-                text_gc.Copy(Style.TextGC(StateType.Normal));
-                Gdk.Color color_a = parent.Style.Base(StateType.Normal);
-                Gdk.Color color_b = parent.Style.Text(StateType.Normal);
-                text_gc.RgbFgColor = Hyena.Gui.GtkUtilities.ColorBlend(color_a, color_b);
             }
 
             protected override bool OnDrawn (Cairo.Context cr)
@@ -496,16 +480,16 @@ namespace Banshee.Widgets
                 // separate window, so we can ensure that for themes that don't
                 // respect HasFrame, we never ever allow the base frame drawing
                 // to happen
-                if(evnt.Window == GdkWindow) {
+                if (CairoHelper.ShouldDrawWindow (cr, Window)) {
                     return true;
                 }
 
-                bool ret = base.OnExposeEvent(evnt);
+                bool ret = base.OnDrawn (cr);
 
-                if(text_gc == null || evnt.Window != text_window) {
-                    text_window = evnt.Window;
-                    RefreshGC();
-                }
+                StyleContext.Save ();
+                //use entry class to have free theming
+                StyleContext.AddClass ("entry");
+                StyleContext.State = StateFlags.Insensitive;
 
                 if(Text.Length > 0 || HasFocus || parent.EmptyMessage == null) {
                     return ret;
@@ -519,8 +503,8 @@ namespace Banshee.Widgets
                 int width, height;
                 layout.SetMarkup(parent.EmptyMessage);
                 layout.GetPixelSize(out width, out height);
-                evnt.Window.DrawLayout(text_gc, 2, (SizeRequest().Height - height) / 2, layout);
-
+                StyleContext.RenderLayout (cr, 2, (SizeRequest().Height - height) / 2, layout);
+                StyleContext.Restore ();
                 return ret;
             }
         }
