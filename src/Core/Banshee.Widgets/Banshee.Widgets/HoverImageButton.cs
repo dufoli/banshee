@@ -151,7 +151,7 @@ namespace Banshee.Widgets
         {
             base.OnDrawn (cr);
 
-            PropagateExpose(Child, evnt);
+            PropagateDraw(Child, cr);
 
             if(HasFocus && draw_focus) {
                 Style.PaintFocus(Style, cr, StateType.Normal, this, "button",
