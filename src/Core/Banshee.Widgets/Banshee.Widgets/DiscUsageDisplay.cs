@@ -67,15 +67,19 @@ namespace Banshee.Widgets
             AppPaintable = true;
         }
 
-        protected override void OnStyleSet(Gtk.Style style)
+        protected override void OnStyleUpdated ()
         {
-            fill_color_a = CairoExtensions.GdkColorToCairoColor(Style.Background(StateType.Selected));
-            fill_color_b = CairoExtensions.GdkColorToCairoColor(Style.Foreground(StateType.Selected));
-            fill_color_c = CairoExtensions.GdkColorToCairoColor(Style.Background(StateType.Normal));
-            stroke_color = CairoExtensions.GdkColorToCairoColor(Style.Foreground(StateType.Normal), 0.6);
-            inner_stroke_color = CairoExtensions.GdkColorToCairoColor(Style.Foreground(StateType.Normal), 0.4);
-            text_color = CairoExtensions.GdkColorToCairoColor(Style.Foreground(StateType.Normal), 0.8);
-            text_bg_color = CairoExtensions.GdkColorToCairoColor(Style.Background(StateType.Normal), 0.6);
+            Gdk.RGBA rgba = StyleContext.GetBackgroundColor (StateFlags.Selected);
+            fill_color_a = new Color (rgba.Red, rgba.Green, rgba.Blue, rgba.Alpha);
+            rgba = StyleContext.GetColor (StateFlags.Selected);
+            fill_color_b = new Color (rgba.Red, rgba.Green, rgba.Blue, rgba.Alpha);
+            rgba = StyleContext.GetColor (StateFlags.Normal);
+            stroke_color = new Color (rgba.Red, rgba.Green, rgba.Blue, 0.6);
+            inner_stroke_color = new Color (rgba.Red, rgba.Green, rgba.Blue, 0.4);
+            text_color = new Color (rgba.Red, rgba.Green, rgba.Blue, 0.8);
+            rgba = StyleContext.GetBackgroundColor (StateFlags.Normal);
+            text_bg_color = new Color (rgba.Red, rgba.Green, rgba.Blue, 0.6);
+            fill_color_c = new Color (rgba.Red, rgba.Green, rgba.Blue, rgba.Alpha);
         }
 
         protected override void OnSizeAllocated(Gdk.Rectangle rect)
@@ -110,13 +114,11 @@ namespace Banshee.Widgets
                 return false;
             }
 
-            CairoHelper.TransformToWindow (cr, this, GdkWindow);
+            CairoHelper.TransformToWindow (cr, this, Window);
 
-            foreach(Gdk.Rectangle rect in evnt.Region.GetRectangles()) {
-                cr.Rectangle(rect.X, rect.Y, rect.Width, rect.Height);
-                cr.Clip();
-                Draw(cr);
-            }
+            cr.Rectangle (Allocation.X, Allocation.Y, Allocation.Width, Allocation.Height);
+            cr.Clip();
+            Draw(cr);
 
             return false;
         }
