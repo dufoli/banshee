@@ -108,15 +108,15 @@ namespace Banshee.Widgets
                 return false;
             }
 
-            if(evnt.Window == GdkWindow && HasFocus) {
+            if(CairoHelper.ShouldDrawWindow (cr, Window) && HasFocus) {
                 int layout_width = 0, layout_height = 0;
                 label.Layout.GetPixelSize(out layout_width, out layout_height);
-                Style.PaintFocus (Style, GdkWindow, State, evnt.Area, this, "checkbutton",
+                Style.PaintFocus (Style, cr, State, this, "checkbutton",
                     0, 0, layout_width + 2 * padding, layout_height + 2 * padding);
             }
 
             if(Child != null) {
-                PropagateExpose(Child, evnt);
+                PropagateDraw(Child, cr);
             }
 
             return false;
@@ -125,7 +125,7 @@ namespace Banshee.Widgets
         protected override void OnGetPreferredHeight (out int minimum_height, out int natural_height)
         {
             if (label == null) {
-                base.OnGetPreferredWidth (out minimum_width, out natural_width);
+                base.OnGetPreferredHeight (out minimum_height, out natural_height);
                 return;
             }
 
