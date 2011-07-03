@@ -122,12 +122,16 @@ namespace Banshee.Widgets
                 bar_width -= 2 * Style.XThickness;
                 render_bar = true;
 
-                Gtk.Style.PaintBox (Style, GdkWindow, StateType.Normal, ShadowType.In, evnt.Area, this, null,
+                StyleContext.RenderBackground (cr,
+                    Allocation.X, Allocation.Y, Allocation.Width, Allocation.Height);
+                StyleContext.RenderFrame (cr,
                     Allocation.X, Allocation.Y, Allocation.Width, Allocation.Height);
 
                 if (bar_width > 0) {
-                    Gtk.Style.PaintBox (Style, GdkWindow, StateType.Selected, ShadowType.EtchedOut,
-                        evnt.Area, this, "bar",
+                    StyleContext.RenderBackground (cr,
+                        Allocation.X + Style.XThickness, Allocation.Y + Style.YThickness,
+                        bar_width, Allocation.Height - 2 * Style.YThickness);
+                    StyleContext.RenderFrame (cr,
                         Allocation.X + Style.XThickness, Allocation.Y + Style.YThickness,
                         bar_width, Allocation.Height - 2 * Style.YThickness);
                 }
@@ -138,18 +142,18 @@ namespace Banshee.Widgets
 
             int x = Allocation.X + ((Allocation.Width - width) / 2);
             int y = Allocation.Y + ((Allocation.Height - height) / 2);
-            Gdk.Rectangle rect = evnt.Area;
+            Gdk.Rectangle rect = Allocation;
 
             if (render_bar) {
                 width = bar_width + Style.XThickness;
-                rect = new Gdk.Rectangle (evnt.Area.X, evnt.Area.Y, width, evnt.Area.Height);
-                Gtk.Style.PaintLayout (Style, GdkWindow, StateType.Selected, true, rect, this, null, x, y, layout);
+                rect = new Gdk.Rectangle (Allocation.X, Allocation.Y, width, Allocation.Height);
+                StyleContext.RenderLayout (cr, x, y, layout);
 
                 rect.X += rect.Width;
-                rect.Width = evnt.Area.Width - rect.Width;
+                rect.Width = Allocation.Width - rect.Width;
             }
-
-            Gtk.Style.PaintLayout (Style, GdkWindow, StateType.Normal, false, rect, this, null, x, y, layout);
+//Set state to stateflags normal?
+            StyleContext.RenderLayout (cr, x, y, layout);
 
             return true;
         }
