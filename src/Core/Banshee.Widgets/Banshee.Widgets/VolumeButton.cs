@@ -207,7 +207,7 @@ namespace Bacon
 
             dock.Screen = Screen;
 
-            GdkWindow.GetOrigin(out x, out y);
+            Window.GetOrigin(out x, out y);
             x += Allocation.X;
 
             v = Volume / (adj.Upper - adj.Lower);
@@ -223,10 +223,10 @@ namespace Bacon
                 dock.Move(x, y - (SCALE_SIZE / 2));
                 dock.ShowAll();
 
-                dock.GdkWindow.GetOrigin(out dx, out dy);
+                dock.Window.GetOrigin(out dx, out dy);
                 dy += dock.Allocation.Y;
 
-                slider.GdkWindow.GetOrigin(out sx, out sy);
+                slider.Window.GetOrigin(out sx, out sy);
                 sy += slider.Allocation.Y;
                 ystartoff = sy - dy;
 
@@ -245,7 +245,7 @@ namespace Bacon
                 }
 
                 dock.Move(x, y);
-                slider.GdkWindow.GetOrigin(out sx, out sy);
+                slider.Window.GetOrigin(out sx, out sy);
             }
 
             bool base_result = !classic && evnt is Gdk.EventButton
@@ -254,7 +254,7 @@ namespace Bacon
 
             Gtk.Grab.Add(dock);
 
-            if(Gdk.Pointer.Grab(dock.GdkWindow, true,
+            if(Gdk.Pointer.Grab(dock.Window, true,
                 Gdk.EventMask.ButtonPressMask |
                 Gdk.EventMask.ButtonReleaseMask |
                 Gdk.EventMask.PointerMotionMask, null, null, event_time) != Gdk.GrabStatus.Success) {
@@ -263,7 +263,7 @@ namespace Bacon
                 return false;
             }
 
-            if(Gdk.Keyboard.Grab(dock.GdkWindow, true, event_time) != Gdk.GrabStatus.Success) {
+            if(Gdk.Keyboard.Grab(dock.Window, true, event_time) != Gdk.GrabStatus.Success) {
                 Display.PointerUngrab(event_time);
                 Gtk.Grab.Remove(dock);
                 dock.Hide();
