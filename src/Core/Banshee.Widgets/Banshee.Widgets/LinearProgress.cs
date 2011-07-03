@@ -35,7 +35,6 @@ namespace Banshee.Widgets
     public class LinearProgress : Gtk.DrawingArea
     {
         private double fraction;
-        private static Cairo.Context bar_gc = null;
 
         public LinearProgress()
         {
@@ -46,24 +45,23 @@ namespace Banshee.Widgets
 
         protected override bool OnDrawn (Cairo.Context cr)
         {
-            if(bar_gc == null) {
-                bar_gc = Gdk.CairoHelper.Create (GdkWindow);
-                Gdk.Color color = Hyena.Gui.GtkUtilities.ColorBlend(Style.Background(StateType.Normal),
-                    Style.Foreground(StateType.Normal));
-                bar_gc.Background = color;
-                bar_gc.Foreground = color;
-            }
-
-            DrawGdk();
+            cr.Save ();
+            Gdk.RGBA color = Hyena.Gui.GtkUtilities.ColorBlend(StyleContext.GetBackgroundColor(StateFlags.Normal),
+                StyleContext.GetColor(StateFlags.Normal));
+            cr.SetSourceRGBA(color.Red, color.Green, color.Blue, color.Alpha);
+            DrawGdk(cr);
+            cr.Restore ();
             return false;
         }
 
-        private void DrawGdk()
+        private void DrawGdk(Cairo.Context cr)
         {
             int bar_width = (int)((double)Allocation.Width * fraction - 3.0);
-            GdkWindow.DrawRectangle(bar_gc, false, 0, 0, Allocation.Width - 1, Allocation.Height - 1);
+            cr.Rectangle(0, 0, Allocation.Width - 1, Allocation.Height - 1);
+            cr.Fill ();
             if(bar_width > 0) {
-                GdkWindow.DrawRectangle(bar_gc, true, 2, 2, bar_width, Allocation.Height - 4);
+                cr.Rectangle(2, 2, bar_width, Allocation.Height - 4);
+                cr.Fill ();
             }
         }
 
