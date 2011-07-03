@@ -46,7 +46,6 @@ namespace Banshee.Widgets
 
         public SeekSlider () : base (0.0, 0.0, 0.0)
         {
-            UpdatePolicy = UpdateType.Continuous;
             DrawValue = false;
 
             raise_seek_requested = true;
