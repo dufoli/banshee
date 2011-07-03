@@ -76,8 +76,7 @@ namespace Banshee.Widgets
 
             StyleSet += delegate {
                 PrimaryLabel.ModifyFg (StateType.Normal, Style.Text (StateType.Normal));
-                Gdk.RGBA rgba;
-                StyleContext.GetColor (StateFlags.Normal, rgba);
+                Gdk.RGBA rgba = StyleContext.GetColor (StateFlags.Normal);
                 SecondaryLabel.OverrideColor (StateFlags.Normal, Hyena.Gui.GtkUtilities.ColorBlend (
                     rgba, StyleContext.GetBackgroundColor (StateFlags.Normal)));
             };
