@@ -111,11 +111,11 @@ namespace Banshee.Audiobook
             var title_label = new Gtk.Label () { Markup = String.Format ("<b>{0}</b>", GLib.Markup.EscapeText (this.Name)) };
             var b = new Gtk.Button (title_label) { Relief = Gtk.ReliefStyle.None };
             b.Clicked += delegate { SwitchToGridView (); };
-            title_switcher.PackStart (b);
+            title_switcher.PackStart (b, true, true, 0);
 
             title_switcher.ShowAll ();
             book_label = new Gtk.Label () { Visible = false };
-            title_switcher.PackStart (book_label);
+            title_switcher.PackStart (book_label, true, true, 0);
             Properties.Set<Gtk.Widget> ("Nereid.SourceContents.TitleWidget", title_switcher);
 
             TracksAdded += (o, a) => {

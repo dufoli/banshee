@@ -54,7 +54,7 @@ namespace Banshee.Collection.Gui
             }
         }
 
-        public override void Render (CellContext context, StateType state, double cellWidth, double cellHeight)
+        public override void Render (CellContext context, StateFlags state, double cellWidth, double cellHeight)
         {
             if (BoundObject == null) {
                 return;
@@ -78,8 +78,10 @@ namespace Banshee.Collection.Gui
             context.Layout.GetPixelSize (out text_width, out text_height);
 
             context.Context.MoveTo (4, ((int)cellHeight - text_height) / 2);
-            Cairo.Color color = context.Theme.Colors.GetWidgetColor (
-                context.TextAsForeground ? GtkColorClass.Foreground : GtkColorClass.Text, state);
+            context.Widget.StyleContext.Save ();
+            context.Widget.StyleContext.AddClass ("entry");
+            Cairo.Color color = CairoExtensions.GdkRGBAToCairoColor (context.Widget.StyleContext.GetColor (StateFlags.Selected));
+            context.Widget.StyleContext.Restore ();
             color.A = (!context.Opaque) ? 0.3 : 1.0;
             context.Context.Color = color;
 

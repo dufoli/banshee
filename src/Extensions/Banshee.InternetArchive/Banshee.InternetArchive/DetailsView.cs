@@ -483,7 +483,7 @@ namespace Banshee.InternetArchive
             file_list.ColumnController = file_columns;
             file_list.SetModel (files_model);
 
-            var format_list = ComboBox.NewText ();
+            var format_list = new ComboBoxText ();
             format_list.RowSeparatorFunc = (model, iter) => {
                 return (string)model.GetValue (iter, 0) == "---";
             };

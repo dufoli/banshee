@@ -114,7 +114,7 @@ namespace Banshee.Preferences.Gui
                 frame.LabelWidget = label;
                 frame.LabelXalign = 0.0f;
                 frame.LabelYalign = 0.5f;
-                frame.Shadow = ShadowType.None;
+                frame.ShadowType = ShadowType.None;
                 frame.Show ();
                 PackStart (frame, false, false, 0);
             }

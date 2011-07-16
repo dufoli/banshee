@@ -133,10 +133,11 @@ namespace Banshee.Equalizer.Gui
             base.OnDestroyed ();
         }
 
-        protected override bool OnExposeEvent (Gdk.EventExpose evnt)
+        protected override bool OnDrawn (Cairo.Context cr)
         {
-            GdkWindow.DrawRectangle (Style.BackgroundGC (StateType.Active), true, header_box.Allocation);
-            return base.OnExposeEvent (evnt);
+            // FIXME: Check that this is not needed, background should already be painted
+            //GdkWindow.DrawRectangle (Style.BackgroundGC (StateType.Active), true, header_box.Allocation);
+            return base.OnDrawn (cr);
         }
 
         private void OnNewPreset (object o, EventArgs args)

@@ -39,7 +39,7 @@ namespace Banshee.Daap
 {
     public class OpenRemoteServer : BansheeDialog
     {
-        private ComboBoxEntry address_entry;
+        private ComboBoxText address_entry;
         private SpinButton port_entry;
         private List<string> history = new List<string>();
 
@@ -55,7 +55,7 @@ namespace Banshee.Daap
             box.Spacing = 12;
             VBox.PackStart (box, false, false, 0);
 
-            address_entry = ComboBoxEntry.NewText ();
+            address_entry = ComboBoxText.NewWithEntry ();
             address_entry.Entry.Activated += OnEntryActivated;
             address_entry.Entry.WidthChars = 30;
             address_entry.Show ();

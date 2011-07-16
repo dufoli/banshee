@@ -436,7 +436,8 @@ namespace Nereid
             };
 
             if (!PlatformDetection.IsMeeGo) {
-                header_toolbar.ExposeEvent += OnToolbarExposeEvent;
+                // FIXME: confirm that this is not needed anymore
+                /*header_toolbar.ExposeEvent += OnToolbarExposeEvent;
             }
         }
 

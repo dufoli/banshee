@@ -40,7 +40,7 @@ namespace Banshee.Query.Gui
 {
     public class PlaybackErrorQueryValueEntry : QueryValueEntry
     {
-        protected ComboBox combo;
+        protected ComboBoxText combo;
         protected PlaybackErrorQueryValue query_value;
         protected Dictionary<int, int> combo_error_id_map = new Dictionary<int, int> ();
 
@@ -55,7 +55,7 @@ namespace Banshee.Query.Gui
                     Remove (combo);
                 }
 
-                combo = ComboBox.NewText();
+                combo = new ComboBoxText ();
                 combo.WidthRequest = DefaultWidth;
 
                 Add (combo);

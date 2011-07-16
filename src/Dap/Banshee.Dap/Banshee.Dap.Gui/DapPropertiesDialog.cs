@@ -54,7 +54,7 @@ namespace Banshee.Dap
             // Translators: {0} is the name assigned to a Digital Audio Player by its owner
             String.Format(Catalog.GetString("{0} Properties"), source.Name),
             null,
-            DialogFlags.Modal | DialogFlags.NoSeparator,
+            DialogFlags.Modal,
             Stock.Close,
             ResponseType.Close)
         {
@@ -126,7 +126,7 @@ namespace Banshee.Dap
             Resizable = false;
             iconbox.PackStart(box, true, true, 0);
             iconbox.ShowAll();
-            VBox.Add(iconbox);
+            ContentArea.Add(iconbox);
         }
 
         public void RunDialog ()

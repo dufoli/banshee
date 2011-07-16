@@ -319,7 +319,7 @@ namespace Banshee.Sources.Gui
             return true;
         }
 
-        protected override bool OnExposeEvent (Gdk.EventExpose evnt)
+        protected override bool OnDrawn (Cairo.Context cr)
         {
             if (need_resort) {
                 need_resort = false;
@@ -338,18 +338,12 @@ namespace Banshee.Sources.Gui
                 QueueDraw ();
             }
 
-            try {
-                cr = Gdk.CairoHelper.Create (evnt.Window);
-                base.OnExposeEvent (evnt);
-                if (Hyena.PlatformDetection.IsMeeGo) {
-                    theme.DrawFrameBorder (cr, new Gdk.Rectangle (0, 0,
-                        Allocation.Width, Allocation.Height));
-                }
-                return true;
-            } finally {
-                CairoExtensions.DisposeContext (cr);
-                cr = null;
+            base.OnDrawn (cr);
+            if (Hyena.PlatformDetection.IsMeeGo) {
+                theme.DrawFrameBorder (cr, new Gdk.Rectangle (0, 0,
+                    Allocation.Width, Allocation.Height));
             }
+            return true;
         }
 
         private bool IncrementPathForKeyPress (Gdk.EventKey press, TreePath path)

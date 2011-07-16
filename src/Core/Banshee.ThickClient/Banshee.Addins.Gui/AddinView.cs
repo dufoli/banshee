@@ -47,7 +47,7 @@ namespace Banshee.Addins.Gui
             var hbox = new HBox () { Spacing = 6 };
 
             var filter_label = new Label (Catalog.GetString ("Show:"));
-            var filter_combo = ComboBox.NewText ();
+            var filter_combo = new ComboBoxText ();
             filter_combo.AppendText (Catalog.GetString ("All"));
             filter_combo.AppendText (Catalog.GetString ("Enabled"));
             filter_combo.AppendText (Catalog.GetString ("Not Enabled"));

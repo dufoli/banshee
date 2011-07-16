@@ -67,8 +67,8 @@ namespace Banshee.PlayerMigration
 
             Title = Catalog.GetString ("iTunes Importer");
             Resizable = false;
-            VBox.BorderWidth = 8;
-            VBox.Spacing = 8;
+            ContentArea.BorderWidth = 8;
+            ContentArea.Spacing = 8;
 
             Button cancel_button = new Button (Stock.Cancel);
             cancel_button.Clicked += delegate { Respond (ResponseType.Cancel); };
@@ -99,7 +99,7 @@ namespace Banshee.PlayerMigration
 
             PackCheckboxes (vbox);
 
-            VBox.ShowAll ();
+            ContentArea.ShowAll ();
         }
 
         protected virtual void PackCheckboxes (VBox vbox)
@@ -123,12 +123,12 @@ namespace Banshee.PlayerMigration
                 hbox.PackStart (label1, false, false, 0);
                 Button browse_button = new Button (hbox);
                 browse_button.Clicked += OnBrowseButtonClicked;
-                VBox.PackStart (browse_button, false, false, 0);
+                ContentArea.PackStart (browse_button, false, false, 0);
 
                 ratings.Sensitive = stats.Sensitive = playlists.Sensitive = import_button.Sensitive = false;
             }
 
-            VBox.PackStart (vbox, false, false, 0);
+            ContentArea.PackStart (vbox, false, false, 0);
         }
 
         private void OnBrowseButtonClicked (object o, EventArgs args)
@@ -207,11 +207,11 @@ namespace Banshee.PlayerMigration
             chooser.ShowAll ();
             vbox.PackStart (chooser, true, true, 0);
 
-            VBox.PackStart (vbox, true, true, 0);
+            ContentArea.PackStart (vbox, true, true, 0);
 
             DefaultResponse = ResponseType.Cancel;
 
-            VBox.ShowAll ();
+            ContentArea.ShowAll ();
         }
     }
 }

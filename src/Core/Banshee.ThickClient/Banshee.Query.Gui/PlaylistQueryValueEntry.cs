@@ -43,14 +43,14 @@ namespace Banshee.Query.Gui
 {
     public class PlaylistQueryValueEntry : QueryValueEntry
     {
-        protected ComboBox combo;
+        protected ComboBoxText combo;
         protected PlaylistQueryValue query_value;
         protected Dictionary<int, int> playlist_id_combo_map = new Dictionary<int, int> ();
         protected Dictionary<int, int> combo_playlist_id_map = new Dictionary<int, int> ();
 
         public PlaylistQueryValueEntry () : base ()
         {
-            combo = ComboBox.NewText();
+            combo = new ComboBoxText ();
             combo.WidthRequest = DefaultWidth;
 
             int count = 0;

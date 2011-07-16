@@ -79,10 +79,6 @@ namespace Banshee.Gui.Dialogs
                 translation_credits.Append ("\n");
             }
 
-            SetUrlHook (delegate (Gtk.AboutDialog dialog, string link) {
-                Banshee.Web.Browser.Open (link);
-            });
-
             // TODO: We should really use ProgramName in the future rather
             // than plain Name, since it's been depreciated. We can't do that
             // yet though since it breaks stuff for other people.
@@ -111,6 +107,12 @@ namespace Banshee.Gui.Dialogs
             WrapLicense = true;
             Response += OnResponse;
         }
+
+        protected override bool OnActivateLink (string uri)
+        {
+            return Banshee.Web.Browser.Open (uri);
+        }
+
     }
 }
 

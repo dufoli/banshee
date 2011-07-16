@@ -56,7 +56,7 @@ namespace Banshee.Collection.Gui
         public static Widget For (Widget widget, Func<int, int, bool> is_sensitive, Func<TrackInfo> get_track, System.Action on_updated)
         {
             return new EditorBox (widget) {
-                IsSensitive = is_sensitive,
+                IsBoxSensitive = is_sensitive,
                 GetTrack = get_track,
                 OnUpdated = on_updated
             };
@@ -64,7 +64,7 @@ namespace Banshee.Collection.Gui
 
         private class EditorBox : EventBox
         {
-            public Func<int, int, bool> IsSensitive;
+            public Func<int, int, bool> IsBoxSensitive;
             public Func<TrackInfo> GetTrack;
             public System.Action OnUpdated;
 
@@ -74,7 +74,7 @@ namespace Banshee.Collection.Gui
                 VisibleWindow = false;
 
                 ButtonPressEvent += (o, a) => {
-                    if (a.Event.Button == 3 && IsSensitive ((int)a.Event.X, (int)a.Event.Y)) {
+                    if (a.Event.Button == 3 && IsBoxSensitive ((int)a.Event.X, (int)a.Event.Y)) {
                         var menu = new Menu ();
 
                         var choose = new MenuItem (Catalog.GetString ("Choose New Cover Art..."));

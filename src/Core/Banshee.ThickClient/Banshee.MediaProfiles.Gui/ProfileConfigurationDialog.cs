@@ -80,7 +80,6 @@ namespace Banshee.MediaProfiles.Gui
         {
             this.profile = profile;
 
-            HasSeparator = false;
             BorderWidth = 5;
 
             AccelGroup accel_group = new AccelGroup();
@@ -158,7 +157,7 @@ namespace Banshee.MediaProfiles.Gui
                 box.PackStart(scroll, false, false, 0);
             }
 
-            VBox.PackStart(box, false, false, 0);
+            ContentArea.PackStart(box, false, false, 0);
 
             SetSizeRequest(350, -1);
 

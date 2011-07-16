@@ -65,18 +65,17 @@ namespace Banshee.Gui.Dialogs
             //     inner_vbox   5 => total = 12
             //     ActionArea   5 => total = 12
             BorderWidth = 5;
-            base.VBox.BorderWidth = 0;
+            ContentArea.BorderWidth = 0;
 
             // This spacing is 2 b/c the inner_vbox and ActionArea should be
             // 12 apart, and they already have BorderWidth 5 each
-            base.VBox.Spacing = 2;
+            ContentArea.Spacing = 2;
 
             inner_vbox = new VBox () { Spacing = 12, BorderWidth = 5, Visible = true };
-            base.VBox.PackStart (inner_vbox, true, true, 0);
+            ContentArea.PackStart (inner_vbox, true, true, 0);
 
             Visible = false;
-            HasSeparator = false;
-
+            
             if (parent == null) {
                 GtkElementsService service = ServiceManager.Get<GtkElementsService> ();
                 if (service != null) {
@@ -95,7 +94,7 @@ namespace Banshee.Gui.Dialogs
             AddAccelGroup (accel_group);
         }
 
-        public new VBox VBox { get { return inner_vbox; } }
+        public VBox VBox { get { return inner_vbox; } }
 
         public new ResponseType Run ()
         {
