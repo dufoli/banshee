@@ -88,15 +88,16 @@ namespace Banshee.NotificationArea
             event_box.ShowAll ();
         }
 
-        public override void Dispose ()
+        protected override void Dispose (bool disposing)
         {
-            HidePopup ();
+            if (disposing) {
+                HidePopup ();
 
-            event_box.ButtonPressEvent -= OnButtonPressEvent;
-            event_box.EnterNotifyEvent -= OnEnterNotifyEvent;
-            event_box.LeaveNotifyEvent -= OnLeaveNotifyEvent;
-            event_box.ScrollEvent -= OnMouseScroll;
-
+                event_box.ButtonPressEvent -= OnButtonPressEvent;
+                event_box.EnterNotifyEvent -= OnEnterNotifyEvent;
+                event_box.LeaveNotifyEvent -= OnLeaveNotifyEvent;
+                event_box.ScrollEvent -= OnMouseScroll;
+            }
             Destroy ();
         }
 

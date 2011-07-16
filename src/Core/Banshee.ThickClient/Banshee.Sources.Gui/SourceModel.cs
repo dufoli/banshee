@@ -84,11 +84,13 @@ namespace Banshee.Sources.Gui
             ServiceManager.SourceManager.SourceRemoved += OnSourceRemoved;
         }
 
-        public override void Dispose ()
+        protected override void Dispose (bool disposing)
         {
-            ServiceManager.SourceManager.SourceAdded -= OnSourceAdded;
-            ServiceManager.SourceManager.SourceRemoved -= OnSourceRemoved;
-            base.Dispose ();
+            if (disposing) {
+                ServiceManager.SourceManager.SourceAdded -= OnSourceAdded;
+                ServiceManager.SourceManager.SourceRemoved -= OnSourceRemoved;
+            }
+            base.Dispose (disposing);
         }
 
         private void OnSourceAdded (SourceAddedArgs args)

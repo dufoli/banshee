@@ -57,10 +57,12 @@ namespace Banshee.Gui.Widgets
         {
         }
 
-        public override void Dispose ()
+        protected override void Dispose (bool disposing)
         {
-            base.Dispose ();
-            HidePopup ();
+            if (disposing) {
+                HidePopup ();
+            }
+            base.Dispose (disposing);
         }
 
         protected override int ArtworkSizeRequest {

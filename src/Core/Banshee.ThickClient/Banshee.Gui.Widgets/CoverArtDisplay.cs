@@ -53,14 +53,14 @@ namespace Banshee.Gui.Widgets
         {
         }
 
-        public override void Dispose ()
+        protected override void Dispose (bool disposing)
         {
             var disposable = idle_album as IDisposable;
             if (disposable != null) {
                 disposable.Dispose ();
             }
 
-            base.Dispose ();
+            base.Dispose (disposing);
         }
 
         protected override int ArtworkSizeRequest {

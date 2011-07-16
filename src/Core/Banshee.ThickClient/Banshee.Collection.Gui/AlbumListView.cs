@@ -83,10 +83,13 @@ namespace Banshee.Collection.Gui
 
         protected AlbumListView (IntPtr ptr) : base () {}
 
-        public override void Dispose ()
+        protected override void Dispose (bool disposing)
         {
-            ServiceManager.PlayerEngine.DisconnectEvent (OnPlayerEvent);
-            Banshee.Metadata.MetadataService.Instance.ArtworkUpdated -= OnArtworkUpdated;
+            if (disposing) {
+                ServiceManager.PlayerEngine.DisconnectEvent (OnPlayerEvent);
+                Banshee.Metadata.MetadataService.Instance.ArtworkUpdated -= OnArtworkUpdated;
+            }
+            base.Dispose (disposing);
         }
 
         private void ToggleAlbumGrid ()

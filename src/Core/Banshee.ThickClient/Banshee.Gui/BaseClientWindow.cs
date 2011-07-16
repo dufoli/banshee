@@ -86,15 +86,15 @@ namespace Banshee.Gui
             }
         }
 
-        public override void Dispose ()
+        protected override void Dispose (bool disposing)
         {
-            base.Dispose ();
-
             try {
                 Gtk.AccelMap.Save (accel_map_file);
             } catch (Exception e) {
                 Hyena.Log.Exception ("Failed to save custom AccelMap", e);
             }
+
+            base.Dispose (disposing);
         }
 
         protected void InitialShowPresent ()
@@ -209,7 +209,8 @@ namespace Banshee.Gui
             OnTitleChanged ();
         }
 
-        protected void OnToolbarExposeEvent (object o, ExposeEventArgs args)
+        // FIXME: confirm that this is not needed anymore
+        /*protected void OnToolbarExposeEvent (object o, ExposeEventArgs args)
         {
             Toolbar toolbar = (Toolbar)o;
 
@@ -223,6 +224,6 @@ namespace Banshee.Gui
             foreach (Widget child in toolbar.Children) {
                 toolbar.PropagateExpose (child, args.Event);
             }
-        }
+        }*/
     }
 }

@@ -129,14 +129,16 @@ namespace Banshee.Audiobook
             );
         }
 
-        public override void Dispose ()
+        protected override void Dispose (bool disposing)
         {
-            if (cover != null) {
-                cover.Dispose ();
-                cover = null;
+            if (disposing) {
+                if (cover != null) {
+                    cover.Dispose ();
+                    cover = null;
+                }
             }
 
-            base.Dispose ();
+            base.Dispose (disposing);
         }
 
 #region ISourceContents

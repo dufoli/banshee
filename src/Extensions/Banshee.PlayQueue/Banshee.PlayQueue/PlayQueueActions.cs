@@ -117,11 +117,13 @@ namespace Banshee.PlayQueue
             Register ();
         }
 
-        public override void Dispose ()
+        protected override void Dispose (bool disposing)
         {
-            playqueue.Updated -= OnUpdated;
-            ServiceManager.SourceManager.ActiveSourceChanged -= OnSourceUpdated;
-            base.Dispose ();
+            if (disposing) {
+                playqueue.Updated -= OnUpdated;
+                ServiceManager.SourceManager.ActiveSourceChanged -= OnSourceUpdated;
+            }
+            base.Dispose (disposing);
         }
 
         #region Action Handlers

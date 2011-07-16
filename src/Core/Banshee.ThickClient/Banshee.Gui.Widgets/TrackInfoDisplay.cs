@@ -156,20 +156,22 @@ namespace Banshee.Gui.Widgets
             );
         }
 
-        public override void Dispose ()
+        protected override void Dispose (bool disposing)
         {
-            if (idle_timeout_id > 0) {
-                GLib.Source.Remove (idle_timeout_id);
+            if (disposing) {
+                if (idle_timeout_id > 0) {
+                    GLib.Source.Remove (idle_timeout_id);
+                }
+
+                Connected = false;
+
+                stage.Iteration -= OnStageIteration;
+                stage = null;
+
+                InvalidateCache ();
             }
 
-            Connected = false;
-
-            stage.Iteration -= OnStageIteration;
-            stage = null;
-
-            InvalidateCache ();
-
-            base.Dispose ();
+            base.Dispose (disposing);
         }
 
         protected override void OnRealized ()

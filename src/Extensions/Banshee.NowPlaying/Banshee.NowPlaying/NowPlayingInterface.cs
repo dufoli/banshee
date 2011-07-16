@@ -88,12 +88,14 @@ namespace Banshee.NowPlaying
             screensaver = new ScreensaverManager ();
         }
 
-        public override void Dispose ()
+        protected override void Dispose (bool disposing)
         {
-            base.Dispose ();
-            fullscreen_adapter.SuggestUnfullscreen -= OnAdapterSuggestUnfullscreen;
-            fullscreen_adapter.Dispose ();
-            screensaver.Dispose ();
+            if (disposing) {
+                fullscreen_adapter.SuggestUnfullscreen -= OnAdapterSuggestUnfullscreen;
+                fullscreen_adapter.Dispose ();
+                screensaver.Dispose ();
+            }
+            base.Dispose (disposing);
         }
 
         private void MoveVideoExternal (bool hidden)
