@@ -32,7 +32,7 @@ using Hyena;
 
 namespace Banshee.Equalizer.Gui
 {
-    public class EqualizerPresetComboBox : Gtk.ComboBoxEntry
+    public class EqualizerPresetComboBox : Gtk.ComboBox
     {
         private EqualizerManager manager;
         private ListStore store;
@@ -44,7 +44,7 @@ namespace Banshee.Equalizer.Gui
         {
         }
 
-        public EqualizerPresetComboBox (EqualizerManager manager) : base ()
+        public EqualizerPresetComboBox (EqualizerManager manager) : base (true)
         {
             if (manager == null) {
                 throw new ArgumentNullException ("provide an EqualizerManager or use default constructor");
@@ -58,7 +58,7 @@ namespace Banshee.Equalizer.Gui
         {
             store = new ListStore (typeof (string), typeof (EqualizerSetting));
             Model = store;
-            TextColumn = 0;
+            EntryTextColumn = 0;
 
             store.DefaultSortFunc = (model, ia, ib) => {
                 var a = GetEqualizerSettingForIter (ia);

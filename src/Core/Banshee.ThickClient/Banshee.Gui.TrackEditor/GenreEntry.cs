@@ -36,23 +36,23 @@ using Banshee.Collection.Database;
 
 namespace Banshee.Gui.TrackEditor
 {
-    public class GenreEntry : ComboBoxEntry, ICanUndo, IEditorField
+    public class GenreEntry : ComboBox, ICanUndo, IEditorField
     {
         private ListStore genre_model;
         private EditorEditableUndoAdapter<Entry> undo_adapter = new EditorEditableUndoAdapter<Entry> ();
 
-        public GenreEntry ()
+        public GenreEntry () : base (true)
         {
             genre_model = new ListStore (typeof (string));
             Model = genre_model;
-            TextColumn = 0;
+            EntryTextColumn = 0;
 
             EntryCompletion c = new EntryCompletion ();
             c.Model = genre_model;
-            c.TextColumn = TextColumn;
+            c.TextColumn = EntryTextColumn;
             c.PopupCompletion = true;
             c.InlineCompletion = true;
-            //c.InlineSelection = true; // requires 2.12
+            c.InlineSelection = true;
             c.PopupSingleMatch = false;
             Entry.Completion = c;
 
