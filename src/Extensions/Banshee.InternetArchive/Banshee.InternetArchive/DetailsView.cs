@@ -147,7 +147,7 @@ namespace Banshee.InternetArchive
                 Box.PackStart (arrow, false, false, 0);
                 Box.PackStart (label, true, true, 0);
 
-                State = StateType.Selected;
+                this.SetStateFlags (StateFlags.Selected, true);
 
                 bool changing_style = false;
                 StyleSet += (o, a) => {
