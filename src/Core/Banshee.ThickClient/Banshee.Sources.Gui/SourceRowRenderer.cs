@@ -120,23 +120,22 @@ namespace Banshee.Sources.Gui
             }
         }
 
-        public override void GetSize (Widget widget, ref Gdk.Rectangle cell_area,
-            out int x_offset, out int y_offset, out int width, out int height)
+        protected override void OnGetPreferredWidth (Widget widget, out int minimum_size, out int natural_size)
         {
-            int text_x, text_y, text_w, text_h;
-
-            base.GetSize (widget, ref cell_area, out text_x, out text_y, out text_w, out text_h);
-
-            x_offset = 0;
-            y_offset = 0;
-
             if (!(widget is TreeView)) {
-                width = 200;
+                minimum_size = 200;
             } else {
-                width = 0;
+                minimum_size = 0;
             }
 
-            height = (int)Math.Max (RowHeight, text_h);
+            natural_size = minimum_size;
+        }
+
+        protected override void OnGetPreferredHeight (Widget widget, out int minimum_size, out int natural_size)
+        {
+            base.OnGetPreferredHeight (widget, out minimum_size, out natural_size);
+            minimum_size = (int)Math.Max (RowHeight, minimum_size);
+            natural_size = minimum_size;
         }
 
         private int expander_right_x;
