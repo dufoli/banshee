@@ -243,29 +243,23 @@ namespace Banshee.Gui.Widgets
         {
         }
 
-        protected override bool OnExposeEvent (Gdk.EventExpose evnt)
+        protected override bool OnDrawn (Cairo.Context cr)
         {
             bool idle = incoming_track == null && current_track == null;
             if (!Visible || !IsMapped || (idle && !CanRenderIdle)) {
                 return true;
             }
 
-            Cairo.Context cr = Gdk.CairoHelper.Create (evnt.Window);
+            cr.Rectangle (Allocation.X, Allocation.Y, Allocation.Width, Allocation.Height);
+            cr.Clip ();
 
-            foreach (Gdk.Rectangle damage in evnt.Region.GetRectangles ()) {
-                cr.Rectangle (damage.X, damage.Y, damage.Width, damage.Height);
-                cr.Clip ();
-
-                if (idle) {
-                    RenderIdle (cr);
-                } else {
-                    RenderAnimation (cr);
-                }
-
-                cr.ResetClip ();
+            if (idle) {
+                RenderIdle (cr);
+            } else {
+                RenderAnimation (cr);
             }
 
-            CairoExtensions.DisposeContext (cr);
+            cr.ResetClip ();
 
             return true;
         }
