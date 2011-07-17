@@ -58,7 +58,7 @@ namespace Banshee.Widgets
         {
             int bar_width = (int)((double)Allocation.Width * fraction - 3.0);
             cr.Rectangle(0, 0, Allocation.Width - 1, Allocation.Height - 1);
-            cr.Fill ();
+            cr.Stroke ();
             if(bar_width > 0) {
                 cr.Rectangle(2, 2, bar_width, Allocation.Height - 4);
                 cr.Fill ();
