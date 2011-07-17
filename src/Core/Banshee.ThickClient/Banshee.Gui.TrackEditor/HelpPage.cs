@@ -58,7 +58,11 @@ namespace Banshee.Gui.TrackEditor
 
         public void LoadTrack (EditorTrackInfo track)
         {
-            dialog.Notebook.SetTabLabelPacking (this, false, false, PackType.End);
+            Notebook.NotebookChild notebook_child = dialog.Notebook [this] as Notebook.NotebookChild;
+            if (notebook_child == null)
+                return;
+            notebook_child.TabFill = false;
+            notebook_child.TabExpand = false;
         }
 
         public int Order {
