@@ -120,22 +120,22 @@ namespace Banshee.Sources.Gui
             }
         }
 
-        protected override void OnGetPreferredWidth (Widget widget, out int minimum_size, out int natural_size)
+        protected override void OnGetPreferredWidth (Widget widget, out int minimum_width, out int natural_width)
         {
             if (!(widget is TreeView)) {
-                minimum_size = 200;
+                minimum_width = natural_width = 200;
             } else {
-                minimum_size = 0;
+                minimum_width = natural_width = 0;
             }
-
-            natural_size = minimum_size;
         }
 
-        protected override void OnGetPreferredHeight (Widget widget, out int minimum_size, out int natural_size)
+        protected override void OnGetPreferredHeight (Widget widget, out int minimum_height, out int natural_height)
         {
-            base.OnGetPreferredHeight (widget, out minimum_size, out natural_size);
-            minimum_size = (int)Math.Max (RowHeight, minimum_size);
-            natural_size = minimum_size;
+            int minimum_text_h, natural_text_h;
+            base.GetPreferredHeight (widget, out minimum_text_h, out natural_text_h);
+
+            minimum_height = (int)Math.Max (RowHeight, minimum_text_h);
+            natural_height = (int)Math.Max (RowHeight, natural_text_h);
         }
 
         private int expander_right_x;
@@ -206,9 +206,12 @@ namespace Banshee.Sources.Gui
 
             if (icon != null) {
                 x += expander_icon_spacing;
-                Gdk.CairoHelper.SetSourcePixbuf (cr, icon, 0.0, 0.0);
-                cr.Rectangle (x, Middle (cell_area, icon.Height), icon.Width, icon.Height);
-                cr.Fill ();
+
+                cr.Save ();
+                Gdk.CairoHelper.SetSourcePixbuf (cr, icon, x, Middle (cell_area, icon.Height));
+                cr.Paint ();
+                cr.Restore ();
+
                 x += icon.Width;
 
                 if (dispose_icon) {
@@ -289,11 +292,7 @@ namespace Banshee.Sources.Gui
                 rect.Width += 4;
 
                 // clear the standard GTK selection and focus
-                view.StyleContext.Save ();
                 Gdk.RGBA rgba = view.StyleContext.GetBackgroundColor (StateFlags.Normal);
-                view.StyleContext.AddClass ("entry");
-                view.StyleContext.Restore ();
-
                 cr.SetSourceRGBA (rgba.Red, rgba.Green, rgba.Blue, rgba.Alpha);
                 cr.Rectangle (rect.X, rect.Y, rect.Width, rect.Height);
                 cr.Fill ();
