@@ -36,7 +36,7 @@ namespace Banshee.Widgets
     {
         private double fraction;
 
-        public LinearProgress()
+        public LinearProgress ()
         {
             AppPaintable = true;
             fraction = 0;
@@ -46,21 +46,22 @@ namespace Banshee.Widgets
         protected override bool OnDrawn (Cairo.Context cr)
         {
             cr.Save ();
-            Gdk.RGBA color = Hyena.Gui.GtkUtilities.ColorBlend(StyleContext.GetBackgroundColor(StateFlags.Normal),
-                StyleContext.GetColor(StateFlags.Normal));
-            cr.SetSourceRGBA(color.Red, color.Green, color.Blue, color.Alpha);
-            DrawGdk(cr);
+            Gdk.RGBA color = Hyena.Gui.GtkUtilities.ColorBlend (
+                StyleContext.GetBackgroundColor (StateFlags.Normal),
+                StyleContext.GetColor (StateFlags.Normal));
+            cr.SetSourceRGBA (color.Red, color.Green, color.Blue, color.Alpha);
+            DrawCairo (cr);
             cr.Restore ();
             return false;
         }
 
-        private void DrawGdk(Cairo.Context cr)
+        private void DrawCairo (Cairo.Context cr)
         {
             int bar_width = (int)((double)Allocation.Width * fraction - 3.0);
-            cr.Rectangle(0, 0, Allocation.Width - 1, Allocation.Height - 1);
+            cr.Rectangle (0, 0, Allocation.Width - 1, Allocation.Height - 1);
             cr.Stroke ();
-            if(bar_width > 0) {
-                cr.Rectangle(2, 2, bar_width, Allocation.Height - 4);
+            if (bar_width > 0) {
+                cr.Rectangle (2, 2, bar_width, Allocation.Height - 4);
                 cr.Fill ();
             }
         }
@@ -71,7 +72,7 @@ namespace Banshee.Widgets
             }
 
             set {
-                fraction = Math.Max(0.0, Math.Min(1.0, value));
+                fraction = Math.Max (0.0, Math.Min (1.0, value));
                 QueueDraw();
             }
         }
