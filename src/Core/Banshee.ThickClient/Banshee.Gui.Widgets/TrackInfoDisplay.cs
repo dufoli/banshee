@@ -121,8 +121,7 @@ namespace Banshee.Gui.Widgets
             }
 
             Connected = true;
-
-            WidgetFlags |= WidgetFlags.NoWindow;
+            HasWindow = false;
         }
 
         private bool connected;
