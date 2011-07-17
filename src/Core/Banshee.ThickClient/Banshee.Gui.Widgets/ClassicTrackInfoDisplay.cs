@@ -135,9 +135,10 @@ namespace Banshee.Gui.Widgets
             }
         }
 
-        protected override void OnSizeRequested (ref Requisition requisition)
+        protected override void OnGetPreferredHeight (out int minimum_height, out int natural_height)
         {
-            requisition.Height = ComputeWidgetHeight ();
+            minimum_height = ComputeWidgetHeight ();
+            natural_height = minimum_height;
         }
 
         private int ComputeWidgetHeight ()
