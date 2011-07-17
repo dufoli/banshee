@@ -290,9 +290,9 @@ namespace Nereid
                 };
                 source_scroll.Add (source_view);
 
-                var color = new Gdk.Color ((byte)0xe6, (byte)0xe6, (byte)0xe6);
-                Gdk.Colormap.System.AllocColor (ref color, true, true);
-                source_view.ModifyBase (StateType.Normal, color);
+                var color = new Gdk.RGBA ();
+                color.Parse ("e6e6e6");
+                source_view.OverrideBackgroundColor (StateFlags.Normal, color);
             } else {
                 Hyena.Widgets.ScrolledWindow window;
                 if (ApplicationContext.CommandLine.Contains ("smooth-scroll")) {
@@ -417,7 +417,8 @@ namespace Nereid
 
             // UI events
             view_container.SearchEntry.Changed += OnSearchEntryChanged;
-            views_pane.SizeRequested += delegate {
+            // TODO: Check that this still works, it was using SizeRequested
+            views_pane.SizeAllocated += delegate {
                 SourceViewWidth.Set (views_pane.Position);
             };
 
