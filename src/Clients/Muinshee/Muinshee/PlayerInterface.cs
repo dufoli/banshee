@@ -123,17 +123,19 @@ namespace Muinshee
 
 #region System Overrides
 
-        public override void Dispose ()
+        protected override void Dispose (bool disposing)
         {
             lock (this) {
-                Hide ();
-                if (played_songs_number >= 0) {
-                    played_songs_number_pref.Value = played_songs_number;
+                if (disposing) {
+                    Hide ();
+                    if (played_songs_number >= 0) {
+                        played_songs_number_pref.Value = played_songs_number;
+                    }
+                    if (actions != null) {
+                        actions.Dispose ();
+                    }
                 }
-                if (actions != null) {
-                    actions.Dispose ();
-                }
-                base.Dispose ();
+                base.Dispose (disposing);
                 Gtk.Application.Quit ();
             }
         }
