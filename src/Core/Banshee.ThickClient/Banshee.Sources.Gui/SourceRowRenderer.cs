@@ -326,7 +326,7 @@ namespace Banshee.Sources.Gui
             return area.Y + (int)Math.Round ((double)(area.Height - height) / 2.0, MidpointRounding.AwayFromZero);
         }
 
-        public override CellEditable StartEditing (Gdk.Event evnt, Widget widget, string path,
+        protected override CellEditable OnStartEditing (Gdk.Event evnt, Widget widget, string path,
             Gdk.Rectangle background_area, Gdk.Rectangle cell_area, CellRendererState flags)
         {
             CellEditEntry text = new CellEditEntry ();
