@@ -144,8 +144,8 @@ namespace Banshee.Sources.Gui
             return x < expander_right_x;
         }
 
-        protected override void Render (Gdk.Drawable drawable, Widget widget, Gdk.Rectangle background_area,
-            Gdk.Rectangle cell_area, Gdk.Rectangle expose_area, CellRendererState flags)
+        protected override void OnRender (Cairo.Context cr, Widget widget, Gdk.Rectangle background_area,
+            Gdk.Rectangle cell_area, CellRendererState flags)
         {
             if (source == null || source is SourceManager.GroupSource) {
                 return;
@@ -155,7 +155,7 @@ namespace Banshee.Sources.Gui
             bool selected = view != null && view.Selection.IterIsSelected (iter);
             StateType state = RendererStateToWidgetState (widget, flags);
 
-            RenderSelection (drawable, background_area, selected, state);
+            RenderSelection (cr, background_area, selected, state);
 
             int title_layout_width = 0, title_layout_height = 0;
             int count_layout_width = 0, count_layout_height = 0;
@@ -209,10 +209,9 @@ namespace Banshee.Sources.Gui
 
             if (icon != null) {
                 x += expander_icon_spacing;
-                drawable.DrawPixbuf (main_gc, icon, 0, 0,
-                    x, Middle (cell_area, icon.Height),
-                    icon.Width, icon.Height, RgbDither.None, 0, 0);
-
+                cr.SetSourcePixbuf (icon);
+                cr.Rectangle (x, Middle (cell_area, icon.Height), icon.Width, icon.Height);
+                cr.Fill ();
                 x += icon.Width;
 
                 if (dispose_icon) {
@@ -280,7 +279,7 @@ namespace Banshee.Sources.Gui
             fd.Dispose ();
         }
 
-        private void RenderSelection (Gdk.Drawable drawable, Gdk.Rectangle background_area,
+        private void RenderSelection (Cairo.Context cr, Gdk.Rectangle background_area,
             bool selected, StateType state)
         {
             if (view == null) {
@@ -293,7 +292,14 @@ namespace Banshee.Sources.Gui
                 rect.Width += 4;
 
                 // clear the standard GTK selection and focus
-                drawable.DrawRectangle (view.Style.BaseGC (StateType.Normal), true, rect);
+                view.StyleContext.Save ();
+                Gdk.RGBA rgba = view.StyleContext.GetBackgroundColor (StateFlags.Normal);
+                view.StyleContext.AddClass ("entry");
+                view.StyleContext.Restore ();
+
+                cr.SetSourceRGB (rgba.Red, rgba.Green, rgba.Blue, rgba.Alpha);
+                cr.Rectangle (rect);
+                cr.Fill ();
 
                 // draw the hot cairo selection
                 if (!view.EditingRow) {
