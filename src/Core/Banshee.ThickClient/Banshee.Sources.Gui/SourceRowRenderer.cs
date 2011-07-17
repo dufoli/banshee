@@ -98,19 +98,19 @@ namespace Banshee.Sources.Gui
         {
         }
 
-        private StateType RendererStateToWidgetState (Widget widget, CellRendererState flags)
+        private StateFlags RendererStateToWidgetState (Widget widget, CellRendererState flags)
         {
             if (!Sensitive) {
-                return StateType.Insensitive;
+                return StateFlags.Insensitive;
             } else if ((flags & CellRendererState.Selected) == CellRendererState.Selected) {
-                return widget.HasFocus ? StateType.Selected : StateType.Active;
+                return widget.HasFocus ? StateFlags.Selected : StateFlags.Active;
             } else if ((flags & CellRendererState.Prelit) == CellRendererState.Prelit) {
                 ComboBox box = parent_widget as ComboBox;
-                return box != null && box.PopupShown ? StateType.Prelight : StateType.Normal;
-            } else if (widget.State == StateType.Insensitive) {
-                return StateType.Insensitive;
+                return box != null && box.PopupShown ? StateFlags.Prelight : StateFlags.Normal;
+            } else if (widget.StateFlags == StateFlags.Insensitive) {
+                return StateFlags.Insensitive;
             } else {
-                return StateType.Normal;
+                return StateFlags.Normal;
             }
         }
 
@@ -153,7 +153,7 @@ namespace Banshee.Sources.Gui
 
             view = widget as SourceView;
             bool selected = view != null && view.Selection.IterIsSelected (iter);
-            StateType state = RendererStateToWidgetState (widget, flags);
+            StateFlags state = RendererStateToWidgetState (widget, flags);
 
             RenderSelection (cr, background_area, selected, state);
 
@@ -171,8 +171,6 @@ namespace Banshee.Sources.Gui
                 // Don't indent NowPlaying and Play Queue as much
                 x += Math.Max (0, (int)Xpad - 2);
             }
-
-            Gdk.GC main_gc = widget.Style.TextGC (state);
 
             // Draw the expander if the source has children
             double exp_h = (cell_area.Height - 2.0*Ypad) / 3.2;
@@ -192,7 +190,7 @@ namespace Banshee.Sources.Gui
             Pixbuf icon = SourceIconResolver.ResolveIcon (source, RowHeight);
 
             bool dispose_icon = false;
-            if (state == StateType.Insensitive) {
+            if (state == StateFlags.Insensitive) {
                 // Code ported from gtk_cell_renderer_pixbuf_render()
                 var icon_source = new IconSource () {
                     Pixbuf = icon,
@@ -200,8 +198,7 @@ namespace Banshee.Sources.Gui
                     SizeWildcarded = false
                 };
 
-                icon = widget.Style.RenderIcon (icon_source, widget.Direction, state,
-                    (IconSize)(-1), widget, "SourceRowRenderer");
+                icon = widget.StyleContext.RenderIconPixbuf (icon_source, (IconSize)(-1));
 
                 dispose_icon = true;
                 icon_source.Dispose ();
@@ -209,7 +206,7 @@ namespace Banshee.Sources.Gui
 
             if (icon != null) {
                 x += expander_icon_spacing;
-                cr.SetSourcePixbuf (icon);
+                Gdk.CairoHelper.SetSourcePixbuf (cr, icon, 0.0, 0.0);
                 cr.Rectangle (x, Middle (cell_area, icon.Height), icon.Width, icon.Height);
                 cr.Fill ();
                 x += icon.Width;
@@ -256,16 +253,16 @@ namespace Banshee.Sources.Gui
             title_layout.GetPixelSize (out title_layout_width, out title_layout_height);
 
             x += img_padding;
-            drawable.DrawLayout (main_gc, x, Middle (cell_area, title_layout_height), title_layout);
+            widget.StyleContext.RenderLayout (cr, x, Middle (cell_area, title_layout_height), title_layout);
 
             title_layout.Dispose ();
 
             // Draw the count
             if (!hide_count) {
                 if (view != null && view.Cr != null) {
-                    view.Cr.Color = state == StateType.Normal || (view != null && state == StateType.Prelight)
+                    view.Cr.Color = state == StateFlags.Normal || (view != null && state == StateFlags.Prelight)
                         ? view.Theme.TextMidColor
-                        : view.Theme.Colors.GetWidgetColor (GtkColorClass.Text, state);
+                        : CairoExtensions.GdkRGBAToCairoColor (view.Theme.Widget.StyleContext.GetColor (state));
 
                     view.Cr.MoveTo (
                         cell_area.X + cell_area.Width - count_layout_width - 2,
@@ -280,7 +277,7 @@ namespace Banshee.Sources.Gui
         }
 
         private void RenderSelection (Cairo.Context cr, Gdk.Rectangle background_area,
-            bool selected, StateType state)
+            bool selected, StateFlags state)
         {
             if (view == null) {
                 return;
@@ -297,8 +294,8 @@ namespace Banshee.Sources.Gui
                 view.StyleContext.AddClass ("entry");
                 view.StyleContext.Restore ();
 
-                cr.SetSourceRGB (rgba.Red, rgba.Green, rgba.Blue, rgba.Alpha);
-                cr.Rectangle (rect);
+                cr.SetSourceRGBA (rgba.Red, rgba.Green, rgba.Blue, rgba.Alpha);
+                cr.Rectangle (rect.X, rect.Y, rect.Width, rect.Height);
                 cr.Fill ();
 
                 // draw the hot cairo selection
@@ -312,7 +309,7 @@ namespace Banshee.Sources.Gui
             } else if (view.NotifyStage.ActorCount > 0 && view.Cr != null) {
                 if (!TreeIter.Zero.Equals (iter) && view.NotifyStage.Contains (iter)) {
                     Actor<TreeIter> actor = view.NotifyStage[iter];
-                    Cairo.Color color = view.Theme.Colors.GetWidgetColor (GtkColorClass.Background, StateType.Active);
+                    Cairo.Color color = CairoExtensions.GdkRGBAToCairoColor (view.StyleContext.GetBackgroundColor (StateFlags.Active));
                     color.A = Math.Sin (actor.Percent * Math.PI);
 
                     view.Theme.DrawRowSelection (view.Cr, background_area.X + 1, background_area.Y + 1,
