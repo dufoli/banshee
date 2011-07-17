@@ -62,7 +62,7 @@ namespace Banshee.NowPlaying
 
             Decorated = false;
             DestroyWithParent = true;
-            AllowGrow = true;
+            Resizable = true;
             KeepAbove = true;
             TransientFor = toplevel;
 
@@ -76,12 +76,12 @@ namespace Banshee.NowPlaying
 
         protected override void OnRealized ()
         {
-            composited = CompositeUtils.IsComposited (Screen) && CompositeUtils.SetRgbaColormap (this);
+            composited = Screen.IsComposited && CompositeUtils.SetRgbaVisual (this);
             AppPaintable = composited;
 
             base.OnRealized ();
 
-            GdkWindow.OverrideRedirect = true;
+            Window.OverrideRedirect = true;
 
             ShapeWindow ();
             Relocate ();
@@ -98,16 +98,27 @@ namespace Banshee.NowPlaying
             return base.OnConfigureEvent (evnt);
         }
 
-        protected override void OnSizeRequested (ref Requisition requisition)
+        protected override void OnGetPreferredHeight (out int minimum_height, out int natural_height)
         {
+            minimum_height = natural_height = 0;
+
             if (Child != null) {
-                requisition = Child.SizeRequest ();
+                Child.GetPreferredHeight (out minimum_height, out natural_height);
+            }
+        }
+
+        protected override void OnGetPreferredWidth (out int minimum_width, out int natural_width)
+        {
+            minimum_width = natural_width = 0;
+
+            if (Child != null) {
+                Child.GetPreferredWidth (out minimum_width, out natural_width);
             }
 
             if (width_scale > 0 && width_scale <= 1 && TransientFor != null) {
-                int monitor_num = Screen.GetMonitorAtWindow (TransientFor.GdkWindow);
+                int monitor_num = Screen.GetMonitorAtWindow (TransientFor.Window);
                 Gdk.Rectangle monitor = Screen.GetMonitorGeometry (monitor_num < 0 ? 0 : monitor_num);
-                requisition.Width = (int)(monitor.Width * width_scale);
+                minimum_width = natural_width = (int)(monitor.Width * width_scale);
             }
         }
 
@@ -131,23 +142,17 @@ namespace Banshee.NowPlaying
             Relocate ();
         }
 
-        protected override bool OnExposeEvent (Gdk.EventExpose evnt)
+        protected override bool OnDrawn (Cairo.Context cr)
         {
-            if (!composited || evnt.Window != GdkWindow) {
-                return base.OnExposeEvent (evnt);
+            if (!composited) {
+                return base.OnDrawn (cr);
             }
 
-            Cairo.Context cr = Gdk.CairoHelper.Create (evnt.Window);
+            Gdk.RGBA color = StyleContext.GetBackgroundColor (StateFlags);
 
-            Gdk.Color color = Style.Background (State);
+            ShapeSurface (cr, new Cairo.Color (color.Red, color.Blue, color.Green, 0.85));
 
-            ShapeSurface (cr, new Cairo.Color (color.Red / (double) ushort.MaxValue,
-                color.Blue / (double) ushort.MaxValue,
-                color.Green / (double) ushort.MaxValue,
-                0.85));
-
-            CairoExtensions.DisposeContext (cr);
-            return base.OnExposeEvent (evnt);
+            return base.OnDrawn (cr);
         }
 
         protected virtual void ShapeSurface (Cairo.Context cr, Cairo.Color color)
@@ -171,7 +176,7 @@ namespace Banshee.NowPlaying
 
             int x, y;
 
-            toplevel.GdkWindow.GetOrigin (out x, out y);
+            toplevel.Window.GetOrigin (out x, out y);
 
             int x_origin = x;
             int y_origin = y;

@@ -56,7 +56,7 @@ namespace Banshee.NowPlaying
 
         protected abstract Gdk.Window RenderWindow { get; }
 
-        protected abstract void ExposeVideo (Gdk.EventExpose evnt);
+        protected abstract void ExposeVideo ();
 
         protected override void OnDestroyed ()
         {
@@ -64,17 +64,21 @@ namespace Banshee.NowPlaying
             ServiceManager.PlayerEngine.DisconnectEvent (OnPlayerEvent);
         }
 
-        protected override bool OnExposeEvent (Gdk.EventExpose evnt)
+        protected override bool OnDrawn (Cairo.Context cr)
         {
-            RenderWindow.DrawRectangle (Style.BlackGC, true,
-                new Gdk.Rectangle (0, 0, Allocation.Width, Allocation.Height));
+            // We want to draw on RenderWindow so we need another Cairo.Context
+            Cairo.Context cr_window = Gdk.CairoHelper.Create (RenderWindow);
+            cr_window.SetSourceRGB (0.0, 0.0, 0.0);
+            cr_window.Rectangle (0, 0, Allocation.Width, Allocation.Height);
+            cr_window.Paint ();
+            ((IDisposable)cr_window).Dispose ();
 
             if (RenderWindow == null || !RenderWindow.IsVisible) {
                 return true;
             }
 
             if (!is_idle && ServiceManager.PlayerEngine.VideoDisplayContextType != VideoDisplayContextType.Unsupported) {
-                ExposeVideo (evnt);
+                ExposeVideo ();
             }
 
             return true;

@@ -150,7 +150,7 @@ namespace Banshee.NowPlaying
             }
 
             previous_fullscreen_handler = service.ViewActions.Fullscreen;
-            primary_window_is_fullscreen = (primary_window.GdkWindow.State & Gdk.WindowState.Fullscreen) != 0;
+            primary_window_is_fullscreen = (primary_window.Window.State & Gdk.WindowState.Fullscreen) != 0;
             service.ViewActions.Fullscreen = FullscreenHandler;
             DisableFullscreenAction ();
         }

@@ -43,16 +43,16 @@ namespace Banshee.NowPlaying
 
         public XOverlayVideoDisplay () : base ()
         {
-            WidgetFlags = WidgetFlags.NoWindow;
+            HasWindow = false;
             CreateVideoWindow ();
         }
 
         protected override void OnRealized ()
         {
-            WidgetFlags |= WidgetFlags.Realized;
+            IsRealized = true;
             CreateVideoWindow ();
-            GdkWindow = Parent.GdkWindow;
-            video_window.Reparent (GdkWindow, 0, 0);
+            Window = Parent.Window;
+            video_window.Reparent (Window, 0, 0);
             video_window.MoveResize (Allocation.X, Allocation.Y, Allocation.Width, Allocation.Height);
             video_window.ShowUnraised ();
         }
@@ -70,21 +70,19 @@ namespace Banshee.NowPlaying
                 Width = 0,
                 Height = 0,
                 Visual = Visual,
-                Wclass = Gdk.WindowClass.InputOutput,
-                Colormap = Colormap,
+                Wclass = Gdk.WindowWindowClass.InputOutput,
                 EventMask = (int)(Gdk.EventMask.ExposureMask | Gdk.EventMask.VisibilityNotifyMask)
             };
 
             Gdk.WindowAttributesType attributes_mask =
                 Gdk.WindowAttributesType.X |
                 Gdk.WindowAttributesType.Y |
-                Gdk.WindowAttributesType.Visual |
-                Gdk.WindowAttributesType.Colormap;
+                Gdk.WindowAttributesType.Visual;
 
             video_window = new Gdk.Window (null, attributes, attributes_mask);
             video_window.UserData = Handle;
 
-            video_window.SetBackPixmap (null, false);
+            video_window.BackgroundPattern = null;
 
             if (ServiceManager.PlayerEngine.VideoDisplayContextType == VideoDisplayContextType.GdkWindow) {
                 ServiceManager.PlayerEngine.VideoDisplayContext = video_window.Handle;
@@ -137,7 +135,7 @@ namespace Banshee.NowPlaying
             return false;
         }
 
-        protected override void ExposeVideo (Gdk.EventExpose evnt)
+        protected override void ExposeVideo ()
         {
             if (ServiceManager.PlayerEngine.VideoDisplayContextType == VideoDisplayContextType.GdkWindow) {
                 ServiceManager.PlayerEngine.VideoExpose (video_window.Handle, true);
