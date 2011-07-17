@@ -89,7 +89,7 @@ namespace Banshee.Gui.Widgets
             attributes.Y = Allocation.Y;
             attributes.Width = Allocation.Width;
             attributes.Height = Allocation.Height;
-            attributes.Wclass = WindowClass.InputOnly;
+            attributes.Wclass = WindowWindowClass.InputOnly;
             attributes.EventMask = (int)(
                 EventMask.PointerMotionMask |
                 EventMask.EnterNotifyMask |
@@ -105,8 +105,7 @@ namespace Banshee.Gui.Widgets
 
         protected override void OnUnrealized ()
         {
-            WidgetFlags ^= WidgetFlags.Realized;
-
+            IsRealized = false;
             event_window.UserData = IntPtr.Zero;
             Hyena.Gui.GtkWorkarounds.WindowDestroy (event_window);
             event_window = null;
