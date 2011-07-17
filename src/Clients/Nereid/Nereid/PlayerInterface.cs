@@ -146,10 +146,12 @@ namespace Nereid
 
 #region System Overrides
 
-        public override void Dispose ()
+        protected override void Dispose (bool disposing)
         {
             lock (this) {
-                Hide ();
+                if (disposing) {
+                    Hide ();
+                }
                 base.Dispose ();
                 Gtk.Application.Quit ();
             }
@@ -437,7 +439,7 @@ namespace Nereid
 
             if (!PlatformDetection.IsMeeGo) {
                 // FIXME: confirm that this is not needed anymore
-                /*header_toolbar.ExposeEvent += OnToolbarExposeEvent;
+                //header_toolbar.ExposeEvent += OnToolbarExposeEvent;
             }
         }
 
