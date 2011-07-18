@@ -72,6 +72,7 @@ namespace Banshee.Hardware.Gio
         void HandleMonitorMountAdded (object o, MountAddedArgs args)
         {
             // Manually get the mount as gio-sharp translates it to the wrong managed object
+            // TODO: check if this workaround is still needed
             var mount = GLib.MountAdapter.GetObject ((GLib.Object) args.Args [0]);
             if (mount.Volume == null)
                 return;
