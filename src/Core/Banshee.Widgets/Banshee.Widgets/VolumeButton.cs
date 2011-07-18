@@ -500,7 +500,7 @@ namespace Bacon
             };
 
             int width, height;
-            Icon.SizeLookup(size, out width, out height);
+            Gtk.Icon.SizeLookup(size, out width, out height);
             IconTheme theme = IconTheme.GetForScreen(Screen);
 
             if(pixbufs == null) {
