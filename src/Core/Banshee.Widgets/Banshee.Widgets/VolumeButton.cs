@@ -686,42 +686,6 @@ namespace Bacon
 
                 return base.OnKeyReleaseEvent(evnt);
             }
-
-            // FIXME: This is also seriously LAME. The MinSliderSize property is "protected"
-            // according to gtkrange.h, and thus should be exposed and accessible through
-            // this sub-class, but GAPI does not bind protected structure fields. LAME LAME.
-            // http://bugzilla.novell.com/show_bug.cgi?id=323372
-
-            [DllImport("libgobject-2.0-0.dll")]
-            private static extern void g_type_query(IntPtr type, IntPtr query);
-
-            // In case there's no map provided by the assembly .config file
-            [DllImport("libgobject-2.0-0.dll", EntryPoint="g_type_query")]
-            private static extern void g_type_query_fallback(IntPtr type, IntPtr query);
-
-            private int min_slider_size_offset = -1;
-
-            public int MinSliderSize {
-                get {
-                    if(min_slider_size_offset < 0) {
-                        IntPtr query = Marshal.AllocHGlobal(5 * IntPtr.Size);
-
-                        try {
-                            g_type_query(Gtk.Widget.GType.Val, query);
-                        } catch(DllNotFoundException) {
-                            button.WarnGObjectMap();
-                            g_type_query_fallback(Gtk.Widget.GType.Val, query);
-                        }
-
-                        min_slider_size_offset = (int)Marshal.ReadIntPtr(query, 2 * IntPtr.Size + 4);
-                        min_slider_size_offset += IntPtr.Size + 8;
-
-                        Marshal.FreeHGlobal(query);
-                    }
-
-                    return (int)Marshal.ReadIntPtr(Handle, min_slider_size_offset);
-                }
-            }
         }
     }
 }
