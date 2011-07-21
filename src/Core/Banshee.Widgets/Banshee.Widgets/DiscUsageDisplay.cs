@@ -117,13 +117,13 @@ namespace Banshee.Widgets
             CairoHelper.TransformToWindow (cr, this, Window);
 
             cr.Rectangle (Allocation.X, Allocation.Y, Allocation.Width, Allocation.Height);
-            cr.Clip();
-            Draw(cr);
+            cr.Clip ();
+            DrawWidget (cr);
 
             return false;
         }
 
-        private void Draw(Cairo.Context cr)
+        private void DrawWidget (Cairo.Context cr)
         {
             cr.Antialias = Antialias.Subpixel;
             cr.LineWidth = base_line_width / 1.5;
