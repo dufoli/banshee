@@ -208,16 +208,7 @@ namespace Banshee.NotificationArea
 
         private bool BuildNotificationArea ()
         {
-            if (Environment.OSVersion.Platform == PlatformID.Unix) {
-                try {
-                    notif_area = new X11NotificationAreaBox ();
-                } catch {
-                }
-            }
-
-            if (notif_area == null) {
-                notif_area = new GtkNotificationAreaBox (elements_service.PrimaryWindow);
-            }
+            notif_area = new GtkNotificationAreaBox (elements_service.PrimaryWindow);
 
             if (notif_area == null) {
                 return false;

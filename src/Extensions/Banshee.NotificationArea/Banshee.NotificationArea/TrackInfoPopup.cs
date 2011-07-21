@@ -76,11 +76,14 @@ namespace Banshee.NotificationArea
             base.Dispose (disposing);
         }
 
-        protected override bool OnExposeEvent (Gdk.EventExpose evnt)
+        protected override bool OnDrawn (Cairo.Context cr)
         {
-            Gtk.Style.PaintFlatBox (Style, GdkWindow, StateType.Normal, ShadowType.Out, evnt.Area, this, "tooltip",
-                0, 0, Allocation.Width, Allocation.Height);
-            return base.OnExposeEvent (evnt);
+            StyleContext.Save ();
+            StyleContext.AddClass ("tooltip");
+            StyleContext.RenderBackground (cr, 0, 0, Allocation.Width, Allocation.Height);
+            StyleContext.RenderFrame (cr, 0, 0, Allocation.Width, Allocation.Height);
+            StyleContext.Restore ();
+            return base.OnDrawn (cr);
         }
     }
 }

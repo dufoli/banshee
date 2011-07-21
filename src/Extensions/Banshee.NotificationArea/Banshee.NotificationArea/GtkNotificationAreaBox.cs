@@ -40,15 +40,9 @@ namespace Banshee.NotificationArea
     {
         public event EventHandler Disconnected;
 
-        public event EventHandler Activated {
-            add { base.Activate += value; }
-            remove { base.Activate -= value; }
-        }
-
-        public event PopupMenuHandler PopupMenuEvent {
-            add { base.PopupMenu += value; }
-            remove { base.PopupMenu -= value; }
-        }
+        public event EventHandler Activated;
+        public event PopupMenuHandler PopupMenuEvent;
+        private TrackInfoPopup custom_tooltip;
 
         public Widget Widget {
             get { return null; }
@@ -60,8 +54,10 @@ namespace Banshee.NotificationArea
             IconName = (IconThemeUtils.HasIcon ("banshee-panel")) ?
                 "banshee-panel" : Banshee.ServiceStack.Application.IconName;
 
-            Tooltip = window.Title;
-            window.TitleChanged += delegate { Tooltip = window.Title; };
+            HasTooltip = true;
+            base.Activate += delegate {OnActivated ();};
+            base.PopupMenu += delegate {OnPopupMenuEvent ();};
+            custom_tooltip = new TrackInfoPopup ();
         }
 
         public void PositionMenu (Menu menu, out int x, out int y, out bool push_in)
@@ -71,6 +67,86 @@ namespace Banshee.NotificationArea
 
         public void OnPlayerEvent (PlayerEventArgs args)
         {
+/*            switch (args.Event) {
+                case PlayerEvent.StartOfStream:
+                    can_show_popup = true;
+                    break;
+
+                case PlayerEvent.EndOfStream:
+                    // only hide the popup when we don't play again after 250ms
+                    GLib.Timeout.Add (250, delegate {
+                        if (ServiceManager.PlayerEngine.CurrentState != PlayerState.Playing) {
+                            HidePopup ();
+                         }
+                         return false;
+                    });
+                    break;
+            }*/
+        }
+
+        protected bool OnScrollEvent (Gdk.EventScroll evnt)
+        {
+            switch (evnt.Direction) {
+                case Gdk.ScrollDirection.Up:
+                    if ((evnt.State & Gdk.ModifierType.ControlMask) != 0) {
+                        ServiceManager.PlayerEngine.Volume += (ushort)PlayerEngine.VolumeDelta;
+                    } else if((evnt.State & Gdk.ModifierType.ShiftMask) != 0) {
+                        ServiceManager.PlayerEngine.Position += PlayerEngine.SkipDelta;
+                    } else {
+                        ServiceManager.PlaybackController.Next ();
+                    }
+                    break;
+
+                case Gdk.ScrollDirection.Down:
+                    if ((evnt.State & Gdk.ModifierType.ControlMask) != 0) {
+                        if (ServiceManager.PlayerEngine.Volume < (ushort)PlayerEngine.VolumeDelta) {
+                            ServiceManager.PlayerEngine.Volume = 0;
+                        } else {
+                            ServiceManager.PlayerEngine.Volume -= (ushort)PlayerEngine.VolumeDelta;
+                        }
+                    } else if((evnt.State & Gdk.ModifierType.ShiftMask) != 0) {
+                        ServiceManager.PlayerEngine.Position -= PlayerEngine.SkipDelta;
+                    } else {
+                        ServiceManager.PlaybackController.Previous ();
+                    }
+                    break;
+            }
+            return true;
+        }
+
+        protected override bool OnButtonPressEvent (Gdk.EventButton evnt)
+        {
+            if (evnt.Type != Gdk.EventType.ButtonPress) {
+                return false;
+            }
+
+            switch (evnt.Button) {
+                case 1:
+                    if ((evnt.State & Gdk.ModifierType.ControlMask) != 0) {
+                        ServiceManager.PlaybackController.Next ();
+                    } else {
+                        OnActivated ();
+                    }
+                    break;
+                case 2:
+                    ServiceManager.PlayerEngine.TogglePlaying ();
+                    break;
+                case 3:
+                    if ((evnt.State & Gdk.ModifierType.ControlMask) != 0) {
+                        ServiceManager.PlaybackController.Next ();
+                    } else {
+                        OnPopupMenuEvent ();
+                    }
+                    break;
+            }
+            return true;
+        }
+
+
+        protected override bool OnQueryTooltip (int x, int y, bool keyboard_mode, Tooltip tooltip)
+        {
+            tooltip.Custom = custom_tooltip;
+            return true;
         }
 
         public void Show ()
@@ -81,6 +157,22 @@ namespace Banshee.NotificationArea
         public void Hide ()
         {
             Visible = false;
+        }
+
+        protected virtual void OnActivated ()
+        {
+            EventHandler handler = Activated;
+            if (handler != null) {
+                handler (this, EventArgs.Empty);
+            }
+        }
+
+        protected virtual void OnPopupMenuEvent ()
+        {
+            PopupMenuHandler handler = PopupMenuEvent;
+            if (handler != null) {
+                handler (this, new PopupMenuArgs ());
+            }
         }
     }
 }
