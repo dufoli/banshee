@@ -146,10 +146,10 @@ namespace Banshee.YouTube
             ShowAll ();
         }
 
-        protected override void OnStyleSet (Style previous_style)
+        protected override void OnStyleUpdated ()
         {
-            base.OnStyleSet (previous_style);
-            results_tv.ModifyBg (StateType.Normal, Style.Base (StateType.Normal));
+            base.OnStyleUpdated ();
+            results_tv.OverrideBackgroundColor (StateFlags.Normal, StyleContext.GetColor (StateFlags.Normal));
         }
 
         private class RefreshVideosJob : SimpleAsyncJob
