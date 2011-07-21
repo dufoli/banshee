@@ -1,9 +1,5 @@
-if EXTERNAL_NOTIFY_SHARP
-NOTIFY_SHARP_LIBS = $(NOTIFY_SHARP_LIBS)
-else
 GMCS_FLAGS+="-define:INTERNAL_NOTIFY_SHARP"
 NOTIFY_SHARP_LIBS = 
-endif
 
 if HAVE_GDK_2_22
 GMCS_FLAGS+= "-define:HAVE_GDK_2_22"
@@ -11,7 +7,7 @@ endif
 
 ASSEMBLY = Banshee.NotificationArea
 TARGET = library
-LINK = $(REF_EXTENSION_NOTIFICATIONAREA) $(NOTIFY_SHARP_LIBS)
+LINK = $(REF_EXTENSION_NOTIFICATIONAREA)
 INSTALL_DIR = $(EXTENSIONS_INSTALL_DIR)
 
 SOURCES =  \
@@ -19,8 +15,6 @@ SOURCES =  \
 	Banshee.NotificationArea/INotificationAreaBox.cs \
 	Banshee.NotificationArea/NotificationAreaService.cs \
 	Banshee.NotificationArea/TrackInfoPopup.cs \
-	Banshee.NotificationArea/X11NotificationArea.cs \
-	Banshee.NotificationArea/X11NotificationAreaBox.cs \
 	Notifications/Notification.cs \
 	Notifications/Notifications.cs
 
