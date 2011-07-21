@@ -141,11 +141,11 @@ namespace Banshee.Gui
 
         public void Save ()
         {
-            if (window == null || !window.Visible || !window.IsMapped || window.GdkWindow == null) {
+            if (window == null || !window.Visible || !window.IsMapped || window.Window == null) {
                 return;
             }
 
-            maximized = (window.GdkWindow.State & Gdk.WindowState.Maximized) != 0;
+            maximized = (window.Window.State & Gdk.WindowState.Maximized) != 0;
             window.GetPosition (out x, out y);
             window.GetSize (out width, out height);
 

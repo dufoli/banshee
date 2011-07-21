@@ -66,8 +66,8 @@ namespace Banshee.Gui
 
         private void OnPrimaryWindowRealized (object o, EventArgs args)
         {
-            if (primary_window != null && primary_window.GdkWindow != null) {
-                property_store.Set<IntPtr> ("PrimaryWindow.RawHandle", primary_window.GdkWindow.Handle);
+            if (primary_window != null && primary_window.Window != null) {
+                property_store.Set<IntPtr> ("PrimaryWindow.RawHandle", primary_window.Window.Handle);
             } else {
                 property_store.Remove ("PrimaryWindow.RawHandle");
             }

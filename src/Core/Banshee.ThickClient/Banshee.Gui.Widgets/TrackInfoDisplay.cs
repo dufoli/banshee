@@ -175,7 +175,7 @@ namespace Banshee.Gui.Widgets
 
         protected override void OnRealized ()
         {
-            GdkWindow = Parent.GdkWindow;
+            Window = Parent.Window;
             base.OnRealized ();
         }
 

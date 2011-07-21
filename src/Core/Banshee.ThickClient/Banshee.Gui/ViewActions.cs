@@ -50,7 +50,7 @@ namespace Banshee.Gui
                 GtkElementsService service = ServiceManager.Get<GtkElementsService> ();
                 Gtk.ToggleAction action = this["FullScreenAction"] as Gtk.ToggleAction;
                 if (service != null && action != null && value == null) {
-                    action.Active = (service.PrimaryWindow.GdkWindow.State & Gdk.WindowState.Fullscreen) != 0;
+                    action.Active = (service.PrimaryWindow.Window.State & Gdk.WindowState.Fullscreen) != 0;
                 }
             }
         }

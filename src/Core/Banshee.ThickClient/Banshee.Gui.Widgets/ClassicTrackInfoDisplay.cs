@@ -99,7 +99,7 @@ namespace Banshee.Gui.Widgets
             WindowAttributesType attributes_mask =
                 WindowAttributesType.X | WindowAttributesType.Y | WindowAttributesType.Wmclass;
 
-            event_window = new Gdk.Window (GdkWindow, attributes, attributes_mask);
+            event_window = new Gdk.Window (Window, attributes, attributes_mask);
             event_window.UserData = Handle;
         }
 
