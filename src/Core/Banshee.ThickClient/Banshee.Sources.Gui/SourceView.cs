@@ -58,7 +58,6 @@ namespace Banshee.Sources.Gui
         private SourceRowRenderer source_renderer;
         private CellRendererText header_renderer;
         private Theme theme;
-        private Cairo.Context cr;
 
         private Stage<TreeIter> notify_stage = new Stage<TreeIter> (2000);
 
@@ -565,10 +564,6 @@ namespace Banshee.Sources.Gui
 
         internal TreeIter HighlightedIter {
             get { return highlight_iter; }
-        }
-
-        internal Cairo.Context Cr {
-            get { return cr; }
         }
 
         internal Theme Theme {

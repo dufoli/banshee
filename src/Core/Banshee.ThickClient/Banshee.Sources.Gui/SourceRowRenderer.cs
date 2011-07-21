@@ -175,9 +175,9 @@ namespace Banshee.Sources.Gui
             // Draw the expander if the source has children
             double exp_h = (cell_area.Height - 2.0*Ypad) / 3.2;
             double exp_w = exp_h * 1.6;
-            if (view != null && view.Cr != null && source.Children != null && source.Children.Count > 0) {
+            if (view != null && source.Children != null && source.Children.Count > 0) {
                 var r = new Gdk.Rectangle (x, cell_area.Y + (int)((cell_area.Height - exp_h) / 2.0), (int)exp_w, (int)exp_h);
-                view.Theme.DrawArrow (view.Cr, r, source.Expanded ? Math.PI/2.0 : 0.0);
+                view.Theme.DrawArrow (cr, r, source.Expanded ? Math.PI/2.0 : 0.0);
             }
 
             if (!np_etc) {
@@ -262,15 +262,15 @@ namespace Banshee.Sources.Gui
 
             // Draw the count
             if (!hide_count) {
-                if (view != null && view.Cr != null) {
-                    view.Cr.Color = state == StateFlags.Normal || (view != null && state == StateFlags.Prelight)
+                if (view != null) {
+                    cr.Color = state == StateFlags.Normal || (view != null && state == StateFlags.Prelight)
                         ? view.Theme.TextMidColor
                         : CairoExtensions.GdkRGBAToCairoColor (view.Theme.Widget.StyleContext.GetColor (state));
 
-                    view.Cr.MoveTo (
+                    cr.MoveTo (
                         cell_area.X + cell_area.Width - count_layout_width - 2,
                         cell_area.Y + 0.5 + (double)(cell_area.Height - count_layout_height) / 2.0);
-                    PangoCairoHelper.ShowLayout (view.Cr, count_layout);
+                    PangoCairoHelper.ShowLayout (cr, count_layout);
                 }
 
                 count_layout.Dispose ();
@@ -286,7 +286,7 @@ namespace Banshee.Sources.Gui
                 return;
             }
 
-            if (selected && view.Cr != null) {
+            if (selected) {
                 Gdk.Rectangle rect = background_area;
                 rect.X -= 2;
                 rect.Width += 4;
@@ -299,19 +299,19 @@ namespace Banshee.Sources.Gui
 
                 // draw the hot cairo selection
                 if (!view.EditingRow) {
-                    view.Theme.DrawRowSelection (view.Cr, background_area.X + 1, background_area.Y + 1,
+                    view.Theme.DrawRowSelection (cr, background_area.X + 1, background_area.Y + 1,
                         background_area.Width - 2, background_area.Height - 2);
                 }
-            } else if (!TreeIter.Zero.Equals (iter) && iter.Equals (view.HighlightedIter) && view.Cr != null) {
-                view.Theme.DrawRowSelection (view.Cr, background_area.X + 1, background_area.Y + 1,
+            } else if (!TreeIter.Zero.Equals (iter) && iter.Equals (view.HighlightedIter)) {
+                view.Theme.DrawRowSelection (cr, background_area.X + 1, background_area.Y + 1,
                     background_area.Width - 2, background_area.Height - 2, false);
-            } else if (view.NotifyStage.ActorCount > 0 && view.Cr != null) {
+            } else if (view.NotifyStage.ActorCount > 0) {
                 if (!TreeIter.Zero.Equals (iter) && view.NotifyStage.Contains (iter)) {
                     Actor<TreeIter> actor = view.NotifyStage[iter];
                     Cairo.Color color = CairoExtensions.GdkRGBAToCairoColor (view.StyleContext.GetBackgroundColor (StateFlags.Active));
                     color.A = Math.Sin (actor.Percent * Math.PI);
 
-                    view.Theme.DrawRowSelection (view.Cr, background_area.X + 1, background_area.Y + 1,
+                    view.Theme.DrawRowSelection (cr, background_area.X + 1, background_area.Y + 1,
                         background_area.Width - 2, background_area.Height - 2, true, true, color);
                 }
             }
