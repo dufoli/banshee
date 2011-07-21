@@ -120,7 +120,7 @@ namespace Banshee.Dap.Gui
 
         private void SetBackground ()
         {
-            Cairo.Color light = CairoExtensions.GdkColorToCairoColor (Style.Background (StateType.Normal));
+            Cairo.Color light = CairoExtensions.GdkRGBAToCairoColor (StyleContext.GetBackgroundColor (StateFlags.Normal));
             Cairo.Color dark = CairoExtensions.ColorShade (light, 0.85);
 
             Cairo.LinearGradient grad = new Cairo.LinearGradient (0, Allocation.Y, 0, Allocation.Y + Allocation.Height);
