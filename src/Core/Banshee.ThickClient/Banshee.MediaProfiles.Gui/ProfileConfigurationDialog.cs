@@ -162,7 +162,9 @@ namespace Banshee.MediaProfiles.Gui
             SetSizeRequest(350, -1);
 
             Gdk.Geometry limits = new Gdk.Geometry();
-            limits.MinWidth = SizeRequest().Width;
+            int minimum_width, natural_width;
+            GetPreferredWidth (out minimum_width, out natural_width);
+            limits.MinWidth = minimum_width;
             limits.MaxWidth = Gdk.Screen.Default.Width;
             limits.MinHeight = -1;
             limits.MaxHeight = -1;

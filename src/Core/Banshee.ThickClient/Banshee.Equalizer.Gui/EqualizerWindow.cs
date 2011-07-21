@@ -107,10 +107,12 @@ namespace Banshee.Equalizer.Gui
             eq_enabled_checkbox.Clicked += OnEnableDisable;
             eq_preset_combo.ActiveEqualizer = EqualizerManager.Instance.SelectedEqualizer;
 
+            int minimum_height, natural_height;
+            GetPreferredHeight (out minimum_height, out natural_height);
             Gdk.Geometry limits = new Gdk.Geometry ();
             limits.MinWidth = -1;
             limits.MaxWidth = -1;
-            limits.MinHeight = SizeRequest ().Height;
+            limits.MinHeight = minimum_height;
             limits.MaxHeight = Gdk.Screen.Default.Height;
             SetGeometryHints (this, limits, Gdk.WindowHints.MaxSize);
 

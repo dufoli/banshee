@@ -93,13 +93,17 @@ namespace Banshee.Gui.Dialogs
 
         private void OnConfigureGeometry (object o, EventArgs args)
         {
+            Requisition minimum_size, natural_size;
+            GetPreferredSize (out minimum_size, out natural_size);
             var limits = new Gdk.Geometry () {
-                MinWidth = SizeRequest ().Width,
+                MinWidth = minimum_size.Width,
                 MaxWidth = Gdk.Screen.Default.Width
             };
 
             if (details_expander.Expanded) {
-                limits.MinHeight = SizeRequest ().Height + list_view.SizeRequest ().Height;
+                int list_min_height, list_natural_height;
+                list_view.GetPreferredHeight (out list_min_height, out list_natural_height);
+                limits.MinHeight = minimum_size.Height + list_min_height;
                 limits.MaxHeight = Gdk.Screen.Default.Height;
             } else {
                 limits.MinHeight = -1;
