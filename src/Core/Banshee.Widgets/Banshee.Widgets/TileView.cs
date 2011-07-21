@@ -106,7 +106,9 @@ namespace Banshee.Widgets
             int new_column_count = RelayoutTablesIfNeeded(usable_area, current_column_count);
 
             if(current_column_count != new_column_count) {
-                child.SizeRequest();
+                // FIXME: Is that really needed ?
+                Requisition minimum_size, natural_size;
+                child.GetPreferredSize (out minimum_size, out natural_size);
                 current_column_count = new_column_count;
             }
 

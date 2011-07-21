@@ -74,8 +74,8 @@ namespace Banshee.Widgets
             SecondaryLabel.Xalign = 0.0f;
             SecondaryLabel.Yalign = 0.0f;
 
-            StyleSet += delegate {
-                PrimaryLabel.ModifyFg (StateType.Normal, Style.Text (StateType.Normal));
+            StyleUpdated += delegate {
+                PrimaryLabel.OverrideColor (StateFlags.Normal, StyleContext.GetColor (StateFlags.Normal));
                 Gdk.RGBA rgba = StyleContext.GetColor (StateFlags.Normal);
                 SecondaryLabel.OverrideColor (StateFlags.Normal, Hyena.Gui.GtkUtilities.ColorBlend (
                     rgba, StyleContext.GetBackgroundColor (StateFlags.Normal)));

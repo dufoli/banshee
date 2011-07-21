@@ -94,7 +94,7 @@ namespace Banshee.Widgets
 
         protected override bool OnEnterNotifyEvent(Gdk.EventCrossing evnt)
         {
-            image.GdkWindow.Cursor = hand_cursor;
+            image.Window.Cursor = hand_cursor;
             is_hovering = true;
             UpdateImage();
             return base.OnEnterNotifyEvent(evnt);
@@ -154,8 +154,10 @@ namespace Banshee.Widgets
             PropagateDraw(Child, cr);
 
             if(HasFocus && draw_focus) {
-                Style.PaintFocus(Style, cr, StateType.Normal, this, "button",
-                    0, 0, Allocation.Width, Allocation.Height);
+                StyleContext.Save ();
+                StyleContext.AddClass ("button");
+                StyleContext.RenderFocus (cr, 0, 0, Allocation.Width, Allocation.Height);
+                StyleContext.Restore ();
             }
 
             return true;

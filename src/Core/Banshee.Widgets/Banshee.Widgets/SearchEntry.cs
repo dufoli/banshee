@@ -144,11 +144,13 @@ namespace Banshee.Widgets
         {
             int origin_x, origin_y, tmp;
 
-            filter_button.GdkWindow.GetOrigin(out origin_x, out tmp);
-            GdkWindow.GetOrigin(out tmp, out origin_y);
+            filter_button.Window.GetOrigin(out origin_x, out tmp);
+            Window.GetOrigin(out tmp, out origin_y);
 
             x = origin_x + filter_button.Allocation.X;
-            y = origin_y + SizeRequest().Height;
+            int minimum_height, natural_height;
+            GetPreferredHeight (out minimum_height, out natural_height);
+            y = origin_y + natural_height;
             push_in = true;
         }
 
@@ -204,11 +206,11 @@ namespace Banshee.Widgets
 
         private void UpdateStyle ()
         {
-            Gdk.Color color = entry.Style.Base (entry.State);
-            filter_button.ModifyBg (entry.State, color);
-            clear_button.ModifyBg (entry.State, color);
+            var color = entry.StyleContext.GetBackgroundColor (entry.StateFlags);
+            filter_button.OverrideBackgroundColor (entry.StateFlags, color);
+            clear_button.OverrideBackgroundColor (entry.StateFlags, color);
 
-            box.BorderWidth = (uint)entry.Style.XThickness;
+            box.BorderWidth = (uint)entry.StyleContext.GetBorder (StateFlags).Left;
         }
 
         private void OnInnerEntryStyleSet (object o, StyleSetArgs args)
@@ -257,12 +259,13 @@ namespace Banshee.Widgets
 
         protected override bool OnDrawn (Cairo.Context cr)
         {
-            Style.PaintFlatBox (entry.Style, cr, State, ShadowType.None, this,
-                "entry_bg", 0, 0, Allocation.Width, Allocation.Height);
-            PropagateDraw(Child, cr);
-            Style.PaintShadow(entry.Style, cr, StateType.Normal,
-                ShadowType.In, entry, "entry",
-                0, 0, Allocation.Width, Allocation.Height);
+            StyleContext.Save ();
+            StyleContext.AddClass ("entry");
+            StyleContext.RenderFrame (cr, 0, 0, Allocation.Width, Allocation.Height);
+            StyleContext.RenderBackground (cr, 0, 0, Allocation.Width, Allocation.Height);
+            PropagateDraw (Child, cr);
+            StyleContext.Restore ();
+
             return true;
         }
 
@@ -419,21 +422,15 @@ namespace Banshee.Widgets
         private class FilterMenuItem : MenuItem /*CheckMenuItem*/
         {
             private int id;
-            private string label;
 
             public FilterMenuItem(int id, string label) : base(label)
             {
                 this.id = id;
-                this.label = label;
                 //DrawAsRadio = true;
             }
 
             public int ID {
                 get { return id; }
-            }
-
-            public string Label {
-                get { return label; }
             }
 
             // FIXME: Remove when restored to CheckMenuItem
@@ -443,7 +440,7 @@ namespace Banshee.Widgets
                 set { active = value; }
             }
 
-            public new event EventHandler Toggled;
+            public event EventHandler Toggled;
             protected override void OnActivated ()
             {
                 base.OnActivated ();
@@ -475,7 +472,7 @@ namespace Banshee.Widgets
 
             protected override bool OnDrawn (Cairo.Context cr)
             {
-                // The Entry's GdkWindow is the top level window onto which
+                // The Entry's Window is the top level window onto which
                 // the frame is drawn; the actual text entry is drawn into a
                 // separate window, so we can ensure that for themes that don't
                 // respect HasFrame, we never ever allow the base frame drawing
@@ -503,7 +500,9 @@ namespace Banshee.Widgets
                 int width, height;
                 layout.SetMarkup(parent.EmptyMessage);
                 layout.GetPixelSize(out width, out height);
-                StyleContext.RenderLayout (cr, 2, (SizeRequest().Height - height) / 2, layout);
+                int minimum_height, natural_height;
+                OnGetPreferredHeight (out minimum_height, out natural_height);
+                StyleContext.RenderLayout (cr, 2, (natural_height - height) / 2, layout);
                 StyleContext.Restore ();
                 return ret;
             }
