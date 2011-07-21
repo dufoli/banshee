@@ -81,23 +81,24 @@ namespace Banshee.Widgets
 			calAlignment.Add(cal);
 		
 			box.PackStart(calAlignment, false, false, 0);
-				
-			Requisition req = SizeRequest();
+
+			int minimum_height, natural_height;
+			GetPreferredHeight (out minimum_height, out natural_height);
 			int x = 0, y = 0;
-			GdkWindow.GetOrigin(out x, out y);
-			popup.Move(x + Allocation.X, y + Allocation.Y + req.Height + 3);
+			Window.GetOrigin(out x, out y);
+			popup.Move(x + Allocation.X, y + Allocation.Y + natural_height + 3);
 			popup.Show();
 			popup.GrabFocus();
 				
 			Grab.Add(popup);
 
-			Gdk.GrabStatus grabbed = Gdk.Pointer.Grab(popup.GdkWindow, true,
+			Gdk.GrabStatus grabbed = Gdk.Pointer.Grab(popup.Window, true,
 				Gdk.EventMask.ButtonPressMask
 				| Gdk.EventMask.ButtonReleaseMask
 				| Gdk.EventMask.PointerMotionMask, null, null, CURRENT_TIME);
 
 			if(grabbed == Gdk.GrabStatus.Success) {
-				grabbed = Gdk.Keyboard.Grab(popup.GdkWindow,
+				grabbed = Gdk.Keyboard.Grab(popup.Window,
 					true, CURRENT_TIME);
 
 				if(grabbed != Gdk.GrabStatus.Success) {
