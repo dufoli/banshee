@@ -202,8 +202,8 @@ namespace Banshee.Gui.Widgets
         {
             base.OnStyleSet (previous);
 
-            text_color = CairoExtensions.GdkColorToCairoColor (Style.Foreground (StateType.Normal));
-            BackgroundColor = CairoExtensions.GdkColorToCairoColor (Style.Background (StateType.Normal));
+            text_color = CairoExtensions.GdkRGBAToCairoColor (StyleContext.GetColor (StateFlags.Normal));
+            BackgroundColor = CairoExtensions.GdkRGBAToCairoColor (StyleContext.GetBackgroundColor (StateFlags.Normal));
             text_light_color = Hyena.Gui.Theming.GtkTheme.GetCairoTextMidColor (this);
 
             ResetMissingImages ();

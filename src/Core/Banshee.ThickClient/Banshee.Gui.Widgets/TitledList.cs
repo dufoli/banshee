@@ -61,8 +61,8 @@ namespace Banshee.Gui.Widgets
             title.Show ();
 
             StyleSet += delegate {
-                title.ModifyBg (StateType.Normal, Style.Base (StateType.Normal));
-                title.ModifyFg (StateType.Normal, Style.Text (StateType.Normal));
+                title.OverrideBackgroundColor (StateFlags.Normal, StyleContext.GetBackgroundColor (StateFlags.Normal));
+                title.OverrideColor (StateFlags.Normal, StyleContext.GetColor (StateFlags.Normal));
             };
         }
     }

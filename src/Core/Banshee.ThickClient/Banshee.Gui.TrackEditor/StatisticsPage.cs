@@ -163,10 +163,10 @@ namespace Banshee.Gui.TrackEditor
             }
         }
 
-        protected override void OnStyleSet (Style previous_style)
+        protected override void OnStyleUpdated ()
         {
-            base.OnStyleSet (previous_style);
-            name_renderer.CellBackgroundGdk = Style.Background (StateType.Normal);
+            base.OnStyleUpdated ();
+            name_renderer.CellBackgroundRgba = StyleContext.GetBackgroundColor (StateFlags.Normal);
         }
 
         public void Initialize (TrackEditorDialog dialog)
