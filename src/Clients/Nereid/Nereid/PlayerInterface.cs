@@ -152,7 +152,7 @@ namespace Nereid
                 if (disposing) {
                     Hide ();
                 }
-                base.Dispose ();
+                base.Dispose (disposing);
                 Gtk.Application.Quit ();
             }
         }
