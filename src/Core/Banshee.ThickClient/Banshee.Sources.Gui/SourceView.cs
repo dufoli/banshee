@@ -442,13 +442,13 @@ namespace Banshee.Sources.Gui
             QueueDraw ();
         }
 
-        internal void Expand (Source src)
+        internal new void Expand (Source src)
         {
             Expand (store.FindSource (src));
             src.Expanded = true;
         }
 
-        private void Expand (TreeIter iter)
+        private new void Expand (TreeIter iter)
         {
             using (var path = store.GetPath (iter)) {
                 ExpandRow (path, true);
