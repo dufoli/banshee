@@ -22,10 +22,6 @@ if ENABLE_TESTS
     ENABLE_TESTS_FLAG = "-define:ENABLE_TESTS"
 endif
 
-if HAVE_GTK3
-    GTK3_FLAG = "-define:GTK3"
-endif
-
 FILTERED_LINK = $(shell echo "$(LINK)" | $(UNIQUE_FILTER_PIPE))
 DEP_LINK = $(shell echo "$(LINK)" | $(UNIQUE_FILTER_PIPE) | sed s,-r:,,g | grep '$(top_builddir)/bin/')
 

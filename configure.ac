@@ -117,7 +117,7 @@ BANSHEE_CHECK_LIBWEBKIT
 dnl gdata (optional through --disable-youtube)
 BANSHEE_CHECK_YOUTUBE
 
-dnl gtk#-beans and gio#
+dnl gio#
 BANSHEE_CHECK_GIO_SHARP
 
 dnl Moonlight (optional through --enable-moonlight)
