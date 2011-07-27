@@ -189,6 +189,7 @@ namespace Nereid
         {
             header_table = new Table (2, 2, false);
             header_table.Show ();
+            header_table.Vexpand = false;
             primary_vbox.PackStart (header_table, false, false, 0);
 
             main_menu = new MainMenu ();
