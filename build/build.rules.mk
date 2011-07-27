@@ -60,7 +60,7 @@ $(ASSEMBLY_FILE): $(SOURCES_BUILD) $(RESOURCES_EXPANDED) $(DEP_LINK)
 		$(ASSEMBLY_BUILD_FLAGS) \
 		-nowarn:0278 -nowarn:0078 $$warn \
 		-debug -target:$(TARGET) -out:$@ \
-		$(BUILD_DEFINES) $(ENABLE_TESTS_FLAG) $(GTK3_FLAG) \
+		$(BUILD_DEFINES) $(ENABLE_TESTS_FLAG) \
 		$(FILTERED_LINK) $(RESOURCES_BUILD) $(SOURCES_BUILD)
 	@if [ -e $(srcdir)/$(notdir $@.config) ]; then \
 		cp $(srcdir)/$(notdir $@.config) $(top_builddir)/bin; \

@@ -369,7 +369,7 @@ ${PACKAGE}-${VERSION}
     C Compiler:            ${CC}
     Mono C# Compiler:      ${MCS} ${GMCS_FLAGS}
     Mono Runtime:          ${MONO}
-    Gtk#:                  3
+    Gtk#:                  ${gtk_sharp_version}
 
   Video/Graphics:
     Graphics System:       ${GRAPHICS_SUBSYSTEM}
@@ -392,8 +392,8 @@ ${PACKAGE}-${VERSION}
       + GNOME Proxy        ${have_libsoup_gnome} (libsoup-gnome-2.4 >= $SOUP_GNOME_MIN_VERSION)
     Boo Scripting:         ${enable_boo}
     DAAP:                  ${enable_daap}
-    GIO Backend:           ${enable_gio} (glib >= 2.22, gio-sharp)
-    GIO Hardware:          ${enable_gio_hardware} (gudev-sharp, gkeyfile-sharp)
+    GIO Backend:           ${enable_gio} (gio-sharp >= 2.99)
+    GIO Hardware:          ${enable_gio_hardware} (gudev-sharp)
     YouTube:               ${enable_youtube} (gdata-sharp >= 1.4)
     Sound Menu:            ${enable_soundmenu}
     Ubuntu One Store:      ${enable_ubuntuone} (ubuntuone-sharp >= 0.3.2)
