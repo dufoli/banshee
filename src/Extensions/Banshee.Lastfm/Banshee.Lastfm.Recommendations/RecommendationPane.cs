@@ -229,7 +229,8 @@ namespace Banshee.Lastfm.Recommendations
         protected override void OnStyleSet (Style previous_style)
         {
             base.OnStyleSet (previous_style);
-            similar_artists_view.ModifyBg (StateType.Normal, Style.Base (StateType.Normal));
+            similar_artists_view.OverrideBackgroundColor (StateFlags.Normal,
+                                                          StyleContext.GetBackgroundColor (StateFlags.Normal));
         }
 
         private class RefreshRecommendationsJob : Banshee.Kernel.Job
@@ -304,7 +305,7 @@ namespace Banshee.Lastfm.Recommendations
                     album_button.Relief = ReliefStyle.None;
 
                     Label label = new Label ();
-                    label.ModifyFg (StateType.Normal, Style.Text (StateType.Normal));
+                    label.OverrideColor (StateFlags.Normal, StyleContext.GetColor (StateFlags.Normal));
                     label.Ellipsize = Pango.EllipsizeMode.End;
                     label.Xalign = 0;
                     label.Markup = String.Format ("{0}. {1}", i+1, GLib.Markup.EscapeText (album.Name));
@@ -325,7 +326,7 @@ namespace Banshee.Lastfm.Recommendations
                     HBox box = new HBox ();
 
                     Label label = new Label ();
-                    label.ModifyFg (StateType.Normal, Style.Text (StateType.Normal));
+                    label.OverrideColor (StateFlags.Normal, StyleContext.GetColor (StateFlags.Normal));
                     label.Ellipsize = Pango.EllipsizeMode.End;
                     label.Xalign = 0;
                     label.Markup = String.Format ("{0}. {1}", i+1, GLib.Markup.EscapeText (track.Name));

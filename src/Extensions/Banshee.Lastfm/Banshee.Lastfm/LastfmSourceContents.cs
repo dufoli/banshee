@@ -55,9 +55,9 @@ namespace Banshee.Lastfm
 
             viewport.Add (main_box);
 
-            StyleSet += delegate {
-                viewport.ModifyBg (StateType.Normal, Style.Base (StateType.Normal));
-                viewport.ModifyFg (StateType.Normal, Style.Text (StateType.Normal));
+            StyleUpdated += delegate {
+                viewport.OverrideBackgroundColor (StateFlags.Normal, StyleContext.GetBackgroundColor (StateFlags.Normal));
+                viewport.OverrideColor (StateFlags.Normal, StyleContext.GetColor (StateFlags.Normal));
             };
 
             AddWithFrame (viewport);
@@ -194,9 +194,9 @@ namespace Banshee.Lastfm
                 PackStart (tile_view, true, true, 0);
                 tile_view.Show ();
 
-                StyleSet += delegate {
-                    tile_view.ModifyBg (StateType.Normal, Style.Base (StateType.Normal));
-                    tile_view.ModifyFg (StateType.Normal, Style.Text (StateType.Normal));
+                StyleUpdated += delegate {
+                    tile_view.OverrideBackgroundColor (StateFlags.Normal, StyleContext.GetBackgroundColor (StateFlags.Normal));
+                    tile_view.OverrideColor (StateFlags.Normal, StyleContext.GetColor (StateFlags.Normal));
                 };
             }
 
