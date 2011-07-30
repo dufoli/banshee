@@ -173,10 +173,11 @@ namespace Banshee.Sources.Gui
             }
 
             // Draw the expander if the source has children
-            double exp_h = (cell_area.Height - 2.0*Ypad) / 3.2;
+            double exp_h = (cell_area.Height - 2.0*Ypad) / 2.0;
             double exp_w = exp_h * 1.6;
+            int y = Middle (cell_area, (int)exp_h);
             if (view != null && source.Children != null && source.Children.Count > 0) {
-                var r = new Gdk.Rectangle (x, cell_area.Y + (int)((cell_area.Height - exp_h) / 2.0), (int)exp_w, (int)exp_h);
+                var r = new Gdk.Rectangle (x, y, (int)exp_w, (int)exp_h);
                 view.Theme.DrawArrow (cr, r, source.Expanded ? Math.PI/2.0 : 0.0);
             }
 
