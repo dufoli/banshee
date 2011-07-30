@@ -324,7 +324,7 @@ namespace Banshee.Sources.Gui
 
         protected void SetModel<T> (ListView<T> view, IListModel<T> model)
         {
-            if (view.Model != null) {
+            if (view.Model != null && view.Vadjustment != null) {
                 model_positions[view.Model] = view.Vadjustment.Value;
             }
 
