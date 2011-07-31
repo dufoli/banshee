@@ -124,16 +124,16 @@ namespace Banshee.Widgets
                 render_bar = true;
 
                 StyleContext.RenderBackground (cr,
-                    Allocation.X, Allocation.Y, Allocation.Width, Allocation.Height);
+                    0, 0, Allocation.Width, Allocation.Height);
                 StyleContext.RenderFrame (cr,
-                    Allocation.X, Allocation.Y, Allocation.Width, Allocation.Height);
+                    0, 0, Allocation.Width, Allocation.Height);
 
                 if (bar_width > 0) {
                     StyleContext.RenderBackground (cr,
-                        Allocation.X + border.Left, Allocation.Y + border.Top,
+                        border.Left, border.Top,
                         bar_width, Allocation.Height - (border.Top + border.Bottom));
                     StyleContext.RenderFrame (cr,
-                        Allocation.X + border.Left, Allocation.Y + border.Top,
+                        border.Left, border.Top,
                         bar_width, Allocation.Height - (border.Top + border.Bottom));
                 }
             }
@@ -141,13 +141,13 @@ namespace Banshee.Widgets
             int width, height;
             layout.GetPixelSize (out width, out height);
 
-            int x = Allocation.X + ((Allocation.Width - width) / 2);
-            int y = Allocation.Y + ((Allocation.Height - height) / 2);
+            int x = (Allocation.Width - width) / 2;
+            int y = (Allocation.Height - height) / 2;
             Gdk.Rectangle rect = Allocation;
 
             if (render_bar) {
                 width = bar_width + border.Left;
-                rect = new Gdk.Rectangle (Allocation.X, Allocation.Y, width, Allocation.Height);
+                rect = new Gdk.Rectangle (0, 0, width, Allocation.Height);
                 StyleContext.RenderLayout (cr, x, y, layout);
 
                 rect.X += rect.Width;
