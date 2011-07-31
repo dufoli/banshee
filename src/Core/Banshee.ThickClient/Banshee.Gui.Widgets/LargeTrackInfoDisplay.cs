@@ -75,8 +75,8 @@ namespace Banshee.Gui.Widgets
             get {
                 int width = ArtworkSizeRequest * 2 + Spacing;
                 int height = (int)Math.Ceiling (ArtworkSizeRequest * 1.2);
-                int x = Allocation.X + (Allocation.Width - width) / 2;
-                int y = Allocation.Y + (Allocation.Height - height) / 2;
+                int x = (Allocation.Width - width) / 2;
+                int y = (Allocation.Height - height) / 2;
                 return new Gdk.Rectangle (x, y, width, height);
             }
         }
