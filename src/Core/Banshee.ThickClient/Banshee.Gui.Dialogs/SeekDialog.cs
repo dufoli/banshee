@@ -47,10 +47,11 @@ namespace Banshee.Gui.Dialogs
             seek_slider.StreamPositionLabel.FormatString = "<big>{0}</big>";
             seek_slider.ShowAll ();
 
-            VBox.PackStart (seek_slider, false, false, 0);
+            VBox.PackStart (seek_slider, true, true, 0);
             AddDefaultCloseButton ();
 
-            SetSizeRequest (300, -1);
+            // FIXME: We shouldn't have to set a minimum height here
+            SetSizeRequest (300, 120);
         }
     }
 }
