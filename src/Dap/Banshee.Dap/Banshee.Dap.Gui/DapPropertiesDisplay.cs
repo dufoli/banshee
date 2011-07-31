@@ -86,7 +86,7 @@ namespace Banshee.Dap.Gui
 
         private void DrawFrame (Cairo.Context cr)
         {
-            Gdk.Rectangle rect = new Gdk.Rectangle (Allocation.X, Allocation.Y,
+            Gdk.Rectangle rect = new Gdk.Rectangle (0, 0,
                 Allocation.Width, Allocation.Height);
             theme.Context.ShowStroke = true;
             theme.DrawFrameBackground (cr, rect, true);
