@@ -91,7 +91,7 @@ namespace Banshee.Widgets
 
         protected override void OnGetPreferredHeight (out int minimum_height, out int natural_height)
         {
-            minimum_height = natural_height = default(int);
+            minimum_height = natural_height = 0;
             if (!IsRealized || layout == null) {
                 return;
             }
@@ -103,7 +103,7 @@ namespace Banshee.Widgets
 
         protected override void OnGetPreferredWidth (out int minimum_width, out int natural_width)
         {
-            minimum_width = natural_width = default(int);
+            minimum_width = natural_width = 0;
             if (!IsRealized || layout == null) {
                 return;
             }
@@ -123,38 +123,58 @@ namespace Banshee.Widgets
                 bar_width -= border.Left + border.Right;
                 render_bar = true;
 
-                StyleContext.RenderBackground (cr,
-                    Allocation.X, Allocation.Y, Allocation.Width, Allocation.Height);
-                StyleContext.RenderFrame (cr,
-                    Allocation.X, Allocation.Y, Allocation.Width, Allocation.Height);
+                StyleContext.Save ();
+                StyleContext.AddClass ("trough");
+                StyleContext.RenderBackground (cr, 0, 0, Allocation.Width, Allocation.Height);
+                StyleContext.RenderFrame (cr, 0, 0, Allocation.Width, Allocation.Height);
+                StyleContext.Restore ();
 
                 if (bar_width > 0) {
-                    StyleContext.RenderBackground (cr,
-                        Allocation.X + border.Left, Allocation.Y + border.Top,
+                    StyleContext.Save ();
+                    StyleContext.AddClass ("progressbar");
+                    StyleContext.RenderActivity (cr,
+                        border.Left, border.Top,
                         bar_width, Allocation.Height - (border.Top + border.Bottom));
-                    StyleContext.RenderFrame (cr,
-                        Allocation.X + border.Left, Allocation.Y + border.Top,
-                        bar_width, Allocation.Height - (border.Top + border.Bottom));
+                    StyleContext.Restore ();
                 }
             }
 
             int width, height;
             layout.GetPixelSize (out width, out height);
 
-            int x = Allocation.X + ((Allocation.Width - width) / 2);
-            int y = Allocation.Y + ((Allocation.Height - height) / 2);
-            Gdk.Rectangle rect = Allocation;
+            int x = (Allocation.Width - width) / 2;
+            int y = (Allocation.Height - height) / 2;
+            Gdk.Rectangle rect = new Gdk.Rectangle (0, 0, Allocation.Width, Allocation.Height);
 
             if (render_bar) {
-                width = bar_width + border.Left;
-                rect = new Gdk.Rectangle (Allocation.X, Allocation.Y, width, Allocation.Height);
-                StyleContext.RenderLayout (cr, x, y, layout);
+                // First render the text that is on the progressbar
+                int full_bar_width = bar_width + border.Left;
+                rect.Width = full_bar_width;
 
+                cr.Save ();
+                Gdk.CairoHelper.Rectangle (cr, rect);
+                cr.Clip ();
+                StyleContext.Save ();
+                // The entry class is need so that the text get the "selected" color
+                StyleContext.AddClass ("entry");
+                StyleContext.AddClass ("progressbar");
+                StyleContext.RenderLayout (cr, x, y, layout);
+                StyleContext.Restore ();
+                cr.Restore ();
+
+                // Adjust the rectangle so that the rest of the text is rendered as expected
                 rect.X += rect.Width;
                 rect.Width = Allocation.Width - rect.Width;
             }
-//Set state to stateflags normal?
+
+            cr.Save ();
+            Gdk.CairoHelper.Rectangle (cr, rect);
+            cr.Clip ();
+            StyleContext.Save ();
+            StyleContext.AddClass ("trough");
             StyleContext.RenderLayout (cr, x, y, layout);
+            StyleContext.Restore ();
+            cr.Restore ();
 
             return true;
         }
