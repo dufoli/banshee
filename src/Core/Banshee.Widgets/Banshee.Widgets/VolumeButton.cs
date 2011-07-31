@@ -369,9 +369,9 @@ namespace Bacon
             return true;
         }
 
-        protected override void OnStyleSet(Style previous)
+        protected override void OnStyleUpdated()
         {
-            base.OnStyleSet(previous);
+            base.OnStyleUpdated();
             LoadIcons();
         }
 

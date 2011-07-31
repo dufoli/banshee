@@ -226,9 +226,9 @@ namespace Banshee.Lastfm.Recommendations
             SetSizeRequest (-1, args.Allocation.Height + (Allocation.Height - args.Allocation.Height));
         }
 
-        protected override void OnStyleSet (Style previous_style)
+        protected override void OnStyleUpdated ()
         {
-            base.OnStyleSet (previous_style);
+            base.OnStyleUpdated ();
             similar_artists_view.OverrideBackgroundColor (StateFlags.Normal,
                                                           StyleContext.GetBackgroundColor (StateFlags.Normal));
         }

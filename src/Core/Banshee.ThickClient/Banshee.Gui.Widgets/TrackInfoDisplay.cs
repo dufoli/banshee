@@ -198,9 +198,9 @@ namespace Banshee.Gui.Widgets
             }
         }
 
-        protected override void OnStyleSet (Style previous)
+        protected override void OnStyleUpdated ()
         {
-            base.OnStyleSet (previous);
+            base.OnStyleUpdated ();
 
             text_color = CairoExtensions.GdkRGBAToCairoColor (StyleContext.GetColor (StateFlags.Normal));
             BackgroundColor = CairoExtensions.GdkRGBAToCairoColor (StyleContext.GetBackgroundColor (StateFlags.Normal));

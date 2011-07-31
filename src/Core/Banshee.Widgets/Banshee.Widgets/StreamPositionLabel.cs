@@ -77,9 +77,9 @@ namespace Banshee.Widgets
 
         private bool first_style_set = false;
 
-        protected override void OnStyleSet (Style old_style)
+        protected override void OnStyleUpdated ()
         {
-            base.OnStyleSet (old_style);
+            base.OnStyleUpdated ();
 
             if (first_style_set) {
                 BuildLayouts ();

@@ -118,9 +118,9 @@ namespace Banshee.Library.Gui
             ServiceManager.SourceManager.SourceUpdated += OnSourceUpdated;
         }
 
-        protected override void OnStyleSet (Style previous_style)
+        protected override void OnStyleUpdated ()
         {
-            base.OnStyleSet (previous_style);
+            base.OnStyleUpdated ();
             UpdateIcons ();
         }
 

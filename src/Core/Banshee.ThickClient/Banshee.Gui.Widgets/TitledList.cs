@@ -60,7 +60,7 @@ namespace Banshee.Gui.Widgets
             PackStart (title, false, false, 0);
             title.Show ();
 
-            StyleSet += delegate {
+            StyleUpdated += delegate {
                 title.OverrideBackgroundColor (StateFlags.Normal, StyleContext.GetBackgroundColor (StateFlags.Normal));
                 title.OverrideColor (StateFlags.Normal, StyleContext.GetColor (StateFlags.Normal));
             };

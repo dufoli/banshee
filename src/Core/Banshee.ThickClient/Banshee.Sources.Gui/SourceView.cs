@@ -203,9 +203,9 @@ namespace Banshee.Sources.Gui
 
 #region Gtk.Widget Overrides
 
-        protected override void OnStyleSet (Style old_style)
+        protected override void OnStyleUpdated ()
         {
-            base.OnStyleSet (old_style);
+            base.OnStyleUpdated ();
             theme = Hyena.Gui.Theming.ThemeEngine.CreateTheme (this);
 
             var light_text = Hyena.Gui.Theming.GtkTheme.GetCairoTextMidColor (this);

@@ -112,9 +112,9 @@ namespace Banshee.Dap.Gui
             });
         }
 
-        protected override void OnStyleSet (Style previous_style)
+        protected override void OnStyleUpdated ()
         {
-            base.OnStyleSet (previous_style);
+            base.OnStyleUpdated ();
             SetBackground ();
         }
 

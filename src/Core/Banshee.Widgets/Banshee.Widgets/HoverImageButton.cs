@@ -81,7 +81,7 @@ namespace Banshee.Widgets
         }
 
         private bool changing_style = false;
-        protected override void OnStyleSet(Style previous_style)
+        protected override void OnStyleUpdated()
         {
             if(changing_style) {
                 return;

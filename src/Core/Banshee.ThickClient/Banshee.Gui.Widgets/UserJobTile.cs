@@ -115,9 +115,9 @@ namespace Banshee.Gui.Widgets
                 AttachOptions.Shrink | AttachOptions.Fill, 0, 0);
         }
 
-        protected override void OnStyleSet (Style style)
+        protected override void OnStyleUpdated ()
         {
-            base.OnStyleSet (style);
+            base.OnStyleUpdated ();
             UpdateIcons ();
         }
 

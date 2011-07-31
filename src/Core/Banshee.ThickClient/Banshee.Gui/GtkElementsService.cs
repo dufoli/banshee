@@ -53,7 +53,7 @@ namespace Banshee.Gui
         {
         }
 
-        private void OnStyleSet (object o, StyleSetArgs args)
+        private void OnStyleUpdated (object o, EventArgs args)
         {
             SourceInvalidateIconPixbuf (ServiceManager.SourceManager.Sources);
 
@@ -93,7 +93,7 @@ namespace Banshee.Gui
             get { return primary_window; }
             set {
                 if (primary_window != null) {
-                    primary_window.StyleSet -= OnStyleSet;
+                    primary_window.StyleUpdated -= OnStyleUpdated;
                     primary_window.Realized -= OnPrimaryWindowRealized;
                 }
 
@@ -102,7 +102,7 @@ namespace Banshee.Gui
                 if (primary_window != null) {
                     property_store.Set<BaseClientWindow> ("PrimaryWindow", primary_window);
 
-                    primary_window.StyleSet += OnStyleSet;
+                    primary_window.StyleUpdated += OnStyleUpdated;
                     primary_window.Realized += OnPrimaryWindowRealized;
                 } else {
                     property_store.Remove ("PrimaryWindow");

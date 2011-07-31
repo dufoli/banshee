@@ -101,7 +101,7 @@ namespace Banshee.Widgets
             Add(box);
             box.ShowAll();
 
-            entry.StyleSet += OnInnerEntryStyleSet;
+            entry.StyleUpdated += OnInnerEntryStyleUpdated;
             entry.StateChanged += OnInnerEntryStateChanged;
             entry.FocusInEvent += OnInnerEntryFocusEvent;
             entry.FocusOutEvent += OnInnerEntryFocusEvent;
@@ -213,7 +213,7 @@ namespace Banshee.Widgets
             box.BorderWidth = (uint)entry.StyleContext.GetBorder (StateFlags).Left;
         }
 
-        private void OnInnerEntryStyleSet (object o, StyleSetArgs args)
+        private void OnInnerEntryStyleUpdated (object o, EventArgs args)
         {
             UpdateStyle ();
         }
