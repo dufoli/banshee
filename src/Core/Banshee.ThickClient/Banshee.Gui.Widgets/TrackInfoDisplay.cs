@@ -249,16 +249,11 @@ namespace Banshee.Gui.Widgets
                 return true;
             }
 
-            cr.Rectangle (Allocation.X, Allocation.Y, Allocation.Width, Allocation.Height);
-            cr.Clip ();
-
             if (idle) {
                 RenderIdle (cr);
             } else {
                 RenderAnimation (cr);
             }
-
-            cr.ResetClip ();
 
             return true;
         }
@@ -336,7 +331,7 @@ namespace Banshee.Gui.Widgets
         protected virtual void RenderCoverArt (Cairo.Context cr, ImageSurface image)
         {
             ArtworkRenderer.RenderThumbnail (cr, image, false,
-                Allocation.X, Allocation.Y + ArtworkOffset,
+                0, ArtworkOffset,
                 ArtworkSizeRequest, ArtworkSizeRequest,
                 !IsMissingImage (image), 0.0,
                 IsMissingImage (image), BackgroundColor);

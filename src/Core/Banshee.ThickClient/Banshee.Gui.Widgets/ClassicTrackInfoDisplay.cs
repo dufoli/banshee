@@ -176,7 +176,7 @@ namespace Banshee.Gui.Widgets
             }
 
             double offset = ArtworkSizeRequest + ArtworkSpacing, y = 0;
-            double x = Allocation.X + offset;
+            double x = offset;
             double width = Allocation.Width - offset;
             int fl_width, fl_height, sl_width, sl_height;
             int pango_width = (int)(width * Pango.Scale.PangoScale);
@@ -205,7 +205,7 @@ namespace Banshee.Gui.Widgets
                 SetSizeRequest (-1, fl_height + sl_height);
             }
 
-            y = Allocation.Y + (Allocation.Height - (fl_height + sl_height)) / 2;
+            y = (Allocation.Height - (fl_height + sl_height)) / 2;
 
             // Render the layouts
             cr.Antialias = Cairo.Antialias.Default;

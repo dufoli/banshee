@@ -80,7 +80,7 @@ namespace Banshee.Gui.Widgets
             idle_album = idle_album ?? PixbufImageSurface.Create (Banshee.Gui.IconThemeUtils.LoadIcon (
                 ArtworkSizeRequest, MissingAudioIconName), true);
 
-            ArtworkRenderer.RenderThumbnail (cr, idle_album, false, Allocation.X, Allocation.Y,
+            ArtworkRenderer.RenderThumbnail (cr, idle_album, false, 0, 0,
                 ArtworkSizeRequest, ArtworkSizeRequest,
                 false, 0, true, BackgroundColor);
         }
