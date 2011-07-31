@@ -148,6 +148,9 @@ namespace Booter
             Console.WriteLine ("Usage: {0} [options...] [files|URIs...]", "banshee");
             Console.WriteLine ();
 
+            string css_file = Path.Combine (Paths.ApplicationData, "gtk.css").Replace (
+                            Environment.GetFolderPath (Environment.SpecialFolder.Personal), "~");
+
             Layout commands = new Layout (
                 new LayoutGroup ("help", Catalog.GetString ("Help Options"),
                     new LayoutOption ("help", Catalog.GetString ("Show this help")),
@@ -220,10 +223,10 @@ namespace Booter
                     new LayoutOption ("uninstalled", Catalog.GetString ("Optimize instance for running uninstalled; " +
                         "most notably, this will create an alternate Mono.Addins database in the working directory")),
                     new LayoutOption ("disable-dbus", Catalog.GetString ("Disable DBus support completely")),
-                    new LayoutOption ("no-gtkrc", String.Format (Catalog.GetString (
-                        "Skip loading a custom gtkrc file ({0}) if it exists"),
-                        Path.Combine (Paths.ApplicationData, "gtkrc").Replace (
-                            Environment.GetFolderPath (Environment.SpecialFolder.Personal), "~")))
+                    new LayoutOption ("no-gtkcss", String.Format (Catalog.GetString (
+                        "Skip loading a custom gtk.css file ({0}) if it exists"), css_file)),
+                    new LayoutOption ("debug-gtkcss", String.Format (Catalog.GetString (
+                        "Reload the custom gtk.css file ({0}) every 5 seconds"), css_file))
                 )
             );
 
