@@ -113,8 +113,8 @@ namespace Banshee.Gui.Widgets
 
             seek_slider.SetSizeRequest (175, -1);
 
-            box.PackStart (seek_slider, true, true, 0);
-            box.PackStart (stream_position_label, false, false, 0);
+            box.PackStart (seek_slider, false, false, 0);
+            box.PackStart (stream_position_label, true, true, 0);
 
             hbox.PackStart (box, true, true, 0);
 
