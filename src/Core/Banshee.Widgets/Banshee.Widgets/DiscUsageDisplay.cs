@@ -114,10 +114,6 @@ namespace Banshee.Widgets
                 return false;
             }
 
-            CairoHelper.TransformToWindow (cr, this, Window);
-
-            cr.Rectangle (Allocation.X, Allocation.Y, Allocation.Width, Allocation.Height);
-            cr.Clip ();
             DrawWidget (cr);
 
             return false;
