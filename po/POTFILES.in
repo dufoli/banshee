@@ -264,7 +264,6 @@ src/Extensions/Banshee.MiroGuide/Banshee.MiroGuide/View.cs
 src/Extensions/Banshee.MultimediaKeys/Banshee.MultimediaKeys.addin.xml
 src/Extensions/Banshee.NotificationArea/Banshee.NotificationArea.addin.xml
 src/Extensions/Banshee.NotificationArea/Banshee.NotificationArea/NotificationAreaService.cs
-src/Extensions/Banshee.NotificationArea/Banshee.NotificationArea/X11NotificationAreaBox.cs
 src/Extensions/Banshee.NowPlaying/Banshee.NowPlaying.addin.xml
 src/Extensions/Banshee.NowPlaying/Banshee.NowPlaying/NowPlayingSource.cs
 src/Extensions/Banshee.PlayerMigration/Banshee.PlayerMigration.addin.xml
