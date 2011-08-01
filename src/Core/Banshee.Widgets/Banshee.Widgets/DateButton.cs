@@ -41,6 +41,7 @@ namespace Banshee.Widgets
         private string displayFormat;
 
         private const uint CURRENT_TIME = 0;
+        private Gdk.Device pointer, keyboard;
 
         public DateButton (string text) : base (text)
         {
@@ -92,14 +93,24 @@ namespace Banshee.Widgets
 
             Grab.Add (popup);
 
-            Gdk.GrabStatus grabbed = Gdk.Pointer.Grab (popup.Window, true,
+            Gdk.Device event_device = Gtk.Global.CurrentEventDevice;
+            if (event_device.Source == Gdk.InputSource.Mouse) {
+                pointer = event_device;
+                keyboard = event_device.AssociatedDevice;
+            } else {
+                keyboard = event_device;
+                pointer = event_device.AssociatedDevice;
+            }
+
+            Gdk.GrabStatus grabbed = pointer.Grab (popup.Window, Gdk.GrabOwnership.Application, true,
                 Gdk.EventMask.ButtonPressMask
                 | Gdk.EventMask.ButtonReleaseMask
-                | Gdk.EventMask.PointerMotionMask, null, null, CURRENT_TIME);
+                | Gdk.EventMask.PointerMotionMask, null, CURRENT_TIME);
 
             if (grabbed == Gdk.GrabStatus.Success) {
-                grabbed = Gdk.Keyboard.Grab (popup.Window, true, CURRENT_TIME);
-                
+                grabbed = keyboard.Grab (popup.Window, Gdk.GrabOwnership.Application, true,
+                    Gdk.EventMask.KeyPressMask | Gdk.EventMask.KeyReleaseMask, null, CURRENT_TIME);
+
                 if (grabbed != Gdk.GrabStatus.Success) {
                     Grab.Remove (popup);
                     popup.Destroy ();
@@ -110,10 +121,10 @@ namespace Banshee.Widgets
                 popup.Destroy ();
                 popup = null;
             }
-            
+
             cal.DaySelectedDoubleClick += OnCalendarDaySelected;
             cal.ButtonPressEvent += OnCalendarButtonPressed;
-            
+
             cal.Date = date;
         }
 
@@ -121,18 +132,18 @@ namespace Banshee.Widgets
         {
             if (popup != null) {
                 Grab.Remove (popup);
-                Gdk.Pointer.Ungrab (CURRENT_TIME);
-                Gdk.Keyboard.Ungrab (CURRENT_TIME);
-                
+                pointer.Ungrab (CURRENT_TIME);
+                keyboard.Ungrab (CURRENT_TIME);
+
                 popup.Destroy ();
                 popup = null;
             }
-            
+
             if (update) {
                 date = cal.GetDate ();
                 Label = date.ToString (displayFormat);
             }
-            
+
             Active = false;
         }
 
