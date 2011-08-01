@@ -139,7 +139,10 @@ namespace Banshee.MiniMode
 
             limits.MinHeight = -1;
             limits.MaxHeight = -1;
-            limits.MinWidth = SizeRequest ().Width;
+
+            int minimum_width, natural_width;
+            GetPreferredWidth (out minimum_width, out natural_width);
+            limits.MinWidth = minimum_width;
             limits.MaxWidth = Gdk.Screen.Default.Width;
 
             SetGeometryHints (this, limits, Gdk.WindowHints.MaxSize | Gdk.WindowHints.MinSize);

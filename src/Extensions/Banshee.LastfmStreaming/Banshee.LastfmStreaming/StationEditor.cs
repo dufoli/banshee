@@ -74,8 +74,10 @@ namespace Banshee.LastfmStreaming.Radio
             AddStockButton (Stock.Cancel, ResponseType.Cancel);
             AddStockButton (Stock.Ok, ResponseType.Ok, true);
 
+            int minimum_width, natural_width;
+            GetPreferredWidth (out minimum_width, out natural_width);
             SetGeometryHints (this, new Gdk.Geometry () {
-                    MinWidth = SizeRequest ().Width,
+                    MinWidth = minimum_width,
                     MaxWidth = Gdk.Screen.Default.Width,
                     MinHeight = -1,
                     MaxHeight = -1
