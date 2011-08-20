@@ -313,6 +313,7 @@ namespace Banshee.GStreamerSharp
                 case EventType.FlushStop:
                 case EventType.Seek:
                 case EventType.NewSegment:
+                case EventType.CustomDownstream:
                     vis_thawing = true;
                 break;
             }
@@ -322,10 +323,12 @@ namespace Banshee.GStreamerSharp
         
             switch (padEvent.Type) {
             case EventType.Eos:
+            case EventType.CustomDownstreamOob:
                 Blocked = false;
                 break;
         
             case EventType.NewSegment:
+            case EventType.CustomDownstream:
                 Blocked = true;
                 break;
             }
