@@ -51,7 +51,7 @@ namespace Banshee.Discs
         public virtual void Initialize ()
         {
             if (ServiceManager.HardwareManager == null) {
-                throw new NotSupportedException ("AudioCdService cannot work when no HardwareManager is available");
+                throw new NotSupportedException ("DiscService cannot work when no HardwareManager is available");
             }
 
             lock (this) {
