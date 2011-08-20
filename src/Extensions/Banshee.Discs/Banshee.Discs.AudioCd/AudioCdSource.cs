@@ -280,7 +280,7 @@ namespace Banshee.Discs.AudioCd
 
         private void SetupGui ()
         {
-            Properties.SetStringList ("Icon.Name", "media-optical", "gnome-dev-cdrom-audio", "source-cd-audio");
+            Properties.SetStringList ("Icon.Name", "media-optical-cd-audio", "media-optical-cd", "media-optical", "gnome-dev-cdrom-audio", "source-cd-audio");
             Properties.SetString ("SourcePreferencesActionLabel", Catalog.GetString ("Audio CD Preferences"));
             Properties.SetString ("UnmapSourceActionLabel", Catalog.GetString ("Eject Disc"));
             Properties.SetString ("UnmapSourceActionIconName", "media-eject");

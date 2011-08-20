@@ -59,7 +59,7 @@ namespace Banshee.Discs.Dvd
 
         private void SetupGui ()
         {
-            Properties.SetStringList ("Icon.Name", "media-dvd", "gnome-dev-dvd");
+            Properties.SetStringList ("Icon.Name", "media-optical-dvd", "media-optical", "gnome-dev-dvd");
             Properties.SetString ("ActiveSourceUIResource", "ActiveSourceUI.xml");
             Properties.SetString ("GtkActionPath", "/DvdContextMenu");
         }
