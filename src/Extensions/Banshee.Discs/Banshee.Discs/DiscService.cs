@@ -55,9 +55,7 @@ namespace Banshee.Discs
             }
 
             lock (this) {
-                InstallPreferences ();
-
-                sources = new Dictionary<string, DiscSource> ();
+                Sources = new Dictionary<string, DiscSource> ();
 
                 // This says Cdrom, but really it means Cdrom in the general Disc device sense.
                 foreach (ICdromDevice device in ServiceManager.HardwareManager.GetAllCdromDevices ()) {
