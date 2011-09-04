@@ -2,10 +2,10 @@ dnl Granularly define the version components
 dnl Remember to also update the Display Version
 m4_define([banshee_version_major], [2])
 m4_define([banshee_version_minor], [1])
-m4_define([banshee_version_micro], [0])
+m4_define([banshee_version_micro], [3])
 
 dnl this can sometimes differ manually
-m4_define([banshee_display_version], ["2.1.0"])
+m4_define([banshee_display_version], ["2.1.3"])
 
 dnl set to 0 when doing an official release
 m4_define([banshee_version_pre_release], [0])
@@ -300,6 +300,7 @@ src/Backends/Banshee.Unix/Makefile
 src/Backends/Banshee.Osx/Makefile
 src/Backends/Banshee.NowPlaying.X11/Makefile
 src/Backends/Banshee.NowPlaying.X11/libbnpx11/Makefile
+src/Backends/Banshee.Windows/Makefile
 
 src/Libraries/Makefile
 src/Libraries/Lastfm/Makefile

@@ -54,6 +54,10 @@ namespace Banshee.AudioCd
 
         public void Initialize ()
         {
+            if (ServiceManager.HardwareManager == null) {
+                throw new NotSupportedException ("AudioCdService cannot work when no HardwareManager is available");
+            }
+
             lock (this) {
                 InstallPreferences ();
 
@@ -230,7 +234,7 @@ namespace Banshee.AudioCd
 
             service.InstallWidgetAdapters += OnPreferencesServiceInstallWidgetAdapters;
 
-            pref_page = new Banshee.Preferences.SourcePage ("audio-cd", Catalog.GetString ("Audio CDs"), "media-cdrom", 400);
+            pref_page = new Banshee.Preferences.SourcePage ("audio-cd", Catalog.GetString ("Audio CDs"), "media-optical", 400);
 
             pref_section = pref_page.Add (new Section ("audio-cd", Catalog.GetString ("Audio CD Importing"), 20));
             pref_section.ShowLabel = false;

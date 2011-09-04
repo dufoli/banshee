@@ -53,7 +53,7 @@ namespace Banshee.AudioCd
         private SourceMessage query_message;
 
         public AudioCdSource (AudioCdService service, AudioCdDiscModel discModel)
-            : base (Catalog.GetString ("Audio CD"), discModel.Title, 400)
+            : base (Catalog.GetString ("Audio CD"), discModel.Title, 59)
         {
             this.service = service;
             this.disc_model = discModel;
@@ -411,7 +411,7 @@ namespace Banshee.AudioCd
 
         private void SetupGui ()
         {
-            Properties.SetStringList ("Icon.Name", "media-cdrom", "gnome-dev-cdrom-audio", "source-cd-audio");
+            Properties.SetStringList ("Icon.Name", "media-optical", "gnome-dev-cdrom-audio", "source-cd-audio");
             Properties.SetString ("SourcePreferencesActionLabel", Catalog.GetString ("Audio CD Preferences"));
             Properties.SetString ("UnmapSourceActionLabel", Catalog.GetString ("Eject Disc"));
             Properties.SetString ("UnmapSourceActionIconName", "media-eject");
@@ -445,7 +445,7 @@ namespace Banshee.AudioCd
 
             Gtk.Action duplicate_action = uia_service.GlobalActions["DuplicateDiscAction"];
             if (duplicate_action != null) {
-                duplicate_action.IconName = "media-cdrom";
+                duplicate_action.IconName = "media-optical";
                 duplicate_action.Visible = AudioCdDuplicator.Supported;
             }
         }

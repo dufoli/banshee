@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: banshee\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=banshee&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-04-11 01:00+0000\n"
-"PO-Revision-Date: 2011-04-11 09:05+0100\n"
+"POT-Creation-Date: 2011-08-27 02:28+0000\n"
+"PO-Revision-Date: 2011-08-27 08:47+0100\n"
 "Last-Translator: Andrej Žnidaršič <andrej.znidarsic@gmail.com>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: \n"
@@ -37,304 +37,294 @@ msgstr "Podpora za večino naprav iPod/iPhone/iPad."
 #: ../data/addin-xml-strings.cs:15
 #: ../data/addin-xml-strings.cs:20
 #: ../data/addin-xml-strings.cs:25
-#: ../data/addin-xml-strings.cs:30
 msgid "Device Support"
 msgstr "Podpora naprav"
 
-#. ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod.addin.xml
-#: ../data/addin-xml-strings.cs:13
-msgid "iPod Support"
-msgstr "Podpora iPod"
-
-#: ../data/addin-xml-strings.cs:14
-msgid "Support for most iPod devices."
-msgstr "Podpora za večino naprav iPod."
-
 #. ../src/Dap/Banshee.Dap.Karma/Banshee.Dap.Karma.addin.xml
-#: ../data/addin-xml-strings.cs:18
+#: ../data/addin-xml-strings.cs:13
 msgid "Karma Support"
 msgstr "Podpora Karma"
 
-#: ../data/addin-xml-strings.cs:19
+#: ../data/addin-xml-strings.cs:14
 msgid "Support for Rio Karma devices."
 msgstr "Podpora naprav Rio Karma."
 
 #. ../src/Dap/Banshee.Dap.MassStorage/Banshee.Dap.MassStorage.addin.xml
-#: ../data/addin-xml-strings.cs:23
+#: ../data/addin-xml-strings.cs:18
 msgid "Mass Storage Media Player Support"
-msgstr "Podpora predvajalnikov večpredstavnostnih datotek z ogromno shrambo"
+msgstr "Podpora predvajalnikov predstavnostnih datotek z ogromno shrambo"
 
-#: ../data/addin-xml-strings.cs:24
+#: ../data/addin-xml-strings.cs:19
 msgid "Support for USB-drive based devices, including many iAudio devices and Android, Pre, and Galaxy phones."
 msgstr "Podpora napravam, osnovanim na USB, vključno s številnimi napravami iAudio in telefoni Android, Pre in Galaxy."
 
 #. ../src/Dap/Banshee.Dap.Mtp/Banshee.Dap.Mtp.addin.xml
-#: ../data/addin-xml-strings.cs:28
+#: ../data/addin-xml-strings.cs:23
 msgid "MTP Media Player Support"
-msgstr "Podpora predvajalnikov večpredstavnostnih datotek MTP"
+msgstr "Podpora predvajalnikov predstavnostnih datotek MTP"
 
-#: ../data/addin-xml-strings.cs:29
+#: ../data/addin-xml-strings.cs:24
 msgid "Support for MTP devices, including many Creative Zen devices."
 msgstr "Podpora naprav MTP, vključno s številnimi napravami Creative Zen."
 
 #. ../src/Extensions/Banshee.AmazonMp3.Store/Banshee.AmazonMp3.Store.addin.xml
-#: ../data/addin-xml-strings.cs:33
+#: ../data/addin-xml-strings.cs:28
 msgid "Amazon MP3 Store Source"
 msgstr "Vir trgovine Amazon MP3"
 
-#: ../data/addin-xml-strings.cs:34
+#: ../data/addin-xml-strings.cs:29
 msgid "Browse, search, and purchase music from the Amazon MP3 store."
 msgstr "Brskajte, iščite in nakupujte glasbo v trgovini Amazon MP3."
 
+#: ../data/addin-xml-strings.cs:30
 #: ../data/addin-xml-strings.cs:35
-#: ../data/addin-xml-strings.cs:40
+#: ../data/addin-xml-strings.cs:70
 #: ../data/addin-xml-strings.cs:75
-#: ../data/addin-xml-strings.cs:80
-#: ../data/addin-xml-strings.cs:95
+#: ../data/addin-xml-strings.cs:90
+#: ../data/addin-xml-strings.cs:100
 #: ../data/addin-xml-strings.cs:105
-#: ../data/addin-xml-strings.cs:110
-#: ../data/addin-xml-strings.cs:125
-#: ../data/addin-xml-strings.cs:170
+#: ../data/addin-xml-strings.cs:120
+#: ../data/addin-xml-strings.cs:165
 msgid "Online Sources"
 msgstr "Spletni viri"
 
 #. ../src/Extensions/Banshee.AmazonMp3/Banshee.AmazonMp3.addin.xml
-#: ../data/addin-xml-strings.cs:38
+#: ../data/addin-xml-strings.cs:33
 msgid "Amazon MP3 Import"
 msgstr "Uvoz Amazon MP3"
 
-#: ../data/addin-xml-strings.cs:39
+#: ../data/addin-xml-strings.cs:34
 msgid "Download and import music purchased from Amazon.com."
 msgstr "Prejem in uvoz glasbe kupljene na Amazon.com."
 
 #. ../src/Extensions/Banshee.Audiobook/Banshee.Audiobook.addin.xml
-#: ../data/addin-xml-strings.cs:43
+#: ../data/addin-xml-strings.cs:38
 msgid "Audiobooks Library"
 msgstr "Knjižnica zvočnih knjig"
 
-#: ../data/addin-xml-strings.cs:44
+#: ../data/addin-xml-strings.cs:39
 msgid "Organize audiobooks, lectures, etc."
 msgstr "Organizacija zvočnih knjig, predavanj, itn."
 
+#: ../data/addin-xml-strings.cs:40
 #: ../data/addin-xml-strings.cs:45
-#: ../data/addin-xml-strings.cs:50
-#: ../data/addin-xml-strings.cs:85
-#: ../data/addin-xml-strings.cs:100
+#: ../data/addin-xml-strings.cs:80
+#: ../data/addin-xml-strings.cs:95
+#: ../data/addin-xml-strings.cs:145
 #: ../data/addin-xml-strings.cs:150
-#: ../data/addin-xml-strings.cs:155
 msgid "Core"
 msgstr "Jedro"
 
 #. ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd.addin.xml
-#: ../data/addin-xml-strings.cs:48
+#: ../data/addin-xml-strings.cs:43
 msgid "Audio CD Support"
-msgstr "Podpora zvočnih CD"
+msgstr "Podpora zvočnih CD-jev"
 
-#: ../data/addin-xml-strings.cs:49
+#: ../data/addin-xml-strings.cs:44
 msgid "Listen to and rip Audio CDs."
 msgstr "Poslušanje in zajemanje zvočnih CD-jev."
 
 #. ../src/Extensions/Banshee.BooScript/Banshee.BooScript.addin.xml
-#: ../data/addin-xml-strings.cs:53
+#: ../data/addin-xml-strings.cs:48
 msgid "Boo Scripting"
 msgstr "Skripte Boo"
 
-#: ../data/addin-xml-strings.cs:54
+#: ../data/addin-xml-strings.cs:49
 msgid "Customize and extend Banshee with Boo-language scripts."
 msgstr "Prilagajanje in razširjanje Banshee s skriptami v jeziku Boo."
 
+#: ../data/addin-xml-strings.cs:50
 #: ../data/addin-xml-strings.cs:55
 #: ../data/addin-xml-strings.cs:60
 #: ../data/addin-xml-strings.cs:65
-#: ../data/addin-xml-strings.cs:70
-#: ../data/addin-xml-strings.cs:90
+#: ../data/addin-xml-strings.cs:85
+#: ../data/addin-xml-strings.cs:110
 #: ../data/addin-xml-strings.cs:115
-#: ../data/addin-xml-strings.cs:120
+#: ../data/addin-xml-strings.cs:125
 #: ../data/addin-xml-strings.cs:130
 #: ../data/addin-xml-strings.cs:135
 #: ../data/addin-xml-strings.cs:140
-#: ../data/addin-xml-strings.cs:145
+#: ../data/addin-xml-strings.cs:155
 #: ../data/addin-xml-strings.cs:160
-#: ../data/addin-xml-strings.cs:165
 msgid "Utilities"
 msgstr "Pripomočki"
 
 #. ../src/Extensions/Banshee.Bpm/Banshee.Bpm.addin.xml
-#: ../data/addin-xml-strings.cs:58
+#: ../data/addin-xml-strings.cs:53
 msgid "BPM Detection"
 msgstr "Zaznavanje UNM"
 
-#: ../data/addin-xml-strings.cs:59
+#: ../data/addin-xml-strings.cs:54
 msgid "Detect the beats per minute (BPM) of your music."
 msgstr "Zaznavanje udarcev na minuto (UNM) vaše skladbe."
 
 #. ../src/Extensions/Banshee.CoverArt/Banshee.CoverArt.addin.xml
-#: ../data/addin-xml-strings.cs:63
+#: ../data/addin-xml-strings.cs:58
 msgid "Cover Art Fetching"
 msgstr "Pridobivanje naslovnice"
 
-#: ../data/addin-xml-strings.cs:64
+#: ../data/addin-xml-strings.cs:59
 msgid "Fetch cover art for all items in your library."
 msgstr "Pridobivanje naslovnic za vse predmete v vaši knjižnici."
 
 #. ../src/Extensions/Banshee.Daap/Banshee.Daap.addin.xml
-#: ../data/addin-xml-strings.cs:68
+#: ../data/addin-xml-strings.cs:63
 msgid "DAAP Sharing"
 msgstr "Souporaba DAAP"
 
-#: ../data/addin-xml-strings.cs:69
+#: ../data/addin-xml-strings.cs:64
 msgid "Browse and listen to music shared over your local network."
 msgstr "Brskanje in poslušanje souporabljene glasbe preko krajevnega omrežja."
 
 #. ../src/Extensions/Banshee.Emusic.Store/Banshee.Emusic.Store.addin.xml
-#: ../data/addin-xml-strings.cs:73
+#: ../data/addin-xml-strings.cs:68
 msgid "eMusic Store"
 msgstr "Trgovina eMusic"
 
-#: ../data/addin-xml-strings.cs:74
+#: ../data/addin-xml-strings.cs:69
 msgid "Browse, search, and purchase music and audiobooks from eMusic"
 msgstr "Brskajte, iščite in nakupujte glasbo in zvočne knjige v eMusic"
 
 #. ../src/Extensions/Banshee.Emusic/Banshee.Emusic.addin.xml
-#: ../data/addin-xml-strings.cs:78
+#: ../data/addin-xml-strings.cs:73
 msgid "eMusic Import"
 msgstr "Uvoz eMusic"
 
-#: ../data/addin-xml-strings.cs:79
+#: ../data/addin-xml-strings.cs:74
 msgid "Download and import music purchased from eMusic."
 msgstr "Prejem in uvoz glasbe kupljene na eMusic."
 
 #. ../src/Extensions/Banshee.FileSystemQueue/Banshee.FileSystemQueue.addin.xml
-#: ../data/addin-xml-strings.cs:83
+#: ../data/addin-xml-strings.cs:78
 msgid "File System Preview Queue"
 msgstr "Vrsta predogleda datotečnega sistema"
 
-#: ../data/addin-xml-strings.cs:84
+#: ../data/addin-xml-strings.cs:79
 msgid "Preview files without importing to your library."
 msgstr "Predogled datotek brez uvoza v knjižnico."
 
 #. ../src/Extensions/Banshee.Fixup/Banshee.Fixup.addin.xml
-#: ../data/addin-xml-strings.cs:88
+#: ../data/addin-xml-strings.cs:83
 msgid "Metadata Fixup"
 msgstr "Popravilo metapodatkov"
 
-#: ../data/addin-xml-strings.cs:89
+#: ../data/addin-xml-strings.cs:84
 msgid "Fix broken and missing metadata using bulk operations."
 msgstr "Popravi pokvarjene in manjkajoče metapodatke z uporabo paketnih opravil."
 
 #. ../src/Extensions/Banshee.InternetArchive/Banshee.InternetArchive.addin.xml
-#: ../data/addin-xml-strings.cs:93
+#: ../data/addin-xml-strings.cs:88
 #: ../src/Extensions/Banshee.InternetArchive/Banshee.InternetArchive/HomeSource.cs:58
 msgid "Internet Archive"
 msgstr "Spletni arhiv"
 
-#: ../data/addin-xml-strings.cs:94
+#: ../data/addin-xml-strings.cs:89
 msgid "Browse and search the Internet Archive's vast media collection."
-msgstr "Brskanje in iskanje po ogromni zbirki večpredstavnostnih datotek spletnega Arhiva"
+msgstr "Brskanje in iskanje po ogromni zbirki predstavnostnih datotek spletnega Arhiva"
 
 #. ../src/Extensions/Banshee.InternetRadio/Banshee.InternetRadio.addin.xml
-#: ../data/addin-xml-strings.cs:98
+#: ../data/addin-xml-strings.cs:93
 msgid "Internet Radio"
 msgstr "Spletni radio"
 
-#: ../data/addin-xml-strings.cs:99
+#: ../data/addin-xml-strings.cs:94
 msgid "Listen to and organize Internet Radio stations."
 msgstr "Poslušanje in organizacija spletnih radijskih postaj."
 
 #. ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.addin.xml
-#: ../data/addin-xml-strings.cs:103
+#: ../data/addin-xml-strings.cs:98
 msgid "Last.fm Scrobbling"
 msgstr "Last.fm pošiljanje seznama predvajane glasbe"
 
-#: ../data/addin-xml-strings.cs:104
+#: ../data/addin-xml-strings.cs:99
 msgid "Last.fm scrobbling and context pane recommendations."
 msgstr "Last.fm pošiljanje seznama predvajane glasbe in priporočila vsebinskega pladnja."
 
 #. ../src/Extensions/Banshee.LastfmStreaming/Banshee.LastfmStreaming.addin.xml
-#: ../data/addin-xml-strings.cs:108
+#: ../data/addin-xml-strings.cs:103
 msgid "Last.fm Radio"
 msgstr "Radio Last.fm"
 
-#: ../data/addin-xml-strings.cs:109
+#: ../data/addin-xml-strings.cs:104
 msgid "Last.fm streaming radio for paid subscribers."
 msgstr "Pretočni radio Last.fm za plačnike naročnine."
 
 #. ../src/Extensions/Banshee.LibraryWatcher/Banshee.LibraryWatcher.addin.xml
-#: ../data/addin-xml-strings.cs:113
+#: ../data/addin-xml-strings.cs:108
 msgid "Library Watcher"
 msgstr "Pregledovalnik knjižnice"
 
-#: ../data/addin-xml-strings.cs:114
+#: ../data/addin-xml-strings.cs:109
 msgid "Automatically update music and video libraries."
 msgstr "Samodejno posodobi glasbene in video knjižnice."
 
 #. ../src/Extensions/Banshee.MiniMode/Banshee.MiniMode.addin.xml
-#: ../data/addin-xml-strings.cs:118
+#: ../data/addin-xml-strings.cs:113
 msgid "Mini Mode"
 msgstr "Majhen način"
 
-#: ../data/addin-xml-strings.cs:119
+#: ../data/addin-xml-strings.cs:114
 msgid "Control Banshee through a small window with only playback controls and track information."
 msgstr "Nadzor Banshee skozi majhno okno z le nadzorom predvajanja in podrobnostmi skladbe."
 
 #. ../src/Extensions/Banshee.MiroGuide/Banshee.MiroGuide.addin.xml
-#: ../data/addin-xml-strings.cs:123
+#: ../data/addin-xml-strings.cs:118
 msgid "Miro Guide Podcast Directory"
 msgstr "Mapa vodiča po podcastih Miro"
 
-#: ../data/addin-xml-strings.cs:124
+#: ../data/addin-xml-strings.cs:119
 msgid "Browse and subscribe to thousands of audio and video podcasts."
 msgstr "Brskajte in naročite se na tisoče zvočnih in video podcastov."
 
 #. ../src/Extensions/Banshee.Mpris/Banshee.Mpris.addin.xml
-#: ../data/addin-xml-strings.cs:128
+#: ../data/addin-xml-strings.cs:123
 msgid "MPRIS D-Bus interface"
 msgstr "Vmesnik MPRIS D-Bus"
 
-#: ../data/addin-xml-strings.cs:129
+#: ../data/addin-xml-strings.cs:124
 msgid "Control Banshee using the MPRIS D-Bus interface."
 msgstr "Nadzirajte Banshee preko vmesnika D-Bus MPRIS."
 
 #. ../src/Extensions/Banshee.MultimediaKeys/Banshee.MultimediaKeys.addin.xml
-#: ../data/addin-xml-strings.cs:133
+#: ../data/addin-xml-strings.cs:128
 msgid "Multimedia Keys"
-msgstr "Večpredstavnostne tipke"
+msgstr "Predstavnostne tipke"
 
-#: ../data/addin-xml-strings.cs:134
+#: ../data/addin-xml-strings.cs:129
 msgid "Control playback via the multimedia keys on your keyboard."
-msgstr "Nadzor predvajanja preko večpredstavnostih tipk na vaši tipkovnici."
+msgstr "Nadzor predvajanja preko predstavnostih tipk na vaši tipkovnici."
 
 #. ../src/Extensions/Banshee.NotificationArea/Banshee.NotificationArea.addin.xml
-#: ../data/addin-xml-strings.cs:138
+#: ../data/addin-xml-strings.cs:133
 msgid "Notification Area Icon"
 msgstr "Ikona opozorilnega področja"
 
-#: ../data/addin-xml-strings.cs:139
+#: ../data/addin-xml-strings.cs:134
 msgid "Display an icon in the notification area for controlling Banshee."
 msgstr "Prikaz ikone za nadzor Banshee v obvestilnem področju."
 
 #. ../src/Extensions/Banshee.PlayerMigration/Banshee.PlayerMigration.addin.xml
-#: ../data/addin-xml-strings.cs:143
+#: ../data/addin-xml-strings.cs:138
 msgid "Importers for Amarok, Rhythmbox and iTunes"
 msgstr "Uvozniki za Amarok, Rhythmbox in iTunes"
 
-#: ../data/addin-xml-strings.cs:144
+#: ../data/addin-xml-strings.cs:139
 msgid "Import your library from Amarok, Rhythmbox or iTunes."
 msgstr "Uvozi vašo knjižnico iz Amarok, Rhythmbox ali iTunes."
 
 #. ../src/Extensions/Banshee.PlayQueue/Banshee.PlayQueue.addin.xml
-#: ../data/addin-xml-strings.cs:148
+#: ../data/addin-xml-strings.cs:143
 #: ../src/Extensions/Banshee.PlayQueue/Banshee.PlayQueue/PlayQueueSource.cs:58
 #: ../src/Extensions/Banshee.PlayQueue/Banshee.PlayQueue/PlayQueueSource.cs:79
 msgid "Play Queue"
-msgstr "Vrsta predvajanja"
+msgstr "Čakalna vrsta predvajanja"
 
-#: ../data/addin-xml-strings.cs:149
+#: ../data/addin-xml-strings.cs:144
 msgid "Queue tracks in an ad-hoc playlist, or let the Auto DJ take over."
 msgstr "Dajte skladbe v ad-hoc seznam predvajanja, ali predajte nadzor samodejnemu DJ-ju."
 
 #. ../src/Extensions/Banshee.Podcasting/Banshee.Podcasting.addin.xml
-#: ../data/addin-xml-strings.cs:153
+#: ../data/addin-xml-strings.cs:148
 #: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:200
 #: ../src/Dap/Banshee.Dap/Banshee.Dap/PodcastGroupSource.cs:38
 #: ../src/Extensions/Banshee.InternetArchive/InternetArchive/MediaType.cs:107
@@ -342,62 +332,62 @@ msgstr "Dajte skladbe v ad-hoc seznam predvajanja, ali predajte nadzor samodejne
 msgid "Podcasts"
 msgstr "Podcasti"
 
-#: ../data/addin-xml-strings.cs:154
+#: ../data/addin-xml-strings.cs:149
 msgid "Subscribe to podcasts and stream or download episodes."
 msgstr "Naročilo na podcaste in pretakanje ali prejemanje epizod."
 
 #. ../src/Extensions/Banshee.SoundMenu/Banshee.SoundMenu.addin.xml
-#: ../data/addin-xml-strings.cs:158
+#: ../data/addin-xml-strings.cs:153
 msgid "Sound Menu Integration"
 msgstr "Vključitev v zvočni meni"
 
-#: ../data/addin-xml-strings.cs:159
+#: ../data/addin-xml-strings.cs:154
 msgid "Control Banshee from the Sound Menu."
 msgstr "Nadzirajte Banshee iz zvočnega menija."
 
 #. ../src/Extensions/Banshee.Torrent/Banshee.Torrent.addin.xml
-#: ../data/addin-xml-strings.cs:163
+#: ../data/addin-xml-strings.cs:158
 msgid "Torrent Downloader"
 msgstr "Prejemnik torrentov"
 
-#: ../data/addin-xml-strings.cs:164
+#: ../data/addin-xml-strings.cs:159
 msgid "Support downloading BitTorrent files from podcasts."
 msgstr "Podpora prejemanja datotek BitTorrent iz podcastov."
 
 #. ../src/Extensions/Banshee.UbuntuOneMusicStore/Banshee.UbuntuOneMusicStore.addin.xml
-#: ../data/addin-xml-strings.cs:168
+#: ../data/addin-xml-strings.cs:163
 #: ../src/Extensions/Banshee.UbuntuOneMusicStore/Banshee.UbuntuOneMusicStore/UbuntuOneMusicStoreSource.cs:52
 #: ../src/Extensions/Banshee.UbuntuOneMusicStore/Banshee.UbuntuOneMusicStore/UbuntuOneMusicStoreSource.cs:53
-#: ../src/Extensions/Banshee.UbuntuOneMusicStore/Banshee.UbuntuOneMusicStore/UbuntuOneMusicStoreSource.cs:116
+#: ../src/Extensions/Banshee.UbuntuOneMusicStore/Banshee.UbuntuOneMusicStore/UbuntuOneMusicStoreSource.cs:109
 msgid "Ubuntu One Music Store"
 msgstr "Glasbena trgovina Ubuntu One"
 
-#: ../data/addin-xml-strings.cs:169
+#: ../data/addin-xml-strings.cs:164
 msgid "This extension grants access to the Ubuntu One Music Store, powered by 7digital."
 msgstr "Ta razširitev omogoči dostop do glasbene trgovine Ubuntu One, ki jo poganja 7digital."
 
 #. ../src/Extensions/Banshee.Wikipedia/Banshee.Wikipedia.addin.xml
-#: ../data/addin-xml-strings.cs:173
+#: ../data/addin-xml-strings.cs:168
 #: ../src/Extensions/Banshee.Wikipedia/Banshee.Wikipedia/ContextPage.cs:44
 msgid "Wikipedia"
 msgstr "Wikipedia"
 
-#: ../data/addin-xml-strings.cs:174
+#: ../data/addin-xml-strings.cs:169
 msgid "View artist information from Wikipedia in the context pane."
 msgstr "Ogled podrobnosti izvajalca iz Wikipedije v vsebinskem pladnju."
 
+#: ../data/addin-xml-strings.cs:170
 #: ../data/addin-xml-strings.cs:175
-#: ../data/addin-xml-strings.cs:180
 msgid "Context Pane"
 msgstr "Vsebinski pladenj"
 
 #. ../src/Extensions/Banshee.YouTube/Banshee.YouTube.addin.xml
-#: ../data/addin-xml-strings.cs:178
+#: ../data/addin-xml-strings.cs:173
 #: ../src/Extensions/Banshee.YouTube/Banshee.YouTube/ContextPage.cs:44
 msgid "YouTube"
 msgstr "YouTube"
 
-#: ../data/addin-xml-strings.cs:179
+#: ../data/addin-xml-strings.cs:174
 msgid "Show related YouTube videos in the context pane."
 msgstr "Pokaži povezane videoposnetke YouTube v vsebinskem pladnju."
 
@@ -599,14 +589,15 @@ msgstr "Banshee predvajalnik"
 #: ../data/desktop-files/common.desktop.in.h:2
 #: ../src/Dap/Banshee.Dap/Banshee.Dap/DapSource.cs:193
 msgid "Media Player"
-msgstr "Večpredstavnostni predvajalnik"
+msgstr "Predvajalnik predstavnosti"
 
 #: ../data/desktop-files/common.desktop.in.h:3
 msgid "Play and organize your media collection"
-msgstr "Predvajajte in organizirajte svojo zbirko večpredstavnostnih datotek"
+msgstr "Predvajajte in organizirajte svojo zbirko predstavnostnih datotek"
 
 #: ../libbanshee/banshee-bpmdetector.c:202
 #: ../libbanshee/banshee-ripper.c:270
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:240
 msgid "Could not create pipeline"
 msgstr "Cevovoda ni mogoče ustvariti"
 
@@ -633,10 +624,12 @@ msgstr "Vstavka lažnega korita ni mogoče ustvariti"
 #: ../libbanshee/banshee-bpmdetector.c:241
 #: ../libbanshee/banshee-bpmdetector.c:250
 #: ../libbanshee/banshee-ripper.c:311
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:281
 msgid "Could not link pipeline elements"
 msgstr "Predmetov cevovoda ni mogoče povezati"
 
 #: ../libbanshee/banshee-ripper.c:276
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:246
 msgid "Could not initialize element from cdda URI"
 msgstr "Predmeta iz cdda URI ni mogoče zagnati"
 
@@ -645,22 +638,27 @@ msgid "Could not create encoder pipeline"
 msgstr "Cevovoda kodirnika ni mogoče ustvariti"
 
 #: ../libbanshee/banshee-ripper.c:296
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:266
 msgid "Could not create queue plugin"
 msgstr "Vstavka za razvrščanje ni mogoče ustvariti"
 
 #: ../libbanshee/banshee-ripper.c:304
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:274
 msgid "Could not create filesink plugin"
 msgstr "Vstavka datotečnega korita ni mogoče najti"
 
 #: ../libbanshee/banshee-transcoder.c:240
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:181
 msgid "Could not create source element"
 msgstr "Predmeta izvira ni mogoče ustvariti"
 
 #: ../libbanshee/banshee-transcoder.c:246
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:187
 msgid "Could not create 'decodebin2' plugin"
 msgstr "Vstavka 'decodebin2' ni mogoče ustvariti"
 
 #: ../libbanshee/banshee-transcoder.c:252
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:63
 msgid "Could not create sink element"
 msgstr "Predmeta korita ni mogoče ustvariti"
 
@@ -669,10 +667,12 @@ msgid "Could not create 'sinkben' plugin"
 msgstr "Vstavka 'sinkben' ni mogoče ustvariti"
 
 #: ../libbanshee/banshee-transcoder.c:264
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:68
 msgid "Could not create 'audioconvert' plugin"
 msgstr "Vstavka 'audioconvert' ni mogoče ustvariti"
 
 #: ../libbanshee/banshee-transcoder.c:270
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:73
 msgid "Could not create 'audioresample' plugin"
 msgstr "Vstavka 'audioresample' ni mogoče ustvariti"
 
@@ -681,10 +681,12 @@ msgid "Could not create encoding pipeline"
 msgstr "Kodirnega cevovoda ni mogoče ustvariti"
 
 #: ../libbanshee/banshee-transcoder.c:282
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:85
 msgid "Could not get sink pad from encoder"
 msgstr "Odtočnega kolena kodirnika ni mogoče določiti"
 
 #: ../libbanshee/banshee-transcoder.c:345
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:269
 msgid "Could not construct pipeline"
 msgstr "Cevovoda ni mogoče izgraditi"
 
@@ -709,6 +711,7 @@ msgid "Fullscreen video playback active"
 msgstr "Celozaslonsko predvajanja videa je dejavno"
 
 #: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/AudioCdRipper.cs:89
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:96
 msgid "Could not find an encoder for ripping."
 msgstr "Kodirnika za zajemanje ni mogoče najti."
 
@@ -717,6 +720,7 @@ msgid "Could not create CD ripping driver."
 msgstr "Gonilnika za zajemanje CD-jev ni mogoče ustvariti."
 
 #: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/BpmDetector.cs:71
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/BpmDetector.cs:107
 msgid "Could not create BPM detection driver."
 msgstr "Gonilnika zaznavanja UNM ni mogoče ustvariti."
 
@@ -735,15 +739,17 @@ msgid "Could not initialize GStreamer library"
 msgstr "Knjižnice GStreamer ni mogoče zagnati"
 
 #: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/PlayerEngine.cs:451
-#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/PlayerEngine.cs:147
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/PlayerEngine.cs:547
 msgid "Unknown Error"
 msgstr "Neznana napaka"
 
 #: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/PlayerEngine.cs:823
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/PlayerEngine.cs:905
 msgid "_Enable ReplayGain correction"
 msgstr "_Omogoči popravek ReplayGain"
 
 #: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/PlayerEngine.cs:824
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/PlayerEngine.cs:906
 msgid "For tracks that have ReplayGain data, automatically scale (normalize) playback volume"
 msgstr "Samodejno izravnaj glasnost predvajanja skladb s podatki ReplayGain"
 
@@ -755,9 +761,23 @@ msgstr "Odstrani majhen premor predvajanja ob spremembi skladb. Uporabno za tema
 msgid "Could not create transcoder"
 msgstr "Prekodirnika ni mogoče ustvariti"
 
-#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/PlayerEngine.cs:348
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:259
+#, csharp-format
+msgid "Could not create encoder pipeline : {0}"
+msgstr "Cevovoda kodirnika ni mogoče ustvariti : {0}"
+
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/PlayerEngine.cs:792
 msgid "GStreamer# 0.10"
 msgstr "Uporabljen Gstreamer 0.10."
+
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:79
+#, csharp-format
+msgid "Could not create encoding pipeline : {0}"
+msgstr "Cevovoda kodiranja ni mogoče ustvariti : {0}"
+
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:198
+msgid "Could not create 'sinkbin' plugin"
+msgstr "Vstavka 'sinkbin' ni mogoče ustvariti"
 
 #: ../src/Backends/Banshee.Osx/Banshee.OsxBackend/OsxService.cs:91
 #: ../src/Extensions/Banshee.NotificationArea/Banshee.NotificationArea/NotificationAreaService.cs:132
@@ -772,6 +792,58 @@ msgstr "_Zapri"
 #: ../src/Extensions/Banshee.SoundMenu/Banshee.SoundMenu/SoundMenuService.cs:111
 msgid "Close"
 msgstr "Zapri"
+
+#: ../src/Backends/Banshee.Windows/Banshee.Windows/VersionUpdater.cs:72
+msgid "Can't check for updates"
+msgstr "Ni mogoče preveriti za posodobitve."
+
+#: ../src/Backends/Banshee.Windows/Banshee.Windows/VersionUpdater.cs:73
+msgid "We're currently not able to check if there's a new version available. Please try again later."
+msgstr "Trenutno ni mogoče preveriti, če je na voljo nova različica. Poskusite znova kasneje."
+
+#: ../src/Backends/Banshee.Windows/Banshee.Windows/VersionUpdater.cs:95
+msgid "No update available"
+msgstr "Ni posodobitev na voljo"
+
+#: ../src/Backends/Banshee.Windows/Banshee.Windows/VersionUpdater.cs:95
+msgid "You already have the latest version of Banshee installed."
+msgstr "Že imate nameščeno zadnjo različico Banshee."
+
+#: ../src/Backends/Banshee.Windows/Banshee.Windows/VersionUpdater.cs:106
+#, csharp-format
+msgid "A new version of Banshee ({0}) is available.{1}Do you want to update?"
+msgstr "Nova različica Banshee ({0}) je na voljo. {1}Ali želite program posodobiti?"
+
+#: ../src/Backends/Banshee.Windows/Banshee.Windows/VersionUpdater.cs:108
+msgid "Banshee update available"
+msgstr "Na voljo je posodobitev Banshee"
+
+#. Translators: {0} is the filename, eg Banshee-1.9.5.msi
+#: ../src/Backends/Banshee.Windows/Banshee.Windows/VersionUpdater.cs:129
+#, csharp-format
+msgid "Downloading {0}"
+msgstr "Prejemanje {0}"
+
+#: ../src/Backends/Banshee.Windows/Banshee.Windows/VersionUpdater.cs:152
+msgid "Update download failed"
+msgstr "Napaka med prejemanjem posodobitve"
+
+#: ../src/Backends/Banshee.Windows/Banshee.Windows/VersionUpdater.cs:152
+msgid "The download failed. Please try again later."
+msgstr "Prejem je spodletel. Poskusite ponovno kasneje."
+
+#: ../src/Backends/Banshee.Windows/Banshee.Windows/VersionUpdater.cs:165
+#, csharp-format
+msgid "The update finished downloading.{0}Do you want to shutdown Banshee and run the installer?"
+msgstr "Prejem posodobitve se je končal. {0} Ali želite izklopiti Banshee in pognati namestilnik?"
+
+#: ../src/Backends/Banshee.Windows/Banshee.Windows/VersionUpdater.cs:167
+msgid "Update finished downloading"
+msgstr "Prejemanje posodobitve je končano"
+
+#: ../src/Backends/Banshee.Windows/Banshee.Windows/WindowsService.cs:109
+msgid "Check for Updates"
+msgstr "Preveri za posodobitve"
 
 #: ../src/Clients/Booter/Booter/Entry.cs:152
 msgid "Help Options"
@@ -989,7 +1061,7 @@ msgstr "Ne predstavi uporabniškega vmesnika, ne glede na ostale možnosti"
 
 #: ../src/Clients/Booter/Booter/Entry.cs:208
 msgid "Present the import media dialog box"
-msgstr "Predstavi pogovorno okno uvažanja večpredstavnosti"
+msgstr "Predstavi pogovorno okno uvažanja predstavnosti"
 
 #: ../src/Clients/Booter/Booter/Entry.cs:209
 msgid "Present the about dialog"
@@ -1024,23 +1096,27 @@ msgid "Specify an alternate database to use"
 msgstr "Navedite dodatno zbirko podatkov za uporabo"
 
 #: ../src/Clients/Booter/Booter/Entry.cs:219
+msgid "Force fetching of missing cover artwork"
+msgstr "Prisili pridobivanje manjkajočih naslovnic"
+
+#: ../src/Clients/Booter/Booter/Entry.cs:220
 msgid "Specify an alternate key, default is /apps/banshee-1/"
 msgstr "Navadite dodaten ključ, privzet je /apps/banshee-1/"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:220
+#: ../src/Clients/Booter/Booter/Entry.cs:221
 msgid "Optimize instance for running uninstalled; most notably, this will create an alternate Mono.Addins database in the working directory"
 msgstr "Optimiziraj program za nenameščeno delovanje; možnost ustvari dodatno podatkovno zbirko vstavka Mono v delovni mapi"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:222
+#: ../src/Clients/Booter/Booter/Entry.cs:223
 msgid "Disable DBus support completely"
 msgstr "Popolno onemogočenje podpore DBus"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:224
+#: ../src/Clients/Booter/Booter/Entry.cs:225
 #, csharp-format
 msgid "Skip loading a custom gtkrc file ({0}) if it exists"
 msgstr "Preskoči nalaganje datoteke gtkrc po meri ({0}), če obstaja"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:255
+#: ../src/Clients/Booter/Booter/Entry.cs:256
 #, csharp-format
 msgid "The following help arguments are invalid: {0}"
 msgstr "Naslednji argumenti pomoči so neveljavni: {0}"
@@ -1119,7 +1195,7 @@ msgstr "Opomba"
 
 #: ../src/Core/Banshee.Core/Banshee.Base/CoverArtSpec.cs:43
 #: ../src/Core/Banshee.Core/Banshee.Collection/ArtistInfo.cs:37
-#: ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd/AudioCdDiscModel.cs:100
+#: ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd/AudioCdDiscModel.cs:102
 #: ../src/Extensions/Banshee.CoverArt/Banshee.CoverArt/CoverArtJob.cs:137
 #: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Recommendations/RecommendationPane.cs:90
 msgid "Unknown Artist"
@@ -1127,7 +1203,7 @@ msgstr "Neznan izvajalec"
 
 #: ../src/Core/Banshee.Core/Banshee.Base/CoverArtSpec.cs:45
 #: ../src/Core/Banshee.Core/Banshee.Collection/AlbumInfo.cs:40
-#: ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd/AudioCdDiscModel.cs:101
+#: ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd/AudioCdDiscModel.cs:103
 #: ../src/Extensions/Banshee.CoverArt/Banshee.CoverArt/CoverArtJob.cs:136
 msgid "Unknown Album"
 msgstr "Neznan album"
@@ -1152,7 +1228,7 @@ msgstr "Datoteke ni mogoče najti"
 
 #: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:349
 msgid "Codec for playing this media type not available"
-msgstr "Kodek za predvajanje te vrste večpredstavnostnih datotek ni na voljo"
+msgstr "Kodek za predvajanje te vrste predstavnostnih datotek ni na voljo"
 
 #: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:351
 msgid "File protected by Digital Rights Management (DRM)"
@@ -1301,10 +1377,10 @@ msgstr "Naključno predvaja skladbe s seznama predvajanja"
 
 #: ../src/Core/Banshee.Services/Banshee.Collection/ImportManager.cs:138
 msgid "Scanning for media"
-msgstr "Preiskovanje za večpredstavnostne datoteke"
+msgstr "Preiskovanje za predstavnostne datoteke"
 
 #: ../src/Core/Banshee.Services/Banshee.Collection/ImportManager.cs:188
-#: ../src/Core/Banshee.Services/Banshee.Database/BansheeDbFormatMigrator.cs:1384
+#: ../src/Core/Banshee.Services/Banshee.Database/BansheeDbFormatMigrator.cs:1395
 msgid "Scanning..."
 msgstr "Preiskovanje ..."
 
@@ -1315,7 +1391,7 @@ msgstr "Preiskovanje ({0} datotek) ..."
 
 #: ../src/Core/Banshee.Services/Banshee.Collection/ImportManager.cs:238
 msgid "Importing Media"
-msgstr "Uvažanje večpredstavnostnih datotek"
+msgstr "Uvažanje predstavnostnih datotek"
 
 #: ../src/Core/Banshee.Services/Banshee.Collection/ImportManager.cs:245
 #: ../src/Core/Banshee.Services/Banshee.Library/ThreadPoolImportSource.cs:119
@@ -1342,7 +1418,7 @@ msgstr "Nadgrajevanje podatkovne zbirke Banshee"
 msgid "Please wait while your old Banshee database is migrated to the new format."
 msgstr "Počakajte, da se stara podatkovna zbirka Banshee pretvori v novo vrsto zapisa."
 
-#: ../src/Core/Banshee.Services/Banshee.Database/BansheeDbFormatMigrator.cs:1381
+#: ../src/Core/Banshee.Services/Banshee.Database/BansheeDbFormatMigrator.cs:1392
 msgid "Refreshing Metadata"
 msgstr "Osveževanje metapodatkov"
 
@@ -1403,14 +1479,18 @@ msgid "Ska"
 msgstr "Ska"
 
 #: ../src/Core/Banshee.Services/Banshee.Equalizer/EqualizerManager.cs:294
+msgid "Smiley Face Curve"
+msgstr "Krivulja smeška"
+
+#: ../src/Core/Banshee.Services/Banshee.Equalizer/EqualizerManager.cs:297
 msgid "Soft"
 msgstr "Mehko"
 
-#: ../src/Core/Banshee.Services/Banshee.Equalizer/EqualizerManager.cs:297
+#: ../src/Core/Banshee.Services/Banshee.Equalizer/EqualizerManager.cs:300
 msgid "Soft Rock"
 msgstr "Mehki rock"
 
-#: ../src/Core/Banshee.Services/Banshee.Equalizer/EqualizerManager.cs:300
+#: ../src/Core/Banshee.Services/Banshee.Equalizer/EqualizerManager.cs:303
 msgid "Techno"
 msgstr "Tehno"
 
@@ -1651,15 +1731,15 @@ msgstr "Neogledano"
 msgid "Videos that haven't been played yet"
 msgstr "Nepredvajani videoposnetki"
 
-#: ../src/Core/Banshee.Services/Banshee.MediaEngine/PlayerEngineService.cs:98
+#: ../src/Core/Banshee.Services/Banshee.MediaEngine/PlayerEngineService.cs:99
 msgid "Default player engine"
 msgstr "Privzeti programnik predvajalnika"
 
-#: ../src/Core/Banshee.Services/Banshee.MediaEngine/PlayerEngineService.cs:105
+#: ../src/Core/Banshee.Services/Banshee.MediaEngine/PlayerEngineService.cs:106
 msgid "No player engines were found. Please ensure Banshee has been cleanly installed."
 msgstr "Programnikov predvajalnika ni mogoče najti. Prepričajte se, da je bil Banshee pravilno nameščen."
 
-#: ../src/Core/Banshee.Services/Banshee.MediaEngine/PlayerEngineService.cs:349
+#: ../src/Core/Banshee.Services/Banshee.MediaEngine/PlayerEngineService.cs:373
 msgid "Problem with Player Engine"
 msgstr "Težave s programnikom predvajalnika"
 
@@ -1686,7 +1766,7 @@ msgstr "Zapiši _metapodatke v datoteke"
 
 #: ../src/Core/Banshee.Services/Banshee.Metadata/SaveTrackMetadataService.cs:50
 msgid "Save tags and other metadata inside supported media files"
-msgstr "Shrani oznake in druge metapodatke v podprte večpredstavnostne datoteke"
+msgstr "Shrani oznake in druge metapodatke v podprte predstavnostne datoteke"
 
 #: ../src/Core/Banshee.Services/Banshee.Metadata/SaveTrackMetadataService.cs:55
 #: ../src/Core/Banshee.Services/Banshee.Metadata/SaveTrackMetadataService.cs:174
@@ -1703,7 +1783,7 @@ msgstr "_Posodobi imena datotek in map"
 
 #: ../src/Core/Banshee.Services/Banshee.Metadata/SaveTrackMetadataService.cs:61
 msgid "Rename files and folders according to media metadata"
-msgstr "Preimenovanje datotek in map glede na metapodatke večpredstavnostnih datotek"
+msgstr "Preimenovanje datotek in map glede na metapodatke predstavnostnih datotek"
 
 #: ../src/Core/Banshee.Services/Banshee.Metadata/SaveTrackMetadataService.cs:175
 msgid "Enable this option to save rating and play count metadata inside supported audio files whenever the rating is changed."
@@ -1800,7 +1880,7 @@ msgstr "Lastno viru"
 
 #: ../src/Core/Banshee.Services/Banshee.Preferences/PreferenceService.cs:52
 msgid "Extensions"
-msgstr "Pripone"
+msgstr "Razširitve"
 
 #. General policies
 #: ../src/Core/Banshee.Services/Banshee.Preferences/PreferenceService.cs:55
@@ -1809,7 +1889,7 @@ msgstr "Pravila datotek"
 
 #: ../src/Core/Banshee.Services/Banshee.Preferences/PreferenceService.cs:58
 msgid "Co_py files to media folders when importing"
-msgstr "Med uvažanjem _kopiraj datoteke v večpredstavnostne mape"
+msgstr "Med uvažanjem _kopiraj datoteke v predstavnostne mape"
 
 #: ../src/Core/Banshee.Services/Banshee.Preferences/PreferenceService.cs:69
 msgid "Improve Banshee by sending anonymous usage data"
@@ -2399,7 +2479,7 @@ msgid "Delete Smart Playlist"
 msgstr "Izbriši pameten seznam predvajanja"
 
 #: ../src/Core/Banshee.Services/Banshee.Sources/DatabaseSource.cs:148
-#: ../src/Extensions/Banshee.InternetRadio/Banshee.InternetRadio/InternetRadioSource.cs:160
+#: ../src/Extensions/Banshee.InternetRadio/Banshee.InternetRadio/InternetRadioSource.cs:161
 #, csharp-format
 msgid "All Genres ({0})"
 msgstr "Vse zvrsti ({0})"
@@ -2452,7 +2532,7 @@ msgid "Close Error Report"
 msgstr "Zapri poročilo o napakah"
 
 #: ../src/Core/Banshee.Services/Banshee.Sources/ErrorSource.cs:83
-#: ../src/Core/Banshee.ThickClient/Banshee.Collection.Gui/ColumnCellStatusIndicator.cs:224
+#: ../src/Core/Banshee.ThickClient/Banshee.Collection.Gui/ColumnCellStatusIndicator.cs:222
 #: ../src/Core/Banshee.ThickClient/Banshee.Gui.Dialogs/ErrorListDialog.cs:46
 msgid "Error"
 msgstr "Napaka"
@@ -2460,7 +2540,7 @@ msgstr "Napaka"
 #: ../src/Core/Banshee.Services/Banshee.Sources/ErrorSource.cs:84
 #: ../src/Core/Banshee.ThickClient/Banshee.Gui.Dialogs/ErrorListDialog.cs:79
 #: ../src/Extensions/Banshee.InternetArchive/Banshee.InternetArchive/DetailsView.cs:251
-#: ../src/Extensions/Banshee.Podcasting/Banshee.Podcasting.Gui/PodcastManager/Dialog/PodcastFeedPropertiesDialog.cs:176
+#: ../src/Extensions/Banshee.Podcasting/Banshee.Podcasting.Gui/PodcastManager/Dialog/PodcastFeedPropertiesDialog.cs:177
 msgid "Details"
 msgstr "Podrobnosti"
 
@@ -2520,13 +2600,13 @@ msgstr[3] "{0} predmeti"
 #. things that depend on being loaded before the music library is added.
 #. AddSource (music_library = new MusicLibrarySource (), true);
 #. AddSource (video_library = new VideoLibrarySource (), false);
-#: ../src/Core/Banshee.Services/Banshee.Sources/SourceManager.cs:84
+#: ../src/Core/Banshee.Services/Banshee.Sources/SourceManager.cs:86
+msgid "Online Media"
+msgstr "Spletne predstavnostne datoteke"
+
+#: ../src/Core/Banshee.Services/Banshee.Sources/SourceManager.cs:87
 msgid "Libraries"
 msgstr "Knjižnice"
-
-#: ../src/Core/Banshee.Services/Banshee.Sources/SourceManager.cs:85
-msgid "Online Media"
-msgstr "Spletne večpredstavnostne datoteke"
 
 #: ../src/Core/Banshee.Services/Banshee.Streaming/RadioTrackInfo.cs:82
 #: ../src/Core/Banshee.Services/Banshee.Streaming/RadioTrackInfo.cs:91
@@ -2604,19 +2684,19 @@ msgstr "Za predstavitev seznama predvajanj v ročni način razvrščanja je treb
 msgid "{0} of {1}"
 msgstr "{0} od {1}"
 
-#: ../src/Core/Banshee.ThickClient/Banshee.Collection.Gui/ColumnCellStatusIndicator.cs:222
+#: ../src/Core/Banshee.ThickClient/Banshee.Collection.Gui/ColumnCellStatusIndicator.cs:220
 msgid "Playing"
 msgstr "Predvajanje"
 
-#: ../src/Core/Banshee.ThickClient/Banshee.Collection.Gui/ColumnCellStatusIndicator.cs:223
+#: ../src/Core/Banshee.ThickClient/Banshee.Collection.Gui/ColumnCellStatusIndicator.cs:221
 msgid "Paused"
 msgstr "V premoru"
 
-#: ../src/Core/Banshee.ThickClient/Banshee.Collection.Gui/ColumnCellStatusIndicator.cs:225
+#: ../src/Core/Banshee.ThickClient/Banshee.Collection.Gui/ColumnCellStatusIndicator.cs:223
 msgid "Protected"
 msgstr "Zaščiteno"
 
-#: ../src/Core/Banshee.ThickClient/Banshee.Collection.Gui/ColumnCellStatusIndicator.cs:226
+#: ../src/Core/Banshee.ThickClient/Banshee.Collection.Gui/ColumnCellStatusIndicator.cs:224
 msgid "External Document"
 msgstr "Zunanji dokument"
 
@@ -2736,7 +2816,7 @@ msgstr "Sodelavci"
 
 #: ../src/Core/Banshee.ThickClient/Banshee.Gui.Dialogs/AboutDialog.cs:96
 msgid "Extraordinary Multimedia Management and Playback"
-msgstr "Izredno upravljanje in predvajanje večpredstavnostnih datotek"
+msgstr "Izredno upravljanje in predvajanje predstavnostnih datotek"
 
 #: ../src/Core/Banshee.ThickClient/Banshee.Gui.Dialogs/AboutDialog.cs:98
 #, csharp-format
@@ -2771,11 +2851,11 @@ msgstr "Nadaljuj izvajanje programa"
 
 #: ../src/Core/Banshee.ThickClient/Banshee.Gui.Dialogs/DefaultApplicationHelperDialog.cs:69
 msgid "Make Banshee the default media player?"
-msgstr "Ali naj bo Banshee privzeti predvajalnik večpredstavnostnih datotek?"
+msgstr "Ali naj bo Banshee privzeti predvajalnik predstavnostnih datotek?"
 
 #: ../src/Core/Banshee.ThickClient/Banshee.Gui.Dialogs/DefaultApplicationHelperDialog.cs:70
 msgid "Currently another program is configured as the default media player.  Would you prefer Banshee to be the default?"
-msgstr "Trenutno je kot privzeti predvajalnik večpredstavnostnih datotek nastavljen drug program. Ali želite, da Banshee postane privzeti program?"
+msgstr "Trenutno je kot privzeti predvajalnik predstavnostnih datotek nastavljen drug program. Ali želite, da Banshee postane privzeti program?"
 
 #: ../src/Core/Banshee.ThickClient/Banshee.Gui.Dialogs/DefaultApplicationHelperDialog.cs:72
 #: ../src/Core/Banshee.ThickClient/Banshee.Gui/SourceActions.cs:435
@@ -2827,15 +2907,15 @@ msgstr "Iskanje mesta"
 
 #: ../src/Core/Banshee.ThickClient/Banshee.Gui/GlobalActions.cs:50
 msgid "_Media"
-msgstr "_Večpredstavnost"
+msgstr "P_redstavnost"
 
 #: ../src/Core/Banshee.ThickClient/Banshee.Gui/GlobalActions.cs:53
 msgid "Import _Media..."
-msgstr "Uvozi _večpredstavnostne datoteke ..."
+msgstr "Uvozi _predstavnostne datoteke ..."
 
 #: ../src/Core/Banshee.ThickClient/Banshee.Gui/GlobalActions.cs:54
 msgid "Import media from a variety of sources"
-msgstr "Uvoz večpredstavnostnih datotek iz različnih virov"
+msgstr "Uvoz predstavnostnih datotek iz različnih virov"
 
 #: ../src/Core/Banshee.ThickClient/Banshee.Gui/GlobalActions.cs:57
 msgid "Import _Playlist..."
@@ -2900,7 +2980,7 @@ msgstr "Napredno iskanje po zbirki"
 
 #: ../src/Core/Banshee.ThickClient/Banshee.Gui/GlobalActions.cs:96
 msgid "Learn advanced ways to search your media collection"
-msgstr "Učenje naprednih načinov iskanja po svoji zbirki večpredstavnostnih datotek"
+msgstr "Učenje naprednih načinov iskanja po zbirki predstavnostnih datotek"
 
 #: ../src/Core/Banshee.ThickClient/Banshee.Gui/GlobalActions.cs:101
 msgid "Banshee _Home Page"
@@ -3623,20 +3703,20 @@ msgstr "Izvajalec:"
 msgid "Album:"
 msgstr "Album:"
 
-#: ../src/Core/Banshee.ThickClient/Banshee.Gui.TrackEditor/TrackEditorDialog.cs:313
+#: ../src/Core/Banshee.ThickClient/Banshee.Gui.TrackEditor/TrackEditorDialog.cs:314
 msgid "Sync all field _values"
 msgstr "Usklajevanje vseh vrednosti _polj"
 
-#: ../src/Core/Banshee.ThickClient/Banshee.Gui.TrackEditor/TrackEditorDialog.cs:318
+#: ../src/Core/Banshee.ThickClient/Banshee.Gui.TrackEditor/TrackEditorDialog.cs:319
 msgid "Apply the values of all common fields set for this track to all of the tracks selected in this editor"
 msgstr "Uveljavi vrednosti vseh nastavljenih skupnih polj te skladbe za vse skladbe izbrane v urejevalniku"
 
-#: ../src/Core/Banshee.ThickClient/Banshee.Gui.TrackEditor/TrackEditorDialog.cs:418
+#: ../src/Core/Banshee.ThickClient/Banshee.Gui.TrackEditor/TrackEditorDialog.cs:419
 #, csharp-format
 msgid "<i>Editing {0} of {1} items</i>"
 msgstr "<i>Urejanje {0} od {1} predmetov</i>"
 
-#: ../src/Core/Banshee.ThickClient/Banshee.Gui.TrackEditor/TrackEditorDialog.cs:698
+#: ../src/Core/Banshee.ThickClient/Banshee.Gui.TrackEditor/TrackEditorDialog.cs:699
 #, csharp-format
 msgid "Save the changes made to the open track?"
 msgid_plural "Save the changes made to {0} of {1} open tracks?"
@@ -3645,11 +3725,11 @@ msgstr[1] "Ali naj bodo spremembe {0} od {1} odprte skladbe shranjene?"
 msgstr[2] "Ali naj bodo spremembe {0} od {1} odprtih skladb shranjene?"
 msgstr[3] "Ali naj bodo spremembe {0} od {1} odprtih skladb shranjene?"
 
-#: ../src/Core/Banshee.ThickClient/Banshee.Gui.TrackEditor/TrackEditorDialog.cs:715
+#: ../src/Core/Banshee.ThickClient/Banshee.Gui.TrackEditor/TrackEditorDialog.cs:716
 msgid "Close _without Saving"
 msgstr "Zapri _brez shranjevanja"
 
-#: ../src/Core/Banshee.ThickClient/Banshee.Gui.TrackEditor/TrackEditorDialog.cs:752
+#: ../src/Core/Banshee.ThickClient/Banshee.Gui.TrackEditor/TrackEditorDialog.cs:753
 #, csharp-format
 msgid "If you don't save, changes from the last {0} will be permanently lost."
 msgstr "V primeru, da datoteke ne shranite, bo zadnjih {0} sprememb trajno izgubljenih."
@@ -3666,27 +3746,27 @@ msgstr "_Uravnalnik zvoka"
 msgid "View the graphical equalizer"
 msgstr "Ogled grafičnega uravnalnika"
 
-#: ../src/Core/Banshee.ThickClient/Banshee.Gui/ViewActions.cs:72
+#: ../src/Core/Banshee.ThickClient/Banshee.Gui/ViewActions.cs:74
 msgid "_Context Pane"
 msgstr "_Vsebinski pladenj"
 
-#: ../src/Core/Banshee.ThickClient/Banshee.Gui/ViewActions.cs:73
+#: ../src/Core/Banshee.ThickClient/Banshee.Gui/ViewActions.cs:75
 msgid "Show the context pane beneath the track list"
 msgstr "Prikaz vsebinskega pladnja pod seznamom skladb"
 
-#: ../src/Core/Banshee.ThickClient/Banshee.Gui/ViewActions.cs:80
+#: ../src/Core/Banshee.ThickClient/Banshee.Gui/ViewActions.cs:82
 msgid "_Fullscreen"
 msgstr "_Celozaslonski način"
 
-#: ../src/Core/Banshee.ThickClient/Banshee.Gui/ViewActions.cs:81
+#: ../src/Core/Banshee.ThickClient/Banshee.Gui/ViewActions.cs:83
 msgid "Enter or leave fullscreen mode"
 msgstr "Preklop celozaslonskega načina"
 
-#: ../src/Core/Banshee.ThickClient/Banshee.Gui/ViewActions.cs:86
+#: ../src/Core/Banshee.ThickClient/Banshee.Gui/ViewActions.cs:88
 msgid "Show Cover _Art"
 msgstr "Pokaži n_aslovnice"
 
-#: ../src/Core/Banshee.ThickClient/Banshee.Gui/ViewActions.cs:87
+#: ../src/Core/Banshee.ThickClient/Banshee.Gui/ViewActions.cs:89
 msgid "Toggle display of album cover art"
 msgstr "Preklop prikaza naslovnic"
 
@@ -3734,7 +3814,7 @@ msgstr "{0}od{1} {2} {0}od{1} {3}"
 #. Translators: {0} and {1} are for markup so ignore them, {2} is for Album Title;
 #. e.g. 'from Killing with a Smile'
 #: ../src/Core/Banshee.ThickClient/Banshee.Gui.Widgets/TrackInfoDisplay.cs:589
-#: ../src/Extensions/Banshee.NotificationArea/Banshee.NotificationArea/NotificationAreaService.cs:527
+#: ../src/Extensions/Banshee.NotificationArea/Banshee.NotificationArea/NotificationAreaService.cs:525
 #, csharp-format
 msgid "{0}from{1} {2}"
 msgstr "{0}od{1} {2}"
@@ -3742,7 +3822,7 @@ msgstr "{0}od{1} {2}"
 #. Translators: {0} and {1} are for markup so ignore them, {2} is for Artist Name;
 #. e.g. 'by Parkway Drive'
 #: ../src/Core/Banshee.ThickClient/Banshee.Gui.Widgets/TrackInfoDisplay.cs:593
-#: ../src/Extensions/Banshee.NotificationArea/Banshee.NotificationArea/NotificationAreaService.cs:531
+#: ../src/Extensions/Banshee.NotificationArea/Banshee.NotificationArea/NotificationAreaService.cs:529
 #, csharp-format
 msgid "{0}by{1} {2}"
 msgstr "{0}od{1} {2}"
@@ -3784,7 +3864,7 @@ msgstr "Uvoz datotek v knjižnico"
 
 #: ../src/Core/Banshee.ThickClient/Banshee.Library.Gui/FileImportSource.cs:48
 msgid "Media Files"
-msgstr "Večpredstavnostne datoteke"
+msgstr "Predstavnostne datoteke"
 
 #: ../src/Core/Banshee.ThickClient/Banshee.Library.Gui/FileImportSource.cs:59
 msgid "Local Files"
@@ -3836,11 +3916,11 @@ msgstr "Izbor map"
 
 #: ../src/Core/Banshee.ThickClient/Banshee.Library.Gui/ImportDialog.cs:73
 msgid "<big><b>Import Media to Library</b></big>"
-msgstr "<big><b>Uvoz večpredstavnostnih datotek v knjižnico</b></big>"
+msgstr "<big><b>Uvoz predstavnostnih datotek v knjižnico</b></big>"
 
 #: ../src/Core/Banshee.ThickClient/Banshee.Library.Gui/ImportDialog.cs:79
 msgid "Your media library is empty. You may import new music and videos into your library now, or choose to do so later."
-msgstr "Večpredstavnostna knjižnica je prazna. Novo glasbo in video je mogoče uvoziti v knjižnico sedaj ali pozneje."
+msgstr "Predstavnostna knjižnica je prazna. Novo glasbo in video lahko v knjižnico uvozite sedaj ali pozneje."
 
 #: ../src/Core/Banshee.ThickClient/Banshee.Library.Gui/ImportDialog.cs:89
 msgid "Import _from:"
@@ -3993,26 +4073,23 @@ msgstr "Glasnost"
 
 #: ../src/Core/Banshee.Widgets/Banshee.Widgets/VolumeButton.cs:548
 msgid "Muted"
-msgstr "Nemo"
+msgstr "Utišano"
 
 #: ../src/Core/Banshee.Widgets/Banshee.Widgets/VolumeButton.cs:550
 msgid "Full Volume"
 msgstr "Polna glasnost"
 
 #: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:108
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/IpodSource.cs:102
 msgid "Device"
 msgstr "Naprava"
 
 #: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:109
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/IpodSource.cs:104
 msgid "Generation"
 msgstr "Ustvarjanje"
 
 #. FIXME
 #. AddDapProperty (Catalog.GetString ("Color"), "black");
 #: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:114
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/IpodSource.cs:105
 msgid "Capacity"
 msgstr "Zmogljivost"
 
@@ -4021,7 +4098,6 @@ msgid "Available"
 msgstr "Na voljo"
 
 #: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:116
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/IpodSource.cs:106
 #: ../src/Dap/Banshee.Dap.Mtp/Banshee.Dap.Mtp/MtpSource.cs:141
 msgid "Serial number"
 msgstr "Zaporedna številka"
@@ -4032,43 +4108,38 @@ msgstr "Zaporedna številka"
 #. ipod_device.ModelInfo.Capabilities.CopyTo (capabilities, 0);
 #. AddDapProperty (Catalog.GetString ("Capabilities"), String.Join (", ", capabilities));
 #: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:123
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/IpodSource.cs:113
 msgid "Supports cover art"
 msgstr "Podpira ovitke"
 
 #: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:124
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/IpodSource.cs:114
 msgid "Supports photos"
 msgstr "Podpira fotografije"
 
-#: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:452
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/IpodSource.cs:491
+#: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:453
 msgid "Track duration is zero"
 msgstr "Trajanje skladbe je nič"
 
-#: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:555
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/IpodSource.cs:694
+#: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:556
 msgid "Syncing iPod"
 msgstr "Usklajevanje iPoda"
 
-#: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:556
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/IpodSource.cs:695
+#: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:557
 msgid "Preparing to synchronize..."
 msgstr "Pripravljanje na usklajevanje ..."
 
-#: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:559
+#: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:560
 #, csharp-format
 msgid "Adding track {0} of {1}"
 msgstr "Dodajanje skladbe {0} od {1}"
 
-#: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:595
+#: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:596
 #, csharp-format
 msgid "Removing track {0} of {1}"
 msgstr "Odstranjevanje skladbe {0} od {1}"
 
-#: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:648
+#: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:649
 msgid "Writing media database"
-msgstr "Zapisovanje podatkovne zbirke večpredstavnostnih datotek"
+msgstr "Zapisovanje podatkovne zbirke predstavnostnih datotek"
 
 #: ../src/Dap/Banshee.Dap/Banshee.Dap/DapLibrarySync.cs:131
 #, csharp-format
@@ -4082,9 +4153,7 @@ msgid "{0} to add, {1} to remove, {2} to update"
 msgstr "{0} za dodajanje, {1} za odstranitev, {2} za posodobitev"
 
 #. This group source gives us a seperator for DAPs in the source view.
-#. We add it when we get our first dap source, and then remove it when
-#. we lose the last one.
-#: ../src/Dap/Banshee.Dap/Banshee.Dap/DapService.cs:63
+#: ../src/Dap/Banshee.Dap/Banshee.Dap/DapService.cs:64
 msgid "Devices"
 msgstr "Naprave"
 
@@ -4243,125 +4312,6 @@ msgstr "Odklapljanje {0} ..."
 msgid "Could not disconnect {0}: {1}"
 msgstr "{0} ni bilo mogoče odklopiti: {1}"
 
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/DatabaseRebuilder.cs:92
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/DatabaseRebuilder.cs:95
-msgid "Rebuilding Database"
-msgstr "Ponovna izgradnja podatkovne zbirke"
-
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/DatabaseRebuilder.cs:96
-msgid "Scanning iPod..."
-msgstr "Preiskovanje enote iPod ..."
-
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/DatabaseRebuilder.cs:131
-msgid "Processing Tracks..."
-msgstr "Obdelovanje skladb ..."
-
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/DatabaseRebuilder.cs:147
-msgid "Ordering Tracks..."
-msgstr "Urejanje skladb ..."
-
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/DatabaseRebuilder.cs:218
-msgid "Saving new database..."
-msgstr "Shranjevanje nove podatkovne zbirke ..."
-
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/DatabaseRebuilder.cs:230
-msgid "Error rebuilding iPod database"
-msgstr "Napaka ponovne izgradnje podatkovne zbirke iPod"
-
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/IpodSource.cs:103
-msgid "Color"
-msgstr "Barva"
-
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/IpodSource.cs:107
-msgid "Produced on"
-msgstr "Proizvedeno ob"
-
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/IpodSource.cs:108
-msgid "Firmware"
-msgstr "Strojna programska oprema"
-
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/IpodSource.cs:112
-msgid "Capabilities"
-msgstr "Zmožnosti"
-
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/IpodSource.cs:680
-msgid "Out of space on device"
-msgstr "Na napravi ni prostora"
-
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/IpodSource.cs:680
-msgid "Please manually remove some songs"
-msgstr "Skladbe je treba odstraniti ročno"
-
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/IpodSource.cs:724
-msgid "Updating..."
-msgstr "Posodabljanje ..."
-
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/IpodSource.cs:728
-msgid "Flushing to disk..."
-msgstr "Čiščenje na disk ..."
-
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/UnsupportedDatabaseView.cs:61
-msgid "Unable to read your iPod"
-msgstr "Z naprave iPod ni mogoče brati"
-
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/UnsupportedDatabaseView.cs:77
-msgid ""
-"You have used this iPod with a version of iTunes that saves a version of the song database for your iPod that is too new for Banshee to recognize.\n"
-"\n"
-"Banshee can rebuild your database, but you might lose your settings and all the content in the device (be sure to backup your data first). Using Banshee and iTunes with the same iPod is not recommended."
-msgstr ""
-"iPod je bil uporabljan z različico iTunes, ki shranjuje podatkovno zbirko skladb v preveč novi obliki, da bi jo Banshee prepoznal.\n"
-"\n"
-"Z Banshee lahko podatkovno zbirko ponovno ustvarite, toda med tem se lahko nekaj nastavitev izgubi. Uporaba Banshee in iTunes na istem iPodu ni priporočljiva."
-
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/UnsupportedDatabaseView.cs:88
-msgid "Learn more about Banshee's iPod support"
-msgstr "Več podrobnosti o podpori predvajalnika Banshee za iPod"
-
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/UnsupportedDatabaseView.cs:96
-msgid ""
-"An iPod database could not be found on this device.\n"
-"\n"
-"Banshee can build a new database for you."
-msgstr ""
-"Podatkovne zbirke iPod na tej napravi ni mogoče najti.\n"
-"\n"
-"Banshee lahko izgradi novo podatkovno zbirko."
-
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/UnsupportedDatabaseView.cs:104
-msgid "What is the reason for this?"
-msgstr "Kaj je vzrok?"
-
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/UnsupportedDatabaseView.cs:117
-msgid "Your iPod is mounted read only. Banshee can not restore your iPod."
-msgstr "iPod je priklopljen le za branje, zato ga Banshee ne more obnoviti."
-
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/UnsupportedDatabaseView.cs:125
-msgid "Rebuild iPod Database..."
-msgstr "Ponovno izgradi zbirko podatkov iPod ..."
-
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/UnsupportedDatabaseView.cs:133
-msgid "Confirm Rebuild iPod Database"
-msgstr "Potrdite ponovno izgradnjo zbirke podatkov iPod"
-
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/UnsupportedDatabaseView.cs:139
-msgid ""
-"Rebuilding your iPod database may take some time. Also note that any playlists you have on your iPod will be lost.\n"
-"\n"
-"Are you sure you want to rebuild your iPod database?"
-msgstr ""
-"Ponovna izgradnja iPod podatkovne zbirke lahko traja dlje časa. Med ponovno izgradnjo bodo izgubljeni vsi seznami predvajanja, ki so že na iPodu.\n"
-"\n"
-"Ali ste prepričani, da želite izgraditi podatkovno zbirko iPoda?"
-
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/UnsupportedDatabaseView.cs:143
-msgid "Rebuild Database"
-msgstr "Ponovna izgradnja podatkovne zbirke"
-
-#: ../src/Dap/Banshee.Dap.Ipod/Banshee.Dap.Ipod/UnsupportedDatabaseView.cs:157
-msgid "Rebuilding iPod Database..."
-msgstr "Ponovna izgradnja podatkovne zbirke iPod ..."
-
 #: ../src/Dap/Banshee.Dap.MassStorage/Banshee.Dap.MassStorage/AmazonMp3GroupSource.cs:43
 msgid "Purchased Music"
 msgstr "Kupljena glasba"
@@ -4467,29 +4417,29 @@ msgstr "Država"
 msgid "Which Amazon MP3 storefront to use by default."
 msgstr "Katera trgovina Amazon MP3 naj bo uporabljena privzeto."
 
-#: ../src/Extensions/Banshee.AmazonMp3.Store/Banshee.AmazonMp3.Store/StoreSourcePreferences.cs:88
+#: ../src/Extensions/Banshee.AmazonMp3.Store/Banshee.AmazonMp3.Store/StoreSourcePreferences.cs:90
 msgid "Automatic (Geo IP detection)"
 msgstr "Samodejno (zaznavanje geo IP)"
 
 #. TODO uncomment this after string-freeze
 #. combo.Add (Catalog.GetString ("Canada (amazon.ca)"), "CA");
-#: ../src/Extensions/Banshee.AmazonMp3.Store/Banshee.AmazonMp3.Store/StoreSourcePreferences.cs:92
+#: ../src/Extensions/Banshee.AmazonMp3.Store/Banshee.AmazonMp3.Store/StoreSourcePreferences.cs:94
 msgid "France (amazon.fr)"
 msgstr "Francija (amazon.fr)"
 
-#: ../src/Extensions/Banshee.AmazonMp3.Store/Banshee.AmazonMp3.Store/StoreSourcePreferences.cs:93
+#: ../src/Extensions/Banshee.AmazonMp3.Store/Banshee.AmazonMp3.Store/StoreSourcePreferences.cs:95
 msgid "Germany, Switzerland, Austria (amazon.de)"
 msgstr "Nemčija, Švica, Avstrija (amazon.de)"
 
-#: ../src/Extensions/Banshee.AmazonMp3.Store/Banshee.AmazonMp3.Store/StoreSourcePreferences.cs:94
+#: ../src/Extensions/Banshee.AmazonMp3.Store/Banshee.AmazonMp3.Store/StoreSourcePreferences.cs:96
 msgid "Japan (amazon.co.jp)"
 msgstr "Japonska (amazon.co.jp)"
 
-#: ../src/Extensions/Banshee.AmazonMp3.Store/Banshee.AmazonMp3.Store/StoreSourcePreferences.cs:95
+#: ../src/Extensions/Banshee.AmazonMp3.Store/Banshee.AmazonMp3.Store/StoreSourcePreferences.cs:97
 msgid "United Kingdom (amazon.co.uk)"
 msgstr "Združeno Kraljestvo (amazon.co.uk)"
 
-#: ../src/Extensions/Banshee.AmazonMp3.Store/Banshee.AmazonMp3.Store/StoreSourcePreferences.cs:96
+#: ../src/Extensions/Banshee.AmazonMp3.Store/Banshee.AmazonMp3.Store/StoreSourcePreferences.cs:98
 msgid "United States (amazon.com)"
 msgstr "Združene Države (amazon.com)"
 
@@ -4591,7 +4541,7 @@ msgstr "Ni nastavljenih zaznamkov"
 msgid "Audio CD"
 msgstr "Zvočni CD"
 
-#: ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd/AudioCdDiscModel.cs:102
+#: ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd/AudioCdDiscModel.cs:104
 #, csharp-format
 msgid "Track {0}"
 msgstr "Skladba {0}"
@@ -4613,56 +4563,56 @@ msgstr "<i>{0}</i> se uvaža v knjižnico. Ali želite postopek prekiniti?"
 msgid "Cannot Import CD"
 msgstr "CD-ja ni mogoče uvoziti"
 
-#: ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd/AudioCdService.cs:233
+#: ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd/AudioCdService.cs:237
 msgid "Audio CDs"
 msgstr "Zvočni CD-ji"
 
-#: ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd/AudioCdService.cs:235
+#: ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd/AudioCdService.cs:239
 msgid "Audio CD Importing"
 msgstr "Uvažanje zvočnega CD-ja"
 
-#: ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd/AudioCdService.cs:238
+#: ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd/AudioCdService.cs:242
 msgid "_Import format"
 msgstr "Vrsta zapisa _uvoza"
 
-#: ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd/AudioCdService.cs:242
+#: ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd/AudioCdService.cs:246
 msgid "_Automatically import audio CDs when inserted"
 msgstr "_Samodejno uvažanje zvočnih CD-jev ob vstavitvi v pogon"
 
-#: ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd/AudioCdService.cs:243
+#: ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd/AudioCdService.cs:247
 msgid "When an audio CD is inserted, automatically begin importing it if metadata can be found and it is not already in the library."
 msgstr "Ob vstavitvi v pogon začne samodejno uvažanje CD-ja, če je mogoče najti metapodatke in CD še ni na voljo v knjižnici."
 
-#: ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd/AudioCdService.cs:247
+#: ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd/AudioCdService.cs:251
 msgid "_Eject when done importing"
 msgstr "_Izvrži po uvažanju"
 
-#: ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd/AudioCdService.cs:248
+#: ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd/AudioCdService.cs:252
 msgid "When an audio CD has been imported, automatically eject it."
 msgstr "Zvočni CD naj se po končanem uvažanju samodejno izvrže."
 
-#: ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd/AudioCdService.cs:251
+#: ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd/AudioCdService.cs:255
 msgid "Use error correction when importing"
 msgstr "Ob uvažanju uporabi popravljanje napak"
 
-#: ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd/AudioCdService.cs:252
+#: ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd/AudioCdService.cs:256
 msgid "Error correction tries to work around problem areas on a disc, such as surface scratches, but will slow down importing substantially."
 msgstr "Popravljanje napak poskuša zaobiti območja diska, ki so poškodovana, vendar močno upočasni delovanje in uvoz glasbe."
 
-#: ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd/AudioCdService.cs:320
+#: ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd/AudioCdService.cs:324
 #: ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd/AudioCdSource.cs:441
 msgid "Import CD"
 msgstr "Uvozi CD"
 
-#: ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd/AudioCdService.cs:321
+#: ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd/AudioCdService.cs:325
 msgid "Import this audio CD to the library"
 msgstr "Uvoz tega zvočnega CD-ja v knjižnico"
 
-#: ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd/AudioCdService.cs:327
+#: ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd/AudioCdService.cs:331
 msgid "Duplicate CD"
 msgstr "Podvoji CD"
 
-#: ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd/AudioCdService.cs:328
+#: ../src/Extensions/Banshee.AudioCd/Banshee.AudioCd/AudioCdService.cs:332
 msgid "Duplicate this audio CD"
 msgstr "Podvojitev tega zvočnega CD-ja"
 
@@ -5105,7 +5055,7 @@ msgid "Publisher:"
 msgstr "Založnik:"
 
 #: ../src/Extensions/Banshee.InternetArchive/Banshee.InternetArchive/DetailsView.cs:230
-#: ../src/Extensions/Banshee.Podcasting/Banshee.Podcasting.Gui/PodcastManager/Dialog/PodcastFeedPropertiesDialog.cs:173
+#: ../src/Extensions/Banshee.Podcasting/Banshee.Podcasting.Gui/PodcastManager/Dialog/PodcastFeedPropertiesDialog.cs:174
 msgid "Keywords:"
 msgstr "Ključne besede:"
 
@@ -5196,7 +5146,7 @@ msgstr "Razvrsti po:"
 
 #: ../src/Extensions/Banshee.InternetArchive/Banshee.InternetArchive/HomeSource.cs:119
 msgid "Preferred Media Types"
-msgstr "Prednostne vrste večpredstavnostnih datotek"
+msgstr "Prednostne vrste predstavnostnih datotek"
 
 #: ../src/Extensions/Banshee.InternetArchive/Banshee.InternetArchive/HomeSource.cs:122
 msgid "_Audio"
@@ -5385,7 +5335,7 @@ msgstr "Jezik"
 
 #: ../src/Extensions/Banshee.InternetArchive/InternetArchive/Field.cs:73
 msgid "Media Type"
-msgstr "Vrsta večpredstavnostne datoteke"
+msgstr "Vrsta predstavnostne datoteke"
 
 #: ../src/Extensions/Banshee.InternetArchive/InternetArchive/Field.cs:74
 msgid "Review Count"
@@ -5571,7 +5521,7 @@ msgstr "Uredi postajo"
 msgid "Station"
 msgstr "Postaja"
 
-#: ../src/Extensions/Banshee.InternetRadio/Banshee.InternetRadio/InternetRadioSource.cs:154
+#: ../src/Extensions/Banshee.InternetRadio/Banshee.InternetRadio/InternetRadioSource.cs:155
 #, csharp-format
 msgid "{0} station"
 msgid_plural "{0} stations"
@@ -5580,15 +5530,15 @@ msgstr[1] "{0} postaja"
 msgstr[2] "{0} postaji"
 msgstr[3] "{0} postaje"
 
-#: ../src/Extensions/Banshee.InternetRadio/Banshee.InternetRadio/InternetRadioSource.cs:240
+#: ../src/Extensions/Banshee.InternetRadio/Banshee.InternetRadio/InternetRadioSource.cs:241
 msgid "Please provide a valid station URI"
 msgstr "Vnesti je treba veljaven URI postaje"
 
-#: ../src/Extensions/Banshee.InternetRadio/Banshee.InternetRadio/InternetRadioSource.cs:253
+#: ../src/Extensions/Banshee.InternetRadio/Banshee.InternetRadio/InternetRadioSource.cs:254
 msgid "Please provide a station genre"
 msgstr "Vnesti je treba zvrst postaje"
 
-#: ../src/Extensions/Banshee.InternetRadio/Banshee.InternetRadio/InternetRadioSource.cs:261
+#: ../src/Extensions/Banshee.InternetRadio/Banshee.InternetRadio/InternetRadioSource.cs:262
 msgid "Please provide a station title"
 msgstr "Vnesti je treba naslov postaje"
 
@@ -5621,7 +5571,7 @@ msgid "Station Creator:"
 msgstr "Ustvarjalec postaj:"
 
 #: ../src/Extensions/Banshee.InternetRadio/Banshee.InternetRadio/StationEditor.cs:123
-#: ../src/Extensions/Banshee.Podcasting/Banshee.Podcasting.Gui/PodcastManager/Dialog/PodcastFeedPropertiesDialog.cs:171
+#: ../src/Extensions/Banshee.Podcasting/Banshee.Podcasting.Gui/PodcastManager/Dialog/PodcastFeedPropertiesDialog.cs:172
 #: ../src/Extensions/Banshee.Podcasting/Banshee.Podcasting.Gui/PodcastManager/Dialog/PodcastPropertiesDialog.cs:89
 msgid "Description:"
 msgstr "Opis:"
@@ -5735,7 +5685,7 @@ msgstr "http://www.last.fm/music/{0}/+videos"
 
 #. Translators: this is used for looking up artist pages on Wikipedia; change to your wikipedia language if you want
 #: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm/LastfmActions.cs:182
-#: ../src/Extensions/Banshee.Wikipedia/Banshee.Wikipedia/WikipediaView.cs:48
+#: ../src/Extensions/Banshee.Wikipedia/Banshee.Wikipedia/WikipediaView.cs:49
 #, csharp-format
 msgid "http://en.wikipedia.org/wiki/{0}"
 msgstr "http://en.wikipedia.org/wiki/{0}"
@@ -6037,7 +5987,7 @@ msgstr "lastfm://"
 
 #: ../src/Extensions/Banshee.MeeGo/Banshee.MeeGo/MediaPanelContents.cs:110
 msgid "Media"
-msgstr "Večpredstavnostna datoteka"
+msgstr "Predstavnostna datoteka"
 
 #: ../src/Extensions/Banshee.MeeGo/Banshee.MeeGo/MediaPanelContents.cs:120
 msgid "Library"
@@ -6045,7 +5995,7 @@ msgstr "Knjižnica"
 
 #: ../src/Extensions/Banshee.MeeGo/Banshee.MeeGo/MediaPanelContents.cs:132
 msgid "Launch the Banshee Media Player"
-msgstr "Zaženi predvajalnik večpredstavnostnih datotek Banshee"
+msgstr "Zaženi predvajalnik predstavnostnih datotek Banshee"
 
 #: ../src/Extensions/Banshee.MeeGo/Banshee.MeeGo/MediaPanelContents.cs:165
 #: ../src/Extensions/Banshee.NowPlaying/Banshee.NowPlaying/NowPlayingSource.cs:50
@@ -6055,25 +6005,25 @@ msgstr "Predvaja se"
 #: ../src/Extensions/Banshee.MeeGo/Banshee.MeeGo/MeeGoPanel.cs:60
 #: ../src/Extensions/Banshee.MeeGo/meego-panel-banshee.desktop.in.in.h:2
 msgid "media"
-msgstr "večpredstavnostne datoteke"
+msgstr "predstavnostne datoteke"
 
 #: ../src/Extensions/Banshee.MeeGo/meego-panel-banshee.desktop.in.in.h:1
 msgid "Quick access panel for your media"
-msgstr "Pladenj hitrega dostopa do vaših večpredstavnostnih datotek"
+msgstr "Pladenj hitrega dostopa do vaših predstavnostnih datotek"
 
 #: ../src/Extensions/Banshee.MiniMode/Banshee.MiniMode/MiniModeService.cs:25
 msgid "_Mini Mode"
 msgstr "_Enostavni način"
 
-#: ../src/Extensions/Banshee.MiniMode/Banshee.MiniMode/MiniModeWindow.cs:100
+#: ../src/Extensions/Banshee.MiniMode/Banshee.MiniMode/MiniModeWindow.cs:98
 msgid "Full Mode"
 msgstr "Polni način"
 
-#: ../src/Extensions/Banshee.MiniMode/Banshee.MiniMode/MiniModeWindow.cs:123
+#: ../src/Extensions/Banshee.MiniMode/Banshee.MiniMode/MiniModeWindow.cs:121
 msgid "Switch back to full mode"
 msgstr "Preklop nazaj na polni način"
 
-#: ../src/Extensions/Banshee.MiniMode/Banshee.MiniMode/MiniModeWindow.cs:124
+#: ../src/Extensions/Banshee.MiniMode/Banshee.MiniMode/MiniModeWindow.cs:122
 msgid "Change repeat playback mode"
 msgstr "Spremeni način ponavljanja predvajanja"
 
@@ -6105,27 +6055,27 @@ msgstr "_Prikaži obvestila"
 msgid "Show notifications when item changes"
 msgstr "Prikaz obvestil ob spremembi predmeta"
 
-#: ../src/Extensions/Banshee.NotificationArea/Banshee.NotificationArea/NotificationAreaService.cs:349
+#: ../src/Extensions/Banshee.NotificationArea/Banshee.NotificationArea/NotificationAreaService.cs:347
 msgid "Still Running"
 msgstr "Še vedno teče"
 
-#: ../src/Extensions/Banshee.NotificationArea/Banshee.NotificationArea/NotificationAreaService.cs:350
+#: ../src/Extensions/Banshee.NotificationArea/Banshee.NotificationArea/NotificationAreaService.cs:348
 msgid "Banshee was closed to the notification area. Use the <i>Quit</i> option to end your session."
 msgstr "Program Banshee je skrit v obvestilnem področju. Uporabite možnost <i>Končaj</i> za končanje programa."
 
-#: ../src/Extensions/Banshee.NotificationArea/Banshee.NotificationArea/NotificationAreaService.cs:485
+#: ../src/Extensions/Banshee.NotificationArea/Banshee.NotificationArea/NotificationAreaService.cs:483
 #: ../src/Extensions/Banshee.SoundMenu/Banshee.SoundMenu/SoundMenuService.cs:326
 msgid "Skip this item"
 msgstr "Preskoči predmet"
 
-#: ../src/Extensions/Banshee.NotificationArea/Banshee.NotificationArea/NotificationAreaService.cs:489
+#: ../src/Extensions/Banshee.NotificationArea/Banshee.NotificationArea/NotificationAreaService.cs:487
 msgid "Cannot show notification"
 msgstr "Obvestila ni mogoče prikazati"
 
 #. Translators: {0} and {1} are for markup so ignore them, {2} and {3}
 #. are Artist Name and Album Title, respectively;
 #. e.g. 'by Parkway Drive from Killing with a Smile'
-#: ../src/Extensions/Banshee.NotificationArea/Banshee.NotificationArea/NotificationAreaService.cs:523
+#: ../src/Extensions/Banshee.NotificationArea/Banshee.NotificationArea/NotificationAreaService.cs:521
 #, csharp-format
 msgid ""
 "{0}by{1} {2}\n"
@@ -6514,41 +6464,41 @@ msgstr "Prejmi nove epizode"
 msgid "Archive all episodes except the newest one"
 msgstr "Arhiviraj vse epizode razen najnovejše"
 
-#: ../src/Extensions/Banshee.Podcasting/Banshee.Podcasting.Gui/PodcastManager/Dialog/PodcastFeedPropertiesDialog.cs:135
+#: ../src/Extensions/Banshee.Podcasting/Banshee.Podcasting.Gui/PodcastManager/Dialog/PodcastFeedPropertiesDialog.cs:136
 #: ../src/Extensions/Banshee.Podcasting/Banshee.Podcasting.Gui/PodcastManager/Dialog/PodcastPropertiesDialog.cs:105
 msgid "No description available"
 msgstr "Opis ni na voljo"
 
-#: ../src/Extensions/Banshee.Podcasting/Banshee.Podcasting.Gui/PodcastManager/Dialog/PodcastFeedPropertiesDialog.cs:155
+#: ../src/Extensions/Banshee.Podcasting/Banshee.Podcasting.Gui/PodcastManager/Dialog/PodcastFeedPropertiesDialog.cs:156
 msgid "Name:"
 msgstr "Ime:"
 
-#: ../src/Extensions/Banshee.Podcasting/Banshee.Podcasting.Gui/PodcastManager/Dialog/PodcastFeedPropertiesDialog.cs:156
+#: ../src/Extensions/Banshee.Podcasting/Banshee.Podcasting.Gui/PodcastManager/Dialog/PodcastFeedPropertiesDialog.cs:157
 msgid "Website:"
 msgstr "Spletišče:"
 
-#: ../src/Extensions/Banshee.Podcasting/Banshee.Podcasting.Gui/PodcastManager/Dialog/PodcastFeedPropertiesDialog.cs:158
+#: ../src/Extensions/Banshee.Podcasting/Banshee.Podcasting.Gui/PodcastManager/Dialog/PodcastFeedPropertiesDialog.cs:159
 msgid "Visit"
 msgstr "Obišči"
 
-#: ../src/Extensions/Banshee.Podcasting/Banshee.Podcasting.Gui/PodcastManager/Dialog/PodcastFeedPropertiesDialog.cs:166
+#: ../src/Extensions/Banshee.Podcasting/Banshee.Podcasting.Gui/PodcastManager/Dialog/PodcastFeedPropertiesDialog.cs:167
 #: ../src/Extensions/Banshee.Podcasting/Banshee.Podcasting.Gui/PodcastManager/Dialog/PodcastSubscribeDialog.cs:133
 msgid "Subscription Options"
 msgstr "Možnosti naročila"
 
-#: ../src/Extensions/Banshee.Podcasting/Banshee.Podcasting.Gui/PodcastManager/Dialog/PodcastFeedPropertiesDialog.cs:169
+#: ../src/Extensions/Banshee.Podcasting/Banshee.Podcasting.Gui/PodcastManager/Dialog/PodcastFeedPropertiesDialog.cs:170
 msgid "Feed URL:"
 msgstr "URL vira:"
 
-#: ../src/Extensions/Banshee.Podcasting/Banshee.Podcasting.Gui/PodcastManager/Dialog/PodcastFeedPropertiesDialog.cs:170
+#: ../src/Extensions/Banshee.Podcasting/Banshee.Podcasting.Gui/PodcastManager/Dialog/PodcastFeedPropertiesDialog.cs:171
 msgid "Last Refreshed:"
 msgstr "Zadnjič osveženo:"
 
-#: ../src/Extensions/Banshee.Podcasting/Banshee.Podcasting.Gui/PodcastManager/Dialog/PodcastFeedPropertiesDialog.cs:172
+#: ../src/Extensions/Banshee.Podcasting/Banshee.Podcasting.Gui/PodcastManager/Dialog/PodcastFeedPropertiesDialog.cs:173
 msgid "Category:"
 msgstr "Kategorija:"
 
-#: ../src/Extensions/Banshee.Podcasting/Banshee.Podcasting.Gui/PodcastManager/Dialog/PodcastFeedPropertiesDialog.cs:174
+#: ../src/Extensions/Banshee.Podcasting/Banshee.Podcasting.Gui/PodcastManager/Dialog/PodcastFeedPropertiesDialog.cs:175
 msgid "Copyright:"
 msgstr "Avtorske pravice:"
 
@@ -6631,7 +6581,7 @@ msgstr "Začni nadziranje SQL"
 msgid "Stop SQL Monitoring"
 msgstr "Zaustavi nadziranje SQL"
 
-#: ../src/Extensions/Banshee.UbuntuOneMusicStore/Banshee.UbuntuOneMusicStore/UbuntuOneMusicStoreSource.cs:115
+#: ../src/Extensions/Banshee.UbuntuOneMusicStore/Banshee.UbuntuOneMusicStore/UbuntuOneMusicStoreSource.cs:108
 msgid "Track Preview"
 msgstr "Predogled skladbe"
 
@@ -6852,7 +6802,7 @@ msgstr "Shrani in se prijavi"
 msgid "Authorize for Last.fm"
 msgstr "Pooblasti za Last.fm"
 
-#: ../src/Libraries/Lastfm/Lastfm/AudioscrobblerConnection.cs:447
+#: ../src/Libraries/Lastfm/Lastfm/AudioscrobblerConnection.cs:449
 msgid "Last.fm username is invalid or Banshee is not authorized to access your account."
 msgstr "Uporabniško ime za Last.fm je neveljavno ali pa Banshee ni pooblaščen za dostop do vašega računa."
 
@@ -6946,6 +6896,88 @@ msgstr "Povezano z Last.fm"
 msgid "Unknown Podcast"
 msgstr "Neznan podcast"
 
+#~ msgid "iPod Support"
+#~ msgstr "Podpora iPod"
+#~ msgid "Support for most iPod devices."
+#~ msgstr "Podpora za večino naprav iPod."
+#~ msgid "Rebuilding Database"
+#~ msgstr "Ponovna izgradnja podatkovne zbirke"
+#~ msgid "Scanning iPod..."
+#~ msgstr "Preiskovanje enote iPod ..."
+#~ msgid "Processing Tracks..."
+#~ msgstr "Obdelovanje skladb ..."
+#~ msgid "Ordering Tracks..."
+#~ msgstr "Urejanje skladb ..."
+#~ msgid "Saving new database..."
+#~ msgstr "Shranjevanje nove podatkovne zbirke ..."
+#~ msgid "Error rebuilding iPod database"
+#~ msgstr "Napaka ponovne izgradnje podatkovne zbirke iPod"
+#~ msgid "Color"
+#~ msgstr "Barva"
+#~ msgid "Produced on"
+#~ msgstr "Proizvedeno ob"
+#~ msgid "Firmware"
+#~ msgstr "Strojna programska oprema"
+#~ msgid "Capabilities"
+#~ msgstr "Zmožnosti"
+#~ msgid "Out of space on device"
+#~ msgstr "Na napravi ni prostora"
+#~ msgid "Please manually remove some songs"
+#~ msgstr "Skladbe je treba odstraniti ročno"
+#~ msgid "Updating..."
+#~ msgstr "Posodabljanje ..."
+#~ msgid "Flushing to disk..."
+#~ msgstr "Čiščenje na disk ..."
+#~ msgid "Unable to read your iPod"
+#~ msgstr "Z naprave iPod ni mogoče brati"
+#~ msgid ""
+#~ "You have used this iPod with a version of iTunes that saves a version of "
+#~ "the song database for your iPod that is too new for Banshee to "
+#~ "recognize.\n"
+#~ "\n"
+#~ "Banshee can rebuild your database, but you might lose your settings and "
+#~ "all the content in the device (be sure to backup your data first). Using "
+#~ "Banshee and iTunes with the same iPod is not recommended."
+#~ msgstr ""
+#~ "iPod je bil uporabljan z različico iTunes, ki shranjuje podatkovno zbirko "
+#~ "skladb v preveč novi obliki, da bi jo Banshee prepoznal.\n"
+#~ "\n"
+#~ "Z Banshee lahko podatkovno zbirko ponovno ustvarite, toda med tem se "
+#~ "lahko nekaj nastavitev izgubi. Uporaba Banshee in iTunes na istem iPodu "
+#~ "ni priporočljiva."
+#~ msgid "Learn more about Banshee's iPod support"
+#~ msgstr "Več podrobnosti o podpori predvajalnika Banshee za iPod"
+#~ msgid ""
+#~ "An iPod database could not be found on this device.\n"
+#~ "\n"
+#~ "Banshee can build a new database for you."
+#~ msgstr ""
+#~ "Podatkovne zbirke iPod na tej napravi ni mogoče najti.\n"
+#~ "\n"
+#~ "Banshee lahko izgradi novo podatkovno zbirko."
+#~ msgid "What is the reason for this?"
+#~ msgstr "Kaj je vzrok?"
+#~ msgid "Your iPod is mounted read only. Banshee can not restore your iPod."
+#~ msgstr "iPod je priklopljen le za branje, zato ga Banshee ne more obnoviti."
+#~ msgid "Rebuild iPod Database..."
+#~ msgstr "Ponovno izgradi zbirko podatkov iPod ..."
+#~ msgid "Confirm Rebuild iPod Database"
+#~ msgstr "Potrdite ponovno izgradnjo zbirke podatkov iPod"
+#~ msgid ""
+#~ "Rebuilding your iPod database may take some time. Also note that any "
+#~ "playlists you have on your iPod will be lost.\n"
+#~ "\n"
+#~ "Are you sure you want to rebuild your iPod database?"
+#~ msgstr ""
+#~ "Ponovna izgradnja iPod podatkovne zbirke lahko traja dlje časa. Med "
+#~ "ponovno izgradnjo bodo izgubljeni vsi seznami predvajanja, ki so že na "
+#~ "iPodu.\n"
+#~ "\n"
+#~ "Ali ste prepričani, da želite izgraditi podatkovno zbirko iPoda?"
+#~ msgid "Rebuild Database"
+#~ msgstr "Ponovna izgradnja podatkovne zbirke"
+#~ msgid "Rebuilding iPod Database..."
+#~ msgstr "Ponovna izgradnja podatkovne zbirke iPod ..."
 #~ msgid "GIO IO and Hardware backends"
 #~ msgstr "Strojna in GIO VI zaledja"
 #~ msgid ""
@@ -6958,8 +6990,8 @@ msgstr "Neznan podcast"
 #~ "GStreamer multimedia services including playback, CD ripping, and "
 #~ "transcoding."
 #~ msgstr ""
-#~ "Večpredstavnostne storitve GStreamer vključno s predvajanjem, CD zajemom "
-#~ "in prekodiranjem."
+#~ "Predstavnostne storitve GStreamer vključno s predvajanjem, CD zajemom in "
+#~ "prekodiranjem."
 #~ msgid "Provides hardware support through HAL."
 #~ msgstr "Zagotovi strojno podporo s HAL."
 #~ msgid ""
@@ -6982,10 +7014,10 @@ msgstr "Neznan podcast"
 #~ msgid "Apple device Support"
 #~ msgstr "Podpora za naprave Apple"
 #~ msgid "Digital Media Player Support"
-#~ msgstr "Podpora digitalnih predvajalnikov večpredstavnostnih datotek"
+#~ msgstr "Podpora digitalnih predvajalnikov predstavnostnih datotek"
 #~ msgid "Provides general support for many kinds of media player devices."
 #~ msgstr ""
-#~ "Zagotovi splošno podporo za veliko vrst naprav večpredstavnostnega "
+#~ "Zagotovi splošno podporo za veliko vrst naprav predstavnostnega "
 #~ "predvajalnika."
 #~ msgid "Download and import music purchased from Amazon.com"
 #~ msgstr "Prejmi in uvozi glasbo kupljene na Amazon.com"
@@ -7000,7 +7032,7 @@ msgstr "Neznan podcast"
 #~ msgstr "Podpora MeeGo"
 #~ msgid "Provides MeeGo integration, including a custom media panel."
 #~ msgstr ""
-#~ "Zagotovi povezavo z MeeGo, vključno z večpredstavnostnim pladnjem po meri."
+#~ "Zagotovi povezavo z MeeGo, vključno z predstavnostnim pladnjem po meri."
 #~ msgid ""
 #~ "Provides a source that displays embedded video and provides fullscreen "
 #~ "video playback and controls."
@@ -7058,8 +7090,6 @@ msgstr "Neznan podcast"
 #~ msgstr "Običajno"
 #~ msgid "VBR Mode"
 #~ msgstr "Način VBR"
-#~ msgid "Not Downloaded"
-#~ msgstr "Ne prejeto"
 #~ msgid "Old Items"
 #~ msgstr "Stari predmeti"
 #~ msgid "_Limit to episodes from"
