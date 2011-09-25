@@ -31,9 +31,9 @@
 
 #include "banshee-player-private.h"
 
-void      _bp_dvd_pipeline_setup    (BansheePlayer *player);
-gboolean  _bp_dvd_handle_uri        (BansheePlayer *player, const gchar *uri);
-void      _bp_dvd_find_navigation   (BansheePlayer *player);
-
+void      _bp_dvd_pipeline_setup            (BansheePlayer *player);
+gboolean  _bp_dvd_handle_uri                (BansheePlayer *player, const gchar *uri);
+void      _bp_dvd_find_navigation           (BansheePlayer *player);
+void      _bp_dvd_elements_process_message  (BansheePlayer *player, GstMessage *message);
 
 #endif /* _BANSHEE_PLAYER_DVD_H */

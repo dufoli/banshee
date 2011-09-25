@@ -214,40 +214,13 @@ bp_pipeline_bus_callback (GstBus *bus, GstMessage *message, gpointer userdata)
                     && gst_structure_has_name (messageStruct, "playbin2-stream-changed")) {
                 bp_next_track_starting (player);
             }
-            if ( gst_navigation_message_get_type (message) != GST_NAVIGATION_MESSAGE_COMMANDS_CHANGED) {
+            if (gst_is_missing_plugin_message (message)) {
                 _bp_missing_elements_process_message (player, message);
                 break;
             }
-            player->is_menu = FALSE;
-            // Get available command to know if player is in menu
-            GstQuery *query = gst_navigation_query_new_commands();
-
-            guint n_cmds, i;
-            //execute query over playbin or navigation ?
-            if (gst_element_query (player->playbin, query) 
-                && gst_navigation_query_parse_commands_length (query, &n_cmds)) {
-                gst_query_unref (query);
-                break;
+            if ( gst_navigation_message_get_type (message) == GST_NAVIGATION_MESSAGE_COMMANDS_CHANGED) {
+                _bp_dvd_elements_process_message (player, message);
             }
-            
-            for (i = 0; i < n_cmds; i++) {
-                GstNavigationCommand cmd;
-                if (gst_navigation_query_parse_commands_nth (query, i, &cmd)) {
-                    switch (cmd) {
-                        case GST_NAVIGATION_COMMAND_ACTIVATE:
-                        case GST_NAVIGATION_COMMAND_LEFT:
-                        case GST_NAVIGATION_COMMAND_RIGHT:
-                        case GST_NAVIGATION_COMMAND_UP:
-                        case GST_NAVIGATION_COMMAND_DOWN:
-                            player->is_menu = TRUE;
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
-
-            gst_query_unref (query);
             break;
         }
 

@@ -119,24 +119,22 @@ _bp_missing_elements_process_message (BansheePlayer *player, GstMessage *message
 {
     g_return_if_fail (IS_BANSHEE_PLAYER (player));
     g_return_if_fail (message != NULL);
-    
-    if (gst_is_missing_plugin_message (message)) {
-        gchar *detail = gst_missing_plugin_message_get_installer_detail (message);
-        GSList *node = player->missing_element_details_handled;
-       
-        player->handle_missing_elements = TRUE;
-       
-        // Only save the error if we've never encounted it before
-        for (; node != NULL; node = node->next) {
-            if (g_ascii_strcasecmp (node->data, detail) == 0) {
-                bp_debug2 ("Ignoring missing element details, already prompted ('%s')", detail);
-                return;
-            }
+
+    gchar *detail = gst_missing_plugin_message_get_installer_detail (message);
+    GSList *node = player->missing_element_details_handled;
+
+    player->handle_missing_elements = TRUE;
+
+    // Only save the error if we've never encounted it before
+    for (; node != NULL; node = node->next) {
+        if (g_ascii_strcasecmp (node->data, detail) == 0) {
+            bp_debug2 ("Ignoring missing element details, already prompted ('%s')", detail);
+            return;
         }
-        
-        bp_debug2 ("Saving missing element details ('%s')", detail);
-        player->missing_element_details = g_slist_append (player->missing_element_details, detail);  
     }
+
+    bp_debug2 ("Saving missing element details ('%s')", detail);
+    player->missing_element_details = g_slist_append (player->missing_element_details, detail);  
 }
 
 void

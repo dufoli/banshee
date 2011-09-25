@@ -68,6 +68,44 @@ _bp_dvd_pipeline_setup (BansheePlayer *player)
     }
 }
 
+void
+_bp_dvd_elements_process_message (BansheePlayer *player, GstMessage *message)
+{
+    g_return_if_fail (IS_BANSHEE_PLAYER (player));
+    g_return_if_fail (message != NULL);
+
+    player->is_menu = FALSE;
+    // Get available command to know if player is in menu
+    GstQuery *query = gst_navigation_query_new_commands();
+
+    guint n_cmds, i;
+    //execute query over playbin or navigation ?
+    if (gst_element_query (player->playbin, query)
+        && gst_navigation_query_parse_commands_length (query, &n_cmds)) {
+        gst_query_unref (query);
+        return;
+    }
+
+    for (i = 0; i < n_cmds; i++) {
+        GstNavigationCommand cmd;
+        if (gst_navigation_query_parse_commands_nth (query, i, &cmd)) {
+            switch (cmd) {
+                case GST_NAVIGATION_COMMAND_ACTIVATE:
+                case GST_NAVIGATION_COMMAND_LEFT:
+                case GST_NAVIGATION_COMMAND_RIGHT:
+                case GST_NAVIGATION_COMMAND_UP:
+                case GST_NAVIGATION_COMMAND_DOWN:
+                    player->is_menu = TRUE;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    gst_query_unref (query);
+}
+
 gboolean
 _bp_dvd_handle_uri (BansheePlayer *player, const gchar *uri)
 {
