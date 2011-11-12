@@ -1,11 +1,11 @@
 dnl Granularly define the version components
 dnl Remember to also update the Display Version
 m4_define([banshee_version_major], [2])
-m4_define([banshee_version_minor], [1])
-m4_define([banshee_version_micro], [3])
+m4_define([banshee_version_minor], [3])
+m4_define([banshee_version_micro], [1])
 
 dnl this can sometimes differ manually
-m4_define([banshee_display_version], ["2.1.3"])
+m4_define([banshee_display_version], ["2.3.1"])
 
 dnl set to 0 when doing an official release
 m4_define([banshee_version_pre_release], [0])
@@ -27,8 +27,8 @@ m4_define([banshee_asm_version], [banshee_api_version.0.0])
 AC_PREREQ(2.52)
 AC_INIT([banshee], banshee_version, [http://bugzilla.gnome.org/enter_bug.cgi?product=banshee])
 
-AM_INIT_AUTOMAKE([1.9 dist-bzip2 tar-ustar dist-zip foreign])
-AM_MAINTAINER_MODE
+AM_INIT_AUTOMAKE([1.9 no-dist-gzip dist-bzip2 tar-ustar foreign])
+AM_MAINTAINER_MODE([enable])
 AM_CONFIG_HEADER([config.h])
 AC_CONFIG_MACRO_DIR([build/m4])
 AC_SUBST([ACLOCAL_AMFLAGS], ["-I build/m4/shamrock -I build/m4/banshee -I build/m4/shave \${ACLOCAL_FLAGS}"])
@@ -322,7 +322,6 @@ src/Extensions/Makefile
 src/Extensions/Banshee.AmazonMp3/Makefile
 src/Extensions/Banshee.AmazonMp3.Store/Makefile
 src/Extensions/Banshee.Audiobook/Makefile
-src/Extensions/Banshee.AudioCd/Makefile
 src/Extensions/Banshee.BooScript/Makefile
 src/Extensions/Banshee.Bpm/Makefile
 src/Extensions/Banshee.CoverArt/Makefile
@@ -343,6 +342,7 @@ src/Extensions/Banshee.Mpris/Makefile
 src/Extensions/Banshee.MultimediaKeys/Makefile
 src/Extensions/Banshee.NotificationArea/Makefile
 src/Extensions/Banshee.NowPlaying/Makefile
+src/Extensions/Banshee.OpticalDisc/Makefile
 src/Extensions/Banshee.PlayQueue/Makefile
 src/Extensions/Banshee.PlayerMigration/Makefile
 src/Extensions/Banshee.Podcasting/Makefile

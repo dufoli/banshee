@@ -65,7 +65,7 @@
     <person>Gerard BONNER</person>
     <person>Kristjan SCHMIDT</person>
   </language>
-  <language code="es" name="Español; Castellano">
+  <language code="es" name="Español">
     <person>Andrés Herrera</person>
     <person>Benjamín Valero Espinosa</person>
     <person>Daniel Mustieles</person>
@@ -95,7 +95,6 @@
   </language>
   <language code="gl" name="Galician">
     <person>Antón Méixome</person>
-    <person>Fran Dieguez</person>
     <person>Fran Diéguez</person>
     <person>Ignacio Casal Quinteiro</person>
   </language>
@@ -110,7 +109,6 @@
     <person>Yaron Shahrabani</person>
   </language>
   <language code="hu" name="Hungarian">
-    <person>Balázs Úr</person>
     <person>Gabor Kelemen</person>
     <person>Kéménczy Kálmán</person>
   </language>
@@ -164,7 +162,7 @@
     <person>A S Alam</person>
   </language>
   <language code="pl" name="Polish">
-    <person>Tomasz Dominikowski</person>
+    <person>Mateusz Kacprzak</person>
   </language>
   <language code="pt" name="Portuguese">
     <person>António Lima</person>
@@ -225,8 +223,9 @@
     <person>Sira Nokyoongtong</person>
     <person>Theppitak Karoonboonyanan</person>
   </language>
-  <language code="tr" name="Türkçe">
+  <language code="tr" name="Turkish">
     <person>Hasan Yılmaz</person>
+    <person>Muhammet Kara</person>
   </language>
   <language code="uk" name="Ukrainian">
     <person>Maxim Dziumanenko</person>

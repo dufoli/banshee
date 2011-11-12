@@ -1,47 +1,46 @@
 ===============================================================================
-Banshee 2.1.3 - 2011-08-24
+Banshee 2.3.1 - 2011-11-02
 ===============================================================================
 
-    Banshee 2.1.3 is the second release in the 2.1 development series leading up
-    to 2.2 (versions 2.1.1 and 2.1.2 were not released).
+    Banshee 2.3.1 is the first release in the 2.3 development series leading up
+    to 2.4, scheduled for March 2012.
 
     New Features:
 
-      * New custom support for the Barnes & Noble Nook
-      * Support default internet radio stations. At first start, XSPF playlists
-        in $datadir/banshee/stations/ are imported automatically. We don't
-        provide default radio stations ourselves but this allows distros or
-        other third parties to do so.
+      * DVD playback support
+
+            You can now watch your DVDs with Banshee. You can navigate in the
+            DVD's menus using the mouse or the keyboard.
 
     Enhancements:
 
-      * bgo#549173: Add "Stop when finished" option in the notification popup menu
-      * bgo#636071: Get info from the database or the file when opening a URI
-      * bgo#639805: Hide labels in the source pane when the group is empty
-      * bgo#647306: Add support for the Notion Ink Adam tablet
-      * bgo#651497: Motorola Atrix support
-      * bgo#653255: Samsung Galaxy S2 support
-      * bgo#653284: Remove keyboard shortcut for toggling scrobbling
-      * bgo#653997: Samsung Galaxy Ace support
-      * bgo#656526: Add "Smiley Face Curve" default equalizer
-      * bgo#656670: Cache the ArtworkID in the database for faster startup
-      * Various enhancements to our experimental GStreamer# backend, bringing it
-        close to feature parity with our current C backend. It is still not
-        built by default and not recommended for daily use, but testing is welcome.
+      * Several improvements to Muinshee, our alternative UI:
+        - Add a Clear button to the toolbar
+        - Make double-click on an album do the same as the Play button
+        - Don't close the dialog when pressing Enqueue
+        - Make the Esc key close the dialog if there is no search text
+        - Use better icons for the Play and Enqueue buttons
+      * Add separate options for writing ratings and play counts to files
+      * Update values for the Smiley Face equalizer preset
+      * Set the PulseAudio media.role property
 
-    Notable Bugs Fixed (39 fixed since 2.1.0):
+    Notable Bugs Fixed (36 fixed since 2.2.0):
 
-      * bgo#587264: Fix metadata fetching from MusicBrainz
-      * bgo#647111: Put the Audio CD source label in the right place
-      * bgo#647202: Fix space usage reporting for some DAP devices
-      * bgo#648498: Make sure the MPRIS sends the new metadata on track change
-      * bgo#650011: Fix items disappearing in playlists when re-connecting iPod
-      * bgo#650184: Fix XSPF playlist importing error
-      * bgo#651914: Fix "Least Favorite" smart playlist to not pick unrated songs
-      * bgo#654524: Fix the SetPosition method in the MPRIS interface
-      * bgo#656176: Don't ignore the last value of the .is_audio_player file
-      * bgo#656246: Fix random crash while changing tracks
-      * EqualizerSetting: Set the amplifier level for default equalizers
+      * UbuntuOneMusicStore: Ensure u1ms URIs passed at startup get loaded
+      * Daap: Fix crash while resolving the address of a DAAP service
+      * DatabaseImportManager: Support importing .mka files
+      * Notify playlists on rating change through d-bus or command line
+      * bgo#661467: AmazonMp3: Handle plain text AMZ files now sent by Amazon
+      * bgo#662906: AudiobookLibrarySource: Fix crash when adding tracks
+      * bgo#659841: GnomeBackend: Be more robust against GConf failures
+      * bgo#656533: Notification: Fix application name used in internal notify#
+      * bgo#649277: NotificationArea: Only use supported tags in the notification message
+      * bgo#647898: Try to fetch coverart without an internet connection
+      * bgo#658803: Prune CoverArtDownloads table when removing tracks
+
+    Packaging Changes:
+
+      * Mono.Addins >= 0.6.2 required
 
 ===============================================================================
 SOURCES / PACKAGES
@@ -50,10 +49,10 @@ SOURCES / PACKAGES
 Sources
 -------
 
-    * Banshee 2.1.3 Tarballs:
-      http://ftp.gnome.org/pub/GNOME/sources/banshee/2.1/banshee-2.1.3.tar.bz2
-      http://ftp.gnome.org/pub/GNOME/sources/banshee/2.1/banshee-2.1.3.tar.gz
-      http://ftp.gnome.org/pub/GNOME/sources/banshee/2.1/banshee-2.1.3.sha256sum
+    * Banshee 2.3.1 Tarballs:
+      http://ftp.gnome.org/pub/GNOME/sources/banshee/2.3/banshee-2.3.1.tar.bz2
+      http://ftp.gnome.org/pub/GNOME/sources/banshee/2.3/banshee-2.3.1.tar.gz
+      http://ftp.gnome.org/pub/GNOME/sources/banshee/2.3/banshee-2.3.1.sha256sum
 
 Packages
 --------
@@ -76,7 +75,7 @@ REPORT BUGS - HELP THE PROJECT - GROW THE COMMUNITY
     hesitate to file bugs!
 
     * http://banshee.fm/contribute/file-bugs
-    * http://bugzilla.gnome.org/enter_bug.cgi?product=banshee&version=2.1.3
+    * http://bugzilla.gnome.org/enter_bug.cgi?product=banshee&version=2.3.1
 
 
 ===============================================================================
@@ -89,19 +88,16 @@ Contributors For This Release
     The following people directly contributed to the release of this version
     of Banshee. Without their help, there would be no release!
 
-      Abner Silva, Alban Crequy, Alberto Gonzalez, Alex Launi,
-      Alexander Kojevnikov, Andres G. Aragoneses, Andy Street, Bertrand Lorentz,
-      Carlos Sanchez, Chase Geigle, Chow Loong Jin,
-      Christopher James Halse Rogers, Corec, Dinh Ngoc Tu, Gabriel Burt,
-      Hajime Mizuno, Johannes Koch, Marek Černocký, Mark Saunders, Martin Pitt,
-      Olivier Dufour, Travis Patterson, Victor Vargas, Will Thompson,
-      William Witt
+     Adam Lofts, Age Bosma, Alex Launi, Alexander Kojevnikov,
+     Andrés G. Aragoneses, Bertrand Lorentz, Chow Loong Jin, Kevin Anthony,
+     Olivier Dufour, Pacho Ramos, Robin Stocker, Rodney Dawes, Timothy Arceri,
+     Travis Glenn Hansen
 
     The following people contributed updated translations to this release.
     Without them, our project's reach would be much more limited.
 
-      Andrej Žnidaršič, Benjamín Valero, Bruno Brouard, Emmanouel Kapernaros,
-      Fran Dieguez, Gabor Kelemen, Gianvito Cavasoli, Hajime Taira,
-      Isabell Long, Jordi Mas, Kristjan SCHMIDT, Lucian Adrian Grijincu,
-      Marek Černocký, Mario Blättermann, Pavol Klačanský, Piotr Drąg,
-      Wouter Bolsterlee, Yaron Shahrabani, longxin, Мирослав Николић
+     Changwoo Ryu, Cheng-Chia Tseng, Christian Kirbach, Daniel Mustieles,
+     Daniel Nylander, Fran Dieguez, Gianvito Cavasoli, Jorge González,
+     Kentaro KAZUHAMA, Marek Černocký, Mario Blättermann, Matej Urbančič,
+     Mateusz Kacprzak
+

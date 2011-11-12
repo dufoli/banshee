@@ -124,14 +124,14 @@ namespace Banshee.Audiobook
 
                     ServiceManager.DbConnection.Execute (
                         "UPDATE CoreTracks SET Attributes = Attributes | ? WHERE PrimarySourceID = ?",
-                        TrackMediaAttributes.AudioBook, this.DbId);
+                        (int)TrackMediaAttributes.AudioBook, this.DbId);
                 }
             };
 
             TrackIsPlayingHandler = ServiceManager.PlayerEngine.IsPlaying;
 
             PlaybackSource = new BookPlaylist ("audiobook-playback-source", this);
-            PlaybackSource.DatabaseTrackModel.ForcedSortQuery = BansheeQuery.GetSort ("track", true);
+            PlaybackSource.DatabaseTrackModel.ForcedSortQuery = BansheeQuery.GetSort (BansheeQuery.TrackNumberField, true);
 
             ServiceManager.PlaybackController.SourceChanged += OnPlaybackSourceChanged;
 

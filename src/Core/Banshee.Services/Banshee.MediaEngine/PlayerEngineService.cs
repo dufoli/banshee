@@ -38,6 +38,8 @@ using Hyena;
 using Banshee.Base;
 using Banshee.Streaming;
 using Banshee.ServiceStack;
+using Banshee.Sources;
+using Banshee.Query;
 using Banshee.Metadata;
 using Banshee.Configuration;
 using Banshee.Collection;
@@ -565,6 +567,61 @@ namespace Banshee.MediaEngine
             return active_engine.GetSubtitleDescription (index);
         }
 
+        public void NotifyMouseMove (double x, double y)
+        {
+            active_engine.NotifyMouseMove (x, y);
+        }
+
+        public void NotifyMouseButtonPressed (int button, double x, double y)
+        {
+            active_engine.NotifyMouseButtonPressed (button, x, y);
+        }
+
+        public void NotifyMouseButtonReleased (int button, double x, double y)
+        {
+            active_engine.NotifyMouseButtonReleased (button, x, y);
+        }
+
+        public void NavigateToLeftMenu ()
+        {
+            active_engine.NavigateToLeftMenu ();
+        }
+
+        public void NavigateToRightMenu ()
+        {
+            active_engine.NavigateToRightMenu ();
+        }
+
+        public void NavigateToUpMenu ()
+        {
+            active_engine.NavigateToUpMenu ();
+        }
+
+        public void NavigateToDownMenu ()
+        {
+            active_engine.NavigateToDownMenu ();
+        }
+
+        public void NavigateToMenu ()
+        {
+            active_engine.NavigateToMenu ();
+        }
+
+        public void ActivateCurrentMenu ()
+        {
+            active_engine.ActivateCurrentMenu ();
+        }
+
+        public void GoToNextChapter ()
+        {
+            active_engine.GoToNextChapter ();
+        }
+
+        public void GoToPreviousChapter ()
+        {
+            active_engine.GoToPreviousChapter ();
+        }
+
         private void CheckPending ()
         {
             if (pending_engine != null && pending_engine != active_engine) {
@@ -641,6 +698,13 @@ namespace Banshee.MediaEngine
                 if (CurrentTrack != null) {
                     CurrentTrack.Rating = (int)Math.Min (5u, value);
                     CurrentTrack.Save ();
+
+                    foreach (var source in ServiceManager.SourceManager.Sources) {
+                        var psource = source as PrimarySource;
+                        if (psource != null) {
+                            psource.NotifyTracksChanged (BansheeQuery.RatingField);
+                        }
+                    }
                 }
             }
         }
@@ -668,6 +732,10 @@ namespace Banshee.MediaEngine
         public SafeUri SubtitleUri {
             set { active_engine.SubtitleUri = value; }
             get { return active_engine.SubtitleUri; }
+        }
+
+        public bool InDvdMenu {
+            get { return active_engine.InDvdMenu; }
         }
 
         public VideoDisplayContextType VideoDisplayContextType {
