@@ -92,10 +92,6 @@ fi
 AC_SUBST(MEEGO_PANELS_DIR)
 
 
-dnl Check for gdk-x11 >= 2.22 for NotificationArea extension, bgo#638477
-PKG_CHECK_MODULES(GDK_2_22, gdk-x11-2.0 >= 2.22, have_gdk_2_22=yes, have_gdk_2_22=no)
-AM_CONDITIONAL(HAVE_GDK_2_22, test "x$have_gdk_2_22" = "xyes")
-
 dnl DBus Sharp libraries
 BANSHEE_CHECK_DBUS_SHARP
 
