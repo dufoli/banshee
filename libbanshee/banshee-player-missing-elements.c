@@ -166,7 +166,7 @@ _bp_missing_elements_handle_state_changed (BansheePlayer *player, GstState old, 
     #ifdef GDK_WINDOWING_X11
     if (player->window != NULL) {
         gst_install_plugins_context_set_xid (player->install_plugins_context, 
-            GDK_WINDOW_XWINDOW (player->window));
+            GDK_WINDOW_XID (player->window));
     }
     #endif
     
