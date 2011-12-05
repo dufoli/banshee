@@ -42,7 +42,7 @@ namespace Banshee.Gui.TrackEditor
         private ListStore license_model;
         private EditorEditableUndoAdapter<Entry> undo_adapter = new EditorEditableUndoAdapter<Entry> ();
 
-        public LicenseEntry ()
+        public LicenseEntry () : base (true)
         {
             license_model = new ListStore (typeof (string));
             Model = license_model;
