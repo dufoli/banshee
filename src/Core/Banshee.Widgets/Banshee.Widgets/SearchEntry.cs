@@ -209,8 +209,7 @@ namespace Banshee.Widgets
             var color = entry.StyleContext.GetBackgroundColor (entry.StateFlags);
             filter_button.OverrideBackgroundColor (entry.StateFlags, color);
             clear_button.OverrideBackgroundColor (entry.StateFlags, color);
-
-            box.BorderWidth = (uint)entry.StyleContext.GetBorder (StateFlags).Left;
+            box.BorderWidth = (uint)entry.StyleContext.GetPadding (StateFlags).Left;
         }
 
         private void OnInnerEntryStyleUpdated (object o, EventArgs args)
@@ -479,20 +478,20 @@ namespace Banshee.Widgets
                 // separate window, so we can ensure that for themes that don't
                 // respect HasFrame, we never ever allow the base frame drawing
                 // to happen
-                if (CairoHelper.ShouldDrawWindow (cr, Window)) {
+                if (!CairoHelper.ShouldDrawWindow (cr, Window)) {
                     return true;
                 }
 
                 bool ret = base.OnDrawn (cr);
 
-                StyleContext.Save ();
-                //use entry class to have free theming
-                StyleContext.AddClass ("entry");
-                StyleContext.State = StateFlags.Insensitive;
-
                 if(Text.Length > 0 || HasFocus || parent.EmptyMessage == null) {
                     return ret;
                 }
+
+                StyleContext.Save ();
+                //use entry class to have free theming
+                StyleContext.AddClass ("entry");
+                StyleContext.State = StateFlags.Insensitive ;
 
                 if (layout == null) {
                     layout = new Pango.Layout(PangoContext);
