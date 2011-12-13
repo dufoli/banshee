@@ -144,7 +144,7 @@ namespace Banshee.InternetArchive
                 string prev_query = entry.Query.EndsWith (":") ? null : entry.Query;
                 entry.Query = String.Format ("{0}:{1}", filter_fields[entry.ActiveFilterID].Id, prev_query);
 
-                var editable = entry.InnerEntry as Editable;
+                var editable = entry as Editable;
                 if (editable != null) {
                     editable.Position = entry.Query.Length;
                 }

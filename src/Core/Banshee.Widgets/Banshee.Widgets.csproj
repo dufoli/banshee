@@ -76,7 +76,6 @@
     <Compile Include="Banshee.Widgets\DateButton.cs" />
     <Compile Include="Banshee.Widgets\DictionaryComboBox.cs" />
     <Compile Include="Banshee.Widgets\DiscUsageDisplay.cs" />
-    <Compile Include="Banshee.Widgets\HoverImageButton.cs" />
     <Compile Include="Banshee.Widgets\LinearProgress.cs" />
     <Compile Include="Banshee.Widgets\LinkLabel.cs" />
     <Compile Include="Banshee.Widgets\MessagePane.cs" />

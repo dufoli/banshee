@@ -103,9 +103,9 @@ namespace Banshee.InternetArchive
             source.Properties.Set<SearchEntry> ("Nereid.SearchEntry", entry);
 
             // Make the search entry text nice and big
-            var font = entry.InnerEntry.StyleContext.GetFont (StateFlags.Normal).Copy ();
+            var font = entry.StyleContext.GetFont (StateFlags.Normal).Copy ();
             font.Size = (int) (font.Size * Pango.Scale.XLarge);
-            entry.InnerEntry.OverrideFont (font);
+            entry.OverrideFont (font);
             font.Dispose ();
 
             var button = new Hyena.Widgets.ImageButton (Catalog.GetString ("_Go"), Stock.Find);

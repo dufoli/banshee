@@ -4,8 +4,10 @@
 // Author:
 //   Aaron Bockover <abockover@novell.com>
 //   Gabriel Burt <gburt@novell.com>
+//   Bertrand Lorentz <bertrand.lorentz@gmail.com>
 //
-// Copyright (C) 2007 Novell, Inc.
+// Copyright 2007 Novell, Inc.
+// Copyright 2011 Bertrand Lorentz
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -32,13 +34,8 @@ using Gtk;
 
 namespace Banshee.Widgets
 {
-    public class SearchEntry : EventBox
+    public class SearchEntry : Entry
     {
-        private HBox box;
-        private Entry entry;
-        private HoverImageButton filter_button;
-        private HoverImageButton clear_button;
-
         private Menu menu;
         private int active_filter_id = -1;
 
@@ -50,14 +47,9 @@ namespace Banshee.Widgets
         private event EventHandler filter_changed;
         private event EventHandler entry_changed;
 
-        public event EventHandler Changed {
+        public new event EventHandler Changed {
             add { entry_changed += value; }
             remove { entry_changed -= value; }
-        }
-
-        public event EventHandler Activated {
-            add { entry.Activated += value; }
-            remove { entry.Activated -= value; }
         }
 
         public event EventHandler FilterChanged {
@@ -67,6 +59,8 @@ namespace Banshee.Widgets
 
         public uint ChangeTimeoutMs { get; set; }
 
+        public bool ShowSearchIcon { get; set; }
+
         public Menu Menu {
             get { return menu; }
         }
@@ -75,108 +69,55 @@ namespace Banshee.Widgets
         {
         }
 
-        public SearchEntry()
+        public SearchEntry () : base ()
         {
             ChangeTimeoutMs = 25;
-            AppPaintable = true;
 
-            BuildWidget();
-            BuildMenu();
-
-            NoShowAll = true;
+            menu = new Menu ();
         }
 
-        private void BuildWidget()
+        private void ShowMenu (uint time)
         {
-            box = new HBox();
-            entry = new FramelessEntry(this);
-            filter_button = new HoverImageButton(IconSize.Menu, new string [] { "edit-find", Stock.Find });
-            clear_button = new HoverImageButton(IconSize.Menu, new string [] { "edit-clear", Stock.Clear });
-            clear_button.TooltipText = Mono.Unix.Catalog.GetString ("Clear search");
-
-            box.PackStart(filter_button, false, false, 0);
-            box.PackStart(entry, true, true, 0);
-            box.PackStart(clear_button, false, false, 0);
-
-            Add(box);
-            box.ShowAll();
-
-            entry.StyleUpdated += OnInnerEntryStyleUpdated;
-            entry.StateChanged += OnInnerEntryStateChanged;
-            entry.FocusInEvent += OnInnerEntryFocusEvent;
-            entry.FocusOutEvent += OnInnerEntryFocusEvent;
-            entry.Changed += OnInnerEntryChanged;
-
-            filter_button.Image.Xpad = 2;
-            clear_button.Image.Xpad = 2;
-            filter_button.CanFocus = false;
-            clear_button.CanFocus = false;
-
-            filter_button.ButtonReleaseEvent += OnButtonReleaseEvent;
-            clear_button.ButtonReleaseEvent += OnButtonReleaseEvent;
-            clear_button.Clicked += OnClearButtonClicked;
-
-            filter_button.Visible = false;
-            clear_button.Visible = false;
-        }
-
-        private void BuildMenu()
-        {
-            menu = new Menu();
-            menu.Deactivated += OnMenuDeactivated;
-        }
-
-        private void ShowMenu(uint time)
-        {
-            if(menu.Children.Length > 0) {
-                menu.Popup(null, null, OnPositionMenu, 0, time);
-                menu.ShowAll();
+            if (menu.Children.Length > 0) {
+                menu.Popup (null, null, null, 0, time);
+                menu.ShowAll ();
             }
         }
 
-        private void ShowHideButtons()
+        private void ShowHideButtons ()
         {
-            clear_button.Visible = entry.Text.Length > 0;
-            filter_button.Visible = menu != null && menu.Children.Length > 0;
-        }
-
-        private void OnPositionMenu(Menu menu, out int x, out int y, out bool push_in)
-        {
-            int origin_x, origin_y, tmp;
-
-            filter_button.Window.GetOrigin(out origin_x, out tmp);
-            Window.GetOrigin(out tmp, out origin_y);
-
-            x = origin_x + filter_button.Allocation.X;
-            int minimum_height, natural_height;
-            GetPreferredHeight (out minimum_height, out natural_height);
-            y = origin_y + natural_height;
-            push_in = true;
-        }
-
-        private void OnMenuDeactivated(object o, EventArgs args)
-        {
-            filter_button.QueueDraw();
+            if (ShowSearchIcon || (menu != null && menu.Children.Length > 0)) {
+                SetIconFromIconName (EntryIconPosition.Primary, "edit-find");
+                PrimaryIconSensitive = PrimaryIconActivatable = true;
+            } else {
+                SetIconFromIconName (EntryIconPosition.Primary, null);
+            }
+            if (Text.Length > 0) {
+                SetIconFromIconName (EntryIconPosition.Secondary, "edit-clear");
+                SecondaryIconSensitive = SecondaryIconActivatable = true;
+            } else {
+                SetIconFromIconName (EntryIconPosition.Secondary, null);
+            }
         }
 
         private bool toggling = false;
 
-        private void OnMenuItemActivated(object o, EventArgs args)
+        private void OnMenuItemActivated (object o, EventArgs args)
         {
-            if(toggling || !(o is FilterMenuItem)) {
+            if (toggling || !(o is FilterMenuItem)) {
                 return;
             }
 
             toggling = true;
             FilterMenuItem item = (FilterMenuItem)o;
 
-            foreach(MenuItem child_item in menu) {
-                if(!(child_item is FilterMenuItem)) {
+            foreach (MenuItem child_item in menu) {
+                if (!(child_item is FilterMenuItem)) {
                     continue;
                 }
 
                 FilterMenuItem filter_child = (FilterMenuItem)child_item;
-                if(filter_child != item) {
+                if (filter_child != item) {
                     filter_child.Active = false;
                 }
             }
@@ -186,160 +127,147 @@ namespace Banshee.Widgets
             toggling = false;
         }
 
-        private void OnInnerEntryChanged(object o, EventArgs args)
+        protected override void OnChanged ()
         {
-            ShowHideButtons();
+            ShowHideButtons ();
 
-            if(changed_timeout_id > 0) {
-                GLib.Source.Remove(changed_timeout_id);
+            if (changed_timeout_id > 0) {
+                GLib.Source.Remove (changed_timeout_id);
             }
 
-            if (Ready)
-                changed_timeout_id = GLib.Timeout.Add(ChangeTimeoutMs, OnChangedTimeout);
+            if (Ready) {
+                changed_timeout_id = GLib.Timeout.Add (ChangeTimeoutMs, OnChangedTimeout);
+            }
         }
 
-        private bool OnChangedTimeout()
+        private bool OnChangedTimeout ()
         {
-            OnChanged();
+            if (!Ready) {
+                return false;
+            }
+
+            EventHandler handler = entry_changed;
+            if (handler != null) {
+                handler (this, EventArgs.Empty);
+            }
+
             return false;
         }
 
-        private void UpdateStyle ()
+        protected override void OnIconPress (EntryIconPosition icon_pos, Gdk.Event evnt)
         {
-            var color = entry.StyleContext.GetBackgroundColor (entry.StateFlags);
-            filter_button.OverrideBackgroundColor (entry.StateFlags, color);
-            clear_button.OverrideBackgroundColor (entry.StateFlags, color);
-            box.BorderWidth = (uint)entry.StyleContext.GetPadding (StateFlags).Left;
-        }
-
-        private void OnInnerEntryStyleUpdated (object o, EventArgs args)
-        {
-            UpdateStyle ();
-        }
-
-        private void OnInnerEntryStateChanged (object o, EventArgs args)
-        {
-            UpdateStyle ();
-        }
-
-        private void OnInnerEntryFocusEvent(object o, EventArgs args)
-        {
-            QueueDraw();
-        }
-
-        private void OnButtonReleaseEvent(object o, ButtonReleaseEventArgs args)
-        {
-            if(args.Event.Button != 1) {
+            var evnt_button = evnt as Gdk.EventButton;
+            if (evnt_button == null) {
                 return;
             }
 
-            entry.HasFocus = true;
-
-            if(o == filter_button) {
-                ShowMenu(args.Event.Time);
+            if (evnt_button.Button != 1) {
+                return;
             }
-        }
 
-        private void OnClearButtonClicked(object o, EventArgs args)
-        {
-            active_filter_id = 0;
-            entry.Text = String.Empty;
+            HasFocus = true;
+
+            if (icon_pos == EntryIconPosition.Primary) {
+                ShowMenu (evnt_button.Time);
+            } else if (icon_pos == EntryIconPosition.Secondary) {
+                active_filter_id = 0;
+                Text = String.Empty;
+            }
         }
 
         protected override bool OnKeyPressEvent (Gdk.EventKey evnt)
         {
             if (evnt.Key == Gdk.Key.Escape) {
                 active_filter_id = 0;
-                entry.Text = String.Empty;
+                Text = String.Empty;
                 return true;
             }
             return base.OnKeyPressEvent (evnt);
         }
 
+        protected override void OnShown ()
+        {
+            base.OnShown ();
+            ShowHideButtons ();
+        }
+
+        // TODO: GTK+ 3.2 adds a placeholder-text property, but for now
+        // we have to handle it ourselves
         protected override bool OnDrawn (Cairo.Context cr)
         {
-            StyleContext.Save ();
-            StyleContext.AddClass ("entry");
-            StyleContext.RenderFrame (cr, 0, 0, Allocation.Width, Allocation.Height);
-            StyleContext.RenderBackground (cr, 0, 0, Allocation.Width, Allocation.Height);
-            PropagateDraw (Child, cr);
-            StyleContext.Restore ();
+            bool ret = base.OnDrawn (cr);
 
-            return true;
-        }
-
-        protected override void OnShown()
-        {
-            base.OnShown();
-            ShowHideButtons();
-        }
-
-        protected virtual void OnChanged()
-        {
-            if(!Ready) {
-                return;
+            if(Text.Length > 0 || HasFocus || EmptyMessage == null) {
+                return ret;
             }
 
-            EventHandler handler = entry_changed;
-            if(handler != null) {
-                handler(this, EventArgs.Empty);
+            Layout.SetMarkup (EmptyMessage);
+
+            Gdk.RGBA color;
+            if (!StyleContext.LookupColor ("placeholder_text_color", out color)) {
+                color = StyleContext.GetColor (StateFlags.Insensitive);
             }
+            Pango.Attribute attr = new Pango.AttrForeground (Convert.ToUInt16 (color.Red * 65535),
+                Convert.ToUInt16 (color.Green * 65535), Convert.ToUInt16 (color.Blue * 65535));
+            Layout.Attributes.Insert (attr);
+
+            return ret;
         }
 
-        protected virtual void OnFilterChanged()
+        protected virtual void OnFilterChanged ()
         {
             EventHandler handler = filter_changed;
-            if(handler != null) {
-                handler(this, EventArgs.Empty);
+            if (handler != null) {
+                handler (this, EventArgs.Empty);
             }
 
-            if(IsQueryAvailable) {
-                OnInnerEntryChanged(this, EventArgs.Empty);
+            if (IsQueryAvailable) {
+                OnChanged ();
             }
         }
 
-        public void AddFilterOption(int id, string label)
+        public void AddFilterOption (int id, string label)
         {
-            if(id < 0) {
-                throw new ArgumentException("id", "must be >= 0");
+            if (id < 0) {
+                throw new ArgumentException ("id", "must be >= 0");
             }
 
-            FilterMenuItem item = new FilterMenuItem(id, label);
+            FilterMenuItem item = new FilterMenuItem (id, label);
             item.Activated += OnMenuItemActivated;
-            menu.Append(item);
+            menu.Append (item);
 
-            if(ActiveFilterID < 0) {
-                item.Activate();
+            if (ActiveFilterID < 0) {
+                item.Activate ();
             }
 
-            filter_button.Visible = true;
+            SetIconSensitive (EntryIconPosition.Primary, true);
         }
 
-        public void AddFilterSeparator()
+        public void AddFilterSeparator ()
         {
-            menu.Append(new SeparatorMenuItem());
+            menu.Append (new SeparatorMenuItem ());
         }
 
-        public void RemoveFilterOption(int id)
+        public void RemoveFilterOption (int id)
         {
-            FilterMenuItem item = FindFilterMenuItem(id);
-            if(item != null) {
-                menu.Remove(item);
-            }
-        }
-
-        public void ActivateFilter(int id)
-        {
-            FilterMenuItem item = FindFilterMenuItem(id);
-            if(item != null) {
-                item.Activate();
+            FilterMenuItem item = FindFilterMenuItem (id);
+            if (item != null) {
+                menu.Remove (item);
             }
         }
 
-        private FilterMenuItem FindFilterMenuItem(int id)
+        public void ActivateFilter (int id)
         {
-            foreach(MenuItem item in menu) {
-                if(item is FilterMenuItem && ((FilterMenuItem)item).ID == id) {
+            FilterMenuItem item = FindFilterMenuItem (id);
+            if (item != null) {
+                item.Activate ();
+            }
+        }
+
+        private FilterMenuItem FindFilterMenuItem (int id)
+        {
+            foreach (MenuItem item in menu) {
+                if (item is FilterMenuItem && ((FilterMenuItem)item).ID == id) {
                     return (FilterMenuItem)item;
                 }
             }
@@ -347,47 +275,47 @@ namespace Banshee.Widgets
             return null;
         }
 
-        public string GetLabelForFilterID(int id)
+        public string GetLabelForFilterID (int id)
         {
-            FilterMenuItem item = FindFilterMenuItem(id);
-            if(item == null) {
+            FilterMenuItem item = FindFilterMenuItem (id);
+            if (item == null) {
                 return null;
             }
 
             return item.Label;
         }
 
-        public void CancelSearch()
+        public void CancelSearch ()
         {
-            entry.Text = String.Empty;
-            ActivateFilter(0);
+            Text = String.Empty;
+            ActivateFilter (0);
         }
 
         public int ActiveFilterID {
             get { return active_filter_id; }
             private set {
-                if(value == active_filter_id) {
+                if (value == active_filter_id) {
                     return;
                 }
 
                 active_filter_id = value;
-                OnFilterChanged();
+                OnFilterChanged ();
             }
         }
 
         public string EmptyMessage {
             get {
-                return entry.Sensitive ? empty_message : String.Empty;
+                return Sensitive ? empty_message : String.Empty;
             }
             set {
                 empty_message = value;
-                entry.QueueDraw();
+                QueueDraw ();
             }
         }
 
         public string Query {
-            get { return entry.Text.Trim(); }
-            set { entry.Text = String.IsNullOrEmpty (value) ? String.Empty : value.Trim (); }
+            get { return Text.Trim (); }
+            set { Text = String.IsNullOrEmpty (value) ? String.Empty : value.Trim (); }
         }
 
         public bool IsQueryAvailable {
@@ -399,113 +327,29 @@ namespace Banshee.Widgets
             set { ready = value; }
         }
 
-        public new bool HasFocus {
-            get { return entry.HasFocus; }
-            set { entry.HasFocus = true; }
-        }
-
-
-        public Entry InnerEntry {
-            get { return entry; }
-        }
-
         protected override void OnStateChanged (Gtk.StateType previous_state)
         {
             base.OnStateChanged (previous_state);
 
-            entry.Sensitive = State != StateType.Insensitive;
-            filter_button.Sensitive = State != StateType.Insensitive;
-            clear_button.Sensitive = State != StateType.Insensitive;
+            Sensitive = State != StateType.Insensitive;
         }
 
-        private class FilterMenuItem : MenuItem /*CheckMenuItem*/
+        private class FilterMenuItem : CheckMenuItem
         {
             private int id;
 
-            public FilterMenuItem(int id, string label) : base(label)
+            public FilterMenuItem (int id, string label) : base(label)
             {
                 this.id = id;
-                //DrawAsRadio = true;
+                DrawAsRadio = true;
             }
 
-            protected FilterMenuItem(IntPtr ptr) : base (ptr) {}
+            protected FilterMenuItem (IntPtr ptr) : base (ptr)
+            {
+            }
 
             public int ID {
                 get { return id; }
-            }
-
-            // FIXME: Remove when restored to CheckMenuItem
-            private bool active;
-            public bool Active {
-                get { return active; }
-                set { active = value; }
-            }
-
-            public event EventHandler Toggled;
-            protected override void OnActivated ()
-            {
-                base.OnActivated ();
-                if (Toggled != null) {
-                    Toggled (this, EventArgs.Empty);
-                }
-            }
-
-        }
-
-        private class FramelessEntry : Entry
-        {
-            private SearchEntry parent;
-            private Pango.Layout layout;
- 
-            public FramelessEntry(SearchEntry parent) : base()
-            {
-                this.parent = parent;
-                HasFrame = false;
-
-                parent.StyleUpdated += OnParentStyleUpdated;
-                WidthChars = 1;
-            }
-
-            private void OnParentStyleUpdated (object o, EventArgs args)
-            {
-                QueueDraw();
-            }
-
-            protected override bool OnDrawn (Cairo.Context cr)
-            {
-                // The Entry's Window is the top level window onto which
-                // the frame is drawn; the actual text entry is drawn into a
-                // separate window, so we can ensure that for themes that don't
-                // respect HasFrame, we never ever allow the base frame drawing
-                // to happen
-                if (!CairoHelper.ShouldDrawWindow (cr, Window)) {
-                    return true;
-                }
-
-                bool ret = base.OnDrawn (cr);
-
-                if(Text.Length > 0 || HasFocus || parent.EmptyMessage == null) {
-                    return ret;
-                }
-
-                StyleContext.Save ();
-                //use entry class to have free theming
-                StyleContext.AddClass ("entry");
-                StyleContext.State = StateFlags.Insensitive ;
-
-                if (layout == null) {
-                    layout = new Pango.Layout(PangoContext);
-                    layout.FontDescription = PangoContext.FontDescription;
-                }
-
-                int width, height;
-                layout.SetMarkup(parent.EmptyMessage);
-                layout.GetPixelSize(out width, out height);
-                int minimum_height, natural_height;
-                OnGetPreferredHeight (out minimum_height, out natural_height);
-                StyleContext.RenderLayout (cr, 2, (natural_height - height) / 2, layout);
-                StyleContext.Restore ();
-                return ret;
             }
         }
     }

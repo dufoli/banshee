@@ -729,7 +729,7 @@ namespace Nereid
             var src = ServiceManager.SourceManager.ActiveSource;
             var search_entry = src.Properties.Get<SearchEntry> ("Nereid.SearchEntry") ?? view_container.SearchEntry;
             if (focus_search && search_entry.Visible && !source_view.EditingRow) {
-                search_entry.InnerEntry.GrabFocus ();
+                search_entry.GrabFocus ();
                 search_entry.HasFocus = true;
                 return true;
             }

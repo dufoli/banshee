@@ -169,7 +169,7 @@ namespace Nereid
 
             search_entry.Query = String.IsNullOrEmpty (query) ? String.Empty : query + ":";
 
-            Editable editable = search_entry.InnerEntry as Editable;
+            Editable editable = search_entry as Editable;
             if (editable != null) {
                 editable.Position = search_entry.Query.Length;
             }

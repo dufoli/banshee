@@ -152,7 +152,7 @@ namespace Banshee.Addins.Gui
             PackStart (hbox, false, false, 0);
             PackStart (tree_scroll, true, true, 0);
             ShowAll ();
-            search_entry.InnerEntry.GrabFocus ();
+            search_entry.GrabFocus ();
 
             txt_cell.WrapWidth = 300;
         }
