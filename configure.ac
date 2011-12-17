@@ -2,10 +2,10 @@ dnl Granularly define the version components
 dnl Remember to also update the Display Version
 m4_define([banshee_version_major], [2])
 m4_define([banshee_version_minor], [3])
-m4_define([banshee_version_micro], [1])
+m4_define([banshee_version_micro], [2])
 
 dnl this can sometimes differ manually
-m4_define([banshee_display_version], ["2.3.1"])
+m4_define([banshee_display_version], ["2.3.2"])
 
 dnl set to 0 when doing an official release
 m4_define([banshee_version_pre_release], [0])
@@ -134,8 +134,7 @@ dnl GNOME (optional)
 AC_ARG_ENABLE(gnome, AC_HELP_STRING([--disable-gnome], [Disable GNOME support]), , enable_gnome="yes")
 if test "x$enable_gnome" = "xyes"; then
 	BANSHEE_CHECK_GNOME_SHARP
-	AC_PATH_PROG(GCONFTOOL, gconftool-2, no)
-	AM_GCONF_SOURCE_2
+	BANSHEE_CHECK_GCONF
 	AM_CONDITIONAL(ENABLE_GNOME, true)
 else
 	AM_CONDITIONAL(GCONF_SCHEMAS_INSTALL, false)
