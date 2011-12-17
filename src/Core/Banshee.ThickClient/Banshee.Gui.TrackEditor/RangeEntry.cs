@@ -63,7 +63,7 @@ namespace Banshee.Gui.TrackEditor
                 PackStart (auto_order_button = new AutoOrderButton (), false, false, 1);
                 auto_order_button.Clicked += delegate { orderClosure (this); };
                 if (orderTooltip != null) {
-                    TooltipSetter.Set (TooltipSetter.CreateHost (), auto_order_button, orderTooltip);
+                    auto_order_button.TooltipText = orderTooltip;
                 }
             }
 

@@ -70,8 +70,7 @@ namespace Banshee.Gui.TrackEditor
                     forward_button.Sensitive = dialog.CanGoForward;
                 };
                 forward_button = EditorUtilities.CreateSmallStockButton (Stock.GoForward);
-                object tooltip_host = Hyena.Gui.TooltipSetter.CreateHost ();
-                Hyena.Gui.TooltipSetter.Set (tooltip_host, forward_button, Catalog.GetString ("Advance to the next track and edit its title"));
+                forward_button.TooltipText = Catalog.GetString ("Advance to the next track and edit its title");
                 forward_button.Sensitive = dialog.CanGoForward;
                 forward_button.Show ();
                 forward_button.Clicked += EditNextTitle;

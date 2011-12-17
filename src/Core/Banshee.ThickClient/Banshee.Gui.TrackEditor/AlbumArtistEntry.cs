@@ -40,7 +40,6 @@ namespace Banshee.Gui.TrackEditor
 
         private CheckButton enable_compilation = new CheckButton ();
         private TextEntry entry = new TextEntry ("CoreAlbums", "ArtistName");
-        private object tooltip_host = Hyena.Gui.TooltipSetter.CreateHost ();
         private Button track_artist_sync_button;
         private PageNavigationEntry track_artist_entry;
 
@@ -53,10 +52,10 @@ namespace Banshee.Gui.TrackEditor
             enable_compilation.Label = Catalog.GetString ("Com_pilation Album Artist:");
             enable_compilation.UseUnderline = true;
 
-            Hyena.Gui.TooltipSetter.Set (tooltip_host, enable_compilation,
-                Catalog.GetString ("Check this if this track is part of an album with tracks by various artists"));
-            Hyena.Gui.TooltipSetter.Set (tooltip_host, entry,
-                Catalog.GetString ("This value will affect how this album is sorted; if you enter 'Various Artists' then the album will located with other albums that start with 'V'."));
+            enable_compilation.TooltipText = Catalog.GetString (
+                "Check this if this track is part of an album with tracks by various artists");
+            entry.TooltipText = Catalog.GetString (
+                "This value will affect how this album is sorted; if you enter 'Various Artists' then the album will located with other albums that start with 'V'.");
 
             PackStart (enable_compilation, false, false, 0);
             PackStart (entry, false, false, 0);

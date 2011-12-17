@@ -54,7 +54,6 @@ namespace Banshee.Gui.Widgets
         private Button cancel_button;
         private uint update_delay_id;
         private uint progress_bounce_id;
-        private object tooltips;
 
         Hyena.Widgets.HigMessageDialog cancel_dialog;
 
@@ -75,7 +74,6 @@ namespace Banshee.Gui.Widgets
 
             icon = new Image ();
 
-            tooltips = TooltipSetter.CreateHost ();
             title_label = new Label ();
             title_label.Xalign = 0.0f;
             title_label.Ellipsize = Pango.EllipsizeMode.End;
@@ -194,7 +192,7 @@ namespace Banshee.Gui.Widgets
                 } else {
                     never_had_status = false;
                     status_label.Markup = String.Format ("<small>{0}</small>", GLib.Markup.EscapeText (job.Status ?? String.Empty));
-                    TooltipSetter.Set (tooltips, status_label, job.Status ?? String.Empty);
+                    status_label.TooltipText = job.Status ?? String.Empty;
                     status_label.Show ();
                 }
                 status = job.Status;

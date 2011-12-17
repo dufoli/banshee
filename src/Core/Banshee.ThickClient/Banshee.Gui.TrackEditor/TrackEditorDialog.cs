@@ -64,7 +64,6 @@ namespace Banshee.Gui.TrackEditor
         private Label header_artist_label;
         private Label header_album_label;
         private Label edit_notif_label;
-        private object tooltip_host;
 
         private DateTime dialog_launch_datetime = DateTime.Now;
 
@@ -115,8 +114,6 @@ namespace Banshee.Gui.TrackEditor
                 AddStockButton (Stock.Close, ResponseType.Close, true);
             }
 
-            tooltip_host = TooltipSetter.CreateHost ();
-
             AddNavigationButtons ();
 
             main_vbox = new VBox ();
@@ -146,15 +143,15 @@ namespace Banshee.Gui.TrackEditor
 
             nav_backward_button = new Button (Stock.GoBack);
             nav_backward_button.UseStock = true;
+            nav_backward_button.TooltipText = Catalog.GetString ("Show the previous track");
             nav_backward_button.Clicked += delegate { NavigateBackward (); };
             nav_backward_button.Show ();
-            TooltipSetter.Set (tooltip_host, nav_backward_button, Catalog.GetString ("Show the previous track"));
 
             nav_forward_button = new Button (Stock.GoForward);
             nav_forward_button.UseStock = true;
+            nav_forward_button.TooltipText = Catalog.GetString ("Show the next track");
             nav_forward_button.Clicked += delegate { NavigateForward (); };
             nav_forward_button.Show ();
-            TooltipSetter.Set (tooltip_host, nav_forward_button, Catalog.GetString ("Show the next track"));
 
             ActionArea.PackStart (nav_backward_button, false, false, 0);
             ActionArea.PackStart (nav_forward_button, false, false, 0);
@@ -315,9 +312,9 @@ namespace Banshee.Gui.TrackEditor
                 alignment.Add (box);
                 sync_all_button.Add (alignment);
 
-                TooltipSetter.Set (tooltip_host, sync_all_button, Catalog.GetString (
-                    "Apply the values of all common fields set for this track to all of the tracks selected in this editor"));
-
+                sync_all_button.TooltipText = Catalog.GetString (
+                    "Apply the values of all common fields set for this track to all of the tracks selected in this editor");
+                
                 button_box.PackStart (sync_all_button, false, false, 0);
 
                 foreach (Widget child in ActionArea.Children) {

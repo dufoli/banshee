@@ -53,7 +53,6 @@ namespace Banshee.MiniMode
         private ConnectedVolumeButton volume_button;
         private SourceComboBox source_combo_box;
         private ConnectedSeekSlider seek_slider;
-        private object tooltip_host;
 
         private BaseClientWindow default_main_window;
 
@@ -63,8 +62,6 @@ namespace Banshee.MiniMode
 
             BorderWidth = 12;
             Resizable = false;
-
-            tooltip_host = TooltipSetter.CreateHost ();
 
             Build ();
             ShowAll ();
@@ -118,19 +115,14 @@ namespace Banshee.MiniMode
             repeat_align.Add (repeat_toggle_button);
             bot.PackEnd (repeat_align, false, false, 0);
 
-            SetTip (fullmode_button, Catalog.GetString ("Switch back to full mode"));
-            SetTip (repeat_toggle_button, Catalog.GetString ("Change repeat playback mode"));
+            fullmode_button.TooltipText = Catalog.GetString ("Switch back to full mode");
+            repeat_toggle_button.TooltipText = Catalog.GetString ("Change repeat playback mode");
 
             Add (vbox);
         }
 
         protected override void Initialize ()
         {
-        }
-
-        private void SetTip (Widget widget, string tip)
-        {
-            TooltipSetter.Set (tooltip_host, widget, tip);
         }
 
         private void SetHeightLimit ()

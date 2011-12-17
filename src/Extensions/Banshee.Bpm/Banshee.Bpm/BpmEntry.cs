@@ -106,15 +106,9 @@ namespace Banshee.Bpm
             tap_adapter.BpmChanged += OnTapBpmChanged;
             Add (tap_button);
 
-            object tooltip_host = TooltipSetter.CreateHost ();
-
-            TooltipSetter.Set (tooltip_host, detect_button,
-                Catalog.GetString ("Have Banshee attempt to auto-detect the BPM of this song"));
-
-            TooltipSetter.Set (tooltip_host, play_button, Catalog.GetString ("Play this song"));
-
-            TooltipSetter.Set (tooltip_host, tap_button,
-                Catalog.GetString ("Tap this button to the beat to set the BPM for this song manually"));
+            detect_button.TooltipText = Catalog.GetString ("Have Banshee attempt to auto-detect the BPM of this song");
+            play_button.TooltipText = Catalog.GetString ("Play this song");
+            tap_button.TooltipText = Catalog.GetString ("Tap this button to the beat to set the BPM for this song manually");
 
             ShowAll ();
         }
