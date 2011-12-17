@@ -62,7 +62,7 @@ namespace Banshee.Equalizer.Gui
             SkipPagerHint = true;
             SkipTaskbarHint = true;
 
-            SetDefaultSize (-1, 180);
+            SetDefaultSize (-1, 230);
 
             VBox box = new VBox ();
             header_box = new HBox ();
@@ -101,6 +101,14 @@ namespace Banshee.Equalizer.Gui
             header_box.PackEnd (eq_enabled_checkbox, false, false, 0);
 
             box.PackStart (eq_view, true, true, 0);
+
+            var button_box = new ButtonBox (Orientation.Horizontal);
+            button_box.Layout = ButtonBoxStyle.End;
+            button_box.BorderWidth = 12;
+            var button = new Button (Stock.Close) { UseStock = true };
+            button.Clicked += delegate { Destroy (); };
+            button_box.Add (button);
+            box.PackEnd (button_box, false, true, 0);
 
             eq_enabled_checkbox.Active = EqualizerManager.Instance.IsActive;
             eq_enabled_checkbox.Clicked += OnEnableDisable;
