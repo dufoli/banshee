@@ -61,7 +61,6 @@ namespace Banshee.Equalizer.Gui
             TypeHint = Gdk.WindowTypeHint.Dialog;
             SkipPagerHint = true;
             SkipTaskbarHint = true;
-            AppPaintable = true;
 
             SetDefaultSize (-1, 180);
 
@@ -133,13 +132,6 @@ namespace Banshee.Equalizer.Gui
         {
             instance = null;
             base.OnDestroyed ();
-        }
-
-        protected override bool OnDrawn (Cairo.Context cr)
-        {
-            // FIXME: Check that this is not needed, background should already be painted
-            //GdkWindow.DrawRectangle (Style.BackgroundGC (StateType.Active), true, header_box.Allocation);
-            return base.OnDrawn (cr);
         }
 
         private void OnNewPreset (object o, EventArgs args)
