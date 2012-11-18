@@ -42,6 +42,7 @@ using Banshee.Collection;
 using Banshee.Collection.Database;
 using Banshee.Library;
 using Banshee.Metadata;
+using Banshee.Query;
 using Banshee.ServiceStack;
 using Banshee.Sources;
 using Banshee.Streaming;
@@ -98,10 +99,10 @@ namespace Banshee.LibraryWatcher
 
             watcher = new FileSystemWatcher (path);
             watcher.IncludeSubdirectories = true;
-            watcher.Changed += OnChanged;
-            watcher.Created += OnChanged;
-            watcher.Deleted += OnChanged;
-            watcher.Renamed += OnChanged;
+            watcher.Changed += OnModified;
+            watcher.Created += OnModified;
+            watcher.Deleted += OnModified;
+            watcher.Renamed += OnModified;
 
             active = true;
             watch_thread = new Thread (new ThreadStart (Watch));
@@ -116,10 +117,10 @@ namespace Banshee.LibraryWatcher
         {
             if (!disposed) {
                 active = false;
-                watcher.Changed -= OnChanged;
-                watcher.Created -= OnChanged;
-                watcher.Deleted -= OnChanged;
-                watcher.Renamed -= OnChanged;
+                watcher.Changed -= OnModified;
+                watcher.Created -= OnModified;
+                watcher.Deleted -= OnModified;
+                watcher.Renamed -= OnModified;
 
                 lock (queue) {
                     queue.Clear ();
@@ -134,7 +135,61 @@ namespace Banshee.LibraryWatcher
 
 #region Private Methods
 
-        private void OnChanged (object source, FileSystemEventArgs args)
+        private readonly double MAX_TIME_BETWEEN_CHANGED_EVENTS = TimeSpan.FromSeconds (10).TotalMilliseconds;
+
+        Dictionary<string, System.Timers.Timer> created_items_bag = new Dictionary<string, System.Timers.Timer> ();
+
+        private System.Timers.Timer CreateTimer (string fullpath)
+        {
+            var timer = new System.Timers.Timer (MAX_TIME_BETWEEN_CHANGED_EVENTS);
+            timer.Elapsed += (sender, e) => TimeUpForChangedEvent (fullpath);
+            return timer;
+        }
+
+        private void OnCreation (string fullpath)
+        {
+            var timer = CreateTimer (fullpath);
+            lock (created_items_bag) {
+                created_items_bag [fullpath] = timer;
+            }
+            timer.AutoReset = false;
+            timer.Start ();
+        }
+
+        private void TimeUpForChangedEvent (string fullpath)
+        {
+            lock (created_items_bag) {
+                created_items_bag [fullpath].Stop ();
+                created_items_bag [fullpath].Dispose ();
+                created_items_bag.Remove (fullpath);
+            }
+            var fake_args = new FileSystemEventArgs (WatcherChangeTypes.Created,
+                                                     System.IO.Path.GetDirectoryName (fullpath),
+                                                     System.IO.Path.GetFileName (fullpath));
+            EnqueueAffectedElement (fake_args);
+        }
+
+        private void OnModified (object source, FileSystemEventArgs args)
+        {
+            if (args.ChangeType == WatcherChangeTypes.Created) {
+                OnCreation (args.FullPath);
+                return;
+            } else if (args.ChangeType == WatcherChangeTypes.Changed) {
+                lock (created_items_bag) {
+                    System.Timers.Timer timer;
+                    if (created_items_bag.TryGetValue (args.FullPath, out timer)) {
+                        // A file we saw being created was modified, restart the timer
+                        timer.Stop ();
+                        timer.Start ();
+                        return;
+                    }
+                }
+            }
+
+            EnqueueAffectedElement (args);
+        }
+
+        private void EnqueueAffectedElement (FileSystemEventArgs args)
         {
             var item = new QueueItem {
                 When = DateTime.Now,
@@ -148,10 +203,8 @@ namespace Banshee.LibraryWatcher
             }
             handle.Set ();
 
-            if (args.ChangeType != WatcherChangeTypes.Changed) {
-                Hyena.Log.DebugFormat ("Watcher: {0} {1}{2}",
-                    item.ChangeType, args is RenamedEventArgs ? item.OldFullPath + " => " : "", item.FullPath);
-            }
+            Hyena.Log.DebugFormat ("Watcher: {0} {1}{2}",
+                item.ChangeType, args is RenamedEventArgs ? item.OldFullPath + " => " : "", item.FullPath);
         }
 
         private void Watch ()
@@ -172,17 +225,21 @@ namespace Banshee.LibraryWatcher
                         Thread.Sleep (sleep);
                     }
 
-                    if (item.ChangeType == WatcherChangeTypes.Changed) {
-                        UpdateTrack (item.FullPath);
-                    } else if (item.ChangeType == WatcherChangeTypes.Created) {
-                        AddTrack (item.FullPath);
-                    } else if (item.ChangeType == WatcherChangeTypes.Deleted) {
-                        RemoveTrack (item.FullPath);
-                    } else if (item.ChangeType == WatcherChangeTypes.Renamed) {
-                        RenameTrack (item.OldFullPath, item.FullPath);
+                    try {
+                        if (item.ChangeType == WatcherChangeTypes.Changed) {
+                            UpdateTrack (item.FullPath);
+                        } else if (item.ChangeType == WatcherChangeTypes.Created) {
+                            AddTrack (item.FullPath);
+                        } else if (item.ChangeType == WatcherChangeTypes.Deleted) {
+                            RemoveTrack (item.FullPath);
+                        } else if (item.ChangeType == WatcherChangeTypes.Renamed) {
+                            RenameTrack (item.OldFullPath, item.FullPath);
+                        }
+    
+                        change_types |= item.ChangeType;
+                    } catch (Exception e) {
+                        Log.Error (String.Format ("Watcher: Error processing {0}", item.FullPath), e.Message, false);
                     }
-
-                    change_types |= item.ChangeType;
                 }
 
                 if ((change_types & WatcherChangeTypes.Deleted) > 0) {
@@ -203,7 +260,7 @@ namespace Banshee.LibraryWatcher
             using (var reader = ServiceManager.DbConnection.Query (
                 DatabaseTrackInfo.Provider.CreateFetchCommand (String.Format (
                 "CoreTracks.PrimarySourceID = ? AND {0} = ? LIMIT 1",
-                Banshee.Query.BansheeQuery.UriField.Column)),
+                BansheeQuery.UriField.Column)),
                 library.DbId, new SafeUri (track).AbsoluteUri)) {
                 if (reader.Read ()) {
                     var track_info = DatabaseTrackInfo.Provider.Load (reader);
@@ -226,17 +283,21 @@ namespace Banshee.LibraryWatcher
 
             // Trigger file rename.
             string uri = new SafeUri(track).AbsoluteUri;
-            HyenaSqliteCommand command = new HyenaSqliteCommand (@"
+            var command = new HyenaSqliteCommand (String.Format (@"
                 UPDATE CoreTracks
                 SET DateUpdatedStamp = LastSyncedStamp + 1
-                WHERE Uri = ?", uri);
+                WHERE {0} = ?",
+                BansheeQuery.UriField.Column), uri);
             ServiceManager.DbConnection.Execute (command);
         }
 
         private void RemoveTrack (string track)
         {
             string uri = new SafeUri(track).AbsoluteUri;
-            const string hash_sql = @"SELECT TrackID, MetadataHash FROM CoreTracks WHERE Uri = ? LIMIT 1";
+            string hash_sql = String.Format (
+                @"SELECT TrackID, MetadataHash FROM CoreTracks WHERE {0} = ? LIMIT 1",
+                BansheeQuery.UriField.Column
+            );
             int track_id = 0;
             string hash = null;
             using (var reader = new HyenaDataReader (ServiceManager.DbConnection.Query (hash_sql, uri))) {
@@ -258,9 +319,10 @@ namespace Banshee.LibraryWatcher
                 }
             }
 
-            const string delete_sql = @"
+            string delete_sql = @"
                 INSERT INTO CoreRemovedTracks (DateRemovedStamp, TrackID, Uri)
-                SELECT ?, TrackID, Uri FROM CoreTracks WHERE TrackID IN ({0})
+                    SELECT ?, TrackID, " + BansheeQuery.UriField.Column + @"
+                    FROM CoreTracks WHERE TrackID IN ({0})
                 ;
                 DELETE FROM CoreTracks WHERE TrackID IN ({0})";
 
@@ -271,8 +333,10 @@ namespace Banshee.LibraryWatcher
                     "?"), DateTime.Now, track_id, track_id);
             } else {
                 string pattern = StringUtil.EscapeLike (uri) + "/_%";
-                delete_command = new HyenaSqliteCommand (String.Format (delete_sql,
-                    @"SELECT TrackID FROM CoreTracks WHERE Uri LIKE ? ESCAPE '\'"), DateTime.Now, pattern, pattern);
+                string select_sql = String.Format (@"SELECT TrackID FROM CoreTracks WHERE {0} LIKE ? ESCAPE '\'",
+                                                   BansheeQuery.UriField.Column);
+                delete_command = new HyenaSqliteCommand (String.Format (delete_sql, select_sql),
+                    DateTime.Now, pattern, pattern);
             }
 
             ServiceManager.DbConnection.Execute (delete_command);
@@ -287,10 +351,12 @@ namespace Banshee.LibraryWatcher
             string old_uri = new SafeUri (oldFullPath).AbsoluteUri;
             string new_uri = new SafeUri (fullPath).AbsoluteUri;
             string pattern = StringUtil.EscapeLike (old_uri) + "%";
-            HyenaSqliteCommand rename_command = new HyenaSqliteCommand (@"
+            var rename_command = new HyenaSqliteCommand (String.Format (@"
                 UPDATE CoreTracks
-                SET Uri = REPLACE(Uri, ?, ?), DateUpdatedStamp = ?
-                WHERE Uri LIKE ? ESCAPE '\'",
+                SET Uri = REPLACE ({0}, ?, ?),
+                    DateUpdatedStamp = ?
+                WHERE {0} LIKE ? ESCAPE '\'",
+                BansheeQuery.UriField.Column),
                 old_uri, new_uri, DateTime.Now, pattern);
             ServiceManager.DbConnection.Execute (rename_command);
         }

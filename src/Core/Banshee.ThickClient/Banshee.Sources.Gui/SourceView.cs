@@ -129,11 +129,32 @@ namespace Banshee.Sources.Gui
 
             source_column.PackStart (header_renderer, true);
             source_column.SetCellDataFunc (header_renderer, new Gtk.CellLayoutDataFunc ((layout, cell, model, iter) => {
-                var type = (SourceModel.EntryType) model.GetValue (iter, (int)SourceModel.Columns.Type);
+                if (model == null) {
+                    throw new ArgumentNullException ("model");
+                }
+
+                // be paranoid about the values returned from model.GetValue(), they may be null or have unexpected types, see bgo#683359
+                var obj_type = model.GetValue (iter, (int)SourceModel.Columns.Type);
+                if (obj_type == null || !(obj_type is SourceModel.EntryType)) {
+
+                    var source = model.GetValue (iter, (int)SourceModel.Columns.Source) as Source;
+                    var source_name = source == null ? "some source" : String.Format ("source {0}", source.Name);
+
+                    Log.ErrorFormat (
+                        "SourceView of {0} could not render its source column because its type value returned {1} from the iter",
+                        source_name, obj_type == null ? "null" : String.Format ("an instance of {0}", obj_type.GetType ().FullName));
+
+                    header_renderer.Visible = false;
+                    source_renderer.Visible = false;
+
+                    return;
+                }
+
+                var type = (SourceModel.EntryType) obj_type;
                 header_renderer.Visible = type == SourceModel.EntryType.Group;
                 source_renderer.Visible = type == SourceModel.EntryType.Source;
                 if (type == SourceModel.EntryType.Group) {
-                    var source = model.GetValue (iter, (int)SourceModel.Columns.Source) as Source;
+                    var source = (Source) model.GetValue (iter, (int)SourceModel.Columns.Source);
                     header_renderer.Visible = true;
                     header_renderer.Text = source.Name;
                 } else {

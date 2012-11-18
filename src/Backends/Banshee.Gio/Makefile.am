@@ -39,6 +39,6 @@ RESOURCES = Banshee.Gio.addin.xml
 if ENABLE_GIO
 include $(top_srcdir)/build/build.mk
 else
-EXTRA_DIST = $(SOURCES) $(RESOURCES)
+include $(top_srcdir)/build/build.dist.mk
 endif
 

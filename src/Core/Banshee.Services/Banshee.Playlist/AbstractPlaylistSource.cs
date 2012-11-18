@@ -77,12 +77,6 @@ namespace Banshee.Playlist
             get { return true; }
         }
 
-        private bool is_temporary = false;
-        public bool IsTemporary {
-            get { return is_temporary; }
-            set { is_temporary = value; }
-        }
-
         public int? DbId {
             get { return dbid; }
             protected set {
@@ -221,11 +215,5 @@ namespace Banshee.Playlist
 
         protected abstract void Create ();
         protected abstract void Update ();
-
-        // Reserve strings in preparation for the forthcoming string freeze (BGO#389550)
-        public void ReservedStrings ()
-        {
-            Catalog.GetString ("The track's rating was set differently on the device and in Banshee");
-        }
     }
 }

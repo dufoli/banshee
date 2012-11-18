@@ -78,9 +78,8 @@ namespace Banshee.Playlists.Formats
 
         protected virtual Uri ResolveUri(string uri)
         {
-            if (!uri.Contains ("/") && uri.Contains ("\\")) {
-                uri = uri.Replace ("\\", "/");
-            }
+            uri = Paths.NormalizeToUnix (uri);
+
             return BaseUri == null ? new Uri(uri) : new Uri(BaseUri, uri);
         }
 
@@ -132,5 +131,7 @@ namespace Banshee.Playlists.Formats
             get { return title; }
             set { title = value; }
         }
+
+        public virtual char FolderSeparator { get; set; }
     }
 }

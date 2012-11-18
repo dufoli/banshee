@@ -28,10 +28,15 @@ envfile="$selfdir/$profile_name.env"
 pushd ../bockbuild/profiles/banshee &>/dev/null
 ./$profile -bv
 ./$profile -e > "$envfile"
+
+# write the newly generated env vars as xml into the Nereid.csproj
+# so we can start with MonoDevelop immediately.
+[ $profile_name = darwin ] && \
+	./$profile --csproj-insert="$selfdir/src/Clients/Nereid/Nereid.csproj"
 popd &>/dev/null
 
 [ $profile_name = darwin ] && \
-	echo "export GTK2_RC_FILES=\"$selfdir/../../bockbuild/profiles/banshee/skeleton.darwin/Contents/Resources/etc/gtk-2.0/gtkrc\"" >> "$envfile"
+	echo "export GTK2_RC_FILES=\"$selfdir/../bockbuild/profiles/banshee/skeleton.darwin/Contents/Resources/etc/gtk-2.0/gtkrc\"" >> "$envfile"
 
 source "$envfile"
 

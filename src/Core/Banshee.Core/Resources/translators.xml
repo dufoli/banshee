@@ -35,10 +35,12 @@
     <person>Joe Hansen</person>
     <person>Lasse Bang Mikkelsen</person>
   </language>
-  <language code="de" name="Deutsch">
+  <language code="de" name="German">
     <person>Andre Klapper</person>
     <person>Christian Kirbach</person>
     <person>Daniel Schindler</person>
+    <person>Daniel Winzen</person>
+    <person>Hendrik Knackstedt</person>
     <person>Jochen Skulj</person>
     <person>Mario Blättermann</person>
     <person>Micha Pietsch</person>
@@ -50,13 +52,16 @@
   </language>
   <language code="el" name="Greek">
     <person>Emmanouel Kapernaros</person>
+    <person>Ioannis Zampoukas</person>
     <person>Michael Kotsarinis</person>
+    <person>Tom Tryfonidis</person>
   </language>
   <language code="en_CA" name="Canadian English">
     <person>Adam Weinberger</person>
   </language>
   <language code="en_GB" name="British English">
     <person>Bruce Cowan</person>
+    <person>Chris Leonard</person>
     <person>Christopher Orr</person>
     <person>David Lodge</person>
     <person>Jen Ockwell</person>
@@ -115,7 +120,7 @@
   <language code="id" name="Indonesian">
     <person>Andika Triwidada</person>
   </language>
-  <language code="it" name="Italiana">
+  <language code="it" name="Italiano">
     <person>Gianvito Cavasoli</person>
   </language>
   <language code="ja" name="Japanese">
@@ -136,10 +141,11 @@
     <person>Timur Zhamakeev</person>
   </language>
   <language code="lt" name="Lithuanian">
+    <person>Aurimas Černius</person>
     <person>Gintautas Miliauskas</person>
     <person>Žygimantas Beručka</person>
   </language>
-  <language code="lv" name="Latvian">
+  <language code="lv" name="Latviešu">
     <person>Raivis Dejus</person>
     <person>Rūdolfs Mazurs</person>
   </language>
@@ -155,6 +161,9 @@
     <person>Stijn Verslycken</person>
     <person>Wouter Bolsterlee</person>
   </language>
+  <language code="nn" name="Norsk">
+    <person>Andreas Nesdal</person>
+  </language>
   <language code="oc" name="Occitan">
     <person>Yannig Marchegay (Kokoyaya)</person>
   </language>
@@ -162,7 +171,11 @@
     <person>A S Alam</person>
   </language>
   <language code="pl" name="Polish">
+    <person>Artur Flinta</person>
     <person>Mateusz Kacprzak</person>
+    <person>Piotr Drąg</person>
+    <person>Tomasz Dominikowski</person>
+    <person>Wadim Dziedzic</person>
   </language>
   <language code="pt" name="Portuguese">
     <person>António Lima</person>
@@ -174,11 +187,11 @@
     <person>Carlos José Pereira</person>
     <person>Daniel Abreu</person>
     <person>Daniel S. Koda</person>
-    <person>Djavan Fagundes</person>
     <person>Enrico Nicoletto</person>
     <person>Evandro Fernandes Giovanini</person>
     <person>Fábio Nogueira</person>
     <person>Fabrício Godoy</person>
+    <person>Lucas Mezencio</person>
     <person>Marco Carvalho</person>
     <person>Michel Recondo</person>
     <person>Og Maciel</person>
@@ -239,8 +252,10 @@
   <language code="zh_CN" name="Simplified Chinese">
     <person>Aron Xu</person>
     <person>ben</person>
+    <person>EaiLFly</person>
     <person>Tao Wang</person>
-    <person>Xhacker Liu</person>
+    <person>Techlive Zheng</person>
+    <person>Wylmer Wang</person>
     <person>甘露(Gan Lu)</person>
   </language>
   <language code="zh_HK" name="Chinese (Hong Kong)">

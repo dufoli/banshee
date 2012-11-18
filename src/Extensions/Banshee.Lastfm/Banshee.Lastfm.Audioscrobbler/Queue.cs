@@ -4,6 +4,7 @@
 // Author:
 //   Chris Toshok <toshok@ximian.com>
 //   Alexander Hixon <hixon.alexander@mediati.org>
+//   Phil Trimble <philtrimble@gmail.com>
 //
 // Copyright (C) 2005-2008 Novell, Inc.
 //
@@ -49,7 +50,9 @@ namespace Banshee.Lastfm.Audioscrobbler
 {
     class Queue : IQueue
     {
-        internal class QueuedTrack
+        private readonly TimeSpan MAXIMUM_TRACK_STARTTIME_IN_FUTURE = TimeSpan.FromDays (180);
+
+        internal class QueuedTrack : IQueuedTrack
         {
             private static DateTime epoch = DateTimeUtil.LocalUnixEpoch.ToUniversalTime ();
 
@@ -121,6 +124,14 @@ namespace Banshee.Lastfm.Audioscrobbler
                 get { return track_auth; }
             }
 
+            public override string ToString ()
+            {
+                return String.Format (
+                    "{0} - {1} (on {2} - track {3}) <duration: {4}sec, start time: {5}sec>",
+                    Artist, Title, Album, TrackNumber, Duration, StartTime
+                );
+            }
+
             string artist;
             string album;
             string title;
@@ -131,7 +142,7 @@ namespace Banshee.Lastfm.Audioscrobbler
             string track_auth = String.Empty;
         }
 
-        List<QueuedTrack> queue;
+        List<IQueuedTrack> queue;
         string xml_path;
         bool dirty;
 
@@ -139,15 +150,33 @@ namespace Banshee.Lastfm.Audioscrobbler
 
         public Queue ()
         {
-            string xmlfilepath = Path.Combine (Hyena.Paths.ExtensionCacheRoot, "last.fm");
-            xml_path = Path.Combine (xmlfilepath, "audioscrobbler-queue.xml");
-            queue = new List<QueuedTrack> ();
+            string xml_dir_path = Path.Combine (Hyena.Paths.ExtensionCacheRoot, "lastfm");
+            xml_path = Path.Combine (xml_dir_path, "audioscrobbler-queue.xml");
+            queue = new List<IQueuedTrack> ();
 
-            if (!Directory.Exists(xmlfilepath)) {
-                Directory.CreateDirectory (xmlfilepath);
+            if (!Directory.Exists(xml_dir_path)) {
+                Directory.CreateDirectory (xml_dir_path);
             }
 
+            MigrateQueueFile ();
+
             Load ();
+        }
+
+        private void MigrateQueueFile ()
+        {
+            string old_xml_dir_path = Path.Combine (Hyena.Paths.ExtensionCacheRoot, "last.fm");
+            string old_xml_path = Path.Combine (old_xml_dir_path, "audioscrobbler-queue.xml");
+
+            if (Banshee.IO.Directory.Exists (old_xml_dir_path)) {
+                var old_file = new SafeUri (old_xml_path);
+                var file = new SafeUri (xml_path);
+                if (Banshee.IO.File.Exists (old_file)) {
+                    Banshee.IO.File.Copy (old_file, file, true);
+                    Banshee.IO.File.Delete (old_file);
+                }
+                Banshee.IO.Directory.Delete (old_xml_dir_path, true);
+            }
         }
 
         public void Save ()
@@ -228,51 +257,29 @@ namespace Banshee.Lastfm.Audioscrobbler
             }
         }
 
-        public string GetTransmitInfo (out int numtracks)
+        public List<IQueuedTrack> GetTracks ()
         {
-            StringBuilder sb = new StringBuilder ();
-
-            int i;
-            for (i = 0; i < queue.Count; i ++) {
-                /* Last.fm 1.2 can handle up to 50 songs in one request */
-                if (i == 49) break;
-
-                QueuedTrack track = (QueuedTrack) queue[i];
-
-                string str_track_number = String.Empty;
-                if (track.TrackNumber != 0)
-                    str_track_number = track.TrackNumber.ToString();
-
-                string source = "P"; /* chosen by user */
-                if (track.TrackAuth.Length != 0) {
-                    // from last.fm
-                    source = "L" + track.TrackAuth;
-                }
-
-                sb.AppendFormat (
-                    "&a[{9}]={0}&t[{9}]={1}&i[{9}]={2}&o[{9}]={3}&r[{9}]={4}&l[{9}]={5}&b[{9}]={6}&n[{9}]={7}&m[{9}]={8}",
-                    HttpUtility.UrlEncode (track.Artist),
-                    HttpUtility.UrlEncode (track.Title),
-                    track.StartTime.ToString (),
-                    source,
-                    ""  /* rating: L/B/S */,
-                    track.Duration.ToString (),
-                    HttpUtility.UrlEncode (track.Album),
-                    str_track_number,
-                    track.MusicBrainzId,
-
-                    i);
-            }
-
-            numtracks = i;
-            return sb.ToString ();
+            // Last.fm can technically handle up to 50 songs in one request
+            // but seems to throw errors if our submission is too long.
+            return queue.GetRange (0, Math.Min (queue.Count, 30));
         }
 
         public void Add (object track, DateTime started_at)
         {
             TrackInfo t = (track as TrackInfo);
             if (t != null) {
-                queue.Add (new QueuedTrack (t, started_at));
+                QueuedTrack new_queued_track = new QueuedTrack (t, started_at);
+
+                //FIXME Just log invalid tracks until we determine the root cause
+                if (IsInvalidQueuedTrack (new_queued_track)) {
+                    Log.WarningFormat (
+                        "Invalid data detected while adding to audioscrobbler queue for " +
+                        "track '{0}', original start time: '{1}'", new_queued_track, started_at
+                    );
+                }
+
+                queue.Add (new_queued_track);
+
                 dirty = true;
                 RaiseTrackAdded (this, new EventArgs ());
             }
@@ -293,6 +300,31 @@ namespace Banshee.Lastfm.Audioscrobbler
             EventHandler handler = TrackAdded;
             if (handler != null)
                 handler (o, args);
+        }
+
+        public void RemoveInvalidTracks ()
+        {
+            int removed_track_count = queue.RemoveAll (IsInvalidQueuedTrack);
+            if (removed_track_count > 0) {
+                Log.WarningFormat (
+                    "{0} invalid track(s) removed from audioscrobbler queue",
+                    removed_track_count
+                );
+                dirty = true;
+                Save ();
+            }
+        }
+
+        private bool IsInvalidQueuedTrack (IQueuedTrack track)
+        {
+            DateTime trackStartTime = DateTimeUtil.FromTimeT (track.StartTime);
+
+            return (
+                String.IsNullOrEmpty (track.Artist) ||
+                String.IsNullOrEmpty (track.Title) ||
+                trackStartTime < DateTimeUtil.LocalUnixEpoch ||
+                trackStartTime > DateTime.Now.Add (MAXIMUM_TRACK_STARTTIME_IN_FUTURE)
+            );
         }
     }
 }

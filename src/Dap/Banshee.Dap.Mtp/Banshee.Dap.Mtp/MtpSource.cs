@@ -175,10 +175,9 @@ namespace Banshee.Dap.Mtp
                     }
                 }
 
-                int [] source_ids = new int [] { DbId };
                 foreach (Track mtp_track in files) {
                     int track_id;
-                    if ((track_id = DatabaseTrackInfo.GetTrackIdForUri (MtpTrackInfo.GetPathFromMtpTrack (mtp_track), source_ids)) > 0) {
+                    if ((track_id = DatabaseTrackInfo.GetTrackIdForUri (MtpTrackInfo.GetPathFromMtpTrack (mtp_track), DbId )) > 0) {
                         track_map[track_id] = mtp_track;
                     } else {
                         MtpTrackInfo track = new MtpTrackInfo (mtp_device, mtp_track);
@@ -296,11 +295,14 @@ namespace Banshee.Dap.Mtp
         public override long BytesUsed {
             get {
                 if (Monitor.TryEnter (mtp_device)) {
-                    bytes_used = 0;
-                    foreach (DeviceStorage s in mtp_device.GetStorage ()) {
-                        bytes_used += (long) s.MaxCapacity - (long) s.FreeSpaceInBytes;
+                    try {
+                        bytes_used = 0;
+                        foreach (DeviceStorage s in mtp_device.GetStorage ()) {
+                            bytes_used += (long) s.MaxCapacity - (long) s.FreeSpaceInBytes;
+                        }
+                    } finally {
+                        Monitor.Exit (mtp_device);
                     }
-                    Monitor.Exit (mtp_device);
                 }
                 return bytes_used;
             }
@@ -310,11 +312,14 @@ namespace Banshee.Dap.Mtp
         public override long BytesCapacity {
             get {
                 if (Monitor.TryEnter (mtp_device)) {
-                    bytes_capacity = 0;
-                    foreach (DeviceStorage s in mtp_device.GetStorage ()) {
-                        bytes_capacity += (long) s.MaxCapacity;
+                    try {
+                        bytes_capacity = 0;
+                        foreach (DeviceStorage s in mtp_device.GetStorage ()) {
+                            bytes_capacity += (long) s.MaxCapacity;
+                        }
+                    } finally {
+                        Monitor.Exit (mtp_device);
                     }
-                    Monitor.Exit (mtp_device);
                 }
                 return bytes_capacity;
             }

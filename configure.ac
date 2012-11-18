@@ -1,11 +1,11 @@
 dnl Granularly define the version components
 dnl Remember to also update the Display Version
 m4_define([banshee_version_major], [2])
-m4_define([banshee_version_minor], [3])
-m4_define([banshee_version_micro], [2])
+m4_define([banshee_version_minor], [6])
+m4_define([banshee_version_micro], [0])
 
 dnl this can sometimes differ manually
-m4_define([banshee_display_version], ["2.3.2"])
+m4_define([banshee_display_version], ["2.6"])
 
 dnl set to 0 when doing an official release
 m4_define([banshee_version_pre_release], [0])
@@ -27,7 +27,7 @@ m4_define([banshee_asm_version], [banshee_api_version.0.0])
 AC_PREREQ(2.52)
 AC_INIT([banshee], banshee_version, [http://bugzilla.gnome.org/enter_bug.cgi?product=banshee])
 
-AM_INIT_AUTOMAKE([1.9 no-dist-gzip dist-bzip2 tar-ustar foreign])
+AM_INIT_AUTOMAKE([1.10 no-dist-gzip dist-bzip2 tar-ustar foreign])
 AM_MAINTAINER_MODE([enable])
 AM_CONFIG_HEADER([config.h])
 AC_CONFIG_MACRO_DIR([build/m4])
@@ -127,6 +127,9 @@ BANSHEE_CHECK_GTK_SHARP
 
 dnl OS X (optional through --enable-osx)
 BANSHEE_CHECK_OSX
+
+dnl Mono.Upnp libraries
+BANSHEE_CHECK_MONO_UPNP
 
 PKG_CHECK_MODULES(SQLITE, sqlite3 >= 3.4)
 
@@ -344,6 +347,7 @@ src/Extensions/Banshee.Sample/Makefile
 src/Extensions/Banshee.Torrent/Makefile
 src/Extensions/Banshee.RemoteAudio/Makefile
 src/Extensions/Banshee.UbuntuOneMusicStore/Makefile
+src/Extensions/Banshee.UPnPClient/Makefile
 src/Extensions/Banshee.Wikipedia/Makefile
 src/Extensions/Banshee.YouTube/Makefile
 
@@ -390,6 +394,7 @@ ${PACKAGE}-${VERSION}
     YouTube:               ${enable_youtube} (gdata-sharp >= 1.4)
     Sound Menu:            ${enable_soundmenu}
     Ubuntu One Store:      ${enable_ubuntuone} (ubuntuone-sharp >= 0.3.2)
+    UPnP:                  ${enable_upnp} (mono-upnp >= $MONOUPNP_REQUIRED)
 
   Build/Development:
     Unit Tests:            ${do_tests} (nunit >= ${NUNIT_REQUIRED})

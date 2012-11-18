@@ -3,8 +3,12 @@
 //
 // Author:
 //   Alan McGovern <amcgovern@novell.com>
+//   Phil Trimble <philtrimble@gmail.com>
+//   Andres G. Aragoneses <knocte@gmail.com>
 //
 // Copyright (C) 2010 Novell, Inc.
+// Copyright (C) 2012 Phil Trimble
+// Copyright (C) 2012 Andres G. Aragoneses
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -42,10 +46,11 @@ using Banshee.Hardware;
 using Banshee.Sources;
 using Banshee.I18n;
 using Banshee.Playlist;
+using Banshee.Collection;
 
 namespace Banshee.Dap.AppleDevice
 {
-    public class AppleDeviceSource : DapSource
+    public class AppleDeviceSource : DapSource, IBatchScrobblerSource
     {
         GPod.Device Device {
             get; set;
@@ -60,6 +65,8 @@ namespace Banshee.Dap.AppleDevice
         }
 
         private Dictionary<int, AppleDeviceTrackInfo> tracks_map = new Dictionary<int, AppleDeviceTrackInfo> (); // FIXME: EPIC FAIL
+
+        public event EventHandler<ScrobblingBatchEventArgs> ReadyToScrobble;
 
 #region Device Setup/Dispose
 
@@ -202,11 +209,10 @@ namespace Banshee.Dap.AppleDevice
                 });
             }
 
-            var invalid_tracks = new List<GPod.Track> ();
             foreach (var ipod_track in MediaDatabase.Tracks) {
 
                 if (String.IsNullOrEmpty (ipod_track.IpodPath)) {
-                    invalid_tracks.Add (ipod_track);
+                    invalid_tracks_in_device.Enqueue (ipod_track);
                     continue;
                 }
 
@@ -221,13 +227,10 @@ namespace Banshee.Dap.AppleDevice
                     Log.Exception (e);
                 }
             }
-            if (invalid_tracks.Count > 0) {
-                Log.Warning (String.Format ("Found {0} invalid tracks on the device", invalid_tracks.Count));
-                foreach (var track in invalid_tracks) {
-                    DeleteTrack (track, false);
-                }
-            }
 
+            if (invalid_tracks_in_device.Count > 0) {
+                Log.Warning (String.Format ("Found {0} invalid tracks on the device", invalid_tracks_in_device.Count));
+            }
 
             Hyena.Data.Sqlite.HyenaSqliteCommand insert_cmd = new Hyena.Data.Sqlite.HyenaSqliteCommand (
                 @"INSERT INTO CorePlaylistEntries (PlaylistID, TrackID)
@@ -247,6 +250,8 @@ namespace Banshee.Dap.AppleDevice
                 pl_src.UpdateCounts ();
                 AddChildSource (pl_src);
             }
+
+            RaiseReadyToScrobble ();
         }
 
 #endregion
@@ -376,10 +381,12 @@ namespace Banshee.Dap.AppleDevice
         private Queue<AppleDeviceTrackInfo> tracks_to_add = new Queue<AppleDeviceTrackInfo> ();
         private Queue<AppleDeviceTrackInfo> tracks_to_update = new Queue<AppleDeviceTrackInfo> ();
         private Queue<AppleDeviceTrackInfo> tracks_to_remove = new Queue<AppleDeviceTrackInfo> ();
+        private Queue<GPod.Track> invalid_tracks_in_device = new Queue<GPod.Track> ();
 
         private uint sync_timeout_id = 0;
         private object sync_timeout_mutex = new object ();
         private object sync_mutex = new object ();
+        private object write_mutex = new object ();
         private Thread sync_thread;
         private AutoResetEvent sync_thread_wait;
         private bool sync_thread_dispose = false;
@@ -430,7 +437,9 @@ namespace Banshee.Dap.AppleDevice
                 playlist.Tracks.Remove (track);
             }
 
-            if (SupportsPodcasts && track.MediaType == GPod.MediaType.Podcast) {
+            if (SupportsPodcasts &&
+                track.MediaType == GPod.MediaType.Podcast &&
+                MediaDatabase.PodcastsPlaylist != null) {
                 MediaDatabase.PodcastsPlaylist.Tracks.Remove (track);
             }
 
@@ -464,8 +473,11 @@ namespace Banshee.Dap.AppleDevice
         public override void SyncPlaylists ()
         {
             if (!IsReadOnly && Monitor.TryEnter (sync_mutex)) {
-                PerformSync ();
-                Monitor.Exit (sync_mutex);
+                try {
+                    PerformSync ();
+                } finally {
+                    Monitor.Exit (sync_mutex);
+                }
             }
         }
 
@@ -551,14 +563,32 @@ namespace Banshee.Dap.AppleDevice
         {
             Hyena.Log.Debug ("Starting AppleDevice sync thread cycle");
 
-            string message;
-            int total, i = 0;
             var progressUpdater = new UserJob (Catalog.GetString ("Syncing iPod"),
                                                Catalog.GetString ("Preparing to synchronize..."), GetIconNames ());
             progressUpdater.Register ();
             MediaDatabase.StartSync ();
-            message = Catalog.GetString ("Adding track {0} of {1}");
-            total = tracks_to_add.Count;
+
+            SyncTracksToAdd (progressUpdater);
+
+            SyncTracksToUpdate (progressUpdater);
+
+            SyncTracksToRemove (progressUpdater);
+
+            SyncTracksToPlaylists ();
+
+            SyncDatabase (progressUpdater);
+
+            MediaDatabase.StopSync ();
+            progressUpdater.Finish ();
+
+            Hyena.Log.Debug ("Ending AppleDevice sync thread cycle");
+        }
+
+        void SyncTracksToAdd (UserJob progressUpdater)
+        {
+            string message = Catalog.GetString ("Adding track {0} of {1}");
+            int total = tracks_to_add.Count;
+            int i = 0;
             while (tracks_to_add.Count > 0) {
                 AppleDeviceTrackInfo track = null;
                 lock (sync_mutex) {
@@ -572,14 +602,19 @@ namespace Banshee.Dap.AppleDevice
                     track.Save (false);
                     tracks_map[track.TrackId] = track;
                 } catch (Exception e) {
-                    Log.Exception ("Cannot save track to iPod", e);
+                    Log.Exception ("Cannot save track to the Apple device", e);
                 }
             }
             if (total > 0) {
                 OnTracksAdded ();
                 OnUserNotifyUpdated ();
             }
+        }
 
+        void SyncTracksToUpdate (UserJob progressUpdater)
+        {
+            string message = Catalog.GetString ("Updating metadata in track {0} of {1}");
+            int total = tracks_to_update.Count;
             while (tracks_to_update.Count > 0) {
                 AppleDeviceTrackInfo track = null;
                 lock (sync_mutex) {
@@ -587,14 +622,19 @@ namespace Banshee.Dap.AppleDevice
                 }
 
                 try {
+                    UpdateProgress (progressUpdater, message, total - tracks_to_update.Count, total);
+
                     track.CommitToIpod (MediaDatabase);
                 } catch (Exception e) {
                     Log.Exception ("Cannot save track to iPod", e);
                 }
             }
+        }
 
-            message = Catalog.GetString ("Removing track {0} of {1}");
-            total = tracks_to_remove.Count;
+        void SyncTracksToRemove (UserJob progressUpdater)
+        {
+            string message = Catalog.GetString ("Removing track {0} of {1}");
+            int total = tracks_to_remove.Count;
             while (tracks_to_remove.Count > 0) {
                 AppleDeviceTrackInfo track = null;
                 lock (sync_mutex) {
@@ -618,45 +658,69 @@ namespace Banshee.Dap.AppleDevice
                 }
             }
 
-            if (SupportsPlaylists) {
-                // Remove playlists on the device
-                var device_playlists = new List<GPod.Playlist> (MediaDatabase.Playlists);
-                foreach (var playlist in device_playlists) {
-                    if (!playlist.IsMaster && !playlist.IsPodcast) {
-                        MediaDatabase.Playlists.Remove (playlist);
-                    }
-                }
+            SyncRemovalOfInvalidTracks (progressUpdater);
+        }
 
-                // Add playlists from Banshee to the device
-                foreach (Source child in Children) {
-                    PlaylistSource from = child as PlaylistSource;
-                    if (from != null && from.Count > 0) {
-                        var playlist = new GPod.Playlist (from.Name);
-                        MediaDatabase.Playlists.Add (playlist);
-                        foreach (int track_id in ServiceManager.DbConnection.QueryEnumerable<int> (String.Format (
-                            "SELECT CoreTracks.TrackID FROM {0} WHERE {1}",
-                            from.DatabaseTrackModel.ConditionFromFragment, from.DatabaseTrackModel.Condition)))
-                        {
-                            if (tracks_map.ContainsKey (track_id)) {
-                                playlist.Tracks.Add (tracks_map[track_id].IpodTrack);
-                            }
+        void SyncRemovalOfInvalidTracks (UserJob progressUpdater)
+        {
+            string message = Catalog.GetString ("Cleaning up, removing invalid track {0} of {1}");
+            int total = invalid_tracks_in_device.Count;
+            while (invalid_tracks_in_device.Count > 0) {
+                try {
+                    UpdateProgress (progressUpdater, message, total - invalid_tracks_in_device.Count, total);
+                    DeleteTrack (invalid_tracks_in_device.Dequeue (), false);
+                } catch (Exception e) {
+                    Log.Exception ("Cannot remove invalid track from iPod", e);
+                }
+            }
+        }
+
+        void SyncTracksToPlaylists ()
+        {
+            if (!SupportsPlaylists) {
+                return;
+            }
+
+            // Remove playlists on the device
+            var device_playlists = new List<GPod.Playlist> (MediaDatabase.Playlists);
+            foreach (var playlist in device_playlists) {
+                if (!playlist.IsMaster && !playlist.IsPodcast) {
+                    MediaDatabase.Playlists.Remove (playlist);
+                }
+            }
+
+            // Add playlists from Banshee to the device
+            foreach (Source child in Children) {
+                PlaylistSource from = child as PlaylistSource;
+                if (from != null && from.Count > 0) {
+                    var playlist = new GPod.Playlist (from.Name);
+                    MediaDatabase.Playlists.Add (playlist);
+                    foreach (int track_id in ServiceManager.DbConnection.QueryEnumerable<int> (String.Format (
+                        "SELECT CoreTracks.TrackID FROM {0} WHERE {1}",
+                        from.DatabaseTrackModel.ConditionFromFragment, from.DatabaseTrackModel.Condition)))
+                    {
+                        if (tracks_map.ContainsKey (track_id)) {
+                            playlist.Tracks.Add (tracks_map[track_id].IpodTrack);
                         }
                     }
                 }
             }
+        }
 
+        void SyncDatabase (UserJob progressUpdater)
+        {
             try {
-                message = Catalog.GetString ("Writing media database");
+                string message = Catalog.GetString ("Writing media database");
                 UpdateProgress (progressUpdater, message, 1, 1);
-                MediaDatabase.Write ();
+
+                lock (write_mutex) {
+                    MediaDatabase.Write ();
+                }
+
                 Log.Information ("Wrote iPod database");
             } catch (Exception e) {
                 Log.Exception ("Failed to save iPod database", e);
             }
-            MediaDatabase.StopSync ();
-            progressUpdater.Finish ();
-
-            Hyena.Log.Debug ("Ending AppleDevice sync thread cycle");
         }
 
         public bool SyncNeeded {
@@ -675,6 +739,63 @@ namespace Banshee.Dap.AppleDevice
                 // savetrackmetadataservice to take in account this source
                 return true;
             }
+        }
+
+#endregion
+
+#region Scrobbling
+
+        private void RaiseReadyToScrobble ()
+        {
+            var handler = ReadyToScrobble;
+            if (handler != null) {
+                var recent_plays = new ScrobblingBatchEventArgs {
+                    ScrobblingBatch = GatherRecentPlayInfo ()
+                };
+                if (recent_plays.ScrobblingBatch.Count != 0) {
+                    handler (this, recent_plays);
+
+                    // We must perform a write to clear out the recent playcount information so we do not
+                    // submit duplicate plays on subsequent invocations.
+                    lock (write_mutex) {
+                        MediaDatabase.Write ();
+                    }
+                }
+            }
+        }
+
+        private IDictionary<TrackInfo, IList<DateTime>> GatherRecentPlayInfo ()
+        {
+            var recent_plays = new Dictionary <TrackInfo, IList<DateTime>> ();
+
+            foreach (var ipod_track in MediaDatabase.Tracks) {
+
+                if (String.IsNullOrEmpty (ipod_track.IpodPath) || ipod_track.RecentPlayCount == 0) {
+                    continue;
+                }
+
+                IList<DateTime> playtimes = GenerateFakePlaytimes (ipod_track);
+
+                recent_plays [new AppleDeviceTrackInfo (ipod_track)] = playtimes;
+            }
+
+            return recent_plays;
+        }
+
+        // Apple products do not save DateTime info for each track play, only a total
+        // sum of number of plays (playcount) of each track.
+        private IList<DateTime> GenerateFakePlaytimes (GPod.Track track)
+        {
+            IList<DateTime> playtimes = new List<DateTime> ();
+
+            //FIXME: avoid sequences of overlapping playtimes?
+            DateTime current_playtime = track.TimePlayed;
+            for (int i = 0; i < track.RecentPlayCount; i++) {
+                playtimes.Add (current_playtime);
+                current_playtime -= TimeSpan.FromMilliseconds (track.TrackLength);
+            }
+
+            return playtimes;
         }
 
 #endregion

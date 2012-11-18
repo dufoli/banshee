@@ -76,35 +76,19 @@ namespace Banshee.Dap.MassStorage
         public virtual bool LoadDeviceConfiguration ()
         {
             string path = IsAudioPlayerPath;
-            string path_rockbox = System.IO.Path.Combine (source.Volume.MountPoint, ".rockbox/config.cfg");
 
-            if (!File.Exists (path) && !File.Exists (path_rockbox) ) {
+            if (!File.Exists (path)) {
                 return false;
             }
 
-            if (File.Exists (path_rockbox) ) {
-                Hyena.Log.DebugFormat ("Found RockBox Device");
-                name = Catalog.GetString ("Rockbox Device");
-                audio_folders = new string [] {"Music/","Videos/"};
-                video_folders = new string [] {"Videos/"};
-                folder_depth = 2;
-                playback_mime_types = new string [] {"application/ogg","audio/x-ms-wma","audio/mpeg","audio/mp4","audio/flac","audio/aac","audio/mp4","audio/x-wav"};
-                playlist_formats = new string [] {"audio/x-mpegurl"};
-                playlist_path = "Playlists/";
-                cover_art_file_name = "cover.jpg";
-                cover_art_file_type = "jpeg";
-                cover_art_size = 320;
-
-            } else {
-                LoadConfig ();
-            }
+            LoadConfig ();
 
             return true;
         }
 
         protected void LoadConfig ()
         {
-            var config = new Dictionary<string, string[]> ();
+            IDictionary<string, string[]> config = null;
 
             if (File.Exists (IsAudioPlayerPath)) {
 
@@ -119,6 +103,15 @@ namespace Banshee.Dap.MassStorage
                 }
             }
 
+            LoadConfig (config);
+        }
+
+        protected void LoadConfig (IDictionary<string, string[]> config)
+        {
+            if (config == null) {
+                config = new Dictionary<string, string[]> ();
+            }
+
             name = GetPreferredValue ("name", config, DefaultName);
             cover_art_file_type = GetPreferredValue ("cover_art_file_type", config, DefaultCoverArtFileType);
             cover_art_file_name = GetPreferredValue ("cover_art_file_name", config, DefaultCoverArtFileName);
@@ -127,8 +120,17 @@ namespace Banshee.Dap.MassStorage
             video_folders = MergeValues ("video_folders", config, DefaultVideoFolders);
             playback_mime_types = MergeValues ("output_formats", config, DefaultPlaybackMimeTypes);
             playlist_formats = MergeValues ("playlist_formats", config, DefaultPlaylistFormats);
-            playlist_path = GetPreferredValue ("playlist_path", config, DefaultPlaylistPath);
+            var playlist_path = GetPreferredValue ("playlist_path", config, DefaultPlaylistPath);
+            PlaylistPaths = playlist_path != null ? new string [] { playlist_path } : new string [0];
+
             folder_depth = GetPreferredValue ("folder_depth", config, DefaultFolderDepth);
+
+            string preferred_folder_separator = GetPreferredValue ("folder_separator", config, DefaultFolderSeparator);
+            if (preferred_folder_separator == Paths.Folder.DosSeparator.ToString () || preferred_folder_separator == "DOS") {
+                folder_separator = Paths.Folder.DosSeparator;
+            } else {
+                folder_separator = Paths.Folder.UnixSeparator;
+            }
         }
 
         private string[] MergeValues (string key, IDictionary<string, string[]> config, string[] defaultValues)
@@ -207,6 +209,15 @@ namespace Banshee.Dap.MassStorage
             get { return FolderDepth; }
         }
 
+        protected virtual string DefaultFolderSeparator {
+            get { return null; }
+        }
+
+        private char folder_separator;
+        public virtual char FolderSeparator {
+            get { return folder_separator; }
+        }
+
         protected virtual string [] DefaultAudioFolders {
             get { return new string[0]; }
         }
@@ -256,9 +267,8 @@ namespace Banshee.Dap.MassStorage
             get { return null; }
         }
 
-        private string playlist_path;
-        public virtual string PlaylistPath {
-            get { return playlist_path; }
+        public virtual string [] PlaylistPaths {
+            get; private set;
         }
 
         protected virtual string[] DefaultPlaybackMimeTypes {

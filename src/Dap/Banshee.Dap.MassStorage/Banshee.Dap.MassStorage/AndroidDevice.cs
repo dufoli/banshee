@@ -67,7 +67,7 @@ namespace Banshee.Dap.MassStorage
             "audio/x-mpegurl"
         };
 
-        private static string playlists_path = "Playlists/";
+        private static string playlists_path = "Music/Playlists/";
 
         private AmazonMp3GroupSource amazon_source;
         private string amazon_base_dir;
@@ -135,6 +135,10 @@ namespace Banshee.Dap.MassStorage
             switch (Name) {
                 case "Google Nexus One":
                     icon_names[0] = "phone-google-nexus-one";
+                    break;
+                case "Xperia arc":
+                case "Xperia X10":
+                    icon_names[0] = "phone-xperia-arc";
                     break;
                 default:
                     icon_names[0] = "phone-htc-g1-white";

@@ -26,6 +26,7 @@ src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs
 src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/BpmDetector.cs
 src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/PlayerEngine.cs
 src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs
+src/Backends/Banshee.Osx/Banshee.OsxBackend/OsxFileChooserDialog.cs
 src/Backends/Banshee.Osx/Banshee.OsxBackend/OsxService.cs
 src/Backends/Banshee.Windows/Banshee.Windows/VersionUpdater.cs
 src/Backends/Banshee.Windows/Banshee.Windows/WindowsService.cs
@@ -115,6 +116,7 @@ src/Core/Banshee.ThickClient/Banshee.Gui.Dialogs/ConfirmShutdownDialog.cs
 src/Core/Banshee.ThickClient/Banshee.Gui.Dialogs/DefaultApplicationHelperDialog.cs
 src/Core/Banshee.ThickClient/Banshee.Gui.Dialogs/ErrorListDialog.cs
 src/Core/Banshee.ThickClient/Banshee.Gui.Dialogs/FileChooserDialog.cs
+src/Core/Banshee.ThickClient/Banshee.Gui.Dialogs/GtkFileChooserDialog.cs
 src/Core/Banshee.ThickClient/Banshee.Gui.Dialogs/ImageFileChooserDialog.cs
 src/Core/Banshee.ThickClient/Banshee.Gui.Dialogs/OpenLocationDialog.cs
 src/Core/Banshee.ThickClient/Banshee.Gui.Dialogs/SeekDialog.cs
@@ -154,12 +156,12 @@ src/Core/Banshee.ThickClient/Banshee.Sources.Gui/CompositeTrackSourceContents.cs
 src/Core/Banshee.ThickClient/Banshee.Sources.Gui/FilteredListSourceContents.cs
 src/Core/Banshee.ThickClient/Banshee.Sources.Gui/SourceView.cs
 src/Core/Banshee.ThickClient/Banshee.Sources.Gui/SourceView_DragAndDrop.cs
+src/Core/Banshee.WebBrowser/Banshee.WebBrowser/NavigationControl.cs
 src/Core/Banshee.WebBrowser/Banshee.WebSource/WebBrowserShell.cs
 src/Core/Banshee.Widgets/Banshee.Widgets/DiscUsageDisplay.cs
 src/Core/Banshee.Widgets/Banshee.Widgets/SearchEntry.cs
 src/Core/Banshee.Widgets/Banshee.Widgets/SeekSlider.cs
 src/Core/Banshee.Widgets/Banshee.Widgets/StreamPositionLabel.cs
-src/Core/Banshee.Widgets/Banshee.Widgets/VolumeButton.cs
 src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs
 src/Dap/Banshee.Dap/Banshee.Dap.addin.xml
 src/Dap/Banshee.Dap/Banshee.Dap/DapLibrarySync.cs
@@ -182,6 +184,7 @@ src/Dap/Banshee.Dap.MassStorage/Banshee.Dap.MassStorage/AmazonMp3GroupSource.cs
 src/Dap/Banshee.Dap.MassStorage/Banshee.Dap.MassStorage/AndroidDevice.cs
 src/Dap/Banshee.Dap.MassStorage/Banshee.Dap.MassStorage/MassStorageDevice.cs
 src/Dap/Banshee.Dap.MassStorage/Banshee.Dap.MassStorage/MassStorageSource.cs
+src/Dap/Banshee.Dap.MassStorage/Banshee.Dap.MassStorage/RockBoxDevice.cs
 src/Dap/Banshee.Dap.MassStorage/Banshee.Dap.MassStorage/WebOSDevice.cs
 src/Dap/Banshee.Dap.Mtp/Banshee.Dap.Mtp.addin.xml
 src/Dap/Banshee.Dap.Mtp/Banshee.Dap.Mtp/MtpSource.cs
@@ -307,6 +310,10 @@ src/Extensions/Banshee.SoundMenu/Banshee.SoundMenu/SoundMenuService.cs
 src/Extensions/Banshee.SqlDebugConsole/Banshee.SqlDebugConsole/SqlActions.cs
 src/Extensions/Banshee.Torrent/Banshee.Torrent.addin.xml
 src/Extensions/Banshee.UbuntuOneMusicStore/Banshee.UbuntuOneMusicStore/UbuntuOneMusicStoreSource.cs
+src/Extensions/Banshee.UPnPClient/Banshee.UPnPClient/UPnPContainerSource.cs
+src/Extensions/Banshee.UPnPClient/Banshee.UPnPClient/UPnPMusicSource.cs
+src/Extensions/Banshee.UPnPClient/Banshee.UPnPClient/UPnPServerSource.cs
+src/Extensions/Banshee.UPnPClient/Banshee.UPnPClient/UPnPVideoSource.cs
 src/Extensions/Banshee.Wikipedia/Banshee.Wikipedia.addin.xml
 src/Extensions/Banshee.Wikipedia/Banshee.Wikipedia/ContextPage.cs
 src/Extensions/Banshee.Wikipedia/Banshee.Wikipedia/WikipediaView.cs

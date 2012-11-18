@@ -92,17 +92,22 @@ namespace Banshee.Sources
         protected bool error_source_visible = false;
 
         protected string remove_range_sql = @"
-            INSERT INTO CoreRemovedTracks (DateRemovedStamp, TrackID, Uri) SELECT ?, TrackID, Uri FROM CoreTracks WHERE TrackID IN (SELECT {0});
+            INSERT INTO CoreRemovedTracks (DateRemovedStamp, TrackID, Uri)
+                SELECT ?, TrackID, " + BansheeQuery.UriField.Column + @"
+                FROM CoreTracks WHERE TrackID IN (SELECT {0});
             DELETE FROM CoreTracks WHERE TrackID IN (SELECT {0})";
 
-        protected HyenaSqliteCommand remove_list_command = new HyenaSqliteCommand (@"
-            INSERT INTO CoreRemovedTracks (DateRemovedStamp, TrackID, Uri) SELECT ?, TrackID, Uri FROM CoreTracks WHERE TrackID IN (SELECT ItemID FROM CoreCache WHERE ModelID = ?);
+        protected HyenaSqliteCommand remove_list_command = new HyenaSqliteCommand (String.Format (@"
+            INSERT INTO CoreRemovedTracks (DateRemovedStamp, TrackID, Uri)
+                SELECT ?, TrackID, {0} FROM CoreTracks WHERE TrackID IN (SELECT ItemID FROM CoreCache WHERE ModelID = ?);
             DELETE FROM CoreTracks WHERE TrackID IN (SELECT ItemID FROM CoreCache WHERE ModelID = ?)
-        ");
+        ", BansheeQuery.UriField.Column));
 
         protected HyenaSqliteCommand prune_artists_albums_command = new HyenaSqliteCommand (@"
-            DELETE FROM CoreArtists WHERE ArtistID NOT IN (SELECT ArtistID FROM CoreTracks);
-            DELETE FROM CoreAlbums WHERE AlbumID NOT IN (SELECT AlbumID FROM CoreTracks)
+            DELETE FROM CoreAlbums WHERE AlbumID NOT IN (SELECT AlbumID FROM CoreTracks);
+            DELETE FROM CoreArtists WHERE
+                    NOT EXISTS (SELECT 1 FROM CoreTracks WHERE CoreTracks.ArtistID = CoreArtists.ArtistID)
+                AND NOT EXISTS (SELECT 1 FROM CoreAlbums WHERE CoreAlbums.ArtistID = CoreArtists.ArtistID)
         ");
 
         protected HyenaSqliteCommand purge_tracks_command = new HyenaSqliteCommand (@"
@@ -123,9 +128,10 @@ namespace Banshee.Sources
 
                 dbid = ServiceManager.DbConnection.Query<int> ("SELECT PrimarySourceID FROM CorePrimarySources WHERE StringID = ?", UniqueId);
                 if (dbid == 0) {
-                    dbid = ServiceManager.DbConnection.Execute ("INSERT INTO CorePrimarySources (StringID) VALUES (?)", UniqueId);
+                    dbid = ServiceManager.DbConnection.Execute ("INSERT INTO CorePrimarySources (StringID, IsTemporary) VALUES (?, ?)", UniqueId, IsTemporary);
                 } else {
                     SavedCount = ServiceManager.DbConnection.Query<int> ("SELECT CachedCount FROM CorePrimarySources WHERE PrimarySourceID = ?", dbid);
+                    IsTemporary = ServiceManager.DbConnection.Query<bool> ("SELECT IsTemporary FROM CorePrimarySources WHERE PrimarySourceID = ?", dbid);
                 }
 
                 if (dbid == 0) {
@@ -200,9 +206,14 @@ namespace Banshee.Sources
             get { return base_dir_with_sep ?? (base_dir_with_sep = BaseDirectory + System.IO.Path.DirectorySeparatorChar); }
         }
 
-        protected PrimarySource (string generic_name, string name, string id, int order) : base (generic_name, name, id, order)
+        protected PrimarySource (string generic_name, string name, string id, int order) : this (generic_name, name, id, order, false)
+        {
+        }
+
+        protected PrimarySource (string generic_name, string name, string id, int order, bool is_temp) : base (generic_name, name, id, order)
         {
             Properties.SetString ("SortChildrenActionLabel", Catalog.GetString ("Sort Playlists By"));
+            IsTemporary = is_temp;
             PrimarySourceInitialize ();
         }
 
@@ -235,13 +246,15 @@ namespace Banshee.Sources
         {
             PathPattern = pattern;
 
-            var file_system = PreferencesPage.Add (new Section ("file-system", Catalog.GetString ("File Organization"), 5));
+            var file_system = PreferencesPage.FindOrAdd (new Section ("file-system", Catalog.GetString ("File Organization"), 5));
             file_system.Add (new SchemaPreference<string> (pattern.FolderSchema, Catalog.GetString ("Folder hie_rarchy")));
             file_system.Add (new SchemaPreference<string> (pattern.FileSchema, Catalog.GetString ("File _name")));
         }
 
         public virtual void Dispose ()
         {
+            PurgeSelfIfTemporary ();
+
             if (Application.ShuttingDown)
                 return;
 
@@ -266,6 +279,12 @@ namespace Banshee.Sources
             DatabaseTrackModel.AddCondition (String.Format ("CoreTracks.PrimarySourceID = {0}", DbId));
 
             primary_sources[DbId] = this;
+
+            // If there was a crash, tracks can be left behind, for example in DaapSource.
+            // Temporary playlists are cleaned up by the PlaylistSource.LoadAll call below
+            if (IsTemporary && SavedCount > 0) {
+                PurgeTracks ();
+            }
 
             // Load our playlists and smart playlists
             foreach (PlaylistSource pl in PlaylistSource.LoadAll (this)) {
@@ -431,6 +450,20 @@ namespace Banshee.Sources
             OnTracksDeleted ();
         }
 
+        protected virtual void PurgeSelfIfTemporary ()
+        {
+            if (!IsTemporary) {
+                return;
+            }
+
+            PlaylistSource.ClearTemporary (this);
+            PurgeTracks ();
+
+            ServiceManager.DbConnection.Execute (new HyenaSqliteCommand (@"
+                DELETE FROM CorePrimarySources WHERE PrimarySourceId = ?"),
+                DbId);
+        }
+
         protected virtual void PurgeTracks ()
         {
             ServiceManager.DbConnection.Execute (purge_tracks_command, DbId);
@@ -569,10 +602,9 @@ namespace Banshee.Sources
             return true;
         }
 
-        private static HyenaSqliteCommand get_track_id_cmd = new HyenaSqliteCommand ("SELECT TrackID FROM CoreTracks WHERE PrimarySourceId = ? AND Uri = ? LIMIT 1");
         public int GetTrackIdForUri (string uri)
         {
-            return ServiceManager.DbConnection.Query<int> (get_track_id_cmd, DbId, new SafeUri (uri).AbsoluteUri);
+            return DatabaseTrackInfo.GetTrackIdForUri (new SafeUri (uri), DbId);
         }
 
         private bool is_adding;
@@ -618,6 +650,9 @@ namespace Banshee.Sources
                     Log.Exception (e);
                     ErrorSource.AddMessage (e.Message, track.Uri.ToString ());
                 }
+            }
+            if (!AddTrackJob.IsFinished) {
+                AddTrackJob.Finish ();
             }
             is_adding = false;
         }

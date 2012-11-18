@@ -103,7 +103,7 @@ namespace Banshee.Playlist
             remove_track_range_command = new HyenaSqliteCommand (@"
                 DELETE FROM CorePlaylistEntries WHERE PlaylistID = ? AND
                     EntryID IN (SELECT ItemID FROM CoreCache
-                        WHERE ModelID = ? LIMIT ?, ?)"
+                        WHERE ModelID = ? ORDER BY OrderID LIMIT ?, ?)"
             );
         }
 
@@ -366,6 +366,18 @@ namespace Banshee.Playlist
                 DELETE FROM CorePlaylists WHERE IsTemporary = 1;"
             );
             ServiceManager.DbConnection.CommitTransaction ();
+        }
+
+        public static void ClearTemporary (PrimarySource parent)
+        {
+            if (parent != null) {
+                ServiceManager.DbConnection.BeginTransaction ();
+                ServiceManager.DbConnection.Execute (@"
+                    DELETE FROM CorePlaylistEntries WHERE PlaylistID IN (SELECT PlaylistID FROM CorePlaylists WHERE PrimarySourceID = ? AND IsTemporary = 1);
+                    DELETE FROM CorePlaylists WHERE PrimarySourceID = ? AND IsTemporary = 1;", parent.DbId, parent.DbId
+                );
+                ServiceManager.DbConnection.CommitTransaction ();
+            }
         }
 
         private static int GetPlaylistId (string name)

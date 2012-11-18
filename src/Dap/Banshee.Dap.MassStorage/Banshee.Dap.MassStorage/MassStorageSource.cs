@@ -38,6 +38,7 @@ using Banshee.Dap;
 using Banshee.Base;
 using Banshee.ServiceStack;
 using Banshee.Library;
+using Banshee.Query;
 using Banshee.Sources;
 using Banshee.Collection;
 using Banshee.Collection.Database;
@@ -164,9 +165,11 @@ namespace Banshee.Dap.MassStorage
             if (CanSyncPlaylists) {
                 var insert_cmd = new Hyena.Data.Sqlite.HyenaSqliteCommand (
                     "INSERT INTO CorePlaylistEntries (PlaylistID, TrackID) VALUES (?, ?)");
-                int [] psources = new int [] {DbId};
                 foreach (string playlist_path in PlaylistFiles) {
-                    IPlaylistFormat loaded_playlist = PlaylistFileUtil.Load (playlist_path, new Uri (PlaylistsPath));
+                    // playlist_path has a file:// prefix, and GetDirectoryName messes it up,
+                    // so we need to convert it to a regular path
+                    string base_folder = System.IO.Path.GetDirectoryName (SafeUri.UriToFilename (playlist_path));
+                    IPlaylistFormat loaded_playlist = PlaylistFileUtil.Load (playlist_path, new Uri (base_folder));
                     if (loaded_playlist == null)
                         continue;
 
@@ -176,7 +179,7 @@ namespace Banshee.Dap.MassStorage
                     //Hyena.Data.Sqlite.HyenaSqliteCommand.LogAll = true;
                     foreach (Dictionary<string, object> element in loaded_playlist.Elements) {
                         string track_path = (element["uri"] as Uri).LocalPath;
-                        int track_id = DatabaseTrackInfo.GetTrackIdForUri (new SafeUri (track_path), psources);
+                        int track_id = DatabaseTrackInfo.GetTrackIdForUri (new SafeUri (track_path), DbId);
                         if (track_id == 0) {
                             Log.DebugFormat ("Failed to find track {0} in DAP library to load it into playlist {1}", track_path, playlist_path);
                         } else {
@@ -235,22 +238,41 @@ namespace Banshee.Dap.MassStorage
 
 #region Properties and Methods for Supporting Syncing of Playlists
 
-        private string playlists_path;
-        private string PlaylistsPath {
+        private string [] playlists_paths;
+        private string [] PlaylistsPaths {
             get {
-                if (playlists_path == null) {
-                    if (MediaCapabilities == null || MediaCapabilities.PlaylistPath == null) {
-                        playlists_path = WritePath;
+                if (playlists_paths == null) {
+                    if (MediaCapabilities == null || MediaCapabilities.PlaylistPaths == null
+                        || MediaCapabilities.PlaylistPaths.Length == 0) {
+                        playlists_paths = new string [] { WritePath };
                     } else {
-                        playlists_path = System.IO.Path.Combine (WritePath, MediaCapabilities.PlaylistPath);
-                        playlists_path = playlists_path.Replace ("%File", String.Empty);
-                    }
-
-                    if (!Directory.Exists (playlists_path)) {
-                        Directory.Create (playlists_path);
+                        playlists_paths = new string [MediaCapabilities.PlaylistPaths.Length];
+                        for (int i = 0; i < MediaCapabilities.PlaylistPaths.Length; i++) {
+                            playlists_paths[i] = Paths.Combine (BaseDirectory, MediaCapabilities.PlaylistPaths[i]);
+                            playlists_paths[i] = playlists_paths[i].Replace ("%File", String.Empty);
+                        }
                     }
                 }
-                return playlists_path;
+                return playlists_paths;
+            }
+        }
+
+        private string playlists_write_path;
+        private string PlaylistsWritePath {
+            get {
+                if (playlists_write_path == null) {
+                    playlists_write_path = WritePath;
+                    // We write playlists to the first folder listed in the PlaylistsPath property
+                    if (PlaylistsPaths.Length > 0) {
+                        playlists_write_path = PlaylistsPaths[0];
+                    }
+
+                    if (!Directory.Exists (playlists_write_path)) {
+                        Directory.Create (playlists_write_path);
+                    }
+
+                }
+                return playlists_write_path;
             }
         }
 
@@ -289,11 +311,16 @@ namespace Banshee.Dap.MassStorage
 
         private IEnumerable<string> PlaylistFiles {
             get {
-                foreach (string file_name in Directory.GetFiles (PlaylistsPath)) {
-                    foreach (PlaylistFormatDescription desc in playlist_types) {
-                        if (file_name.EndsWith (desc.FileExtension)) {
-                            yield return file_name;
-                            break;
+                foreach (string folder_name in PlaylistsPaths) {
+                    if (!Directory.Exists (folder_name)) {
+                        continue;
+                    }
+                    foreach (string file_name in Directory.GetFiles (folder_name)) {
+                        foreach (PlaylistFormatDescription desc in playlist_types) {
+                            if (file_name.EndsWith (desc.FileExtension)) {
+                                yield return file_name;
+                                break;
+                            }
                         }
                     }
                 }
@@ -302,7 +329,7 @@ namespace Banshee.Dap.MassStorage
 
         private bool CanSyncPlaylists {
             get {
-                return PlaylistsPath != null && playlist_types.Count > 0;
+                return PlaylistsWritePath != null && playlist_types.Count > 0;
             }
         }
 
@@ -329,16 +356,17 @@ namespace Banshee.Dap.MassStorage
                 if (from != null && !String.IsNullOrEmpty (escaped_name)) {
                     from.Reload ();
                     if (playlist_format == null) {
-                         playlist_format = Activator.CreateInstance (PlaylistTypes[0].Type) as PlaylistFormatBase;
+                        playlist_format = Activator.CreateInstance (PlaylistTypes[0].Type) as PlaylistFormatBase;
+                        playlist_format.FolderSeparator = MediaCapabilities.FolderSeparator;
                     }
 
                     SafeUri playlist_path = new SafeUri (System.IO.Path.Combine (
-                        PlaylistsPath, String.Format ("{0}.{1}", escaped_name, PlaylistTypes[0].FileExtension)));
+                        PlaylistsWritePath, String.Format ("{0}.{1}", escaped_name, PlaylistTypes[0].FileExtension)));
 
                     System.IO.Stream stream = null;
                     try {
                         stream = Banshee.IO.File.OpenWrite (playlist_path, true);
-                        playlist_format.BaseUri = new Uri (PlaylistsPath);
+                        playlist_format.BaseUri = new Uri (PlaylistsWritePath);
 
                         playlist_format.Save (stream, from);
                     } catch (Exception e) {
@@ -485,6 +513,24 @@ namespace Banshee.Dap.MassStorage
             set { cover_art_file_type = value; }
         }
 
+        public override void UpdateMetadata (DatabaseTrackInfo track)
+        {
+            SafeUri new_uri = new SafeUri (GetTrackPath (track, System.IO.Path.GetExtension (track.Uri)));
+
+            if (new_uri.ToString () != track.Uri.ToString ()) {
+                Directory.Create (System.IO.Path.GetDirectoryName (new_uri.LocalPath));
+                Banshee.IO.File.Move (track.Uri, new_uri);
+
+                //to remove the folder if it's not needed anymore:
+                DeleteTrackFile (track);
+
+                track.Uri = new_uri;
+                track.Save (true, BansheeQuery.UriField);
+            }
+
+            base.UpdateMetadata (track);
+        }
+
         protected override void AddTrackToDevice (DatabaseTrackInfo track, SafeUri fromUri)
         {
             if (track.PrimarySourceId == DbId)
@@ -561,11 +607,16 @@ namespace Banshee.Dap.MassStorage
 
         protected override bool DeleteTrack (DatabaseTrackInfo track)
         {
-            try {
-                if (ms_device != null && !ms_device.DeleteTrackHook (track)) {
-                    return false;
-                }
+            if (ms_device != null && !ms_device.DeleteTrackHook (track)) {
+                return false;
+            }
+            DeleteTrackFile (track);
+            return true;
+        }
 
+        private void DeleteTrackFile (DatabaseTrackInfo track)
+        {
+            try {
                 string track_file = System.IO.Path.GetFileName (track.Uri.LocalPath);
                 string track_dir = System.IO.Path.GetDirectoryName (track.Uri.LocalPath);
                 int files = 0;
@@ -585,12 +636,14 @@ namespace Banshee.Dap.MassStorage
                     System.IO.File.Delete (Paths.Combine (track_dir, CoverArtFileName));
                 }
 
-                Banshee.IO.Utilities.DeleteFileTrimmingParentDirectories (track.Uri);
+                if (Banshee.IO.File.Exists (track.Uri)) {
+                    Banshee.IO.Utilities.DeleteFileTrimmingParentDirectories (track.Uri);
+                } else {
+                    Banshee.IO.Utilities.TrimEmptyDirectories (track.Uri);
+                }
             } catch (System.IO.FileNotFoundException) {
             } catch (System.IO.DirectoryNotFoundException) {
             }
-
-            return true;
         }
 
         protected override void Eject ()
@@ -689,6 +742,10 @@ namespace Banshee.Dap.MassStorage
             file_path += ext;
 
             return file_path;
+        }
+
+        public override bool HasEditableTrackProperties {
+            get { return true; }
         }
     }
 }

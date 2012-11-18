@@ -157,8 +157,6 @@ namespace Banshee.Daap
 
         public void ThreadedInitialize ()
         {
-            // Add the source, even though its empty, so that the user sees the
-            // plugin is enabled, just no child sources yet.
             source_map = new Dictionary<string, DaapSource> ();
             container = new DaapContainerSource ();
 
@@ -182,13 +180,16 @@ namespace Banshee.Daap
 
             var uia_service = ServiceManager.Get<InterfaceActionService> ();
             if (uia_service != null) {
-                uia_service.GlobalActions.Add (
-                    new ActionEntry ("AddRemoteDaapServerAction", Stock.Add,
-                        Catalog.GetString ("Add Remote DAAP Server"), null,
-                        Catalog.GetString ("Add a new remote DAAP server"),
-                        OnAddRemoteServer)
-                );
-                actions_id = uia_service.UIManager.AddUiFromResource ("GlobalUI.xml");
+                ThreadAssist.ProxyToMain ( () => {
+                    uia_service.GlobalActions.Add (
+                        new ActionEntry ("AddRemoteDaapServerAction", Stock.Add,
+                            Catalog.GetString ("Add Remote DAAP Server"), null,
+                            Catalog.GetString ("Add a new remote DAAP server"),
+                            OnAddRemoteServer)
+                    );
+                    actions_id = uia_service.UIManager.AddUiFromResource ("GlobalUI.xml");
+                });
+
             }
         }
 

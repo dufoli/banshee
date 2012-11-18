@@ -54,6 +54,7 @@ namespace Banshee.Dap
 {
     public abstract class DapSource : RemovableSource, IDisposable
     {
+        private bool flushed = false;
         private DapSync sync;
         private DapInfoBar dap_info_bar;
         private Page page;
@@ -97,6 +98,8 @@ namespace Banshee.Dap
 
         public override void Dispose ()
         {
+            Flush ();
+
             PurgeTemporaryPlaylists ();
             PurgeTracks ();
 
@@ -183,8 +186,6 @@ namespace Banshee.Dap
             Properties.SetString ("ActiveSourceUIResource", "ActiveSourceUI.xml");
 
             sync = new DapSync (this);
-            dap_info_bar = new DapInfoBar (this);
-            Properties.Set<Gtk.Widget> ("Nereid.SourceContents.FooterWidget", dap_info_bar);
 
             /*dap_properties_display = new DapPropertiesDisplay (this);
             Properties.Set<Banshee.Sources.Gui.ISourceContents> ("Nereid.SourceContents", dap_properties_display);*/
@@ -208,18 +209,25 @@ namespace Banshee.Dap
             }
 
             AddChildSource (music_group_source = new MusicGroupSource (this));
+            // We want the group sources to be on top of the list, with Music first
+            music_group_source.Order = -30;
 
             if (SupportsVideo) {
                 video_group_source = new VideoGroupSource (this);
+                video_group_source.Order = -20;
             }
 
             if (SupportsPodcasts) {
                 podcast_group_source = new PodcastGroupSource (this);
+                podcast_group_source.Order = -10;
             }
 
             BuildPreferences ();
 
             ThreadAssist.ProxyToMain (delegate {
+                dap_info_bar = new DapInfoBar (this);
+                Properties.Set<Gtk.Widget> ("Nereid.SourceContents.FooterWidget", dap_info_bar);
+
                 Properties.Set<Banshee.Sources.Gui.ISourceContents> ("Nereid.SourceContents", new DapContent (this));
             });
         }
@@ -312,10 +320,18 @@ namespace Banshee.Dap
 
         protected override void Eject ()
         {
-            if (!Sync.Enabled) {
-                // If sync isn't enabled, then make sure we've written saved our playlists
-                // Track transfers happen immediately, but playlists saves don't
-                SyncPlaylists ();
+            Flush ();
+        }
+
+        private void Flush ()
+        {
+            if (!flushed) {
+                flushed = true;
+                if (!Sync.Enabled) {
+                    // If sync isn't enabled, then make sure we've written saved our playlists
+                    // Track transfers happen immediately, but playlists saves don't
+                    SyncPlaylists ();
+                }
             }
         }
 

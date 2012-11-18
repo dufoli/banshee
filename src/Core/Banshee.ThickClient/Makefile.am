@@ -50,6 +50,7 @@ SOURCES =  \
 	Banshee.Gui.Dialogs/ErrorListDialog.cs \
 	Banshee.Gui.Dialogs/ExtensionManagerDialog.cs \
 	Banshee.Gui.Dialogs/FileChooserDialog.cs \
+	Banshee.Gui.Dialogs/GtkFileChooserDialog.cs \
 	Banshee.Gui.Dialogs/ImageFileChooserDialog.cs \
 	Banshee.Gui.Dialogs/OpenLocationDialog.cs \
 	Banshee.Gui.Dialogs/SeekDialog.cs \
@@ -95,6 +96,7 @@ SOURCES =  \
 	Banshee.Gui.Widgets/PlaylistMenuItem.cs \
 	Banshee.Gui.Widgets/RepeatActionButton.cs \
 	Banshee.Gui.Widgets/TaskStatusIcon.cs \
+	Banshee.Gui.Widgets/Tests/TrackInfoDisplayTests.cs \
 	Banshee.Gui.Widgets/TitledList.cs \
 	Banshee.Gui.Widgets/TrackInfoDisplay.cs \
 	Banshee.Gui.Widgets/UserJobTile.cs \
