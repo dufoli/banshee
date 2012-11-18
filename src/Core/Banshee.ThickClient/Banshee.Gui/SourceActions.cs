@@ -463,7 +463,7 @@ namespace Banshee.Gui
         private Menu BuildSortMenu (Source source)
         {
             Menu menu = new Menu ();
-            GLib.SList group = null;
+            RadioMenuItem [] group = null;
             foreach (SourceSortType sort_type in source.ChildSortTypes) {
                 RadioMenuItem item = new RadioMenuItem (group, sort_type.Label);
                 group = item.Group;
