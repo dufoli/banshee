@@ -5,16 +5,38 @@ using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.Reflection;
 
-public class GConfSchemaExtractor
+public class GConfSchemaExtractorProgram
 {
-	private static Dictionary<string, StringBuilder> entries = 
-		new Dictionary<string, StringBuilder>();
-    private static int schema_count = 0;
+    private static Dictionary<string, StringBuilder> entries;
+    private static int schema_count;
 
     public static void Main(string [] args)
     {
-        Assembly asm = Assembly.LoadFrom(args[0]);
-        foreach(Type type in asm.GetTypes()) {
+        if (args.Length != 2) {
+            Console.Error.WriteLine ("Usage: gconf-schema-extractor.exe Foo.dll bar.schema");
+            Environment.Exit (1);
+        }
+
+        Extract (args [0], args [1]);
+    }
+
+    private static void Extract (string assemblyName, string outputFile)
+    {
+        Assembly asm = Assembly.LoadFrom (assemblyName);
+        StringBuilder sbuilder = Extract (asm.GetTypes ());
+        if (sbuilder != null) {
+            using (StreamWriter writer = new StreamWriter (outputFile)) {
+                writer.Write (sbuilder.ToString ());
+            }
+        }
+    }
+
+    internal static StringBuilder Extract (IEnumerable<Type> types)
+    {
+        schema_count = 0;
+        entries = new Dictionary<string, StringBuilder> ();
+
+        foreach (Type type in types) {
             foreach(FieldInfo field in type.GetFields()) {
                 if(field.FieldType.IsGenericType && 
                     field.FieldType.GetGenericTypeDefinition().Name.StartsWith("SchemaEntry")) {
@@ -51,10 +73,9 @@ public class GConfSchemaExtractor
             final.Append("  </schemalist>\n");
             final.Append("</gconfschemafile>\n");
 
-            using(StreamWriter writer = new StreamWriter(args[1])) {
-                writer.Write(final.ToString());
-            }
+            return final;
         }
+        return null;
     }
 
     private static string GetString(object o, string name)
