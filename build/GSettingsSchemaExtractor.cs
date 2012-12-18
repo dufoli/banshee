@@ -139,7 +139,7 @@ public class GSettingsSchemaExtractorProgram
             type_attrib = "a" + type_attrib;
 
         StringBuilder builder = new StringBuilder ();
-        builder.AppendFormat ("  <schema id=\"{0}\" path=\"{1}\">\n", id, path);
+        builder.AppendFormat ("  <schema id=\"{0}\" path=\"{1}\" gettext-domain=\"banshee\">\n", id, path);
         builder.AppendFormat ("    <key name=\"{0}\" type=\"{1}\">\n", key, type_attrib);
         builder.AppendFormat ("      <default>{0}</default>\n", str_val);
         builder.AppendFormat ("      <_summary>{0}</_summary>\n", summary);

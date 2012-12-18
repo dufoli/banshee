@@ -53,7 +53,7 @@ namespace GSettingsSchemaExtractor
             Assert.That (result, Is.Not.Null);
             Assert.That (result.ToString ().Trim (), Is.EqualTo (@"
 <schemalist>
-  <schema id=""org.gnome.banshee.player_window"" path=""/apps/banshee/player_window/"">
+  <schema id=""org.gnome.banshee.player_window"" path=""/apps/banshee/player_window/"" gettext-domain=""banshee"">
     <key name=""default_export_format"" type=""s"">
       <default>'m3u'</default>
       <_summary>Export Format</_summary>
@@ -83,7 +83,7 @@ namespace GSettingsSchemaExtractor
             Assert.That (result, Is.Not.Null);
             Assert.That (result.ToString ().Trim (), Is.EqualTo (@"
 <schemalist>
-  <schema id=""org.gnome.banshee.import"" path=""/apps/banshee/import/"">
+  <schema id=""org.gnome.banshee.import"" path=""/apps/banshee/import/"" gettext-domain=""banshee"">
     <key name=""show_initial_import_dialog"" type=""b"">
       <default>true</default>
       <_summary>Show the Initial Import Dialog</_summary>
@@ -111,7 +111,7 @@ namespace GSettingsSchemaExtractor
             Assert.That (result, Is.Not.Null);
             Assert.That (result.ToString ().Trim (), Is.EqualTo (@"
 <schemalist>
-  <schema id=""org.gnome.banshee.player_engine"" path=""/apps/banshee/player_engine/"">
+  <schema id=""org.gnome.banshee.player_engine"" path=""/apps/banshee/player_engine/"" gettext-domain=""banshee"">
     <key name=""volume"" type=""i"">
       <default>80</default>
       <_summary>Volume</_summary>
@@ -139,7 +139,7 @@ namespace GSettingsSchemaExtractor
             Assert.That (result, Is.Not.Null);
             Assert.That (result.ToString ().Trim (), Is.EqualTo (@"
 <schemalist>
-  <schema id=""org.gnome.banshee.player_window"" path=""/apps/banshee/player_window/"">
+  <schema id=""org.gnome.banshee.player_window"" path=""/apps/banshee/player_window/"" gettext-domain=""banshee"">
     <key name=""cover_art_size"" type=""d"">
       <default>20.5</default>
       <_summary>Cover art size</_summary>
@@ -167,7 +167,7 @@ namespace GSettingsSchemaExtractor
             Assert.That (result, Is.Not.Null);
             Assert.That (result.ToString ().Trim (), Is.EqualTo (@"
 <schemalist>
-  <schema id=""org.gnome.banshee.sources.fsq"" path=""/apps/banshee/sources/fsq/"">
+  <schema id=""org.gnome.banshee.sources.fsq"" path=""/apps/banshee/sources/fsq/"" gettext-domain=""banshee"">
     <key name=""current_filters"" type=""as"">
       <default>['album','artist']</default>
       <_summary></_summary>
