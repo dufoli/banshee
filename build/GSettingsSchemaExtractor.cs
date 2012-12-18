@@ -45,7 +45,7 @@ public class GSettingsSchemaExtractorProgram
                         continue;
                     }
 
-                    object schema = field.GetValue(null);
+                    object schema = field.GetValue (null);
 
                     AddSchemaEntry (schema.GetType ().GetField ("DefaultValue").GetValue (schema),
                         GetString (schema, "Namespace"),
@@ -116,15 +116,15 @@ public class GSettingsSchemaExtractorProgram
         string str_type = null;
         
         if (list) {
-            if(value == null || ((object [])value).Length == 0) {
+            if (value == null || ((object[])value).Length == 0) {
                 GetValueString (type, null, out str_type);
                 str_val = "[]";
             } else {
                 str_val = "[";
                 object [] arr = (object [])value;
-                for(int i = 0; i < arr.Length; i++) {
+                for (int i = 0; i < arr.Length; i++) {
                     str_val += GetValueString (type, arr [i], out str_type).Replace (",", "\\,");
-                    if(i < arr.Length - 1) {
+                    if (i < arr.Length - 1) {
                         str_val += ",";
                     }
                 }
@@ -135,8 +135,9 @@ public class GSettingsSchemaExtractorProgram
         }
 
         string type_attrib = str_type;
-        if (list)
+        if (list) {
             type_attrib = "a" + type_attrib;
+        }
 
         StringBuilder builder = new StringBuilder ();
         builder.AppendFormat ("  <schema id=\"{0}\" path=\"{1}\" gettext-domain=\"banshee\">\n", id, path);
