@@ -154,8 +154,8 @@ namespace GSettingsSchemaExtractor
             public static readonly SchemaEntry<string[]> CurrentFiltersSchema = new SchemaEntry<string[]> (
                 "sources.fsq", "current_filters",
                 new string[] { "album", "artist" },
-            null,
-            null
+                null,
+                null
             );
         }
 
@@ -204,6 +204,34 @@ namespace GSettingsSchemaExtractor
       <default>'m3u'</default>
       <_summary>Export Format</_summary>
       <_description>The default playlist export format</_description>
+    </key>
+  </schema>
+</schemalist>"
+                .Trim ()));
+        }
+
+        internal class StringTypeWithNullDefaultValue {
+            public static readonly SchemaEntry<string> LastScrobbleUrlSchema = new SchemaEntry<string> (
+                "plugins.audioscrobbler", "api_url",
+                null,
+                "AudioScrobbler API URL",
+                "URL for the AudioScrobbler API (supports turtle.libre.fm, for instance)"
+            );
+        }
+
+        [Test]
+        public void SchemaWithNullDefaultValue ()
+        {
+            StringBuilder result = GSettingsSchemaExtractorProgram.Extract (new Type [] { typeof (StringTypeWithNullDefaultValue) });
+
+            Assert.That (result, Is.Not.Null);
+            Assert.That (result.ToString ().Trim (), Is.EqualTo (@"
+<schemalist>
+  <schema id=""org.gnome.banshee.plugins.audioscrobbler"" path=""/apps/banshee/plugins/audioscrobbler/"" gettext-domain=""banshee"">
+    <key name=""api_url"" type=""s"">
+      <default></default>
+      <_summary>AudioScrobbler API URL</_summary>
+      <_description>URL for the AudioScrobbler API (supports turtle.libre.fm, for instance)</_description>
     </key>
   </schema>
 </schemalist>"

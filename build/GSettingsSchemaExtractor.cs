@@ -47,7 +47,11 @@ public class GSettingsSchemaExtractorProgram
 
                     object schema = field.GetValue (null);
 
-                    AddSchemaEntry (schema.GetType ().GetField ("DefaultValue").GetValue (schema),
+                    var default_value = schema.GetType ().GetField ("DefaultValue");
+
+                    AddSchemaEntry (
+                        default_value.GetValue (schema),
+                        default_value.FieldType,
                         GetString (schema, "Namespace"),
                         GetString (schema, "Key"),
                         GetString (schema, "ShortDescription"),
@@ -106,25 +110,26 @@ public class GSettingsSchemaExtractorProgram
         return o == null ? null : o.ToString ();
     }
 
-    private static void AddSchemaEntry (object value, string namespce, string key,
-        string summary, string description)
+    private static void AddSchemaEntry (object defaultValue, Type defaultValueType,
+                                        string namespce, string key,
+                                        string summary, string description)
     {
         schema_count++;
 
         string id = CreateId (namespce);
         
-        bool list = value.GetType ().IsArray;
-        Type type = list ? Type.GetTypeArray ((object [])value) [0] : value.GetType ();
+        bool list = defaultValueType.IsArray;
+        Type type = list ? Type.GetTypeArray ((object [])defaultValue) [0] : defaultValueType;
         string str_val = null;
         string str_type = null;
         
         if (list) {
-            if (value == null || ((object[])value).Length == 0) {
+            if (defaultValue == null || ((object[])defaultValue).Length == 0) {
                 GetValueString (type, null, out str_type);
                 str_val = "[]";
             } else {
                 str_val = "[";
-                object [] arr = (object [])value;
+                object [] arr = (object [])defaultValue;
                 for (int i = 0; i < arr.Length; i++) {
                     str_val += GetValueString (type, arr [i], out str_type).Replace (",", "\\,");
                     if (i < arr.Length - 1) {
@@ -134,7 +139,7 @@ public class GSettingsSchemaExtractorProgram
                 str_val += "]";
             }
         } else {
-            str_val = GetValueString (type, value, out str_type);
+            str_val = GetValueString (type, defaultValue, out str_type);
         }
 
         string type_attrib = str_type;
