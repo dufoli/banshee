@@ -83,6 +83,8 @@ public class GSettingsSchemaExtractorProgram
 
     private static string GetValueString (Type type, object o, out string gctype)
     {
+        // gctypes to return taken from http://developer.gnome.org/glib/unstable/glib-GVariant.html#GVariantClass
+
         if (type == typeof (bool)) {
             gctype = "b";
             return o == null ? null : o.ToString ().ToLower ();
@@ -131,17 +133,14 @@ public class GSettingsSchemaExtractorProgram
         } else {
             str_val = GetValueString (type, value, out str_type);
         }
- 
+
+        string type_attrib = str_type;
+        if (list)
+            type_attrib = "a" + type_attrib;
+
         StringBuilder builder = new StringBuilder ();
         builder.AppendFormat ("  <schema id=\"{0}\" path=\"{1}\">\n", id, path);
-        builder.AppendFormat ("    <key name=\"{0}\" type=\"{1}\">\n", key, str_type);
-//TODO: deal with list types?
-//        if (!list) {
-//            builder.AppendFormat ("      <type>{0}</type>\n", str_type);
-//        } else {
-//            builder.AppendFormat ("      <type>list</type>\n");
-//            builder.AppendFormat ("      <list_type>{0}</list_type>\n", str_type);
-//        }
+        builder.AppendFormat ("    <key name=\"{0}\" type=\"{1}\">\n", key, type_attrib);
         builder.AppendFormat ("      <default>{0}</default>\n", str_val);
         builder.AppendFormat ("      <_summary>{0}</_summary>\n", summary);
         builder.AppendFormat ("      <_description>{0}</_description>\n", description);
