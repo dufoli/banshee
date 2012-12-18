@@ -1,5 +1,5 @@
 //
-// GConfSchemaExtractorTests.cs
+// Tests.cs
 //
 // Author:
 //   Andres G. Aragoneses <knocte@gmail.com>
@@ -109,11 +109,11 @@ namespace GConfSchemaExtractor
         }
 
         internal class IntegerType {
-            public static readonly SchemaEntry<bool> ShowCoverArt = new SchemaEntry<bool> (
-                "player_window", "show_cover_art",
-                false,
-                "Show cover art",
-                "Show cover art below source view if available"
+            public static readonly SchemaEntry<int> VolumeSchema = new SchemaEntry<int> (
+                "player_engine", "volume",
+                80,
+                "Volume",
+                "Volume of playback relative to mixer output"
             );
         }
 
@@ -128,14 +128,14 @@ namespace GConfSchemaExtractor
 <gconfschemafile>
   <schemalist>
     <schema>
-      <key>/schemas/apps/banshee/player_window/show_cover_art</key>
-      <applyto>/apps/banshee/player_window/show_cover_art</applyto>
+      <key>/schemas/apps/banshee/player_engine/volume</key>
+      <applyto>/apps/banshee/player_engine/volume</applyto>
       <owner>banshee</owner>
-      <type>bool</type>
-      <default>false</default>
+      <type>int</type>
+      <default>80</default>
       <locale name=""C"">
-        <short>Show cover art</short>
-        <long>Show cover art below source view if available</long>
+        <short>Volume</short>
+        <long>Volume of playback relative to mixer output</long>
       </locale>
     </schema>
   </schemalist>
