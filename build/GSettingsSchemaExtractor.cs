@@ -59,9 +59,7 @@ public class GSettingsSchemaExtractorProgram
 
         if (schema_count > 0) {
             StringBuilder final = new StringBuilder ();
-            final.Append ("<?xml version=\"1.0\"?>\n");
-            final.Append ("<gconfschemafile>\n");
-            final.Append ("  <schemalist>\n");
+            final.Append ("<schemalist>\n");
 
             List<string> keys = new List<string> (entries.Keys);
             keys.Sort ();
@@ -70,8 +68,7 @@ public class GSettingsSchemaExtractorProgram
                 final.Append (entries [key]);
             }
 
-            final.Append ("  </schemalist>\n");
-            final.Append ("</gconfschemafile>\n");
+            final.Append ("</schemalist>\n");
 
             return final;
         }
@@ -87,14 +84,15 @@ public class GSettingsSchemaExtractorProgram
     private static string GetValueString (Type type, object o, out string gctype)
     {
         if (type == typeof (bool)) {
-            gctype = "bool";
+            gctype = "b";
             return o == null ? null : o.ToString ().ToLower ();
         } else if (type == typeof (int)) {
-            gctype = "int";
-        } else if (type == typeof (float) || type == typeof (double)) {
-            gctype = "float";
+            gctype = "i";
+        } else if (type == typeof (double)) {
+            gctype = "d";
         } else if (type == typeof (string)) {
-            gctype = "string";
+            gctype = "s";
+            return o == null ? null : "'" + o.ToString () + "'";
         } else {
             throw new Exception("Unsupported type '" + type + "'");
         }
@@ -103,11 +101,12 @@ public class GSettingsSchemaExtractorProgram
     }
 
     private static void AddSchemaEntry (object value, string namespce, string key,
-        string short_desc, string long_desc)
+        string summary, string description)
     {
         schema_count++;
-        
-        string full_key = CreateKey (namespce, key);
+
+        string id = CreateId (namespce);
+        string path = GetPath (id);
         
         bool list = value.GetType ().IsArray;
         Type type = list ? Type.GetTypeArray ((object [])value) [0] : value.GetType ();
@@ -134,23 +133,21 @@ public class GSettingsSchemaExtractorProgram
         }
  
         StringBuilder builder = new StringBuilder ();
-        builder.AppendFormat ("    <schema>\n");
-        builder.AppendFormat ("      <key>/schemas{0}</key>\n", full_key);
-        builder.AppendFormat ("      <applyto>{0}</applyto>\n", full_key);
-        builder.AppendFormat ("      <owner>banshee</owner>\n");
-        if (!list) {
-            builder.AppendFormat ("      <type>{0}</type>\n", str_type);
-        } else {
-            builder.AppendFormat ("      <type>list</type>\n");
-            builder.AppendFormat ("      <list_type>{0}</list_type>\n", str_type);
-        }
+        builder.AppendFormat ("  <schema id=\"{0}\" path=\"{1}\">\n", id, path);
+        builder.AppendFormat ("    <key name=\"{0}\" type=\"{1}\">\n", key, str_type);
+//TODO: deal with list types?
+//        if (!list) {
+//            builder.AppendFormat ("      <type>{0}</type>\n", str_type);
+//        } else {
+//            builder.AppendFormat ("      <type>list</type>\n");
+//            builder.AppendFormat ("      <list_type>{0}</list_type>\n", str_type);
+//        }
         builder.AppendFormat ("      <default>{0}</default>\n", str_val);
-        builder.AppendFormat ("      <locale name=\"C\">\n");
-        builder.AppendFormat ("        <short>{0}</short>\n", short_desc);
-        builder.AppendFormat ("        <long>{0}</long>\n", long_desc);
-        builder.AppendFormat ("      </locale>\n");
-        builder.AppendFormat ("    </schema>\n");
-        entries.Add (full_key, builder);
+        builder.AppendFormat ("      <_summary>{0}</_summary>\n", summary);
+        builder.AppendFormat ("      <_description>{0}</_description>\n", description);
+        builder.AppendFormat ("    </key>\n");
+        builder.AppendFormat ("  </schema>\n");
+        entries.Add (id + key, builder);
     }
         
     private static string CamelCaseToUnderCase (string s)
@@ -172,12 +169,14 @@ public class GSettingsSchemaExtractorProgram
         return undercase;
     }
 
-    private static string CreateKey (string namespce, string key)
+    private static string CreateId (string namespce)
     {
-        return namespce == null
-            ? "/apps/banshee/" + CamelCaseToUnderCase (key)
-            : "/apps/banshee/" + CamelCaseToUnderCase (namespce.Replace (".", "/"))
-                + "/" + CamelCaseToUnderCase (key);
-    } 
+        return "org.gnome.banshee." + CamelCaseToUnderCase (namespce);
+    }
+
+    private static string GetPath (string id)
+    {
+        return id.Replace ("org.gnome.", "/apps/").Replace (".", "/") + "/";
+    }
 }
 
