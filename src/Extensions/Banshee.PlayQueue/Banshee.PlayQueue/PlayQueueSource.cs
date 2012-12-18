@@ -1015,7 +1015,7 @@ namespace Banshee.PlayQueue
 
         public static readonly SchemaEntry<string> PopulateFromSchema = new SchemaEntry<string> (
             "plugins.play_queue", "populate_from",
-            ServiceManager.SourceManager.MusicLibrary.Name,
+            MusicLibrarySource.SourceName,
             "Source to poplulate from",
             "Name of the source to populate the the Play Queue from"
         );
