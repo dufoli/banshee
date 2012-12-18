@@ -177,6 +177,42 @@ namespace GConfSchemaExtractor
 </gconfschemafile>"
             .Trim ()));
         }
+
+        internal class ArrayType {
+            public static readonly SchemaEntry<string[]> CurrentFiltersSchema = new SchemaEntry<string[]> (
+                "sources.fsq", "current_filters",
+                new string[] { "album", "artist" },
+                null,
+                null
+            );
+        }
+
+        [Test]
+        public void SchemaWithArray ()
+        {
+            StringBuilder result = GConfSchemaExtractorProgram.Extract (new Type [] { typeof (ArrayType) });
+
+            Assert.That (result, Is.Not.Null);
+            Assert.That (result.ToString ().Trim (), Is.EqualTo (@"
+<?xml version=""1.0""?>
+<gconfschemafile>
+  <schemalist>
+    <schema>
+      <key>/schemas/apps/banshee/sources/fsq/current_filters</key>
+      <applyto>/apps/banshee/sources/fsq/current_filters</applyto>
+      <owner>banshee</owner>
+      <type>list</type>
+      <list_type>string</list_type>
+      <default>[album,artist]</default>
+      <locale name=""C"">
+        <short></short>
+        <long></long>
+      </locale>
+    </schema>
+  </schemalist>
+</gconfschemafile>"
+                .Trim ()));
+        }
     }
 }
 
