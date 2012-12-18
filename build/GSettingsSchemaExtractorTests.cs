@@ -1,5 +1,5 @@
 //
-// GConfSchemaExtractorTests.cs
+// GSettingsExtractorTests.cs
 //
 // Author:
 //   Andres G. Aragoneses <knocte@gmail.com>
@@ -31,7 +31,7 @@ using Banshee.Configuration;
 
 using NUnit.Framework;
 
-namespace GConfSchemaExtractor
+namespace GSettingsSchemaExtractor
 {
     [TestFixture]
     public class Tests
@@ -48,26 +48,19 @@ namespace GConfSchemaExtractor
         [Test]
         public void SchemaWithString ()
         {
-            StringBuilder result = GConfSchemaExtractorProgram.Extract (new Type [] { typeof (StringType) });
+            StringBuilder result = GSettingsSchemaExtractorProgram.Extract (new Type [] { typeof (StringType) });
 
             Assert.That (result, Is.Not.Null);
             Assert.That (result.ToString ().Trim (), Is.EqualTo (@"
-<?xml version=""1.0""?>
-<gconfschemafile>
-  <schemalist>
-    <schema>
-      <key>/schemas/apps/banshee/player_window/default_export_format</key>
-      <applyto>/apps/banshee/player_window/default_export_format</applyto>
-      <owner>banshee</owner>
-      <type>string</type>
-      <default>m3u</default>
-      <locale name=""C"">
-        <short>Export Format</short>
-        <long>The default playlist export format</long>
-      </locale>
-    </schema>
-  </schemalist>
-</gconfschemafile>"
+<schemalist>
+  <schema id=""org.gnome.banshee.player_window"" path=""/apps/banshee/player_window/"">
+    <key name=""default_export_format"" type=""s"">
+      <default>'m3u'</default>
+      <_summary>Export Format</_summary>
+      <_description>The default playlist export format</_description>
+    </key>
+  </schema>
+</schemalist>"
             .Trim ()));
         }
 
@@ -85,26 +78,19 @@ namespace GConfSchemaExtractor
         [Test]
         public void SchemaWithBoolean ()
         {
-            StringBuilder result = GConfSchemaExtractorProgram.Extract (new Type [] { typeof (BooleanType) });
+            StringBuilder result = GSettingsSchemaExtractorProgram.Extract (new Type [] { typeof (BooleanType) });
 
             Assert.That (result, Is.Not.Null);
             Assert.That (result.ToString ().Trim (), Is.EqualTo (@"
-<?xml version=""1.0""?>
-<gconfschemafile>
-  <schemalist>
-    <schema>
-      <key>/schemas/apps/banshee/import/show_initial_import_dialog</key>
-      <applyto>/apps/banshee/import/show_initial_import_dialog</applyto>
-      <owner>banshee</owner>
-      <type>bool</type>
+<schemalist>
+  <schema id=""org.gnome.banshee.import"" path=""/apps/banshee/import/"">
+    <key name=""show_initial_import_dialog"" type=""b"">
       <default>true</default>
-      <locale name=""C"">
-        <short>Show the Initial Import Dialog</short>
-        <long>Show the Initial Import Dialog when the Banshee library is empty</long>
-      </locale>
-    </schema>
-  </schemalist>
-</gconfschemafile>"
+      <_summary>Show the Initial Import Dialog</_summary>
+      <_description>Show the Initial Import Dialog when the Banshee library is empty</_description>
+    </key>
+  </schema>
+</schemalist>"
             .Trim ()));
         }
 
@@ -120,26 +106,19 @@ namespace GConfSchemaExtractor
         [Test]
         public void SchemaWithInt ()
         {
-            StringBuilder result = GConfSchemaExtractorProgram.Extract (new Type [] { typeof (IntegerType) });
+            StringBuilder result = GSettingsSchemaExtractorProgram.Extract (new Type [] { typeof (IntegerType) });
 
             Assert.That (result, Is.Not.Null);
             Assert.That (result.ToString ().Trim (), Is.EqualTo (@"
-<?xml version=""1.0""?>
-<gconfschemafile>
-  <schemalist>
-    <schema>
-      <key>/schemas/apps/banshee/player_engine/volume</key>
-      <applyto>/apps/banshee/player_engine/volume</applyto>
-      <owner>banshee</owner>
-      <type>int</type>
+<schemalist>
+  <schema id=""org.gnome.banshee.player_engine"" path=""/apps/banshee/player_engine/"">
+    <key name=""volume"" type=""i"">
       <default>80</default>
-      <locale name=""C"">
-        <short>Volume</short>
-        <long>Volume of playback relative to mixer output</long>
-      </locale>
-    </schema>
-  </schemalist>
-</gconfschemafile>"
+      <_summary>Volume</_summary>
+      <_description>Volume of playback relative to mixer output</_description>
+    </key>
+  </schema>
+</schemalist>"
                 .Trim ()));
         }
 
@@ -155,26 +134,19 @@ namespace GConfSchemaExtractor
         [Test]
         public void SchemaWithDouble ()
         {
-            StringBuilder result = GConfSchemaExtractorProgram.Extract (new Type [] { typeof (DoubleType) });
+            StringBuilder result = GSettingsSchemaExtractorProgram.Extract (new Type [] { typeof (DoubleType) });
 
             Assert.That (result, Is.Not.Null);
             Assert.That (result.ToString ().Trim (), Is.EqualTo (@"
-<?xml version=""1.0""?>
-<gconfschemafile>
-  <schemalist>
-    <schema>
-      <key>/schemas/apps/banshee/player_window/cover_art_size</key>
-      <applyto>/apps/banshee/player_window/cover_art_size</applyto>
-      <owner>banshee</owner>
-      <type>float</type>
+<schemalist>
+  <schema id=""org.gnome.banshee.player_window"" path=""/apps/banshee/player_window/"">
+    <key name=""cover_art_size"" type=""d"">
       <default>20.5</default>
-      <locale name=""C"">
-        <short>Cover art size</short>
-        <long>Surface size of cover art in the album grid</long>
-      </locale>
-    </schema>
-  </schemalist>
-</gconfschemafile>"
+      <_summary>Cover art size</_summary>
+      <_description>Surface size of cover art in the album grid</_description>
+    </key>
+  </schema>
+</schemalist>"
             .Trim ()));
         }
     }
