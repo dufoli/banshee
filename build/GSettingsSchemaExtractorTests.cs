@@ -177,6 +177,39 @@ namespace GSettingsSchemaExtractor
 </schemalist>"
                 .Trim ()));
         }
+
+        [Test]
+        public void SchemaWithMoreThanOneKey ()
+        {
+            StringBuilder result = GSettingsSchemaExtractorProgram.Extract (
+                new Type [] { typeof (IntegerType), typeof (DoubleType), typeof (StringType) });
+
+            Assert.That (result, Is.Not.Null);
+            Assert.That (result.ToString ().Trim (), Is.EqualTo (@"
+<schemalist>
+  <schema id=""org.gnome.banshee.player_engine"" path=""/apps/banshee/player_engine/"" gettext-domain=""banshee"">
+    <key name=""volume"" type=""i"">
+      <default>80</default>
+      <_summary>Volume</_summary>
+      <_description>Volume of playback relative to mixer output</_description>
+    </key>
+  </schema>
+  <schema id=""org.gnome.banshee.player_window"" path=""/apps/banshee/player_window/"" gettext-domain=""banshee"">
+    <key name=""cover_art_size"" type=""d"">
+      <default>20.5</default>
+      <_summary>Cover art size</_summary>
+      <_description>Surface size of cover art in the album grid</_description>
+    </key>
+    <key name=""default_export_format"" type=""s"">
+      <default>'m3u'</default>
+      <_summary>Export Format</_summary>
+      <_description>The default playlist export format</_description>
+    </key>
+  </schema>
+</schemalist>"
+                .Trim ()));
+        }
+
     }
 }
 

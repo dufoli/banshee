@@ -7,7 +7,7 @@ using System.Reflection;
 
 public class GSettingsSchemaExtractorProgram
 {
-    private static Dictionary<string, StringBuilder> entries;
+    private static Dictionary<string, List<StringBuilder>> entries;
     private static int schema_count;
 
     public static void Main(string [] args)
@@ -34,7 +34,7 @@ public class GSettingsSchemaExtractorProgram
     internal static StringBuilder Extract (IEnumerable<Type> types)
     {
         schema_count = 0;
-        entries = new Dictionary<string, StringBuilder> ();
+        entries = new Dictionary<string, List<StringBuilder>> ();
 
         foreach (Type type in types) {
             foreach (FieldInfo field in type.GetFields ()) {
@@ -61,11 +61,15 @@ public class GSettingsSchemaExtractorProgram
             StringBuilder final = new StringBuilder ();
             final.Append ("<schemalist>\n");
 
-            List<string> keys = new List<string> (entries.Keys);
-            keys.Sort ();
+            List<string> schemas = new List<string> (entries.Keys);
+            schemas.Sort ();
 
-            foreach(string key in keys) {
-                final.Append (entries [key]);
+            foreach (string id in schemas) {
+                final.AppendFormat ("  <schema id=\"{0}\" path=\"{1}\" gettext-domain=\"banshee\">\n", id, GetPath (id));
+                foreach (StringBuilder sb in entries [id]) {
+                    final.Append (sb);
+                }
+                final.Append ("  </schema>\n");
             }
 
             final.Append ("</schemalist>\n");
@@ -108,7 +112,6 @@ public class GSettingsSchemaExtractorProgram
         schema_count++;
 
         string id = CreateId (namespce);
-        string path = GetPath (id);
         
         bool list = value.GetType ().IsArray;
         Type type = list ? Type.GetTypeArray ((object [])value) [0] : value.GetType ();
@@ -140,14 +143,16 @@ public class GSettingsSchemaExtractorProgram
         }
 
         StringBuilder builder = new StringBuilder ();
-        builder.AppendFormat ("  <schema id=\"{0}\" path=\"{1}\" gettext-domain=\"banshee\">\n", id, path);
         builder.AppendFormat ("    <key name=\"{0}\" type=\"{1}\">\n", key, type_attrib);
         builder.AppendFormat ("      <default>{0}</default>\n", str_val);
         builder.AppendFormat ("      <_summary>{0}</_summary>\n", summary);
         builder.AppendFormat ("      <_description>{0}</_description>\n", description);
         builder.AppendFormat ("    </key>\n");
-        builder.AppendFormat ("  </schema>\n");
-        entries.Add (id + key, builder);
+        if (entries.ContainsKey (id)) {
+            entries [id].Add (builder);
+        } else {
+            entries [id] = new List<StringBuilder> { builder };
+        }
     }
         
     private static string CamelCaseToUnderCase (string s)

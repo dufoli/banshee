@@ -213,6 +213,56 @@ namespace GConfSchemaExtractor
 </gconfschemafile>"
                 .Trim ()));
         }
+
+        [Test]
+        public void SchemaWithMoreThanOneKey ()
+        {
+            StringBuilder result = GConfSchemaExtractorProgram.Extract (
+                new Type [] { typeof (IntegerType), typeof (DoubleType), typeof (StringType) });
+
+            Assert.That (result, Is.Not.Null);
+            Assert.That (result.ToString ().Trim (), Is.EqualTo (@"
+<?xml version=""1.0""?>
+<gconfschemafile>
+  <schemalist>
+    <schema>
+      <key>/schemas/apps/banshee/player_engine/volume</key>
+      <applyto>/apps/banshee/player_engine/volume</applyto>
+      <owner>banshee</owner>
+      <type>int</type>
+      <default>80</default>
+      <locale name=""C"">
+        <short>Volume</short>
+        <long>Volume of playback relative to mixer output</long>
+      </locale>
+    </schema>
+    <schema>
+      <key>/schemas/apps/banshee/player_window/cover_art_size</key>
+      <applyto>/apps/banshee/player_window/cover_art_size</applyto>
+      <owner>banshee</owner>
+      <type>float</type>
+      <default>20.5</default>
+      <locale name=""C"">
+        <short>Cover art size</short>
+        <long>Surface size of cover art in the album grid</long>
+      </locale>
+    </schema>
+    <schema>
+      <key>/schemas/apps/banshee/player_window/default_export_format</key>
+      <applyto>/apps/banshee/player_window/default_export_format</applyto>
+      <owner>banshee</owner>
+      <type>string</type>
+      <default>m3u</default>
+      <locale name=""C"">
+        <short>Export Format</short>
+        <long>The default playlist export format</long>
+      </locale>
+    </schema>
+  </schemalist>
+</gconfschemafile>
+"
+                .Trim ()));
+        }
     }
 }
 
