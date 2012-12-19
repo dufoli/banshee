@@ -177,11 +177,13 @@ public class GSettingsSchemaExtractorProgram
             type_attrib = "a" + type_attrib;
         }
 
+        key = key.Replace ("_", "-");
+
         StringBuilder builder = new StringBuilder ();
         builder.AppendFormat ("    <key name=\"{0}\" type=\"{1}\">\n", key, type_attrib);
         builder.AppendFormat ("      <default>{0}</default>\n", str_val);
-        builder.AppendFormat ("      <_summary>{0}</_summary>\n", summary);
-        builder.AppendFormat ("      <_description>{0}</_description>\n", description);
+        builder.AppendFormat ("      <summary>{0}</summary>\n", summary);
+        builder.AppendFormat ("      <description>{0}</description>\n", description);
         builder.AppendFormat ("    </key>\n");
         if (entries.ContainsKey (id)) {
             entries [id].Add (builder);

@@ -54,10 +54,10 @@ namespace GSettingsSchemaExtractor
             Assert.That (result.ToString ().Trim (), Is.EqualTo (@"
 <schemalist>
   <schema id=""org.gnome.banshee.player_window"" path=""/apps/banshee/player_window/"" gettext-domain=""banshee"">
-    <key name=""default_export_format"" type=""s"">
+    <key name=""default-export-format"" type=""s"">
       <default>'m3u'</default>
-      <_summary>Export Format</_summary>
-      <_description>The default playlist export format</_description>
+      <summary>Export Format</summary>
+      <description>The default playlist export format</description>
     </key>
   </schema>
 </schemalist>"
@@ -84,10 +84,10 @@ namespace GSettingsSchemaExtractor
             Assert.That (result.ToString ().Trim (), Is.EqualTo (@"
 <schemalist>
   <schema id=""org.gnome.banshee.import"" path=""/apps/banshee/import/"" gettext-domain=""banshee"">
-    <key name=""show_initial_import_dialog"" type=""b"">
+    <key name=""show-initial-import-dialog"" type=""b"">
       <default>true</default>
-      <_summary>Show the Initial Import Dialog</_summary>
-      <_description>Show the Initial Import Dialog when the Banshee library is empty</_description>
+      <summary>Show the Initial Import Dialog</summary>
+      <description>Show the Initial Import Dialog when the Banshee library is empty</description>
     </key>
   </schema>
 </schemalist>"
@@ -114,8 +114,8 @@ namespace GSettingsSchemaExtractor
   <schema id=""org.gnome.banshee.player_engine"" path=""/apps/banshee/player_engine/"" gettext-domain=""banshee"">
     <key name=""volume"" type=""i"">
       <default>80</default>
-      <_summary>Volume</_summary>
-      <_description>Volume of playback relative to mixer output</_description>
+      <summary>Volume</summary>
+      <description>Volume of playback relative to mixer output</description>
     </key>
   </schema>
 </schemalist>"
@@ -140,10 +140,10 @@ namespace GSettingsSchemaExtractor
             Assert.That (result.ToString ().Trim (), Is.EqualTo (@"
 <schemalist>
   <schema id=""org.gnome.banshee.player_window"" path=""/apps/banshee/player_window/"" gettext-domain=""banshee"">
-    <key name=""cover_art_size"" type=""d"">
+    <key name=""cover-art-size"" type=""d"">
       <default>20.5</default>
-      <_summary>Cover art size</_summary>
-      <_description>Surface size of cover art in the album grid</_description>
+      <summary>Cover art size</summary>
+      <description>Surface size of cover art in the album grid</description>
     </key>
   </schema>
 </schemalist>"
@@ -168,10 +168,10 @@ namespace GSettingsSchemaExtractor
             Assert.That (result.ToString ().Trim (), Is.EqualTo (@"
 <schemalist>
   <schema id=""org.gnome.banshee.sources.fsq"" path=""/apps/banshee/sources/fsq/"" gettext-domain=""banshee"">
-    <key name=""current_filters"" type=""as"">
+    <key name=""current-filters"" type=""as"">
       <default>['album','artist']</default>
-      <_summary></_summary>
-      <_description></_description>
+      <summary></summary>
+      <description></description>
     </key>
   </schema>
 </schemalist>"
@@ -190,20 +190,20 @@ namespace GSettingsSchemaExtractor
   <schema id=""org.gnome.banshee.player_engine"" path=""/apps/banshee/player_engine/"" gettext-domain=""banshee"">
     <key name=""volume"" type=""i"">
       <default>80</default>
-      <_summary>Volume</_summary>
-      <_description>Volume of playback relative to mixer output</_description>
+      <summary>Volume</summary>
+      <description>Volume of playback relative to mixer output</description>
     </key>
   </schema>
   <schema id=""org.gnome.banshee.player_window"" path=""/apps/banshee/player_window/"" gettext-domain=""banshee"">
-    <key name=""cover_art_size"" type=""d"">
+    <key name=""cover-art-size"" type=""d"">
       <default>20.5</default>
-      <_summary>Cover art size</_summary>
-      <_description>Surface size of cover art in the album grid</_description>
+      <summary>Cover art size</summary>
+      <description>Surface size of cover art in the album grid</description>
     </key>
-    <key name=""default_export_format"" type=""s"">
+    <key name=""default-export-format"" type=""s"">
       <default>'m3u'</default>
-      <_summary>Export Format</_summary>
-      <_description>The default playlist export format</_description>
+      <summary>Export Format</summary>
+      <description>The default playlist export format</description>
     </key>
   </schema>
 </schemalist>"
@@ -228,10 +228,10 @@ namespace GSettingsSchemaExtractor
             Assert.That (result.ToString ().Trim (), Is.EqualTo (@"
 <schemalist>
   <schema id=""org.gnome.banshee.plugins.audioscrobbler"" path=""/apps/banshee/plugins/audioscrobbler/"" gettext-domain=""banshee"">
-    <key name=""api_url"" type=""s"">
+    <key name=""api-url"" type=""s"">
       <default></default>
-      <_summary>AudioScrobbler API URL</_summary>
-      <_description>URL for the AudioScrobbler API (supports turtle.libre.fm, for instance)</_description>
+      <summary>AudioScrobbler API URL</summary>
+      <description>URL for the AudioScrobbler API (supports turtle.libre.fm, for instance)</description>
     </key>
   </schema>
 </schemalist>"
