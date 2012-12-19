@@ -65,7 +65,7 @@ public class GSettingsSchemaExtractorProgram
         entries = new Dictionary<string, List<StringBuilder>> ();
 
         foreach (Type type in types) {
-            foreach (FieldInfo field in type.GetFields ()) {
+            foreach (FieldInfo field in type.GetFields (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static)) {
                 if (field.FieldType.IsGenericType &&
                     field.FieldType.GetGenericTypeDefinition ().Name.StartsWith ("SchemaEntry")) {
 
