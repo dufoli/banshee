@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
@@ -12,27 +13,54 @@ public class GSettingsSchemaExtractorProgram
 
     public static void Main(string [] args)
     {
-        if (args.Length != 2) {
-            Console.Error.WriteLine ("Usage: gsettings-schema-extractor.exe Foo.dll bar.schema");
+        if (args.Length != 1) {
+            Console.Error.WriteLine ("Usage: gsettings-schema-extractor.exe /path/to/binaries/");
             Environment.Exit (1);
         }
 
-        Extract (args [0], args [1]);
+        var dir = new DirectoryInfo (args [0]);
+        if (!dir.Exists) {
+            Console.Error.WriteLine (args [0] + " does not exist");
+            Environment.Exit (1);
+        }
+
+        Extract (dir);
     }
 
-    private static void Extract (string assemblyName, string outputFile)
+    private static void Extract (DirectoryInfo dir)
     {
-        Assembly asm = Assembly.LoadFrom (assemblyName);
-        StringBuilder sbuilder = Extract (asm.GetTypes ());
+        var dot_net_assemblies = dir.EnumerateFiles ()
+            .Where (f => f.FullName.EndsWith (".dll", true, System.Globalization.CultureInfo.InvariantCulture) ||
+            f.FullName.EndsWith (".exe", true, System.Globalization.CultureInfo.InvariantCulture));
+
+        if (!dot_net_assemblies.Any ()) {
+            Console.Error.WriteLine ("No binary files found in specified path");
+            Environment.Exit (1);
+        }
+
+        var types = new List<Type> ();
+        foreach (var file in dot_net_assemblies) {
+            Assembly asm = Assembly.LoadFrom (file.FullName);
+            types.AddRange (asm.GetTypes ());
+            Console.WriteLine ("Inspecting types in " + file.Name);
+        }
+
+        StringBuilder sbuilder = Extract (types);
         if (sbuilder != null) {
+
+            string outputFile = Path.Combine (dir.FullName, "org.gnome.banshee.gschema.xml");
+
             using (StreamWriter writer = new StreamWriter (outputFile)) {
                 writer.Write (sbuilder.ToString ());
             }
+
+            Console.WriteLine ("Successfully wrote " + Path.GetFileName (outputFile));
         }
     }
 
     internal static StringBuilder Extract (IEnumerable<Type> types)
     {
+        Console.WriteLine ("Generating schemas");
         schema_count = 0;
         entries = new Dictionary<string, List<StringBuilder>> ();
 
@@ -44,6 +72,8 @@ public class GSettingsSchemaExtractorProgram
                     if (field.Name == "Zero") {
                         continue;
                     }
+
+                    Console.WriteLine ("Found SchemaEntry: " + type.FullName + "." + field.Name);
 
                     object schema = field.GetValue (null);
 
