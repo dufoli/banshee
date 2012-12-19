@@ -86,8 +86,8 @@ namespace Banshee.Lastfm.Audioscrobbler
             account = LastfmCore.Account;
 
             if (account.UserName == null) {
-                account.UserName = LastUserSchema.Get ();
-                account.SessionKey = LastSessionKeySchema.Get ();
+                account.UserName = LastfmSource.LastUserSchema.Get ();
+                account.SessionKey = LastfmSource.LastSessionKeySchema.Get ();
                 account.ScrobbleUrl = LastScrobbleUrlSchema.Get ();
             }
 
@@ -442,14 +442,6 @@ namespace Banshee.Lastfm.Audioscrobbler
         }
 
 #endregion
-
-        public static readonly SchemaEntry<string> LastUserSchema = new SchemaEntry<string> (
-            "plugins.lastfm", "username", "", "Last.fm user", "Last.fm username"
-        );
-
-        public static readonly SchemaEntry<string> LastSessionKeySchema = new SchemaEntry<string> (
-            "plugins.lastfm", "session_key", "", "Last.fm session key", "Last.fm sessions key used in authenticated calls"
-        );
 
         public static readonly SchemaEntry<string> LastScrobbleUrlSchema = new SchemaEntry<string> (
             "plugins.audioscrobbler", "api_url",
