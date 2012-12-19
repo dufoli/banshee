@@ -229,7 +229,7 @@ namespace GSettingsSchemaExtractor
 <schemalist>
   <schema id=""org.gnome.banshee.plugins.audioscrobbler"" path=""/apps/banshee/plugins/audioscrobbler/"" gettext-domain=""banshee"">
     <key name=""api-url"" type=""s"">
-      <default></default>
+      <default>''</default>
       <summary>AudioScrobbler API URL</summary>
       <description>URL for the AudioScrobbler API (supports turtle.libre.fm, for instance)</description>
     </key>

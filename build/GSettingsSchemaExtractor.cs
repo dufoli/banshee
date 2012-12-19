@@ -132,7 +132,8 @@ public class GSettingsSchemaExtractorProgram
             gctype = "d";
         } else if (type == typeof (string)) {
             gctype = "s";
-            return o == null ? null : "'" + o.ToString () + "'";
+            string value = o == null ? String.Empty : o.ToString ();
+            return String.Format ("'{0}'", value);
         } else {
             throw new Exception("Unsupported type '" + type + "'");
         }
