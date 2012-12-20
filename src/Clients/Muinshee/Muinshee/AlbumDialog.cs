@@ -63,12 +63,12 @@ namespace Muinshee
 
     public class AlbumDialog : BaseDialog
     {
-        const string config_namespace = BaseDialog.ConfigNamespacePrefix + ".album";
-        static readonly SchemaEntry<int> WidthSchema = WindowConfiguration.NewWidthSchema (config_namespace, BaseDialog.DEFAULT_WIDTH);
-        static readonly SchemaEntry<int> HeightSchema = WindowConfiguration.NewHeightSchema (config_namespace, BaseDialog.DEFAULT_HEIGHT);
-        static readonly SchemaEntry<int> XPosSchema = WindowConfiguration.NewXPosSchema (config_namespace);
-        static readonly SchemaEntry<int> YPosSchema = WindowConfiguration.NewYPosSchema (config_namespace);
-        static readonly SchemaEntry<bool> MaximizedSchema = WindowConfiguration.NewMaximizedSchema (config_namespace);
+        const string CONFIG_NAMESPACE = BaseDialog.CONFIG_NAMESPACE_PREFIX + ".album";
+        static readonly SchemaEntry<int> WidthSchema = WindowConfiguration.NewWidthSchema (CONFIG_NAMESPACE, BaseDialog.DEFAULT_WIDTH);
+        static readonly SchemaEntry<int> HeightSchema = WindowConfiguration.NewHeightSchema (CONFIG_NAMESPACE, BaseDialog.DEFAULT_HEIGHT);
+        static readonly SchemaEntry<int> XPosSchema = WindowConfiguration.NewXPosSchema (CONFIG_NAMESPACE);
+        static readonly SchemaEntry<int> YPosSchema = WindowConfiguration.NewYPosSchema (CONFIG_NAMESPACE);
+        static readonly SchemaEntry<bool> MaximizedSchema = WindowConfiguration.NewMaximizedSchema (CONFIG_NAMESPACE);
 
         private static DatabaseAlbumListModel album_model;
 
