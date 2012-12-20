@@ -47,45 +47,11 @@ namespace Banshee.Gui
         private uint timer_id = 0;
         private bool pending_changes;
 
-        public PersistentWindowController (Gtk.Window window, string configNameSpace, int defaultWidth, int defaultHeight, WindowPersistOptions options)
+        public PersistentWindowController (Gtk.Window window, WindowConfiguration windowConfig, WindowPersistOptions options)
         {
             this.window = window;
             this.options = options;
-
-            WidthSchema = new SchemaEntry<int>(
-                configNameSpace, "width",
-                defaultWidth,
-                "Window Width",
-                "Width of the main interface window."
-            );
-
-            HeightSchema = new SchemaEntry<int>(
-                configNameSpace, "height",
-                defaultHeight,
-                "Window Height",
-                "Height of the main interface window."
-            );
-
-            XPosSchema = new SchemaEntry<int>(
-                configNameSpace, "x_pos",
-                0,
-                "Window Position X",
-                "Pixel position of Main Player Window on the X Axis"
-            );
-
-            YPosSchema = new SchemaEntry<int>(
-                configNameSpace, "y_pos",
-                0,
-                "Window Position Y",
-                "Pixel position of Main Player Window on the Y Axis"
-            );
-
-            MaximizedSchema = new SchemaEntry<bool>(
-                configNameSpace, "maximized",
-                false,
-                "Window Maximized",
-                "True if main window is to be maximized, false if it is not."
-            );
+            this.window_config = windowConfig;
 
             window.ConfigureEvent += OnChanged;
             window.WindowStateEvent += OnChanged;
@@ -108,8 +74,8 @@ namespace Banshee.Gui
         public void Restore ()
         {
             if ((options & WindowPersistOptions.Size) != 0) {
-                int width = WidthSchema.Get ();
-                int height = HeightSchema.Get ();
+                int width = window_config.WidthSchema.Get ();
+                int height = window_config.HeightSchema.Get ();
 
                 if (width != 0 && height != 0) {
                     window.Resize (width, height);
@@ -117,8 +83,8 @@ namespace Banshee.Gui
             }
 
             if ((options & WindowPersistOptions.Position) != 0) {
-                int x = XPosSchema.Get ();
-                int y = YPosSchema.Get ();
+                int x = window_config.XPosSchema.Get ();
+                int y = window_config.YPosSchema.Get ();
 
                 if (x == 0 && y == 0) {
                     window.SetPosition (Gtk.WindowPosition.Center);
@@ -128,7 +94,7 @@ namespace Banshee.Gui
             }
 
             if ((options & WindowPersistOptions.Size) != 0) {
-                if (MaximizedSchema.Get ()) {
+                if (window_config.MaximizedSchema.Get ()) {
                     window.Maximize ();
                 } else {
                     window.Unmaximize ();
@@ -172,7 +138,7 @@ namespace Banshee.Gui
         private void InnerSave ()
         {
             if (maximized) {
-                MaximizedSchema.Set (true);
+                window_config.MaximizedSchema.Set (true);
                 return;
             }
 
@@ -180,17 +146,13 @@ namespace Banshee.Gui
                  return;
             }
 
-            MaximizedSchema.Set (false);
-            XPosSchema.Set (x);
-            YPosSchema.Set (y);
-            WidthSchema.Set (width);
-            HeightSchema.Set (height);
+            window_config.MaximizedSchema.Set (false);
+            window_config.XPosSchema.Set (x);
+            window_config.YPosSchema.Set (y);
+            window_config.WidthSchema.Set (width);
+            window_config.HeightSchema.Set (height);
         }
 
-        private SchemaEntry<int> WidthSchema;
-        private SchemaEntry<int> HeightSchema;
-        private SchemaEntry<int> XPosSchema;
-        private SchemaEntry<int> YPosSchema;
-        private SchemaEntry<bool> MaximizedSchema;
+        private WindowConfiguration window_config;
     }
 }

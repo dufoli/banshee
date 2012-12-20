@@ -63,11 +63,15 @@ namespace Muinshee
 
     public abstract class BaseDialog : BansheeDialog
     {
+        protected const string CONFIG_NAMESPACE_PREFIX = "muinshee";
+        protected const int DEFAULT_WIDTH = 500;
+        protected const int DEFAULT_HEIGHT = 475;
+
         private SearchEntry search_entry;
         private PlaylistSource queue;
         private PersistentWindowController window_controller;
 
-        public BaseDialog (PlaylistSource queue, string title, string addType) : base (title)
+        public BaseDialog (PlaylistSource queue, string title, WindowConfiguration windowConfig) : base (title)
         {
             this.queue = queue;
             VBox.Spacing = 6;
@@ -99,7 +103,7 @@ namespace Muinshee
             Button play_button = new ImageButton (Catalog.GetString ("_Play"), "media-playback-start");
             AddButton (play_button, Gtk.ResponseType.Ok, true);
 
-            window_controller = new PersistentWindowController (this, String.Format ("muinshee.{0}", addType), 500, 475, WindowPersistOptions.Size);
+            window_controller = new PersistentWindowController (this, windowConfig, WindowPersistOptions.Size);
             window_controller.Restore ();
             ShowAll ();
 

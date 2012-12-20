@@ -59,6 +59,15 @@ namespace Muinshee
 {
     public class PlayerInterface : BaseClientWindow, IClientWindow, IDBusObjectName, IService, IDisposable
     {
+        const string CONFIG_NAMESPACE = "muinshee";
+        const int DEFAULT_WIDTH = -1;
+        const int DEFAULT_HEIGHT = 450;
+        static readonly SchemaEntry<int> WidthSchema = WindowConfiguration.NewWidthSchema (CONFIG_NAMESPACE, DEFAULT_WIDTH);
+        static readonly SchemaEntry<int> HeightSchema = WindowConfiguration.NewHeightSchema (CONFIG_NAMESPACE, DEFAULT_HEIGHT);
+        static readonly SchemaEntry<int> XPosSchema = WindowConfiguration.NewXPosSchema (CONFIG_NAMESPACE);
+        static readonly SchemaEntry<int> YPosSchema = WindowConfiguration.NewYPosSchema (CONFIG_NAMESPACE);
+        static readonly SchemaEntry<bool> MaximizedSchema = WindowConfiguration.NewMaximizedSchema (CONFIG_NAMESPACE);
+
         // Major Layout Components
         private VBox content_vbox;
         private VBox main_vbox;
@@ -73,7 +82,9 @@ namespace Muinshee
         private int played_songs_number = -1;
         private SchemaPreference<int> played_songs_number_pref;
 
-        public PlayerInterface () : base (Catalog.GetString ("Banshee Media Player"), "muinshee", -1, 450)
+        public PlayerInterface () :
+            base (Catalog.GetString ("Banshee Media Player"),
+                  new WindowConfiguration (WidthSchema, HeightSchema, XPosSchema, YPosSchema, MaximizedSchema))
         {
         }
 

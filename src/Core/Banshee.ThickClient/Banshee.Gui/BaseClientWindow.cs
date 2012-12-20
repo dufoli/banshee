@@ -61,14 +61,14 @@ namespace Banshee.Gui
         {
         }
 
-        public BaseClientWindow (string title, string configNameSpace, int defaultWidth, int defaultHeight) : base (title)
+        public BaseClientWindow (string title, WindowConfiguration windowConfiguration) : base (title)
         {
             elements_service = ServiceManager.Get<GtkElementsService> ();
             action_service = ServiceManager.Get<InterfaceActionService> ();
 
             ConfigureWindow ();
 
-            window_controller = new PersistentWindowController (this, configNameSpace, defaultWidth, defaultHeight, WindowPersistOptions.All);
+            window_controller = new PersistentWindowController (this, windowConfiguration, WindowPersistOptions.All);
             window_controller.Restore ();
 
             elements_service.PrimaryWindow = this;

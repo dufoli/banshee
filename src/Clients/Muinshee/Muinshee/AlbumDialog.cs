@@ -63,6 +63,13 @@ namespace Muinshee
 
     public class AlbumDialog : BaseDialog
     {
+        const string config_namespace = BaseDialog.ConfigNamespacePrefix + ".album";
+        static readonly SchemaEntry<int> WidthSchema = WindowConfiguration.NewWidthSchema (config_namespace, BaseDialog.DEFAULT_WIDTH);
+        static readonly SchemaEntry<int> HeightSchema = WindowConfiguration.NewHeightSchema (config_namespace, BaseDialog.DEFAULT_HEIGHT);
+        static readonly SchemaEntry<int> XPosSchema = WindowConfiguration.NewXPosSchema (config_namespace);
+        static readonly SchemaEntry<int> YPosSchema = WindowConfiguration.NewYPosSchema (config_namespace);
+        static readonly SchemaEntry<bool> MaximizedSchema = WindowConfiguration.NewMaximizedSchema (config_namespace);
+
         private static DatabaseAlbumListModel album_model;
 
         static AlbumDialog () {
@@ -74,7 +81,9 @@ namespace Muinshee
             }
         }
 
-        public AlbumDialog (PlaylistSource queue) : base (queue, Catalog.GetString ("Play Album"), "album")
+        public AlbumDialog (PlaylistSource queue) :
+            base (queue, Catalog.GetString ("Play Album"),
+                  new WindowConfiguration (WidthSchema, HeightSchema, XPosSchema, YPosSchema, MaximizedSchema))
         {
         }
 

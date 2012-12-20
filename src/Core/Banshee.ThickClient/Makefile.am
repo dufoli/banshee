@@ -126,6 +126,7 @@ SOURCES =  \
 	Banshee.Gui/SourceActions.cs \
 	Banshee.Gui/TrackActions.cs \
 	Banshee.Gui/ViewActions.cs \
+	Banshee.Gui/WindowConfiguration.cs \
 	Banshee.Library.Gui/FileImportSource.cs \
 	Banshee.Library.Gui/FolderImportSource.cs \
 	Banshee.Library.Gui/ImportDialog.cs \

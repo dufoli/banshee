@@ -58,6 +58,13 @@ namespace Nereid
 {
     public class PlayerInterface : BaseClientWindow, IClientWindow, IDBusObjectName, IService, IDisposable, IHasSourceView
     {
+        const string CONFIG_NAMESPACE = "player_window";
+        static readonly SchemaEntry<int> WidthSchema = WindowConfiguration.NewWidthSchema (CONFIG_NAMESPACE, 1024);
+        static readonly SchemaEntry<int> HeightSchema = WindowConfiguration.NewHeightSchema (CONFIG_NAMESPACE, 700);
+        static readonly SchemaEntry<int> XPosSchema = WindowConfiguration.NewXPosSchema (CONFIG_NAMESPACE);
+        static readonly SchemaEntry<int> YPosSchema = WindowConfiguration.NewYPosSchema (CONFIG_NAMESPACE);
+        static readonly SchemaEntry<bool> MaximizedSchema = WindowConfiguration.NewMaximizedSchema (CONFIG_NAMESPACE);
+
         // Major Layout Components
         private VBox primary_vbox;
         private Table header_table;
@@ -104,7 +111,9 @@ namespace Nereid
             }
         }
 
-        public PlayerInterface () : base (Catalog.GetString ("Banshee Media Player"), "player_window", 1024, 700)
+        public PlayerInterface () :
+            base (Catalog.GetString ("Banshee Media Player"),
+                  new WindowConfiguration (WidthSchema, HeightSchema, XPosSchema, YPosSchema, MaximizedSchema))
         {
             // if (PlatformDetection.IsMeeGo) {
             //     Gdk.Window.AddFilterForAll (OnGdkEventFilter);
