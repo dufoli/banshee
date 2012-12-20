@@ -44,11 +44,19 @@ using Banshee.Sources.Gui;
 using Banshee.MediaEngine;
 using Banshee.ServiceStack;
 using Banshee.Widgets;
+using Banshee.Configuration;
 
 namespace Banshee.MiniMode
 {
     public class MiniMode : Banshee.Gui.BaseClientWindow
     {
+        const string CONFIG_NAMESPACE = "minimode";
+        static readonly SchemaEntry<int> WidthSchema = WindowConfiguration.NewWidthSchema (CONFIG_NAMESPACE, 0);
+        static readonly SchemaEntry<int> HeightSchema = WindowConfiguration.NewHeightSchema (CONFIG_NAMESPACE, 0);
+        static readonly SchemaEntry<int> XPosSchema = WindowConfiguration.NewXPosSchema (CONFIG_NAMESPACE);
+        static readonly SchemaEntry<int> YPosSchema = WindowConfiguration.NewYPosSchema (CONFIG_NAMESPACE);
+        static readonly SchemaEntry<bool> MaximizedSchema = WindowConfiguration.NewMaximizedSchema (CONFIG_NAMESPACE);
+
         private TrackInfoDisplay track_info_display;
         private ConnectedVolumeButton volume_button;
         private SourceComboBox source_combo_box;
@@ -56,7 +64,9 @@ namespace Banshee.MiniMode
 
         private BaseClientWindow default_main_window;
 
-        public MiniMode (BaseClientWindow defaultMainWindow) : base (Catalog.GetString ("Banshee Media Player"), "minimode", 0, 0)
+        public MiniMode (BaseClientWindow defaultMainWindow) :
+            base (Catalog.GetString ("Banshee Media Player"),
+                  new WindowConfiguration (WidthSchema, HeightSchema, XPosSchema, YPosSchema, MaximizedSchema))
         {
             default_main_window = defaultMainWindow;
 
