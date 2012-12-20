@@ -55,13 +55,6 @@ namespace Banshee.Configuration.Schema
                 "%album_artist_initial%, %artist% (deprecated, use %album_artist%)."
         );
 
-        public static readonly SchemaEntry<bool> MoveOnInfoSave = new SchemaEntry<bool>(
-            "library", "move_on_info_save",
-            false,
-            "Move music on info save",
-            "Move music within banshee music library directory when saving track info"
-        );
-
         public static readonly SchemaEntry<bool> WriteMetadata = new SchemaEntry<bool>(
             "library", "write_metadata",
             false,
