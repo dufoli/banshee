@@ -14,6 +14,7 @@ endif
 
 FILTERED_LINK = $(shell echo "$(LINK)" | $(UNIQUE_FILTER_PIPE))
 DEP_LINK = $(shell echo "$(LINK)" | $(UNIQUE_FILTER_PIPE) | sed s,-r:,,g | grep '$(top_builddir)/bin/')
+DLL_MAP_VERIFIER_ASSEMBLY = $(top_srcdir)/build/dll-map-verifier.exe
 
 moduledir = $(INSTALL_DIR_RESOLVED)
 module_SCRIPTS = $(OUTPUT_FILES)
@@ -33,9 +34,12 @@ test:
 build-debug:
 	@echo $(DEP_LINK)
 
+$(DLL_MAP_VERIFIER_ASSEMBLY): $(top_srcdir)/build/DllMapVerifier.cs
+	$(MCS) -out:$@ $<
+
 $(ASSEMBLY_FILE).mdb: $(ASSEMBLY_FILE)
 
-$(ASSEMBLY_FILE): $(SOURCES_BUILD) $(RESOURCES_EXPANDED) $(DEP_LINK)
+$(ASSEMBLY_FILE): $(SOURCES_BUILD) $(RESOURCES_EXPANDED) $(DEP_LINK) $(DLL_MAP_VERIFIER_ASSEMBLY)
 	@mkdir -p $(top_builddir)/bin
 	@if [ ! "x$(ENABLE_RELEASE)" = "xyes" ]; then \
 		$(top_srcdir)/build/dll-map-makefile-verifier $(srcdir)/Makefile.am $(srcdir)/$(notdir $@.config) && \
