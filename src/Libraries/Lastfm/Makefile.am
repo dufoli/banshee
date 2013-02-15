@@ -17,7 +17,8 @@ SOURCES =  \
 	Lastfm/IQueue.cs \
 	Lastfm/LastfmCore.cs \
 	Lastfm/LastfmRequest.cs \
-	Lastfm/RadioConnection.cs 
+	Lastfm/RadioConnection.cs \
+	Lastfm/Tests/LastfmRequestTests.cs
 
 include $(top_srcdir)/build/build.mk
 

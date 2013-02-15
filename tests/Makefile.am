@@ -10,6 +10,7 @@ TEST_ASSEMBLIES = \
 	Hyena.dll \
 	Hyena.Gui.dll \
 	Hyena.Data.Sqlite.dll \
+	Lastfm.dll \
 	Migo.dll \
 	Mono.Media.dll \
 	Banshee.Core.dll \

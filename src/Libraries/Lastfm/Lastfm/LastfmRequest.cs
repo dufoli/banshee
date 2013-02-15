@@ -54,6 +54,19 @@ namespace Lastfm
 
     public delegate void SendRequestHandler ();
 
+    internal interface IWebRequestCreator
+    {
+        HttpWebRequest Create (string requestUriString);
+    }
+
+    internal class WebRequestCreator : IWebRequestCreator
+    {
+        public HttpWebRequest Create (string requestUriString)
+        {
+            return (HttpWebRequest) HttpWebRequest.Create (requestUriString);
+        }
+    }
+
     public class LastfmRequest
     {
         private const string API_ROOT = "http://ws.audioscrobbler.com/2.0/";
@@ -61,9 +74,16 @@ namespace Lastfm
         private Dictionary<string, string> parameters = new Dictionary<string, string> ();
         private Stream response_stream;
         private string response_string;
+        IWebRequestCreator web_request_creator;
 
         public LastfmRequest ()
         {}
+
+        internal LastfmRequest (string method, RequestType request_type, ResponseFormat response_format, IWebRequestCreator web_request_creator)
+            : this (method, request_type, response_format)
+        {
+            this.web_request_creator = web_request_creator;
+        }
 
         public LastfmRequest (string method) : this (method, RequestType.Read, ResponseFormat.Json)
         {}
@@ -73,6 +93,9 @@ namespace Lastfm
             this.method = method;
             this.request_type = request_type;
             this.response_format = response_format;
+            if (this.web_request_creator == null) {
+                this.web_request_creator = new WebRequestCreator ();
+            }
         }
 
         private string method;
@@ -271,7 +294,7 @@ namespace Lastfm
 
         private Stream Get (string uri, string accept)
         {
-            HttpWebRequest request = (HttpWebRequest) WebRequest.Create (uri);
+            HttpWebRequest request = web_request_creator.Create (uri);
             if (accept != null) {
                 request.Accept = accept;
             }
@@ -293,7 +316,7 @@ namespace Lastfm
         private Stream Post (string uri, string data)
         {
             // Do not trust docs : it doesn't work if parameters are in the request body
-            HttpWebRequest request = (HttpWebRequest) WebRequest.Create (String.Concat (uri, "?", data));
+            HttpWebRequest request = web_request_creator.Create (String.Concat (uri, "?", data));
             request.UserAgent = LastfmCore.UserAgent;
             request.Timeout = 10000;
             request.Method = "POST";
