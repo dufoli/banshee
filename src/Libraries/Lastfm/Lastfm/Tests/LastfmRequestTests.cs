@@ -112,7 +112,7 @@ namespace Lastfm.Tests
             UrisAreEquivalent (expected, creator.Uri.ToString ());
         }
 
-        public void UrisAreEquivalent (string expected, string actual)
+        private void UrisAreEquivalent (string expected, string actual)
         {
             if (String.IsNullOrEmpty (expected)) {
                 throw new ArgumentNullException ("expected");
