@@ -37,15 +37,15 @@ namespace Lastfm.Tests
     [TestFixture]
     public class Tests
     {
-        class FakeWebRequestCreator : IWebRequestCreator
+        class FakeWebRequestCreator : IWebRequestCreate
         {
-            public HttpWebRequest Create (string requestUriString)
+            public WebRequest Create (Uri uri)
             {
-                Uri = requestUriString;
-                return (HttpWebRequest)WebRequest.Create (requestUriString);
+                Uri = uri;
+                return (HttpWebRequest)WebRequest.Create (uri);
             }
 
-            internal string Uri { get; set; }
+            internal Uri Uri { get; set; }
         }
 
         [Test]
@@ -54,7 +54,7 @@ namespace Lastfm.Tests
             var expected = "http://ws.audioscrobbler.com/2.0/?method=someMethod&api_key=344e9141fffeb02201e1ae455d92ae9f&format=json";
             var creator = new FakeWebRequestCreator ();
             new LastfmRequest ("someMethod", RequestType.Read, ResponseFormat.Json, creator).Send ();
-            Assert.AreEqual (expected, creator.Uri);
+            Assert.AreEqual (expected, creator.Uri.ToString ());
         }
 
         [Test]
@@ -66,7 +66,7 @@ namespace Lastfm.Tests
             req.AddParameter ("x", "y");
             req.AddParameter ("a", "b");
             req.Send ();
-            Assert.AreEqual (expected, creator.Uri);
+            Assert.AreEqual (expected, creator.Uri.ToString ());
         }
 
         [Test]
@@ -75,7 +75,7 @@ namespace Lastfm.Tests
             var expected = "http://ws.audioscrobbler.com/2.0/?method=someMethod&api_key=344e9141fffeb02201e1ae455d92ae9f&raw=true";
             var creator = new FakeWebRequestCreator ();
             new LastfmRequest ("someMethod", RequestType.Read, ResponseFormat.Raw, creator).Send ();
-            Assert.AreEqual (expected, creator.Uri);
+            Assert.AreEqual (expected, creator.Uri.ToString ());
         }
 
         [Test]
@@ -84,7 +84,7 @@ namespace Lastfm.Tests
             var expected = "http://ws.audioscrobbler.com/2.0/?method=someMethod&api_key=344e9141fffeb02201e1ae455d92ae9f&format=json&sk=&api_sig=33ca04b6d45c54eb1405b3d7cb7735ea";
             var creator = new FakeWebRequestCreator ();
             new LastfmRequest ("someMethod", RequestType.Write, ResponseFormat.Json, creator).Send ();
-            Assert.AreEqual (expected, creator.Uri);
+            Assert.AreEqual (expected, creator.Uri.ToString ());
         }
 
         [Test]
@@ -96,7 +96,7 @@ namespace Lastfm.Tests
             req.AddParameter ("x", "y");
             req.AddParameter ("a", "b");
             req.Send ();
-            Assert.AreEqual (expected, creator.Uri);
+            Assert.AreEqual (expected, creator.Uri.ToString ());
         }
 
         [Test]
@@ -108,7 +108,7 @@ namespace Lastfm.Tests
             req.AddParameter ("x", "y");
             req.AddParameter ("a", "b");
             req.Send ();
-            Assert.AreEqual (expected, creator.Uri);
+            Assert.AreEqual (expected, creator.Uri.ToString ());
         }
 
     }
