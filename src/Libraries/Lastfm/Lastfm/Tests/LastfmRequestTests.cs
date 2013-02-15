@@ -30,6 +30,7 @@
 
 using System;
 using System.Net;
+using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace Lastfm.Tests
@@ -54,7 +55,7 @@ namespace Lastfm.Tests
             var expected = "http://ws.audioscrobbler.com/2.0/?method=someMethod&api_key=344e9141fffeb02201e1ae455d92ae9f&format=json";
             var creator = new FakeWebRequestCreator ();
             new LastfmRequest ("someMethod", RequestType.Read, ResponseFormat.Json, creator).Send ();
-            Assert.AreEqual (expected, creator.Uri.ToString ());
+            UrisAreEquivalent (expected, creator.Uri.ToString ());
         }
 
         [Test]
@@ -66,7 +67,7 @@ namespace Lastfm.Tests
             req.AddParameter ("x", "y");
             req.AddParameter ("a", "b");
             req.Send ();
-            Assert.AreEqual (expected, creator.Uri.ToString ());
+            UrisAreEquivalent (expected, creator.Uri.ToString ());
         }
 
         [Test]
@@ -75,7 +76,7 @@ namespace Lastfm.Tests
             var expected = "http://ws.audioscrobbler.com/2.0/?method=someMethod&api_key=344e9141fffeb02201e1ae455d92ae9f&raw=true";
             var creator = new FakeWebRequestCreator ();
             new LastfmRequest ("someMethod", RequestType.Read, ResponseFormat.Raw, creator).Send ();
-            Assert.AreEqual (expected, creator.Uri.ToString ());
+            UrisAreEquivalent (expected, creator.Uri.ToString ());
         }
 
         [Test]
@@ -84,7 +85,7 @@ namespace Lastfm.Tests
             var expected = "http://ws.audioscrobbler.com/2.0/?method=someMethod&api_key=344e9141fffeb02201e1ae455d92ae9f&format=json&sk=&api_sig=33ca04b6d45c54eb1405b3d7cb7735ea";
             var creator = new FakeWebRequestCreator ();
             new LastfmRequest ("someMethod", RequestType.Write, ResponseFormat.Json, creator).Send ();
-            Assert.AreEqual (expected, creator.Uri.ToString ());
+            UrisAreEquivalent (expected, creator.Uri.ToString ());
         }
 
         [Test]
@@ -96,7 +97,7 @@ namespace Lastfm.Tests
             req.AddParameter ("x", "y");
             req.AddParameter ("a", "b");
             req.Send ();
-            Assert.AreEqual (expected, creator.Uri.ToString ());
+            UrisAreEquivalent (expected, creator.Uri.ToString ());
         }
 
         [Test]
@@ -108,7 +109,36 @@ namespace Lastfm.Tests
             req.AddParameter ("x", "y");
             req.AddParameter ("a", "b");
             req.Send ();
-            Assert.AreEqual (expected, creator.Uri.ToString ());
+            UrisAreEquivalent (expected, creator.Uri.ToString ());
+        }
+
+        public void UrisAreEquivalent (string expected, string actual)
+        {
+            if (String.IsNullOrEmpty (expected)) {
+                throw new ArgumentNullException ("expected");
+            }
+
+            if (String.IsNullOrEmpty (actual)) {
+                throw new ArgumentNullException ("actual");
+            }
+
+            if (!expected.Contains ("?") || !actual.Contains ("?")) {
+                throw new ArgumentException ("uris must contain parameters, so a ? char to beging the querystring should be present");
+            }
+
+            string expected_without_querystring = expected.Substring (0, expected.IndexOf ("?"));
+            string actual_without_querystring = actual.Substring (0, actual.IndexOf ("?"));
+
+            Assert.AreEqual (expected_without_querystring, actual_without_querystring);
+
+            var expected_parameters = expected.Substring (expected.IndexOf ("?")).Split (new [] {'&'});
+            var actual_parameters = new List<string> (actual.Substring (actual.IndexOf ("?")).Split (new [] {'&'}));
+
+            Assert.AreEqual (expected_parameters.Length, actual_parameters.Count);
+            foreach (var expected_param in expected_parameters) {
+                Assert.IsTrue (actual_parameters.Contains (expected_param),
+                               String.Format ("URI {0} is missing parameter '{1}'", actual, expected_param));
+            }
         }
 
     }
