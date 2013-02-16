@@ -511,7 +511,7 @@ namespace Banshee.Sources
         {
             is_deleting = true;
             DeleteTrackJob.Total += list.Count;
-            List<DatabaseTrackInfo> skip_deletion = null;
+            var skip_deletion = new List<DatabaseTrackInfo> ();
 
             // Remove from file system
             foreach (DatabaseTrackInfo track in list) {
@@ -520,12 +520,14 @@ namespace Banshee.Sources
                     continue;
                 }
 
+                if (DeleteTrackJob.IsCancelRequested) {
+                    skip_deletion.Add (track);
+                    continue;
+                }
+
                 try {
                     DeleteTrackJob.Status = String.Format ("{0} - {1}", track.ArtistName, track.TrackTitle);
                     if (!DeleteTrack (track)) {
-                        if (skip_deletion == null) {
-                            skip_deletion = new List<DatabaseTrackInfo> ();
-                        }
                         skip_deletion.Add (track);
                     }
                 } catch (Exception e) {
@@ -539,17 +541,15 @@ namespace Banshee.Sources
                 }
             }
 
+            if (!DeleteTrackJob.IsFinished || DeleteTrackJob.IsCancelRequested) {
+                delete_track_job.Finish ();
+            }
+            delete_track_job = null;
             is_deleting = false;
 
-            if (DeleteTrackJob.Total == DeleteTrackJob.Completed) {
-                delete_track_job.Finish ();
-                delete_track_job = null;
-            }
-
-            if (skip_deletion != null) {
+            if (skip_deletion.Count > 0) {
                 list.Remove (skip_deletion);
                 skip_deletion.Clear ();
-                skip_deletion = null;
             }
 
             // Remove from database
@@ -727,6 +727,7 @@ namespace Banshee.Sources
                         delete_track_job.SetResources (Resource.Cpu, Resource.Database);
                         delete_track_job.PriorityHints = PriorityHints.SpeedSensitive | PriorityHints.DataLossIfStopped;
                         delete_track_job.DelayShow = DelayDeleteJob;
+                        delete_track_job.CanCancel = true;
                         delete_track_job.Register ();
                     }
                 }
