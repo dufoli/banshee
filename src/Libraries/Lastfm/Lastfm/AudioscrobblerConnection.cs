@@ -5,8 +5,11 @@
 //   Chris Toshok <toshok@ximian.com>
 //   Alexander Hixon <hixon.alexander@mediati.org>
 //   Phil Trimble <philtrimble@gmail.com>
+//   Andres G. Aragoneses <knocte@gmail.com>
 //
 // Copyright (C) 2005-2008 Novell, Inc.
+// Copyright (C) 2013 Phil Trimble
+// Copyright (C) 2013 Andres G. Aragoneses
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -40,6 +43,7 @@ using System.Web;
 using Hyena;
 using Hyena.Json;
 using Mono.Unix;
+using System.Collections.Specialized;
 
 namespace Lastfm
 {
@@ -199,33 +203,30 @@ namespace Lastfm
                 return;
             }
 
+            state = State.Transmitting;
             current_scrobble_request = new LastfmRequest ("track.scrobble", RequestType.Write, ResponseFormat.Json);
-            IList<IQueuedTrack> tracks = queue.GetTracks ();
 
-            for (int i = 0; i < tracks.Count; i++) {
-                IQueuedTrack track = tracks[i];
+            int trackCount = 0;
+            while (true) {
+                IQueuedTrack track = queue.GetNextTrack ();
+                if (track == null ||
+                    // Last.fm can technically handle up to 50 songs in one request
+                    // but let's not use the top limit
+                    trackCount == 40) {
+                    break;
+                 }
 
-                string str_track_number = String.Empty;
-                if (track.TrackNumber != 0) {
-                    str_track_number = track.TrackNumber.ToString();
+                try {
+                    current_scrobble_request.AddParameters (GetTrackParameters (track, trackCount));
+                    trackCount++;
+                } catch (MaxSizeExceededException) {
+                    break;
                 }
-
-                bool chosen_by_user = (track.TrackAuth.Length == 0);
-
-                current_scrobble_request.AddParameter (String.Format ("timestamp[{0}]", i), track.StartTime.ToString ());
-                current_scrobble_request.AddParameter (String.Format ("track[{0}]", i), track.Title);
-                current_scrobble_request.AddParameter (String.Format ("artist[{0}]", i), track.Artist);
-                current_scrobble_request.AddParameter (String.Format ("album[{0}]", i), track.Album);
-                current_scrobble_request.AddParameter (String.Format ("trackNumber[{0}]", i), str_track_number);
-                current_scrobble_request.AddParameter (String.Format ("duration[{0}]", i), track.Duration.ToString ());
-                current_scrobble_request.AddParameter (String.Format ("mbid[{0}]", i), track.MusicBrainzId);
-                current_scrobble_request.AddParameter (String.Format ("chosenByUser[{0}]", i), chosen_by_user ? "1" : "0");
             }
 
             Log.DebugFormat ("Last.fm scrobbler sending '{0}'", current_scrobble_request.ToString ());
 
-            state = State.Transmitting;
-            current_async_result = current_scrobble_request.BeginSend (OnScrobbleResponse, tracks.Count);
+            current_async_result = current_scrobble_request.BeginSend (OnScrobbleResponse, trackCount);
             state = State.WaitingForResponse;
             if (!(current_async_result.AsyncWaitHandle.WaitOne (TIME_OUT, false))) {
                 Log.Warning ("Audioscrobbler upload failed", "The request timed out and was aborted", false);
@@ -233,6 +234,26 @@ namespace Lastfm
                 hard_failures++;
                 state = State.Idle;
             }
+        }
+
+        private static NameValueCollection GetTrackParameters (IQueuedTrack track, int trackCount)
+        {
+            string str_track_number = String.Empty;
+            if (track.TrackNumber != 0) {
+                str_track_number = track.TrackNumber.ToString();
+            }
+            bool chosen_by_user = (track.TrackAuth.Length == 0);
+
+            return new NameValueCollection () {
+                { String.Format ("timestamp[{0}]", trackCount), track.StartTime.ToString () },
+                { String.Format ("track[{0}]", trackCount), track.Title },
+                { String.Format ("artist[{0}]", trackCount), track.Artist },
+                { String.Format ("album[{0}]", trackCount), track.Album },
+                { String.Format ("trackNumber[{0}]", trackCount), str_track_number },
+                { String.Format ("duration[{0}]", trackCount), track.Duration.ToString () },
+                { String.Format ("mbid[{0}]", trackCount), track.MusicBrainzId },
+                { String.Format ("chosenByUser[{0}]", trackCount), chosen_by_user ? "1" : "0" }
+            };
         }
 
         private void OnScrobbleResponse (IAsyncResult ar)

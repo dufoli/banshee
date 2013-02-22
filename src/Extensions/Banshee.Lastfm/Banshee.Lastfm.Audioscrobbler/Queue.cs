@@ -145,6 +145,7 @@ namespace Banshee.Lastfm.Audioscrobbler
         List<IQueuedTrack> queue;
         string xml_path;
         bool dirty;
+        int next = 0;
 
         public event EventHandler TrackAdded;
 
@@ -257,11 +258,12 @@ namespace Banshee.Lastfm.Audioscrobbler
             }
         }
 
-        public List<IQueuedTrack> GetTracks ()
+        public IQueuedTrack GetNextTrack ()
         {
-            // Last.fm can technically handle up to 50 songs in one request
-            // but seems to throw errors if our submission is too long.
-            return queue.GetRange (0, Math.Min (queue.Count, 30));
+            if (next >= queue.Count) {
+                return null;
+            }
+            return queue [next++];
         }
 
         public void Add (object track, DateTime started_at)
@@ -289,6 +291,7 @@ namespace Banshee.Lastfm.Audioscrobbler
         {
             queue.RemoveRange (first, count);
             dirty = true;
+            next = 0;
         }
 
         public int Count {
@@ -311,6 +314,7 @@ namespace Banshee.Lastfm.Audioscrobbler
                     removed_track_count
                 );
                 dirty = true;
+                next = 0;
                 Save ();
             }
         }

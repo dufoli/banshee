@@ -4,8 +4,11 @@
 // Authors:
 //   Bertrand Lorentz <bertrand.lorentz@gmail.com>
 //   Phil Trimble <philtrimble@gmail.com>
+//   Andres G. Aragoneses <knocte@gmail.com>
 //
 // Copyright (C) 2009 Bertrand Lorentz
+// Copyright (C) 2013 Phil Trimble
+// Copyright (C) 2013 Andres G. Aragoneses
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -29,6 +32,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -53,6 +57,10 @@ namespace Lastfm
     }
 
     public delegate void SendRequestHandler ();
+
+    public class MaxSizeExceededException : ApplicationException
+    {
+    }
 
     internal class WebRequestCreator : IWebRequestCreate
     {
@@ -91,6 +99,29 @@ namespace Lastfm
             if (this.web_request_creator == null) {
                 this.web_request_creator = new WebRequestCreator ();
             }
+
+            Init ();
+        }
+
+        private void Init ()
+        {
+            this.incremental_data = new StringBuilder ();
+
+            if (request_type != RequestType.Write) {
+                incremental_data.Append (API_ROOT);
+            }
+            incremental_data.AppendFormat ("?method={0}", method);
+            incremental_data.AppendFormat ("&api_key={0}", LastfmCore.ApiKey);
+
+            if (request_type == RequestType.AuthenticatedRead || request_type == RequestType.Write) {
+                AddParameter ("sk", LastfmCore.Account.SessionKey);
+            }
+
+            if (response_format == ResponseFormat.Json) {
+                AddParameter ("format", "json");
+            } else if (response_format == ResponseFormat.Raw) {
+                AddParameter ("raw", "true");
+            }
         }
 
         private string method;
@@ -99,10 +130,50 @@ namespace Lastfm
 
         private ResponseFormat response_format;
 
+        private StringBuilder incremental_data;
+
+        // This is close to the max based on testing.
+        private const int MAX_POST_LENGTH = 7000;
 
         public void AddParameter (string param_name, string param_value)
         {
+            var chunk = String.Format ("&{0}={1}",
+                                       param_name, param_value != null ? Uri.EscapeDataString (param_value) : null);
+
+            CheckSize (chunk.Length);
+
+            incremental_data.Append (chunk);
             parameters.Add (param_name, param_value);
+        }
+
+        public void AddParameters (NameValueCollection parms)
+        {
+            var chunks = new StringBuilder ();
+            foreach (string key in parms) {
+                var value = parms [key];
+                chunks.AppendFormat ("&{0}={1}",
+                                     key, value != null ? Uri.EscapeDataString (value) : null);
+            }
+
+            CheckSize (chunks.Length);
+
+            incremental_data.Append (chunks.ToString ());
+            foreach (string key in parms) {
+                var value = parms [key];
+                parameters.Add (key, value);
+            }
+        }
+
+        private void CheckSize (int length)
+        {
+            var target_length = incremental_data.Length + length;
+            if (request_type != RequestType.Read) {
+                target_length += 9 + 32; // length of &api_sig={GetSignature()}
+            }
+
+            if (target_length > MAX_POST_LENGTH) {
+                throw new MaxSizeExceededException ();
+            }
         }
 
         public Stream GetResponseStream ()
@@ -114,12 +185,6 @@ namespace Lastfm
         {
             if (method == null) {
                 throw new InvalidOperationException ("The method name should be set");
-            }
-
-            if (response_format == ResponseFormat.Json) {
-                AddParameter ("format", "json");
-            } else if (response_format == ResponseFormat.Raw) {
-                AddParameter ("raw", "true");
             }
 
             if (request_type == RequestType.Write) {
@@ -201,39 +266,17 @@ namespace Lastfm
 
         private string BuildGetUrl ()
         {
-            if (request_type == RequestType.AuthenticatedRead) {
-                parameters.Add ("sk", LastfmCore.Account.SessionKey);
-            }
-
-            StringBuilder url = new StringBuilder (API_ROOT);
-            url.AppendFormat ("?method={0}", method);
-            url.AppendFormat ("&api_key={0}", LastfmCore.ApiKey);
-            foreach (KeyValuePair<string, string> param in parameters) {
-                url.AppendFormat ("&{0}={1}", param.Key, Uri.EscapeDataString (param.Value));
-            }
             if (request_type == RequestType.AuthenticatedRead || request_type == RequestType.SessionRequest) {
-                url.AppendFormat ("&api_sig={0}", GetSignature ());
+                incremental_data.AppendFormat ("&api_sig={0}", GetSignature ());
             }
 
-            return url.ToString ();
+            return incremental_data.ToString ();
         }
 
         private string BuildPostData ()
         {
-            parameters.Add ("sk", LastfmCore.Account.SessionKey);
-
-            StringBuilder data = new StringBuilder ();
-            data.AppendFormat ("method={0}", method);
-            data.AppendFormat ("&api_key={0}", LastfmCore.ApiKey);
-
-            foreach (KeyValuePair<string, string> param in parameters) {
-                data.AppendFormat ("&{0}={1}",
-                                   param.Key, param.Value != null ? Uri.EscapeDataString (param.Value) : null);
-            }
-
-            data.AppendFormat ("&api_sig={0}", GetSignature ());
-
-            return data.ToString ();
+            incremental_data.AppendFormat ("&api_sig={0}", GetSignature ());
+            return incremental_data.ToString ();
         }
 
         private string GetSignature ()
@@ -311,7 +354,7 @@ namespace Lastfm
         private Stream Post (string uri, string data)
         {
             // Do not trust docs : it doesn't work if parameters are in the request body
-            var request = (HttpWebRequest)web_request_creator.Create (new Uri (String.Concat (uri, "?", data)));
+            var request = (HttpWebRequest)web_request_creator.Create (new Uri (String.Concat (uri, data)));
             request.UserAgent = LastfmCore.UserAgent;
             request.Timeout = 10000;
             request.Method = "POST";
