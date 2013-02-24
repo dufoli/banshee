@@ -8,15 +8,15 @@
 # Jiro Matsuzawa <jmatsuzawa@src.gnome.org>, 2011.
 # OKANO Takayoshi <kano@na.rim.or.jp>, 2010.
 # Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>, 2010.
-# Hajime Taira <htaira@redhat.com>, 2011.
+# Hajime Taira <htaira@redhat.com>, 2011-2013.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: banshee master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=banshee&keywords=I18N+L10N&component=general\n"
 "POT-Creation-Date: 2013-02-22 09:15+0000\n"
-"PO-Revision-Date: 2012-08-08 21:01+0900\n"
-"Last-Translator: Kentaro KAZUHAMA <kazken3@gmail.com>\n"
+"PO-Revision-Date: 2013-02-24 15:14+0900\n"
+"Last-Translator: Hajime Taira <htaira@redhat.com>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -758,10 +758,8 @@ msgstr "エンコード用のパイプラインを生成できませんでした
 
 #. Translators: verb
 #: ../src/Backends/Banshee.Osx/Banshee.OsxBackend/OsxFileChooserDialog.cs:66
-#, fuzzy
-#| msgid "_Import"
 msgid "Import"
-msgstr "インポート(_I)"
+msgstr "インポート"
 
 #: ../src/Backends/Banshee.Windows/Banshee.Windows/VersionUpdater.cs:72
 msgid "Can't check for updates"
@@ -2945,12 +2943,10 @@ msgstr "音楽ライブラリフォルダーを再スキャン"
 
 #. singular form unused b/c we know it's > 1, but we still need GetPlural
 #: ../src/Core/Banshee.ThickClient/Banshee.Gui/GlobalActions.cs:88
-#, fuzzy, csharp-format
-#| msgid "The sync operation will remove one track from your device."
-#| msgid_plural "The sync operation will remove {0} tracks from your device."
+#, csharp-format
 msgid "The rescan operation will remove one track from your music library."
 msgid_plural "The rescan operation will remove {0} tracks from your music library."
-msgstr[0] "同期操作でデバイスから {0} トラックを削除します。"
+msgstr[0] "再スキャンを行うと音楽ライブラリから {0} トラックを削除します。"
 
 #: ../src/Core/Banshee.ThickClient/Banshee.Gui/GlobalActions.cs:99
 #: ../src/Extensions/Banshee.InternetArchive/Banshee.InternetArchive/HeaderFilters.cs:134
@@ -4138,13 +4134,12 @@ msgstr "同期の準備中..."
 #: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:593
 #, csharp-format
 msgid "Adding track {0} of {1}"
-msgstr "追加中 {1} 曲中 {0} 曲目"
+msgstr "{1}曲中{0}曲目を追加しています"
 
 #: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:620
-#, fuzzy, csharp-format
-#| msgid "Adding track {0} of {1}"
+#, csharp-format
 msgid "Updating metadata in track {0} of {1}"
-msgstr "追加中 {1} 曲中 {0} 曲目"
+msgstr "{1}曲中{0}曲目のメタデータを更新しています"
 
 #: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:640
 #, csharp-format
@@ -4152,10 +4147,9 @@ msgid "Removing track {0} of {1}"
 msgstr "{1}曲中{0}曲目を削除しています"
 
 #: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:670
-#, fuzzy, csharp-format
-#| msgid "Removing track {0} of {1}"
+#, csharp-format
 msgid "Cleaning up, removing invalid track {0} of {1}"
-msgstr "{1}曲中{0}曲目を削除しています"
+msgstr "クリーニング作業中。{1}曲中{0}曲目の無効なトラックを削除しています。"
 
 #: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:717
 msgid "Writing media database"
