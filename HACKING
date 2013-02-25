@@ -85,6 +85,11 @@ guidelines. If code is in violation, you will be asked to reformat it.
   10. Try to observe a 120 character wrap margin. If your lines are over 120
      characters, break and indent them logically.
 
+  11. One space at both sides of all type of operators (assignment,
+     equality, mathematical, event-subscription, ...):
+
+      var compare = (a + b * c) != (d - e * f);
+
 
 .NET API Naming Guidelines
 ==========================
