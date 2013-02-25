@@ -167,16 +167,16 @@ namespace Banshee.Base
                 ext = String.Format (".{0}", ext);
             }
 
-            string songpath = CreateFromTrackInfo (track);
-            songpath = Hyena.StringUtil.EscapePath (songpath);
+            string track_path = CreateFromTrackInfo (track);
+            track_path = Hyena.StringUtil.EscapePath (track_path);
 
             string dir = Path.GetFullPath (Path.Combine (base_dir,
-                Path.GetDirectoryName (songpath)));
+                Path.GetDirectoryName (track_path)));
             if (!Banshee.IO.Directory.Exists (dir)) {
                 Banshee.IO.Directory.Create (dir);
             }
 
-            string filename = Path.GetFileName (songpath);
+            string filename = Path.GetFileName (track_path);
             // Most filesystems have a filename length limit of 255 characters or bytes
             // We use a limit of 200 characters as a compromise
             if (filename.Length > 200) {
