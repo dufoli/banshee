@@ -44,6 +44,7 @@ using Banshee.ServiceStack;
 using Banshee.Collection;
 using Banshee.Collection.Database;
 using Banshee.Collection.Gui;
+using Banshee.Gui;
 
 namespace Banshee.InternetRadio
 {
@@ -52,7 +53,25 @@ namespace Banshee.InternetRadio
         private TrackListView track_view;
         private QueryFilterView<string> genre_view;
 
-        public InternetRadioSourceContents () : base ("iradio")
+        private static readonly string name = "iradio";
+
+        public static readonly SchemaEntry<int> PaneTopPosition = new SchemaEntry<int> (
+            String.Format ("{0}.{1}.browser.top", PersistentPaneController.NamespacePrefix, name),
+            "position",
+            DEFAULT_PANE_TOP_POSITION,
+            "Internet Radio Browser Pane Container Top Position",
+            "The position of the internet radio browser pane container, when placed at the top"
+        );
+
+        public static readonly SchemaEntry<int> PaneLeftPosition = new SchemaEntry<int> (
+            String.Format ("{0}.{1}.browser.left", PersistentPaneController.NamespacePrefix, name),
+            "position",
+            DEFAULT_PANE_LEFT_POSITION,
+            "Internet Radio Browser Pane Container Left Position",
+            "The position of the internet radio browser pane container, when placed on the left"
+        );
+
+        public InternetRadioSourceContents () : base (name, PaneTopPosition, PaneLeftPosition)
         {
         }
 

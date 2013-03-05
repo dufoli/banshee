@@ -35,6 +35,8 @@ namespace Banshee.Gui
 {
     public class PersistentPaneController
     {
+        public const string NamespacePrefix = "interface.panes";
+
         private static Dictionary<string, PersistentPaneController> controllers = new Dictionary<string, PersistentPaneController> ();
 
         private string @namespace;
@@ -47,7 +49,7 @@ namespace Banshee.Gui
 
         public static void Control (Paned pane, string name)
         {
-            Control (pane, String.Format ("interface.panes.{0}", name), "position", pane.Position);
+            Control (pane, String.Format ("{0}.{1}", NamespacePrefix, name), "position", pane.Position);
         }
 
         public static void Control (Paned pane, SchemaEntry<int> entry)

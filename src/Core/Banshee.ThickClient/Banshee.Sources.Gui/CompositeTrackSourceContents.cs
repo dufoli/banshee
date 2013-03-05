@@ -61,6 +61,23 @@ namespace Banshee.Sources.Gui
 
         private InterfaceActionService action_service;
         private ActionGroup configure_browser_actions;
+        private static readonly string name = "albumartist";
+
+        public static readonly SchemaEntry<int> PaneTopPosition = new SchemaEntry<int> (
+            String.Format ("{0}.{1}.browser.top", PersistentPaneController.NamespacePrefix, name),
+            "position",
+            DEFAULT_PANE_TOP_POSITION,
+            "Artist/Album Browser Container Top Position",
+            "The position of the Artist/Album browser pane container, when placed at the top"
+        );
+
+        public static readonly SchemaEntry<int> PaneLeftPosition = new SchemaEntry<int> (
+            String.Format ("{0}.{1}.browser.left", PersistentPaneController.NamespacePrefix, name),
+            "position",
+            DEFAULT_PANE_LEFT_POSITION,
+            "Artist/Album Browser Container Left Position",
+            "The position of the Artist/Album browser pane container, when placed on the left"
+        );
 
         private static string menu_xml = @"
             <ui>
@@ -83,7 +100,7 @@ namespace Banshee.Sources.Gui
             </ui>
         ";
 
-        public CompositeTrackSourceContents () : base ("albumartist")
+        public CompositeTrackSourceContents () : base (name, PaneTopPosition, PaneLeftPosition)
         {
             if (ServiceManager.Contains ("InterfaceActionService")) {
                 action_service = ServiceManager.Get<InterfaceActionService> ();
