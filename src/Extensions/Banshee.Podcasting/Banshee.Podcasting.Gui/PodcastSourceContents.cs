@@ -84,7 +84,7 @@ namespace Banshee.Podcasting.Gui
         }
 
         protected override string ForcePosition {
-            get { return "Left"; }
+            get { return "left"; }
         }
 
         #region Implement ISourceContents
