@@ -55,23 +55,15 @@ namespace Banshee.InternetRadio
 
         private static readonly string name = "iradio";
 
-        public static readonly SchemaEntry<int> PaneTopPosition = new SchemaEntry<int> (
-            String.Format ("{0}.{1}.browser.top", PersistentPaneController.NamespacePrefix, name),
-            "position",
-            DEFAULT_PANE_TOP_POSITION,
-            "Internet Radio Browser Pane Container Top Position",
-            "The position of the internet radio browser pane container, when placed at the top"
-        );
-
         public static readonly SchemaEntry<int> PaneLeftPosition = new SchemaEntry<int> (
             String.Format ("{0}.{1}.browser.left", PersistentPaneController.NamespacePrefix, name),
             "position",
             DEFAULT_PANE_LEFT_POSITION,
-            "Internet Radio Browser Pane Container Left Position",
-            "The position of the internet radio browser pane container, when placed on the left"
+            "Internet Radio Browser Pane Container Position",
+            "The position of the internet radio browser pane container"
         );
 
-        public InternetRadioSourceContents () : base (name, PaneTopPosition, PaneLeftPosition)
+        public InternetRadioSourceContents () : base (name, SchemaEntry<int>.Zero, PaneLeftPosition)
         {
         }
 

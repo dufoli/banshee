@@ -59,24 +59,15 @@ namespace Banshee.Podcasting.Gui
         private PodcastUnheardFilterView unheard_view;
         private static readonly string name = "podcast";
 
-        public static readonly SchemaEntry<int> PaneTopPosition = new SchemaEntry<int> (
-            String.Format ("{0}.{1}.browser.top", PersistentPaneController.NamespacePrefix, name),
-            "position",
-            DEFAULT_PANE_TOP_POSITION,
-            "Podcast Browser Pane Container Top Position",
-            "The position of the podcast browser pane container, when placed at the top"
-        );
-
         public static readonly SchemaEntry<int> PaneLeftPosition = new SchemaEntry<int> (
             String.Format ("{0}.{1}.browser.left", PersistentPaneController.NamespacePrefix, name),
             "position",
             DEFAULT_PANE_LEFT_POSITION,
-            "Podcast Browser Pane Container Left Position",
-            "The position of the podcast browser pane container, when placed on the left"
+            "Podcast Browser Pane Container Position",
+            "The position of the podcast browser pane container"
         );
 
-
-        public PodcastSourceContents () : base (name, PaneTopPosition, PaneLeftPosition)
+        public PodcastSourceContents () : base (name, SchemaEntry<int>.Zero, PaneLeftPosition)
         {
         }
 
