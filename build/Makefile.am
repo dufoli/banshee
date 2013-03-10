@@ -2,7 +2,6 @@ SUBDIRS = pkg-config m4
 
 GCONF_SCHEMA_EXTRACTOR_ASSEMBLY = gconf-schema-extractor.exe
 TRANSLATOR_EXTRACTOR_ASSEMBLY = translator-extractor.exe
-DLL_MAP_VERIFIER_ASSEMBLY = dll-map-verifier.exe
 ADDIN_XML_STRING_EXTRACTOR_ASSEMBLY = addin-xml-string-extractor.exe
 GOBJECT_INTPTR_CTOR_VERIFIER_ASSEMBLY = gobject-intptr-ctor-verifier.exe
 
@@ -15,16 +14,11 @@ $(GCONF_SCHEMA_EXTRACTOR_ASSEMBLY): GConfSchemaExtractor.cs
 	$(MCS) -out:$@ $<
 endif
 
-all: $(ALL_TARGETS)
-
 $(TRANSLATOR_EXTRACTOR_ASSEMBLY): TranslatorExtractor.cs
 	if [ "x$(top_srcdir)" = "x$(top_builddir)" ]; then \
 		$(MCS) -out:$@ $< && LC_ALL=en_US.UTF-8 $(MONO) $@ $(top_builddir)/po > \
 			$(top_srcdir)/src/Core/Banshee.Core/Resources/translators.xml; \
 	fi;
-
-$(DLL_MAP_VERIFIER_ASSEMBLY): DllMapVerifier.cs
-	$(MCS) -out:$@ $<
 
 $(ADDIN_XML_STRING_EXTRACTOR_ASSEMBLY): AddinXmlStringExtractor.cs
 	$(MCS) -r:System.Xml -out:$@ $<
@@ -47,3 +41,4 @@ EXTRA_DIST = \
 CLEANFILES = *.exe *.mdb
 MAINTAINERCLEANFILES = Makefile.in
 
+include $(top_srcdir)/build/build.rules.mk
