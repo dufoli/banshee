@@ -109,6 +109,7 @@ public class TranslatorExtractor
             case "ast": language_name = "Asturian"; break;
             case "ca": language_name = "Catalan"; break;
             case "ca@valencia": language_name = "Catalan (Valencian)"; break;
+            case "cs": language_name = "Czech"; break;
             case "de": language_name = "German"; break;
             case "fr": language_name = "French"; break;
             case "el": language_name = "Greek"; break;
