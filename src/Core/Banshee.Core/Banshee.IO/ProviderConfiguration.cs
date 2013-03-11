@@ -29,7 +29,7 @@ using Banshee.Configuration;
 
 namespace Banshee.IO
 {
-    public class ProviderConfiguration
+    public static class ProviderConfiguration
     {
         internal static readonly SchemaEntry<string> ProviderSchema = new SchemaEntry<string> (
             "core", "io_provider",
