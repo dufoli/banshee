@@ -228,6 +228,8 @@ namespace Banshee.Sources.Gui
             //Hyena.Log.Information ("ListBrowser LayoutLeft");
             Reset ();
 
+            SchemaEntry<int> current_entry = top ? pane_top_position : pane_left_position;
+
             container = GetPane (!top);
             Paned filter_box = GetPane (top);
             filter_box.PositionSet = true;
@@ -258,12 +260,12 @@ namespace Banshee.Sources.Gui
             container.Pack2 (main_scrolled_window, true, false);
             browser_container = filter_box;
 
-            if ((top && pane_top_position.Equals (SchemaEntry<int>.Zero)) || (!top && pane_left_position.Equals (SchemaEntry<int>.Zero))) {
+            if (current_entry.Equals (SchemaEntry<int>.Zero)) {
                 throw new InvalidOperationException (String.Format ("No SchemaEntry found for {0} position of {1}",
                                                                     top.ToString (), this.GetType ().FullName));
             }
-            container.Position = top ? pane_top_position.DefaultValue : pane_left_position.DefaultValue;
-            PersistentPaneController.Control (container, top ? pane_top_position : pane_left_position);
+            container.Position = current_entry.DefaultValue;
+            PersistentPaneController.Control (container, current_entry);
             ShowPack ();
         }
 
