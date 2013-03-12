@@ -36,12 +36,12 @@ namespace Banshee.Configuration
 {
     public static class ConfigurationClient
     {
-        private static IConfigurationClient client;
+        private static IConfigurationClient instance;
 
         private static void Initialize ()
         {
             lock (typeof (ConfigurationClient)) {
-                if (client != null) {
+                if (instance != null) {
                     return;
                 }
 
@@ -49,8 +49,8 @@ namespace Banshee.Configuration
                     foreach (TypeExtensionNode node in AddinManager.GetExtensionNodes (
                         "/Banshee/Platform/ConfigurationClient")) {
                         try {
-                            client = (IConfigurationClient)node.CreateInstance (typeof (IConfigurationClient));
-                            if (client != null) {
+                            instance = (IConfigurationClient)node.CreateInstance (typeof (IConfigurationClient));
+                            if (instance != null) {
                                 break;
                             }
                         } catch (Exception e) {
@@ -58,65 +58,24 @@ namespace Banshee.Configuration
                         }
                     }
 
-                    if (client == null) {
-                        client = new XmlConfigurationClient ();
+                    if (instance == null) {
+                        instance = new XmlConfigurationClient ();
                     }
                 } else {
-                    client = new MemoryConfigurationClient ();
+                    instance = new MemoryConfigurationClient ();
                 }
 
-                Log.DebugFormat ("Configuration client extension loaded ({0})", client.GetType ().FullName);
+                Log.DebugFormat ("Configuration client extension loaded ({0})", instance.GetType ().FullName);
             }
         }
 
-        public static IConfigurationClient Client {
+        public static IConfigurationClient Instance {
             get {
-                if (client == null) {
+                if (instance == null) {
                     Initialize ();
                 }
-                return client;
+                return instance;
             }
-        }
-
-        public static T Get<T>(SchemaEntry<T> entry)
-        {
-            return Get<T>(entry.Namespace, entry.Key, entry.DefaultValue);
-        }
-
-        public static T Get<T>(SchemaEntry<T> entry, T fallback)
-        {
-            return Get<T>(entry.Namespace, entry.Key, fallback);
-        }
-
-        public static T Get<T>(string key, T fallback)
-        {
-            return Get<T>(null, key, fallback);
-        }
-
-        public static T Get<T>(string namespce, string key, T fallback)
-        {
-            T result;
-            return TryGet<T> (namespce, key, out result) ? result : fallback;
-        }
-
-        public static bool TryGet<T> (string @namespace, string key, out T result)
-        {
-            return Client.TryGet<T> (@namespace, key, out result);
-        }
-
-        public static void Set<T> (SchemaEntry<T> entry, T value)
-        {
-            Set (entry.Namespace, entry.Key, value);
-        }
-
-        public static void Set<T> (string key, T value)
-        {
-            Set (null, key, value);
-        }
-
-        public static void Set<T> (string @namespace, string key, T value)
-        {
-            Client.Set<T> (@namespace, key, value);
         }
     }
 }

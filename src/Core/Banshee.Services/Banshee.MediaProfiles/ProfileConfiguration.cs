@@ -51,7 +51,7 @@ namespace Banshee.MediaProfiles
 
         public static ProfileConfiguration LoadActive (MediaProfileManager manager, string id)
         {
-            string profile_id = ConfigurationClient.Get<string>(MakeConfNamespace(id), "active_profile", string.Empty);
+            string profile_id = ConfigurationClient.Instance.Get<string> (MakeConfNamespace (id), "active_profile", string.Empty);
 
             if(profile_id == string.Empty) {
                 return null;
@@ -69,7 +69,7 @@ namespace Banshee.MediaProfiles
 
         public static void SaveActiveProfile(Profile profile, string id)
         {
-            ConfigurationClient.Set<string>(MakeConfNamespace(id), "active_profile", profile.Id);
+            ConfigurationClient.Instance.Set<string> (MakeConfNamespace (id), "active_profile", profile.Id);
         }
 
         public ProfileConfiguration(Profile profile, string id)
@@ -80,8 +80,8 @@ namespace Banshee.MediaProfiles
 
         protected virtual void Load()
         {
-            foreach(string variable in ConfigurationClient.Get<string[]>(ConfNamespace, "variables", new string[0])) {
-                Add(variable, ConfigurationClient.Get<string>(ConfNamespace, variable, string.Empty));
+            foreach (string variable in ConfigurationClient.Instance.Get<string[]> (ConfNamespace, "variables", new string [0])) {
+                Add(variable, ConfigurationClient.Instance.Get<string> (ConfNamespace, variable, string.Empty));
             }
         }
 
@@ -90,9 +90,9 @@ namespace Banshee.MediaProfiles
             List<string> variable_names = new List<string>(Count);
             foreach(KeyValuePair<string, string> variable in this) {
                 variable_names.Add(variable.Key);
-                ConfigurationClient.Set<string>(ConfNamespace, variable.Key, variable.Value);
+                ConfigurationClient.Instance.Set<string> (ConfNamespace, variable.Key, variable.Value);
             }
-            ConfigurationClient.Set<string[]>(ConfNamespace, "variables", variable_names.ToArray());
+            ConfigurationClient.Instance.Set<string[]> (ConfNamespace, "variables", variable_names.ToArray ());
         }
 
         public void Add(string variable, string value)

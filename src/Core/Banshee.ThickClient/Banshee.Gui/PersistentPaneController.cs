@@ -86,7 +86,7 @@ namespace Banshee.Gui
                 }
 
                 pane = value;
-                pane.Position = ConfigurationClient.Get<int> (@namespace, key, fallback);
+                pane.Position = ConfigurationClient.Instance.Get<int> (@namespace, key, fallback);
                 //pane.MoveHandle += OnPaneMoved;
                 //pane.AcceptPosition += delegate { Console.WriteLine ("accept pos called, pos = {0}", pane.Position); };
                 pane.SizeAllocated += OnPaneMoved;
@@ -114,7 +114,7 @@ namespace Banshee.Gui
                 return true;
             } else {
                 if (pane.Position != last_position) {
-                    ConfigurationClient.Set<int> (@namespace, key, pane.Position);
+                    ConfigurationClient.Instance.Set<int> (@namespace, key, pane.Position);
                     last_position = pane.Position;
                 }
                 timer_id = 0;

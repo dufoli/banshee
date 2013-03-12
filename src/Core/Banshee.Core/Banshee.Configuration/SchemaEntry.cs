@@ -69,12 +69,12 @@ namespace Banshee.Configuration
 
         public T Get ()
         {
-            return ConfigurationClient.Get<T> (this);
+            return ConfigurationClient.Instance.Get<T> (this);
         }
 
         public T Get (T fallback)
         {
-            return ConfigurationClient.Get<T> (this, fallback);
+            return ConfigurationClient.Instance.Get<T> (this, fallback);
         }
 
         public bool Set (T value)
@@ -86,7 +86,7 @@ namespace Banshee.Configuration
                 }
             }
 
-            ConfigurationClient.Set<T> (this, value);
+            ConfigurationClient.Instance.Set<T> (this, value);
             return true;
         }
 

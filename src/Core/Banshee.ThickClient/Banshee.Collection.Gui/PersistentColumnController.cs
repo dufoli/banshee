@@ -181,26 +181,26 @@ namespace Banshee.Collection.Gui
             T result;
 
             if (source_ns != parent_source_ns) {
-                if (!ConfigurationClient.TryGet<T> (conf_ns, key, out result) &&
-                    val != null && val.Equals (ConfigurationClient.Get<T> (parent_source_ns + ns, key, default(T)))) {
+                if (!ConfigurationClient.Instance.TryGet<T> (conf_ns, key, out result) && val != null &&
+                    val.Equals (ConfigurationClient.Instance.Get<T> (parent_source_ns + ns, key, default (T)))) {
                     conf_ns = null;
                 }
             }
 
             if (conf_ns != null) {
-                ConfigurationClient.Set<T> (conf_ns, key, val);
+                ConfigurationClient.Instance.Set<T> (conf_ns, key, val);
             }
         }
 
         private T Get<T> (string ns, string key, T fallback)
         {
             T result;
-            if (ConfigurationClient.TryGet<T> (source_ns + ns, key, out result)) {
+            if (ConfigurationClient.Instance.TryGet<T> (source_ns + ns, key, out result)) {
                 return result;
             }
 
             if (source_ns != parent_source_ns) {
-                return ConfigurationClient.Get<T> (parent_source_ns + ns, key, fallback);
+                return ConfigurationClient.Instance.Get<T> (parent_source_ns + ns, key, fallback);
             }
 
             return fallback;
