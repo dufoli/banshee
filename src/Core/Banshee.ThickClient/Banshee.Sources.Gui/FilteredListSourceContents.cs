@@ -262,7 +262,7 @@ namespace Banshee.Sources.Gui
 
             if (current_entry.Equals (SchemaEntry<int>.Zero)) {
                 throw new InvalidOperationException (String.Format ("No SchemaEntry found for {0} position of {1}",
-                                                                    top.ToString (), this.GetType ().FullName));
+                                                                    top ? "top" : "left", this.GetType ().FullName));
             }
             container.Position = current_entry.DefaultValue;
             PersistentPaneController.Control (container, current_entry);
