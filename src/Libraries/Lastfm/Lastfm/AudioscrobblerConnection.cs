@@ -284,7 +284,10 @@ namespace Lastfm
                 next_interval = DateTime.Now + new TimeSpan (0, 0, RETRY_SECONDS);
                 hard_failures++;
                 state = State.Idle;
-            } else if (error != StationError.None) {
+                return;
+            }
+
+            if (error != StationError.None) {
                 // TODO: If error == StationError.InvalidSessionKey,
                 // suggest to the user to (re)do the Last.fm authentication.
                 hard_failures++;
