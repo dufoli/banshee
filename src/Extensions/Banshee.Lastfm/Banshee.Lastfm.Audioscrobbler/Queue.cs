@@ -164,6 +164,20 @@ namespace Banshee.Lastfm.Audioscrobbler
             Load ();
         }
 
+        #region IEnumerable implementation
+
+        IEnumerator<IQueuedTrack> IEnumerable<IQueuedTrack>.GetEnumerator ()
+        {
+            return queue.GetEnumerator ();
+        }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator ()
+        {
+            return queue.GetEnumerator ();
+        }
+
+        #endregion
+
         private void MigrateQueueFile ()
         {
             string old_xml_dir_path = Path.Combine (Hyena.Paths.ExtensionCacheRoot, "last.fm");

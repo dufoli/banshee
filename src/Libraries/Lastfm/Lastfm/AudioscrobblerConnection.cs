@@ -33,6 +33,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -168,7 +169,7 @@ namespace Lastfm
             // and address changes in our engine state
             switch (state) {
             case State.Idle:
-                if (queue.Count > 0) {
+                if (queue.Any ()) {
                     state = State.NeedTransmit;
                 } else if (current_now_playing_request != null) {
                     // Now playing info needs to be sent
@@ -322,7 +323,7 @@ namespace Lastfm
             }
 
             // if there are still valid tracks in the queue then retransmit on the next interval
-            state = queue.Count > 0 ? State.NeedTransmit : State.Idle;
+            state = queue.Any () ? State.NeedTransmit : State.Idle;
         }
 
         private void LogIfIgnored (JsonObject scrobbled_track)

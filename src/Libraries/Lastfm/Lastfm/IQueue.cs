@@ -45,7 +45,7 @@ namespace Lastfm
         string TrackAuth { get; }
     }
 
-    public interface IQueue
+    public interface IQueue : IEnumerable<IQueuedTrack>
     {
         event EventHandler TrackAdded;
 
