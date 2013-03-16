@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: banshee\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-16 20:52+0100\n"
-"PO-Revision-Date: 2013-02-16 20:53+0100\n"
+"POT-Creation-Date: 2013-03-17 00:49+0100\n"
+"PO-Revision-Date: 2013-03-17 00:50+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -221,7 +221,7 @@ msgstr "Słuchanie i organizowanie stacji radia internetowego."
 #. ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.addin.xml
 #: ../data/addin-xml-strings.cs:93
 msgid "Last.fm Scrobbling"
-msgstr "Scrobblowanie z serwisu Last.fm"
+msgstr "Scrobblowanie do serwisu Last.fm"
 
 #: ../data/addin-xml-strings.cs:94
 msgid "Last.fm scrobbling and context pane recommendations."
@@ -5721,53 +5721,53 @@ msgstr "Opis:"
 msgid "Rating:"
 msgstr "Ocena:"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:136
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:84
+#, csharp-format
+msgid "Processed {0} of {1} tracks"
+msgstr "Przetworzono ścieżek: {0} z {1}"
+
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:146
 msgid "_Last.fm"
 msgstr "_Last.fm"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:137
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:147
 msgid "Configure the Audioscrobbler plugin"
 msgstr "Skonfiguruj wtyczkę Audioscrobbler"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:140
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:150
 msgid "Visit _User Profile Page"
 msgstr "Otwórz stronę profilu _użytkownika"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:141
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:151
 #: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm/LastfmPreferences.cs:172
 msgid "Visit Your Last.fm Profile Page"
 msgstr "Otwiera stronę profilu użytkownika Last.fm"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:146
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:156
 #: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm/LastfmPreferences.cs:93
 msgid "_Enable Song Reporting From Banshee"
 msgstr "Raporto_wanie utworów z programu Banshee"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:147
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:157
 msgid "Enable song reporting From Banshee"
 msgstr "Włącza raportowanie utworów z programu Banshee"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:152
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:162
 #: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm/LastfmPreferences.cs:98
 msgid "_Enable Song Reporting From Device"
 msgstr "Raporto_wanie utworów z urządzenia"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:153
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:163
 msgid "Enable song reporting From Device"
 msgstr "Włącza raportowanie utworów z urządzenia"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:402
-msgid "Scrobbling from device"
-msgstr "Scrobblowanie z urządzenia"
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:450
+msgid "Scrobbling to Last.FM"
+msgstr "Scrobblowanie do serwisu Last.fm"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:403
-msgid "Scrobbling from device..."
-msgstr "Scrobblowanie z urządzenia..."
-
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:414
-#, csharp-format
-msgid "Processing track {0} of {1} ..."
-msgstr "Przetwarzanie ścieżki {0} z {1}..."
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:451
+msgid "Scrobbling to Last.FM..."
+msgstr "Scrobblowanie do serwisu Last.fm..."
 
 #: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm/LastfmActions.cs:66
 msgid "Connect"
