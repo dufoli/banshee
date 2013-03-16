@@ -287,20 +287,7 @@ namespace Lastfm
                 return;
             }
 
-            if (error != StationError.None) {
-                // TODO: If error == StationError.InvalidSessionKey,
-                // suggest to the user to (re)do the Last.fm authentication.
-                hard_failures++;
-
-                queue.RemoveInvalidTracks ();
-
-                // if there are still valid tracks in the queue then retransmit on the next interval
-                if (queue.Count > 0) {
-                    state = State.NeedTransmit;
-                } else {
-                    state = State.Idle;
-                }
-            } else {
+            if (error == StationError.None) {
                 try {
                     var scrobbles = (JsonObject)response["scrobbles"];
                     var scrobbles_attr = (JsonObject)scrobbles["@attr"];
@@ -328,6 +315,19 @@ namespace Lastfm
                 queue.Save ();
 
                 state = State.Idle;
+            } else {
+                // TODO: If error == StationError.InvalidSessionKey,
+                // suggest to the user to (re)do the Last.fm authentication.
+                hard_failures++;
+
+                queue.RemoveInvalidTracks ();
+
+                // if there are still valid tracks in the queue then retransmit on the next interval
+                if (queue.Count > 0) {
+                    state = State.NeedTransmit;
+                } else {
+                    state = State.Idle;
+                }
             }
         }
 
