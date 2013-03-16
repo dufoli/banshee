@@ -313,26 +313,16 @@ namespace Lastfm
                 // we succeeded, pop the elements off our queue
                 queue.RemoveRange (0, nb_tracks_scrobbled);
                 queue.Save ();
-
-                if (queue.Count > 0) {
-                    state = State.NeedTransmit;
-                } else {
-                    state = State.Idle;
-                }
             } else {
                 // TODO: If error == StationError.InvalidSessionKey,
                 // suggest to the user to (re)do the Last.fm authentication.
                 hard_failures++;
 
                 queue.RemoveInvalidTracks ();
-
-                // if there are still valid tracks in the queue then retransmit on the next interval
-                if (queue.Count > 0) {
-                    state = State.NeedTransmit;
-                } else {
-                    state = State.Idle;
-                }
             }
+
+            // if there are still valid tracks in the queue then retransmit on the next interval
+            state = queue.Count > 0 ? State.NeedTransmit : State.Idle;
         }
 
         private void LogIfIgnored (JsonObject scrobbled_track)
