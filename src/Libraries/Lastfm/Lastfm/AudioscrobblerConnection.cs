@@ -314,7 +314,11 @@ namespace Lastfm
                 queue.RemoveRange (0, nb_tracks_scrobbled);
                 queue.Save ();
 
-                state = State.Idle;
+                if (queue.Count > 0) {
+                    state = State.NeedTransmit;
+                } else {
+                    state = State.Idle;
+                }
             } else {
                 // TODO: If error == StationError.InvalidSessionKey,
                 // suggest to the user to (re)do the Last.fm authentication.
