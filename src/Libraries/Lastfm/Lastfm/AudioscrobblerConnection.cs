@@ -48,6 +48,26 @@ using System.Collections.Specialized;
 
 namespace Lastfm
 {
+    public class SubmissionStartEventArgs : EventArgs
+    {
+        public SubmissionStartEventArgs (int total_count)
+        {
+            TotalCount = total_count;
+        }
+
+        public int TotalCount { get; private set; }
+    }
+
+    public class SubmissionUpdateEventArgs : EventArgs
+    {
+        public SubmissionUpdateEventArgs (int update_count)
+        {
+            UpdateCount = update_count;
+        }
+
+        public int UpdateCount { get; private set; }
+    }
+
     public class AudioscrobblerConnection
     {
         private enum State {
@@ -70,6 +90,10 @@ namespace Lastfm
         public bool Started {
             get { return started; }
         }
+
+        public event EventHandler<SubmissionStartEventArgs> SubmissionStart;
+        public event EventHandler<SubmissionUpdateEventArgs> SubmissionUpdate;
+        public event EventHandler SubmissionEnd;
 
         private System.Timers.Timer timer;
         private DateTime next_interval;
@@ -171,11 +195,13 @@ namespace Lastfm
             case State.Idle:
                 if (queue.Any ()) {
                     state = State.NeedTransmit;
+                    RaiseSubmissionStart (queue.Count);
                 } else if (current_now_playing_request != null) {
                     // Now playing info needs to be sent
                     NowPlaying (current_now_playing_request);
                 } else {
                     StopTransitionHandler ();
+                    RaiseSubmissionEnd ();
                 }
 
                 break;
@@ -314,6 +340,7 @@ namespace Lastfm
                 // we succeeded, pop the elements off our queue
                 queue.RemoveRange (0, nb_tracks_scrobbled);
                 queue.Save ();
+                RaiseSubmissionUpdate (nb_tracks_scrobbled);
             } else {
                 // TODO: If error == StationError.InvalidSessionKey,
                 // suggest to the user to (re)do the Last.fm authentication.
@@ -416,6 +443,30 @@ namespace Lastfm
                 now_playing_started = false;
             }
             current_now_playing_request = null;
+        }
+
+        private void RaiseSubmissionStart (int total_count)
+        {
+            var handler = SubmissionStart;
+            if (handler != null) {
+                handler (this, new SubmissionStartEventArgs (total_count));
+            }
+        }
+
+        private void RaiseSubmissionUpdate (int update_count)
+        {
+            var handler = SubmissionUpdate;
+            if (handler != null) {
+                handler (this, new SubmissionUpdateEventArgs (update_count));
+            }
+        }
+
+        private void RaiseSubmissionEnd ()
+        {
+            var handler = SubmissionEnd;
+            if (handler != null) {
+                handler (this, null);
+            }
         }
     }
 }

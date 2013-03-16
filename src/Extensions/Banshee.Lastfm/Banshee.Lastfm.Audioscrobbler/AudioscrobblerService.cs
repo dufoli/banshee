@@ -9,6 +9,7 @@
 //   Phil Trimble <philtrimble@gmail.com>
 //
 // Copyright (C) 2005-2008 Novell, Inc.
+// Copyright (C) 2013 Phil Trimble
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -77,6 +78,11 @@ namespace Banshee.Lastfm.Audioscrobbler
         private readonly TimeSpan MINIMUM_TRACK_DURATION = TimeSpan.FromSeconds (30);
         private readonly TimeSpan MINIMUM_TRACK_PLAYTIME = TimeSpan.FromSeconds (240);
 
+        private UserJob scrobble_job;
+        private int job_tracks_count;
+        private int job_tracks_total;
+        private string scrobbling_progress_message = Catalog.GetString ("Processed {0} of {1} tracks");
+
         public AudioscrobblerService ()
         {
         }
@@ -107,6 +113,10 @@ namespace Banshee.Lastfm.Audioscrobbler
             Network network = ServiceManager.Get<Network> ();
             connection.UpdateNetworkState (network.Connected);
             network.StateChanged += HandleNetworkStateChanged;
+
+            connection.SubmissionStart += OnSubmissionStart;
+            connection.SubmissionUpdate += OnSubmissionUpdate;
+            connection.SubmissionEnd += OnSubmissionEnd;
 
             // Update the Visit action menu item if we update our account info
             LastfmCore.Account.Updated += delegate (object o, EventArgs args) {
@@ -183,6 +193,10 @@ namespace Banshee.Lastfm.Audioscrobbler
             action_service.UIManager.RemoveUi (ui_manager_id);
             action_service.UIManager.RemoveActionGroup (actions);
             actions = null;
+
+            connection.SubmissionStart -= OnSubmissionStart;
+            connection.SubmissionUpdate -= OnSubmissionUpdate;
+            connection.SubmissionEnd -= OnSubmissionEnd;
         }
 
         List<IBatchScrobblerSource> sources_watched;
@@ -399,46 +413,80 @@ namespace Banshee.Lastfm.Audioscrobbler
 
         private void OnReadyToScrobble (object source, ScrobblingBatchEventArgs args)
         {
-            var scrobble_job = new UserJob (Catalog.GetString ("Scrobbling from device"),
-                                            Catalog.GetString ("Scrobbling from device..."));
-
-            scrobble_job.PriorityHints = PriorityHints.DataLossIfStopped;
-            scrobble_job.Register ();
-
-            try {
-                if (!connection.Started) {
-                    connection.Start ();
-                }
-    
-                int added_track_count = 0, processed_track_count = 0;
-                string message = Catalog.GetString ("Processing track {0} of {1} ...");
-                var batchCount = args.ScrobblingBatch.Count;
-    
-                foreach (var track_entry in args.ScrobblingBatch) {
-                    TrackInfo track = track_entry.Key;
-    
-                    if (IsValidForSubmission (track)) {
-                        IList<DateTime> playtimes = track_entry.Value;
-    
-                        foreach (DateTime playtime in playtimes) {
-                            queue.Add (track, playtime);
-                            added_track_count++;
-                        }
-                        Log.DebugFormat ("Added to Last.fm queue: {0} - Number of plays: {1}", track, playtimes.Count);
-                    } else {
-                        Log.DebugFormat ("Track {0} failed validation check for Last.fm submission, skipping...",
-                                         track);
-                    }
-    
-                    scrobble_job.Status = String.Format (message, ++processed_track_count, batchCount);
-                    scrobble_job.Progress = processed_track_count / (double) batchCount;
-                }
-    
-                Log.InformationFormat ("Number of played tracks from device added to Last.fm queue: {0}", added_track_count);
-
-            } finally {
-                scrobble_job.Finish ();
+            if (!connection.Started) {
+                connection.Start ();
             }
+
+            int added_track_count = 0;
+
+            foreach (var track_entry in args.ScrobblingBatch) {
+                TrackInfo track = track_entry.Key;
+
+                if (IsValidForSubmission (track)) {
+                    IList<DateTime> playtimes = track_entry.Value;
+
+                    foreach (DateTime playtime in playtimes) {
+                        queue.Add (track, playtime);
+                        added_track_count++;
+                    }
+                    Log.DebugFormat ("Added to Last.fm queue: {0} - Number of plays: {1}", track, playtimes.Count);
+                } else {
+                    Log.DebugFormat ("Track {0} failed validation check for Last.fm submission, skipping...",
+                                     track);
+                }
+            }
+
+            Log.InformationFormat ("Number of played tracks from device added to Last.fm queue: {0}", added_track_count);
+        }
+
+        private void OnSubmissionStart (object source, SubmissionStartEventArgs args)
+        {
+            // We only want to display something if more than one track is being submitted
+            if (args.TotalCount <= 1) {
+                return;
+            }
+
+            if (scrobble_job == null) {
+                scrobble_job = new UserJob (Catalog.GetString ("Scrobbling to Last.FM"),
+                                            Catalog.GetString ("Scrobbling to Last.FM..."));
+
+                scrobble_job.PriorityHints = PriorityHints.None;
+                scrobble_job.CanCancel = true;
+                scrobble_job.CancelRequested += OnScrobbleJobCancelRequest;
+                scrobble_job.Register ();
+
+                job_tracks_count = 0;
+                job_tracks_total = args.TotalCount;
+            }
+            UpdateJob ();
+        }
+
+        private void OnSubmissionUpdate (object source, SubmissionUpdateEventArgs args)
+        {
+            if (scrobble_job != null) {
+                job_tracks_count += args.UpdateCount;
+                UpdateJob ();
+            }
+        }
+
+        private void UpdateJob ()
+        {
+            scrobble_job.Status = String.Format (scrobbling_progress_message, job_tracks_count, job_tracks_total);
+            scrobble_job.Progress = job_tracks_count / (double) job_tracks_total;
+        }
+
+        private void OnSubmissionEnd (object source, EventArgs args)
+        {
+            if (scrobble_job != null) {
+                scrobble_job.Finish ();
+                scrobble_job = null;
+            }
+        }
+
+        private void OnScrobbleJobCancelRequest (object source, EventArgs args)
+        {
+            scrobble_job.Finish ();
+            scrobble_job = null;
         }
 
 #endregion
