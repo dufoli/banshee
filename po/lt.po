@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=banshee&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-01-12 19:01+0000\n"
-"PO-Revision-Date: 2013-01-29 22:40+0200\n"
+"POT-Creation-Date: 2013-03-16 23:07+0000\n"
+"PO-Revision-Date: 2013-03-17 14:24+0200\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -765,18 +765,18 @@ msgstr "Nepavyko sukurti BPM aptikimo tvarkyklės."
 msgid "Could not initialize GStreamer library"
 msgstr "Nepavyko inicijuoti GStreamer bibliotekos"
 
-#: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/PlayerEngine.cs:504
-#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/PlayerEngine.cs:555
+#: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/PlayerEngine.cs:510
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/PlayerEngine.cs:566
 msgid "Unknown Error"
 msgstr "Nežinoma klaida"
 
-#: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/PlayerEngine.cs:880
-#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/PlayerEngine.cs:980
+#: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/PlayerEngine.cs:883
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/PlayerEngine.cs:989
 msgid "_Enable ReplayGain correction"
 msgstr "Į_jungti ReplayGain korekciją"
 
-#: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/PlayerEngine.cs:881
-#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/PlayerEngine.cs:981
+#: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/PlayerEngine.cs:884
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/PlayerEngine.cs:990
 msgid ""
 "For tracks that have ReplayGain data, automatically scale (normalize) "
 "playback volume"
@@ -784,11 +784,11 @@ msgstr ""
 "Automatiškai normalizuoti takelių, kuriuose yra ReplayGain duomenų, "
 "perklausos garsumą."
 
-#: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/PlayerEngine.cs:886
+#: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/PlayerEngine.cs:889
 msgid "Enable _gapless playback"
 msgstr "Įjungti _betarpę perklausą"
 
-#: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/PlayerEngine.cs:887
+#: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/PlayerEngine.cs:890
 msgid ""
 "Eliminate the small playback gap on track change. Useful for concept albums "
 "and classical music"
@@ -805,7 +805,7 @@ msgstr "Nepavyko sukurti transkoderio"
 msgid "Could not create encoder pipeline : {0}"
 msgstr "Nepavyko sukurti koderio konvejerio: {0}"
 
-#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/PlayerEngine.cs:802
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/PlayerEngine.cs:811
 msgid "GStreamer# 0.10"
 msgstr "GStreamer# 0.10"
 
@@ -1263,91 +1263,87 @@ msgstr "Žanras"
 msgid "Comment"
 msgstr "Komentaras"
 
-#: ../src/Core/Banshee.Core/Banshee.Base/CoverArtSpec.cs:43
+#: ../src/Core/Banshee.Core/Banshee.Collection/AlbumInfo.cs:40
+#: ../src/Extensions/Banshee.CoverArt/Banshee.CoverArt/CoverArtJob.cs:137
+msgid "Unknown Album"
+msgstr "Nežinomas albumas"
+
 #: ../src/Core/Banshee.Core/Banshee.Collection/ArtistInfo.cs:37
 #: ../src/Extensions/Banshee.CoverArt/Banshee.CoverArt/CoverArtJob.cs:138
 #: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Recommendations/RecommendationPane.cs:90
-#: ../src/Extensions/Banshee.OpticalDisc/Banshee.OpticalDisc.AudioCd/AudioCdDiscModel.cs:101
 msgid "Unknown Artist"
 msgstr "Nežinomas atlikėjas"
-
-#: ../src/Core/Banshee.Core/Banshee.Base/CoverArtSpec.cs:45
-#: ../src/Core/Banshee.Core/Banshee.Collection/AlbumInfo.cs:40
-#: ../src/Extensions/Banshee.CoverArt/Banshee.CoverArt/CoverArtJob.cs:137
-#: ../src/Extensions/Banshee.OpticalDisc/Banshee.OpticalDisc.AudioCd/AudioCdDiscModel.cs:102
-msgid "Unknown Album"
-msgstr "Nežinomas albumas"
 
 #: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:49
 msgid "Unknown Title"
 msgstr "Nežinomas pavadinimas"
 
-#: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:191
+#: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:192
 #: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Recommendations/RecommendationPane.cs:91
 msgid "Various Artists"
 msgstr "Įvairūs atlikėjai"
 
-#: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:347
+#: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:348
 msgid "Stream location not found"
 msgstr "Srauto vieta nerasta"
 
-#: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:347
+#: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:348
 #: ../src/Dap/Banshee.Dap/Banshee.Dap/DapSource.cs:344
 msgid "File not found"
 msgstr "Failas nerastas"
 
-#: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:349
+#: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:350
 msgid "Codec for playing this media type not available"
 msgstr "Šio tipo medijos atkūrimui reikiamo kodeko nėra"
 
-#: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:351
+#: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:352
 msgid "File protected by Digital Rights Management (DRM)"
 msgstr "Failą saugo skaitmeninių teisių valdymo (DRM) technologija"
 
-#: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:353
+#: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:354
 msgid "Unknown error"
 msgstr "Nežinoma klaida"
 
 #. TODO turn this into a PrimarySource-owned delegate?
-#: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:422
+#: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:423
 msgid "_Restart Podcast"
 msgstr "_Leisti Podcast iš naujo"
 
-#: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:423
+#: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:424
 msgid "_Restart Audiobook"
 msgstr "_Leisti garso knygą iš naujo"
 
-#: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:424
+#: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:425
 msgid "_Restart Video"
 msgstr "_Leisti vaizdo įrašą iš naujo"
 
-#: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:425
+#: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:426
 #: ../src/Core/Banshee.ThickClient/Banshee.Gui/PlaybackActions.cs:93
 msgid "_Restart Song"
 msgstr "_Leisti dainą iš naujo"
 
-#: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:426
+#: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:427
 msgid "_Restart Item"
 msgstr "_Leisti elementą iš naujo"
 
-#: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:442
+#: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:443
 msgid "_Jump to Playing Podcast"
 msgstr "_Peršokti prie leidžiamos tinklalaidės"
 
-#: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:443
+#: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:444
 msgid "_Jump to Playing Audiobook"
 msgstr "_Peršokti prie leidžiamos garso knygos"
 
-#: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:444
+#: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:445
 msgid "_Jump to Playing Video"
 msgstr "_Peršokti prie leidžiamo vaizdo įrašo"
 
-#: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:445
+#: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:446
 #: ../src/Core/Banshee.ThickClient/Banshee.Gui/PlaybackActions.cs:89
 msgid "_Jump to Playing Song"
 msgstr "_Peršokti prie leidžiamos dainos"
 
-#: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:446
+#: ../src/Core/Banshee.Core/Banshee.Collection/TrackInfo.cs:447
 msgid "_Jump to Playing Item"
 msgstr "_Peršokti prie leidžiamo elemento"
 
@@ -1469,7 +1465,7 @@ msgid "Scanning for media"
 msgstr "Ieškoma įvairialypės terpės"
 
 #: ../src/Core/Banshee.Services/Banshee.Collection/ImportManager.cs:188
-#: ../src/Core/Banshee.Services/Banshee.Database/BansheeDbFormatMigrator.cs:1419
+#: ../src/Core/Banshee.Services/Banshee.Database/BansheeDbFormatMigrator.cs:1423
 msgid "Scanning..."
 msgstr "Skenuojama..."
 
@@ -1510,7 +1506,7 @@ msgstr ""
 "Luktelėkite, kol bus atnaujintas jūsų senosios „Banshee“ duomenų bazės "
 "formatas."
 
-#: ../src/Core/Banshee.Services/Banshee.Database/BansheeDbFormatMigrator.cs:1416
+#: ../src/Core/Banshee.Services/Banshee.Database/BansheeDbFormatMigrator.cs:1420
 msgid "Refreshing Metadata"
 msgstr "Atnaujinami metaduomenys"
 
@@ -2588,7 +2584,7 @@ msgid "Delete Smart Playlist"
 msgstr "Ištrinti išmanųjį grojaraštį"
 
 #: ../src/Core/Banshee.Services/Banshee.Sources/DatabaseSource.cs:149
-#: ../src/Extensions/Banshee.InternetRadio/Banshee.InternetRadio/InternetRadioSource.cs:161
+#: ../src/Extensions/Banshee.InternetRadio/Banshee.InternetRadio/InternetRadioSource.cs:163
 #, csharp-format
 msgid "All Genres ({0})"
 msgstr "Visi žanrai ({0})"
@@ -3086,8 +3082,6 @@ msgstr "Iš naujo skenuoti fonotekos aplanką"
 #. singular form unused b/c we know it's > 1, but we still need GetPlural
 #: ../src/Core/Banshee.ThickClient/Banshee.Gui/GlobalActions.cs:88
 #, csharp-format
-#| msgid "The sync operation will remove one track from your device."
-#| msgid_plural "The sync operation will remove {0} tracks from your device."
 msgid "The rescan operation will remove one track from your music library."
 msgid_plural ""
 "The rescan operation will remove {0} tracks from your music library."
@@ -4304,39 +4298,39 @@ msgstr "Palaiko albumų viršelius"
 msgid "Supports photos"
 msgstr "Palaiko nuotraukas"
 
-#: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:462
+#: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:466
 msgid "Track duration is zero"
 msgstr "Takelio trukmė lygi nuliui"
 
-#: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:566
+#: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:570
 msgid "Syncing iPod"
 msgstr "Sinchronizuojamas iPod"
 
-#: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:567
+#: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:571
 msgid "Preparing to synchronize..."
 msgstr "Ruošiamasi sinchronizuoti..."
 
-#: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:589
+#: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:593
 #, csharp-format
 msgid "Adding track {0} of {1}"
 msgstr "Pridedamas {0} takelis iš {1}"
 
-#: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:616
+#: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:620
 #, csharp-format
 msgid "Updating metadata in track {0} of {1}"
 msgstr "Atnaujinami metaduomenys {0} takelyje iš {1}"
 
-#: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:636
+#: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:640
 #, csharp-format
 msgid "Removing track {0} of {1}"
 msgstr "Šalinamas {0} takelis iš {1}"
 
-#: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:666
+#: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:670
 #, csharp-format
 msgid "Cleaning up, removing invalid track {0} of {1}"
 msgstr "Išvaloma, šalinamas {0} netinkamas takelis iš {1}"
 
-#: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:713
+#: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:717
 msgid "Writing media database"
 msgstr "Įrašoma medijos duomenų bazė"
 
@@ -4495,12 +4489,12 @@ msgstr "Importuoti įsigytą muziką"
 msgid "Disconnect"
 msgstr "Atsijungti"
 
-#: ../src/Dap/Banshee.Dap/Banshee.Dap/RemovableSource.cs:108
+#: ../src/Dap/Banshee.Dap/Banshee.Dap/RemovableSource.cs:111
 #, csharp-format
 msgid "Disconnecting {0}..."
 msgstr "Atjungiama {0}..."
 
-#: ../src/Dap/Banshee.Dap/Banshee.Dap/RemovableSource.cs:115
+#: ../src/Dap/Banshee.Dap/Banshee.Dap/RemovableSource.cs:118
 #, csharp-format
 msgid "Could not disconnect {0}: {1}"
 msgstr "Nepavyko atjungti {0}: {1}"
@@ -5628,7 +5622,7 @@ msgstr "Taisyti stotį"
 msgid "Station"
 msgstr "Stotis"
 
-#: ../src/Extensions/Banshee.InternetRadio/Banshee.InternetRadio/InternetRadioSource.cs:155
+#: ../src/Extensions/Banshee.InternetRadio/Banshee.InternetRadio/InternetRadioSource.cs:157
 #, csharp-format
 msgid "{0} station"
 msgid_plural "{0} stations"
@@ -5636,15 +5630,15 @@ msgstr[0] "{0} stotis"
 msgstr[1] "{0} stotys"
 msgstr[2] "{0} stočių"
 
-#: ../src/Extensions/Banshee.InternetRadio/Banshee.InternetRadio/InternetRadioSource.cs:241
+#: ../src/Extensions/Banshee.InternetRadio/Banshee.InternetRadio/InternetRadioSource.cs:243
 msgid "Please provide a valid station URI"
 msgstr "Nurodykite tinkamą stoties URI"
 
-#: ../src/Extensions/Banshee.InternetRadio/Banshee.InternetRadio/InternetRadioSource.cs:254
+#: ../src/Extensions/Banshee.InternetRadio/Banshee.InternetRadio/InternetRadioSource.cs:256
 msgid "Please provide a station genre"
 msgstr "Nurodykite stoties žanrą"
 
-#: ../src/Extensions/Banshee.InternetRadio/Banshee.InternetRadio/InternetRadioSource.cs:262
+#: ../src/Extensions/Banshee.InternetRadio/Banshee.InternetRadio/InternetRadioSource.cs:264
 msgid "Please provide a station title"
 msgstr "Nurodykite stoties pavadinimą"
 
@@ -5691,53 +5685,56 @@ msgstr "Aprašymas:"
 msgid "Rating:"
 msgstr "Įvertinimas:"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:136
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:84
+#, csharp-format
+#| msgid "Processing track {0} of {1} ..."
+msgid "Processed {0} of {1} tracks"
+msgstr "Apdorotas {0} takelis iš {1}"
+
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:146
 msgid "_Last.fm"
 msgstr "_Last.fm"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:137
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:147
 msgid "Configure the Audioscrobbler plugin"
 msgstr "Konfigūruoti Audioscrobbler įskiepį"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:140
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:150
 msgid "Visit _User Profile Page"
 msgstr "Aplankyti _naudotojo profilio puslapį"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:141
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:151
 #: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm/LastfmPreferences.cs:172
 msgid "Visit Your Last.fm Profile Page"
 msgstr "Aplankyti savo Last.fm profilio puslapį"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:146
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:156
 #: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm/LastfmPreferences.cs:93
 msgid "_Enable Song Reporting From Banshee"
 msgstr "_Pranešti apie kūrinius, perklausytus naudojant „Banshee“ programą"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:147
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:157
 msgid "Enable song reporting From Banshee"
 msgstr "Pranešti apie kūrinius, perklausytus naudojant „Banshee“ programą"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:152
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:162
 #: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm/LastfmPreferences.cs:98
 msgid "_Enable Song Reporting From Device"
 msgstr "_Pranešti apie kūrinius, perklausytus naudojant grotuvą"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:153
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:163
 msgid "Enable song reporting From Device"
 msgstr "Pranešti apie kūrinius, perklausytus naudojant grotuvą"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:402
-msgid "Scrobbling from device"
-msgstr "Pranešimas apie kūrinius, perklausytus naudojant grotuvą"
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:450
+#| msgid "Log in to Last.fm"
+msgid "Scrobbling to Last.FM"
+msgstr "Pasufleruoti Last.fm"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:403
-msgid "Scrobbling from device..."
-msgstr "Pranešama apie kūrinius, perklausytus naudojant grotuvą..."
-
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:414
-#, csharp-format
-msgid "Processing track {0} of {1} ..."
-msgstr "Apdorojamas {0} takelis iš {1}..."
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:451
+#| msgid "Scrobbling from device..."
+msgid "Scrobbling to Last.FM..."
+msgstr "Sufleruojama Last.FM..."
 
 #: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm/LastfmActions.cs:66
 msgid "Connect"
@@ -5868,19 +5865,19 @@ msgstr "Esate prisijungę prie Last.fm kaip naudojas <i>{0}</i>."
 msgid "Log out of Last.fm"
 msgstr "Atsijungti nuo Last.fm"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm/LastfmSourceContents.cs:123
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm/LastfmSourceContents.cs:150
 msgid "Recently Loved Tracks"
 msgstr "Paskutinieji patinkantys takeliai"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm/LastfmSourceContents.cs:124
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm/LastfmSourceContents.cs:151
 msgid "Recently Played Tracks"
 msgstr "Paskutinieji klausyti takeliai"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm/LastfmSourceContents.cs:125
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm/LastfmSourceContents.cs:152
 msgid "My Top Artists"
 msgstr "Mano populiariausi atlikėjai"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm/LastfmSourceContents.cs:211
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm/LastfmSourceContents.cs:238
 #, csharp-format
 msgid "{0} plays"
 msgstr "{0} grojimų"
@@ -7221,3 +7218,4 @@ msgstr "Prisijungta prie Last.fm"
 #: ../src/Libraries/Migo/Migo.Syndication/RssParser.cs:103
 msgid "Unknown Podcast"
 msgstr "Nežinoma tinklalaidė"
+
