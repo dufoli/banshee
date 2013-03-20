@@ -15,6 +15,7 @@ SUBDIRS = \
 	Banshee.Lastfm \
 	Banshee.LastfmStreaming \
 	Banshee.LibraryWatcher \
+	Banshee.MeeGo \
 	Banshee.MiniMode \
 	Banshee.Mpris \
 	Banshee.MiroGuide \
@@ -24,7 +25,6 @@ SUBDIRS = \
 	Banshee.OpticalDisc \
 	Banshee.PlayerMigration \
 	Banshee.PlayQueue \
-	Banshee.MeeGo \
 	Banshee.Podcasting \
 	Banshee.Sample \
 	Banshee.SoundMenu \
