@@ -1,5 +1,5 @@
 //
-// ListBrowserSourceContents.cs
+// FilteredListSourceContents.cs
 //
 // Authors:
 //   Aaron Bockover <abockover@novell.com>
