@@ -168,6 +168,8 @@ public class GSettingsSchemaExtractorProgram
     internal struct GSettingsSchema
     {
         internal string Id { get; private set; }
+        internal string Path { get { return Id.Replace ("org.gnome.", "/apps/").Replace (".", "/") + "/"; } }
+
         internal HashSet<GSettingsKey> Keys { get; private set; }
 
         internal GSettingsSchema (string id) : this ()
@@ -179,7 +181,7 @@ public class GSettingsSchemaExtractorProgram
         public override string ToString ()
         {
             string result = String.Empty;
-            result += String.Format ("  <schema id=\"{0}\" path=\"{1}\" gettext-domain=\"banshee\">\n", Id, GetPath (Id));
+            result += String.Format ("  <schema id=\"{0}\" path=\"{1}\" gettext-domain=\"banshee\">\n", Id, Path);
             foreach (var key in Keys) {
                 result += key.ToString ();
             }
@@ -192,7 +194,6 @@ public class GSettingsSchemaExtractorProgram
     internal struct GSettingsKey
     {
         internal GSettingsSchema ParentSchema { get; private set; }
-        internal string Path { get; private set; }
         internal string Default { get; private set; }
         internal string KeyName { get; private set; }
         internal string KeyType { get; private set; }
@@ -217,20 +218,18 @@ public class GSettingsSchemaExtractorProgram
             var short_description = GetStringValueOfFieldNamed (schema, "ShortDescription");
             var long_description = GetStringValueOfFieldNamed (schema, "LongDescription");
 
-            var gsettings_key = new GSettingsKey (schemaSet, default_value, default_value_type, namespce, key, short_description, long_description);
-            return gsettings_key;
+            return new GSettingsKey (schemaSet, default_value, default_value_type, namespce, key, short_description, long_description);
         }
 
         private GSettingsKey (SchemaSet schemaSet, object defaultValue, Type defaultValueType,
                               string namespce, string key,
                               string short_desc, string long_desc) : this ()
         {
-            ParentSchema = schemaSet.RetrieveOrCreate (CreateId (namespce));
+            ParentSchema = schemaSet.RetrieveOrCreate (namespce);
 
             Default = GetDefault (defaultValue, defaultValueType);
             KeyName = key.Replace ("_", "-");
             KeyType = GetTypeAttrib (defaultValue, defaultValueType);
-            Path = GetPath (ParentSchema.Id);
             Summary = short_desc;
             Description = long_desc;
 
@@ -258,8 +257,14 @@ public class GSettingsSchemaExtractorProgram
 
         internal Dictionary<string, GSettingsSchema> Schemas { get; private set; }
 
-        internal GSettingsSchema RetrieveOrCreate (string id)
+        private static string NamespaceToId (string namespce)
         {
+            return "org.gnome.banshee." + CamelCaseToUnderScoreLowerCase (namespce);
+        }
+
+        internal GSettingsSchema RetrieveOrCreate (string namespce)
+        {
+            string id = NamespaceToId (namespce);
             GSettingsSchema schema;
             if (!Schemas.TryGetValue (id, out schema)) {
                 schema = new GSettingsSchema (id);
@@ -333,16 +338,6 @@ public class GSettingsSchemaExtractorProgram
         }
 
         return undercase;
-    }
-
-    private static string CreateId (string namespce)
-    {
-        return "org.gnome.banshee." + CamelCaseToUnderScoreLowerCase (namespce);
-    }
-
-    private static string GetPath (string id)
-    {
-        return id.Replace ("org.gnome.", "/apps/").Replace (".", "/") + "/";
     }
 }
 
