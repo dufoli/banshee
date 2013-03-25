@@ -8,7 +8,7 @@ using System.Reflection;
 
 public class GSettingsSchemaExtractorProgram
 {
-    private static Dictionary<string, List<StringBuilder>> entries;
+    private static HashSet<FieldInfo> schema_fields;
     private static int schema_count;
 
     public static void Main(string [] args)
@@ -62,48 +62,29 @@ public class GSettingsSchemaExtractorProgram
     {
         Console.WriteLine ("Generating schemas");
         schema_count = 0;
-        entries = new Dictionary<string, List<StringBuilder>> ();
+        schema_fields = new HashSet<FieldInfo> ();
 
         foreach (Type type in types) {
-            foreach (FieldInfo field in type.GetFields (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static)) {
-                if (field.FieldType.IsGenericType &&
-                    field.FieldType.GetGenericTypeDefinition ().Name.StartsWith ("SchemaEntry")) {
-
-                    if (field.Name == "Zero") {
-                        continue;
-                    }
-
-                    Console.WriteLine ("Found SchemaEntry: " + type.FullName + "." + field.Name);
-
-                    object schema = field.GetValue (null);
-
-                    var default_value = schema.GetType ().GetField ("DefaultValue");
-
-                    AddSchemaEntry (
-                        default_value.GetValue (schema),
-                        default_value.FieldType,
-                        GetString (schema, "Namespace"),
-                        GetString (schema, "Key"),
-                        GetString (schema, "ShortDescription"),
-                        GetString (schema, "LongDescription")
-                    );
+            foreach (FieldInfo field in type.GetFields (BindingFlags.Public | BindingFlags.Static)) {
+                if (CheckForValidEntry (type, field)) {
+                    schema_fields.Add (field);
                 }
             }
         }
 
-        if (schema_count > 0) {
+        if (schema_fields.Count > 0) {
+
+            var schemaSet = new SchemaSet ();
+
+            foreach (FieldInfo field in schema_fields) {
+                GSettingsKey.ExtractFromField (schemaSet, field);
+            }
+
             StringBuilder final = new StringBuilder ();
             final.Append ("<schemalist>\n");
 
-            List<string> schemas = new List<string> (entries.Keys);
-            schemas.Sort ();
-
-            foreach (string id in schemas) {
-                final.AppendFormat ("  <schema id=\"{0}\" path=\"{1}\" gettext-domain=\"banshee\">\n", id, GetPath (id));
-                foreach (StringBuilder sb in entries [id]) {
-                    final.Append (sb);
-                }
-                final.Append ("  </schema>\n");
+            foreach (GSettingsSchema schema in schemaSet.Schemas.Values) {
+                final.Append (schema.ToString ());
             }
 
             final.Append ("</schemalist>\n");
@@ -113,56 +94,215 @@ public class GSettingsSchemaExtractorProgram
         return null;
     }
 
-    private static string GetString(object o, string name)
+    internal class InvalidSchemaException : Exception
     {
-        FieldInfo field = o.GetType ().GetField (name);
-        return (string)field.GetValue (o);
+        internal InvalidSchemaException (string msg) : base (msg)
+        {
+        }
     }
 
-    private static string GetValueString (Type type, object o, out string gctype)
+    static bool CheckForValidEntry (Type type, FieldInfo field)
+    {
+        if (!field.FieldType.IsGenericType || field.Name == "Zero") {
+            return false;
+        }
+
+        string type_definition = field.FieldType.GetGenericTypeDefinition ().Name;
+
+        if (type_definition.StartsWith ("SchemaEntry")) {
+            Console.WriteLine ("Found SchemaEntry: " + type.FullName + "." + field.Name);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    private static string GetStringValueOfFieldNamed (object schemaEntryObject, string fieldName)
+    {
+        FieldInfo field = schemaEntryObject.GetType ().GetField (fieldName);
+        return (string)field.GetValue (schemaEntryObject);
+    }
+
+    private static string GetValueString (Type type, object o)
+    {
+        if (type == typeof (bool)) {
+            return o == null ? null : o.ToString ().ToLower ();
+        }
+
+        if (type == typeof (string)) {
+            string value = o == null ? String.Empty : o.ToString ();
+            return String.Format ("'{0}'", value);
+        }
+
+        if (type == typeof (int) || type == typeof (double)) {
+            return o == null ? null : o.ToString ();
+        }
+
+        throw new Exception (String.Format ("Unsupported type '{0}'", type));
+    }
+
+    private static string GetGcType (Type type)
     {
         // gctypes to return taken from http://developer.gnome.org/glib/unstable/glib-GVariant.html#GVariantClass
 
         if (type == typeof (bool)) {
-            gctype = "b";
-            return o == null ? null : o.ToString ().ToLower ();
-        } else if (type == typeof (int)) {
-            gctype = "i";
-        } else if (type == typeof (double)) {
-            gctype = "d";
-        } else if (type == typeof (string)) {
-            gctype = "s";
-            string value = o == null ? String.Empty : o.ToString ();
-            return String.Format ("'{0}'", value);
-        } else {
-            throw new Exception("Unsupported type '" + type + "'");
+            return "b";
         }
 
-        return o == null ? null : o.ToString ();
+        if (type == typeof (int)) {
+            return "i";
+        }
+
+        if (type == typeof (double)) {
+            return "d";
+        }
+
+        if (type == typeof (string)) {
+            return "s";
+        }
+
+        throw new Exception (String.Format ("Unsupported type '{0}'", type));
     }
 
-    private static void AddSchemaEntry (object defaultValue, Type defaultValueType,
-                                        string namespce, string key,
-                                        string summary, string description)
+    internal struct GSettingsSchema
     {
-        schema_count++;
+        internal string Id { get; private set; }
+        internal HashSet<GSettingsKey> Keys { get; private set; }
 
-        string id = CreateId (namespce);
-        
+        internal GSettingsSchema (string id) : this ()
+        {
+            Id = id;
+            Keys = new HashSet<GSettingsKey> ();
+        }
+
+        public override string ToString ()
+        {
+            string result = String.Empty;
+            result += String.Format ("  <schema id=\"{0}\" path=\"{1}\" gettext-domain=\"banshee\">\n", Id, GetPath (Id));
+            foreach (var key in Keys) {
+                result += key.ToString ();
+            }
+            result += ("  </schema>\n");
+            return result;
+        }
+
+    }
+
+    internal struct GSettingsKey
+    {
+        internal GSettingsSchema ParentSchema { get; private set; }
+        internal string Path { get; private set; }
+        internal string Default { get; private set; }
+        internal string KeyName { get; private set; }
+        internal string KeyType { get; private set; }
+        internal string Summary { get; private set; }
+        internal string Description { get; private set; }
+
+        internal static GSettingsKey ExtractFromField (SchemaSet schemaSet, FieldInfo field)
+        {
+            object schema = field.GetValue (null);
+            if (schema == null) {
+                throw new InvalidSchemaException (String.Format (
+                    "Schema could not be retrieved from field {0} in type {1}",
+                    field.Name, field.DeclaringType.FullName));
+            }
+
+            var default_value_field = schema.GetType ().GetField ("DefaultValue");
+            var default_value = default_value_field.GetValue (schema);
+
+            var default_value_type = default_value_field.FieldType;
+            var namespce = GetStringValueOfFieldNamed (schema, "Namespace");
+            var key = GetStringValueOfFieldNamed (schema, "Key");
+            var short_description = GetStringValueOfFieldNamed (schema, "ShortDescription");
+            var long_description = GetStringValueOfFieldNamed (schema, "LongDescription");
+
+            var gsettings_key = new GSettingsKey (schemaSet, default_value, default_value_type, namespce, key, short_description, long_description);
+            return gsettings_key;
+        }
+
+        private GSettingsKey (SchemaSet schemaSet, object defaultValue, Type defaultValueType,
+                              string namespce, string key,
+                              string short_desc, string long_desc) : this ()
+        {
+            ParentSchema = schemaSet.RetrieveOrCreate (CreateId (namespce));
+
+            Default = GetDefault (defaultValue, defaultValueType);
+            KeyName = key.Replace ("_", "-");
+            KeyType = GetTypeAttrib (defaultValue, defaultValueType);
+            Path = GetPath (ParentSchema.Id);
+            Summary = short_desc;
+            Description = long_desc;
+
+            ParentSchema.Keys.Add (this);
+        }
+
+        public override string ToString ()
+        {
+            string result = String.Empty;
+            result += String.Format ("    <key name=\"{0}\" type=\"{1}\">\n", KeyName, KeyType);
+            result += String.Format ("      <default>{0}</default>\n", Default);
+            result += String.Format ("      <summary>{0}</summary>\n", Summary);
+            result += String.Format ("      <description>{0}</description>\n", Description);
+            result +=               ("    </key>\n");
+            return result;
+        }
+    }
+
+    internal class SchemaSet
+    {
+        internal SchemaSet ()
+        {
+            Schemas = new Dictionary<string, GSettingsSchema> ();
+        }
+
+        internal Dictionary<string, GSettingsSchema> Schemas { get; private set; }
+
+        internal GSettingsSchema RetrieveOrCreate (string id)
+        {
+            GSettingsSchema schema;
+            if (!Schemas.TryGetValue (id, out schema)) {
+                schema = new GSettingsSchema (id);
+                Schemas [id] = schema;
+            }
+            return schema;
+        }
+    }
+
+    internal static string GetTypeAttrib (object defaultValue, Type defaultValueType)
+    {
+        string str_type;
         bool list = defaultValueType.IsArray;
-        Type type = list ? Type.GetTypeArray ((object [])defaultValue) [0] : defaultValueType;
-        string str_val = null;
-        string str_type = null;
-        
+        Type type = null;
         if (list) {
+            type = Type.GetTypeArray ((object [])defaultValue) [0];
+            object [] arr = (object[])defaultValue;
+            GetValueString (type, arr [0]);
+            str_type = "a" + GetGcType (type);
+        } else {
+            type = defaultValueType;
+            GetValueString (type, defaultValue);
+            str_type = GetGcType (type);
+        }
+        return str_type;
+    }
+
+    internal static string GetDefault (object defaultValue, Type defaultValueType)
+    {
+        bool list = defaultValueType.IsArray;
+
+        Type type = null;
+        string str_val = null;
+
+        if (list) {
+            type = Type.GetTypeArray ((object [])defaultValue) [0];
             if (defaultValue == null || ((object[])defaultValue).Length == 0) {
-                GetValueString (type, null, out str_type);
                 str_val = "[]";
             } else {
                 str_val = "[";
                 object [] arr = (object [])defaultValue;
                 for (int i = 0; i < arr.Length; i++) {
-                    str_val += GetValueString (type, arr [i], out str_type).Replace (",", "\\,");
+                    str_val += GetValueString (type, arr [i]).Replace (",", "\\,");
                     if (i < arr.Length - 1) {
                         str_val += ",";
                     }
@@ -170,36 +310,19 @@ public class GSettingsSchemaExtractorProgram
                 str_val += "]";
             }
         } else {
-            str_val = GetValueString (type, defaultValue, out str_type);
+            type = defaultValueType;
+            str_val = GetValueString (type, defaultValue);
         }
-
-        string type_attrib = str_type;
-        if (list) {
-            type_attrib = "a" + type_attrib;
-        }
-
-        key = key.Replace ("_", "-");
-
-        StringBuilder builder = new StringBuilder ();
-        builder.AppendFormat ("    <key name=\"{0}\" type=\"{1}\">\n", key, type_attrib);
-        builder.AppendFormat ("      <default>{0}</default>\n", str_val);
-        builder.AppendFormat ("      <summary>{0}</summary>\n", summary);
-        builder.AppendFormat ("      <description>{0}</description>\n", description);
-        builder.AppendFormat ("    </key>\n");
-        if (entries.ContainsKey (id)) {
-            entries [id].Add (builder);
-        } else {
-            entries [id] = new List<StringBuilder> { builder };
-        }
+        return str_val;
     }
-        
-    private static string CamelCaseToUnderCase (string s)
+
+    private static string CamelCaseToUnderScoreLowerCase (string s)
     {
         string undercase = String.Empty;
         string [] tokens = Regex.Split (s, "([A-Z]{1}[a-z]+)");
         
         for(int i = 0; i < tokens.Length; i++) {
-            if (tokens[i] == String.Empty) {
+            if (tokens [i] == String.Empty) {
                 continue;
             }
 
@@ -214,7 +337,7 @@ public class GSettingsSchemaExtractorProgram
 
     private static string CreateId (string namespce)
     {
-        return "org.gnome.banshee." + CamelCaseToUnderCase (namespce);
+        return "org.gnome.banshee." + CamelCaseToUnderScoreLowerCase (namespce);
     }
 
     private static string GetPath (string id)
