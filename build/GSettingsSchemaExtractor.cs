@@ -65,7 +65,9 @@ public class GSettingsSchemaExtractorProgram
         schema_fields = new HashSet<FieldInfo> ();
 
         foreach (Type type in types) {
-            foreach (FieldInfo field in type.GetFields (BindingFlags.Public | BindingFlags.Static)) {
+            foreach (FieldInfo field in type.GetFields (BindingFlags.Public |
+                                                        BindingFlags.NonPublic |
+                                                        BindingFlags.Static)) {
                 if (CheckForValidEntry (type, field)) {
                     schema_fields.Add (field);
                 }

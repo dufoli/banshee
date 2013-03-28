@@ -71,13 +71,17 @@ namespace Muinshee
         static readonly SchemaEntry<bool> MaximizedSchema = WindowConfiguration.NewMaximizedSchema (CONFIG_NAMESPACE);
 
         private static DatabaseAlbumListModel album_model;
-
-        static AlbumDialog () {
-            // TODO set the Album filter as the one/only current filter
-            foreach (IFilterListModel filter in Music.CurrentFilters) {
-                if (filter is DatabaseAlbumListModel) {
-                    album_model = filter as DatabaseAlbumListModel;
+        private static DatabaseAlbumListModel AlbumModel {
+            get {
+                if (album_model == null) {
+                    // TODO set the Album filter as the one/only current filter
+                    foreach (IFilterListModel filter in Music.CurrentFilters) {
+                        if (filter is DatabaseAlbumListModel) {
+                            album_model = filter as DatabaseAlbumListModel;
+                        }
+                    }
                 }
+                return album_model;
             }
         }
 
@@ -90,7 +94,7 @@ namespace Muinshee
         protected override Widget GetItemWidget ()
         {
             AlbumListView album_view = new MuinsheeAlbumView ();
-            album_view.SetModel (album_model);
+            album_view.SetModel (AlbumModel);
 
             album_view.RowActivated += OnRowActivated;
             return album_view;
@@ -107,7 +111,7 @@ namespace Muinshee
 
         public override void Destroy ()
         {
-            album_model.Selection.Clear ();
+            AlbumModel.Selection.Clear ();
             base.Destroy ();
         }
 

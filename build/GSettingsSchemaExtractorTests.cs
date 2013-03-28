@@ -240,6 +240,24 @@ namespace GSettingsSchemaExtractor
                 .Trim ()));
         }
 
+        internal class TypeWithInternalSchema {
+            internal static readonly SchemaEntry<int> VolumeSchema = new SchemaEntry<int> (
+                "player_engine", "volume",
+                80,
+                "Volume",
+                "Volume of playback relative to mixer output"
+            );
+        }
+
+        [Test]
+        public void SchemaNonPublic ()
+        {
+            StringBuilder result = GSettingsSchemaExtractorProgram.Extract (new Type [] { typeof (TypeWithInternalSchema) });
+
+            Assert.That (result, Is.Not.Null);
+            Assert.That (result.ToString ().Trim (), Is.StringContaining ("<schema id="));
+        }
+
     }
 }
 
