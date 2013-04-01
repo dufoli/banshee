@@ -146,6 +146,10 @@ public class GSettingsSchemaExtractorProgram
 
     private static string GetGcType (Type type)
     {
+        if (type == null) {
+            throw new ArgumentNullException ("type");
+        }
+
         // gctypes to return taken from http://developer.gnome.org/glib/unstable/glib-GVariant.html#GVariantClass
 
         if (type == typeof (bool)) {
@@ -204,6 +208,10 @@ public class GSettingsSchemaExtractorProgram
 
         internal static GSettingsKey ExtractFromField (SchemaSet schemaSet, FieldInfo field)
         {
+            if (field == null) {
+                throw new ArgumentNullException ("field");
+            }
+
             object schema = field.GetValue (null);
             if (schema == null) {
                 throw new InvalidSchemaException (String.Format (
