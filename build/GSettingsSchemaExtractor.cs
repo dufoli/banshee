@@ -278,34 +278,27 @@ public class GSettingsSchemaExtractorProgram
 
     internal static string GetTypeAttrib (object defaultValue, Type defaultValueType)
     {
-        string str_type;
+        var i_enumerable_interface = defaultValueType.GetInterfaces ()
+            .Where (i => i.IsGenericType && i.GetGenericTypeDefinition () == typeof (IEnumerable<>)).FirstOrDefault ();
         bool list = defaultValueType.IsArray;
-        Type type = null;
         if (list) {
-            type = Type.GetTypeArray ((object [])defaultValue) [0];
-            object [] arr = (object[])defaultValue;
-            GetValueString (type, arr [0]);
-            str_type = "a" + GetGcType (type);
-        } else {
-            type = defaultValueType;
-            GetValueString (type, defaultValue);
-            str_type = GetGcType (type);
+            var inner_type = i_enumerable_interface.GetGenericArguments () [0];
+            return "a" + GetGcType (inner_type);
         }
-        return str_type;
+        return GetGcType (defaultValueType);
     }
 
     internal static string GetDefault (object defaultValue, Type defaultValueType)
     {
         bool list = defaultValueType.IsArray;
 
-        Type type = null;
         string str_val = null;
 
         if (list) {
-            type = Type.GetTypeArray ((object [])defaultValue) [0];
             if (defaultValue == null || ((object[])defaultValue).Length == 0) {
                 str_val = "[]";
             } else {
+                var type = Type.GetTypeArray ((object [])defaultValue) [0];
                 str_val = "[";
                 object [] arr = (object [])defaultValue;
                 for (int i = 0; i < arr.Length; i++) {
@@ -317,8 +310,7 @@ public class GSettingsSchemaExtractorProgram
                 str_val += "]";
             }
         } else {
-            type = defaultValueType;
-            str_val = GetValueString (type, defaultValue);
+            str_val = GetValueString (defaultValueType, defaultValue);
         }
         return str_val;
     }

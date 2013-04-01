@@ -180,6 +180,34 @@ namespace GSettingsSchemaExtractor
                 .Trim ()));
         }
 
+        internal class ArrayTypeWithEmptyDefaultValue {
+            public static readonly SchemaEntry<string[]> CurrentFiltersSchema = new SchemaEntry<string[]> (
+                "sources.fsq", "current_filters",
+                new string [0],
+                null,
+                null
+            );
+        }
+
+        [Test]
+        public void SchemaWithEmptyArrayAsDefaultValue ()
+        {
+            StringBuilder result = GSettingsSchemaExtractorProgram.Extract (new Type [] { typeof (ArrayTypeWithEmptyDefaultValue) });
+
+            Assert.That (result, Is.Not.Null);
+            Assert.That (result.ToString ().Trim (), Is.EqualTo (@"
+<schemalist>
+  <schema id=""org.gnome.banshee.sources.fsq"" path=""/apps/banshee/sources/fsq/"" gettext-domain=""banshee"">
+    <key name=""current-filters"" type=""as"">
+      <default>[]</default>
+      <summary></summary>
+      <description></description>
+    </key>
+  </schema>
+</schemalist>"
+                .Trim ()));
+        }
+
         [Test]
         public void SchemaWithMoreThanOneKey ()
         {
