@@ -170,6 +170,7 @@ namespace Banshee.Playlist
         public static void ImportPlaylistToLibrary (string path, PrimarySource source, DatabaseImportManager importer)
         {
             try {
+                Log.InformationFormat ("Importing playlist {0} to library", path);
                 SafeUri uri = new SafeUri (path);
                 PlaylistParser parser = new PlaylistParser ();
                 string relative_dir = System.IO.Path.GetDirectoryName (uri.LocalPath);
@@ -180,7 +181,11 @@ namespace Banshee.Playlist
                 if (parser.Parse (uri)) {
                     List<string> uris = new List<string> ();
                     foreach (PlaylistElement element in parser.Elements) {
-                        uris.Add (element.Uri.LocalPath);
+                        if (element.Uri.IsFile) {
+                            uris.Add (element.Uri.LocalPath);
+                        } else {
+                            Log.InformationFormat ("Ignoring invalid playlist element: {0}", element.Uri.OriginalString);
+                        }
                     }
 
                     if (source == null) {
