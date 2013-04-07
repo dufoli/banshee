@@ -125,6 +125,10 @@ namespace Banshee.Metadata
 
         private bool RenameFile (DatabaseTrackInfo track)
         {
+            if (track.PathPattern == null) {
+                return false;
+            }
+
             SafeUri old_uri = track.Uri;
             bool in_library = old_uri.AbsolutePath.StartsWith (musicLibrarySource.BaseDirectoryWithSeparator);
 
