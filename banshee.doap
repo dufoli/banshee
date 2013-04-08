@@ -70,6 +70,13 @@
   </maintainer>
   <maintainer>
     <foaf:Person>
+      <foaf:name>Andrés G. Aragoneses</foaf:name>
+      <foaf:mbox rdf:resource="mailto:knocte@gmail.com" />
+      <gnome:userid>aaragoneses</gnome:userid>
+    </foaf:Person>
+  </maintainer>
+  <maintainer>
+    <foaf:Person>
       <foaf:name>Bertrand Lorentz</foaf:name>
       <foaf:mbox rdf:resource="mailto:bertrand.lorentz@gmail.com" />
       <gnome:userid>blorentz</gnome:userid>
