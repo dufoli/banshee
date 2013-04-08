@@ -95,7 +95,7 @@ namespace Banshee.Sources.Gui
         {
             this.name = name;
             this.pane_top_position = pane_top_position;
-            this.pane_left_position = pane_top_position;
+            this.pane_left_position = pane_left_position;
 
             InitializeViews ();
 
