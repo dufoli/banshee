@@ -18,16 +18,16 @@
 
   <title>Playlists</title>
 
-  <p>Playlists allow you to create and save a list of music tracks to be played
-  in a specific order. Playlists are convenient to create a list of your
-  favorite songs or to split your library into smaller lists that are easy
-  to browse through. Some portable media players even allow you to transfer the
+  <p>Playlists allow you to create and save a list of music tracks to be
+  played in a specific order. Playlists are convenient to create a list of your
+  favorite songs or to split your library into smaller lists that are easy to
+  browse through. Some portable media players even allow you to transfer the
   playlist so you can take it with you on the go.</p>
 
-  <p>Banshee supports normal playlists, which include songs you add to the
-  playlist, as well as smart playlists. Smart Playlists are automatically
-  generated playlists based on your listening habits, favorite music, or
-  more.</p>
+  <p><app>Banshee</app> supports normal playlists, which include songs you add
+  to the playlist, as well as smart playlists. Smart Playlists are
+  automatically generated playlists based on your listening habits, favorite
+  music, or more.</p>
 
   <section id="manual">
     <title>Normal Playlists</title>
@@ -40,17 +40,19 @@
   <p>You can create a new playlist by pressing <keyseq><key>Control</key>
   <key>N</key></keyseq>, from the menu choosing
   <guiseq><gui style="menu">Media</gui>
-  <gui style="menuitem">New Playlist</gui></guiseq> or by selecing the track(s)
-  you would like to add to the playlist. Select the track(s), right click them,
-  and choose <guiseq><gui style="menuitem">Add to Playlist</gui>
-  <gui style="menuitem">New Playlist</gui></guiseq>. You can also drag and drop
-  them to a new playlist by selecting the track(s) and dragging them to the
-  left hand window pane over <gui>Music</gui>. As you drag it over
-  <gui>Music</gui>, a new option
-  <gui style="menuitem"><em>New Playlist</em></gui> will appear and you can drop
-  the track(s) over <gui style="menuitem"><em>New Playlist</em></gui> to add
-  them to the playlist. You can repeat this process until you have added all
-  the tracks you want in the playlist.</p>
+  <gui style="menuitem">New Playlist</gui></guiseq> or
+  by selecing the track(s) you would like to add to the playlist. Select the
+  track(s), right click them, and choose
+  <guiseq><gui style="menuitem">Add to Playlist</gui>
+  <gui style="menuitem">New Playlist</gui></guiseq>. You can
+  also drag and drop them to a new playlist by selecting the track(s) and
+  dragging them to the left hand window pane over <gui>Music</gui>. As you
+  drag it over <gui>Music</gui>, a new option
+  <gui style="menuitem"><em>New Playlist</em></gui> will appear and you
+  can drop the track(s) over
+  <gui style="menuitem"><em>New Playlist</em></gui> to add them to the
+  playlist. You can repeat this process until you have added all the
+  tracks you want in the playlist.</p>
 
   <p>To give your playlist its own name, select the playlist and right click
   on the playlist and press <gui style="menuitem">Rename Playlist</gui> and
@@ -65,8 +67,8 @@
   <p>To remove a track from the playlist, select the track(s) you wish to
   remove. Press the <key>Delete</key>, from the menu choose
   <guiseq><gui style="menu">Edit</gui>
-  <gui style="menuitem">Remove from Playlist</gui></guiseq> or right click the
-  track(s) with your mouse and press
+  <gui style="menuitem">Remove from Playlist</gui></guiseq>
+  or right click the track(s) with your mouse and press
   <gui style="menuitem">Remove from Playlist</gui>.</p>
 
   </section>
@@ -74,17 +76,18 @@
   <section id="smartplaylists">
     <title>Smart Playlist</title>
 
-  <p>Smart Playlists allow you to quickly generate a dynamic playlist based
-  on a number of pre-set variables. You can quickly create a new playlist
-  based on a specific artist, favorites or more.</p>
+  <p>Smart Playlists allow you to quickly generate a dynamic playlist based on
+  a number of pre-set variables. You can quickly create a new playlist based
+  on a specific artist, favorites or more.</p>
 
   <p>To create a new Smart Playlist, from the menu choose
   <guiseq><gui style="menu">Media</gui>
-  <gui style="menuitem">New Smart Playlist</gui></guiseq>. You will be presented
-  with a dialog to create a new Smart Playlist. Enter the name of your playlist
-  and then choose the criteria your playlist should be based on. You can choose
-  from any field included in the song's meatadata, such as Album, Artist or
-  Year. Choose the criteria and then choose from one of the following:</p>
+  <gui style="menuitem">New Smart Playlist</gui></guiseq>.
+  You will be presented with a dialog to create a new
+  Smart Playlist. Enter the name of your playlist and then choose the criteria
+  your playlist should be based on. You can choose from any field included in
+  the song's meatadata, such as Album, Artist or Year. Choose the criteria and
+  then choose from one of the following:</p>
 
     <list>
       <item><p>is</p></item>
@@ -102,11 +105,13 @@
 
   <table frame="all" rules="rows" shade="rows">
   <tr>
-    <td><p><gui>Year</gui></p></td><td><p><gui>is</gui></p></td>
+    <td><p><gui>Year</gui></p></td>
+    <td><p><gui>is</gui></p></td>
     <td><p>2010</p></td>
   </tr>
   <tr>
-    <td><p><gui>Rating</gui></p></td><td><p><gui>is</gui></p></td>
+    <td><p><gui>Rating</gui></p></td>
+    <td><p><gui>is</gui></p></td>
     <td><p>5 stars</p></td>
   </tr>
   </table>
@@ -115,25 +120,39 @@
   the <gui style="checkbox">Limit to</gui> checkbox and choosing the number of
   songs to be included.</p>
 
-  <p>Banshee also includes smart playlists already created for you. Press the
-  <gui style="button">Open in editor</gui> button to view how the playlist
-  created was or to modify it. If you press
-  <gui style="button">Create and save</gui> the playlist will be automatically
-  generated and saved for you. The following playlists are included:</p>
+  <p><app>Banshee</app> also includes smart playlists already created for you.
+  Press the <gui style="button">Open in editor</gui> button to view how the
+  playlist created was or to modify it. If you press
+  <gui style="button">Create and save</gui>
+  the playlist will be automatically generated and saved for
+  you. The following playlists are included:</p>
 
   <list>
-    <title>Banshee Smart Playlists</title>
-    <item><p>Favorites (Songs rated four and five stars)</p></item>
-    <item><p>Recent Favorites (Songs listened to often in the past week)</p>
+    <title><app>Banshee</app> Smart Playlists</title>
+    <item>
+      <p>Favorites (Songs rated four and five stars)</p>
     </item>
-    <item><p>Recently Added (Songs imported within the last week)</p></item>
-    <item><p>Unheard (Songs that have not been played or skipped)</p></item>
-    <item><p>Neglected Favorites (Favorites not played in over two months)
-    </p></item>
-    <item><p>700 MB of Favorites (A data CD worth of favorite songs)</p></item>
-    <item><p>80 Minutes of Favorites (An audio CD worth of favorite songs)</p>
+    <item>
+      <p>Recent Favorites (Songs listened to often in the past week)</p>
     </item>
-    <item><p>Unrated (Songs that haven't been rated)</p></item>
+    <item>
+      <p>Recently Added (Songs imported within the last week)</p>
+    </item>
+    <item>
+      <p>Unheard (Songs that have not been played or skipped)</p>
+    </item>
+    <item>
+      <p>Neglected Favorites (Favorites not played in over two months)</p>
+    </item>
+    <item>
+      <p>700 MB of Favorites (A data CD worth of favorite songs)</p>
+    </item>
+    <item>
+      <p>80 Minutes of Favorites (An audio CD worth of favorite songs)</p>
+    </item>
+    <item>
+      <p>Unrated (Songs that haven't been rated)</p>
+    </item>
   </list>
 
   </section>

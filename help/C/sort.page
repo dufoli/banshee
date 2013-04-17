@@ -12,6 +12,10 @@
       <name>Paul Cutler</name>
       <email>pcutler@gnome.org</email>
     </credit>
+    <credit type="editor">
+      <name>Aruna Sankaranarayanan</name>
+      <email>aruna.evam@gmail.com</email>
+    </credit>
 <!--
     <copyright>
       <year>2010</year>
@@ -28,16 +32,17 @@
     <title>Adding Columns</title>
 
   <p>As your library grows, you may want to change your library view to add
-  additional information about the songs in your library or change the way
-  you can view and sort your songs, artists or albums.</p>
+  additional information about the songs in your library or change the way you
+  can view and sort your songs, artists or albums.</p>
 
   <p>You can add additional columns to the library view in <app>Banshee</app>
-  to give you more information about the songs and also allow you to sort
-  by. By default, Banshee displays columns for songs including <gui>Name</gui>,
-  <gui>Artist</gui>, <gui>Album</gui> and <gui>Time</gui>. To add additional
-  columns, using your mouse right click on any of the columns and Banshee will
-  display all available column to choose from. Click the checkbox next to the
-  name of the column you wish to add to the library view.</p>
+  to give you more information about the songs and also allow you to sort by.
+  By default, <app>Banshee</app> displays columns for songs including
+  <gui>Name</gui>, <gui>Artist</gui>, <gui>Album</gui> and <gui>Time</gui>. To
+  add additional columns, using your mouse right click on any of the columns
+  and <app>Banshee</app> will display all available column to choose from.
+  Click the checkbox next to the name of the column you wish to add to the
+  library view.</p>
 
   </section>
 
@@ -45,11 +50,10 @@
     <title>Sorting Columns</title>
 
   <p>You can sort your library by using your mouse to click on any of the
-  columns displayed in library view. If you wish to sort your music library
-  by Artist, click the <gui>Artist</gui> column header and Banshee will
-  automatically sort that column alphabetically. Clicking the
-  <gui>Artist</gui> column again will sort the column in reverse alphabetical
-  order.</p>
+  columns displayed in library view. If you wish to sort your music library by
+  Artist, click the <gui>Artist</gui> column header and <app>Banshee</app> will
+  automatically sort that column alphabetically. Clicking the <gui>Artist</gui>
+  column again will sort the column in reverse alphabetical order.</p>
 
   </section>
 

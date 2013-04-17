@@ -15,6 +15,10 @@
       <name>Sindhu S</name>
       <email>sindhus@live.in</email>
     </credit>
+    <credit type="editor">
+      <name>Aruna Sankaranarayanan</name>
+      <email>aruna.evam@gmail.com</email>
+    </credit>
 <!--
     <copyright>
       <year>2010</year>
@@ -24,7 +28,7 @@
     <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude" />
   </info>
 
-  <title>Banshee Media Player</title>
+  <title><app>Banshee</app> Media Player</title>
 
   <section id="media" style="2column">
     <title>Add, Remove &amp; Play</title>
@@ -39,11 +43,11 @@
   </section>
 
   <section id="extensions" style="2column">
-    <title>Add additional functionality to Banshee</title>
+    <title>Add additional functionality to <app>Banshee</app></title>
   </section>
 
   <section id="advanced" style="2column">
-	<title>Advanced options and help</title>
+    <title>Advanced options and help</title>
   </section>
 
 </page>

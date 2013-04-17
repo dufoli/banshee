@@ -27,18 +27,18 @@
   <section id="metadata">
     <title>Music metadata</title>
 
-  <p>Digital music contains metadata that stores information in the
-  music file including the artist, album, year recorded, genre, and more.
-  Almost all music purchased over the internet will have the metadata
-  already embedded and if you import music from CDs, Banshee will include
-  the metadata when ripping the CD if available. For more information
-  on ripping CDs and including the metadata see the <link xref="import"/>.</p>
+  <p>Digital music contains metadata that stores information in the music file
+  including the artist, album, year recorded, genre, and more.  Almost all
+  music purchased over the internet will have the metadata already embedded and
+  if you import music from CDs, <app>Banshee</app> will include the metadata
+  when ripping the CD if available. For more information on ripping CDs and
+  including the metadata see the <link xref="import"/>.</p>
 
   <p>Popular metadata formats are ID3v1 and ID3v2 for MP3 files and Vorbis
   comments for OGG Vorbis files.</p>
 
   <p>If you have imported songs that do not contain metadata,<app>Banshee</app>
-  will display <gui>Unknown</gui> for most fields in the library. </p>
+  will display <gui>Unknown</gui> for most fields in the library.</p>
 
   </section>
 

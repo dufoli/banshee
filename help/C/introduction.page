@@ -5,10 +5,14 @@
   <info>
     <link type="guide" xref="index"/>
     <revision pkgversion="2.0" version="0.1" date="2010-05-19" status="draft"/>
-    <desc>Introduction to the <app>Banshee Media Player</app>.</desc>
+    <desc>Introduction to the <app>Banshee</app> Media Player.</desc>
     <credit type="author">
       <name>Paul Cutler</name>
       <email>pcutler@gnome.org</email>
+    </credit>
+    <credit type="editor">
+      <name>Aruna Sankaranarayanan</name>
+      <email>aruna.evam@gmail.com</email>
     </credit>
 <!--
     <copyright>
@@ -28,10 +32,11 @@
   <p><app>Banshee</app> includes features to import your media, manage its
   metadata, and play your music and videos.</p>
 
-  <p>Banshee also helps you sync your music and videos to popular portable
-  devices, such as digital audio players and smartphones. Banshee supports
-  popular devices including most iPods, Sandisk and Creative MP3 players, and
-  Android powered phones.</p>
+  <p><app>Banshee</app> also helps you sync your music and videos to popular
+  portable devices, such as digital audio players and smartphones.
+  <app>Banshee</app> supports popular devices including most iPods, Sandisk and
+  Creative MP3 players, and Android powered phones.</p>
+
 <!--
   <figure>
     <title><gui>Banshee Media Player</gui> window</title>

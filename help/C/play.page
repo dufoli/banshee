@@ -18,6 +18,10 @@
       <name>Sindhu S</name>
       <email>sindhus@live.in</email>
     </credit>
+    <credit>
+      <name>Aruna Sankaranarayanan</name>
+      <email>aruna.evam@gmail.com</email>
+    </credit>
 <!--
     <copyright>
       <year>2010</year>
@@ -32,35 +36,40 @@
   <section id="playmusic">
     <title>Play your music</title>
 
-  <p>To play music in Banshee, choose the Music source. The music library
-  will show you all artists in your music library, cover art for each album,
-  and a list of all songs in your library.</p>
+  <p>To play music in <app>Banshee</app>, choose the Music source. The music
+  library will show you all artists in your music library, cover art for each
+  album, and a list of all songs in your library.</p>
 
-  <p>Choose the album or song you wish to play from the list of artists, albums
-  or use the search bar in the upper right hand corner of Banshee.</p>
+  <p>Choose the album or song you wish to play from the list of artists,
+  albums or use the search bar in the upper right hand corner of
+  <app>Banshee</app>.</p>
 
   <p>To start playing a song, use your mouse to double click the song name,
-  press the <key>Spacebar</key>, or choose
+  press the <key>Space</key>, or choose
   <guiseq><gui style="menu">Playback</gui>
-  <gui style="menuitem">Play</gui></guiseq> from the Banshee menu.</p>
+  <gui style="menuitem">Play</gui></guiseq> from
+  the <app>Banshee</app> menu.</p>
 
   <p>You can also start playing an album by choosing the album in the album
   browser and using your mouse to double click the song name, press the
-  <key>Spacebar</key>, or choose <guiseq><gui style="menu">Playback</gui>
-  <gui style="menuitem">Play</gui></guiseq> from the Banshee menu.</p>
+  <key>Space</key>, or choose <guiseq><gui style="menu">Playback</gui>
+  <gui style="menuitem">Play</gui></guiseq> from the
+  <app>Banshee</app> menu.</p>
 
   <p>To play all songs by one artist, choose the artist in the artist browser
-  and press the <key>Spacebar</key>, or choose
+  and press the <key>Space</key>, or choose
   <guiseq><gui style="menu">Playback</gui>
-  <gui style="menuitem">Play</gui></guiseq> from the Banshee menu.</p>
+  <gui style="menuitem">Play</gui></guiseq> from
+  the <app>Banshee</app> menu.</p>
 
-  <p>Banshee also displays your Favorite albums (those you play the most),
-  Recent Favorites, Recently Added and Unheard music. Choose the one
-  you wish to listen to and you can play songs from each.</p>
+  <p><app>Banshee</app> also displays your Favorite albums (those you play the
+  most), Recent Favorites, Recently Added and Unheard music. Choose the one you
+  wish to listen to and you can play songs from each.</p>
 
-  <p>Banshee can be used to play music in a random order using the
-  <gui style="menuitem">Shuffle</gui> mode. Enable the mode in <guiseq>
-  <gui style="menu">Playback</gui><gui style="menuitem">Shuffle</gui></guiseq>,
+  <p><app>Banshee</app> can be used to play music in a random order using the
+  <gui style="menuitem">Shuffle</gui> mode. Enable the mode in
+  <guiseq><gui style="menu">Playback</gui>
+  <gui style="menuitem">Shuffle</gui></guiseq>,
   followed by a shuffle type selection.</p>
 
   <terms>
@@ -96,13 +105,14 @@
   <section id="playvideo">
     <title>Play a video</title>
 
-  <p>Your imported videos are listed alphabetically. To play a video,
-  choose the video you wish to play from the list and press the
-  <key>Spacebar</key>, or choose <guiseq><gui style="menu">Playback</gui>
-  <gui style="menuitem">Play</gui></guiseq> from the Banshee menu.</p>
+  <p>Your imported videos are listed alphabetically. To play a video, choose
+  the video you wish to play from the list and press the <key>Space</key>,
+  or choose <guiseq><gui style="menu">Playback</gui>
+  <gui style="menuitem">Play</gui></guiseq> from the
+  <app>Banshee</app> menu.</p>
 
-  <p>Banshee also shows your Favorite videos (those you watch the most)
-  and Unwatched videos. Choose one and you can play a video from the
+  <p><app>Banshee</app> also shows your Favorite videos (those you watch the
+  most) and Unwatched videos. Choose one and you can play a video from the
   list.</p>
 
   </section>
@@ -115,9 +125,10 @@
   newest first.</p>
 
   <p>To play a Podcast, choose the Podcast you wish to play from the list and
-  press the <key>Spacebar</key>, or choose
+  press the <key>Space</key>, or choose
   <guiseq><gui style="menu">Playback</gui>
-  <gui style="menuitem">Play</gui></guiseq> from the Banshee menu.</p>
+  <gui style="menuitem">Play</gui></guiseq> from
+  the <app>Banshee</app> menu.</p>
 
   </section>
 
@@ -125,12 +136,13 @@
     <title>Play an internet radio station</title>
 
   <p>The Radio source shows you all internet radio stations you have added
-  to Banshee alphabetically.</p>
+  to <app>Banshee</app> alphabetically.</p>
 
   <p>To play an internet radio station, choose the radio station you wish to
-  play from the list and press the <key>Spacebar</key>, or choose
+  play from the list and press the <key>Space</key>, or choose
   <guiseq><gui style="menu">Playback</gui>
-  <gui style="menuitem">Play</gui></guiseq> from the Banshee menu.</p>
+  <gui style="menuitem">Play</gui></guiseq> from
+  the <app>Banshee</app> menu.</p>
 
   </section>
 

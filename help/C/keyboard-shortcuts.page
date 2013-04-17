@@ -19,25 +19,29 @@
 -->
 
   <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
-  </info>
+</info>
 
-  <title>Control Banshee using Keyboard Shortcuts</title>
+  <title>Control <app>Banshee</app> using Keyboard Shortcuts</title>
 
   <section id="playbackcontrol">
     <title>Playback Control</title>
 
   <table frame="all" rules="rows" shade="rows">
   <tr>
-    <td><p><gui>Key</gui></p></td><td><p><gui>Action</gui></p></td>
+    <td><p><gui>Key</gui></p></td>
+    <td><p><gui>Action</gui></p></td>
   </tr>
   <tr>
-    <td><p><key>Space Bar</key></p></td><td><p>Play or Pause the current song</p></td>
+    <td><p><key>Space</key></p></td>
+    <td><p>Play or Pause the current song</p></td>
   </tr>
   <tr>
-    <td><p><key>N</key></p></td><td><p>Play the next song</p></td>
+    <td><p><key>N</key></p></td>
+    <td><p>Play the next song</p></td>
   </tr>
   <tr>
-    <td><p><key>B</key></p></td> <td><p>Play the previous song</p></td>
+    <td><p><key>B</key></p></td>
+    <td><p>Play the previous song</p></td>
   </tr>
   </table>
 
@@ -48,15 +52,17 @@
 
   <table frame="all" rules="rows" shade="rows">
   <tr>
-    <td><p><gui>Key</gui></p></td><td><p><gui>Action</gui></p></td>
+    <td><p><gui>Key</gui></p></td>
+    <td><p><gui>Action</gui></p></td>
   </tr>
   <tr>
-    <td><p><key>/</key>, <keyseq><key>Control</key><key>F</key></keyseq></p>
-    </td> <td><p>Move the focus to the search box</p></td>
+    <td><p><key>/</key>,<keyseq><key>Control</key><key>F</key></keyseq></p>
+    </td>
+    <td><p>Move the focus to the search box</p></td>
   </tr>
   <tr>
-    <td><p><keyseq><key>Control</key><key>I</key></keyseq></p></td><td>
-    <p>Open import media dialog</p></td>
+    <td><p><keyseq><key>Control</key><key>I</key></keyseq></p></td>
+    <td><p>Open import media dialog</p></td>
    </tr>
 </table>
 
@@ -68,11 +74,12 @@
 
 <table frame="all" rules="rows" shade="rows">
   <tr>
-    <td><p><gui>Key</gui></p></td><td><p><gui>Action</gui></p></td>
+    <td><p><gui>Key</gui></p></td>
+    <td><p><gui>Action</gui></p></td>
   </tr>
   <tr>
-    <td><p><keyseq><key>Control</key><key>N</key></keyseq></p></td> <td><p>
-    Create New Playlist</p></td>
+    <td><p><keyseq><key>Control</key><key>N</key></keyseq></p></td>
+    <td><p>Create New Playlist</p></td>
   </tr>
 
 </table>
@@ -84,11 +91,12 @@
 
   <table frame="all" rules="rows" shade="rows">
   <tr>
-    <td><p><gui>Key</gui></p></td><td><p><gui>Action</gui></p></td>
+    <td><p><gui>Key</gui></p></td>
+    <td><p><gui>Action</gui></p></td>
   </tr>
   <tr>
-    <td><p><key>Y</key></p></td><td><p>Mark the selected episodes as old</p>
-    </td>
+    <td><p><key>Y</key></p></td>
+    <td><p>Mark the selected episodes as old</p></td>
   </tr>
 
   </table>
@@ -100,36 +108,43 @@
 
   <table frame="all" rules="rows" shade="rows">
   <tr>
-    <td><p><gui>Key</gui></p></td><td><p><gui>Action</gui></p></td>
+    <td><p><gui>Key</gui></p></td>
+    <td><p><gui>Action</gui></p></td>
   </tr>
   <tr>
-    <td><p><key>F</key></p></td><td><p>Toggle full-screen mode</p></td>
+    <td><p><key>F</key></p></td>
+    <td><p>Toggle full-screen mode</p></td>
   </tr>
   <tr>
-    <td><p><keyseq><key>Control</key><key>A</key></keyseq></p></td> <td><p>
-    Select all songs in playlist view</p></td>
+    <td><p><keyseq><key>Control</key><key>A</key></keyseq></p></td>
+    <td><p>Select all songs in playlist view</p></td>
   </tr>
   <tr>
     <td><p><keyseq><key>Control</key><key>Shift</key><key>A</key></keyseq></p>
-    </td> <td><p>Unselect all songs in playlist view</p></td>
+    </td>
+    <td><p>Unselect all songs in playlist view</p></td>
   </tr>
   <tr>
-    <td><p><keyseq><key>Control</key><key>W</key></keyseq></p></td> <td><p>
-    Hide Banshee Window (Requires Notification Area Plug-in Enabled</p></td>
+    <td><p><keyseq><key>Control</key><key>W</key></keyseq></p></td>
+    <td><p>Hide <app>Banshee</app>
+    Window (Requires Notification Area Plug-in Enabled</p></td>
   </tr>
   <tr>
     <td><p><keyseq><key>Control</key><key>Left Mouse Button</key></keyseq>
-    </p></td> <td><p>Play Previous Song (Requires Notification Area Plug-in
+    </p></td>
+    <td><p>Play Previous Song (Requires Notification Area Plug-in
     Enabled</p></td>
   </tr>
   <tr>
     <td><p><keyseq><key>Control</key><key>Right Mouse Button</key></keyseq>
-    </p></td> <td><p>Play Next Song (Requires Notification Area Plug-in
+    </p></td>
+    <td><p>Play Next Song (Requires Notification Area Plug-in
     Enabled</p></td>
   </tr>
   <tr>
     <td><p><keyseq><key>Control</key><key>Middle Mouse Button</key></keyseq>
-    </p></td> <td><p>Toggle Play / Pause (Requires Notification Area Plug-in
+    </p></td>
+    <td><p>Toggle Play / Pause (Requires Notification Area Plug-in
     Enabled</p></td>
   </tr>
 

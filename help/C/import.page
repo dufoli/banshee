@@ -5,7 +5,7 @@
   <info>
     <link type="guide" xref="index#media"/>
     <link type="seealso" xref="remove-media"/>
-    <desc>Add music and videos from your computer to your Banshee
+    <desc>Add music and videos from your computer to your <app>Banshee</app>
     library.</desc>
     <revision pkgversion="1.6" version="1.6" date="2010-07-15"
     status="review"/>
@@ -17,19 +17,22 @@
       <name>Shaun McCance</name>
       <email>shaunm@gnome.org</email>
     </credit>
+    <credit type="editor">
+      <name>Aruna Sankaranarayanan</name>
+      <email>aruna.evam@gmail.com</email>
+    </credit>
     <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
   </info>
 
   <title>Import music &amp; videos</title>
 
-  <p>You can import music and videos stored on your computer into Banshee.
-  Imported files appear in your sources and can be edited and managed like any
-  other media in Banshee.</p>
+  <p>You can import music and videos stored on your computer into
+  <app>Banshee</app>. Imported files appear in your sources and can be edited
+  and managed like any other media in <app>Banshee</app>.</p>
 
-  <p>To import music or video files on your computer, choose
-  <guiseq><gui style="menu">Media</gui>
-  <gui style="menuitem">Import Media</gui></guiseq>. A dialog wil appear with a
-  number of choices.</p>
+  <p>To import music or video files on your computer, choose <guiseq><gui
+  style="menu">Media</gui> <gui style="menuitem">Import Media</gui></guiseq>. A
+  dialog wil appear with a number of choices.</p>
 
   <note style="tip">
     <p>Plugins may add additional import choices. See <link xref="#plugins"/>
@@ -72,7 +75,7 @@
     <title>Import from a Playlist</title>
 
   <p>You can also import music from playlists. Most playlist files end in
-  <em>m3u</em>. To import from a playlist, from the Banshee menu choose
+  <em>m3u</em>. To import from a playlist, from the <app>Banshee</app> menu choose
   <guiseq><gui style="menu">Media</gui>
   <gui style="menuitem">Import Playlist</gui></guiseq> and locate the playlist
   file in your folder, select it and press <gui style="button">Import</gui>.

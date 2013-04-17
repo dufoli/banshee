@@ -11,7 +11,7 @@ DOC_PAGES = \
 	import.page \
 	index.page \
 	introduction.page \
-	keyboardshortcuts.page \
+	keyboard-shortcuts.page \
 	lastfm.page \
 	manage-playlists.page \
 	manage-tags.page \
