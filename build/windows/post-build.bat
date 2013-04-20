@@ -20,6 +20,7 @@ mkdir bin\share\icons\hicolor\48x48
 mkdir bin\share\icons\hicolor\48x48\actions
 mkdir bin\share\icons\hicolor\48x48\categories
 mkdir bin\share\icons\hicolor\48x48\devices
+
 copy /Y "src\Backends\Banshee.Gnome\ThemeIcons\16x16\actions\media-write-cd.png" bin\share\icons\hicolor\16x16\actions\media-write-cd.png
 copy /Y "src\Backends\Banshee.Gnome\ThemeIcons\22x22\actions\media-write-cd.png" bin\share\icons\hicolor\22x22\actions\media-write-cd.png
 copy /Y "src\Backends\Banshee.Gnome\ThemeIcons\32x32\actions\media-write-cd.png" bin\share\icons\hicolor\32x32\actions\media-write-cd.png
@@ -37,34 +38,37 @@ copy /Y "src\Core\Banshee.ThickClient\ThemeIcons\16x16\emblems\creative-commons-
 copy /Y "src\Core\Banshee.ThickClient\ThemeIcons\22x22\actions\encode.png" bin\share\icons\hicolor\22x22\actions\encode.png
 copy /Y "src\Core\Banshee.ThickClient\ThemeIcons\22x22\categories\source-playlist.png" bin\share\icons\hicolor\22x22\categories\source-playlist.png
 copy /Y "src\Core\Banshee.ThickClient\ThemeIcons\22x22\categories\source-smart-playlist.png" bin\share\icons\hicolor\22x22\categories\source-smart-playlist.png
-copy /Y "src\Dap\Banshee.Dap.Ipod\ThemeIcons\16x16\devices\multimedia-player-ipod-U2-color.png" bin\share\icons\hicolor\16x16\devices\multimedia-player-ipod-U2-color.png
-copy /Y "src\Dap\Banshee.Dap.Ipod\ThemeIcons\16x16\devices\multimedia-player-ipod-U2-monochrome.png" bin\share\icons\hicolor\16x16\devices\multimedia-player-ipod-U2-monochrome.png
-copy /Y "src\Dap\Banshee.Dap.Ipod\ThemeIcons\16x16\devices\multimedia-player-ipod-mini-blue.png" bin\share\icons\hicolor\16x16\devices\multimedia-player-ipod-mini-blue.png
-copy /Y "src\Dap\Banshee.Dap.Ipod\ThemeIcons\16x16\devices\multimedia-player-ipod-mini-gold.png" bin\share\icons\hicolor\16x16\devices\multimedia-player-ipod-mini-gold.png
-copy /Y "src\Dap\Banshee.Dap.Ipod\ThemeIcons\16x16\devices\multimedia-player-ipod-mini-green.png" bin\share\icons\hicolor\16x16\devices\multimedia-player-ipod-mini-green.png
-copy /Y "src\Dap\Banshee.Dap.Ipod\ThemeIcons\16x16\devices\multimedia-player-ipod-mini-pink.png" bin\share\icons\hicolor\16x16\devices\multimedia-player-ipod-mini-pink.png
-copy /Y "src\Dap\Banshee.Dap.Ipod\ThemeIcons\16x16\devices\multimedia-player-ipod-mini-silver.png" bin\share\icons\hicolor\16x16\devices\multimedia-player-ipod-mini-silver.png
-copy /Y "src\Dap\Banshee.Dap.Ipod\ThemeIcons\16x16\devices\multimedia-player-ipod-nano-black.png" bin\share\icons\hicolor\16x16\devices\multimedia-player-ipod-nano-black.png
-copy /Y "src\Dap\Banshee.Dap.Ipod\ThemeIcons\16x16\devices\multimedia-player-ipod-nano-white.png" bin\share\icons\hicolor\16x16\devices\multimedia-player-ipod-nano-white.png
-copy /Y "src\Dap\Banshee.Dap.Ipod\ThemeIcons\16x16\devices\multimedia-player-ipod-shuffle.png" bin\share\icons\hicolor\16x16\devices\multimedia-player-ipod-shuffle.png
-copy /Y "src\Dap\Banshee.Dap.Ipod\ThemeIcons\16x16\devices\multimedia-player-ipod-standard-color.png" bin\share\icons\hicolor\16x16\devices\multimedia-player-ipod-standard-color.png
-copy /Y "src\Dap\Banshee.Dap.Ipod\ThemeIcons\16x16\devices\multimedia-player-ipod-standard-monochrome.png" bin\share\icons\hicolor\16x16\devices\multimedia-player-ipod-standard-monochrome.png
-copy /Y "src\Dap\Banshee.Dap.Ipod\ThemeIcons\16x16\devices\multimedia-player-ipod-video-black.png" bin\share\icons\hicolor\16x16\devices\multimedia-player-ipod-video-black.png
-copy /Y "src\Dap\Banshee.Dap.Ipod\ThemeIcons\16x16\devices\multimedia-player-ipod-video-white.png" bin\share\icons\hicolor\16x16\devices\multimedia-player-ipod-video-white.png
-copy /Y "src\Dap\Banshee.Dap.Ipod\ThemeIcons\22x22\devices\multimedia-player-ipod-U2-color.png" bin\share\icons\hicolor\22x22\devices\multimedia-player-ipod-U2-color.png
-copy /Y "src\Dap\Banshee.Dap.Ipod\ThemeIcons\22x22\devices\multimedia-player-ipod-U2-monochrome.png" bin\share\icons\hicolor\22x22\devices\multimedia-player-ipod-U2-monochrome.png
-copy /Y "src\Dap\Banshee.Dap.Ipod\ThemeIcons\22x22\devices\multimedia-player-ipod-mini-blue.png" bin\share\icons\hicolor\22x22\devices\multimedia-player-ipod-mini-blue.png
-copy /Y "src\Dap\Banshee.Dap.Ipod\ThemeIcons\22x22\devices\multimedia-player-ipod-mini-gold.png" bin\share\icons\hicolor\22x22\devices\multimedia-player-ipod-mini-gold.png
-copy /Y "src\Dap\Banshee.Dap.Ipod\ThemeIcons\22x22\devices\multimedia-player-ipod-mini-green.png" bin\share\icons\hicolor\22x22\devices\multimedia-player-ipod-mini-green.png
-copy /Y "src\Dap\Banshee.Dap.Ipod\ThemeIcons\22x22\devices\multimedia-player-ipod-mini-pink.png" bin\share\icons\hicolor\22x22\devices\multimedia-player-ipod-mini-pink.png
-copy /Y "src\Dap\Banshee.Dap.Ipod\ThemeIcons\22x22\devices\multimedia-player-ipod-mini-silver.png" bin\share\icons\hicolor\22x22\devices\multimedia-player-ipod-mini-silver.png
-copy /Y "src\Dap\Banshee.Dap.Ipod\ThemeIcons\22x22\devices\multimedia-player-ipod-nano-black.png" bin\share\icons\hicolor\22x22\devices\multimedia-player-ipod-nano-black.png
-copy /Y "src\Dap\Banshee.Dap.Ipod\ThemeIcons\22x22\devices\multimedia-player-ipod-nano-white.png" bin\share\icons\hicolor\22x22\devices\multimedia-player-ipod-nano-white.png
-copy /Y "src\Dap\Banshee.Dap.Ipod\ThemeIcons\22x22\devices\multimedia-player-ipod-shuffle.png" bin\share\icons\hicolor\22x22\devices\multimedia-player-ipod-shuffle.png
-copy /Y "src\Dap\Banshee.Dap.Ipod\ThemeIcons\22x22\devices\multimedia-player-ipod-standard-color.png" bin\share\icons\hicolor\22x22\devices\multimedia-player-ipod-standard-color.png
-copy /Y "src\Dap\Banshee.Dap.Ipod\ThemeIcons\22x22\devices\multimedia-player-ipod-standard-monochrome.png" bin\share\icons\hicolor\22x22\devices\multimedia-player-ipod-standard-monochrome.png
-copy /Y "src\Dap\Banshee.Dap.Ipod\ThemeIcons\22x22\devices\multimedia-player-ipod-video-black.png" bin\share\icons\hicolor\22x22\devices\multimedia-player-ipod-video-black.png
-copy /Y "src\Dap\Banshee.Dap.Ipod\ThemeIcons\22x22\devices\multimedia-player-ipod-video-white.png" bin\share\icons\hicolor\22x22\devices\multimedia-player-ipod-video-white.png
+
+set APPLEDEVICE_ICONS_PATH=src\Dap\Banshee.Dap.AppleDevice\ThemeIcons
+copy /Y "%APPLEDEVICE_ICONS_PATH%\16x16\devices\multimedia-player-ipod-U2-color.png" bin\share\icons\hicolor\16x16\devices\multimedia-player-ipod-U2-color.png
+copy /Y "%APPLEDEVICE_ICONS_PATH%\16x16\devices\multimedia-player-ipod-U2-monochrome.png" bin\share\icons\hicolor\16x16\devices\multimedia-player-ipod-U2-monochrome.png
+copy /Y "%APPLEDEVICE_ICONS_PATH%\16x16\devices\multimedia-player-ipod-mini-blue.png" bin\share\icons\hicolor\16x16\devices\multimedia-player-ipod-mini-blue.png
+copy /Y "%APPLEDEVICE_ICONS_PATH%\16x16\devices\multimedia-player-ipod-mini-gold.png" bin\share\icons\hicolor\16x16\devices\multimedia-player-ipod-mini-gold.png
+copy /Y "%APPLEDEVICE_ICONS_PATH%\16x16\devices\multimedia-player-ipod-mini-green.png" bin\share\icons\hicolor\16x16\devices\multimedia-player-ipod-mini-green.png
+copy /Y "%APPLEDEVICE_ICONS_PATH%\16x16\devices\multimedia-player-ipod-mini-pink.png" bin\share\icons\hicolor\16x16\devices\multimedia-player-ipod-mini-pink.png
+copy /Y "%APPLEDEVICE_ICONS_PATH%\16x16\devices\multimedia-player-ipod-mini-silver.png" bin\share\icons\hicolor\16x16\devices\multimedia-player-ipod-mini-silver.png
+copy /Y "%APPLEDEVICE_ICONS_PATH%\16x16\devices\multimedia-player-ipod-nano-black.png" bin\share\icons\hicolor\16x16\devices\multimedia-player-ipod-nano-black.png
+copy /Y "%APPLEDEVICE_ICONS_PATH%\16x16\devices\multimedia-player-ipod-nano-white.png" bin\share\icons\hicolor\16x16\devices\multimedia-player-ipod-nano-white.png
+copy /Y "%APPLEDEVICE_ICONS_PATH%\16x16\devices\multimedia-player-ipod-shuffle.png" bin\share\icons\hicolor\16x16\devices\multimedia-player-ipod-shuffle.png
+copy /Y "%APPLEDEVICE_ICONS_PATH%\16x16\devices\multimedia-player-ipod-standard-color.png" bin\share\icons\hicolor\16x16\devices\multimedia-player-ipod-standard-color.png
+copy /Y "%APPLEDEVICE_ICONS_PATH%\16x16\devices\multimedia-player-ipod-standard-monochrome.png" bin\share\icons\hicolor\16x16\devices\multimedia-player-ipod-standard-monochrome.png
+copy /Y "%APPLEDEVICE_ICONS_PATH%\16x16\devices\multimedia-player-ipod-video-black.png" bin\share\icons\hicolor\16x16\devices\multimedia-player-ipod-video-black.png
+copy /Y "%APPLEDEVICE_ICONS_PATH%\16x16\devices\multimedia-player-ipod-video-white.png" bin\share\icons\hicolor\16x16\devices\multimedia-player-ipod-video-white.png
+copy /Y "%APPLEDEVICE_ICONS_PATH%\22x22\devices\multimedia-player-ipod-U2-color.png" bin\share\icons\hicolor\22x22\devices\multimedia-player-ipod-U2-color.png
+copy /Y "%APPLEDEVICE_ICONS_PATH%\22x22\devices\multimedia-player-ipod-U2-monochrome.png" bin\share\icons\hicolor\22x22\devices\multimedia-player-ipod-U2-monochrome.png
+copy /Y "%APPLEDEVICE_ICONS_PATH%\22x22\devices\multimedia-player-ipod-mini-blue.png" bin\share\icons\hicolor\22x22\devices\multimedia-player-ipod-mini-blue.png
+copy /Y "%APPLEDEVICE_ICONS_PATH%\22x22\devices\multimedia-player-ipod-mini-gold.png" bin\share\icons\hicolor\22x22\devices\multimedia-player-ipod-mini-gold.png
+copy /Y "%APPLEDEVICE_ICONS_PATH%\22x22\devices\multimedia-player-ipod-mini-green.png" bin\share\icons\hicolor\22x22\devices\multimedia-player-ipod-mini-green.png
+copy /Y "%APPLEDEVICE_ICONS_PATH%\22x22\devices\multimedia-player-ipod-mini-pink.png" bin\share\icons\hicolor\22x22\devices\multimedia-player-ipod-mini-pink.png
+copy /Y "%APPLEDEVICE_ICONS_PATH%\22x22\devices\multimedia-player-ipod-mini-silver.png" bin\share\icons\hicolor\22x22\devices\multimedia-player-ipod-mini-silver.png
+copy /Y "%APPLEDEVICE_ICONS_PATH%\22x22\devices\multimedia-player-ipod-nano-black.png" bin\share\icons\hicolor\22x22\devices\multimedia-player-ipod-nano-black.png
+copy /Y "%APPLEDEVICE_ICONS_PATH%\22x22\devices\multimedia-player-ipod-nano-white.png" bin\share\icons\hicolor\22x22\devices\multimedia-player-ipod-nano-white.png
+copy /Y "%APPLEDEVICE_ICONS_PATH%\22x22\devices\multimedia-player-ipod-shuffle.png" bin\share\icons\hicolor\22x22\devices\multimedia-player-ipod-shuffle.png
+copy /Y "%APPLEDEVICE_ICONS_PATH%\22x22\devices\multimedia-player-ipod-standard-color.png" bin\share\icons\hicolor\22x22\devices\multimedia-player-ipod-standard-color.png
+copy /Y "%APPLEDEVICE_ICONS_PATH%\22x22\devices\multimedia-player-ipod-standard-monochrome.png" bin\share\icons\hicolor\22x22\devices\multimedia-player-ipod-standard-monochrome.png
+copy /Y "%APPLEDEVICE_ICONS_PATH%\22x22\devices\multimedia-player-ipod-video-black.png" bin\share\icons\hicolor\22x22\devices\multimedia-player-ipod-video-black.png
+copy /Y "%APPLEDEVICE_ICONS_PATH%\22x22\devices\multimedia-player-ipod-video-white.png" bin\share\icons\hicolor\22x22\devices\multimedia-player-ipod-video-white.png
+
 copy /Y "src\Dap\Banshee.Dap.MassStorage\ThemeIcons\128x128\devices\phone-google-nexus-one.png" bin\share\icons\hicolor\128x128\devices\phone-google-nexus-one.png
 copy /Y "src\Dap\Banshee.Dap.MassStorage\ThemeIcons\128x128\devices\phone-htc-g1-white.png" bin\share\icons\hicolor\128x128\devices\phone-htc-g1-white.png
 copy /Y "src\Dap\Banshee.Dap.MassStorage\ThemeIcons\128x128\devices\phone-nokia-n900.png" bin\share\icons\hicolor\128x128\devices\phone-nokia-n900.png
@@ -134,12 +138,14 @@ copy /Y "src\Extensions\Banshee.Wikipedia\ThemeIcons\48x48\categories\wikipedia.
 copy /Y "src\Extensions\Banshee.YouTube\ThemeIcons\16x16\categories\youtube.png" bin\share\icons\hicolor\16x16\categories\youtube.png
 copy /Y "src\Extensions\Banshee.YouTube\ThemeIcons\22x22\categories\youtube.png" bin\share\icons\hicolor\22x22\categories\youtube.png
 copy /Y "src\Extensions\Banshee.YouTube\ThemeIcons\24x24\categories\youtube.png" bin\share\icons\hicolor\24x24\categories\youtube.png
+
 mkdir bin\share\icons\hicolor\16x16\apps
 mkdir bin\share\icons\hicolor\192x192\apps
 mkdir bin\share\icons\hicolor\22x22\apps
 mkdir bin\share\icons\hicolor\24x24\apps
 mkdir bin\share\icons\hicolor\32x32\apps
 mkdir bin\share\icons\hicolor\48x48\apps
+
 copy /Y data\icon-theme-hicolor\media-player-banshee-16.png bin\share\icons\hicolor\16x16\apps\media-player-banshee.png
 copy /Y data\icon-theme-hicolor\media-player-banshee-192.png bin\share\icons\hicolor\192x192\apps\media-player-banshee.png
 copy /Y data\icon-theme-hicolor\media-player-banshee-22.png bin\share\icons\hicolor\22x22\apps\media-player-banshee.png
