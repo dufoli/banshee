@@ -4,12 +4,13 @@ REM See banshee\build\windows\README.txt for more information
 REM (this file is tracked in version control at: http://git.gnome.org/browse/banshee/plain/build/windows/checkout-banshee.bat )
 
 @echo off
-call git clone git://git.gnome.org/banshee
+set GIT_PATH="git"
+call %GIT_PATH% clone git://git.gnome.org/banshee
 if not exist banshee goto failure
 
 cd banshee
-call git submodule update --init
-call git clone git://gitorious.org/banshee/windows-binaries.git bin
+call %GIT_PATH% submodule update --init
+call %GIT_PATH% clone git://gitorious.org/banshee/windows-binaries.git bin
 if not exist bin goto failure
 
 echo "Checkout script finished. Banshee is now checked out into the banshee folder.  Build it with build\windows\build-banshee.bat or your favorite IDE using Banshee.sln"
