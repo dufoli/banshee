@@ -98,8 +98,11 @@ copy /Y "src\Dap\Banshee.Dap.MassStorage\ThemeIcons\48x48\devices\phone-nokia-n9
 copy /Y "src\Dap\Banshee.Dap.MassStorage\ThemeIcons\48x48\devices\phone-palm-pre.png" bin\share\icons\hicolor\48x48\devices\phone-palm-pre.png
 copy /Y "src\Extensions\Banshee.AmazonMp3.Store\ThemeIcons\16x16\categories\amazon-mp3-store-source.png" bin\share\icons\hicolor\16x16\categories\amazon-mp3-store-source.png
 copy /Y "src\Extensions\Banshee.AmazonMp3.Store\ThemeIcons\22x22\categories\amazon-mp3-store-source.png" bin\share\icons\hicolor\22x22\categories\amazon-mp3-store-source.png
-copy /Y "src\Extensions\Banshee.AudioCd\ThemeIcons\16x16\actions\media-import-audio-cd.png" bin\share\icons\hicolor\16x16\actions\media-import-audio-cd.png
-copy /Y "src\Extensions\Banshee.AudioCd\ThemeIcons\22x22\actions\media-import-audio-cd.png" bin\share\icons\hicolor\22x22\actions\media-import-audio-cd.png
+
+set OPTICALDISC_ICONS_PATH=src\Extensions\Banshee.OpticalDisc\ThemeIcons
+copy /Y "%OPTICALDISC_ICONS_PATH%\16x16\actions\media-import-audio-cd.png" bin\share\icons\hicolor\16x16\actions\media-import-audio-cd.png
+copy /Y "%OPTICALDISC_ICONS_PATH%\22x22\actions\media-import-audio-cd.png" bin\share\icons\hicolor\22x22\actions\media-import-audio-cd.png
+
 copy /Y "src\Extensions\Banshee.Audiobook\ThemeIcons\16x16\categories\audiobook.png" bin\share\icons\hicolor\16x16\categories\audiobook.png
 copy /Y "src\Extensions\Banshee.Audiobook\ThemeIcons\22x22\categories\audiobook.png" bin\share\icons\hicolor\22x22\categories\audiobook.png
 copy /Y "src\Extensions\Banshee.Audiobook\ThemeIcons\256x256\categories\audiobook.png" bin\share\icons\hicolor\256x256\categories\audiobook.png
