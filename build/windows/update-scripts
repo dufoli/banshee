@@ -2,8 +2,11 @@
 
 cd ../..
 
-echo "REM This file is called/ran after Banshee.Core.dll is built, see src/Core/Banshee.Core/Banshee.Core.csproj
+echo "REM This is a generated file, do not edit manually
 "> build/windows/post-build.bat
+
+echo "REM This file is called/ran after Banshee.Core.dll is built, see src/Core/Banshee.Core/Banshee.Core.csproj
+">> build/windows/post-build.bat
 
 # Find all ThemeIcon PNGs and produce a Windows BAT script
 # to move them into bin/share/icon/hicolor, creating
