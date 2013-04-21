@@ -1,6 +1,9 @@
 // This script was started by copying MonoDevelop's, available at 
 // https://github.com/mono/monodevelop/tree/master/setup/WixSetup
 
+// To run: just open a Windows command line (cmd.exe) and invoke
+// it like if it was a .bat/.cmd file (do not simply double-click)
+
 // HEAT manual: http://wix.sourceforge.net/manual-wix3/heat.htm
 
 var bin = '..\\..\\bin';

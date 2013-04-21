@@ -9,7 +9,8 @@ You need
 - WIX 3.5 installed
 - Banshee built
 
-With that, you should be able to run build-installer.js and have it produce the
+With that, you should be able to run build-installer.js (inside a Windows command
+line shell, not simply running it in an explorer window) and have it produce the
 installer.
 
 == Updating Bundled Deps ==
