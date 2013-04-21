@@ -10,7 +10,12 @@ var bin = '..\\..\\bin';
 var sh = new ActiveXObject("WScript.Shell");
 var fs = new ActiveXObject("Scripting.FileSystemObject");
 var env = sh.Environment("Process");
-var heat = "\"" + env("WIX") + "bin\\heat.exe\"";
+var wix_path = env("WIX");
+if (wix_path == "") {
+  WScript.Echo ('WIX environment variable not set, did you install WiX 3.5?');
+  WScript.Quit (1);
+}
+var heat = "\"" + wix_path + "bin\\heat.exe\"";
 
 // Look for msbuild.exe
 if (fs.FileExists (env("windir") + "\\Microsoft.NET\\Framework\\v4.0.30319\\msbuild.exe") == 1) {
