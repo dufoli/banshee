@@ -43,7 +43,7 @@
     <Reference Include="Hyena, Version=1.3.3.0, Culture=neutral" />
     <Reference Include="monotorrent-dbus">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..bin\monotorrent-dbus.dll</HintPath>
+      <HintPath>..\..\..\bin\bin\monotorrent-dbus.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
