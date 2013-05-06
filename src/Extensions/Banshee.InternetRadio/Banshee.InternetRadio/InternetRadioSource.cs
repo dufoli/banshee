@@ -274,6 +274,8 @@ namespace Banshee.InternetRadio
                 if (destroy) {
                     editor.Response -= OnStationEditorResponse;
                     editor.Destroy ();
+
+                    Reload ();
                 }
             }
         }
