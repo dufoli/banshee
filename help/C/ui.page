@@ -30,7 +30,7 @@
   <figure>
     <title><gui>Banshee Media Player</gui> window</title>
     <desc><app>Banshee Media Player</app></desc>
-    <media type="image" src="figures/banshee.png" mime="image/png"
+    <media type="image" src="figures/main-window.png" mime="image/png"
     style="right">
       <p><app>Banshee</app> library interface</p>
     </media>
