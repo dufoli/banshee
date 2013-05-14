@@ -2,9 +2,9 @@
 // RawBlockDevice.cs
 //
 // Author:
-//   alex <${AuthorEmail}>
+//   Alex Launi <alex.launi@gmail.com>
 //
-// Copyright (c) 2010 alex
+// Copyright (c) 2010 Alex Launi
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
