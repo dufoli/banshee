@@ -5,7 +5,6 @@
 
   <info>
     <link type="guide" xref="index#manage"/>
-    <link type="seealso" xref="coverart"/>
     <link type="seealso" xref="playlists"/>
     <desc>Edit and change music tags and metadata.</desc>
     <revision pkgversion="2.0" version="0.1" date="2010-05-09" status="draft"/>

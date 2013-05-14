@@ -5,7 +5,6 @@
 
   <info>
     <link type="guide" xref="index#extensions"/>
-    <link type="seealso" xref=""/>
     <desc>Sync and purchase music from the Amazon MP3 Store.</desc>
     <revision pkgversion="1.6" version="0.1" date="2010-07-11" status="draft"/>
     <credit type="author">
