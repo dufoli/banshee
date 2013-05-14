@@ -25,7 +25,7 @@
     <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
   </info>
 
-  <title>Introduction to the Banshee User Interface</title>
+  <title>Introduction to the <app>Banshee</app> user interface</title>
 
   <figure>
     <title><gui>Banshee Media Player</gui> window</title>
@@ -39,57 +39,76 @@
   <section id="context">
     <title>Sources</title>
 
-  <p>Your music and video sources are shown on the left in Banshee. The
-  sources give you quick access to your Play Queue, Music, Videos, Amazon,
-  Last.fm, Podcasts and more.</p>
+  <p>Your music and video sources are shown on the left in <app>Banshee</app>.
+  The sources give you quick access to your <gui>Play Queue</gui>,
+  <gui>Music</gui>, <gui>Videos</gui>, <gui>Amazon MP3 Store</gui>,
+  <gui>Last.fm</gui>, <gui>Podcasts</gui> and more.</p>
 
   <note style="tip">
     <p>The menu choices will change depending on the source you have chosen.
     For example, to use the menu to import a Podcast, you will need to choose
-    the Podcast source. The menu option for importing a Podcast is not
-    available when viewing the video or music library.</p>
+    the <gui>Podcasts</gui> source. The menu option for importing a Podcast is
+    not available when viewing the video or music library.</p>
   </note>
 
   </section>
 
   <section id="browser">
-    <title>Library Browser</title>
+    <title>Library browser</title>
 
-  <p>When you select a music or video source from Sources, Banshee will
-  display your content in the Library browser. Depending on the source
-  you choose, Banshee can display your music or video library, Podcast
+  <p>When you select a music or video source from Sources, <app>Banshee</app>
+  will display your content in the library browser. Depending on the source you
+  choose, <app>Banshee</app> can display your music or video library, Podcast
   subscriptions or even the Amazon Music Store to allow you to buy music.</p>
 
   </section>
 
   <section id="now-playing">
-    <title>Now Playing View</title>
+    <title><gui>Now Playing</gui> view</title>
 
-  <p>Helpful when using Banshee in full screen mode, the Now Playing mode
-  hides the library to give you a larger view of the music or video you're
-  watching. When listening to music, the Now Playing view will show you
-  the artist name, album and cover art if available. If you are watching
-  a video, Banshee will display the video.</p>
+  <p>Helpful when using <app>Banshee</app> in full screen mode, the
+  <gui>Now Playing</gui> mode hides the library to give you a larger view of
+  the music or video you are watching. When listening to music, the
+  <gui>Now Playing</gui> view will show you the artist name, album and cover
+  art if available. If you are watching a video, <app>Banshee</app> will
+  display the video.</p>
 
-  <p>To change Now Playing to hide the <app>Banshee</app> user interface and
-  use the full screen mode, you can press <key>F</key>, <key>F11</key>, press
-  the <gui style="button">Fullscreen</gui> button in the upper right hand
-  corner of <app>Banshee</app>, or choose
-  <guiseq><gui style="menu">View</gui>
-  <gui style="menuitem">Fullscreen</gui></guiseq> to
-  start Fullscreen mode.</p>
+  <p>To change the <gui>Now Playing</gui> mode to hide the <app>Banshee</app>
+  user interface and view your media in full screen mode instead, you can do
+  any of the following:</p>
+
+  <list>
+    <item>
+      <p>Double-click the view with your mouse.</p>
+    </item>
+    <item>
+      <p>Press <key>F</key>.</p>
+    </item>
+    <item>
+      <p>Press <key>F11</key>.</p>
+    </item>
+    <item>
+      <p>Press the <gui style="button">Fullscreen</gui> button in the upper
+      right hand corner of <app>Banshee</app>.</p>
+    </item>
+    <item>
+      <p>Select <guiseq><gui style="menu">View</gui>
+      <gui style="menuitem">Fullscreen</gui></guiseq>.</p>
+    </item>
+  </list>
 
   </section>
 
-  <section id="library">
-    <title>Library</title>
+  <section id="libraries">
+    <title>Libraries</title>
 
-  <p>The Library view in Banshee will change depending on the Source you have
-  chosen. The Music Library will display cover art, artists in your library,
-  and list of songs. The Podcast Library will display your Podcast
-  subscriptions, podcasts that are downloaded or not downloaded, and all, new
-  or old podcasts. Please see each Source's help page for detailed information
-  on managing a source.</p>
+  <p>The <gui>Libraries</gui> view in <app>Banshee</app> will change depending
+  on the Source you have chosen. For example, the <gui>Music</gui> library will
+  display cover art, artists in your library, and list of songs and the
+  <gui>Podcasts</gui> library will display your Podcast subscriptions, Podcasts
+  that are downloaded or not downloaded, and all, new or old Podcasts. Please
+  see the help page of each source for detailed information on managing a
+  source.</p>
 
   </section>
 
