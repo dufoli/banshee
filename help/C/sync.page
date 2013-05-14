@@ -5,7 +5,7 @@
 
   <info>
     <link type="guide" xref="index#sync"/>
-    <link type="seealso" xref="playlists"/>
+    <link type="seealso" xref="manage-playlists"/>
     <desc>Sync your media to a portable media player or smartphone.</desc>
     <revision pkgversion="1.8" version="0.1" date="2010-08-29" status="draft"/>
     <credit type="author">

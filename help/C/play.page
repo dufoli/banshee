@@ -5,7 +5,7 @@
 
   <info>
     <link type="guide" xref="index#media"/>
-    <link type="seealso" xref="queue"/>
+    <link type="seealso" xref="play-queue"/>
     <desc>Play your videos and music files.</desc>
     <revision pkgversion="1.6" version="0.1" date="2009-01-22" status="draft"/>
     <revision pkgversion="2.6.0" version="0.2" date="2012-11-26"
@@ -33,7 +33,7 @@
 
   <title>Play Your Media</title>
 
-  <section id="playmusic">
+  <section id="play-music">
     <title>Play your music</title>
 
   <p>To play music in <app>Banshee</app>, choose the Music source. The music
@@ -102,7 +102,7 @@
 
   </section>
 
-  <section id="playvideo">
+  <section id="play-video">
     <title>Play a video</title>
 
   <p>Your imported videos are listed alphabetically. To play a video, choose
@@ -117,7 +117,7 @@
 
   </section>
 
-  <section id="playpodcast">
+  <section id="play-podcast">
     <title>Play a Podcast</title>
 
   <p>Podcasts shows you all Podcasts you're subscribed to, all Podcast
@@ -132,7 +132,7 @@
 
   </section>
 
-  <section id="playradio">
+  <section id="play-radio">
     <title>Play an internet radio station</title>
 
   <p>The Radio source shows you all internet radio stations you have added

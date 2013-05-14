@@ -1,9 +1,9 @@
 <page xmlns="http://projectmallard.org/1.0/"
       type="topic" style="task"
-      id="keyboardshortcuts">
+      id="keyboard-shortcuts">
 
 <info>
-    <link type="guide" xref="index#advanced"/>
+  <link type="guide" xref="index#advanced"/>
   <desc>Keyboard Shortcuts</desc>
   <revision pkgversion="2.0" version="0.1" date="2010-05-29" status="draft"/>
   <credit type="author">
@@ -23,7 +23,7 @@
 
   <title>Control <app>Banshee</app> using Keyboard Shortcuts</title>
 
-  <section id="playbackcontrol">
+  <section id="playback-control">
     <title>Playback Control</title>
 
   <table frame="all" rules="rows" shade="rows">

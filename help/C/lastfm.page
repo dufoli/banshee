@@ -4,7 +4,7 @@
       id="lastfm">
 
   <info>
-    <link type="guide" xref="extend#official"/>
+    <link type="guide" xref="extensions#official"/>
     <link type="seealso" xref="sync"/>
     <desc>Enable Last.fm, song reporting and Last.fm radio.</desc>
     <revision pkgversion="1.6" version="0.1" date="2010-07-15" status="draft"/>
@@ -64,7 +64,7 @@
 
   </section>
 
-  <section id="songreporting">
+  <section id="song-reporting">
     <title>Enable Last.fm Song Reporting From <app>Banshee</app></title>
 
   <p>After you have successfully linked <app>Banshee</app> to your Last.fm
@@ -83,7 +83,7 @@
 
   </section>
 
-  <section id="devicesongreporting">
+  <section id="device-song-reporting">
     <title>Enable Last.fm Song Reporting From Your Device</title>
 
   <p>After successfully linking <app>Banshee</app> to your Last.fm profile and

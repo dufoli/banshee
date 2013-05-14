@@ -30,7 +30,7 @@
 
   <title>Podcasts</title>
 
-  <section id="podcastdescription">
+  <section id="podcast-description">
   <title>What is a podcast?</title>
 
   <p>Podcasts are recorded programs, similar to radio programs, that are
@@ -46,7 +46,7 @@
 
   </section>
 
-  <section id="addpodcast">
+  <section id="add-podcast">
     <title>Add a podcast</title>
 
   <p>To add a podcast to <app>Banshee</app>, you will first need to visit the
@@ -95,18 +95,18 @@
 
   </section>
 
-  <section id="playpodcast">
+  <section id="play-podcast">
     <title>Play podcast</title>
 
   <p>To <link xref="play">play</link> a podcast episode, double click on the
   episode or select it, then select <guiseq><gui style="menu">Playback</gui>
   <gui style="menuitem">Play</gui></guiseq>. You can also add the episode to
-  the <link xref="queue"><gui>Play Queue</gui></link> by right clicking on the
-  episode and selecting <gui style="menuitem">Add to Play Queue</gui>.</p>
+  the <gui xref="play-queue">Play Queue</gui> by right clicking on
+  the episode and selecting <gui style="menuitem">Add to Play Queue</gui>.</p>
 
   </section>
 
-  <section id="removepodcast">
+  <section id="remove-podcast">
     <title>Remove a podcast</title>
 
   <p>To remove a podcast, right click on the podcast in the podcast list and

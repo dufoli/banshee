@@ -29,7 +29,7 @@
 
   <title>Internet radio</title>
 
-  <section id="radiodescription">
+  <section id="radio-description">
     <title>What is internet radio?</title>
 
   <p>Internet radio stations are similar to regular radio stations, allowing
@@ -40,7 +40,7 @@
 
   </section>
 
-  <section id="addradio">
+  <section id="add-radio">
     <title>Add radio station</title>
 
   <p>Search for internet radio stations using your favourite search engine.
@@ -97,11 +97,11 @@
 
   <!--Not sure about play queue and play after current track-->
 
-  <p>To add a radio station to the <link xref="queue">
-  <gui style="menuitem">Play Queue</gui></link>, you can right click on the
-  station and select <gui style="menuitem">Add to Play Queue</gui>. This will
-  play the radio station when the queue has finished playing all media which is
-  ahead of the station in the <gui>Play Queue</gui>.</p>
+  <p>To add a radio station to the
+  <gui style="menuitem" xref="play-queue">Play Queue</gui>, you can right click
+  on the station and select <gui style="menuitem">Add to Play Queue</gui>. This
+  will play the radio station when the queue has finished playing all media
+  which is ahead of the station in the <gui>Play Queue</gui>.</p>
 
   <p>You can also right click the station and select <gui
   style="menuitem">Play after Current Track</gui> to add the radio station to

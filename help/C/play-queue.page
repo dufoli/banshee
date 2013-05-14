@@ -1,7 +1,7 @@
 <page xmlns="http://projectmallard.org/1.0/"
       xmlns:e="http://projectmallard.org/experimental/"
       type="topic" style="task"
-      id="queue">
+      id="play-queue">
 
   <info>
     <link type="guide" xref="index#media"/>
@@ -21,7 +21,7 @@
   order. You can add many tracks to let you listen to hours of music non-stop.
   You can add individual tracks or entire albums, and sort or re-order them.</p>
 
-  <section id="addqueue">
+  <section id="add-queue">
     <title>Add Music to the Play Queue</title>
 
   <p>From your music library, you will need to select the music tracks or
@@ -45,15 +45,15 @@
 
   </section>
 
-  <section id="reorderqueue">
-    <title>Organize Your Play Queue</title>
+  <section id="reorder-queue">
+    <title>Organize Your <gui>Play Queue</gui></title>
 
-  <p>Your Play Queue is organized in the order of the tracks you added. The
-  first tracks or albums you added to the queue will be the first to be played.
-  You can re-order your Play Queue by using your mouse and dragging and
-  dropping a track or group of tracks in the list. Choose the track(s) you wish
-  to re-order with your mouse and release your mouse over the number or place
-  in the list you wish those files to be in the queue.</p>
+  <p>Your <gui>Play Queue</gui> is organized in the order of the tracks you
+  added. The first tracks or albums you added to the queue will be the first to
+  be played. You can re-order your <gui>Play Queue</gui> by using your mouse
+  and dragging and dropping a track or group of tracks in the list. Choose the
+  track(s) you wish to re-order with your mouse and release your mouse over the
+  number or place in the list you wish those files to be in the queue.</p>
 
   </section>
 

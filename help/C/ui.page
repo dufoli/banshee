@@ -62,7 +62,7 @@
 
   </section>
 
-  <section id="nowplaying">
+  <section id="now-playing">
     <title>Now Playing View</title>
 
   <p>Helpful when using Banshee in full screen mode, the Now Playing mode
