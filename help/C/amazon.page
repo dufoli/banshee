@@ -25,7 +25,7 @@
     <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
   </info>
 
-  <title>Amazon MP3 Store</title>
+  <title>Amazon MP3 store</title>
 
   <p><app>Banshee</app> supports downloading and importing music from the
   Amazon MP3 store. You can manually import Amazon music files, purchase music
@@ -42,7 +42,7 @@
   <section id="amazon-browser">
     <title>Purchase Amazon MP3s in your web browser</title>
 
-  <p>Music purchased from Amazon's MP3 store can be automatically downloaded
+  <p>Music purchased from the Amazon MP3 store can be automatically downloaded
   and imported into <app>Banshee</app>. <app>Banshee</app> associates itself
   with the .amz file Amazon provides for MP3 purchases. When you buy music on
   Amazon, your web browser will download the .amz file and <app>Banshee</app>

@@ -37,20 +37,20 @@
   Vorbis or MP3, if you have the correct codecs installed.</p>
 
   <section id="devices">
-    <title>Device Support</title>
+    <title>Device support</title>
 
   <p><app>Banshee</app> supports almost all modern portable music players and
   smartphones with the notable exception of the Apple iPhone, iPad and
   iPod Touch.</p>
 
   <p>When you plug your device in, <app>Banshee</app> will display it in the
-  left menu.  Pressing the device icon will take you to your device home page
+  left menu. Pressing the device icon will take you to your device home page
   in <app>Banshee</app> displaying your sync preferences.</p>
 
   </section>
 
   <section id="sync-settings">
-    <title>Sync Your Music</title>
+    <title>Sync your music</title>
 
   <p>You can choose to manage the media on your portable music by having
   <app>Banshee</app> automatically sync it or manage your music and media
@@ -63,7 +63,7 @@
     <item><p>Music</p></item>
     <item><p>Audiobooks</p></item>
     <item><p>Videos</p></item>
-    <item><p>Podcast</p></item>
+    <item><p>Podcasts</p></item>
   </list>
 
   <p>From the dropdown menu next to each of the media, choose from:</p>
@@ -97,7 +97,7 @@
   </section>
 
   <section id="sync-manually">
-    <title>Sync Your Entire Library</title>
+    <title>Sync your entire library</title>
 
   <p>You can drag and drop media to your portable music player from
   <app>Banshee</app>. Select the file or files you want to copy to your
@@ -122,7 +122,7 @@
   </section>
 
   <section id="pmp-play">
-    <title>Play Music From Your Portable Music Player</title>
+    <title>Play music from your portable music player</title>
 
   <p>You can play music stored on your portable music player directly in
   <app>Banshee</app>. Choose your player in the <app>Banshee</app> menu on the
@@ -133,7 +133,7 @@
   </section>
 
   <section id="pmp-delete">
-    <title>Remove Music From your Portable Music Player</title>
+    <title>Remove music from your portable music player</title>
 
   <p>To remove songs stored on your portable music player, choose your player
   in <app>Banshee</app> to view its library. Then choose the tracks you would

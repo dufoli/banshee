@@ -96,7 +96,7 @@
   </section>
 
   <section id="play-podcast">
-    <title>Play podcast</title>
+    <title>Play a podcast</title>
 
   <p>To <link xref="play">play</link> a podcast episode, double click on the
   episode or select it, then select <guiseq><gui style="menu">Playback</gui>

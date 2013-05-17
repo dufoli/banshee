@@ -21,10 +21,7 @@
     <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
   </info>
 
-  <title>Music Metadata</title>
-
-  <section id="metadata">
-    <title>Music metadata</title>
+  <title>Music metadata</title>
 
   <p>Digital music contains metadata that stores information in the music file
   including the artist, album, year recorded, genre, and more.  Almost all
@@ -39,10 +36,8 @@
   <p>If you have imported songs that do not contain metadata,<app>Banshee</app>
   will display <gui>Unknown</gui> for most fields in the library.</p>
 
-  </section>
-
   <section id="edit-metadata">
-    <title>Edit Your Metadata</title>
+    <title>Edit your metadata</title>
 
   <p>You can change and edit the metadata of your songs. Select the song or
   songs you want to update and hit the <key>E</key>, choose

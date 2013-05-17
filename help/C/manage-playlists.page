@@ -29,7 +29,7 @@
   music, or more.</p>
 
   <section id="manual">
-    <title>Normal Playlists</title>
+    <title>Normal playlists</title>
 
   <p>A normal playlist is a list of songs that you add and manage. You might
   want to create your own list of songs by your favorite artist from multiple
@@ -73,7 +73,7 @@
   </section>
 
   <section id="smart-playlists">
-    <title>Smart Playlist</title>
+    <title>Smart playlist</title>
 
   <p>Smart Playlists allow you to quickly generate a dynamic playlist based on
   a number of pre-set variables. You can quickly create a new playlist based
@@ -127,7 +127,7 @@
   you. The following playlists are included:</p>
 
   <list>
-    <title><app>Banshee</app> Smart Playlists</title>
+    <title><app>Banshee</app> smart playlists</title>
     <item>
       <p>Favorites (Songs rated four and five stars)</p>
     </item>

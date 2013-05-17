@@ -71,7 +71,7 @@
   </note>
 
   <section id="import-playlist">
-    <title>Import from a Playlist</title>
+    <title>Import from a playlist</title>
 
   <p>You can also import music from playlists. Most playlist files end in
   <em>m3u</em>. To import from a playlist, from the <app>Banshee</app> menu choose
@@ -83,7 +83,7 @@
   </section>
 
   <section id="plugins">
-    <title>Additional Import Sources</title>
+    <title>Additional import sources</title>
 
   <p>Plugins may add additional import choices. The following additional
   sources will be available if the appropriate plugins are enabled:</p>

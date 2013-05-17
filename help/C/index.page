@@ -28,14 +28,14 @@
     <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude" />
   </info>
 
-  <title><app>Banshee</app> Media Player</title>
+  <title><app>Banshee</app> media player</title>
 
   <section id="media" style="2column">
-    <title>Add, Remove &amp; Play</title>
+    <title>Add, remove &amp; play</title>
   </section>
 
   <section id="manage" style="2column">
-    <title>Manage &amp; Sort</title>
+    <title>Manage &amp; sort</title>
   </section>
 
   <section id="sync" style="2column">

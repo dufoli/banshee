@@ -25,7 +25,7 @@
     <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
   </info>
 
-  <title>Searching your <app>Banshee</app> Library</title>
+  <title>Searching your <app>Banshee</app> library</title>
 
   <p><app>Banshee</app> features a powerful search language. You can search
   your library quickly and easily with basic search terms or perform detailed
@@ -44,7 +44,7 @@
   <em>Dave</em>, and <em>DAVE</em> all mean the same thing when searching.</p>
 
   <section id="operators">
-    <title>Basic Operators</title>
+    <title>Basic operators</title>
 
   <p>Operators can be placed between any two search words or placed before a
   search word. The default operation is <gui>AND</gui> and is used when
@@ -58,7 +58,7 @@
   </section>
 
   <section id="logical">
-    <title>Logical Operators and Examples</title>
+    <title>Logical operators and examples</title>
 
   <p>The following is a list of logical operators and examples of the search
   results when searching using them.</p>

@@ -4,7 +4,7 @@
 
 <info>
   <link type="guide" xref="index#advanced"/>
-  <desc>Keyboard Shortcuts</desc>
+  <desc>Keyboard shortcuts</desc>
   <revision pkgversion="2.0" version="0.1" date="2010-05-29" status="draft"/>
   <credit type="author">
     <name>Paul Cutler</name>
@@ -21,10 +21,10 @@
   <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
 </info>
 
-  <title>Control <app>Banshee</app> using Keyboard Shortcuts</title>
+  <title>Control <app>Banshee</app> using keyboard shortcuts</title>
 
   <section id="playback-control">
-    <title>Playback Control</title>
+    <title>Playback control</title>
 
   <table frame="all" rules="rows" shade="rows">
   <tr>
@@ -48,7 +48,7 @@
   </section>
 
   <section id="library">
-    <title>Library Interaction</title>
+    <title>Library interaction</title>
 
   <table frame="all" rules="rows" shade="rows">
   <tr>

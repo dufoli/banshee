@@ -31,7 +31,7 @@
     <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
   </info>
 
-  <title>Play Your Media</title>
+  <title>Play your media</title>
 
   <section id="play-music">
     <title>Play your music</title>
@@ -118,13 +118,13 @@
   </section>
 
   <section id="play-podcast">
-    <title>Play a Podcast</title>
+    <title>Play a podcast</title>
 
-  <p>Podcasts shows you all Podcasts you're subscribed to, all Podcast
-  shows available, and the Podcast browser lists all Podcasts in order of
+  <p>Podcasts shows you all podcasts you are subscribed to, all podcast
+  shows available, and the podcast browser lists all podcasts in order of
   newest first.</p>
 
-  <p>To play a Podcast, choose the Podcast you wish to play from the list and
+  <p>To play a podcast, choose the podcast you wish to play from the list and
   press the <key>Space</key>, or choose
   <guiseq><gui style="menu">Playback</gui>
   <gui style="menuitem">Play</gui></guiseq> from

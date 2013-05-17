@@ -65,7 +65,7 @@
   </section>
 
   <section id="song-reporting">
-    <title>Enable Last.fm Song Reporting From <app>Banshee</app></title>
+    <title>Enable Last.fm song reporting from <app>Banshee</app></title>
 
   <p>After you have successfully linked <app>Banshee</app> to your Last.fm
   profile you must ensure that you have enabled <app>Banshee</app> to report
@@ -84,7 +84,7 @@
   </section>
 
   <section id="device-song-reporting">
-    <title>Enable Last.fm Song Reporting From Your Device</title>
+    <title>Enable Last.fm song reporting from your device</title>
 
   <p>After successfully linking <app>Banshee</app> to your Last.fm profile and
   enabling <app>Banshee</app> to report songs to Last.fm you can also enable
@@ -111,7 +111,7 @@
   </section>
 
   <section id="lastfm-radio">
-    <title>Listen to Last.fm Radio</title>
+    <title>Listen to Last.fm radio</title>
 
   <p>Last.fm radio is free for residents of the United States, United Kingdom
   and Germany. Residents of other countries will have to pay for a premium

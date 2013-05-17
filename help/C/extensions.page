@@ -20,11 +20,11 @@
     <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
   </info>
 
-  <title><app>Banshee</app> Extensions</title>
+  <title><app>Banshee</app> extensions</title>
 
   <section id="official" style="2column">
     <info>
-      <title type="link">Official <app>Banshee</app> Extensions</title>
+      <title type="link">Official <app>Banshee</app> extensions</title>
     </info>
 
   <title>Manage extensions for <app>Banshee</app></title>

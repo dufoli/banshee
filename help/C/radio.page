@@ -64,13 +64,13 @@
       wish to add. The first three fields are mandatory:</p>
         <list>
           <item>
-            <p>In the <gui style="menuitem">Station Genre</gui> field,
+            <p>In the <gui style="menuitem">Station Genre</gui> text box,
 	    describe the type of music the internet radio station plays by
 	    creating an appropriate label, or choose a label from the available
 	    drop down selections.</p>
           </item>
           <item>
-            <p>In the <gui style="input">Station Name</gui> field, enter a
+            <p>In the <gui style="input">Station Name</gui> text box, enter a
 	    name for the radio station.</p>
           </item>
           <item>
@@ -124,10 +124,13 @@
   </section>
 
   <section id="remove-radio">
-    <title>Remove radio station</title>
+    <title>Remove a radio station</title>
 
-  <p>To remove a radio station from <app>Banshee</app>, right click on the
-  radio station and select <gui style="menuitem">Remove</gui>.</p>
+  <p>To remove a radio station from <app>Banshee</app>, you can right click on
+  the radio station and select <gui style="menuitem">Remove</gui>, or
+  alternatively, you can select the station with your mouse and press
+  <key>Delete</key>. When you are prompted for confirmation, click the
+  <gui style="button">Remove</gui> button to remove the radio station.</p>
 
   </section>
 

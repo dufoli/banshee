@@ -8,6 +8,7 @@
     <link type="seealso" xref="play"/>
     <desc>Add media to your <gui>Play Queue</gui>.</desc>
     <revision pkgversion="1.6" version="0.1" date="2010-05-26" status="draft"/>
+    <revision pkgversion="2.6" version="0.1" date="2013-05-17" status="draft"/>
     <credit type="editor copyright">
       <name>Aruna Sankaranarayanan</name>
       <email>aruna.evam@gmail.com</email>
@@ -20,30 +21,30 @@
     <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
   </info>
 
-  <title><gui>Play Queue</gui></title>
+  <title>Play queue</title>
 
-  <p>The <gui>Play Queue</gui> allows you to add music to play in a sequential
-  order. You can add many tracks to let you listen to hours of music non-stop.
-  You can add individual tracks or entire albums, and sort or re-order
-  them.</p>
+  <p>The <gui>Play Queue</gui> can be used to play tracks in a sequential
+  order. You can add many tracks to the <gui>Play Queue</gui> and listen
+  to hours of music non-stop. You can add individual tracks or entire
+  albums, and sort or re-order them as you wish.</p>
 
   <section id="add-queue">
-    <title>Add Music to the <gui>Play Queue</gui></title>
+    <title>Add music to the <gui>Play Queue</gui></title>
 
   <p>From your music library, you will need to select the music tracks or
   albums you want to add to the <gui>Play Queue</gui>.</p>
 
-  <p>To add an entire album to the <gui>Play Queue</gui>, using your mouse
-  press and hold the album and drag the album over <gui>Play Queue</gui> in the
-  far left window pane.</p>
+  <p>To add an entire album to the <gui>Play Queue</gui>, use your mouse to
+  press and hold the album and drag and drop it over <gui>Play Queue</gui> in
+  the far left window pane.</p>
 
   <p>You can add music tracks to the <gui>Play Queue</gui> individually or as
   a group. To add an individual file, drag and drop it over the
   <gui>Play Queue</gui> in the far left window pane, or right click the track
   and choose <gui style="menuitem">Add to Play Queue</gui>.</p>
 
-  <p>You can select multiple files by using your mouse and pressing
-  <key>Ctrl</key> and choosing each file with your mouse or select a range of
+  <p>To select multiple tracks, select each track with
+  your mouse while holding down <key>Ctrl</key> or select a range of
   files by pressing <key>Shift</key> and clicking twice to select that range of
   files. You can then drag and drop it over the <gui>Play Queue</gui> in the
   far left window pane or right click the tracks and choose <gui
@@ -52,7 +53,7 @@
   </section>
 
   <section id="reorder-queue">
-    <title>Organize Your <gui>Play Queue</gui></title>
+    <title>Organize your <gui>Play Queue</gui></title>
 
   <p>Your <gui>Play Queue</gui> is organized in the order of the tracks you
   added. The first tracks or albums you added to the queue will be the first to
@@ -64,10 +65,10 @@
   </section>
 
   <section id="remove-queue">
-    <title>Removing Tracks from the <gui>Play Queue</gui></title>
+    <title>Removing tracks from the <gui>Play Queue</gui></title>
 
   <p>You can remove an individual track, a group of tracks, or clear your
-  entire <gui>Play Queue</gui>.</p>
+  entire <gui>Play Queue</gui>:</p>
 
   <list>
     <item>
@@ -75,16 +76,17 @@
       then press <key>Delete</key>.</p>
     </item>
     <item>
-      <p>To remove multiple tracks, select each of the different tracks with
+      <p>To remove multiple tracks, select each track with
       your mouse while holding down <key>Ctrl</key>. Once all the desired
       tracks have been selected, press <key>Delete</key>.</p>
       <note style="tip">
         <p>If you accidentally select a track you do not want to remove, hold
-	down <key>Ctrl</key> and select the track again to unselect it.</p>
+	down <key>Ctrl</key> and select the track again with your mouse,
+        to unselect it.</p>
       </note>
     </item>
     <item>
-      <p> To clear your entire <gui>Play Queue</gui>, press the
+      <p>To clear your entire <gui>Play Queue</gui>, press the
       <gui style="button">Clear</gui> button in the upper right hand corner of
       the <gui>Play Queue</gui> or press
       <keyseq><key>Ctrl</key><key>A</key></keyseq> and press
