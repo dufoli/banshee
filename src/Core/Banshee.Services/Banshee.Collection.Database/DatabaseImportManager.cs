@@ -78,21 +78,21 @@ namespace Banshee.Collection.Database
         public delegate PrimarySource TrackPrimarySourceChooser (DatabaseTrackInfo track);
 
         private TrackPrimarySourceChooser trackPrimarySourceChooser;
-        private Dictionary<int, int> counts;
+        private Dictionary<long, int> counts;
         private ErrorSource error_source;
-        private int [] primary_source_ids;
+        private long [] primary_source_ids;
         private string base_directory;
         private bool force_copy;
 
         public event DatabaseImportResultHandler ImportResult;
 
         public DatabaseImportManager (PrimarySource psource) :
-            this (psource.ErrorSource, delegate { return psource; }, new int [] {psource.DbId}, psource.BaseDirectory)
+            this (psource.ErrorSource, delegate { return psource; }, new long [] {psource.DbId}, psource.BaseDirectory)
         {
         }
 
         public DatabaseImportManager (ErrorSource error_source, TrackPrimarySourceChooser chooser,
-            int [] primarySourceIds, string baseDirectory) : this (chooser)
+            long [] primarySourceIds, string baseDirectory) : this (chooser)
         {
             this.error_source = error_source;
             primary_source_ids = primarySourceIds;
@@ -102,14 +102,14 @@ namespace Banshee.Collection.Database
         public DatabaseImportManager (TrackPrimarySourceChooser chooser)
         {
             trackPrimarySourceChooser = chooser;
-            counts = new Dictionary<int, int> ();
+            counts = new Dictionary<long, int> ();
         }
 
         protected virtual ErrorSource ErrorSource {
             get { return error_source; }
         }
 
-        protected virtual int [] PrimarySourceIds {
+        protected virtual long [] PrimarySourceIds {
             get { return primary_source_ids; }
             set { primary_source_ids = value; }
         }

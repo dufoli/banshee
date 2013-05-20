@@ -55,7 +55,7 @@ namespace Banshee.Collection.Database
         public long BookmarkId { get; private set; }
 
         [DatabaseColumn]
-        protected int TrackId {
+        protected long TrackId {
             get { return Track.TrackId; }
             set {
                 Track = DatabaseTrackInfo.Provider.FetchSingle (value);

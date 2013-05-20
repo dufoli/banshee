@@ -298,11 +298,11 @@ namespace Banshee.LibraryWatcher
                 @"SELECT TrackID, MetadataHash FROM CoreTracks WHERE {0} = ? LIMIT 1",
                 BansheeQuery.UriField.Column
             );
-            int track_id = 0;
+            long track_id = 0;
             string hash = null;
             using (var reader = new HyenaDataReader (ServiceManager.DbConnection.Query (hash_sql, uri))) {
                 if (reader.Read ()) {
-                    track_id = reader.Get<int> (0);
+                    track_id = reader.Get<long> (0);
                     hash = reader.Get<string> (1);
                 }
             }

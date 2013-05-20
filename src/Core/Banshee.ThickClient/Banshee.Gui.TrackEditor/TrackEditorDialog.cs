@@ -599,7 +599,7 @@ namespace Banshee.Gui.TrackEditor
 
         public void Save ()
         {
-            List<int> primary_sources = new List<int> ();
+            List<long> primary_sources = new List<long> ();
 
             // TODO: wrap in db transaction
             try {
@@ -616,7 +616,7 @@ namespace Banshee.Gui.TrackEditor
 
                     if (track.SourceTrack is DatabaseTrackInfo) {
                         // If the source track is from the database, save its parent for notification later
-                        int id = (track.SourceTrack as DatabaseTrackInfo).PrimarySourceId;
+                        long id = (track.SourceTrack as DatabaseTrackInfo).PrimarySourceId;
                         if (!primary_sources.Contains (id)) {
                             primary_sources.Add (id);
                         }
@@ -624,7 +624,7 @@ namespace Banshee.Gui.TrackEditor
                 }
 
                 // Finally, notify the affected primary sources
-                foreach (int id in primary_sources) {
+                foreach (long id in primary_sources) {
                     PrimarySource psrc = PrimarySource.GetById (id);
                     if (psrc != null) {
                         psrc.NotifyTracksChanged ();

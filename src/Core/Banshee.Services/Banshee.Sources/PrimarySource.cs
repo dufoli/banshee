@@ -119,14 +119,14 @@ namespace Banshee.Sources
             get { return expanded_schema; }
         }
 
-        private int dbid;
-        public int DbId {
+        private long dbid;
+        public long DbId {
             get {
                 if (dbid > 0) {
                     return dbid;
                 }
 
-                dbid = ServiceManager.DbConnection.Query<int> ("SELECT PrimarySourceID FROM CorePrimarySources WHERE StringID = ?", UniqueId);
+                dbid = ServiceManager.DbConnection.Query<long> ("SELECT PrimarySourceID FROM CorePrimarySources WHERE StringID = ?", UniqueId);
                 if (dbid == 0) {
                     dbid = ServiceManager.DbConnection.Execute ("INSERT INTO CorePrimarySources (StringID, IsTemporary) VALUES (?, ?)", UniqueId, IsTemporary);
                 } else {
@@ -190,8 +190,8 @@ namespace Banshee.Sources
         public event TrackEventHandler TracksChanged;
         public event TrackEventHandler TracksDeleted;
 
-        private static Dictionary<int, PrimarySource> primary_sources = new Dictionary<int, PrimarySource> ();
-        public static PrimarySource GetById (int id)
+        private static Dictionary<long, PrimarySource> primary_sources = new Dictionary<long, PrimarySource> ();
+        public static PrimarySource GetById (long id)
         {
             return (primary_sources.ContainsKey (id)) ? primary_sources[id] : null;
         }
@@ -602,7 +602,7 @@ namespace Banshee.Sources
             return true;
         }
 
-        public int GetTrackIdForUri (string uri)
+        public long GetTrackIdForUri (string uri)
         {
             return DatabaseTrackInfo.GetTrackIdForUri (new SafeUri (uri), DbId);
         }

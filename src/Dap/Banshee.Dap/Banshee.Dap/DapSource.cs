@@ -347,7 +347,7 @@ namespace Banshee.Dap
             // Ensure there's enough space
             if (BytesAvailable - Banshee.IO.File.GetSize (fromUri) >= 0) {
                 // Ensure it's not already on the device
-                if (ServiceManager.DbConnection.Query<int> (track_on_dap_query, DbId, track.MetadataHash) == 0) {
+                if (ServiceManager.DbConnection.Query<long> (track_on_dap_query, DbId, track.MetadataHash) == 0) {
                     AddTrackToDevice (track, fromUri);
                 }
             }

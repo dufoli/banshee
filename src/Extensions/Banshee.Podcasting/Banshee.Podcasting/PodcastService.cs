@@ -132,7 +132,7 @@ namespace Banshee.Podcasting
                     int moved = 0;
                     foreach (FeedEnclosure enclosure in FeedEnclosure.Provider.FetchAllMatching ("LocalPath IS NOT NULL AND LocalPath != ''")) {
                         SafeUri uri = new SafeUri (enclosure.LocalPath);
-                        int track_id = DatabaseTrackInfo.GetTrackIdForUri (uri, ServiceManager.SourceManager.MusicLibrary.DbId);
+                        long track_id = DatabaseTrackInfo.GetTrackIdForUri (uri, ServiceManager.SourceManager.MusicLibrary.DbId);
 
                         if (track_id > 0) {
                             PodcastTrackInfo pi = new PodcastTrackInfo (DatabaseTrackInfo.Provider.FetchSingle (track_id));

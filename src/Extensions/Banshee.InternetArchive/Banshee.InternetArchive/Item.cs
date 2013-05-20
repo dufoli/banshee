@@ -72,7 +72,7 @@ namespace Banshee.InternetArchive
         }
 
         [DatabaseColumn("ItemId", Constraints = DatabaseColumnConstraints.PrimaryKey)]
-        private int DbId { get; set; }
+        private long DbId { get; set; }
 
         [DatabaseColumn]
         private string DetailsJson { get; set; }

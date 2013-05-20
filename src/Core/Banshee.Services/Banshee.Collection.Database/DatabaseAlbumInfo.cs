@@ -60,7 +60,7 @@ namespace Banshee.Collection.Database
             (String.IsNullOrEmpty (provider.Where) ? "1=1" : provider.Where)
         ));
 
-        private static int last_artist_id;
+        private static long last_artist_id;
         private static string last_title;
         private static DatabaseAlbumInfo last_album;
 
@@ -86,7 +86,7 @@ namespace Banshee.Collection.Database
             return FindOrCreate (artist, album);
         }
 
-        private static IDataReader FindExistingArtists (int artist_id, string title)
+        private static IDataReader FindExistingArtists (long artist_id, string title)
         {
             HyenaSqliteConnection db = ServiceManager.DbConnection;
             if (title == null) {
@@ -192,14 +192,14 @@ namespace Banshee.Collection.Database
         }
 
         [DatabaseColumn("AlbumID", Constraints = DatabaseColumnConstraints.PrimaryKey)]
-        private int dbid;
-        public int DbId {
+        private long dbid;
+        public long DbId {
             get { return dbid; }
         }
 
         [DatabaseColumn("ArtistID")]
-        private int artist_id;
-        public int ArtistId {
+        private long artist_id;
+        public long ArtistId {
             get { return artist_id; }
             set { artist_id = value; }
         }

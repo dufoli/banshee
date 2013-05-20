@@ -60,10 +60,10 @@ namespace Banshee.Library
             get { return ServiceManager.SourceManager.MusicLibrary.ErrorSource; }
         }
 
-        protected override int [] PrimarySourceIds {
+        protected override long [] PrimarySourceIds {
             get {
                 if (base.PrimarySourceIds == null) {
-                    base.PrimarySourceIds = new int [] {
+                    base.PrimarySourceIds = new long [] {
                         ServiceManager.SourceManager.VideoLibrary.DbId,
                         ServiceManager.SourceManager.MusicLibrary.DbId
                     };

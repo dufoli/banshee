@@ -65,7 +65,7 @@ namespace Banshee.Collection.Database
         private TrackInfo last_track;
 
         public string Id { get; private set; }
-        public int DbId { get; private set; }
+        public long DbId { get; private set; }
 
         public Action<RandomBy> RandomModeAdded;
         public Action<RandomBy> RandomModeRemoved;
@@ -185,12 +185,12 @@ namespace Banshee.Collection.Database
             }
         }
 
-        internal void RecordShuffle (int trackId)
+        internal void RecordShuffle (long trackId)
         {
             ServiceManager.DbConnection.Execute (add_shuffle_cmd, this.DbId, DateTime.Now, trackId);
         }
 
-        public void RecordShuffleModification (int trackId, ShuffleModificationType type)
+        public void RecordShuffleModification (long trackId, ShuffleModificationType type)
         {
             ServiceManager.DbConnection.Execute (add_discard_cmd, this.DbId, DateTime.Now, (int)type, trackId);
         }
@@ -239,7 +239,7 @@ namespace Banshee.Collection.Database
         {
             var db = ServiceManager.DbConnection;
 
-            int res = db.Query<int> ("SELECT ShufflerID FROM CoreShufflers WHERE ID = ?", Id);
+            long res = db.Query<long> ("SELECT ShufflerID FROM CoreShufflers WHERE ID = ?", Id);
             if (res > 0) {
                 DbId = res;
             } else {

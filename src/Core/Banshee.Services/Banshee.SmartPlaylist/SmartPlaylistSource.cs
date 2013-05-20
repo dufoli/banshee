@@ -232,7 +232,7 @@ namespace Banshee.SmartPlaylist
         }
 
         // For existing smart playlists that we're loading from the database
-        protected SmartPlaylistSource (int dbid, string name, string condition_xml, string order_by, string limit_number, string limit_criterion, PrimarySource parent, int count, bool is_temp, bool hiddenWhenEmpty) :
+        protected SmartPlaylistSource (long dbid, string name, string condition_xml, string order_by, string limit_number, string limit_criterion, PrimarySource parent, int count, bool is_temp, bool hiddenWhenEmpty) :
             base (generic_name, name, dbid, -1, 0, parent, is_temp)
         {
             ConditionXml = condition_xml;
@@ -542,7 +542,7 @@ namespace Banshee.SmartPlaylist
                     SmartPlaylistSource playlist = null;
                     try {
                         playlist = new SmartPlaylistSource (
-                            reader.Get<int> (0), reader.Get<string> (1),
+                            reader.Get<long> (0), reader.Get<string> (1),
                             reader.Get<string> (2), reader.Get<string> (3),
                             reader.Get<string> (4), reader.Get<string> (5),
                             parent, reader.Get<int> (7), reader.Get<bool> (8),
@@ -644,7 +644,7 @@ namespace Banshee.SmartPlaylist
             playlists.Sort (new DependencyComparer ());
         }
 
-        public static SmartPlaylistSource GetById (int dbId)
+        public static SmartPlaylistSource GetById (long dbId)
         {
             // TODO use a dictionary
             foreach (SmartPlaylistSource sp in playlists) {

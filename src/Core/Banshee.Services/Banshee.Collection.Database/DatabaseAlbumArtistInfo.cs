@@ -51,8 +51,8 @@ namespace Banshee.Collection.Database
         }
 
         [DatabaseColumn("ArtistID", Constraints = DatabaseColumnConstraints.PrimaryKey)]
-        private int dbid;
-        public int DbId {
+        private long dbid;
+        public long DbId {
             get { return dbid; }
         }
 

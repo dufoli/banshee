@@ -50,7 +50,7 @@ namespace Banshee.Playlist
 {
     public abstract class AbstractPlaylistSource : DatabaseSource
     {
-        protected int? dbid;
+        protected long? dbid;
 
         protected abstract string SourceTable { get; }
         protected abstract string SourcePrimaryKey { get; }
@@ -77,7 +77,7 @@ namespace Banshee.Playlist
             get { return true; }
         }
 
-        public int? DbId {
+        public long? DbId {
             get { return dbid; }
             protected set {
                 if (value != null && value != dbid) {
@@ -86,8 +86,8 @@ namespace Banshee.Playlist
             }
         }
 
-        protected int primary_source_id;
-        public int PrimarySourceId {
+        protected long primary_source_id;
+        public long PrimarySourceId {
             get { return primary_source_id; }
         }
 
@@ -134,7 +134,7 @@ namespace Banshee.Playlist
             }
         }
 
-        public AbstractPlaylistSource (string generic_name, string name, int dbid, int sortColumn, int sortType, PrimarySource parent, bool is_temp)
+        public AbstractPlaylistSource (string generic_name, string name, long dbid, int sortColumn, int sortType, PrimarySource parent, bool is_temp)
             : base (generic_name, name, dbid.ToString (), 500, parent)
         {
             primary_source_id = parent.DbId;

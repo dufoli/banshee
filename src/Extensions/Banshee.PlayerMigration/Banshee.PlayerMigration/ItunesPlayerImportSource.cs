@@ -62,7 +62,7 @@ namespace Banshee.PlayerMigration
             public string[] query_dirs;
             public bool get_ratings, get_stats, get_playlists, user_provided_prefix, empty_library;
             public int total_songs, total_processed;
-            public Dictionary<int, int> track_ids = new Dictionary<int, int> (); // key=itunes_id, value=banshee_id
+            public Dictionary<int, long> track_ids = new Dictionary<int, long> (); // key=itunes_id, value=banshee_id
         }
 
         private readonly object mutex = new object ();
@@ -574,7 +574,7 @@ namespace Banshee.PlayerMigration
                 while (xml_reader.ReadToFollowing ("integer") && !CheckForCanceled ()) {
                     xml_reader.Read ();
                     int itunes_id = Int32.Parse (xml_reader.ReadContentAsString ());
-                    int track_id;
+                    long track_id;
                     if (data.track_ids.TryGetValue (itunes_id, out track_id)) {
                         try {
                             ServiceManager.DbConnection.Execute (

@@ -114,11 +114,11 @@ namespace Banshee.Playlist
             SetProperties ();
         }
 
-        protected PlaylistSource (string name, int dbid, PrimarySource parent) : this (name, dbid, -1, 0, parent, 0, false)
+        protected PlaylistSource (string name, long dbid, PrimarySource parent) : this (name, dbid, -1, 0, parent, 0, false)
         {
         }
 
-        protected PlaylistSource (string name, int dbid, int sortColumn, int sortType, PrimarySource parent, int count, bool is_temp)
+        protected PlaylistSource (string name, long dbid, int sortColumn, int sortType, PrimarySource parent, int count, bool is_temp)
             : base (generic_name, name, dbid, sortColumn, sortType, parent, is_temp)
         {
             SetProperties ();
@@ -232,7 +232,7 @@ namespace Banshee.Playlist
 
 #endregion
 
-        protected void AddTrack (int track_id)
+        protected void AddTrack (long track_id)
         {
             ServiceManager.DbConnection.Execute (add_track_command, DbId, track_id, MaxViewOrder);
             OnTracksAdded ();
@@ -350,7 +350,7 @@ namespace Banshee.Playlist
                     WHERE Special = 0 AND PrimarySourceID = ?", parent.DbId))) {
                 while (reader.Read ()) {
                     yield return new PlaylistSource (
-                        reader.Get<string> (1), reader.Get<int> (0),
+                        reader.Get<string> (1), reader.Get<long> (0),
                         reader.Get<int> (2), reader.Get<int> (3), parent,
                         reader.Get<int> (5), reader.Get<bool> (6)
                     );
@@ -380,9 +380,9 @@ namespace Banshee.Playlist
             }
         }
 
-        private static int GetPlaylistId (string name)
+        private static long GetPlaylistId (string name)
         {
-            return ServiceManager.DbConnection.Query<int> (
+            return ServiceManager.DbConnection.Query<long> (
                 "SELECT PlaylistID FROM Playlists WHERE Name = ? LIMIT 1", name
             );
         }

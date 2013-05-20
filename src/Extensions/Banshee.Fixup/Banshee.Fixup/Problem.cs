@@ -48,11 +48,11 @@ namespace Banshee.Fixup
         }
 
         [DatabaseColumn ("ProblemID", Constraints = DatabaseColumnConstraints.PrimaryKey)]
-        public int Id { get; private set; }
+        public long Id { get; private set; }
 
         public override long DbId {
             get { return Id; }
-            protected set { Id = (int)value; }
+            protected set { Id = value; }
         }
 
         [DatabaseColumn ("ProblemType")]
@@ -115,7 +115,7 @@ namespace Banshee.Fixup
 
         public override int GetHashCode ()
         {
-            return Id;
+            return ((int)Id ^ (int)(Id >> 32));
         }
 
         public override string ToString ()

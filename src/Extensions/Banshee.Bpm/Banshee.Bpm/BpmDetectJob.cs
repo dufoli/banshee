@@ -51,7 +51,7 @@ namespace Banshee.Bpm
 {
     public class BpmDetectJob : DbIteratorJob
     {
-        private int current_track_id;
+        private long current_track_id;
         private IBpmDetector detector;
         private PrimarySource music_library;
         private ManualResetEvent result_ready_event = new ManualResetEvent (false);
@@ -111,7 +111,7 @@ namespace Banshee.Bpm
         protected override void IterateCore (HyenaDataReader reader)
         {
             SafeUri uri = new SafeUri (reader.Get<string> (0));
-            current_track_id = reader.Get<int> (1);
+            current_track_id = reader.Get<long> (1);
 
             // Wait for the result to be ready
             result_ready_event.Reset ();

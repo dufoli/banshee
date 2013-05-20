@@ -294,7 +294,7 @@ namespace Banshee.MediaEngine
             bool found = false;
             if (ServiceManager.DbConnection != null) {
                 // Try to find uri in the library
-                int track_id = DatabaseTrackInfo.GetTrackIdForUri (uri);
+                long track_id = DatabaseTrackInfo.GetTrackIdForUri (uri);
                 if (track_id > 0) {
                     DatabaseTrackInfo track_db = DatabaseTrackInfo.Provider.FetchSingle (track_id);
                     found = true;

@@ -242,16 +242,16 @@ namespace Banshee.Collection.Database
             return Provider.Refresh (this);
         }
 
-        private int track_id;
+        private long track_id;
         [DatabaseColumn ("TrackID", Constraints = DatabaseColumnConstraints.PrimaryKey)]
-        public int TrackId {
+        public long TrackId {
             get { return track_id; }
             protected set { track_id = value; }
         }
 
-        private int primary_source_id;
+        private long primary_source_id;
         [DatabaseColumn ("PrimarySourceID")]
-        public int PrimarySourceId {
+        public long PrimarySourceId {
             get { return primary_source_id; }
             set { primary_source_id = value; }
         }
@@ -261,16 +261,16 @@ namespace Banshee.Collection.Database
             set { PrimarySourceId = value.DbId; }
         }
 
-        private int artist_id;
+        private long artist_id;
         [DatabaseColumn ("ArtistID")]
-        public int ArtistId {
+        public long ArtistId {
             get { return artist_id; }
             set { artist_id = value; }
         }
 
-        private int album_id;
+        private long album_id;
         [DatabaseColumn ("AlbumID")]
-        public int AlbumId {
+        public long AlbumId {
             get { return album_id; }
             set { album_id = value; }
         }
@@ -794,27 +794,27 @@ namespace Banshee.Collection.Database
             "SELECT COUNT('x') FROM CoreTracks WHERE PrimarySourceId IN (?) AND MetadataHash = ?"
         );
 
-        public static int GetTrackIdForUri (string uri)
+        public static long GetTrackIdForUri (string uri)
         {
             return GetTrackIdForUri (new SafeUri (uri));
         }
 
-        public static int GetTrackIdForUri (SafeUri uri, params int [] primary_sources)
+        public static long GetTrackIdForUri (SafeUri uri, params long [] primary_sources)
         {
             return GetTrackIdForUri (uri.AbsoluteUri, primary_sources);
         }
 
-        public static int GetTrackIdForUri (string absoluteUri, params int [] primary_sources)
+        public static long GetTrackIdForUri (string absoluteUri, params long [] primary_sources)
         {
             if (primary_sources == null || primary_sources.Length == 0) {
-                return ServiceManager.DbConnection.Query<int> (get_track_id_by_uri_plain, absoluteUri);
+                return ServiceManager.DbConnection.Query<long> (get_track_id_by_uri_plain, absoluteUri);
             }
-            return ServiceManager.DbConnection.Query<int> (
+            return ServiceManager.DbConnection.Query<long> (
                 get_track_id_by_uri_primarysources, primary_sources, absoluteUri
             );
         }
 
-        private static IDataReader FindTrackByMetadataHash (string metadata_hash, int [] primary_sources)
+        private static IDataReader FindTrackByMetadataHash (string metadata_hash, long [] primary_sources)
         {
             var command = new HyenaSqliteCommand (String.Format (
                 get_track_by_metadata_hash,
@@ -823,12 +823,12 @@ namespace Banshee.Collection.Database
                 primary_sources, metadata_hash);
         }
 
-        public static bool ContainsUri (SafeUri uri, int [] primary_sources)
+        public static bool ContainsUri (SafeUri uri, long [] primary_sources)
         {
             return GetTrackIdForUri (uri, primary_sources) > 0;
         }
 
-        internal static DatabaseTrackInfo GetTrackForMetadataHash (string metadata_hash, int [] primary_sources)
+        internal static DatabaseTrackInfo GetTrackForMetadataHash (string metadata_hash, long [] primary_sources)
         {
             using (IDataReader reader = FindTrackByMetadataHash (metadata_hash, primary_sources)) {
                 if (reader.Read ()) {
@@ -838,7 +838,7 @@ namespace Banshee.Collection.Database
             }
         }
 
-        internal static int MetadataHashCount (string metadata_hash, int [] primary_sources)
+        internal static int MetadataHashCount (string metadata_hash, long [] primary_sources)
         {
             return ServiceManager.DbConnection.Query<int> (get_track_count_by_metadata_hash,
                 primary_sources, metadata_hash);

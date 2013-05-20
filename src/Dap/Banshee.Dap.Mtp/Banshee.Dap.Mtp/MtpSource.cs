@@ -53,7 +53,7 @@ namespace Banshee.Dap.Mtp
     {
 		private MtpDevice mtp_device;
         //private bool supports_jpegs = false;
-        private Dictionary<int, Track> track_map;
+        private Dictionary<long, Track> track_map;
 
         private Dictionary<string, Album> album_cache = new Dictionary<string, Album> ();
 
@@ -149,7 +149,7 @@ namespace Banshee.Dap.Mtp
 
         protected override void LoadFromDevice ()
         {
-            track_map = new Dictionary<int, Track> ();
+            track_map = new Dictionary<long, Track> ();
             try {
                 List<Track> files = null;
                 lock (mtp_device) {
@@ -176,7 +176,7 @@ namespace Banshee.Dap.Mtp
                 }
 
                 foreach (Track mtp_track in files) {
-                    int track_id;
+                    long track_id;
                     if ((track_id = DatabaseTrackInfo.GetTrackIdForUri (MtpTrackInfo.GetPathFromMtpTrack (mtp_track), DbId )) > 0) {
                         track_map[track_id] = mtp_track;
                     } else {

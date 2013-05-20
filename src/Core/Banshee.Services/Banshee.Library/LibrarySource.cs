@@ -201,8 +201,8 @@ namespace Banshee.Library
                 SafeUri uri = new SafeUri (path);
 
                 // Make sure it's not already in the library
-                // TODO optimize - no need to recreate this int [] every time
-                if (DatabaseTrackInfo.ContainsUri (uri, new int [] {DbId})) {
+                // TODO optimize - no need to recreate this long [] every time
+                if (DatabaseTrackInfo.ContainsUri (uri, new long [] {DbId})) {
                     return;
                 }
 

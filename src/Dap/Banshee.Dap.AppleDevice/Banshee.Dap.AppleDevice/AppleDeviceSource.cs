@@ -64,7 +64,7 @@ namespace Banshee.Dap.AppleDevice
             get; set;
         }
 
-        private Dictionary<int, AppleDeviceTrackInfo> tracks_map = new Dictionary<int, AppleDeviceTrackInfo> (); // FIXME: EPIC FAIL
+        private Dictionary<long, AppleDeviceTrackInfo> tracks_map = new Dictionary<long, AppleDeviceTrackInfo> (); // FIXME: EPIC FAIL
 
         public event EventHandler<ScrobblingBatchEventArgs> ReadyToScrobble;
 
@@ -699,7 +699,7 @@ namespace Banshee.Dap.AppleDevice
                 if (from != null && from.Count > 0) {
                     var playlist = new GPod.Playlist (from.Name);
                     MediaDatabase.Playlists.Add (playlist);
-                    foreach (int track_id in ServiceManager.DbConnection.QueryEnumerable<int> (String.Format (
+                    foreach (long track_id in ServiceManager.DbConnection.QueryEnumerable<long> (String.Format (
                         "SELECT CoreTracks.TrackID FROM {0} WHERE {1}",
                         from.DatabaseTrackModel.ConditionFromFragment, from.DatabaseTrackModel.Condition)))
                     {

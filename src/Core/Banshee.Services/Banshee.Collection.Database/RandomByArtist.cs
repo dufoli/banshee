@@ -43,7 +43,7 @@ namespace Banshee.Collection.Database
     public class RandomByArtist : RandomBy
     {
         private HyenaSqliteCommand query;
-        private int? id;
+        private long? id;
 
         public RandomByArtist () : base ("artist")
         {

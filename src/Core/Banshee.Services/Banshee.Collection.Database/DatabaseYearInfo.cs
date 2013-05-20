@@ -50,9 +50,9 @@ namespace Banshee.Collection.Database
         {
         }
 
-        private int track_id;
+        private long track_id;
         [DatabaseColumn ("TrackID", Constraints = DatabaseColumnConstraints.PrimaryKey)]
-        public int TrackId {
+        public long TrackId {
             get { return track_id; }
             protected set { track_id = value; }
         }

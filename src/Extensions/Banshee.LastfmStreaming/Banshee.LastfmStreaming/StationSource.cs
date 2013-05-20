@@ -113,10 +113,10 @@ namespace Banshee.LastfmStreaming.Radio
             set { play_count = value; }
         }
 
-        private int dbid;
+        private long dbid;
 
         // For StationSources that already exist in the db
-        protected StationSource (LastfmSource lastfm, int dbId, string name, string type, string arg, int playCount) : base (generic_name, name, 150, dbId.ToString ())
+        protected StationSource (LastfmSource lastfm, long dbId, string name, string type, string arg, int playCount) : base (generic_name, name, 150, dbId.ToString ())
         {
             this.lastfm = lastfm;
             dbid = dbId;
@@ -566,7 +566,7 @@ namespace Banshee.LastfmStreaming.Radio
                 while (reader.Read ()) {
                     try {
                         stations.Add (new StationSource (lastfm,
-                            Convert.ToInt32 (reader[0]),
+                            Convert.ToInt64 (reader[0]),
                             reader[1] as string,
                             reader[2] as string,
                             reader[3] as string,

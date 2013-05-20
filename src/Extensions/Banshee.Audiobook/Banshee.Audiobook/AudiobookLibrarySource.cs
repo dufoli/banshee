@@ -290,7 +290,7 @@ namespace Banshee.Audiobook
             }
         }
 
-        public Bookmark GetLastPlayedBookmark (int book_id)
+        public Bookmark GetLastPlayedBookmark (long book_id)
         {
             return Bookmark.Provider.FetchFirstMatching (
                 "Type = ? AND TrackID IN (SELECT TrackID FROM CoreTracks WHERE PrimarySourceID = ? AND AlbumID = ?)",

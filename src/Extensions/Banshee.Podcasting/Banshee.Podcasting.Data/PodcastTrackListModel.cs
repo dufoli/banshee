@@ -61,7 +61,7 @@ namespace Banshee.Podcasting.Gui
         {
             From = String.Format ("{0}, {1}, {2}, {3}", provider.From, Feed.Provider.TableName, FeedItem.Provider.TableName, FeedEnclosure.Provider.TableName);
 
-            int podcast_library_dbid = (source as PodcastSource ?? source.Parent as PodcastSource).DbId;
+            long podcast_library_dbid = (source as PodcastSource ?? source.Parent as PodcastSource).DbId;
             AddCondition (From, String.Format (
                 "CoreTracks.PrimarySourceID = {3} AND {0}.FeedID = {1}.FeedID AND CoreTracks.ExternalID = {1}.ItemID AND {1}.ItemID = {2}.ItemID",
                 Feed.Provider.TableName, FeedItem.Provider.TableName, FeedEnclosure.Provider.TableName, podcast_library_dbid

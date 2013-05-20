@@ -237,7 +237,7 @@ namespace Banshee.PlayQueue
             }
         }
 
-        private void EnqueueId (int trackId, bool prepend, bool generated)
+        private void EnqueueId (long trackId, bool prepend, bool generated)
         {
             if (trackId <= 0) {
                 return;
@@ -549,7 +549,7 @@ namespace Banshee.PlayQueue
 
         private void BindToDatabase ()
         {
-            int result = ServiceManager.DbConnection.Query<int> (
+            long result = ServiceManager.DbConnection.Query<long> (
                 "SELECT PlaylistID FROM CorePlaylists WHERE Special = 1 AND Name = ? LIMIT 1",
                 special_playlist_name
             );

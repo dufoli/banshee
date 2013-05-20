@@ -110,7 +110,7 @@ namespace Banshee.CoverArt
 
         private class CoverartTrackInfo : DatabaseTrackInfo
         {
-            public int DbId {
+            public long DbId {
                 set { TrackId = value; }
             }
         }
@@ -122,8 +122,8 @@ namespace Banshee.CoverArt
                 ArtistName = reader.Get<string> (2),
                 PrimarySource = ServiceManager.SourceManager.MusicLibrary,
                 Uri = new SafeUri (reader.Get<string> (3)),
-                DbId = reader.Get<int> (4),
-                AlbumId = reader.Get<int> (0)
+                DbId = reader.Get<long> (4),
+                AlbumId = reader.Get<long> (0)
             };
 
             Status = String.Format (Catalog.GetString ("{0} - {1}"), track.ArtistName, track.AlbumTitle);
