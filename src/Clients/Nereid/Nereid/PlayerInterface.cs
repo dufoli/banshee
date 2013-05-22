@@ -170,7 +170,18 @@ namespace Nereid
             search_entry_align = new Alignment (1.0f, 0.5f, 0f, 0f);
             var box = new HBox () { Spacing = 2 };
             var grabber = new GrabHandle ();
-            grabber.ControlWidthOf (view_container.SearchEntry, 150, 350, false);
+            var search_entry = view_container.SearchEntry;
+            grabber.ControlWidthOf (search_entry, 150, 350, false);
+
+            int search_entry_width = SearchEntryWidth.Get ();
+
+            // -1 indicates that height should be preserved
+            search_entry.SetSizeRequest (search_entry_width, -1);
+
+            search_entry.SizeAllocated += (o, a) => {
+                SearchEntryWidth.Set (search_entry.Allocation.Width);
+            };
+
             box.PackStart (grabber, false, false, 0);
             box.PackStart (view_container.SearchEntry, false, false, 0);
             search_entry_align.Child = box;
@@ -805,6 +816,11 @@ namespace Nereid
         private static readonly SchemaEntry<int> SeekSliderWidth = new SchemaEntry<int> (
             "player_window", "seek_slider_width",
             175, "Width of seek slider in px", ""
+        );
+
+        private static readonly SchemaEntry<int> SearchEntryWidth = new SchemaEntry<int> (
+            "player_window", "search_entry_width",
+            200, "Width of search entry element in px", ""
         );
 
 #endregion
