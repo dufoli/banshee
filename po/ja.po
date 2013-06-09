@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: banshee master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=banshee&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-02-22 09:15+0000\n"
-"PO-Revision-Date: 2013-02-24 15:14+0900\n"
+"POT-Creation-Date: 2013-05-27 11:35+0000\n"
+"PO-Revision-Date: 2013-06-08 09:37+0900\n"
 "Last-Translator: Hajime Taira <htaira@redhat.com>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
@@ -1134,7 +1134,7 @@ msgstr "残り {0}"
 msgid "Play Song"
 msgstr "曲を再生"
 
-#: ../src/Clients/Nereid/Nereid/PlayerInterface.cs:251
+#: ../src/Clients/Nereid/Nereid/PlayerInterface.cs:262
 #: ../src/Extensions/Banshee.Fixup/Banshee.Fixup/FixSource.cs:79
 #: ../src/Extensions/Banshee.NotificationArea/Banshee.NotificationArea/NotificationAreaService.cs:133
 #: ../src/Extensions/Banshee.SoundMenu/Banshee.SoundMenu/SoundMenuService.cs:111
@@ -1142,7 +1142,7 @@ msgid "Close"
 msgstr "閉じる"
 
 #. Translators: this is a verb (command), not a noun (things)
-#: ../src/Clients/Nereid/Nereid/PlayerInterface.cs:472
+#: ../src/Clients/Nereid/Nereid/PlayerInterface.cs:483
 msgid "Search"
 msgstr "Search"
 
@@ -1157,7 +1157,7 @@ msgstr "アーティスト、アルバム、タイトル"
 #: ../src/Core/Banshee.Services/Banshee.Library/MusicFileNamePattern.cs:78
 #: ../src/Core/Banshee.Services/Banshee.Query/BansheeQuery.cs:84
 msgid "Album Artist"
-msgstr "アーティスト"
+msgstr "アルバムアーティスト"
 
 #: ../src/Clients/Nereid/Nereid/ViewContainer.cs:141
 #: ../src/Core/Banshee.Services/Banshee.Library/MusicFileNamePattern.cs:93
@@ -1279,7 +1279,7 @@ msgstr "{0} ({1}:{2:00})"
 msgid "All Album Artists ({0})"
 msgstr "すべてのアルバムアーティスト ({0})"
 
-#: ../src/Core/Banshee.Services/Banshee.Collection.Database/DatabaseAlbumListModel.cs:75
+#: ../src/Core/Banshee.Services/Banshee.Collection.Database/DatabaseAlbumListModel.cs:77
 #, csharp-format
 msgid "All Albums ({0})"
 msgstr "すべてのアルバム({0})"
@@ -2654,7 +2654,7 @@ msgstr "プレイリストを手動のソートモードにするには、ソー
 #: ../src/Core/Banshee.ThickClient/Banshee.Collection.Gui/ColumnCellDiscAndCount.cs:40
 #: ../src/Core/Banshee.ThickClient/Banshee.Collection.Gui/ColumnCellTrackAndCount.cs:40
 #: ../src/Core/Banshee.Widgets/Banshee.Widgets/StreamPositionLabel.cs:174
-#: ../src/Dap/Banshee.Dap/Banshee.Dap.Gui/DapPropertiesDialog.cs:148
+#: ../src/Dap/Banshee.Dap/Banshee.Dap.Gui/DapPropertiesDialog.cs:149
 #, csharp-format
 msgid "{0} of {1}"
 msgstr "{0} / {1}"
@@ -5434,53 +5434,53 @@ msgstr "説明:"
 msgid "Rating:"
 msgstr "評価:"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:136
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:84
+#, csharp-format
+msgid "Processed {0} of {1} tracks"
+msgstr "{1}曲中{0}曲目を処理しました"
+
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:146
 msgid "_Last.fm"
 msgstr "_Last.fm"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:137
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:147
 msgid "Configure the Audioscrobbler plugin"
 msgstr "Audioscrobblerプラグインの設定"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:140
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:150
 msgid "Visit _User Profile Page"
 msgstr "ユーザーのプロフィールページにアクセス(_U)"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:141
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:151
 #: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm/LastfmPreferences.cs:172
 msgid "Visit Your Last.fm Profile Page"
 msgstr "Last.fmのプロフィールページにアクセス"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:146
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:156
 #: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm/LastfmPreferences.cs:93
 msgid "_Enable Song Reporting From Banshee"
 msgstr "Bansheeで再生した曲の情報送信を有効にする(_E)"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:147
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:157
 msgid "Enable song reporting From Banshee"
 msgstr "Bansheeで再生した曲の情報送信を有効にする"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:152
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:162
 #: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm/LastfmPreferences.cs:98
 msgid "_Enable Song Reporting From Device"
 msgstr "デバイスで再生した曲の情報送信を有効にする(_E)"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:153
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:163
 msgid "Enable song reporting From Device"
 msgstr "デバイスで再生した曲の情報送信を有効にする"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:402
-msgid "Scrobbling from device"
-msgstr "デバイスからScrobblingしています"
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:450
+msgid "Scrobbling to Last.FM"
+msgstr "Last.FMへScrobblingしています"
 
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:403
-msgid "Scrobbling from device..."
-msgstr "デバイスからScrobblingしています..."
-
-#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:414
-#, csharp-format
-msgid "Processing track {0} of {1} ..."
-msgstr "{1}曲中{0}曲目を処理しています..."
+#: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm.Audioscrobbler/AudioscrobblerService.cs:451
+msgid "Scrobbling to Last.FM..."
+msgstr "Last.FMへScrobblingしています..."
 
 #: ../src/Extensions/Banshee.Lastfm/Banshee.Lastfm/LastfmActions.cs:66
 msgid "Connect"
@@ -6914,6 +6914,9 @@ msgstr "Last.fmへ接続しました。"
 #: ../src/Libraries/Migo/Migo.Syndication/RssParser.cs:103
 msgid "Unknown Podcast"
 msgstr "不明なポッドキャスト"
+
+#~ msgid "Scrobbling from device"
+#~ msgstr "デバイスからScrobblingしています"
 
 #~ msgid "Volume"
 #~ msgstr "音量"
