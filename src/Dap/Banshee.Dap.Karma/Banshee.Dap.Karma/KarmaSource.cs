@@ -47,8 +47,8 @@ namespace Banshee.Dap.Karma
         private String mount_point;
 
         // for getting karma track given a DatabaseTrackInfo
-        private Dictionary<int, KarmaTrackInfo> track_map =
-            new Dictionary<int, KarmaTrackInfo>();
+        private Dictionary<long, KarmaTrackInfo> track_map =
+            new Dictionary<long, KarmaTrackInfo>();
 
         public override void DeviceInitialize(IDevice dev)
         {
