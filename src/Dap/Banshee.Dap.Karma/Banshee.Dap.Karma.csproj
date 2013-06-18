@@ -4,7 +4,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
-    <ProjectGuid>{6B73E278-23FB-4A59-9B44-AB7F0212B936}</ProjectGuid>
+    <ProjectGuid>{96643BD4-FCD3-4DEE-96D3-A25D0EB200BB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>Banshee.Dap.Karma</AssemblyName>
     <SchemaVersion>2.0</SchemaVersion>
@@ -91,7 +91,6 @@
       <HintPath>..\..\..\bin\bin\Mono.Posix.dll</HintPath>
     </Reference>
     <Reference Include="Karma-Sharp">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\bin\bin\karma-sharp.dll</HintPath>
     </Reference>
   </ItemGroup>
