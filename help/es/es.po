@@ -11,8 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: banshee-help.master\n"
-"POT-Creation-Date: 2013-06-18 07:54+0000\n"
-"PO-Revision-Date: 2013-06-24 11:17+0200\n"
+"POT-Creation-Date: 2013-06-24 09:18+0000\n"
+"PO-Revision-Date: 2013-07-01 10:56+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: \n"
@@ -845,13 +845,6 @@ msgstr ""
 
 #. Not sure about play queue and play after current track
 #: C/radio.page:109(p)
-#, fuzzy
-#| msgid ""
-#| "To add a radio station to the <link xref=\"queue\"><gui style=\"menuitem"
-#| "\">Play Queue</gui></link>, you can right click on the station and select "
-#| "<gui style=\"menuitem\">Add to Play Queue</gui>. This will play the radio "
-#| "station when the queue has finished playing all media which is ahead of "
-#| "the station in the <gui>Play Queue</gui>."
 msgid ""
 "To add a radio station to the <gui style=\"menuitem\" xref=\"play-queue"
 "\">Play Queue</gui>, you can right click on the station and select <gui "
@@ -859,11 +852,11 @@ msgid ""
 "when the queue has finished playing all media which is ahead of the station "
 "in the <gui>Play Queue</gui>."
 msgstr ""
-"Para añadir una emisora de radio a la <link xref=\"queue\"><gui style="
-"\"menuitem\">Cola de reproducción</gui></link>, puede pulsar con el botón "
-"derecho sobre la emisora y elegir <gui style=\"menuitem\">Añadir a la cola "
-"de reproducción</gui>. Esto reproducirá la emisora de radio cuando la cola "
-"termine de reproducir todo lo que haya por la delante de la emisora en la "
+"Para añadir una emisora de radio a la <gui style=\"menuitem\" xref=\"play-"
+"queue\">Cola de reproducción</gui>, puede pulsar con el botón derecho sobre "
+"la emisora y elegir <gui style=\"menuitem\">Añadir a la cola de "
+"reproducción</gui>. Esto reproducirá la emisora de radio cuando la cola "
+"termine de reproducir todo lo que haya por delante de la emisora en la "
 "<gui>Cola de reproducción</gui>."
 
 #: C/radio.page:115(p)
@@ -886,8 +879,6 @@ msgstr ""
 "funcionar en algunas instalaciones de <app>Banshee</app>."
 
 #: C/radio.page:127(title)
-#, fuzzy
-#| msgid "Remove radio station"
 msgid "Remove a radio station"
 msgstr "Quitar una emisora de radio"
 
@@ -899,6 +890,11 @@ msgid ""
 "<key>Delete</key>. When you are prompted for confirmation, click the <gui "
 "style=\"button\">Remove</gui> button to remove the radio station."
 msgstr ""
+"Para quitar una emisora de rardio de <app>Banshee</app>, puede pulsar con el "
+"botón derecho en la estación de radio y seleccionar <gui style=\"menuitem"
+"\">Quitar</gui>, o alternativamente, puede seleccionar la estación con el "
+"ratón y pulsar <key>Supr</key>. Cuando se le pida que confirme, pulse el "
+"botón <gui style=\"button\">Quitar</gui> para quitar la emisora de radio."
 
 #: C/podcast.page:11(desc)
 msgid "Add, remove and play podcasts in <app>Banshee</app>."
@@ -1037,20 +1033,10 @@ msgstr ""
 "podcast."
 
 #: C/podcast.page:99(title) C/play.page:121(title)
-#, fuzzy
-#| msgid "Play a Podcast"
 msgid "Play a podcast"
 msgstr "Reproducir un podcast"
 
 #: C/podcast.page:101(p)
-#, fuzzy
-#| msgid ""
-#| "To <link xref=\"play\">play</link> a podcast episode, double click on the "
-#| "episode or select it, then select <guiseq><gui style=\"menu\">Playback</"
-#| "gui><gui style=\"menuitem\">Play</gui></guiseq>. You can also add the "
-#| "episode to the <link xref=\"queue\"><gui>Play Queue</gui></link> by right "
-#| "clicking on the episode and selecting <gui style=\"menuitem\">Add to Play "
-#| "Queue</gui>."
 msgid ""
 "To <link xref=\"play\">play</link> a podcast episode, double click on the "
 "episode or select it, then select <guiseq><gui style=\"menu\">Playback</"
@@ -1059,11 +1045,12 @@ msgid ""
 "on the episode and selecting <gui style=\"menuitem\">Add to Play Queue</gui>."
 msgstr ""
 "Para <link xref=\"play\">reproducir</link> un episodio de un podcast, pulse "
-"dos veces sobre el episodio o selecciónelo y elija <guiseq><gui style=\"menu"
-"\">Reproducción</gui><gui style=\"menuitem\">Reproducir</gui></guiseq>. "
-"También puede añadir el podcast a la <link xref=\"queue\"><gui>Cola de "
-"reproducción</gui></link> pulsando con el botón derecho sobre el episodio y "
-"eligiendo <gui style=\"menuitem\">Añadir a la cola de reproducción</gui>."
+"dos veces sobre el episodio o selecciónelo, luego elija <guiseq><gui style="
+"\"menu\">Reproducción</gui><gui style=\"menuitem\">Reproducir</gui></"
+"guiseq>. También puede añadir el episodio a la <link xref=\"queue"
+"\"><gui>Cola de reproducción</gui></link> pulsando con el botón derecho "
+"sobre el episodio y seleccionando <gui style=\"menuitem\">Añadir a la cola "
+"de reproducción</gui>."
 
 #: C/podcast.page:110(title)
 msgid "Remove a podcast"
@@ -1094,8 +1081,6 @@ msgid "sindhus@live.in"
 msgstr "sindhus@live.in"
 
 #: C/play.page:34(title)
-#, fuzzy
-#| msgid "Play Your Media"
 msgid "Play your media"
 msgstr "Reproducir su contenido multimedia"
 
@@ -1259,27 +1244,16 @@ msgstr ""
 "lista."
 
 #: C/play.page:123(p)
-#, fuzzy
-#| msgid ""
-#| "Podcasts shows you all Podcasts you're subscribed to, all Podcast shows "
-#| "available, and the Podcast browser lists all Podcasts in order of newest "
-#| "first."
 msgid ""
 "Podcasts shows you all podcasts you are subscribed to, all podcast shows "
 "available, and the podcast browser lists all podcasts in order of newest "
 "first."
 msgstr ""
-"La colección Podcasts le mostrará todos los podcasts a los que está "
-"suscrito, todos las emisiones disponibles, y el explorador de podcasts lista "
-"todos los podcasts en orden de más reciente a más antiguo."
+"Los podcasts le mostrarán todos los podcasts a los que está suscrito, todos "
+"los podcasts disponibles, y el explorador de podcasts lista todos los "
+"podcasts en orden del más reciente primero."
 
 #: C/play.page:127(p)
-#, fuzzy
-#| msgid ""
-#| "To play a Podcast, choose the Podcast you wish to play from the list and "
-#| "press the <key>Space</key>, or choose <guiseq><gui style=\"menu"
-#| "\">Playback</gui><gui style=\"menuitem\">Play</gui></guiseq> from the "
-#| "<app>Banshee</app> menu."
 msgid ""
 "To play a podcast, choose the podcast you wish to play from the list and "
 "press the <key>Space</key>, or choose <guiseq><gui style=\"menu\">Playback</"
@@ -1316,100 +1290,65 @@ msgstr ""
 "\">Reproducir</gui></guiseq> desde el menú de <app>Banshee</app>."
 
 #: C/play-queue.page:9(desc)
-#, fuzzy
-#| msgid "Add media to your play queue."
 msgid "Add media to your <gui>Play Queue</gui>."
-msgstr "Añadir archivos multimedia a su cola de reproducción."
+msgstr "Añadir archivos multimedia a su <gui>Cola de reproducción</gui>."
 
 #: C/play-queue.page:15(years)
 msgid "2013"
-msgstr ""
+msgstr "2013"
 
 #: C/play-queue.page:24(title)
-#, fuzzy
-#| msgid "Play Queue"
 msgid "Play queue"
 msgstr "Cola de reproducción"
 
 #: C/play-queue.page:26(p)
-#, fuzzy
-#| msgid ""
-#| "The <gui>Play Queue</gui> allows you to add music to play in a sequential "
-#| "order. You can add many tracks to let you listen to hours of music non-"
-#| "stop. You can add individual tracks or entire albums, and sort or re-"
-#| "order them."
 msgid ""
 "The <gui>Play Queue</gui> can be used to play tracks in a sequential order. "
 "You can add many tracks to the <gui>Play Queue</gui> and listen to hours of "
 "music non-stop. You can add individual tracks or entire albums, and sort or "
 "re-order them as you wish."
 msgstr ""
-"La <gui>Cola de reproducción</gui> le permite añadir música para "
-"reproducirla en orden secuencial. Puede añadir varias pistas para escuchar "
-"horas de música sin parar. Puede añadir pistas individuales o álbumes "
-"completos, y ordenarlos o reordenarlos."
+"La <gui>Cola de reproducción</gui> se puede usar para reproducir pistas en "
+"orden secuencial. Puede añadir varias pistas a la <gui>Cola de reproducción</"
+"gui> y escuchar horas de música sin parar. Puede añadir pistas individuales "
+"o álbumes completos, y ordenarlos o reordenarlos como quiera."
 
 #: C/play-queue.page:32(title)
-#, fuzzy
-#| msgid "Add Music to the Play Queue"
 msgid "Add music to the <gui>Play Queue</gui>"
-msgstr "Añadir música a la cola de reproducción"
+msgstr "Añadir música a la <gui>Cola de reproducción</gui>"
 
 #: C/play-queue.page:34(p)
-#, fuzzy
-#| msgid ""
-#| "From your music library, you will need to select the music tracks or "
-#| "albums you want to add to the play queue."
 msgid ""
 "From your music library, you will need to select the music tracks or albums "
 "you want to add to the <gui>Play Queue</gui>."
 msgstr ""
-"Desde su colección de música, deberá seleccionar las pistas de música o los "
-"álbumes que quiere añadir a la cola de reproducción."
+"Desde su colección de música, necesitará seleccionar las pistas de música o "
+"álbumes que quiere añadir a la <gui>Cola de reproducción</gui>."
 
 #: C/play-queue.page:37(p)
-#, fuzzy
-#| msgid ""
-#| "To add an entire album to the Play Queue, using your mouse press and hold "
-#| "the album and drag the album over <gui>Play Queue</gui> in the far left "
-#| "window pane."
 msgid ""
 "To add an entire album to the <gui>Play Queue</gui>, use your mouse to press "
 "and hold the album and drag and drop it over <gui>Play Queue</gui> in the "
 "far left window pane."
 msgstr ""
-"Para añadir un álbum completo a la cola de reproducción, usando su ratón "
-"pulse en el álbum y, manteniéndolo pulsado, arrástrelo hasta la <gui>Cola de "
-"reproducción</gui> en el panel izquierdo de la ventana."
+"Para añadir un álbum completo a la <gui>Cola de reproducción</gui>, use su "
+"ratón para mantener pulsado el álbum, arrastrelo y suéltelo sobre la "
+"<gui>Cola de reproducción</gui> en el panel izquierdo de la ventana."
 
 #: C/play-queue.page:41(p)
-#, fuzzy
-#| msgid ""
-#| "You can add music tracks to the Play Queue individually or as a group. To "
-#| "add an individual file, drag and drop it over the <gui>Play Queue</gui> "
-#| "in the far left window pane, or right click the track and choose <gui "
-#| "style=\"menuitem\">Add to Play Queue</gui>."
 msgid ""
 "You can add music tracks to the <gui>Play Queue</gui> individually or as a "
 "group. To add an individual file, drag and drop it over the <gui>Play Queue</"
 "gui> in the far left window pane, or right click the track and choose <gui "
 "style=\"menuitem\">Add to Play Queue</gui>."
 msgstr ""
-"Puede añadir pistas de música a la cola de reproducción individualmente o en "
-"grupo. Para añadir un archivo individual, arrastre y suéltelo sobre la "
-"<gui>Cola de reproducción</gui> en en panel izquierdo de la ventana, o pulse "
-"con el botón derecho sobre la pista y elija <gui style=\"menuitem\">Añadir a "
-"la cola de reproducción</gui>."
+"Puede añadir pistas de música a la <gui>Cola de reproducción</gui> "
+"individualmente o como en grupo. Para añadir un archivo individual, arrastre "
+"y suéltelo sobre la <gui>Cola de reproducción</gui> en en panel izquierdo de "
+"la ventana, o pulse con el botón derecho sobre la pista y elija <gui style="
+"\"menuitem\">Añadir a la cola de reproducción</gui>."
 
 #: C/play-queue.page:46(p)
-#, fuzzy
-#| msgid ""
-#| "You can select multiple files by using your mouse and pressing "
-#| "<key>Control</key> and choosing each file with your mouse or select a "
-#| "range of files by pressing <key>Shift</key> and clicking twice to select "
-#| "that range of files. You can then drag and drop it over the <gui>Play "
-#| "Queue</gui> in the far left window pane or right click the tracks and "
-#| "choose <gui style=\"menuitem\">Add to Play Queue</gui>."
 msgid ""
 "To select multiple tracks, select each track with your mouse while holding "
 "down <key>Ctrl</key> or select a range of files by pressing <key>Shift</key> "
@@ -1417,29 +1356,19 @@ msgid ""
 "it over the <gui>Play Queue</gui> in the far left window pane or right click "
 "the tracks and choose <gui style=\"menuitem\">Add to Play Queue</gui>."
 msgstr ""
-"Puede seleccionar varios archivos usando su ratón y pulsando <key>Ctrl</key> "
-"y eligiendo cada archivo con su ratón, o seleccionando un rango de archivos "
-"usando la tecla <key>Mayús</key> y pulsando dos veces para seleccionar el "
-"rango de archivos. Entonces puede arrastrar y soltar sobre la <gui>Cola de "
+"Para seleccionar varias pistas, seleccione cada pista con el ratón mientras "
+"mantiene pulsado <key>Ctrl</key> o seleccione un rango de archivos pulsando "
+"la tecla <key>Mayús</key> y pulsando dos veces para seleccionar el rango de "
+"archivos. Entonces puede arrastrar y soltar sobre la <gui>Cola de "
 "reproducción</gui> en el panel izquierdo de la ventana o pulsar con el botón "
-"derecho sobre las pistas y seleccionar <gui style=\"menuitem\">Añadir a la "
-"cola de reproducción</gui>."
+"derecho sobre las pistas y elegir <gui style=\"menuitem\">Añadir a la cola "
+"de reproducción</gui>."
 
 #: C/play-queue.page:56(title)
-#, fuzzy
-#| msgid "Organize Your Play Queue"
 msgid "Organize your <gui>Play Queue</gui>"
-msgstr "Organizar la cola de reproducción"
+msgstr "Organizar su <gui>Cola de reproducción</gui>"
 
 #: C/play-queue.page:58(p)
-#, fuzzy
-#| msgid ""
-#| "Your Play Queue is organized in the order of the tracks you added. The "
-#| "first tracks or albums you added to the queue will be the first to be "
-#| "played. You can re-order your Play Queue by using your mouse and dragging "
-#| "and dropping a track or group of tracks in the list. Choose the track(s) "
-#| "you wish to re-order with your mouse and release your mouse over the "
-#| "number or place in the list you wish those files to be in the queue."
 msgid ""
 "Your <gui>Play Queue</gui> is organized in the order of the tracks you "
 "added. The first tracks or albums you added to the queue will be the first "
@@ -1449,77 +1378,64 @@ msgid ""
 "mouse over the number or place in the list you wish those files to be in the "
 "queue."
 msgstr ""
-"Su cola de reproducción está organizada en el orden en que añade las pistas. "
-"Las primeras pistas o álbumes que añade a la cola serán las primeras que se "
-"reproduzcan. Puede reordenar su cola de reproducción usando su ratón y "
-"arrastrando y soltando una pista o un grupo de pistas en la lista. Elija con "
-"su ratón la pista o las pistas que quiere reordenar y suelte el ratón encima "
-"del número o del sitio en la lista en que quiere que estén esas pistas en la "
-"cola."
+"Su <gui>Cola de reproducción</gui> está organizada en el orden en que añade "
+"las pistas. Las primeras pistas o álbumes que añade a la cola serán las "
+"primeras que se reproduzcan. Puede reordenar su <gui>Cola de reproducción</"
+"gui> usando su ratón y arrastrando y soltando una pista o un grupo de pistas "
+"en la lista. Elija las pistas que quiere con el ratón y suelte el ratón "
+"encima del número o del sitio en la lista en que desea que estén esos "
+"archivos en la cola."
 
 #: C/play-queue.page:68(title)
-#, fuzzy
-#| msgid "Removing Tracks from the Play Queue"
 msgid "Removing tracks from the <gui>Play Queue</gui>"
-msgstr "Quitar pistas de la cola de reproducción"
+msgstr "Quitar pistas de la <gui>Cola de reproducción</gui>"
 
 #: C/play-queue.page:70(p)
-#, fuzzy
-#| msgid ""
-#| "You can remove an individual track, a group of tracks, or clear your "
-#| "entire play queue."
 msgid ""
 "You can remove an individual track, a group of tracks, or clear your entire "
 "<gui>Play Queue</gui>:"
 msgstr ""
-"Puede quitar una pista individual, un grupo de pistas o limpiar la cola de "
-"reproducción completa."
+"Puede quitar una pista individual, un grupo de pistas, o limpiar la "
+"<gui>Cola de reproducción</gui> completa."
 
 #: C/play-queue.page:75(p)
-#, fuzzy
-#| msgid ""
-#| "To remove an individual track or group of tracks, select the track with "
-#| "your mouse and then press <key>Delete</key>."
 msgid ""
 "To remove an individual track, select the track with your mouse and then "
 "press <key>Delete</key>."
 msgstr ""
-"Para quitar una pista individual o un grupo de pistas, seleccione la pista "
-"con su ratón y pulse <key>Supr</key>."
+"Para quitar una pista individual, seleccione la pista con su ratón y luego "
+"pulse <key>Supr</key>."
 
 #: C/play-queue.page:79(p)
-#, fuzzy
-#| msgid ""
-#| "To remove an individual track or group of tracks, select the track with "
-#| "your mouse and then press <key>Delete</key>."
 msgid ""
 "To remove multiple tracks, select each track with your mouse while holding "
 "down <key>Ctrl</key>. Once all the desired tracks have been selected, press "
 "<key>Delete</key>."
 msgstr ""
-"Para quitar una pista individual o un grupo de pistas, seleccione la pista "
-"con su ratón y pulse <key>Supr</key>."
+"Para quitar varias pistas, seleccione cada pista con su ratón mientras "
+"mantiene pulsada la tecla <key>Ctrl</key>. Una vez que ha seleccionado todas "
+"las pistas que quiere quitar, pulse <key>Supr</key>."
 
 #: C/play-queue.page:83(p)
 msgid ""
 "If you accidentally select a track you do not want to remove, hold down "
 "<key>Ctrl</key> and select the track again with your mouse, to unselect it."
 msgstr ""
+"Si accidentalmente selecciona una pista que no quería quitar, mantenga "
+"pulsado <key>Ctrl</key> y seleccione la pista nuevamente con su ratón, para "
+"deseleccionarla."
 
 #: C/play-queue.page:89(p)
-#, fuzzy
-#| msgid ""
-#| "To clear your entire Play Queue, press the <gui style=\"button\">Clear</"
-#| "gui> button in the upper right hand corner of the Play Queue."
 msgid ""
 "To clear your entire <gui>Play Queue</gui>, press the <gui style=\"button"
 "\">Clear</gui> button in the upper right hand corner of the <gui>Play Queue</"
 "gui> or press <keyseq><key>Ctrl</key><key>A</key></keyseq> and press "
 "<key>Delete</key>."
 msgstr ""
-"Para limpiar la cola de reproducción completa, pulse el botón <gui style="
-"\"button\">Limpiar</gui> en la esquina superior derecha de la cola de "
-"reproducción."
+"Para limpiar su <gui>Cola de reproducción</gui> completa, pulse el botón "
+"<gui style=\"button\">Limpiar</gui> en la esquina superior derecha de la "
+"<gui>cola de reproducción</gui> o pulse <keyseq><key>Ctrl</key><key>A</key></"
+"keyseq> y pulse <key>Supr</key>."
 
 #: C/manage-tags.page:9(desc)
 msgid "Edit and change music tags and metadata."
@@ -1564,8 +1480,6 @@ msgstr ""
 "colección."
 
 #: C/manage-tags.page:40(title)
-#, fuzzy
-#| msgid "Edit Your Metadata"
 msgid "Edit your metadata"
 msgstr "Editar sus metadatos"
 
@@ -1672,8 +1586,6 @@ msgstr ""
 "escucha, su música favorita y más."
 
 #: C/manage-playlists.page:32(title)
-#, fuzzy
-#| msgid "Normal Playlists"
 msgid "Normal playlists"
 msgstr "Listas de reproducción normales"
 
@@ -1761,8 +1673,6 @@ msgstr ""
 "style=\"menuitem\">Quitar de la lista de reproducción</gui>."
 
 #: C/manage-playlists.page:76(title)
-#, fuzzy
-#| msgid "Smart Playlist"
 msgid "Smart playlist"
 msgstr "Lista de reproducción inteligente"
 
