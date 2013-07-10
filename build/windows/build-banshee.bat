@@ -2,7 +2,12 @@
 SET v40-30319="%WINDIR%\Microsoft.NET\Framework\v4.0.30319\msbuild"
 SET v35="%WINDIR%\Microsoft.NET\Framework\v3.5\msbuild"
 
-CD ..\..
+SET SOLUTION="Banshee.sln"
+
+IF EXIST "..\..\%SOLUTION%" (
+	CD ..\..
+)
+
 ECHO "Looking for Microsoft.NET MSBuild..."
 IF EXIST %v40-30319% (
 	ECHO "Building with Microsoft.NET v4.0 MSBuild"
@@ -15,7 +20,7 @@ IF EXIST %v40-30319% (
 	GOTO END
 )
 
-%MSBUILD_PATH% Banshee.sln /p:Configuration=Windows /p:Platform="Any CPU" && ^
+%MSBUILD_PATH% %SOLUTION% /p:Configuration=Windows /p:Platform="Any CPU" && ^
 ECHO 'Running "post-build.bat"' && ^
 build\windows\post-build.bat && ^
 CD build\windows
