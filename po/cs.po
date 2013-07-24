@@ -6676,7 +6676,7 @@ msgstr "Přihlásit se k novému podcastu"
 
 #: ../src/Extensions/Banshee.Podcasting/Banshee.Podcasting.Gui/PodcastActions.cs:93
 msgid "Unsubscribe and Delete"
-msgstr "Odhlásit se a odstranit"
+msgstr "Odhlásit a odstranit"
 
 #: ../src/Extensions/Banshee.Podcasting/Banshee.Podcasting.Gui/PodcastActions.cs:99
 msgid "Check for New Episodes"
