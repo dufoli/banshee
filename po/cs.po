@@ -5672,7 +5672,7 @@ msgstr "Název stanice:"
 
 #: ../src/Extensions/Banshee.InternetRadio/Banshee.InternetRadio/StationEditor.cs:121
 msgid "Stream URL:"
-msgstr "Adresa URL proudu:"
+msgstr "Adresa URL vysílání:"
 
 #: ../src/Extensions/Banshee.InternetRadio/Banshee.InternetRadio/StationEditor.cs:122
 msgid "Station Creator:"
