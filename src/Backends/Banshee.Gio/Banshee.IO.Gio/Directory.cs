@@ -59,7 +59,7 @@ namespace Banshee.IO.Gio
 
         internal static bool DisableNativeOptimizations = false;
 
-        private void Delete (string directory, GLib.File dir, bool recursive)
+        private void Delete (string directory, GLib.IFile dir, bool recursive)
         {
             if (!dir.Exists) {
                 return;
@@ -88,12 +88,12 @@ namespace Banshee.IO.Gio
             dir.Delete ();
         }
 
-        private static GLib.File GetDir (string directory)
+        private static GLib.IFile GetDir (string directory)
         {
             return GetDir (directory, directory.Contains ("://"));
         }
 
-        private static GLib.File GetDir (string directory, bool directoryIsUri)
+        private static GLib.IFile GetDir (string directory, bool directoryIsUri)
         {
             return directoryIsUri ? FileFactory.NewForUri (directory) : FileFactory.NewForPath (directory);
         }
@@ -113,7 +113,7 @@ namespace Banshee.IO.Gio
             return GetFiles (GetDir (directory), true);
         }
 
-        private IEnumerable<SafeUri> GetFiles (GLib.File dir, bool followSymlinks)
+        private IEnumerable<SafeUri> GetFiles (GLib.IFile dir, bool followSymlinks)
         {
             var enumerator = dir.EnumerateChildren ("standard::type,standard::name", followSymlinks ? FileQueryInfoFlags.None : FileQueryInfoFlags.NofollowSymlinks, null);
             foreach (FileInfo file in enumerator) {
@@ -136,7 +136,7 @@ namespace Banshee.IO.Gio
             return GetDirectories (GetDir (directory), true);
         }
 
-        private IEnumerable<SafeUri> GetDirectories (GLib.File dir, bool followSymlinks)
+        private IEnumerable<SafeUri> GetDirectories (GLib.IFile dir, bool followSymlinks)
         {
             var enumerator = dir.EnumerateChildren ("standard::type,standard::name", followSymlinks ? FileQueryInfoFlags.None : FileQueryInfoFlags.NofollowSymlinks, null);
             foreach (FileInfo file in enumerator) {

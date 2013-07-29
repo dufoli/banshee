@@ -34,7 +34,7 @@ using Hyena.Gui;
 
 namespace Banshee.Gui.TrackEditor
 {
-    public class EditorEditableUndoAdapter<T> where T : Widget, Editable
+    public class EditorEditableUndoAdapter<T> where T : Widget, IEditable
     {
         private Dictionary<EditorTrackInfo, EditableUndoAdapter<T>> undo_adapters
             = new Dictionary<EditorTrackInfo, EditableUndoAdapter<T>> ();

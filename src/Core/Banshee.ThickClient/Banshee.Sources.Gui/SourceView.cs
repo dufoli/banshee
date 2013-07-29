@@ -408,7 +408,7 @@ namespace Banshee.Sources.Gui
         private bool OnCursorChangedTimeout ()
         {
             TreeIter iter;
-            TreeModel model;
+            ITreeModel model;
 
             current_timeout = -1;
 

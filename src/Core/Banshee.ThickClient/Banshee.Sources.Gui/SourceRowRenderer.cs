@@ -46,7 +46,7 @@ namespace Banshee.Sources.Gui
         {
         }
 
-        public static void CellDataHandler (CellLayout layout, CellRenderer cell, TreeModel model, TreeIter iter)
+        public static void CellDataHandler (ICellLayout layout, CellRenderer cell, ITreeModel model, TreeIter iter)
         {
             SourceRowRenderer renderer = cell as SourceRowRenderer;
             if (renderer == null) {
@@ -327,7 +327,7 @@ namespace Banshee.Sources.Gui
             return area.Y + (int)Math.Round ((double)(area.Height - height) / 2.0, MidpointRounding.AwayFromZero);
         }
 
-        protected override CellEditable OnStartEditing (Gdk.Event evnt, Widget widget, string path,
+        protected override ICellEditable OnStartEditing (Gdk.Event evnt, Widget widget, string path,
             Gdk.Rectangle background_area, Gdk.Rectangle cell_area, CellRendererState flags)
         {
             CellEditEntry text = new CellEditEntry ();

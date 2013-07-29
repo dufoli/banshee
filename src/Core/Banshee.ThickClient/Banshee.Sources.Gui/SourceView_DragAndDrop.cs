@@ -91,9 +91,9 @@ namespace Banshee.Sources.Gui
 
             // Scroll if within 20 pixels of the top or bottom
             if (y < 20)
-                ((Scrollable)this).Vadjustment.Value -= 30;
+                ((IScrollable)this).Vadjustment.Value -= 30;
             else if ((Allocation.Height - y) < 20)
-                ((Scrollable)this).Vadjustment.Value += 30;
+                ((IScrollable)this).Vadjustment.Value += 30;
 
             ShowNewPlaylistUnder (parent_source, active_source);
 

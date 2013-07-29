@@ -42,7 +42,7 @@ using Banshee.ServiceStack;
 
 namespace Banshee.Collection.Gui
 {
-    class ColumnCellStatusIndicatorAccessible : ColumnCellAccessible, Atk.ImageImplementor
+    class ColumnCellStatusIndicatorAccessible : ColumnCellAccessible, Atk.IImageImplementor
     {
         private string image_description;
 

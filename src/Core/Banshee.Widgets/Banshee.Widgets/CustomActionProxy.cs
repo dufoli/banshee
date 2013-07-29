@@ -117,7 +117,7 @@ namespace Banshee.Widgets
                 }
             }
 
-            var activatable = item as Activatable;
+            var activatable = item as IActivatable;
             if (activatable != null) {
                 activatable.RelatedAction = action;
             }

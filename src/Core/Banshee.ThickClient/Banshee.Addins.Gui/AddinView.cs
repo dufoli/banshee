@@ -129,7 +129,7 @@ namespace Banshee.Addins.Gui
                     bool enabled = (bool) model.GetValue (iter, 1);
                     addin.Enabled = !enabled;
                     model.SetValue (iter, 1, addin.Enabled);
-                    model.Foreach (delegate (TreeModel current_model, TreePath path, TreeIter current_iter) {
+                    model.Foreach (delegate (ITreeModel current_model, TreePath path, TreeIter current_iter) {
                         var an = current_model.GetValue (current_iter, 3) as Addin;
                         if (an != null) {
                             current_model.SetValue (current_iter, 1, an.Enabled);

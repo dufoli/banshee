@@ -35,7 +35,7 @@ namespace Banshee.IO.Gio
 {
     public class DemuxVfs : IDemuxVfs
     {
-        private GLib.File file;
+        private GLib.IFile file;
 
         public DemuxVfs (string path)
         {

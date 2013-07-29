@@ -110,7 +110,7 @@ namespace Banshee.Gui
             if (File.Exists (user_css) && !ApplicationContext.CommandLine.Contains ("no-gtkcss")) {
                 custom_provider = new Gtk.CssProvider ();
                 custom_provider.LoadFromPath (user_css);
-                Gtk.StyleContext.AddProviderForScreen (Gdk.Screen.Default, (Gtk.StyleProvider)custom_provider,
+                Gtk.StyleContext.AddProviderForScreen (Gdk.Screen.Default, (Gtk.IStyleProvider)custom_provider,
                                                        600 /* GTK_STYLE_PROVIDER_PRIORITY_APPLICATION*/ );
             }
 
