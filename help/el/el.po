@@ -1,173 +1,214 @@
 # Copyright (C) 2010 banshee's COPYRIGHT HOLDER
 # This file is distributed under the same license as the banshee package.
 # Michael Kotsarinis <mk73628@gmail.com>, 2010, 2011.
+# Dimitris Spingos (Δημήτρης Σπίγγος) <dmtrs32@gmail.com>, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: banshee master\n"
-"POT-Creation-Date: 2011-01-02 12:09+0000\n"
-"PO-Revision-Date: 2011-01-15 09:12+0300\n"
-"Last-Translator: Michael Kotsarinis <mk73628@gmail.com>\n"
-"Language-Team: Greek team\n"
+"POT-Creation-Date: 2013-08-03 23:28+0000\n"
+"PO-Revision-Date: 2013-08-05 09:22+0300\n"
+"Last-Translator: Dimitris Spingos (Δημήτρης Σπίγγος) <dmtrs32@gmail.com>\n"
+"Language-Team: team@gnome.gr\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Virtaal 0.5.2\n"
+"X-Generator: Virtaal 0.7.1\n"
 "X-Poedit-Language: Greek\n"
 "X-Poedit-Country: GREECE\n"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
-#: C/ui.page:29(None) C/introduction.page:45(None)
-msgid "@@image: 'figures/banshee.png'; md5=THIS FILE DOESN'T EXIST"
-msgstr "@@image: 'figures/banshee.png'; md5=THIS FILE DOESN'T EXIST"
+#: C/ui.page:35(None) C/introduction.page:44(None)
+msgid ""
+"@@image: 'figures/main-window.png'; md5=a4b2814f0dce9333bceb0d05e910a796"
+msgstr ""
+"@@image: 'figures/main-window.png'· md5=a4b2814f0dce9333bceb0d05e910a796"
 
-#: C/ui.page:8(desc)
-msgid "An overview of <app>Banshee's</app> user interface."
-msgstr "Μια επισκόπηση της διεπαφής χρήστη του <app>Banshee</app>"
+#: C/ui.page:9(desc)
+msgid "An overview of the <app>Banshee</app> user interface."
+msgstr "Μια επισκόπηση της διεπαφής χρήστη του <app>Banshee</app>."
 
 #: C/ui.page:12(name) C/sync.page:12(name) C/sort.page:12(name)
-#: C/search.page:12(name) C/play.page:12(name) C/play-queue.page:12(name)
-#: C/manage-tags.page:13(name) C/manage-playlists.page:13(name)
-#: C/manage-coverart.page:12(name) C/lastfm.page:12(name)
-#: C/keyboardshortcuts.page:10(name) C/introduction.page:12(name)
-#: C/index.page:9(name) C/import.page:11(name) C/extensions.page:11(name)
-#: C/amazon.page:12(name) C/advanced.page:11(name) C/add-radio.page:14(name)
-#: C/add-podcast.page:14(name)
+#: C/search.page:12(name) C/radio.page:14(name) C/podcast.page:15(name)
+#: C/play.page:14(name) C/play-queue.page:18(name) C/manage-tags.page:12(name)
+#: C/manage-playlists.page:12(name) C/lastfm.page:12(name)
+#: C/keyboard-shortcuts.page:10(name) C/introduction.page:10(name)
+#: C/index.page:11(name) C/import.page:12(name) C/extensions.page:11(name)
+#: C/amazon.page:11(name)
 msgid "Paul Cutler"
 msgstr "Paul Cutler"
 
 #: C/ui.page:13(email) C/sync.page:13(email) C/sort.page:13(email)
-#: C/search.page:13(email) C/play.page:13(email) C/play-queue.page:13(email)
-#: C/manage-tags.page:14(email) C/manage-playlists.page:14(email)
-#: C/manage-coverart.page:13(email) C/lastfm.page:13(email)
-#: C/keyboardshortcuts.page:11(email) C/introduction.page:13(email)
-#: C/index.page:10(email) C/import.page:12(email) C/extensions.page:12(email)
-#: C/amazon.page:13(email) C/advanced.page:12(email)
-#: C/add-radio.page:15(email) C/add-podcast.page:15(email)
+#: C/search.page:13(email) C/radio.page:15(email) C/podcast.page:16(email)
+#: C/play.page:15(email) C/play-queue.page:19(email)
+#: C/manage-tags.page:13(email) C/manage-playlists.page:13(email)
+#: C/lastfm.page:13(email) C/keyboard-shortcuts.page:11(email)
+#: C/introduction.page:11(email) C/index.page:12(email)
+#: C/import.page:13(email) C/extensions.page:12(email) C/amazon.page:12(email)
 msgid "pcutler@gnome.org"
 msgstr "pcutler@gnome.org"
 
-#: C/ui.page:24(title)
-msgid "Introduction to the Banshee User Interface"
-msgstr "Εισαγωγή στη διεπαφή χρήστη του Banshee"
+#: C/ui.page:16(name) C/sync.page:16(name) C/sort.page:16(name)
+#: C/radio.page:18(name) C/play.page:22(name) C/play-queue.page:13(name)
+#: C/lastfm.page:16(name) C/introduction.page:14(name) C/index.page:19(name)
+#: C/import.page:20(name) C/amazon.page:15(name)
+msgid "Aruna Sankaranarayanan"
+msgstr "Aruna Sankaranarayanan"
 
-#: C/ui.page:27(title) C/introduction.page:43(title)
+#: C/ui.page:17(email) C/sync.page:17(email) C/sort.page:17(email)
+#: C/search.page:17(email) C/radio.page:19(email) C/play.page:23(email)
+#: C/play-queue.page:14(email) C/lastfm.page:17(email)
+#: C/introduction.page:15(email) C/index.page:20(email)
+#: C/import.page:21(email) C/amazon.page:16(email)
+msgid "aruna.evam@gmail.com"
+msgstr "aruna.evam@gmail.com"
+
+#: C/ui.page:29(title)
+msgid "The <app>Banshee</app> user interface"
+msgstr "Η διεπαφή χρήστη του <app>Banshee</app>"
+
+#: C/ui.page:32(title) C/introduction.page:41(title)
 msgid "<gui>Banshee Media Player</gui> window"
 msgstr "Παράθυρο <gui>Αναπαραγωγή πολυμέσων Banshee</gui>"
 
-#: C/ui.page:28(app) C/introduction.page:44(app) C/index.page:21(title)
+#: C/ui.page:33(app) C/introduction.page:42(app)
 msgid "Banshee Media Player"
 msgstr "Αναπαραγωγή πολυμέσων Banshee"
 
-#: C/ui.page:30(p) C/introduction.page:46(p)
+#: C/ui.page:36(p) C/introduction.page:45(p)
 msgid "<app>Banshee</app> library interface"
 msgstr "Διεπαφή βιβλιοθήκης <app>Banshee</app>"
 
-#: C/ui.page:35(title)
+#: C/ui.page:41(title)
 msgid "Sources"
 msgstr "Πηγές"
 
-#: C/ui.page:36(p)
+#: C/ui.page:43(p)
 msgid ""
-"Your music and video sources are shown on the left in Banshee. The sources "
-"give you quick access to your Play Queue, Music, Videos, Amazon, Last.fm, "
-"Podcasts and more."
+"Your music and video sources are shown on the left in <app>Banshee</app>. "
+"The sources give you quick access to your <gui>Play Queue</gui>, <gui>Music</"
+"gui>, <gui>Videos</gui>, <gui>Amazon MP3 Store</gui>, <gui>Last.fm</gui>, "
+"<gui>Podcasts</gui> and more."
 msgstr ""
 "Οι πηγές για τη μουσική και τα βίντεό σας εμφανίζονται στα αριστερά στο "
-"Banshee. Οι πηγές σας δίνουν γρήγορη πρόσβαση στη Σειρά αναπαραγωγής σας, "
-"στη Μουσική, στα Βίντεο, στο Amazon, στο Last.fm, στις Φορητές εκπομπές "
-"(Podcasts) και άλλα."
+"<app>Banshee</app>. Οι πηγές σας δίνουν γρήγορη πρόσβαση στη <gui>Σειρά "
+"αναπαραγωγής</gui>, στη <gui>Μουσική</gui>, στα <gui>Βίντεο</gui>, στο "
+"<gui>Κατάστημα MP3 του Amazon</gui>, στο <gui>Last.fm</gui>, στις "
+"<gui>Φορητές εκπομπές</gui> και άλλα."
 
-#: C/ui.page:42(p)
+#: C/ui.page:49(p)
 msgid ""
 "The menu choices will change depending on the source you have chosen. For "
-"example, to use the menu to import a Podcast, you will need to choose the "
-"Podcast source. The menu option for importing a Podcast is not available "
-"when viewing the video or music library."
+"example, to use the menu to import a podcast, you will need to choose the "
+"<gui>Podcasts</gui> source. The menu option for importing a podcast is not "
+"available when viewing the video or music library."
 msgstr ""
 "Οι επιλογές του μενού θα αλλάζουν ανάλογα με την πηγή που έχετε επιλέξει. "
 "Παραδείγματος χάριν, για να χρησιμοποιήσετε το μενού για την εισαγωγή μιας "
-"φορητής εκπομπής (podcast), πρέπει να επιλέξετε την πηγή Φορητές εκπομπές. Η "
-"επιλογή του μενού για εισαγωγή φορητής εκπομπής δεν είναι διαθέσιμη όταν "
-"βλέπετε τη βιβλιοθήκη των βίντεο ή της μουσικής."
-
-#: C/ui.page:50(title)
-msgid "Library Browser"
-msgstr "Περιηγητής βιβλιοθήκης"
-
-#: C/ui.page:51(p)
-msgid ""
-"When you select a music or video source from Sources, Banshee will display "
-"your content in the Library browser. Depending on the source you choose, "
-"Banshee can display your music or video library, Podcast subscriptions or "
-"even the Amazon Music Store to allow you to buy music."
-msgstr ""
-"Όταν επιλέγετε μια πηγή μουσικής ή βίντεο από τις πηγές σας, το Banshee θα "
-"εμφανίσει το περιεχόμενό σας στον περιηγητή βιβλιοθήκης. Ανάλογα με την πηγή "
-"που επιλέγετε, το Banshee μπορεί να εμφανίσει τη βιβλιοθήκη σας μουσικής ή "
-"βίντεο ή ακόμα το κατάστημα μουσικής του Amazon για να σας επιτρέψει να "
-"αγοράσετε μουσική."
+"φορητής εκπομπής (podcast), πρέπει να επιλέξετε την πηγή <gui>Φορητές "
+"εκπομπές</gui>. Η επιλογή του μενού για εισαγωγή φορητής εκπομπής δεν είναι "
+"διαθέσιμη όταν βλέπετε τη βιβλιοθήκη των βίντεο ή της μουσικής."
 
 #: C/ui.page:58(title)
-msgid "Now Playing View"
-msgstr "Προβολή τρέχουσας αναπαραγωγής"
+msgid "Library browser"
+msgstr "Περιηγητής βιβλιοθήκης"
 
-#: C/ui.page:59(p)
+#: C/ui.page:60(p)
 msgid ""
-"Helpful when using Banshee in full screen mode, the Now Playing mode hides "
-"the library to give you a larger view of the music or video you're watching. "
-"When listening to music, the Now Playing view will show you the artist name, "
-"album and cover art if available. If you are watching a video, Banshee will "
-"display the video."
+"When you select a music or video source from Sources, <app>Banshee</app> "
+"will display your content in the library browser. Depending on the source "
+"you choose, <app>Banshee</app> can display your music or video library, "
+"podcast subscriptions or even the Amazon Music Store to allow you to buy "
+"music."
 msgstr ""
-"Βοηθάει όταν χρησιμοποιείτε το Banshee σε κατάσταση πλήρους οθόνης, η "
-"κατάσταση τρέχουσας αναπαραγωγής αποκρύπτει τη βιβλιοθήκη για να σας δώσει "
-"μια μεγαλύτερη προβολή της μουσικής ή του βίντεο που παρακολουθείτε. Όταν "
-"ακούτε μουσική, η προβολή τρέχουσας αναπαραγωγής θα εμφανίσει το όνομα του "
-"καλλιτέχνη, το δίσκο και το εξώφυλλο, αν είναι διαθέσιμα. Αν παρακολουθείτε "
-"βίντεο το Banshee θα εμφανίσει το βίντεο."
+"Όταν επιλέγετε μια πηγή μουσικής ή βίντεο από τις πηγές σας, το "
+"<app>Banshee</app> θα εμφανίσει το περιεχόμενό σας στον περιηγητή "
+"βιβλιοθήκης. Ανάλογα με την πηγή που επιλέγετε, το <app>Banshee</app> μπορεί "
+"να εμφανίσει τη βιβλιοθήκη σας μουσικής ή βίντεο ή ακόμα το κατάστημα "
+"μουσικής του Amazon για να σας επιτρέψει να αγοράσετε μουσική."
 
-#: C/ui.page:65(p)
-#| msgid ""
-#| "To change Now Playing to hide the Banshee user interface and use the full "
-#| "screen mode, you can press the <key>F</key>, press the <gui>Fullscreen</"
-#| "gui> button in the upper right hand corner of Banshee, or choose "
-#| "<guiseq>View<gui/>Fullscreen<gui/></guiseq> to start Fullscreen mode."
+#: C/ui.page:68(title)
+msgid "<gui>Now Playing</gui> view"
+msgstr "Προβολή <gui>τρέχουσας αναπαραγωγής</gui>"
+
+#: C/ui.page:70(p)
 msgid ""
-"To change Now Playing to hide the Banshee user interface and use the full "
-"screen mode, you can press the <key>F</key>, press the <gui>Fullscreen</gui> "
-"button in the upper right hand corner of Banshee, or choose "
-"<guiseq><gui>View</gui><gui>Fullscreen</gui></guiseq> to start Fullscreen "
-"mode."
+"Helpful when using <app>Banshee</app> in full screen mode, the <gui>Now "
+"Playing</gui> mode hides the library to give you a larger view of the music "
+"or video you are watching. When listening to music, the <gui>Now Playing</"
+"gui> view will show you the artist name, album and cover art if available. "
+"If you are watching a video, <app>Banshee</app> will display the video."
 msgstr ""
-"Για να αλλάξετε την τρέχουσα αναπαραγωγή για να αποκρυφτεί η διεπαφή χρήστη "
-"του Banshee και να χρησιμοποιηθεί η κατάσταση πλήρους οθόνης, πατήστε το "
-"<key>F</key> ή το κουμπί <gui>Πλήρης οθόνη</gui> στην πάνω δεξιά γωνία του "
-"Banshee ή επιλέξτε <guiseq>Προβολή<gui/>Πλήρης οθόνη<gui/></guiseq> για να "
-"αρχίσετε την κατάσταση πλήρους οθόνης."
+"Βοηθάει όταν χρησιμοποιείτε το <app>Banshee</app> σε κατάσταση πλήρους "
+"οθόνης, η κατάσταση <gui>τρέχουσας αναπαραγωγής</gui> αποκρύπτει τη "
+"βιβλιοθήκη για να σας δώσει μια μεγαλύτερη προβολή της μουσικής ή του βίντεο "
+"που παρακολουθείτε. Όταν ακούτε μουσική, η προβολή <gui>τρέχουσας "
+"αναπαραγωγής</gui> θα εμφανίσει το όνομα του καλλιτέχνη, τον δίσκο και το "
+"εξώφυλλο, αν είναι διαθέσιμα. Αν παρακολουθείτε βίντεο το <app>Banshee</app> "
+"θα εμφανίσει το βίντεο."
 
-#: C/ui.page:74(title)
-msgid "Library"
-msgstr "Βιβλιοθήκη"
-
-#: C/ui.page:75(p)
+#: C/ui.page:77(p)
 msgid ""
-"The Library view in Banshee will change depending on the Source you have "
-"chosen. The Music Library will display cover art, artists in your library, "
-"and list of songs. The Podcast Library will display your Podcast "
-"subscriptions, podcasts that are downloaded or not downloaded, and all, new "
-"or old podcasts. Please see each Source's help page for detailed information "
+"To change the <gui>Now Playing</gui> mode to hide the <app>Banshee</app> "
+"user interface and view your media in full screen mode instead, you can do "
+"any of the following:"
+msgstr ""
+"Για αλλαγή της κατάστασης <gui>τρέχουσας αναπαραγωγής</gui> για να κρύψετε "
+"τη διεπαφή χρήστη του <app>Banshee</app> και να προβάλετε τα μέσα σας σε "
+"κατάσταση πλήρους οθόνης, μπορείτε να κάνετε οποιοδήποτε από τα παρακάτω:"
+
+#: C/ui.page:83(p)
+msgid "Double-click the view with your mouse."
+msgstr "Διπλοπατήστε την προβολή με το ποντίκι σας."
+
+#: C/ui.page:86(p)
+msgid "Press <key>F</key>."
+msgstr "Πατήστε <key>F</key>."
+
+#: C/ui.page:89(p)
+msgid "Press <key>F11</key>."
+msgstr "Πατήστε <key>F11</key>."
+
+#: C/ui.page:92(p)
+msgid ""
+"Press the <gui style=\"button\">Fullscreen</gui> button in the upper right "
+"hand corner of <app>Banshee</app>."
+msgstr ""
+"Πατήστε το κουμπί <gui style=\"button\">Πλήρης οθόνη</gui> στην πάνω δεξιά "
+"γωνία του <app>Banshee</app>."
+
+#: C/ui.page:96(p)
+msgid ""
+"Select <guiseq><gui style=\"menu\">View</gui><gui style=\"menuitem"
+"\">Fullscreen</gui></guiseq>."
+msgstr ""
+"Επιλέξτε <guiseq><gui style=\"menu\">Προβολή</gui><gui style=\"menuitem\">Πλήρης "
+"οθόνη</gui></guiseq>."
+
+#: C/ui.page:104(title)
+msgid "Libraries"
+msgstr "Βιβλιοθήκες"
+
+#: C/ui.page:106(p)
+msgid ""
+"The <gui>Libraries</gui> view in <app>Banshee</app> will change depending on "
+"the Source you have chosen. For example, the <gui>Music</gui> library will "
+"display cover art, artists in your library, and list of songs and the "
+"<gui>Podcasts</gui> library will display your podcast subscriptions, "
+"podcasts that are downloaded or not downloaded, and all, new or old "
+"podcasts. Please see the help page of each source for detailed information "
 "on managing a source."
 msgstr ""
-"Η προβολή βιβλιοθήκης στο Banshee θα αλλάξει ανάλογα με την πηγή που έχετε "
-"επιλέξει. Η βιβλιοθήκη μουσικής θα εμφανίσει εξώφυλλο, καλλιτέχνες στη "
-"βιβλιοθήκη σας και λίστα τραγουδιών. Η βιβλιοθήκη φορητών εκπομπών θα "
-"εμφανίσει τις συνδρομές σας σε φορητές εκπομπές, εκπομπές που έχουν ή δεν "
-"έχουν μεταφορτωθεί και όλες, τις νέες ή τις παλιές εκπομπές. Παρακαλούμε "
-"δείτε τη σελίδα βοήθειας κάθε πηγής για λεπτομερείς πληροφορίες για τη "
-"διαχείρισή της."
+"Η προβολή <gui>βιβλιοθήκες</gui> στο <app>Banshee</app> θα αλλάξει ανάλογα "
+"με την πηγή που έχετε επιλέξει. Για παράδειγμα, η βιβλιοθήκη "
+"<gui>μουσική</gui> θα εμφανίσει εξώφυλλο, καλλιτέχνες στη βιβλιοθήκη σας και "
+"λίστα τραγουδιών και η βιβλιοθήκη <gui>Φορητών εκπομπών</gui> θα εμφανίσει "
+"τις συνδρομές σας σε φορητές εκπομπές, εκπομπές που έχουν ή δεν έχουν "
+"μεταφορτωθεί και όλες, τις νέες ή τις παλιές εκπομπές. Παρακαλούμε, δείτε τη "
+"σελίδα βοήθειας κάθε πηγής για λεπτομερείς πληροφορίες για τη διαχείρισή "
+"μιας πηγής."
 
 #: C/sync.page:9(desc)
 msgid "Sync your media to a portable media player or smartphone."
@@ -175,230 +216,239 @@ msgstr ""
 "Συγχρονίστε τα πολυμέσα σας με μια φορητή συσκευή αναπαραγωγής ή ένα έξυπνο "
 "κινητό."
 
-#: C/sync.page:24(title)
+#: C/sync.page:28(title)
 msgid "Sync"
 msgstr "Συγχρονισμός"
 
-#: C/sync.page:26(p)
+#: C/sync.page:30(p)
 msgid ""
-"Banshee supports syncing your music to portable media players and "
+"<app>Banshee</app> supports syncing your music to portable media players and "
 "smartphones. You can add specific music tracks, albums or playlist or allow "
-"Banshee to keep your music player in sync with your entire library. After "
-"your player is connected to your computer you can also play back the songs "
-"on your portable player in Banshee. When syncing music in a lossless format, "
-"such as FLAC, Banshee will automatically transcode your music for you to a "
-"lossy format such as Ogg Vorbis or MP3, if you have the correct codecs "
-"installed."
+"<app>Banshee</app> to keep your music player in sync with your entire "
+"library. After your player is connected to your computer you can also play "
+"back the songs on your portable player in <app>Banshee</app>. When syncing "
+"music in a lossless format, such as FLAC, <app>Banshee</app> will "
+"automatically transcode your music for you to a lossy format such as Ogg "
+"Vorbis or MP3, if you have the correct codecs installed."
 msgstr ""
-"Το Banshee υποστηρίζει το συγχρονισμό της μουσικής σας με φορητούς "
-"αναπαραγωγείς και κινητά. Μπορείτε να προσθέσετε συγκεκριμένα μουσικά "
-"κομμάτια, δίσκους ή λίστες αναπαραγωγής ή να επιτρέψετε στο Banshee να "
-"συγχρονίσει τη συσκευή σας με ολόκληρη τη βιβλιοθήκη σας. Αφού η συσκευή σας "
-"συνδεθεί στον υπολογιστή σας μπορείτε επίσης να αναπαράγετε τα τραγούδια που "
-"είναι σε αυτή μέσω του Banshee. Όταν συγχρονίζετε μουσική σε μη απωλεστική "
-"μορφή, όπως το FLAC, το Banshee αυτόματα θα μετατρέψει τη μουσική σας σε μια "
+"Το <app>Banshee</app> υποστηρίζει το συγχρονισμό της μουσικής σας με "
+"φορητούς αναπαραγωγείς μέσων και έξυπνα κινητά. Μπορείτε να προσθέσετε "
+"συγκεκριμένα μουσικά κομμάτια, δίσκους ή λίστες αναπαραγωγής ή να επιτρέψετε "
+"στο <app>Banshee</app> να συγχρονίσει τη συσκευή σας με ολόκληρη τη "
+"βιβλιοθήκη σας. Αφού η συσκευή σας συνδεθεί στον υπολογιστή σας μπορείτε "
+"επίσης να αναπαράγετε τα τραγούδια που είναι σε αυτή μέσω του "
+"<app>Banshee</app>. Όταν συγχρονίζετε μουσική σε μη απωλεστική μορφή, όπως "
+"το FLAC, το <app>Banshee</app> αυτόματα θα μετατρέψει τη μουσική σας σε μια "
 "απωλεστική μορφή, όπως το Ogg Vorbis ή το MP3, αν έχετε τους σωστούς "
-"κωδικοποιητές εγκατεστημένους."
+"κωδικοποιητές-αποκωδικοποιητές εγκατεστημένους."
 
-#: C/sync.page:37(title)
-msgid "Device Support"
+#: C/sync.page:40(title)
+msgid "Device support"
 msgstr "Υποστήριξη συσκευών"
-
-#: C/sync.page:38(p)
-msgid ""
-"Banshee supports almost all modern portable music players and smartphones "
-"with the notable exception of the Apple iPhone, iPad and iPod Touch."
-msgstr ""
-"Το Banshee υποστηρίζει σχεδόν όλες τις σύγχρονες φορητές συσκευές "
-"αναπαραγωγής και τα «έξυπνα» κινητά με την αξιοσημείωτη εξαίρεση των iPhone, "
-"iPad και iPod Touch της Apple."
 
 #: C/sync.page:42(p)
 msgid ""
-"When you plug your device in, Banshee will display it in the left menu. "
-"Pressing the device icon will take you to your device home page in Banshee "
-"displaying your sync preferences."
+"<app>Banshee</app> supports almost all modern portable music players and "
+"smartphones with the notable exception of the Apple iPhone, iPad and iPod "
+"Touch."
 msgstr ""
-"Όταν συνδέσετε τη συσκευή σας, το Banshee θα την εμφανίσει στο αριστερό "
-"μενού. Πατώντας το εικονίδιο της συσκευής θα μεταφερθείτε στην αρχική της "
-"σελίδα στο Banshee όπου εμφανίζονται οι προτιμήσεις σας συγχρονισμού."
+"Το <app>Banshee</app> υποστηρίζει σχεδόν όλες τις σύγχρονες φορητές συσκευές "
+"αναπαραγωγής και τα έξυπνα κινητά με την αξιοσημείωτη εξαίρεση των iPhone, "
+"iPad και iPod Touch της Apple."
 
-#: C/sync.page:50(title)
-msgid "Sync Your Music"
-msgstr "Συγχρονίστε τη μουσική σας"
-
-#: C/sync.page:51(p)
+#: C/sync.page:46(p)
 msgid ""
-"You can choose to manage the media on your portable music by having Banshee "
-"automatically sync it or manage your music and media manually."
+"When you plug your device in, <app>Banshee</app> will display it in the left "
+"menu. Pressing the device icon will take you to your device home page in "
+"<app>Banshee</app> displaying your sync preferences."
+msgstr ""
+"Όταν συνδέσετε τη συσκευή σας, το <app>Banshee</app> θα την εμφανίσει στο "
+"αριστερό μενού. Πατώντας το εικονίδιο της συσκευής θα μεταφερθείτε στην "
+"αρχική της σελίδα στο <app>Banshee</app> όπου εμφανίζονται οι προτιμήσεις "
+"σας συγχρονισμού."
+
+#: C/sync.page:53(title)
+msgid "Sync your music"
+msgstr "Συγχρονισμός της μουσικής σας"
+
+#: C/sync.page:55(p)
+msgid ""
+"You can choose to manage the media on your portable music by having "
+"<app>Banshee</app> automatically sync it or manage your music and media "
+"manually."
 msgstr ""
 "Μπορείτε να επιλέξετε να διαχειρίζεστε τα πολυμέσα στη φορητή σας συσκευή "
-"βάζοντας το Banshee να κάνει αυτόματο συγχρονισμό ή να διαχειρίζεστε τη "
-"μουσική και τα πολυμέσα σας χειροκίνητα."
+"βάζοντας το <app>Banshee</app> να κάνει αυτόματο συγχρονισμό ή να "
+"διαχειρίζεστε τη μουσική και τα πολυμέσα σας χειροκίνητα."
 
-#: C/sync.page:56(p)
+#: C/sync.page:59(p)
 msgid ""
-"Choose your device from the Banshee menu and then choose how you want to "
-"sync your media, including:"
+"Choose your device from the <app>Banshee</app> menu and then choose how you "
+"want to sync your media, including:"
 msgstr ""
-"Επιλέξτε τη συσκευή σας από το μενού του Banshee και μετά επιλέξτε πως "
-"θέλετε να συγχρονίσετε τα πολυμέσα σας, συμπεριλαμβανομένων:"
+"Επιλέξτε τη συσκευή σας από το μενού του <app>Banshee</app> και μετά "
+"επιλέξτε πώς θέλετε να συγχρονίσετε τα πολυμέσα σας, συμπεριλαμβανομένων:"
 
-#: C/sync.page:60(p)
+#: C/sync.page:63(p)
 msgid "Music"
 msgstr "Μουσικής"
 
-#: C/sync.page:61(p)
+#: C/sync.page:64(p)
 msgid "Audiobooks"
 msgstr "Ηχογραφημένων βιβλίων"
 
-#: C/sync.page:62(p)
+#: C/sync.page:65(p)
 msgid "Videos"
 msgstr "Βίντεο"
 
-#: C/sync.page:63(p)
-msgid "Podcast"
-msgstr "Φορητών εκπομπών (podcast)"
+#: C/sync.page:66(p) C/podcast.page:31(title)
+#: C/keyboard-shortcuts.page:90(title)
+msgid "Podcasts"
+msgstr "Φορητές εκπομπές"
 
-#: C/sync.page:66(p)
+#: C/sync.page:69(p)
 msgid "From the dropdown menu next to each of the media, choose from:"
 msgstr "Από το αναπτυσσόμενο μενού δίπλα σε κάθε μέσο, επιλέξτε από:"
 
-#: C/sync.page:69(p)
+#: C/sync.page:72(p)
 msgid "Manage manually"
 msgstr "Χειροκίνητη διαχείριση"
 
-#: C/sync.page:70(p)
+#: C/sync.page:73(p)
 msgid "Sync entire library"
 msgstr "Συγχρονισμός όλης της βιβλιοθήκης"
 
-#: C/sync.page:74(p)
+#: C/sync.page:77(p)
 msgid ""
 "If you choose to sync your entire library automatically with your portable "
 "media player make sure your portable media player has enough storage space. "
 "If your library is larger than the space on your portable media player, "
-"Banshee will sync media until your player is full and then stop."
+"<app>Banshee</app> will sync media until your player is full and then stop."
 msgstr ""
 "Αν επιλέξετε να συγχρονίσετε όλη τη βιβλιοθήκη σας αυτόματα με τη φορητή "
-"συσκευή σας αναπαραγωγής βεβαιωθείτε ότι η συσκευή έχει αρκετό χώρο "
-"αποθήκευσης. Αν η βιβλιοθήκη σας είναι μεγαλύτερη από το χώρο στη συσκευή, "
-"το Banshee θα συγχρονίσει μέχρι να γεμίσει η συσκευή και μετά θα σταματήσει."
+"συσκευή σας αναπαραγωγής βεβαιωθείτε ότι η φορητή συσκευή σας έχει αρκετό "
+"χώρο αποθήκευσης. Αν η βιβλιοθήκη σας είναι μεγαλύτερη από τον χώρο στη "
+"φορητή συσκευή σας, το <app>Banshee</app> θα συγχρονίσει μέχρι να γεμίσει η "
+"συσκευή και μετά θα σταματήσει."
 
-#: C/sync.page:82(p)
+#: C/sync.page:84(p)
 msgid ""
 "If you have created playlists or smart playlists in your music library, they "
 "will also be displayed as a sync option for Music. This can be helpful when "
 "creating smart playlists, as smart playlists will automatically update as "
-"new content is added based on the playlist rules, and Banshee will sync the "
-"new playlist to your device every time you plug it in."
+"new content is added based on the playlist rules, and <app>Banshee</app> "
+"will sync the new playlist to your device every time you plug it in."
 msgstr ""
 "Αν έχετε δημιουργήσει λίστες αναπαραγωγής ή έξυπνες λίστες αναπαραγωγής στη "
 "μουσική σας βιβλιοθήκη, θα εμφανιστούν και αυτές ως επιλογή συγχρονισμού για "
 "τη μουσική. Αυτό μπορεί να βοηθά κατά τη δημιουργία έξυπνων λιστών "
 "αναπαραγωγής, καθώς αυτές θα ενημερώνονται αυτόματα κατά την προθήκη νέου "
-"περιεχόμενου με βάση τους κανόνες της λίστας και το Banshee θα συγχρονίζει "
-"τη νέα λίστα με τη συσκευή σας κάθε φορά που τη συνδέετε."
+"περιεχόμενου με βάση τους κανόνες της λίστας και το <app>Banshee</app> θα "
+"συγχρονίζει τη νέα λίστα με τη συσκευή σας κάθε φορά που τη συνδέετε."
 
-#: C/sync.page:89(p)
+#: C/sync.page:90(p)
 msgid ""
-"Banshee will display the total hard drive space of your portable music "
-"player in a graph in the bottom center of Banshee. The graph will show you "
-"how much space is taken by audio files, video, other and free space. "
-"Directly below that Banshee will show you how many total items are stored on "
-"your portable music player, how many hours or days of listening that is "
-"equal to, and total space used."
+"<app>Banshee</app> will display the total hard drive space of your portable "
+"music player in a graph in the bottom center of <app>Banshee</app>. The "
+"graph will show you how much space is taken by audio files, video, other and "
+"free space. Directly below that <app>Banshee</app> will show you how many "
+"total items are stored on your portable music player, how many hours or days "
+"of listening that is equal to, and total space used."
 msgstr ""
-"Το Banshee θα εμφανίσει το συνολικό χώρο του σκληρού δίσκου της φορητής "
-"συσκευής σας αναπαραγωγής με ένα γράφημα στο κέντρο και κάτω στο Banshee. Το "
-"γράφημα θα σας δείξει πόσος χώρος καταλαμβάνεται από αρχεία ήχου, βίντεο και "
-"άλλα και τον ελεύθερο χώρο. Ακριβώς από κάτω το Banshee θα εμφανίσει πόσα "
-"συνολικά αντικείμενα είναι αποθηκευμένα στη συσκευή σας, σε πόσες ώρες ή "
-"ημέρες ακρόασης αντιστοιχούν και το συνολικό χώρο που χρησιμοποιείται."
+"Το <app>Banshee</app> θα εμφανίσει το συνολικό χώρο του σκληρού δίσκου της "
+"φορητής συσκευής σας αναπαραγωγής με ένα γράφημα στο κέντρο και κάτω στο "
+"<app>Banshee</app>. Το γράφημα θα σας δείξει πόσος χώρος καταλαμβάνεται από "
+"αρχεία ήχου, βίντεο και άλλα και τον ελεύθερο χώρο. Ακριβώς από κάτω το "
+"<app>Banshee</app> θα εμφανίσει πόσα συνολικά στοιχεία είναι αποθηκευμένα "
+"στη συσκευή σας, σε πόσες ώρες ή ημέρες ακρόασης αντιστοιχούν και το "
+"συνολικό χώρο που χρησιμοποιείται."
 
 #: C/sync.page:100(title)
-msgid "Sync Your Entire Library"
-msgstr "Συγχρονισμός ολόκληρης της βιβλιοθήκης σας"
+msgid "Sync your entire library"
+msgstr "Συγχρονισμός όλης της βιβλιοθήκης σας"
 
-#: C/sync.page:101(p)
+#: C/sync.page:102(p)
 msgid ""
-"You can drag and drop media to your portable music player form Banshee. "
-"Select the file or files you want to copy to your portable media player and "
-"then press and hold your right mouse button and drag the file(s) to your "
-"portable media player icon in Banshee. This will copy the files to your "
-"device."
+"You can drag and drop media to your portable music player from <app>Banshee</"
+"app>. Select the file or files you want to copy to your portable media "
+"player and then press and hold your right mouse button and drag the file(s) "
+"to your portable media player icon in <app>Banshee</app>. This will copy the "
+"files to your device."
 msgstr ""
 "Μπορείτε να σύρετε και να αφήσετε μέσα στη φορητή σας συσκευή από το "
-"Banshee. Επιλέξετε το αρχεία ή τα αρχεία που θέλετε να αντιγράψετε στη "
-"φορητή σας συσκευή αναπαραγωγής και μετά πατήστε και κρατήστε πατημένο το "
-"δεξί κουμπί του ποντικού και σύρετε το αρχείο ή τα αρχεία στο εικονίδιο της "
-"φορητής σας συσκευής στο Banshee. Αυτό θα αντιγράψει τα αρχεία στη συσκευή "
-"σας."
+"<app>Banshee</app>. Επιλέξετε το αρχεία ή τα αρχεία που θέλετε να "
+"αντιγράψετε στη φορητή σας συσκευή αναπαραγωγής και μετά πατήστε και "
+"κρατήστε πατημένο το δεξί κουμπί του ποντικού και σύρετε το αρχείο ή τα "
+"αρχεία στο εικονίδιο της φορητής σας συσκευής στο <app>Banshee</app>. Αυτό "
+"θα αντιγράψει τα αρχεία στη συσκευή σας."
 
 #: C/sync.page:108(p)
 msgid ""
 "If your music library is encoded in a format that your portable media player "
 "does not support, such as OGG or FLAC, and you have the necessary codecs "
-"installed, Banshee can automatically transcode these files to MP3 when "
-"transferring to your portable media player. Check with your Linux "
+"installed, <app>Banshee</app> can automatically transcode these files to MP3 "
+"when transferring to your portable media player. Check with your Linux "
 "distribution for the necessary codecs as it is outside the scope of this "
 "help and varies by distribution."
 msgstr ""
 "Αν η μουσική σας βιβλιοθήκη είναι κωδικοποιημένη σε μορφή που δεν "
 "υποστηρίζει η φορητή σας συσκευή, όπως OGG ή FLAC, και έχετε τους "
-"απαραίτητους κωδικοποιητές εγκατεστημένους, το Banshee θα μετατρέψει "
-"αυτόματα αυτά τα αρχεία σε MP3 κατά τη μεταφορά τους στη φορητή συσκευή "
-"αναπαραγωγής. Ελέγξτε τη διανομή σας Linux για τους απαραίτητους "
-"κωδικοποιητές καθώς είναι εκτός του πεδίου αυτής της βοήθειας και διαφέρει "
-"ανά διανομή."
+"απαραίτητους κωδικοποιητές εγκατεστημένους, το <app>Banshee</app> θα "
+"μετατρέψει αυτόματα αυτά τα αρχεία σε MP3 κατά τη μεταφορά τους στη φορητή "
+"συσκευή αναπαραγωγής. Ελέγξτε τη διανομή σας Linux για τους απαραίτητους "
+"κωδικοποιητές-αποκωδικοποιητές καθώς είναι εκτός του πεδίου αυτής της "
+"βοήθειας και διαφέρει ανά διανομή."
 
-#: C/sync.page:117(p)
+#: C/sync.page:116(p)
 msgid ""
 "You may need to eject your device to load the files correctly on your "
-"portable music player. To eject your device in Banshee, using your mouse "
-"right click the device in the Banshee menu and press <gui>Disconnect</gui>."
+"portable music player. To eject your device in <app>Banshee</app>, using "
+"your mouse right click the device in the <app>Banshee</app> menu and press "
+"<gui style=\"menuitem\">Disconnect</gui>."
 msgstr ""
-"Μπορεί να χρειασθεί να αφαιρέσετε τη φορητή συσκευή σας για να φορτωθούν τα "
-"αρχεία σωστά σε αυτή. Για να το κάνετε αυτό στο Banshee, κάντε δεξί κλικ με "
-"το ποντίκι πάνω στη συσκευή στο μενού του Banshee και πατήστε "
-"<gui>Αποσύνδεση</gui>."
+"Μπορεί να χρειαστεί να αφαιρέσετε τη συσκευή σας για να φορτωθούν τα αρχεία "
+"σωστά στη φορητή συσκευή σας. Για να το κάνετε αυτό στο <app>Banshee</app>, "
+"δεξιοπατήστε τη συσκευή στο μενού του <app>Banshee</app> και πατήστε <gui "
+"style=\"menuitem\">Αποσύνδεση</gui>."
 
-#: C/sync.page:127(title)
-msgid "Play Music From Your Portable Music Player"
+#: C/sync.page:125(title)
+msgid "Play music from your portable music player"
 msgstr "Αναπαραγωγή μουσικής από τη φορητή σας συσκευή αναπαραγωγής"
 
-#: C/sync.page:128(p)
+#: C/sync.page:127(p)
 msgid ""
-"You can play music stored on your portable music player directly in Banshee. "
-"Choose your player in the Banshee menu on the left and your portable music "
-"player's library will be displayed. You can then play music in Banshee just "
-"as you would music in your own library."
+"You can play music stored on your portable music player directly in "
+"<app>Banshee</app>. Choose your player in the <app>Banshee</app> menu on the "
+"left and your portable music player's library will be displayed. You can "
+"then play music in <app>Banshee</app> just as you would music in your own "
+"library."
 msgstr ""
 "Μπορείτε να αναπαράγετε μουσική αποθηκευμένη στη φορητή σας συσκευή "
-"απευθείας στο Banshee. Επιλέξτε τη από το μενού του Banshee αριστερά και θα "
-"εμφανιστεί η βιβλιοθήκη μουσικής που περιέχει. Μπορείτε εν συνεχεία να "
-"αναπαράγετε τη μουσική ακριβώς όπως με τη μουσική της βιβλιοθήκης σας."
+"απευθείας στο <app>Banshee</app>. Επιλέξτε την από το μενού του "
+"<app>Banshee</app> αριστερά και θα εμφανιστεί η βιβλιοθήκη μουσικής που "
+"περιέχει. Μπορείτε έπειτα, να αναπαράγετε τη μουσική στο <app>Banshee</app> "
+"ακριβώς όπως θα κάνατε με τη μουσική της βιβλιοθήκης σας."
 
-#: C/sync.page:135(title)
-msgid "Remove Music From your Portable Music Player"
+#: C/sync.page:136(title)
+msgid "Remove music from your portable music player"
 msgstr "Αφαιρέστε μουσική από τη φορητή σας συσκευή αναπαραγωγής"
 
-#: C/sync.page:136(p)
+#: C/sync.page:138(p)
 msgid ""
 "To remove songs stored on your portable music player, choose your player in "
-"Banshee to view its library. Then choose the tracks you would like to remove "
-"and right click the tracks and choose \"Delete\" or from the menu choose "
-"<guiseq><gui>Edit</gui><gui>Delete</gui></guiseq>."
+"<app>Banshee</app> to view its library. Then choose the tracks you would "
+"like to remove and right click the tracks and choose <gui style=\"menuitem"
+"\">Delete</gui> or from the menu choose <guiseq><gui style=\"menu\">Edit</"
+"gui><gui style=\"menuitem\">Delete</gui></guiseq>."
 msgstr ""
 "Για να αφαιρέσετε τραγούδια αποθηκευμένα στη φορητή σας συσκευή, επιλέξτε τη "
-"στο Banshee για να δείτε τη βιβλιοθήκη της. Έπειτα επιλέξτε τα κομμάτια που "
-"θα θέλατε να αφαιρέσετε και κάντε δεξί κλικ στα κομμάτια και επιλέξτε "
-"\"Διαγραφή\" ή από το μενού επιλέξτε <guiseq><gui>Επεξεργασία</"
-"gui><gui>Διαγραφή</gui></guiseq>."
+"στο <app>Banshee</app> για να δείτε τη βιβλιοθήκη της. Έπειτα επιλέξτε τα "
+"κομμάτια που θα θέλατε να αφαιρέσετε και δεξιοπατήστε στα κομμάτια και "
+"επιλέξτε <gui style=\"menuitem\">Διαγραφή</gui> ή από το μενού επιλέξτε "
+"<guiseq><gui style=\"menu\">Επεξεργασία</gui><gui "
+"style=\"menuitem\">Διαγραφή</gui></guiseq>."
 
-#: C/sync.page:142(p)
-#| msgid ""
-#| "Deleting files from your portable music will permanently remove the files "
-#| "and you will not be able to recover them."
+#: C/sync.page:146(p)
 msgid ""
 "Deleting files from your portable music player will permanently remove the "
 "files and you will not be able to recover them."
@@ -410,18 +460,15 @@ msgstr ""
 msgid "Sort your media and add additional columns."
 msgstr "Ταξινομήστε τα μέσα σας και προσθέστε επιπλέον στήλες."
 
-#: C/sort.page:24(title)
+#: C/sort.page:28(title)
 msgid "Sort your media"
 msgstr "Ταξινομήστε τα μέσα σας"
 
-#: C/sort.page:28(title)
-msgid "Adding Columns"
+#: C/sort.page:32(title)
+msgid "Adding columns"
 msgstr "Προσθήκη στηλών"
 
-#: C/sort.page:30(p)
-#| msgid ""
-#| "As your library grows, you may want to sort your library view to play "
-#| "search or view certain songs, artists, or albums."
+#: C/sort.page:34(p)
 msgid ""
 "As your library grows, you may want to change your library view to add "
 "additional information about the songs in your library or change the way you "
@@ -432,126 +479,117 @@ msgstr ""
 "αλλάξετε τον τρόπο προβολής και ταξινόμησης για τα τραγούδια, καλλιτέχνες ή "
 "δίσκους σας."
 
-#: C/sort.page:34(p)
+#: C/sort.page:38(p)
 msgid ""
 "You can add additional columns to the library view in <app>Banshee</app> to "
 "give you more information about the songs and also allow you to sort by. By "
-"default, Banshee displays columns for songs including <gui>Name</gui>, "
-"<gui>Artist</gui>, <gui>Album</gui> and <gui>Time</gui>. To add additional "
-"columns, using your mouse right click on any of the columns and Banshee will "
-"display all available column to choose from. Click the checkbox next to the "
-"name of the column you wish to add to the library view."
+"default, <app>Banshee</app> displays columns for songs including <gui>Name</"
+"gui>, <gui>Artist</gui>, <gui>Album</gui> and <gui>Time</gui>. To add "
+"additional columns, using your mouse right click on any of the columns and "
+"<app>Banshee</app> will display all available column to choose from. Click "
+"the checkbox next to the name of the column you wish to add to the library "
+"view."
 msgstr ""
 "Μπορείτε να προσθέσετε περισσότερες στήλες στην προβολή βιβλιοθήκης στο "
 "<app>Banshee</app> για να έχετε περισσότερες πληροφορίες για τα τραγούδια "
-"και επίσης να μπορείτε να τα ταξινομήσετε. Ως προεπιλογή, το Banshee "
-"εμφανίζει για τα τραγούδια στήλες που περιλαμβάνουν <gui>Όνομα</gui>, "
-"<gui>Καλλιτέχνη</gui>, <gui>Δίσκο</gui> και <gui>Διάρκεια</gui>. Για να "
-"προσθέσετε επιπλέον στήλες, κάντε δεξί κλικ με το ποντίκι σας σε οποιαδήποτε "
-"από τις στήλες και το Banshee θα εμφανίσει όλες τις διαθέσιμες στήλες για να "
-"επιλέξετε. Κάντε κλικ στο πεδίο δίπλα από το όνομα της στήλης που επιθυμείτε "
-"να προσθέσετε στην προβολή βιβλιοθήκης."
+"και επίσης να μπορείτε να τα ταξινομήσετε. Ως προεπιλογή, το "
+"<app>Banshee</app> εμφανίζει για τα τραγούδια στήλες που περιλαμβάνουν "
+"<gui>Όνομα</gui>, <gui>Καλλιτέχνη</gui>, <gui>Δίσκο</gui> και "
+"<gui>Διάρκεια</gui>. Για να προσθέσετε επιπλέον στήλες, δεξιοπατήστε σε "
+"οποιαδήποτε από τις στήλες και το <app>Banshee</app> θα εμφανίσει όλες τις "
+"διαθέσιμες στήλες για να επιλέξετε. Πατήστε το πλαίσιο ελέγχου δίπλα από το "
+"όνομα της στήλης που θέλετε να προσθέσετε στην προβολή βιβλιοθήκης."
 
-#: C/sort.page:46(title)
-msgid "Sorting Columns"
+#: C/sort.page:50(title)
+msgid "Sorting columns"
 msgstr "Ταξινόμηση στηλών"
 
-#: C/sort.page:47(p)
-#| msgid ""
-#| "You can sort your library by using your mouse to click on any of the "
-#| "columns displayed in library view. If you wish to sort your music library "
-#| "by Artist, click the <gui>Artist</gui> column header and Banshee will "
-#| "automically sort that column alphabetically. Clicking the <gui>Artist</"
-#| "gui> column again will sort the column in reverse alphabetical order."
+#: C/sort.page:52(p)
 msgid ""
 "You can sort your library by using your mouse to click on any of the columns "
 "displayed in library view. If you wish to sort your music library by Artist, "
-"click the <gui>Artist</gui> column header and Banshee will automatically "
-"sort that column alphabetically. Clicking the <gui>Artist</gui> column again "
-"will sort the column in reverse alphabetical order."
+"click the <gui>Artist</gui> column header and <app>Banshee</app> will "
+"automatically sort that column alphabetically. Clicking the <gui>Artist</"
+"gui> column again will sort the column in reverse alphabetical order."
 msgstr ""
-"Μπορείτε να ταξινομήσετε τη βιβλιοθήκη σας κάνοντας κλικ με το ποντίκι σε "
-"οποιαδήποτε στήλη εμφανίζεται στην προβολή βιβλιοθήκης. Αν επιθυμείτε να "
-"ταξινομήσετε τη μουσική σας βιβλιοθήκη κατά καλλιτέχνη, κάντε κλικ στην "
-"επικεφαλίδα της στήλης <gui>Καλλιτέχνης</gui> και το Banshee αυτόματα θα την "
-"ταξινομήσει αλφαβητικά. Κάνοντας πάλι κλικ στη στήλη <gui>Καλλιτέχνης</gui> "
-"το Banshee θα την ταξινομήσει με αντίστροφη αλφαβητική σειρά."
+"Μπορείτε να ταξινομήσετε τη βιβλιοθήκη σας δεξιοπατώντας σε οποιαδήποτε "
+"στήλη εμφανίζεται στην προβολή βιβλιοθήκης. Αν θέλετε να ταξινομήσετε τη "
+"μουσική σας βιβλιοθήκη κατά καλλιτέχνη, πατήστε στην επικεφαλίδα της στήλης "
+"<gui>Καλλιτέχνης</gui> και το <app>Banshee</app> αυτόματα θα την ταξινομήσει "
+"αλφαβητικά. Πατώντας τη στήλη <gui>Καλλιτέχνης</gui> ξανά, θα την "
+"ταξινομήσει με αντίστροφη αλφαβητική σειρά."
 
 #: C/search.page:9(desc)
 msgid "Search your media and perfom basic queries."
 msgstr "Αναζήτηση στα μέσα σας και βασικά ερωτήματα."
 
-#: C/search.page:24(title)
-msgid "Searching your Banshee Library"
-msgstr "Αναζήτηση στη βιβλιοθήκη σας του Banshee"
+#: C/search.page:16(name)
+msgid "Aruna sankaranarayanan"
+msgstr "Aruna sankaranarayanan"
 
-#: C/search.page:26(p)
-msgid ""
-"Banshee features a powerful search language. You can search your library "
-"quickly and easily with basic search terms or perform detailed searches with "
-"Banshee's advanced search terminology."
-msgstr ""
-"Το Banshee έχει μια ισχυρή γλώσσα αναζήτησης. Μπορείτε να ψάξετε εύκολα και "
-"γρήγορα στη βιβλιοθήκη σας με βασικούς όρους αναζήτησης ή να κάνετε "
-"λεπτομερείς αναζητήσεις με την προχωρημένη ορολογία αναζήτησης του Banshee."
+#: C/search.page:28(title)
+msgid "Searching your <app>Banshee</app> library"
+msgstr "Αναζήτηση στη βιβλιοθήκη σας του <app>Banshee</app>"
 
 #: C/search.page:30(p)
 msgid ""
-"To perform a search of your media in Banshee, press the <key>S</key> or "
-"click the <gui>Search</gui> box in the upper right hand corner of the "
-"Library view in Banshee."
+"<app>Banshee</app> features a powerful search language. You can search your "
+"library quickly and easily with basic search terms or perform detailed "
+"searches with the <app>Banshee</app> advanced search terminology."
 msgstr ""
-"Για να εκτελέσετε μια αναζήτηση στη βιβλιοθήκη των μέσων σας στο Banshee, "
-"πατήστε το <key>S</key> ή κάντε κλικ στο πεδίο <gui>Αναζήτηση</gui> στην "
-"πάνω δεξιά γωνία της προβολής βιβλιοθήκης στο Banshee."
+"Το <app>Banshee</app> έχει μια ισχυρή γλώσσα αναζήτησης. Μπορείτε να ψάξετε "
+"εύκολα και γρήγορα στη βιβλιοθήκη σας με βασικούς όρους αναζήτησης ή να "
+"κάνετε λεπτομερείς αναζητήσεις με την προχωρημένη ορολογία αναζήτησης του "
+"<app>Banshee</app>."
 
-#: C/search.page:35(p)
-#| msgid ""
-#| "A search query consists of some basic terms, for example, <em>dave "
-#| "matthews</em>. By entering <em>dave matthews</em> in the search box, "
-#| "Banshee will search all metatdata fields including Track Title, Album "
-#| "Title, Album Artist, Year, etc. Any track whose metadata includes "
-#| "<em>dave</em> and <em>matthews</em> will be returned. Search terms are "
-#| "case, meaningyou don't have to capitalize. <em>dave</em>, <em>Dave</em>, "
-#| "and <em>DAVE</em> all mean the same thing when searching."
+#: C/search.page:34(p)
+msgid ""
+"To perform a search of your media in <app>Banshee</app>, press the <key>S</"
+"key> or click the <gui>Search</gui> box in the upper right hand corner of "
+"the Library view in <app>Banshee</app>."
+msgstr ""
+"Για να εκτελέσετε μια αναζήτηση μέσων στο <app>Banshee</app>, πατήστε το "
+"<key>S</key> ή πατήστε το πλαίσιο <gui>Αναζήτηση</gui> στην πάνω δεξιά γωνία "
+"της προβολής βιβλιοθήκης στο <app>Banshee</app>."
+
+#: C/search.page:38(p)
 msgid ""
 "A search query consists of some basic terms, for example, <em>dave matthews</"
-"em>. By entering <em>dave matthews</em> in the search box, Banshee will "
-"search all metatdata fields including Track Title, Album Title, Album "
-"Artist, Year, etc. Any track whose metadata includes <em>dave</em> and "
-"<em>matthews</em> will be returned. Search terms are case, meaning you don't "
-"have to capitalize. <em>dave</em>, <em>Dave</em>, and <em>DAVE</em> all mean "
-"the same thing when searching."
+"em>. By entering <em>dave matthews</em> in the search box, <app>Banshee</"
+"app> will search all metadata fields including Track Title, Album Title, "
+"Album Artist, Year, etc. Any track whose metadata includes <em>dave</em> and "
+"<em>matthews</em> will be returned. Search terms are case insensitive, "
+"meaning you do not have to capitalize. <em>dave</em>, <em>Dave</em>, and "
+"<em>DAVE</em> all mean the same thing when searching."
 msgstr ""
 "Ένα ερώτημα αναζήτησης αποτελείται από μερικούς βασικούς όρους, "
 "παραδείγματος χάριν, <em>dave matthews</em>. Εισάγοντας <em>dave "
-"matthews</em> στο πεδίο αναζήτησης, το Banshee θα ψάξει σε όλα τα πεδία "
-"μεταδεδομένων, περιλαμβανομένων των Τίτλου κομματιού, Τίτλου δίσκου, "
-"Καλλιτέχνη δίσκου, Έτους, κλπ. Οποιοδήποτε κομμάτι του οποίου τα "
+"matthews</em> στο πεδίο αναζήτησης, το <app>Banshee</app> θα ψάξει σε όλα τα "
+"πεδία μεταδεδομένων, περιλαμβανομένων των τίτλου κομματιού, τίτλου δίσκου, "
+"καλλιτέχνη δίσκου, έτους, κλπ. Οποιοδήποτε κομμάτι του οποίου τα "
 "μεταδεδομένα περιλαμβάνουν το <em>dave</em> και το <em>matthews</em> θα "
-"εντοπισθεί. Οι όροι αναζήτησης δεν κάνουν διάκριση πεζών-κεφαλαίων, δηλαδή "
-"δεν χρειάζεται να χρησιμοποιήσετε κεφαλαία στην αρχή των λέξεων. Τα "
-"<em>dave</em>, <em>Dave</em>, και <em>DAVE</em> όλα σημαίνουν το ίδιο πράγμα "
-"κατά την αναζήτηση."
+"επιστραφεί. Οι όροι αναζήτησης δεν ξεχωρίζουν πεζά-κεφαλαία, δηλαδή δεν "
+"χρειάζεται να χρησιμοποιήσετε κεφαλαία. Τα <em>dave</em>, <em>Dave</em>, και "
+"<em>DAVE</em> όλα σημαίνουν το ίδιο πράγμα κατά την αναζήτηση."
 
-#: C/search.page:43(title)
-msgid "Basic Operators"
+#: C/search.page:47(title)
+msgid "Basic operators"
 msgstr "Βασικοί τελεστές"
 
-#: C/search.page:44(p)
+#: C/search.page:49(p)
 msgid ""
 "Operators can be placed between any two search words or placed before a "
 "search word. The default operation is <gui>AND</gui> and is used when no "
-"other operators are used between two search terms. Because it is the "
-"default, there is no explicit AND operator."
+"other operators are used between two search terms. Since it is the default, "
+"there is no explicit AND operator."
 msgstr ""
 "Οι τελεστές μπορεί να τοποθετηθούν μεταξύ οποιωνδήποτε δύο αναζητούμενων "
 "λέξεων ή πριν από μια αναζητούμενη λέξη. Η προεπιλεγμένη λειτουργία είναι "
-"<gui></gui> και χρησιμοποιείται όταν δεν έχουν ορισθεί άλλοι τελεστές μεταξύ "
-"δύο όρων της αναζήτησης. Επειδή είναι η προεπιλογή, δεν εμφανίζεται το AND "
-"ως τελεστής."
+"<gui>ΚΑΙ</gui> και χρησιμοποιείται όταν δεν έχουν ορισθεί άλλοι τελεστές "
+"μεταξύ δύο όρων της αναζήτησης. Επειδή είναι η προεπιλογή, δεν εμφανίζεται "
+"ρητά ο τελεστής ΚΑΙ."
 
-#: C/search.page:49(p)
+#: C/search.page:54(p)
 msgid ""
 "Other basic operators include <gui>OR</gui> and <gui>NOT</gui>. Together, "
 "these three operations can yield very powerful queries to help you search "
@@ -561,11 +599,11 @@ msgstr ""
 "Μαζί, αυτοί οι τρεις τελεστές μπορούν να συνθέσουν πολύ ισχυρά ερωτήματα για "
 "να σας βοηθήσουν στην αναζήτηση των μέσων σας."
 
-#: C/search.page:56(title)
-msgid "Logical Operators and Examples"
+#: C/search.page:61(title)
+msgid "Logical operators and examples"
 msgstr "Λογικοί τελεστές και παραδείγματα"
 
-#: C/search.page:57(p)
+#: C/search.page:63(p)
 msgid ""
 "The following is a list of logical operators and examples of the search "
 "results when searching using them."
@@ -573,61 +611,57 @@ msgstr ""
 "Η ακόλουθη είναι μια λίστα λογικών τελεστών και παραδειγμάτων των "
 "αποτελεσμάτων κατά την αναζήτηση με χρήση τους."
 
-#: C/search.page:62(gui)
+#: C/search.page:68(gui)
 msgid "Operator"
 msgstr "Τελεστής"
 
-#: C/search.page:62(gui) C/search.page:84(gui)
+#: C/search.page:69(gui) C/search.page:93(gui)
 msgid "Description"
 msgstr "Περιγραφή"
 
-#: C/search.page:65(p)
+#: C/search.page:72(p)
 msgid "<em>default</em>, <em>white space</em>"
 msgstr "<em>προεπιλογή</em>, <em>κενό διάστημα</em>"
 
-#: C/search.page:65(p)
+#: C/search.page:73(p)
 msgid "Search for two terms with a space between the two words or terms."
 msgstr "Αναζήτηση για δύο όρους με ένα διάστημα μεταξύ των δύο λέξεων ή όρων."
 
-#: C/search.page:69(p)
+#: C/search.page:77(p)
 msgid "OR, or, <key>|</key>, <key>,</key>"
 msgstr "OR, or, <key>|</key>, <key>,</key>"
 
-#: C/search.page:69(p)
-#| msgid "Search results will be two terms with either result in any field."
+#: C/search.page:78(p)
 msgid "Search results will be two songs with either result in any field."
 msgstr ""
 "Τα αποτελέσματα θα είναι δύο τραγούδια με οποιοδήποτε από τα δύο "
 "αποτελέσματα σε οποιοδήποτε πεδίο."
 
-#: C/search.page:73(p)
+#: C/search.page:82(p)
 msgid "NOT, not,<key>-</key>"
 msgstr "NOT, not,<key>-</key>"
 
-#: C/search.page:73(p)
-#| msgid ""
-#| "Do not display search results with any search team that follows the "
-#| "operator of NOT, not,<key>-</key>."
+#: C/search.page:83(p)
 msgid ""
 "Do not display search results with any search term that follows the operator "
-"of NOT, not,<key>-</key>."
+"of NOT, not,<key>-</key>"
 msgstr ""
-"Να μην εμφανισθούν αποτελέσματα με οποιοδήποτε όρο που ακολουθεί μετά τον "
-"τελεστή NOT, not,<key>-</key>."
+"Να μην εμφανισθούν αποτελέσματα αναζήτησης με οποιοδήποτε όρο αναζήτησης που "
+"ακολουθεί τον τελεστή NOT, not,<key>-</key>."
 
-#: C/search.page:80(p)
+#: C/search.page:88(p)
 msgid "Examples of logical operations include:"
 msgstr "Παραδείγματα λογικών αναζητήσεων περιλαμβάνουν:"
 
-#: C/search.page:84(gui)
+#: C/search.page:92(gui)
 msgid "Query"
 msgstr "Ερώτημα"
 
-#: C/search.page:87(p)
+#: C/search.page:96(p)
 msgid "dave matthews"
 msgstr "dave matthews"
 
-#: C/search.page:87(p)
+#: C/search.page:97(p)
 msgid ""
 "Matches any fields in a track containing both <em>dave</em> and "
 "<em>matthews</em>."
@@ -635,171 +669,588 @@ msgstr ""
 "Ταιριάζει με οποιαδήποτε πεδία σε ένα κομμάτι περιέχουν και το <em>dave</em> "
 "και το <em>matthews</em>."
 
-#: C/search.page:92(p)
+#: C/search.page:101(p)
 msgid "dave, matthews"
 msgstr "dave, matthews"
 
-#: C/search.page:92(p) C/search.page:97(p) C/search.page:102(p)
+#: C/search.page:102(p) C/search.page:107(p) C/search.page:112(p)
 msgid ""
-"Matches any fields in a track containing both <em>dave</em> or <em>matthews</"
-"em>."
+"Matches any fields in a track containing either <em>dave</em> or "
+"<em>matthews</em>."
 msgstr ""
-"Ταιριάζει με οποιαδήποτε πεδία ενός κομματιού περιλαμβάνουν το <em>dave</em> "
-"ή το <em>matthews</em>."
+"Ταιριάζει με οποιαδήποτε πεδία ενός κομματιού που περιλαμβάνουν το <em>dave</"
+"em> ή το <em>matthews</em>."
 
-#: C/search.page:97(p)
+#: C/search.page:106(p)
 msgid "dave or matthews"
 msgstr "dave or matthews"
 
-#: C/search.page:102(p)
+#: C/search.page:111(p)
 msgid "dave | matthews"
 msgstr "dave | matthews"
 
-#: C/search.page:107(p)
+#: C/search.page:116(p)
 msgid "-\"dave matthews\""
 msgstr "-\"dave matthews\""
 
-#: C/search.page:107(p)
-msgid ""
-"Displays all tracks whose fields do not containt <em>dave matthews</em>."
+#: C/search.page:117(p)
+msgid "Displays all tracks whose fields do not contain <em>dave matthews</em>."
 msgstr ""
 "Εμφανίζει όλα τα κομμάτια των οποίων τα πεδία δεν περιέχουν <em>dave "
 "matthews</em>."
 
-#: C/search.page:114(p)
-msgid ""
-"For more information on performing more complex search queries, see the "
-"<link xref=\"adv-search\"/> page."
+#: C/radio.page:10(desc)
+msgid "Add, remove and play internet radio stations in <app>Banshee</app>."
 msgstr ""
-"Για περισσότερες πληροφορίες για την εκτέλεση πιο σύνθετων ερωτημάτων "
-"αναζήτησης, δείτε τη σελίδα <link xref=\"adv-search\"/>."
+"Προσθήκη, αφαίρεση και αναπαραγωγή σταθμών διαδικτυακού ραδιοφώνου στο "
+"<app>Banshee</app>."
 
-#: C/rb-import.page:8(desc)
+#: C/radio.page:30(title)
+msgid "Internet radio"
+msgstr "Διαδικτυακό ραδιόφωνο"
+
+#: C/radio.page:33(title)
+msgid "What is internet radio?"
+msgstr "Τι είναι το διαδικτυακό ραδιόφωνο;"
+
+#: C/radio.page:35(p)
 msgid ""
-"Import music and categorizations from the <app>Rhythmbox</app> music player."
-msgstr "Εισάγετε μουσική και κατηγοριοποιήσεις από το <app>Rhythmbox</app>."
+"Internet radio stations are similar to regular radio stations, allowing an "
+"individual or an organization to stream music live over the internet. "
+"Internet radio stations can be a simultaneous stream of a regular radio "
+"station, amateurs broadcasting their own station, or commercial radio "
+"stations that include live DJs and even commercials."
+msgstr ""
+"Οι διαδικτυακοί ραδιοφωνικοί σταθμοί είναι παρόμοιοι με τους κανονικούς, "
+"επιτρέποντας σε ένα άτομο ή οργανισμό να μεταδώσει ζωντανά μουσική μέσω του "
+"διαδικτύου. Οι διαδικτυακοί ραδιοφωνικοί σταθμοί μπορεί να είναι μια "
+"ταυτόχρονη ροή ενός κανονικού ραδιοφωνικού σταθμού, ενός ερασιτέχνη που "
+"μεταδίδει το δικό του σταθμό ή εμπορικών διαδικτυακών σταθμών που "
+"περιλαμβάνουν, ζωντανό πρόγραμμα και ακόμα διαφημίσεις."
 
-#: C/rb-import.page:12(title)
-msgid "Import your <app>Rhythmbox</app> library"
-msgstr "Εισάγετε τη βιβλιοθήκη σας του <app>Rhythmbox</app>"
+#: C/radio.page:44(title)
+msgid "Add radio station"
+msgstr "Προσθήκη ραδιοφωνικού σταθμού"
+
+#: C/radio.page:46(p)
+msgid ""
+"Search for internet radio stations using your favourite search engine. You "
+"can specify genres, channel frequencies, names of stations and other details "
+"to narrow down your search. Many radio stations display either a button or a "
+"link to listen to their stream. In most web-browsers, you can right click on "
+"the link and choose <gui style=\"menuitem\">Copy Link</gui>."
+msgstr ""
+"Αναζήτηση για διαδικτυακούς ραδιοφωνικούς σταθμούς χρησιμοποιώντας την "
+"αγαπημένη σας μηχανή αναζήτησης. Μπορείτε να ορίσετε είδη, συχνότητες "
+"καναλιών, ονόματα σταθμών και άλλες λεπτομέρειες για τον περιορισμό της "
+"αναζήτησής σας. Πολλοί ραδιοφωνικοί σταθμοί εμφανίζουν ή ένα κουμπί ή ένα "
+"σύνδεσμο για ακρόαση της ροής τους. Στους περισσότερους περιηγητές ιστού, "
+"μπορείτε να δεξιοπατήσετε στον σύνδεσμο και να επιλέξετε <gui "
+"style=\"menuitem\">Αντιγραφή συνδέσμου</gui>."
+
+#: C/radio.page:54(title)
+msgid "To add an internet radio station to <app>Banshee</app>:"
+msgstr "Προσθήκη σταθμού διαδικτυακού ραδιοφώνου στο <app>Banshee</app>:"
+
+#: C/radio.page:56(p)
+msgid ""
+"Select <gui>Radio</gui> in the menu on the left hand side of your window, "
+"then click on <gui style=\"menuitem\">Add Station</gui> on the upper right "
+"hand corner of <app>Banshee</app>. Or, you can select <guiseq><gui style="
+"\"menu\">Media</gui><gui style=\"menuitem\">Add Station</gui></guiseq> from "
+"the menu."
+msgstr ""
+"Επιλέξτε <gui>Ραδιόφωνο</gui> στο μενού στα αριστερά του παραθύρου σας, "
+"έπειτα πατήστε στο <gui style=\"menuitem\">Προσθήκη σταθμού</gui> στην πάνω "
+"δεξιά γωνία του <app>Banshee</app>. Ή μπορείτε να επιλέξετε από το μενού, "
+"επιλέξτε <guiseq><gui style=\"menu\">Μενού</gui><gui style=\"menuitem\">Προσθήκη "
+"σταθμού</gui></guiseq>."
+
+#: C/radio.page:63(p)
+msgid ""
+"You will need to enter some details about the radio station that you wish to "
+"add. The first three fields are mandatory:"
+msgstr ""
+"Θα χρειαστείτε να εισάγετε κάποιες λεπτομέρειες για τον ραδιοφωνικό σταθμό "
+"που θέλετε να προσθέσετε. Τα πρώτα τρία πεδία είναι υποχρεωτικά:"
+
+#: C/radio.page:67(p)
+msgid ""
+"In the <gui style=\"menuitem\">Station Genre</gui> text box, describe the "
+"type of music the internet radio station plays by creating an appropriate "
+"label, or choose a label from the available drop down selections."
+msgstr ""
+"Στο πλαίσιο κειμένου <gui style=\"menuitem\">Είδος σταθμού</gui>, περιγράψτε "
+"τον τύπο μουσικής που ο διαδικτυακός ραδιοφωνικός σταθμός παίζει "
+"δημιουργώντας μια κατάλληλη ετικέτα, ή επιλέξτε μια ετικέτα από τις "
+"διαθέσιμες πτυσσόμενες επιλογές."
+
+#: C/radio.page:73(p)
+msgid ""
+"In the <gui style=\"input\">Station Name</gui> text box, enter a name for "
+"the radio station."
+msgstr ""
+"Στο πλαίσιο κειμένου <gui style=\"input\">Όνομα σταθμού</gui>, εισάγετε ένα "
+"όνομα για τον ραδιοφωνικό σταθμό."
+
+#: C/radio.page:77(p)
+msgid ""
+"In the <gui style=\"input\">Stream URL</gui> field, enter or paste the URL "
+"of the stream by right clicking and selecting <gui style=\"menuitem\">Paste</"
+"gui> or pressing <keyseq><key>Control</key><key>V</key></keyseq>."
+msgstr ""
+"Στο πεδίο <gui style=\"input\">URL ροής</gui>, εισάγετε ή επικολλήστε το URL "
+"της ροής δεξιοπατώντας και επιλέγοντας <gui "
+"style=\"menuitem\">Επικόλληση</gui> ή πατώντας "
+"<keyseq><key>Control</key><key>V</key></keyseq>."
+
+#: C/radio.page:85(p)
+msgid ""
+"You can also fill out the fields for <gui style=\"input\">Station Creator</"
+"gui>, <gui style=\"input\">Description</gui>, and <gui style=\"input"
+"\">Rating</gui>."
+msgstr ""
+"Μπορείτε επίσης να συμπληρώσετε τα πεδία για <gui style=\"input\">Δημιουργό "
+"σταθμού</gui>, <gui style=\"input\">Περιγραφή</gui> και <gui "
+"style=\"input\">Βαθμολογία</gui>."
+
+#: C/radio.page:91(p)
+msgid ""
+"Finally, click <gui style=\"button\">Save</gui> to save the internet radio "
+"station in <app>Banshee</app>."
+msgstr ""
+"Τελικά, πατήστε <gui style=\"button\">Αποθήκευση</gui> για να αποθηκεύσετε τον "
+"διαδικτυακό σταθμό στο <app>Banshee</app>."
+
+#: C/radio.page:99(title)
+msgid "Play a radio station"
+msgstr "Αναπαραγωγή ραδιοφωνικού σταθμού"
+
+#: C/radio.page:101(p)
+msgid ""
+"To <link xref=\"play\">play</link> a radio station, double click on the "
+"radio station. Alternatively, right click on the station and select <gui "
+"style=\"menuitem\">Play</gui> or select the radio station and choose "
+"<guiseq><gui style=\"menu\">Playback</gui><gui style=\"menuitem\">Play</"
+"gui></guiseq>."
+msgstr ""
+"Για <link xref=\"play\">αναπαραγωγή</link> ραδιοφωνικού σταθμού, διπλοπατήστε "
+"τον ραδιοφωνικό σταθμό. Εναλλακτικά, δεξιοπατήστε στον σταθμό και επιλέξτε "
+"<gui style=\"menuitem\">αναπαραγωγή</gui> ή επιλέξτε τον ραδιοφωνικό σταθμό "
+"και διαλέξτε <guiseq><gui style=\"menu\">Αναπαραγωγή</gui><gui "
+"style=\"menuitem\">Εκτέλεση</gui></guiseq>."
+
+#. Not sure about play queue and play after current track
+#: C/radio.page:109(p)
+msgid ""
+"To add a radio station to the <gui style=\"menuitem\" xref=\"play-queue"
+"\">Play Queue</gui>, you can right click on the station and select <gui "
+"style=\"menuitem\">Add to Play Queue</gui>. This will play the radio station "
+"when the queue has finished playing all media which is ahead of the station "
+"in the <gui>Play Queue</gui>."
+msgstr ""
+"Για την προσθήκη ενός ραδιοφωνικού σταθμού στη <gui style=\"menuitem\" xref"
+"=\"play-queue\">Σειρά αναπαραγωγής</gui>, μπορείτε να δεξιοπατήσετε στον "
+"σταθμό και να επιλέξετε <gui style=\"menuitem\">Προσθήκη στη σειρά "
+"αναπαραγωγής</gui>. Αυτό θα παίξει τον ραδιοφωνικό σταθμό, όταν η αναμονή "
+"έχει τελειώσει την αναπαραγωγή όλων των μέσων που είναι πριν στον σταθμό "
+"στην <gui>Σειρά αναπαραγωγής</gui>."
+
+#: C/radio.page:115(p)
+msgid ""
+"You can also right click the station and select <gui style=\"menuitem\">Play "
+"after Current Track</gui> to add the radio station to the queue after the "
+"track that is currently playing."
+msgstr ""
+"Μπορείτε επίσης να δεξιοπατήσετε στον σταθμό και να επιλέξετε <gui "
+"style=\"menuitem\">Αναπαραγωγή μετά το τρέχον κομμάτι</gui> για να προσθέσετε "
+"τον ραδιοφωνικό σταθμό στην αναμονή μετά το κομμάτι που παίζει προς το "
+"παρόν."
+
+#: C/radio.page:120(p)
+msgid ""
+"<gui style=\"menuitem\">Play after Current Track</gui> may not work on some "
+"<app>Banshee</app> installations."
+msgstr ""
+"<gui style=\"menuitem\">Αναπαραγωγή μετά το τρέχον κομμάτι</gui> ίσως να μη "
+"δουλέψει σε μερικές εγκαταστάσεις του <app>Banshee</app>."
+
+#: C/radio.page:127(title)
+msgid "Remove a radio station"
+msgstr "Αφαίρεση ραδιοφωνικού σταθμού"
+
+#: C/radio.page:129(p)
+msgid ""
+"To remove a radio station from <app>Banshee</app>, you can right click on "
+"the radio station and select <gui style=\"menuitem\">Remove</gui>, or "
+"alternatively, you can select the station with your mouse and press "
+"<key>Delete</key>. When you are prompted for confirmation, click the <gui "
+"style=\"button\">Remove</gui> button to remove the radio station."
+msgstr ""
+"Για την αφαίρεση ραδιοφωνικού σταθμού από το <app>Banshee</app>, μπορείτε να "
+"δεξιοπατήσετε στον ραδιοφωνικό σταθμό και να επιλέξετε <gui "
+"style=\"menuitem\">Αφαίρεση</gui>, ή εναλλακτικά, μπορείτε να επιλέξετε τον "
+"σταθμό με το ποντίκι σας και να πατήσετε <key>Διαγραφή</key>. Όταν σας "
+"ζητηθεί επιβεβαίωση, πατήστε το κουμπί <gui style=\"button\">Αφαίρεση</gui> "
+"για να απομακρυνθεί ο ραδιοφωνικός σταθμός."
+
+#: C/podcast.page:11(desc)
+msgid "Add, remove and play podcasts in <app>Banshee</app>."
+msgstr ""
+"Προσθήκη, αφαίρεση και αναπαραγωγή φορητών εκπομπών στο <app>Banshee</app>."
+
+#: C/podcast.page:19(name)
+msgid "Ekaterina Gerasimova"
+msgstr "Ekaterina Gerasimova"
+
+#: C/podcast.page:20(email)
+msgid "kittykat3756@gmail.com"
+msgstr "kittykat3756@gmail.com"
+
+#: C/podcast.page:34(title)
+msgid "What is a podcast?"
+msgstr "Τι είναι φορητή εκπομπή (Podcast);"
+
+#: C/podcast.page:36(p)
+msgid ""
+"Podcasts are recorded programs, similar to radio programs, that are "
+"available on the internet and allow you to subscribe to them. When you "
+"subscribe to a podcast in <app>Banshee</app>, each time a new program is "
+"released, <app>Banshee</app> will automatically download the podcast to your "
+"library."
+msgstr ""
+"Οι φορητές εκπομπές είναι ηχογραφημένα προγράμματα, παρόμοια με τα "
+"ραδιοφωνικά, που είναι διαθέσιμα στο διαδίκτυο και σας επιτρέπουν να γίνετε "
+"συνδρομητής. Όταν γίνετε συνδρομητής σε μια φορητή εκπομπή στο "
+"<app>Banshee</app>, κάθε φορά που παράγεται ένα καινούριο πρόγραμμα, το "
+"<app>Banshee</app> θα μεταφορτώσει αυτόματα την εκπομπή στη βιβλιοθήκη σας."
+
+#: C/podcast.page:42(p)
+msgid ""
+"Podcasts have been made on almost any subject, including music, movies, "
+"Linux and more. Search the internet using your favorite search engine with a "
+"search term such as \"Linux podcast\" and you will be presented with many "
+"options to choose from."
+msgstr ""
+"Υπάρχουν φορητές εκπομπές για σχεδόν κάθε θέμα, περιλαμβανομένων μουσικής, "
+"ταινιών, Λίνουξ και άλλων. Αναζητήστε στο διαδίκτυο με χρήση της αγαπημένης "
+"σας μηχανής αναζήτησης έναν όρο αναζήτησης όπως \"Linux podcast\" και θα "
+"εμφανιστούν πολλές επιλογές για να διαλέξετε."
+
+#: C/podcast.page:50(title)
+msgid "Add a podcast"
+msgstr "Προσθήκη φορητής εκπομπής (podcast)"
+
+#: C/podcast.page:52(p)
+msgid ""
+"To add a podcast to <app>Banshee</app>, you will first need to visit the "
+"podcast home page. Most podcasts will have a button or link displayed to "
+"subscribe to the podcast. Copy the link to the podcast subscription feed. In "
+"most web browsers, you can right click on the link and choose <gui style="
+"\"menuitem\">Copy link</gui>."
+msgstr ""
+"Για να προσθέσετε μια φορητή εκπομπή στο <app>Banshee</app>, θα χρειαστεί "
+"πρώτα να επισκεφτείτε την ιστοσελίδα της φορητής εκπομπής. Σχεδόν όλες οι "
+"φορητές εκπομπές θα έχουν ένα κουμπί ή σύνδεσμο για να εγγραφείτε στη φορητή "
+"εκπομπή. Αντιγράψτε το δεσμό στη συνδρομή σας της φορητής εκπομπής. Στους "
+"περισσότερους περιηγητές ιστού, μπορείτε να δεξιοπατήσετε στο δεσμό και να "
+"επιλέξετε <gui style=\"menuitem\">Αντιγραφή δεσμού</gui>."
+
+#: C/podcast.page:58(p)
+msgid ""
+"In <app>Banshee</app>, click <gui style=\"menuitem\">Podcast</gui> in the "
+"menu on the left side of the window. Then, click <gui style=\"menuitem"
+"\">Subscribe to Podcasts</gui> in the right half of the toolbar, from the "
+"menu choose <guiseq><gui style=\"menu\">Media</gui><gui style=\"menuitem"
+"\">Subscribe to Podcast</gui></guiseq> or use the keyboard shortcut "
+"<keyseq><key>Shift</key><key>Control</key><key>F</key></keyseq>."
+msgstr ""
+"Στο <app>Banshee</app>, πατήστε <gui style=\"menuitem\">Φορητή εκπομπή</gui> "
+"στο μενού στα αριστερά του παραθύρου. Έπειτα, πατήστε <gui "
+"style=\"menuitem\">εγγραφή στις φορητές εκπομπές</gui> στο δεξιό μισό της "
+"εργαλειοθήκης, από το μενού επιλέξτε <guiseq><gui "
+"style=\"menu\">Πολυμέσα</gui><gui style=\"menuitem\"> Συνδρομή στη φορητή "
+"εκπομπή</gui></guiseq> ή χρησιμοποιήστε τη συντόμευση πληκτρολογίου "
+"<keyseq><key>Shift</key><key>Control</key><key>F</key></keyseq>."
+
+#: C/podcast.page:65(p)
+msgid ""
+"By default, the podcasts will not be downloaded, so you will only be able to "
+"listen to them while you are connected to the internet. When you subscribe "
+"to a new podcast, you will be able to select the following options:"
+msgstr ""
+"Από προεπιλογή, οι φορητές εκπομπές δεν μεταφορτώνονται, έτσι θα μπορείτε "
+"μόνο να τις ακούσετε, ενώ είσαστε συνδεμένοι στο διαδίκτυο. Όταν γράφεστε σε "
+"μια νέα φορητή εκπομπή, θα μπορείτε να διαλέξετε τις παρακάτω επιλογές:"
+
+#: C/podcast.page:71(p)
+msgid ""
+"Select <gui style=\"checkbox\">Download new episodes</gui> to automatically "
+"download any new episodes to your computer so that you can access them when "
+"you do not have an internet connection."
+msgstr ""
+"Επιλέξτε <gui style=\"checkbox\">Μεταφόρτωση νέων επεισοδίων</gui> για "
+"αυτόματη μεταφόρτωση οποιωνδήποτε νέων επεισοδίων στον υπολογιστή σας, έτσι "
+"ώστε να μπορείτε να τα προσπελάσετε, όταν δεν έχετε διαδικτυακή σύνδεση."
+
+#: C/podcast.page:76(p)
+msgid ""
+"Select <gui style=\"menuitem\">Archive all episodes except the newest one</"
+"gui> to have only the newest episode displayed."
+msgstr ""
+"Επιλέξτε <gui style=\"menuitem\">Αρχειοθέτηση όλων των επεισοδίων εκτός από το "
+"πιο νέο</gui> για να εμφανίζεται μόνο το πιο νέο επεισόδιο."
+
+#: C/podcast.page:81(p)
+msgid ""
+"After you have added a podcast feed, <app>Banshee</app> will display the "
+"name of the podcast, the title of each episode and the date that it was "
+"published on."
+msgstr ""
+"Μετά την προσθήκη μιας τροφοδοσίας φορητής εκπομπής, το <app>Banshee</app> "
+"θα εμφανίσει το όνομα της φορητής εκπομπής, τον τίτλο κάθε επεισοδίου και "
+"την ημερομηνία δημοσίευσης."
+
+#: C/podcast.page:85(p)
+msgid ""
+"Once a podcast has been archived, it will be removed from the <gui>New "
+"Items</gui> list, but it will still appear in the <gui>All Items</gui> list."
+msgstr ""
+"Μόλις μια φορητή εκπομπή αρχειοθετηθεί, θα αφαιρεθεί από τη λίστα <gui>Νέα "
+"στοιχεία</gui>, αλλά θα εμφανίζεται ακόμα στη λίστα <gui>Όλα τα "
+"στοιχεία</gui>."
+
+#: C/podcast.page:90(p)
+msgid ""
+"You can edit the subscription options the <gui style=\"menuitem\">Podcast "
+"Properties</gui>, which can be accessed by right clicking on the "
+"corresponding podcast name in the podcast list or by right clicking on any "
+"episode of that podcast."
+msgstr ""
+"Μπορείτε να επεξεργαστείτε τις επιλογές εγγραφής στο <gui "
+"style=\"menuitem\">Ιδιότητες φορητής εκπομπής</gui>, που μπορεί να "
+"προσπελαστεί δεξιοπατώντας στο αντίστοιχο όνομα φορητής εκπομπής στη λίστα "
+"φορητών εκπομπών ή δεξιοπατώντας σε οποιοδήποτε επεισόδιο αυτής της "
+"εκπομπής."
+
+#: C/podcast.page:99(title) C/play.page:121(title)
+msgid "Play a podcast"
+msgstr "Αναπαραγωγή φορητής εκπομπής"
+
+#: C/podcast.page:101(p)
+msgid ""
+"To <link xref=\"play\">play</link> a podcast episode, double click on the "
+"episode or select it, then select <guiseq><gui style=\"menu\">Playback</"
+"gui><gui style=\"menuitem\">Play</gui></guiseq>. You can also add the "
+"episode to the <gui xref=\"play-queue\">Play Queue</gui> by right clicking "
+"on the episode and selecting <gui style=\"menuitem\">Add to Play Queue</gui>."
+msgstr ""
+"Για <link xref=\"play\">αναπαραγωγή</link> ενός επεισοδίου φορητής εκπομπής, "
+"διπλοπατήστε στο επεισόδιο ή επιλέξτε το, έπειτα επιλέξτε <guiseq><gui "
+"style=\"menu\">Αναπαραγωγή</gui><gui style=\"menuitem\">Εκτέλεση</gui></guiseq>. "
+"Μπορείτε επίσης να προσθέσετε το επεισόδιο στην <gui xref=\"play-"
+"queue\">σειρά αναπαραγωγής</gui> δεξιοπατώντας στο επεισόδιο και επιλέγοντας "
+"<gui style=\"menuitem\">Προσθήκη στη σειρά αναπαραγωγής</gui>."
+
+#: C/podcast.page:110(title)
+msgid "Remove a podcast"
+msgstr "Αφαίρεση φορητής εκπομπής (Podcast)"
+
+#: C/podcast.page:112(p)
+msgid ""
+"To remove a podcast, right click on the podcast in the podcast list and "
+"select <gui style=\"menuitem\">Unsubscribe and Delete</gui>. This will "
+"unsubscribe you from receiving podcast updates and will delete all the "
+"episodes of the podcast from your library."
+msgstr ""
+"Για την αφαίρεση φορητής εκπομπής, δεξιοπατήστε στην εκπομπή στη λίστα "
+"φορητών εκπομπών και επιλέξτε <gui style=\"menuitem\">Απεγγραφή και "
+"διαγραφή</gui>. Αυτό θα σας απεγγράψει από τη λήψη ενημερώσεων φορητής "
+"εκπομπής και θα διαγράψει όλα τα επεισόδια της εκπομπής από τη βιβλιοθήκη "
+"σας."
 
 #: C/play.page:9(desc)
 msgid "Play your videos and music files."
 msgstr "Αναπαράγετε τα βίντεο και τα αρχεία σας μουσικής."
 
-#: C/play.page:24(title)
-msgid "Play Your Media"
+#: C/play.page:18(name) C/index.page:15(name)
+msgid "Sindhu S"
+msgstr "Sindhu S"
+
+#: C/play.page:19(email) C/index.page:16(email)
+msgid "sindhus@live.in"
+msgstr "sindhus@live.in"
+
+#: C/play.page:34(title)
+msgid "Play your media"
 msgstr "Αναπαραγωγή των πολυμέσων σας"
 
-#: C/play.page:27(title)
+#: C/play.page:37(title)
 msgid "Play your music"
 msgstr "Αναπαραγωγή της μουσικής σας"
 
-#: C/play.page:29(p)
+#: C/play.page:39(p)
 msgid ""
-"To play music in Banshee, choose the Music source. The music library will "
-"show you all artists in your music library, cover art for each album, and a "
-"list of all songs in your library."
+"To play music in <app>Banshee</app>, choose the Music source. The music "
+"library will show you all artists in your music library, cover art for each "
+"album, and a list of all songs in your library."
 msgstr ""
-"Για αναπαραγωγή μουσικής στο Banshee, επιλέξτε την πηγή μουσική. Η "
-"βιβλιοθήκη μουσικής θα σας εμφανίσει όλους τους καλλιτέχνες στη βιβλιοθήκη, "
-"το εξώφυλλο για κάθε δίσκο και μια λίστα όλων των τραγουδιών στη βιβλιοθήκη "
-"σας."
+"Για αναπαραγωγή μουσικής στο <app>Banshee</app>, επιλέξτε την πηγή μουσική. "
+"Η βιβλιοθήκη μουσικής θα σας εμφανίσει όλους τους καλλιτέχνες στη μουσική "
+"βιβλιοθήκη, το εξώφυλλο για κάθε δίσκο και μια λίστα όλων των τραγουδιών στη "
+"βιβλιοθήκη σας."
 
-#: C/play.page:33(p)
+#: C/play.page:43(p)
 msgid ""
 "Choose the album or song you wish to play from the list of artists, albums "
-"or use the search bar in the upper right hand corner of Banshee."
+"or use the search bar in the upper right hand corner of <app>Banshee</app>."
 msgstr ""
-"Επιλέξτε το δίσκο ή το τραγούδι που θέλετε να αναπαραχθεί από τη λίστα "
+"Επιλέξτε τον δίσκο ή το τραγούδι που θέλετε να αναπαραχθεί από τη λίστα "
 "καλλιτεχνών, δίσκων ή χρησιμοποιήστε τη γραμμή αναζήτησης στην πάνω δεξιά "
-"γωνία του Banshee."
+"γωνία του <app>Banshee</app>."
 
-#: C/play.page:37(p)
+#: C/play.page:47(p)
 msgid ""
 "To start playing a song, use your mouse to double click the song name, press "
-"the <key>Spacebar</key>, or choose <guiseq><gui>Playback</gui><gui>Play</"
-"gui></guiseq> from the Banshee menu."
+"the <key>Space</key>, or choose <guiseq><gui style=\"menu\">Playback</"
+"gui><gui style=\"menuitem\">Play</gui></guiseq> from the <app>Banshee</app> "
+"menu."
 msgstr ""
-"Για να αρχίσετε την αναπαραγωγή ενός τραγουδιού, κάντε διπλό κλικ με το "
-"ποντίκι σας στο όνομα του τραγουδιού, πατήστε το <key>πλήκτρο διαστήματος</"
-"key> ή επιλέξτε <guiseq><gui>Αναπαραγωγή</gui><gui>Αναπαραγωγή</gui></"
-"guiseq> από το μενού του Banshee."
-
-#: C/play.page:42(p)
-#| msgid ""
-#| "You can also start playing an album by choosing the album in the album "
-#| "browser and pressing use your mouse to double click the song name, press "
-#| "the <key>Spacebar</key>, or choose <guiseq><gui>Playback</gui><gui>Play</"
-#| "gui></guiseq> from the Banshee menu."
-msgid ""
-"You can also start playing an album by choosing the album in the album "
-"browser and using your mouse to double click the song name, press the "
-"<key>Spacebar</key>, or choose <guiseq><gui>Playback</gui><gui>Play</gui></"
-"guiseq> from the Banshee menu."
-msgstr ""
-"Μπορείτε να ξεκινήσετε την αναπαραγωγή ενός δίσκου επιλέγοντας το δίσκο στην "
-"περιήγηση δίσκων με διπλό κλικ στο όνομα του τραγουδιού, πατώντας το "
-"<key>πλήκτρο διαστήματος</key> ή επιλέγοντας "
-"<guiseq><gui>Αναπαραγωγή</gui><gui>Αναπαραγωγή</gui></guiseq> από το μενού "
-"του Banshee."
-
-#: C/play.page:48(p)
-msgid ""
-"To play all songs by one artist, choose the artist in the artist browser and "
-"press the <key>Spacebar</key>, or choose <guiseq><gui>Playback</"
-"gui><gui>Play</gui></guiseq> from the Banshee menu."
-msgstr ""
-"Για να αναπαραχθούν όλα τα τραγούδια ενός καλλιτέχνη, επιλέξτε τον "
-"καλλιτέχνη από την περιήγηση και πατήστε το <key>πλήκτρο διαστήματος</key> ή "
-"επιλέξτε <guiseq><gui>Αναπαραγωγή</gui><gui>Αναπαραγωγή</gui></guiseq> από "
-"το μενού του Banshee."
+"Για να αρχίσετε την αναπαραγωγή ενός τραγουδιού, διπλοπατήστε στο όνομα του "
+"τραγουδιού, πατήστε το <key>πλήκτρο διαστήματος</key> ή επιλέξτε "
+"<guiseq><gui style=\"menu\">Αναπαραγωγή</gui><gui "
+"style=\"menuitem\">Εκτέλεση</gui></guiseq> από το μενού του "
+"<app>Banshee</app>."
 
 #: C/play.page:53(p)
 msgid ""
-"Banshee also displays your Favorite albums (those you play the most), Recent "
-"Favorites, Recently Added and Unheard music. Choose the one you wish to "
-"listen to and you can play songs from each."
+"You can also start playing an album by choosing the album in the album "
+"browser and using your mouse to double click the song name, press the "
+"<key>Space</key>, or choose <guiseq><gui style=\"menu\">Playback</gui><gui "
+"style=\"menuitem\">Play</gui></guiseq> from the <app>Banshee</app> menu."
 msgstr ""
-"Το Banshee επίσης εμφανίζει τους αγαπημένους σας δίσκους (αυτούς που ακούτε "
-"περισσότερο), τα πρόσφατα αγαπημένα, τις πρόσφατες προσθήκες και αυτά που "
-"δεν έχουν αναπαραχθεί ποτέ. Επιλέξτε αυτό που επιθυμείτε να ακούσετε και "
+"Μπορείτε να ξεκινήσετε την αναπαραγωγή ενός δίσκου επιλέγοντας το δίσκο στην "
+"περιήγηση δίσκων με διπλό κλικ στο όνομα του τραγουδιού, πατώντας το "
+"<key>πλήκτρο διαστήματος</key> ή επιλέγοντας <guiseq><gui "
+"style=\"menu\">Αναπαραγωγή</gui><gui style=\"menuitem\">Εκτέλεση</gui></guiseq> "
+"από το μενού του <app>Banshee</app>."
+
+#: C/play.page:59(p)
+msgid ""
+"To play all songs by one artist, choose the artist in the artist browser and "
+"press the <key>Space</key>, or choose <guiseq><gui style=\"menu\">Playback</"
+"gui><gui style=\"menuitem\">Play</gui></guiseq> from the <app>Banshee</app> "
+"menu."
+msgstr ""
+"Για να αναπαραχθούν όλα τα τραγούδια ενός καλλιτέχνη, επιλέξτε τον "
+"καλλιτέχνη από την περιήγηση και πατήστε το <key>πλήκτρο διαστήματος</key> ή "
+"επιλέξτε <guiseq><gui style=\"menu\">Αναπαραγωγή</gui><gui "
+"style=\"menuitem\">Εκτέλεση</gui></guiseq> από το μενού του "
+"<app>Banshee</app>."
+
+#: C/play.page:65(p)
+msgid ""
+"<app>Banshee</app> also displays your Favorite albums (those you play the "
+"most), Recent Favorites, Recently Added and Unheard music. Choose the one "
+"you wish to listen to and you can play songs from each."
+msgstr ""
+"Το <app>Banshee</app> επίσης εμφανίζει τους αγαπημένους σας δίσκους (αυτούς "
+"που ακούτε περισσότερο), τα πρόσφατα αγαπημένα, τις πρόσφατες προσθήκες και "
+"πρώτες παρουσιάσεις μουσικής. Επιλέξτε αυτό που επιθυμείτε να ακούσετε και "
 "μπορείτε να αναπαράγετε τραγούδια από το καθένα."
 
-#: C/play.page:61(title)
+#: C/play.page:69(p)
+msgid ""
+"<app>Banshee</app> can be used to play music in a random order using the "
+"<gui style=\"menuitem\">Shuffle</gui> mode. Enable the mode in <guiseq><gui "
+"style=\"menu\">Playback</gui><gui style=\"menuitem\">Shuffle</gui></guiseq>, "
+"followed by a shuffle type selection."
+msgstr ""
+"Το <app>Banshee</app> μπορεί να χρησιμοποιηθεί για αναπαραγωγή μουσικής με "
+"τυχαία σειρά χρησιμοποιώντας την κατάσταση <gui style=\"menuitem\">τυχαίας "
+"σειράς</gui>. Ενεργοποιήστε την κατάσταση στο <guiseq><gui "
+"style=\"menu\">Αναπαραγωγή</gui><gui style=\"menuitem\">Τυχαία "
+"σειρά</gui></guiseq>, ακολουθούμενη από την επιλογή τύπου τυχαίας σειράς."
+
+#: C/play.page:77(gui)
+msgid "By Song"
+msgstr "Κατά τραγούδι"
+
+#: C/play.page:78(p)
+msgid "Play tracks in a random order."
+msgstr "Αναπαραγωγή κομματιών με τυχαία σειρά."
+
+#: C/play.page:81(gui)
+msgid "By Artist"
+msgstr "Κατά καλλιτέχνη"
+
+#: C/play.page:82(p)
+msgid "Play tracks by different artists every time."
+msgstr "Αναπαραγωγή κομματιών από διαφορετικούς καλλιτέχνες κάθε φορά."
+
+#: C/play.page:85(gui)
+msgid "By Album"
+msgstr "Κατά δίσκο"
+
+#: C/play.page:86(p)
+msgid "Play tracks from different albums every time."
+msgstr "Αναπαραγωγή κομματιών από διαφορετικούς δίσκους κάθε φορά."
+
+#: C/play.page:89(gui)
+msgid "By Rating"
+msgstr "Κατά κατάταξη"
+
+#: C/play.page:90(p)
+msgid "Play tracks with higher ratings more often than unrated ones."
+msgstr "Αναπαραγωγή κομματιών με υψηλότερη κατάταξη πιο συχνά από αβαθμολόγητα."
+
+#: C/play.page:92(p)
+msgid "If there are no rated tracks, the tracks are played in a random order."
+msgstr ""
+"Αν δεν υπάρχουν βαθμολογημένα κομμάτια, τα κομμάτια αναπαράγονται με τυχαία "
+"σειρά."
+
+#: C/play.page:97(gui)
+msgid "By Score"
+msgstr "Κατά βαθμολογία"
+
+#: C/play.page:98(p)
+msgid ""
+"Tracks that you play frequently are scored higher and played more often."
+msgstr ""
+"Κομμάτια που παίζετε συχνά βαθμολογούνται υψηλότερα και παίζονται πιο συχνά."
+
+#: C/play.page:106(title)
 msgid "Play a video"
 msgstr "Αναπαραγωγή βίντεο"
 
-#: C/play.page:63(p)
+#: C/play.page:108(p)
 msgid ""
 "Your imported videos are listed alphabetically. To play a video, choose the "
-"video you wish to play from the list and press the <key>Spacebar</key>, or "
-"choose <guiseq><gui>Playback</gui><gui>Play</gui></guiseq> from the Banshee "
-"menu."
+"video you wish to play from the list and press the <key>Space</key>, or "
+"choose <guiseq><gui style=\"menu\">Playback</gui><gui style=\"menuitem"
+"\">Play</gui></guiseq> from the <app>Banshee</app> menu."
 msgstr ""
 "Τα εισαγόμενα βίντεο εμφανίζονται αλφαβητικά. Για την αναπαραγωγή ενός "
 "βίντεο, επιλέξτε το βίντεο που θέλετε να αναπαραχθεί από τη λίστα και "
-"πατήστε το <key>πλήκτρο διαστήματος</key> ή επιλέξτε "
-"<guiseq><gui>Αναπαραγωγή</gui><gui>Αναπαραγωγή</gui></guiseq> από το μενού "
-"του Banshee."
+"πατήστε το <key>πλήκτρο διαστήματος</key> ή επιλέξτε <guiseq><gui "
+"style=\"menu\">Αναπαραγωγή</gui><gui style=\"menuitem\">Εκτέλεση</gui></guiseq> "
+"από το μενού του <app>Banshee</app>."
 
-#: C/play.page:68(p)
+#: C/play.page:114(p)
 msgid ""
-"Banshee also shows your Favorite videos (those you watch the most) and "
-"Unwatched videos. Choose one and you can play a video from the list."
+"<app>Banshee</app> also shows your Favorite videos (those you watch the "
+"most) and Unwatched videos. Choose one and you can play a video from the "
+"list."
 msgstr ""
-"Το Banshee εμφανίζει επίσης τα αγαπημένα σας βίντεο (αυτά που παρακολουθείτε "
-"περισσότερο) και αυτά που δεν έχουν προβληθεί. Επιλέξτε ένα και μπορείτε να "
-"το αναπαράγετε από τη λίστα."
+"Το <app>Banshee</app> εμφανίζει επίσης τα αγαπημένα σας βίντεο (αυτά που "
+"παρακολουθείτε περισσότερο) και αυτά που δεν έχουν προβληθεί. Επιλέξτε ένα "
+"και μπορείτε να το αναπαράγετε από τη λίστα."
 
-#: C/play.page:74(title)
-msgid "Play a Podcast"
-msgstr "Αναπαραγωγή φορητής εκπομπής"
-
-#: C/play.page:76(p)
+#: C/play.page:123(p)
 msgid ""
-"Podcasts shows you all Podcasts you're subscribed too, all Podcast shows "
-"available, and the Podcast browser lists all Podcasts in order of newest "
+"Podcasts shows you all podcasts you are subscribed to, all podcast shows "
+"available, and the podcast browser lists all podcasts in order of newest "
 "first."
 msgstr ""
 "Οι φορητές εκπομπές (Podcasts) εμφανίζουν όλες τις φορητές εκπομπές στις "
@@ -807,188 +1258,222 @@ msgstr ""
 "περιήγηση στις φορητές εκπομπές εμφανίζει όλες τις διαθέσιμες φορητές "
 "εκπομπές με πρώτες τις πιο πρόσφατες."
 
-#: C/play.page:80(p)
+#: C/play.page:127(p)
 msgid ""
-"To play a Podcast, choose the Podcast you wish to play from the list and "
-"press the <key>Spacebar</key>, or choose <guiseq><gui>Playback</"
-"gui><gui>Play</gui></guiseq> from the Banshee menu."
+"To play a podcast, choose the podcast you wish to play from the list and "
+"press the <key>Space</key>, or choose <guiseq><gui style=\"menu\">Playback</"
+"gui><gui style=\"menuitem\">Play</gui></guiseq> from the <app>Banshee</app> "
+"menu."
 msgstr ""
 "Για την αναπαραγωγή μιας φορητής εκπομπής, επιλέξτε τη φορητή εκπομπή, που "
-"θέλετε να αναπαραχθεί, από τη λίστα και πατήστε το <key>πλήκτρο διαστήματος</"
-"key> ή επιλέξτε <guiseq><gui>Αναπαραγωγή</gui><gui>Αναπαραγωγή</gui></"
-"guiseq> από το μενού του Banshee."
+"θέλετε να αναπαραχθεί, από τη λίστα και πατήστε το <key>πλήκτρο "
+"διαστήματος</key> ή επιλέξτε <guiseq><gui style=\"menu\">Αναπαραγωγή</gui><gui "
+"style=\"menuitem\">Εκτέλεση</gui></guiseq> από το μενού του "
+"<app>Banshee</app>."
 
-#: C/play.page:88(title)
+#: C/play.page:136(title)
 msgid "Play an internet radio station"
 msgstr "Αναπαραγωγή διαδικτυακού ραδιοφωνικού σταθμού"
 
-#: C/play.page:90(p)
+#: C/play.page:138(p)
 msgid ""
 "The Radio source shows you all internet radio stations you have added to "
-"Banshee alphabetically."
+"<app>Banshee</app> alphabetically."
 msgstr ""
 "Η πηγή ραδιόφωνο σας δείχνει αλφαβητικά όλους τους διαδικτυακούς "
-"ραδιοφωνικούς σταθμούς που έχετε προσθέσει στο Banshee."
+"ραδιοφωνικούς σταθμούς που έχετε προσθέσει στο <app>Banshee</app>."
 
-#: C/play.page:94(p)
+#: C/play.page:141(p)
 msgid ""
 "To play an internet radio station, choose the radio station you wish to play "
-"from the list and press the <key>Spacebar</key>, or choose "
-"<guiseq><gui>Playback</gui><gui>Play</gui></guiseq> from the Banshee menu."
+"from the list and press the <key>Space</key>, or choose <guiseq><gui style="
+"\"menu\">Playback</gui><gui style=\"menuitem\">Play</gui></guiseq> from the "
+"<app>Banshee</app> menu."
 msgstr ""
-"Για την αναπαραγωγή ενός διαδικτυακού ραδιοφωνικού σταθμού, επιλέξτε το "
-"σταθμό, που επιθυμείτε, από τη λίστα και πατήστε το <key>πλήκτρο "
-"διαστήματος</key> ή επιλέξτε <guiseq><gui>Αναπαραγωγή</gui><gui>Αναπαραγωγή</"
-"gui></guiseq> από το μενού του Banshee."
+"Για την αναπαραγωγή ενός διαδικτυακού ραδιοφωνικού σταθμού, επιλέξτε τον "
+"σταθμό που θέλετε από τη λίστα και πατήστε το <key>πλήκτρο διαστήματος</key> "
+"ή επιλέξτε <guiseq><gui style=\"menu\">Αναπαραγωγή</gui><gui "
+"style=\"menuitem\">Εκτέλεση</gui></guiseq> από το μενού του "
+"<app>Banshee</app>."
 
 #: C/play-queue.page:9(desc)
-msgid "Add media to your play queue."
-msgstr "Προσθήκη μέσων στη σειρά αναπαραγωγής σας."
+msgid "Add media to your <gui>Play Queue</gui>."
+msgstr "Προσθήκη μέσων στη <gui>σειρά αναπαραγωγής</gui> σας."
 
-#: C/play-queue.page:18(title)
-msgid "Play Queue"
+#: C/play-queue.page:15(years)
+msgid "2013"
+msgstr "2013"
+
+#: C/play-queue.page:24(title)
+msgid "Play queue"
 msgstr "Σειρά αναπαραγωγής"
 
-#: C/play-queue.page:20(p)
+#: C/play-queue.page:26(p)
 msgid ""
-"The <gui>Play Queue</gui> allows you to add music to play in a sequential "
-"order. You can add many tracks to let you listen to hours of music non-stop. "
-"You can add individual tracks or entire albums, and sort or re-order them."
+"The <gui>Play Queue</gui> can be used to play tracks in a sequential order. "
+"You can add many tracks to the <gui>Play Queue</gui> and listen to hours of "
+"music non-stop. You can add individual tracks or entire albums, and sort or "
+"re-order them as you wish."
 msgstr ""
-"Η <gui>σειρά αναπαραγωγής</gui> σας επιτρέπει να προσθέσετε μουσική για να "
-"αναπαραχθεί με τη σειρά. Μπορείτε να προσθέσετε πολλά κομμάτια για να "
-"ακούσετε πολλές ώρες μουσικής χωρίς διακοπή. Μπορείτε να προσθέσετε "
-"μεμονωμένα κομμάτια ή ολόκληρους δίσκους και να τα ταξινομήσετε ή να τα "
-"επαναδιατάξετε."
+"Η <gui>σειρά αναπαραγωγής</gui> μπορεί να χρησιμοποιηθεί για την αναπαραγωγή "
+"κομματιών με μια διαδοχική σειρά. Μπορείτε να προσθέσετε πολλά κομμάτια στη "
+"<gui>σειρά αναπαραγωγής</gui> και να ακούσετε πολλές ώρες μουσικής χωρίς "
+"διακοπή. Μπορείτε να προσθέσετε μεμονωμένα κομμάτια ή ολόκληρους δίσκους και "
+"να τα ταξινομήσετε ή να τα επαναδιατάξετε όπως θέλετε."
 
-#: C/play-queue.page:26(title)
-msgid "Add Music to the Play Queue"
-msgstr "Προσθήκη μουσικής στη σειρά αναπαραγωγής"
+#: C/play-queue.page:32(title)
+msgid "Add music to the <gui>Play Queue</gui>"
+msgstr "Προσθήκη μουσικής στη <gui>σειρά αναπαραγωγής</gui>"
 
-#: C/play-queue.page:28(p)
+#: C/play-queue.page:34(p)
 msgid ""
 "From your music library, you will need to select the music tracks or albums "
-"you want to add to the play queue."
+"you want to add to the <gui>Play Queue</gui>."
 msgstr ""
 "Από τη μουσική σας βιβλιοθήκη, θα χρειαστεί να επιλέξετε τα κομμάτια ή τους "
-"δίσκους που θέλετε να προσθέσετε στη σειρά αναπαραγωγής."
-
-#: C/play-queue.page:32(p)
-msgid ""
-"To add an entire album to the Play Queue, using your mouse press and hold "
-"the album and drag the album over <gui>Play Queue</gui> in the far left "
-"window pane."
-msgstr ""
-"Για να προσθέσετε έναν ολόκληρο δίσκο στη σειρά αναπαραγωγής, με το ποντίκι "
-"σύρετε το δίσκο πάνω από τη <gui>σειρά αναπαραγωγής</gui> στο αριστερότερο "
-"πλαίσιο του παραθύρου."
+"δίσκους που θέλετε να προσθέσετε στη <gui>σειρά αναπαραγωγής</gui>."
 
 #: C/play-queue.page:37(p)
 msgid ""
-"You can add music tracks to the Play Queue individually or as a group. To "
-"add an individual file, drag and drop it over the <gui>Play Queue</gui> in "
-"the far left window pane, or right click the track and choose <gui>Add to "
-"Play Queue</gui>."
+"To add an entire album to the <gui>Play Queue</gui>, use your mouse to press "
+"and hold the album and drag and drop it over <gui>Play Queue</gui> in the "
+"far left window pane."
 msgstr ""
-"Μπορείτε να προσθέσετε μουσικά κομμάτια στη σειρά αναπαραγωγής μεμονωμένα ή "
-"ως ομάδα. Για να προσθέσετε ένα μεμονωμένο αρχείο, σύρετε και αφήστε το πάνω "
-"στη <gui>Σειρά αναπαραγωγής</gui> στο αριστερότερο πλαίσιο του παραθύρου ή "
-"κάντε δεξί κλικ στο κομμάτι και επιλέξτε <gui>Προσθήκη στη σειρά "
-"αναπαραγωγής</gui>."
+"Για να προσθέσετε έναν ολόκληρο δίσκο στη <gui>σειρά αναπαραγωγής</gui>, "
+"χρησιμοποιήστε το ποντίκι σας για να πατήσετε και να κρατήσετε πατημένο τον "
+"δίσκο και έπειτα να τον μεταφέρετε και να τον αποθέσετε πάνω από τη "
+"<gui>σειρά αναπαραγωγής</gui> στο αριστερότερο πλαίσιο του παραθύρου."
 
-#: C/play-queue.page:43(p)
+#: C/play-queue.page:41(p)
 msgid ""
-"You can select multiple files by using your mouse and pressing <key>Control</"
-"key> and choosing each file with your mouse or select a range of files by "
-"pressing <key>Shift</key> twice to select that range of files. You can then "
-"drag and drop it over the <gui>Play Queue</gui> in the far left window pane "
-"or right click the tracks and choose <gui>Add to Play Queue</gui>."
+"You can add music tracks to the <gui>Play Queue</gui> individually or as a "
+"group. To add an individual file, drag and drop it over the <gui>Play Queue</"
+"gui> in the far left window pane, or right click the track and choose <gui "
+"style=\"menuitem\">Add to Play Queue</gui>."
 msgstr ""
-"Μπορείτε να επιλέξετε πολλαπλά αρχεία με το ποντίκι και πατώντας το "
-"<key>Control</key> και επιλέγοντας κάθε αρχείο με το ποντίκι σας ή "
-"επιλέγοντας μια σειρά αρχείων πατώντας δυο φορές το <key>Shift</key> για να "
-"τα επιλέξετε. Μπορείτε μετά να σύρετε και να τα αφήσετε πάνω στη <gui>Σειρά "
-"αναπαραγωγής</gui> στο αριστερότερο πλαίσιο του παραθύρου ή να κάνετε δεξί "
-"κλικ στα κομμάτια και να επιλέξτε <gui>Προσθήκη στη σειρά αναπαραγωγής</gui>."
+"Μπορείτε να προσθέσετε μουσικά κομμάτια στη <gui>σειρά αναπαραγωγής</gui> "
+"μεμονωμένα ή ως ομάδα. Για να προσθέσετε ένα μεμονωμένο αρχείο, σύρετε και "
+"αφήστε το πάνω στη <gui>Σειρά αναπαραγωγής</gui> στο αριστερότερο πλαίσιο "
+"του παραθύρου ή δεξιοπατήστε στο κομμάτι και επιλέξτε <gui "
+"style=\"menuitem\">Προσθήκη στη σειρά αναπαραγωγής</gui>."
+
+#: C/play-queue.page:46(p)
+msgid ""
+"To select multiple tracks, select each track with your mouse while holding "
+"down <key>Ctrl</key> or select a range of files by pressing <key>Shift</key> "
+"and clicking twice to select that range of files. You can then drag and drop "
+"it over the <gui>Play Queue</gui> in the far left window pane or right click "
+"the tracks and choose <gui style=\"menuitem\">Add to Play Queue</gui>."
+msgstr ""
+"Για την επιλογή  πολλών κομματιών, επιλέξτε κάθε κομμάτι με το ποντίκι σας, "
+"ενώ κρατάτε πατημένο το <key>Control</key>, ή επιλέξτε μια περιοχή αρχείων "
+"πατώντας το <key>Shift</key> και πατώντας δυο φορές για να επιλέξετε την "
+"περιοχή των αρχείων. Μπορείτε μετά να σύρετε και να τα αποθέσετε πάνω στη "
+"<gui>Σειρά αναπαραγωγής</gui> στο αριστερότερο πλαίσιο του παραθύρου ή να "
+"δεξιοπατήσετε στα κομμάτια και να επιλέξτε <gui style=\"menuitem\">Προσθήκη "
+"στη σειρά αναπαραγωγής</gui>."
 
 #: C/play-queue.page:56(title)
-msgid "Organize Your Play Queue"
-msgstr "Οργάνωση της σειράς αναπαραγωγής σας"
+msgid "Organize your <gui>Play Queue</gui>"
+msgstr "Οργάνωση της <gui>σειράς αναπαραγωγής</gui> σας"
 
 #: C/play-queue.page:58(p)
 msgid ""
-"Your Play Queue is organized in the order of the tracks you added. The first "
-"tracks or albums you added to the queue will be the first to be played. You "
-"can re-order your Play Queue by using your mouse and dragging and dropping a "
-"track or group of tracks in the list. Choose the track(s) you wish to re-"
-"order with your mouse and release your mouse over the number or place in the "
-"list you wish those files to be in the queue."
+"Your <gui>Play Queue</gui> is organized in the order of the tracks you "
+"added. The first tracks or albums you added to the queue will be the first "
+"to be played. You can re-order your <gui>Play Queue</gui> by using your "
+"mouse and dragging and dropping a track or group of tracks in the list. "
+"Choose the track(s) you wish to re-order with your mouse and release your "
+"mouse over the number or place in the list you wish those files to be in the "
+"queue."
 msgstr ""
-"Η σειρά αναπαραγωγής σας οργανώνεται με τη σειρά που προσθέσατε τα κομμάτια. "
-"Τα πρώτα κομμάτια ή δίσκοι που προσθέσατε θα αναπαραχθούν πρώτα. Μπορείτε να "
-"επαναδιατάξετε τη σειρά αναπαραγωγής με το ποντίκι, σύροντας και αφήνοντας "
-"ένα κομμάτι ή ομάδα κομματιών στη λίστα. Επιλέξτε το κομμάτι(α) που θέλετε "
-"να επαναδιατάξετε με το ποντίκι σας και αφήστε το κουμπί του ποντικιού πάνω "
-"από τον αριθμό ή θέση της λίστας που θέλετε να τοποθετηθούν αυτά τα αρχεία."
+"Η <gui>σειρά αναπαραγωγής</gui> σας οργανώνεται με τη σειρά που προσθέσατε "
+"τα κομμάτια. Τα πρώτα κομμάτια ή δίσκοι που προσθέσατε θα αναπαραχθούν "
+"πρώτα. Μπορείτε να επαναδιατάξετε τη <gui>σειρά αναπαραγωγής</gui> με το "
+"ποντίκι, σύροντας και αφήνοντας ένα κομμάτι ή ομάδα κομματιών στη λίστα. "
+"Επιλέξτε τα κομμάτια που θέλετε να επαναδιατάξετε με το ποντίκι σας και "
+"αφήστε το ποντίκι σας πάνω από τον αριθμό ή τη θέση στη λίστα που θέλετε να "
+"τοποθετηθούν αυτά τα αρχεία."
 
-#: C/play-queue.page:70(title)
-msgid "Removing Tracks from the Play Queue"
-msgstr "Αφαίρεση κομματιών από τη σειρά αναπαραγωγής"
+#: C/play-queue.page:68(title)
+msgid "Removing tracks from the <gui>Play Queue</gui>"
+msgstr "Αφαίρεση κομματιών από τη <gui>σειρά αναπαραγωγής</gui>"
 
-#: C/play-queue.page:72(p)
+#: C/play-queue.page:70(p)
 msgid ""
 "You can remove an individual track, a group of tracks, or clear your entire "
-"play queue."
+"<gui>Play Queue</gui>:"
 msgstr ""
 "Μπορείτε να αφαιρέσετε ένα μεμονωμένο κομμάτι, μια ομάδα κομματιών ή να "
-"εκκαθαρίσετε όλη τη σειρά αναπαραγωγής."
+"εκκαθαρίσετε όλη τη <gui>σειρά αναπαραγωγής</gui>:"
 
-#: C/play-queue.page:76(p)
+#: C/play-queue.page:75(p)
 msgid ""
-"To remove an individual track or group of tracks, select the track with your "
-"mouse and then press <key>Delete</key>."
+"To remove an individual track, select the track with your mouse and then "
+"press <key>Delete</key>."
 msgstr ""
-"Για να αφαιρέσετε ένα μεμονωμένο κομμάτι ή ομάδα κομματιών, επιλέξτε το "
-"κομμάτι με το ποντίκι σας και πατήστε <key>Delete</key>."
+"Για να αφαιρέσετε ένα μεμονωμένο κομμάτι, επιλέξτε το κομμάτι με το ποντίκι "
+"σας και πατήστε <key>Delete</key>."
 
-#: C/play-queue.page:80(p)
+#: C/play-queue.page:79(p)
 msgid ""
-"To clear your entire Play Queue, press the <gui>Clear</gui> button in the "
-"upper right hand corner of the Play Queue."
+"To remove multiple tracks, select each track with your mouse while holding "
+"down <key>Ctrl</key>. Once all the desired tracks have been selected, press "
+"<key>Delete</key>."
 msgstr ""
-"Για να εκκαθαρίσετε όλη τη σειρά αναπαραγωγής σας, πατήστε το κουμπί "
-"<gui>Εκκαθάριση</gui> στην πάνω δεξιά γωνία της σειράς αναπαραγωγής."
+"Για να αφαιρέσετε πολλά κομμάτια, επιλέξτε κάθε κομμάτι με το ποντίκι σας, "
+"ενώ κρατάτε πατημένο το <key>Ctrl</key>. Μόλις όλα τα επιθυμητά κομμάτια "
+"έχουν επιλεγεί, πατήστε <key>Διαγραφή</key>."
 
-#: C/manage-tags.page:10(desc)
+#: C/play-queue.page:83(p)
+msgid ""
+"If you accidentally select a track you do not want to remove, hold down "
+"<key>Ctrl</key> and select the track again with your mouse, to unselect it."
+msgstr ""
+"Αν επιλέξατε κατά λάθος ένα κομμάτι που δεν θέλετε να αφαιρέσετε, κρατήστε "
+"πατημένο το <key>Ctrl</key> και επιλέξτε το κομμάτι πάλι με το ποντίκι σας, "
+"για να το αποεπιλέξετε."
+
+#: C/play-queue.page:89(p)
+msgid ""
+"To clear your entire <gui>Play Queue</gui>, press the <gui style=\"button"
+"\">Clear</gui> button in the upper right hand corner of the <gui>Play Queue</"
+"gui> or press <keyseq><key>Ctrl</key><key>A</key></keyseq> and press "
+"<key>Delete</key>."
+msgstr ""
+"Για να καθαρίσετε όλη τη <gui>σειρά αναπαραγωγής</gui> σας, πατήστε το "
+"κουμπί <gui style=\"button\">Καθαρισμός</gui> στην πάνω δεξιά γωνία της "
+"<gui>σειράς αναπαραγωγής</gui> ή πατήστε "
+"<keyseq><key>Ctrl</key><key>Α</key></keyseq> και πατήστε "
+"<key>Διαγραφή</key>."
+
+#: C/manage-tags.page:9(desc)
 msgid "Edit and change music tags and metadata."
 msgstr "Επεξεργασία και αλλαγή ετικετών μουσικής και μεταδεδομένων."
 
-#: C/manage-tags.page:25(title)
-msgid "Music Metadata"
-msgstr "Μεταδεδομένα μουσικής"
-
-#: C/manage-tags.page:29(title)
+#: C/manage-tags.page:24(title)
 msgid "Music metadata"
 msgstr "Μεταδεδομένα μουσικής"
 
-#: C/manage-tags.page:31(p)
+#: C/manage-tags.page:26(p)
 msgid ""
 "Digital music contains metadata that stores information in the music file "
 "including the artist, album, year recorded, genre, and more. Almost all "
 "music purchased over the internet will have the metadata already embedded "
-"and if you import music from CDs, Banshee will include the metadata when "
-"ripping the CD if available. For more information on ripping CDs and "
-"including the metadata see the <link xref=\"import\"/>."
+"and if you import music from CDs, <app>Banshee</app> will include the "
+"metadata when ripping the CD if available. For more information on ripping "
+"CDs and including the metadata see the <link xref=\"import\"/>."
 msgstr ""
 "Η ψηφιακή μουσική περιέχει μεταδεδομένα που αποθηκεύουν πληροφορίες στο "
 "μουσικό αρχείο που περιλαμβάνουν τον καλλιτέχνη, το δίσκο, το έτος "
 "ηχογράφησης, το είδος και άλλα. Σχεδόν όλη η μουσική που αγοράζεται μέσω "
 "διαδικτύου θα έχει ήδη ενσωματωμένα τα μεταδεδομένα και αν εισάγετε μουσική "
-"από CD, το Banshee θα συμπεριλάβει τα μεταδεδομένα κατά την εξαγωγή από το "
-"CD, αν είναι διαθέσιμα. Για περισσότερες πληροφορίες για την εξαγωγή CD και "
-"την συμπερίληψη μεταδεδομένων δείτε την <link xref=\"εισαγωγή\"/>."
+"από CDs, το <app>Banshee</app> θα συμπεριλάβει τα μεταδεδομένα κατά την "
+"αντιγραφή από το CD, αν είναι διαθέσιμα. Για περισσότερες πληροφορίες για "
+"την αντιγραφή CD και την συμπερίληψη μεταδεδομένων δείτε την <link "
+"xref=\"import\"/>."
 
-#: C/manage-tags.page:39(p)
+#: C/manage-tags.page:33(p)
 msgid ""
 "Popular metadata formats are ID3v1 and ID3v2 for MP3 files and Vorbis "
 "comments for OGG Vorbis files."
@@ -996,35 +1481,35 @@ msgstr ""
 "Δημοφιλείς μορφές μεταδεδομένων είναι οι ID3v1 και ID3v2 για αρχεία MP3 και "
 "τα σχόλια Vorbis για αρχεία OGG Vorbis."
 
-#: C/manage-tags.page:42(p)
+#: C/manage-tags.page:36(p)
 msgid ""
-"If you have imported songs that do not contain metadata, <app>Banshee</app> "
+"If you have imported songs that do not contain metadata,<app>Banshee</app> "
 "will display <gui>Unknown</gui> for most fields in the library."
 msgstr ""
 "Αν έχετε εισαγάγει τραγούδια που δεν περιέχουν μεταδεδομένα, το "
 "<app>Banshee</app> θα εμφανίσει <gui>Άγνωστο</gui> στα περισσότερα πεδία στη "
 "βιβλιοθήκη."
 
-#: C/manage-tags.page:50(title)
-msgid "Edit Your Metadata"
-msgstr "Επεξεργασία μεταδεδομένων"
+#: C/manage-tags.page:40(title)
+msgid "Edit your metadata"
+msgstr "Επεξεργασία των μεταδεδομένων σας"
 
-#: C/manage-tags.page:52(p)
+#: C/manage-tags.page:42(p)
 msgid ""
 "You can change and edit the metadata of your songs. Select the song or songs "
-"you want to update and hit the <key>E</key>, choose <guiseq><gui>Edit</"
-"gui><gui>Edit Track Information</gui></guiseq> from the menu, or use your "
-"mouse and right click on the files and select <gui>Edit Track Information</"
-"gui>."
+"you want to update and hit the <key>E</key>, choose <guiseq><gui style=\"menu"
+"\">Edit</gui><gui style=\"menuitem\">Edit Track Information</gui></guiseq> "
+"from the menu, or use your mouse and right click on the files and select "
+"<gui style=\"menuitem\">Edit Track Information</gui>."
 msgstr ""
-"Μπορείτε να αλλάξετε και να επεξεργασθείτε τα μεταδεδομένα των τραγουδιών "
+"Μπορείτε να αλλάξετε και να επεξεργαστείτε τα μεταδεδομένα των τραγουδιών "
 "σας. Επιλέξτε το τραγούδι ή τα τραγούδια που θέλετε να ενημερώσετε και "
-"πατήστε το <key>E</key>, επιλέξτε <guiseq><gui>Επεξεργασία</"
-"gui><gui>Επεξεργασία πληροφοριών κομματιού</gui></guiseq> από το μενού ή "
-"κάντε δεξί κλικ στα αρχεία και επιλέξτε <gui>Επεξεργασία πληροφοριών "
-"κομματιού</gui>."
+"πατήστε το <key>E</key>, επιλέξτε <guiseq><gui "
+"style=\"menu\">Επεξεργασία</gui><gui style=\"menuitem\">Επεξεργασία πληροφοριών "
+"κομματιού</gui></guiseq> από το μενού ή δεξιοπατήστε στα αρχεία και επιλέξτε "
+"<gui style=\"menuitem\">Επεξεργασία πληροφοριών κομματιού</gui>."
 
-#: C/manage-tags.page:59(p)
+#: C/manage-tags.page:49(p)
 msgid ""
 "A dialog box will appear that shows the song's metadata and allow you to "
 "change or update it. The default fields displayed include:"
@@ -1033,57 +1518,58 @@ msgstr ""
 "τραγουδιού και σας επιτρέπει να τα αλλάξετε ή να τα ενημερώσετε. Τα "
 "προεπιλεγμένα πεδία που εμφανίζονται περιλαμβάνουν:"
 
-#: C/manage-tags.page:63(gui)
-msgid "Track Title:"
-msgstr "Τίτλος κομματιού:"
+#: C/manage-tags.page:53(gui)
+msgid "Track Title"
+msgstr "Τίτλος κομματιού"
 
-#: C/manage-tags.page:64(gui)
+#: C/manage-tags.page:54(gui)
 msgid "Track Artist"
 msgstr "Καλλιτέχνης κομματιού"
 
-#: C/manage-tags.page:65(gui)
+#: C/manage-tags.page:55(gui)
 msgid "Album Title"
 msgstr "Τίτλος δίσκου"
 
-#: C/manage-tags.page:66(gui)
+#: C/manage-tags.page:56(gui)
 msgid "Genre"
 msgstr "Είδος"
 
-#: C/manage-tags.page:67(gui)
+#: C/manage-tags.page:57(gui)
 msgid "Track Number"
 msgstr "Αριθμός κομματιού"
 
-#: C/manage-tags.page:68(gui)
+#: C/manage-tags.page:58(gui)
 msgid "Disc Number"
 msgstr "Αριθμός δίσκου"
 
-#: C/manage-tags.page:69(gui) C/manage-playlists.page:109(gui)
+#: C/manage-tags.page:59(gui) C/manage-playlists.page:107(gui)
 msgid "Year"
 msgstr "Έτος"
 
-#: C/manage-tags.page:72(p)
+#: C/manage-tags.page:62(p)
 msgid ""
 "Update the song's information. If you have selected multiple songs to edit "
 "press the right arrow icon to the right of the <gui>Track Title</gui> field "
-"or press the <gui>Forward</gui> button at the bottom of the dialog when "
-"finished with each song. When you have completed editing all metadata, press "
-"<gui>Save</gui>."
+"or press the <gui style=\"button\">Forward</gui> button at the bottom of the "
+"dialog when finished with each song. When you have completed editing all "
+"metadata, press <gui style=\"button\">Save</gui>."
 msgstr ""
-"Ενημερώστε τις πληροφορίες τραγουδιού. Αν έχετε επιλέξει πολλαπλά τραγούδια "
-"για επεξεργασία, πατήστε το εικονίδιο με το δεξί βέλος στα δεξιά του πεδίου "
-"<gui>Τίτλος κομματιού</gui> ή πατήστε το κουμπί <gui>Μπροστά</gui> στο κάτω "
-"μέρος του διαλόγου όταν τελειώνετε με κάθε τραγούδι. Όταν έχετε επεξεργασθεί "
-"όλα τα μεταδεδομένα, πατήστε <gui>Αποθήκευση</gui>."
+"Ενημερώστε τις πληροφορίες τραγουδιού. Αν έχετε επιλέξει πολλά τραγούδια για "
+"επεξεργασία, πατήστε το εικονίδιο με το δεξί βέλος στα δεξιά του πεδίου "
+"<gui>Τίτλος κομματιού</gui> ή πατήστε το κουμπί <gui "
+"style=\"button\">Μπροστά</gui> στο κάτω μέρος του διαλόγου όταν τελειώνετε με "
+"κάθε τραγούδι. Όταν έχετε επεξεργασθεί όλα τα μεταδεδομένα, πατήστε <gui "
+"style=\"button\">Αποθήκευση</gui>."
 
-#: C/manage-playlists.page:10(desc)
+#: C/manage-playlists.page:9(desc)
 msgid "Create and manage playlists."
 msgstr "Δημιουργία και διαχείριση λιστών αναπαραγωγής."
 
-#: C/manage-playlists.page:19(title)
+#: C/manage-playlists.page:18(title) C/keyboard-shortcuts.page:73(title)
 msgid "Playlists"
 msgstr "Λίστες αναπαραγωγής"
 
-#: C/manage-playlists.page:21(p)
+#: C/manage-playlists.page:20(p)
 msgid ""
 "Playlists allow you to create and save a list of music tracks to be played "
 "in a specific order. Playlists are convenient to create a list of your "
@@ -1099,23 +1585,23 @@ msgstr ""
 "συσκευές αναπαραγωγής σας επιτρέπουν ακόμα και να μεταφέρετε τη λίστα "
 "αναπαραγωγής ώστε να μπορείτε να την πάρετε μαζί σας."
 
-#: C/manage-playlists.page:28(p)
+#: C/manage-playlists.page:26(p)
 msgid ""
-"Banshee supports normal playlists, which include songs you add to the "
-"playlist, as well as smart playlists. Smart Playlists are automatically "
+"<app>Banshee</app> supports normal playlists, which include songs you add to "
+"the playlist, as well as smart playlists. Smart Playlists are automatically "
 "generated playlists based on your listening habits, favorite music, or more."
 msgstr ""
-"Το Banshee υποστηρίζει κανονικές λίστες αναπαραγωγής, που περιλαμβάνουν "
-"τραγούδια που προσθέτετε στη λίστα αναπαραγωγής καθώς και έξυπνες λίστες "
-"αναπαραγωγής. Οι έξυπνες λίστες αναπαραγωγής δημιουργούν αυτόματα λίστες "
-"αναπαραγωγής βασισμένες στις συνήθειές σας ακρόασης, στην αγαπημένη σας "
-"μουσική και άλλα."
+"Το <app>Banshee</app> υποστηρίζει κανονικές λίστες αναπαραγωγής, που "
+"περιλαμβάνουν τραγούδια που προσθέτετε στη λίστα αναπαραγωγής καθώς και "
+"έξυπνες λίστες αναπαραγωγής. Οι έξυπνες λίστες αναπαραγωγής δημιουργούν "
+"αυτόματα λίστες αναπαραγωγής βασισμένες στις συνήθειές ακρόασης σας, στην "
+"αγαπημένη σας μουσική και άλλα."
 
-#: C/manage-playlists.page:34(title)
-msgid "Normal Playlists"
+#: C/manage-playlists.page:32(title)
+msgid "Normal playlists"
 msgstr "Κανονικές λίστες αναπαραγωγής"
 
-#: C/manage-playlists.page:36(p)
+#: C/manage-playlists.page:34(p)
 msgid ""
 "A normal playlist is a list of songs that you add and manage. You might want "
 "to create your own list of songs by your favorite artist from multiple "
@@ -1124,61 +1610,54 @@ msgid ""
 msgstr ""
 "Μια κανονική λίστα αναπαραγωγής είναι μια λίστα τραγουδιών που έχετε "
 "προσθέσει και διαχειρίζεστε. Μπορεί να θέλετε να δημιουργήσετε τη δική σας "
-"λίστα τραγουδιών από τον αγαπημένο σας καλλιτέχνη από πολλαπλούς δίσκους ή "
-"μια λίστα με έντονο ρυθμό για να ακούτε όσο ασκείστε."
+"λίστα τραγουδιών από τον αγαπημένο σας καλλιτέχνη από πολλούς δίσκους, τα "
+"τελευταία αγαπημένα σας τραγούδια ή μια λίστα με έντονο ρυθμό για να ακούτε "
+"όσο ασκείστε."
 
-#: C/manage-playlists.page:42(p)
-#| msgid ""
-#| "You can create a new playlist by pressing <keyseq><key>Control</"
-#| "key><key>N</key></keyseq>, from the menu choosing <guiseq><gui>Menu</"
-#| "gui><gui>New Playlist</gui></guiseq> or by selecing the track(s) you "
-#| "would like to add to the playlist. Select the track(s), right click them, "
-#| "and choose <guiseq><gui>Add to Playlist</gui><gui>New Playlist</gui></"
-#| "guiseq>. You can also drag and drop them to a new playlist by selcting "
-#| "the track(s) and dragging them to the left hand window pane over "
-#| "<gui>Music</gui>. As you drag it over <gui>Music</gui>, a new option "
-#| "<gui><em>New Playlist</em></gui> will appear and you can drop the track"
-#| "(s) over <gui><em>New Playlist</em></gui> to add them to the playlist. "
-#| "You can repeat this process until you have added all the tracks you want "
-#| "in the playlist."
+#: C/manage-playlists.page:39(p)
 msgid ""
 "You can create a new playlist by pressing <keyseq><key>Control</key><key>N</"
-"key></keyseq>, from the menu choosing <guiseq><gui>Menu</gui><gui>New "
-"Playlist</gui></guiseq> or by selecing the track(s) you would like to add to "
-"the playlist. Select the track(s), right click them, and choose "
-"<guiseq><gui>Add to Playlist</gui><gui>New Playlist</gui></guiseq>. You can "
-"also drag and drop them to a new playlist by selecting the track(s) and "
-"dragging them to the left hand window pane over <gui>Music</gui>. As you "
-"drag it over <gui>Music</gui>, a new option <gui><em>New Playlist</em></gui> "
-"will appear and you can drop the track(s) over <gui><em>New Playlist</em></"
-"gui> to add them to the playlist. You can repeat this process until you have "
-"added all the tracks you want in the playlist."
+"key></keyseq>, from the menu choosing <guiseq><gui style=\"menu\">Media</"
+"gui><gui style=\"menuitem\">New Playlist</gui></guiseq> or by selecing the "
+"track(s) you would like to add to the playlist. Select the track(s), right "
+"click them, and choose <guiseq><gui style=\"menuitem\">Add to Playlist</"
+"gui><gui style=\"menuitem\">New Playlist</gui></guiseq>. You can also drag "
+"and drop them to a new playlist by selecting the track(s) and dragging them "
+"to the left hand window pane over <gui>Music</gui>. As you drag it over "
+"<gui>Music</gui>, a new option <gui style=\"menuitem\"><em>New Playlist</"
+"em></gui> will appear and you can drop the track(s) over <gui style="
+"\"menuitem\"><em>New Playlist</em></gui> to add them to the playlist. You "
+"can repeat this process until you have added all the tracks you want in the "
+"playlist."
 msgstr ""
 "Μπορείτε να δημιουργήσετε μια νέα λίστα αναπαραγωγής πατώντας "
 "<keyseq><key>Control</key><key>N</key></keyseq>, από το μενού επιλέγοντας "
-"<guiseq><gui>Μενού</gui><gui>Νέα λίστα αναπαραγωγής</gui></guiseq> ή "
-"επιλέγοντας τα κομμάτια που θέλετε να προσθέσετε στη λίστα αναπαραγωγής. "
-"Επιλέξτε τα κομμάτια, κάντε δεξί κλικ και επιλέξτε <guiseq><gui>Προσθήκη στη "
-"λίστα αναπαραγωγής</gui><gui>Νέα λίστα αναπαραγωγής</gui></guiseq>. "
-"Μπορείτε επίσης να σύρετε και να τα αφήσετε σε μια νέα λίστα αναπαραγωγής "
-"επιλέγοντας τα κομμάτια και σύροντάς τα στο αριστερό πλαίσιο πάνω από το "
-"<gui>Μουσική</gui>. Καθώς τα σύρετε πάνω από το <gui>Μουσική</gui>, θα "
-"εμφανισθεί μια νέα επιλογή <gui><em>Νέα λίστα αναπαραγωγής</em></gui> και "
-"μπορείτε να αφήσετε τα κομμάτια πάνω από αυτή για να προσθέσετε στη λίστα "
-"αναπαραγωγής. Μπορείτε να επαναλάβετε αυτή τη διαδικασία μέχρι να προσθέσετε "
-"όλα τα κομμάτια που θέλετε στη λίστα αναπαραγωγής."
+"<guiseq><gui style=\"menu\">Μέσα</gui><gui style=\"menuitem\">Νέα λίστα "
+"αναπαραγωγής</gui></guiseq> ή επιλέγοντας τα κομμάτια που θέλετε να "
+"προσθέσετε στη λίστα αναπαραγωγής. Επιλέξτε τα κομμάτια, δεξιοπατήστε τα και "
+"επιλέξτε <guiseq><gui style=\"menuitem\">Προσθήκη στη λίστα "
+"αναπαραγωγής</gui><gui style=\"menuitem\">Νέα λίστα "
+"αναπαραγωγής</gui></guiseq>. Μπορείτε επίσης να σύρετε και να τα αφήσετε σε "
+"μια νέα λίστα αναπαραγωγής επιλέγοντας τα κομμάτια και σύροντάς τα στο "
+"αριστερό πλαίσιο του παραθύρου πάνω από το <gui>Μουσική</gui>. Καθώς τα "
+"σύρετε πάνω από το <gui>Μουσική</gui>, θα εμφανισθεί μια νέα επιλογή <gui "
+"style=\"menuitem\"><em>Νέα λίστα αναπαραγωγής</em></gui> και μπορείτε να "
+"αφήσετε τα κομμάτια πάνω από τη <gui style=\"menuitem\"><em>Νέα λίστα "
+"αναπαραγωγής</em></gui> για να τα προσθέσετε στη λίστα αναπαραγωγής. "
+"Μπορείτε να επαναλάβετε αυτή τη διαδικασία μέχρι να προσθέσετε όλα τα "
+"κομμάτια που θέλετε στη λίστα αναπαραγωγής."
 
 #: C/manage-playlists.page:56(p)
 msgid ""
 "To give your playlist its own name, select the playlist and right click on "
-"the playlist and press <gui>Rename Playlist</gui> and enter the name of your "
-"playlist."
+"the playlist and press <gui style=\"menuitem\">Rename Playlist</gui> and "
+"enter the name of your playlist."
 msgstr ""
-"Για να δώσετε στη λίστα αναπαραγωγής όνομα, επιλέξτε τη, κάντε δεξί κλικ σε "
-"αυτή, πατήστε <gui>Μετονομασία λίστας αναπαραγωγής</gui> και εισάγετε το "
-"όνομα της λίστας."
+"Για να δώσετε στη λίστα αναπαραγωγής σας όνομα, επιλέξτε την και "
+"δεξιοπατήστε σε αυτή, πατήστε <gui style=\"menuitem\">Μετονομασία λίστας "
+"αναπαραγωγής</gui> και εισάγετε το όνομα της λίστας σας."
 
-#: C/manage-playlists.page:61(p)
+#: C/manage-playlists.page:60(p)
 msgid ""
 "You can change the order of the playlist by dragging and dropping the song "
 "to the new position in the playlist. Songs can only be re-ordered in the "
@@ -1192,21 +1671,23 @@ msgstr ""
 "μια στήλη, κάντε κλικ πάνω της μέχρι να μην εμφανίζεται πάνω ή κάτω βέλος "
 "και η στήλη να είναι κενή και μετά επαναδιατάξτε τη λίστα αναπαραγωγής."
 
-#: C/manage-playlists.page:68(p)
+#: C/manage-playlists.page:66(p)
 msgid ""
 "To remove a track from the playlist, select the track(s) you wish to remove. "
-"Press the <key>Delete</key>, from the menu choose <guiseq><gui>Edit</"
-"gui><gui>Remove from Playlist</gui></guiseq> or right click the track(s) "
-"with your mouse and press <gui>Remove from Playlist</gui>."
+"Press the <key>Delete</key>, from the menu choose <guiseq><gui style=\"menu"
+"\">Edit</gui><gui style=\"menuitem\">Remove from Playlist</gui></guiseq> or "
+"right click the track(s) with your mouse and press <gui style=\"menuitem"
+"\">Remove from Playlist</gui>."
 msgstr ""
 "Για να αφαιρέσετε ένα κομμάτι από τη λίστα αναπαραγωγής, επιλέξτε τα "
-"κομμάτια που θέλετε να αφαιρέσετε. Πατήστε το <key>Delete</key>, επιλέξτε "
-"από το μενού <guiseq><gui>Επεξεργασία</gui><gui>Αφαίρεση από τη λίστα "
-"αναπαραγωγής</gui></guiseq> ή κάντε δεξί κλικ στο κομμάτι(α) με το ποντίκι "
-"σας και πατήστε <gui>Αφαίρεση από τη λίστα αναπαραγωγής</gui>."
+"κομμάτια που θέλετε να απομακρύνετε. Πατήστε το <key>Delete</key>, επιλέξτε "
+"από το μενού <guiseq><gui style=\"menu\">Επεξεργασία</gui><gui "
+"style=\"menuitem\">Αφαίρεση από τη λίστα αναπαραγωγής</gui></guiseq> ή "
+"δεξιοπατήστε στα κομμάτια με το ποντίκι σας και πατήστε <gui "
+"style=\"menuitem\">Αφαίρεση από τη λίστα αναπαραγωγής</gui>."
 
 #: C/manage-playlists.page:76(title)
-msgid "Smart Playlist"
+msgid "Smart playlist"
 msgstr "Έξυπνη λίστα αναπαραγωγής"
 
 #: C/manage-playlists.page:78(p)
@@ -1217,260 +1698,326 @@ msgid ""
 msgstr ""
 "Οι έξυπνες λίστες αναπαραγωγής σας επιτρέπουν να δημιουργήσετε γρήγορα μια "
 "δυναμική λίστα βασισμένη σε ένα αριθμό προκαθορισμένων μεταβλητών. Μπορεί να "
-"δημιουργήσετε γρήγορα μια νέα λίστα αναπαραγωγής βασισμένη σε ένα "
+"δημιουργήσετε γρήγορα μια νέα λίστα αναπαραγωγής βασισμένη σε έναν "
 "καλλιτέχνη, σε αγαπημένα και άλλα."
 
-#: C/manage-playlists.page:83(p)
+#: C/manage-playlists.page:82(p)
 msgid ""
-"To create a new Smart Playlist, from the menu choose <guiseq><gui>Media</"
-"gui><gui>New Smart Playlist</gui></guiseq>. You will be presented with a "
-"dialog to create a new Smart Playlist. Enter the name of your playlist and "
-"then choose the criteria your playlist should be based on. You can choose "
-"from any field included in the song's meatadata, such as Album, Artist or "
-"Year. Choose the criteria and then choose from one of the following:"
+"To create a new Smart Playlist, from the menu choose <guiseq><gui style="
+"\"menu\">Media</gui><gui style=\"menuitem\">New Smart Playlist</gui></"
+"guiseq>. You will be presented with a dialog to create a new Smart Playlist. "
+"Enter the name of your playlist and then choose the criteria your playlist "
+"should be based on. You can choose from any field included in the song's "
+"meatadata, such as Album, Artist or Year. Choose the criteria and then "
+"choose from one of the following:"
 msgstr ""
 "Για να δημιουργήσετε μια έξυπνη λίστα αναπαραγωγής, από το μενού επιλέξτε "
-"<guiseq><gui>Πολυμέσα</gui><gui>Νέα έξυνπη λίστα αναπαραγωγής</gui></"
-"guiseq>. Θα εμφανιστεί ένας διάλογος για δημιουργία νέας έξυπνης λίστας "
-"αναπαραγωγής. Εισάγετε το όνομα της λίστας αναπαραγωγής σας και μετά "
-"επιλέξτε τα κριτήρια στα οποία θα βασίζεται η λίστα σας. Μπορεί να επιλέξετε "
-"από οποιοδήποτε πεδίο περιλαμβάνεται στα μεταδεδομένα του τραγουδιού, όπως "
-"Δίσκος, Καλλιτέχνης ή Έτος. Επιλέξτε τα κριτήρια και μετά επιλέξτε ένα από "
-"τα ακόλουθα:"
+"<guiseq><gui style=\"menu\">Πολυμέσα</gui><gui style=\"menuitem\">Νέα έξυπνη "
+"λίστα αναπαραγωγής</gui></guiseq>. Θα εμφανιστεί ένας διάλογος για "
+"δημιουργία νέας έξυπνης λίστας αναπαραγωγής. Εισάγετε το όνομα της λίστας "
+"αναπαραγωγής σας και μετά επιλέξτε τα κριτήρια στα οποία θα βασίζεται η "
+"λίστα σας. Μπορεί να επιλέξετε από οποιοδήποτε πεδίο περιλαμβάνεται στα "
+"μεταδεδομένα του τραγουδιού, όπως Δίσκος, Καλλιτέχνης ή Έτος. Επιλέξτε τα "
+"κριτήρια και μετά επιλέξτε ένα από τα ακόλουθα:"
 
-#: C/manage-playlists.page:93(p) C/manage-playlists.page:109(gui)
+#: C/manage-playlists.page:92(p) C/manage-playlists.page:108(gui)
 #: C/manage-playlists.page:113(gui)
 msgid "is"
 msgstr "είναι"
 
-#: C/manage-playlists.page:94(p)
+#: C/manage-playlists.page:93(p)
 msgid "is not"
 msgstr "δεν είναι"
 
-#: C/manage-playlists.page:95(p)
+#: C/manage-playlists.page:94(p)
 msgid "less than"
 msgstr "λιγότερο από"
 
-#: C/manage-playlists.page:96(p)
+#: C/manage-playlists.page:95(p)
 msgid "more than"
 msgstr "περισσότερο από"
 
-#: C/manage-playlists.page:97(p)
+#: C/manage-playlists.page:96(p)
 msgid "at most"
 msgstr "το πολύ"
 
-#: C/manage-playlists.page:98(p)
+#: C/manage-playlists.page:97(p)
 msgid "at least"
 msgstr "τουλάχιστον"
 
-#: C/manage-playlists.page:101(p)
+#: C/manage-playlists.page:100(p)
 msgid ""
-"You can also press the <gui>+</gui> button to add an addition query to the "
-"Smart Playlist. For example, you could create a smart playlist that includes "
-"all songs from 2010 that you rated 5 stars. To create this playlist you "
-"would choose:"
+"You can also press the <gui style=\"button\">+</gui> button to add an "
+"addition query to the Smart Playlist. For example, you could create a smart "
+"playlist that includes all songs from 2010 that you rated 5 stars. To create "
+"this playlist you would choose:"
 msgstr ""
-"Μπορείτε επίσης να πατήσετε το κουμπί <gui>+</gui> για να προσθέσετε ένα "
-"ερώτημα προσθήκης στην έξυπνη λίστα αναπαραγωγής σας. Παραδείγματος χάριν, "
-"θα μπορούσατε να δημιουργήσετε μια έξυπνη λίστα αναπαραγωγής που "
-"περιλαμβάνει όλα τα τραγούδια από το 2010 που βαθμολογήσατε με 5 αστέρια. "
-"Για να δημιουργήσετε αυτή τη λίστα θα επιλέγατε:"
+"Μπορείτε επίσης να πατήσετε το κουμπί <gui style=\"button\">+</gui> για να "
+"προσθέσετε ένα ερώτημα προσθήκης στην έξυπνη λίστα αναπαραγωγής σας. "
+"Παραδείγματος χάριν, θα μπορούσατε να δημιουργήσετε μια έξυπνη λίστα "
+"αναπαραγωγής που περιλαμβάνει όλα τα τραγούδια από το 2010 που βαθμολογήσατε "
+"με 5 αστέρια. Για να δημιουργήσετε αυτή τη λίστα θα πρέπει να επιλέξετε:"
 
-#: C/manage-playlists.page:110(gui)
+#: C/manage-playlists.page:109(p)
 msgid "2010"
 msgstr "2010"
 
-#: C/manage-playlists.page:113(gui)
+#: C/manage-playlists.page:112(gui)
 msgid "Rating"
-msgstr "Βαθμολογία"
+msgstr "Κατάταξη"
 
 #: C/manage-playlists.page:114(p)
-msgid "<gui/>5 stars"
-msgstr "<gui/>5 αστέρια"
+msgid "5 stars"
+msgstr "5 αστέρια"
 
 #: C/manage-playlists.page:118(p)
 msgid ""
 "You can then optionally select how many songs are included by pressing the "
-"<gui>Limit</gui> to checkbox and choosing the number of songs to be included."
+"<gui style=\"checkbox\">Limit to</gui> checkbox and choosing the number of "
+"songs to be included."
 msgstr ""
 "Μπορείτε τότε προαιρετικά να επιλέξετε πόσα τραγούδια περιλαμβάνονται "
-"πατώντας το <gui>Περιορισμός</gui> στο πεδίο επιλογής και επιλέγοντας τον "
-"αριθμό των τραγουδιών που θα περιληφθούν."
+"πατώντας το πλαίσιο ελέγχου <gui style=\"checkbox\">Περιορισμός</gui> και "
+"επιλέγοντας τον αριθμό των τραγουδιών που θα περιληφθούν."
 
-#: C/manage-playlists.page:123(p)
+#: C/manage-playlists.page:122(p)
 msgid ""
-"Banshee also includes smart playlists already created for you. Press the "
-"<gui>Open in editor</gui> button to view how the playlist created was or to "
-"modify it. If you press <gui>Create and save</gui> the playlist will be "
-"automatically generated and saved for you. The following playlists are "
-"included:"
+"<app>Banshee</app> also includes smart playlists already created for you. "
+"Press the <gui style=\"button\">Open in editor</gui> button to view how the "
+"playlist created was or to modify it. If you press <gui style=\"button"
+"\">Create and save</gui> the playlist will be automatically generated and "
+"saved for you. The following playlists are included:"
 msgstr ""
-"Το Banshee περιλαμβάνει επίσης έξυπνες λίστες αναπαραγωγής που έχουν "
-"δημιουργηθεί για εσάς. Πατήστε το κουμπί <gui>Άνοιγμα στον επεξεργαστή</gui> "
-"για να δείτε πως δημιουργήθηκε η λίστα αναπαραγωγής ή για να την "
-"τροποποιήσετε. Αν πατήσετε <gui>Δημιουργία και αποθήκευση</gui> η λίστα θα "
-"δημιουργηθεί αυτόματα και θα αποθηκευτεί. Περιλαμβάνονται οι ακόλουθες "
-"λίστες αναπαραγωγής:"
+"Το <app>Banshee</app> περιλαμβάνει επίσης έξυπνες λίστες αναπαραγωγής που "
+"έχουν δημιουργηθεί για εσάς. Πατήστε το κουμπί <gui style=\"button\">Άνοιγμα "
+"στον επεξεργαστή</gui> για να δείτε πώς δημιουργήθηκε η λίστα αναπαραγωγής ή "
+"για να την τροποποιήσετε. Αν πατήσετε <gui style=\"button\">Δημιουργία και "
+"αποθήκευση</gui> η λίστα αναπαραγωγής θα δημιουργηθεί αυτόματα και θα "
+"αποθηκευτεί. Περιλαμβάνονται οι ακόλουθες λίστες αναπαραγωγής:"
 
-#: C/manage-playlists.page:131(title)
-msgid "Banshee Smart Playlists"
-msgstr "Έξυπνες λίστες αναπαραγωγής του Banshee"
+#: C/manage-playlists.page:130(title)
+msgid "<app>Banshee</app> smart playlists"
+msgstr "Έξυπνες λίστες αναπαραγωγής του <app>Banshee</app>"
 
 #: C/manage-playlists.page:132(p)
 msgid "Favorites (Songs rated four and five stars)"
 msgstr "Αγαπημένα (τραγούδια με 4 και 5 αστέρια)"
 
-#: C/manage-playlists.page:133(p)
+#: C/manage-playlists.page:135(p)
 msgid "Recent Favorites (Songs listened to often in the past week)"
 msgstr ""
 "Πρόσφατα αγαπημένα (τραγούδια που ακούστηκαν συχνά την προηγούμενη εβδομάδα)"
 
-#: C/manage-playlists.page:135(p)
-msgid "Recently Added (Songs imported within the last week"
+#: C/manage-playlists.page:138(p)
+msgid "Recently Added (Songs imported within the last week)"
 msgstr ""
-"Πρόσφατες προσθήκες (τραγούδια που εισήχθησαν εντός της προηγούμενης "
-"εβδομάδας)"
+"Πρόσφατες προσθήκες (τραγούδια που εισήχθησαν την προηγούμενη εβδομάδα)"
 
-#: C/manage-playlists.page:136(p)
+#: C/manage-playlists.page:141(p)
 msgid "Unheard (Songs that have not been played or skipped)"
-msgstr "Δεν έχουν ακουστεί (τραγούδια που δεν έχουν αναπαραχθεί ή παραβλεφθεί)"
+msgstr "Πρωτάκουστα (τραγούδια που δεν έχουν αναπαραχθεί ή παραβλεφθεί)"
 
-#: C/manage-playlists.page:137(p)
+#: C/manage-playlists.page:144(p)
 msgid "Neglected Favorites (Favorites not played in over two months)"
 msgstr ""
 "Παραμελημένα αγαπημένα (αγαπημένα που δεν έχουν παιχθεί για πάνω από δύο "
 "μήνες)"
 
-#: C/manage-playlists.page:139(p)
+#: C/manage-playlists.page:147(p)
 msgid "700 MB of Favorites (A data CD worth of favorite songs)"
 msgstr "700 MB αγαπημένων (ένα CD δεδομένων γεμάτο με αγαπημένα τραγούδια)"
 
-#: C/manage-playlists.page:140(p)
+#: C/manage-playlists.page:150(p)
 msgid "80 Minutes of Favorites (An audio CD worth of favorite songs)"
 msgstr "80 λεπτά αγαπημένων (ένα CD ήχου γεμάτο με αγαπημένα τραγούδια)"
 
-#: C/manage-playlists.page:142(p)
+#: C/manage-playlists.page:153(p)
 msgid "Unrated (Songs that haven't been rated)"
-msgstr "Χωρίς βαθμολογία (τραγούδια που δεν έχουν αξιολογηθεί)"
-
-#: C/manage-coverart.page:9(desc)
-msgid "Manage or change your albums cover art."
-msgstr "Διαχείριση ή αλλαγή των εξωφύλλων των δίσκων σας."
-
-#: C/manage-coverart.page:24(title)
-msgid "Cover art"
-msgstr "Εξώφυλλο"
+msgstr "Αβαθμολόγητα (τραγούδια που δεν έχουν αξιολογηθεί)"
 
 #: C/lastfm.page:9(desc)
 msgid "Enable Last.fm, song reporting and Last.fm radio."
 msgstr ""
 "Ενεργοποιήστε το Last.fm, αναφορά τραγουδιών και το ραδιόφωνο του Last.fm."
 
-#: C/lastfm.page:24(title)
+#: C/lastfm.page:28(title)
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: C/lastfm.page:26(p)
-#| msgid ""
-#| "Last.fm is a popular online service that offers both free and paid "
-#| "versions. Last.fm offers information on music artists and albums and if "
-#| "you create a user profile Last.fm allows you to track the music you "
-#| "listen to in Banshee for free. If you suscribe as a paying member, you "
-#| "can also listen to streaming music from Last.fm in various music clients, "
-#| "including Banshee. Last.fm offers multiple channels to stream, including "
-#| "recommended music for you based on your listening habits, your favorites "
-#| "and more."
+#: C/lastfm.page:30(p)
 msgid ""
 "Last.fm is a popular online service that offers both free and paid versions. "
 "Last.fm offers information on music artists and albums and if you create a "
-"user profile Last.fm allows you to track the music you listen to in Banshee "
-"for free. If you subscribe as a paying member, you can also listen to "
-"streaming music from Last.fm in various music clients, including Banshee. "
-"Last.fm offers multiple channels to stream, including recommended music for "
-"you based on your listening habits, your favorites and more."
+"user profile Last.fm allows you to track the music you listen to in "
+"<app>Banshee</app> for free. If you subscribe as a paying member, you can "
+"also listen to streaming music from Last.fm in various music clients, "
+"including <app>Banshee</app>. Last.fm offers multiple channels to stream, "
+"including recommended music for you based on your listening habits, your "
+"favorites and more."
 msgstr ""
 "Το Last.fm είναι μια δημοφιλής δικτυακή υπηρεσία που προσφέρει τόσο δωρεάν "
 "όσο και επί πληρωμή υπηρεσίες. Το Last.fm προσφέρει πληροφορίες για "
-"καλλιτέχνες της μουσικής και δίσκους και αν δημιουργήσετε ένα προφίλ χρήστη, "
-"το Last.fm σας επιτρέπει να παρακολουθείτε τη μουσική που ακούτε στο "
-"Banshee δωρεάν. Αν γίνετε επί πληρωμή συνδρομητής, μπορείτε επίσης να ακούτε "
-"ροές μουσικής από το Last.fm σε διάφορους πελάτες μουσικής, "
-"περιλαμβανομένου του Banshee. Το Last.fm προσφέρει πολλαπλά κανάλια για "
-"ροές, περιλαμβανομένης προτεινόμενης μουσικής για εσάς με βάση τις συνήθειες "
-"ακρόασής σας, τα αγαπημένα σας και άλλα."
+"καλλιτέχνες της μουσικής και δίσκους και αν δημιουργήσετε μια κατατομή "
+"χρήστη, το Last.fm σας επιτρέπει να παρακολουθείτε τη μουσική που ακούτε στο "
+"<app>Banshee</app> δωρεάν. Αν γίνετε επί πληρωμή συνδρομητής, μπορείτε "
+"επίσης να ακούτε ροές μουσικής από το Last.fm σε διάφορους πελάτες μουσικής, "
+"περιλαμβανομένου του <app>Banshee</app>. Το Last.fm προσφέρει πολλά κανάλια "
+"για ροές, περιλαμβανομένης προτεινόμενης μουσικής για εσάς με βάση τις "
+"συνήθειες ακρόασής σας, τα αγαπημένα σας και άλλα."
 
-#: C/lastfm.page:35(title)
+#: C/lastfm.page:40(title)
 msgid "Enable Last.fm"
 msgstr "Ενεργοποίηση Last.fm"
 
-#: C/lastfm.page:36(p)
+#: C/lastfm.page:42(p)
 msgid ""
 "To get the most out of Last.fm, you will want to create a Last.fm profile. "
 "Visit <link href=\"http://www.last.fm/join\">http://www.last.fm/join</link> "
-"to create an account or choose <guiseq><gui>Edit</gui><gui>Preferences</"
-"gui></guiseq> from the Banshee menu. Then press the <gui>Source Specific</"
-"gui> tab and press the <gui>Source</gui> drop down menu and choose <gui>Last."
-"fm</gui> and select the <em>Sign up for Last.fm</em> link."
+"to create an account or choose <guiseq><gui style=\"menu\">Edit</gui><gui "
+"style=\"menuitem\">Preferences</gui></guiseq> from the <app>Banshee</app> "
+"menu. Once in the preferences select the <gui style=\"tab\">Source Specific</"
+"gui> tab, press the <gui style=\"menu\">Source</gui> drop down menu, choose "
+"<gui style=\"menuitem\">Last.fm</gui> and finally select the <em>Sign up for "
+"Last.fm</em> link."
 msgstr ""
-"Για να αξιοποιήσετε καλύτερα το Last.fm, θα πρέπει να δημιουργήσετε ένα "
-"προφίλ. Επισκεφθείτε το <link href=\"http://www.last.fm/join\">http://www."
-"last.fm/join</link> για να δημιουργήσετε ένα λογαριασμό ή επιλέξτε "
-"<guiseq><gui>Επεξεργασία</gui><gui>Προτιμήσεις</gui></guiseq> από το μενού "
-"του Banshee. Μετά πατήστε την καρτέλα <gui>Για συγκεκριμένη πηγή</gui> και "
-"πατήστε το αναπτυσσόμενο μενού <gui>Πηγή</gui>, επιλέξτε <gui>Last.fm</gui> "
-"και επιλέξτε <em>Εγγραφή στο Last.fm</em>."
+"Για να αξιοποιήσετε καλύτερα το Last.fm, θα πρέπει να δημιουργήσετε μια "
+"κατατομή στο Last.fm. Επισκεφθείτε το <link "
+"href=\"http://www.last.fm/join\">http://www.last.fm/join</link> για να "
+"δημιουργήσετε ένα λογαριασμό ή επιλέξτε <guiseq><gui "
+"style=\"menu\">Επεξεργασία</gui><gui "
+"style=\"menuitem\">Προτιμήσεις</gui></guiseq> από το μενού του "
+"<app>Banshee</app>. Μόλις βρεθείτε στις προτιμήσεις επιλέξτε την καρτέλα "
+"<gui style=\"tab\">Ειδική πηγή</gui> και πατήστε το πτυσσόμενο μενού <gui "
+"style=\"menu\">Πηγή</gui>, επιλέξτε <gui style=\"menuitem\">Last.fm</gui> και "
+"επιλέξτε τελικά τον σύνδεσμο <em>Εγγραφή στο Last.fm</em>."
 
-#: C/lastfm.page:45(p)
+#: C/lastfm.page:53(p)
 msgid ""
-"To enable Banshee to report the songs you play on your computer to Last.fm, "
-"sign in to Last.fm in Banshee in the <gui>Source Specific</gui> preferences. "
-"Enter your username and press the <gui>Log in to Last.fm</gui> button. You "
-"will be directed to a Last.fm webpage in your browser to grant Banshee "
-"access. Press the <gui>Yes, allow access</gui> link in your browser and you "
-"will be redirected to a webpage that displays a message that Banshee now has "
-"access to Last.fm. Return to Banshee and press the <gui>Finish Logging In</"
-"gui> button to complete the process."
+"To enable <app>Banshee</app> to report the songs you play on your computer "
+"to Last.fm, sign in to Last.fm in <app>Banshee</app> in the <gui style=\"tab"
+"\">Source Specific</gui> preferences. Enter your username and press the <gui "
+"style=\"button\">Log in to Last.fm</gui> button. You will be directed to a "
+"Last.fm webpage in your browser to grant <app>Banshee</app> access. Press "
+"the <gui style=\"button\">Yes, allow access</gui> link in your browser and "
+"you will be redirected to a webpage that displays a message that "
+"<app>Banshee</app> now has access to Last.fm. Return to <app>Banshee</app> "
+"and press the <gui style=\"button\">Finish Logging In</gui> button to "
+"complete the process."
 msgstr ""
-"Για να μπορεί το Banshee να αναφέρει τα τραγούδια που αναπαράγετε στον "
-"υπολογιστή σας στο Last.fm, συνδεθείτε σε αυτό στο Banshee στις προτιμήσεις "
-"<gui>Συγκεκριμένης πηγής</gui>. Εισάγετε το όνομα χρήστη σας και πατήστε "
-"<gui>Σύνδεση στο Last.fm</gui>. Θα μεταφρεθείτε σε μια ιστοσελίδα του Last."
-"fm στον περιηγητή ιστού σας για να δοθεί πρόσβαση στο Banshee. Πατήστε το "
-"σύνδεσμο <gui>Ναι, να επιτραπεί η πρόσβαση</gui> στον περιηγητή σας και θα "
-"επανακατευθυνθείτε σε μια ιστοσελίδα που εμφανίζει ένα μήνυμα ότι το Banshee "
-"έχει τώρα πρόσβαση στο Last.fm. Επιστρέψτε στο Banshee και πατήστε το κουμπί "
-"<gui>Ολοκλήρωση σύνδεσης</gui> για να ολοκληρωθεί η διαδικασία."
+"Για να μπορεί το <app>Banshee</app> να αναφέρει τα τραγούδια που αναπαράγετε "
+"στον υπολογιστή σας στο Last.fm, συνδεθείτε στο Last.fm στο "
+"<app>Banshee</app> και στις προτιμήσεις <gui style=\"tab\">Ειδική πηγή</gui>. "
+"Εισάγετε το όνομα χρήστη σας και πατήστε το κουμπί <gui "
+"style=\"button\">Σύνδεση στο Last.fm</gui>. Θα μεταφερθείτε σε μια ιστοσελίδα "
+"του Last.fm στον περιηγητή ιστού σας για να δοθεί πρόσβαση στο "
+"<app>Banshee</app>. Πατήστε τον σύνδεσμο <gui style=\"button\">Ναι, να "
+"επιτραπεί η πρόσβαση</gui> στον περιηγητή σας και θα ανακατευθυνθείτε σε μια "
+"ιστοσελίδα που εμφανίζει ένα μήνυμα ότι το <app>Banshee</app> έχει τώρα "
+"πρόσβαση στο Last.fm. Επιστρέψτε στο <app>Banshee</app> και πατήστε το "
+"κουμπί <gui style=\"button\">Ολοκλήρωση σύνδεσης</gui> για να ολοκληρωθεί η "
+"διαδικασία."
 
-#: C/lastfm.page:58(title)
-msgid "Enable Last.fm Song Reporting"
-msgstr "Ενεργοποίηση αναφοράς τραγουδιού στο Last.fm"
+#: C/lastfm.page:68(title)
+msgid "Enable Last.fm song reporting from <app>Banshee</app>"
+msgstr "Ενεργοποίηση αναφοράς τραγουδιού στο Last.fm από το <app>Banshee</app>"
 
-#: C/lastfm.page:59(p)
+#: C/lastfm.page:70(p)
 msgid ""
-"After you have successfully linked Banshee to your Last.fm profile, to "
-"enable Banshee to report the songs to your Last.fm profile, in the "
-"<gui>Source Specific</gui> tab in Banshee's preferences, press the "
-"<gui>Enable Song Reporting</gui> checkbox. If you have an active internet "
-"connection, Banshee will now send Last.fm information regarding the songs "
-"you play. To view your play history, visit your profile on the Last.fm "
-"website. Last.fm will automatically update your music metadata if any of "
-"your artist, song title or album information is incorrect."
+"After you have successfully linked <app>Banshee</app> to your Last.fm "
+"profile you must ensure that you have enabled <app>Banshee</app> to report "
+"your songs. To enable <app>Banshee</app> to report the songs to your Last.fm "
+"profile go to <app>Banshee</app> and select preferences, then select the "
+"<gui style=\"tab\">Source Specific</gui> tab, select <gui style=\"menuitem"
+"\">Last.fm</gui> from the dropdown, and press the <gui style=\"checkbox"
+"\">Enable Song Reporting From <app>Banshee</app></gui> checkbox. If you have "
+"an active internet connection <app>Banshee</app> will now send Last.fm "
+"information regarding the songs you play. To view your play history visit "
+"your profile on the Last.fm website. Last.fm will automatically update your "
+"music metadata if any of your artist, song title, or album information is "
+"incorrect (although we recommend that you use the Metadata Fixer extension "
+"to correct your files instead)."
 msgstr ""
-"Αφού έχετε επιτυχώς συνδέσει το Banshee με το προφίλ σας στο Last.fm, για να "
-"ενεργοποιήσετε την αναφορά τραγουδιών στο προφίλ σας του Last.fm, στην "
-"καρτέλα <gui>Συγκεκριμένη πηγή</gui> στις προτιμήσεις του Banshee, πατήστε "
-"στο πεδίο <gui>Ενεργοποίηση αναφοράς τραγουδιών</gui>. Αν έχετε ενεργή "
-"σύνδεση στο διαδίκτυο, το Banshee θα στέλνει στο Last.fm πληροφορίες σχετικά "
-"με τα τραγούδια που παίζετε. Για να προβάλετε το ιστορικό αναπαραγωγής σας, "
-"επισκεφθείτε το προφίλ σας στην ιστοσελίδα του Last.fm. Το Last.fm θα "
-"ενημερώνει αυτόματα τα μεταδεδομένα της μουσικής σας αν οι πληροφορίες για "
-"κάποιο καλλιτέχνη, τίτλο τραγουδιού ή δίσκο είναι λανθασμένες."
+"Αφού έχετε επιτυχώς συνδέσει το <app>Banshee</app> με τη κατατομή σας στο "
+"Last.fm, πρέπει να βεβαιωθείτε ότι έχετε ενεργοποιήσει το <app>Banshee</app> "
+"για να αναφέρει τα τραγούδια σας. Για την ενεργοποίηση του "
+"<app>Banshee</app> ώστε να αναφέρει τα τραγούδια στην κατατομή σας στο "
+"Last.fm, πηγαίνετε στο <app>Banshee</app> και επιλέξτε τις προτιμήσεις, "
+"έπειτα επιλέξτε την καρτέλα <gui style=\"tab\">Ειδική πηγή</gui>, επιλέξτε "
+"<gui style=\"menuitem\">Last.fm</gui> από το πτυσσόμενο και πατήστε το πλαίσιο "
+"ελέγχου <gui style=\"checkbox\">Ενεργοποίηση αναφοράς τραγουδιού από το "
+"<app>Banshee</app></gui>. Αν έχετε μια ενεργή σύνδεση διαδικτύου το "
+"<app>Banshee</app>, θα στείλει τώρα τις πληροφορίες στο Last.fm σχετικά με "
+"τα τραγούδια που παίζετε. Για να προβάλετε το ιστορικό αναπαραγωγής, "
+"επισκεφτείτε την κατατομή σας στον ιστότοπο του Last.fm. Το Last.fm θα "
+"ενημερώσει αυτόματα τα μουσικά σας μεταδεδομένα, αν κάποιο από τα "
+"καλλιτέχνης, τίτλος τραγουδιού, ή πληροφορίες δίσκου είναι εσφαλμένο (αν και "
+"συνιστούμε να χρησιμοποιείτε την επέκταση Metadata Fixer για να διορθώσετε "
+"τα αρχεία σας)."
 
-#: C/lastfm.page:72(title)
-msgid "Listen to Last.fm Radio"
+#: C/lastfm.page:87(title)
+msgid "Enable Last.fm song reporting from your device"
+msgstr "Ενεργοποίηση αναφοράς τραγουδιού στο Last.fm από τη συσκευή σας"
+
+#: C/lastfm.page:89(p)
+msgid ""
+"After successfully linking <app>Banshee</app> to your Last.fm profile and "
+"enabling <app>Banshee</app> to report songs to Last.fm you can also enable "
+"scrobbling from a connected device. <app>Banshee</app> will, upon connection "
+"of your device, attempt to scrobble the songs you have played since the "
+"device was last connected and submit them to Last.fm."
+msgstr ""
+"Μετά την πετυχημένη σύνδεση του <app>Banshee</app> στη κατατομή σας του "
+"Last.fm και την ενεργοποίηση του <app>Banshee</app> για αναφορά τραγουδιών "
+"στο Last.fm, μπορείτε επίσης να ενεργοποιήσετε τις επιλογές από μια "
+"συνδεμένη συσκευή. Το <app>Banshee</app>, με τη σύνδεση της συσκευής σας, θα "
+"προσπαθήσει να διαλέξει τα τραγούδια που έχετε παίξει από την τελευταία "
+"σύνδεση της συσκευής και να τα υποβάλλει στο Last.fm."
+
+#: C/lastfm.page:95(p)
+msgid ""
+"To enable scrobbling of a connected device go to <app>Banshee</app> and "
+"select Preferences, select the <gui style=\"tab\">Source Specific</gui> tab, "
+"select <gui style=\"menuitem\">Last.fm</gui> from the dropdown, and press "
+"the <gui style=\"checkbox\">Enable Song Reporting From Device</gui> "
+"checkbox. If you have an active internet connection <app>Banshee</app> will, "
+"upon connection of your device, now attempt to gather information regarding "
+"the songs that you have played since it was last connected."
+msgstr ""
+"Για την ενεργοποίηση της επιλογής μιας συνδεμένης συσκευής πηγαίνετε στο "
+"<app>Banshee</app> και επιλέξτε προτιμήσεις, επιλέξτε την καρτέλα <gui "
+"style=\"tab\">Ειδική πηγή</gui>, επιλέξτε <gui style=\"menuitem\">Last.fm</gui> "
+"από την πτυσσόμενη λίστα και πατήστε το πλαίσιο ελέγχου <gui "
+"style=\"checkbox\">Ενεργοποίηση αναφοράς τραγουδιού από συσκευή</gui>. Αν "
+"έχετε μια ενεργή διαδικτυακή σύνδεση το <app>Banshee</app>, με τη σύνδεση "
+"της συσκευής σας, θα προσπαθήσει να συλλέξει πληροφορίες σχετικά με τα "
+"τραγούδια που έχουν παίξει από την τελευταία σύνδεση."
+
+#: C/lastfm.page:103(p)
+msgid ""
+"As with regular <app>Banshee</app> scrobbling submissions Last.fm will "
+"automatically update your music metadata if any of your artist, title, or "
+"album information is incorrect (although we again recommend that you use the "
+"Metadata Fixer extension to correct your files instead)."
+msgstr ""
+"Όπως με τις κανονικές υποβολές επιλογής του <app>Banshee</app>, το Last.fm "
+"θα ενημερώσει αυτόματα τα μουσικά σας μεταδεδομένα αν οποιαδήποτε από τις "
+"πληροφορίες καλλιτέχνη, τίτλου ή δίσκου είναι εσφαλμένες (αν και συνιστούμε "
+"πάλι τη χρήση της επέκτασης Metadata Fixer για διόρθωση των αρχείων σας)."
+
+#: C/lastfm.page:108(p)
+msgid ""
+"Please note that currently <app>Banshee</app> only supports this feature "
+"with Apple products that are supported by the AppleDevice extension."
+msgstr ""
+"Παρακαλούμε, σημειώστε ότι προς το παρόν το <app>Banshee</app> υποστηρίζει "
+"αυτό το γνώρισμα μόνο με προϊόντα Apple που υποστηρίζονται από την επέκταση "
+"AppleDevice."
+
+#: C/lastfm.page:114(title)
+msgid "Listen to Last.fm radio"
 msgstr "Ακούστε το ραδιόφωνο του Last.fm"
 
-#: C/lastfm.page:73(p)
+#: C/lastfm.page:116(p)
 msgid ""
 "Last.fm radio is free for residents of the United States, United Kingdom and "
 "Germany. Residents of other countries will have to pay for a premium account "
@@ -1483,232 +2030,210 @@ msgstr ""
 "πληρώσουν για ένα λογαριασμό του Last.fm για ακούσουν ραδιόφωνο. Τα επί "
 "πληρωμή μέλη, επίσης έχουν επιπλέον χαρακτηριστικά στο ραδιόφωνο: ακρόαση "
 "λιστών αναπαραγωγής και σταθμούς μουσικής που σας αρέσουν ή έχετε "
-"επισημάνει. "
+"επισημάνει."
 
-#: C/lastfm.page:80(p)
-#| msgid ""
-#| "In Banshee's context menu onthe left hand side, you will now have a Last."
-#| "fm section, including your Lat.fm radio stations. You will need an active "
-#| "internet connection to listen to Last.fm radio. Choose the radio station "
-#| "you wish to listen to and Banshee will communicate with Last.fm to "
-#| "populate songs for that radio station. Press the <gui>Play</gui> button "
-#| "in Banshee or <key>Spacebar</key> to start streaming a Last.fm radio "
-#| "station. You can also press the <gui>Next</gui> button in Banshee, "
-#| "<key>N</key> or choose <guiseq><gui>Playback</gui><gui>Next</gui></"
-#| "guiseq> to play the next song in your radio station queue."
+#: C/lastfm.page:122(p)
 msgid ""
-"In Banshee's context menu on the left hand side, you will now have a Last.fm "
-"section, including your Last.fm radio stations. You will need an active "
-"internet connection to listen to Last.fm radio. Choose the radio station you "
-"wish to listen to and Banshee will communicate with Last.fm to populate "
-"songs for that radio station. Press the <gui>Play</gui> button in Banshee or "
-"<key>Spacebar</key> to start streaming a Last.fm radio station. You can also "
-"press the <gui>Next</gui> button in Banshee, <key>N</key> or choose "
-"<guiseq><gui>Playback</gui><gui>Next</gui></guiseq> to play the next song in "
-"your radio station queue."
+"In the sources panel on the left hand side of <app>Banshee</app>, you will "
+"now have a Last.fm section, including your Last.fm radio stations. You will "
+"need an active internet connection to listen to Last.fm radio. Choose the "
+"radio station you wish to listen to and <app>Banshee</app> will communicate "
+"with Last.fm to populate songs for that radio station. Press the <gui style="
+"\"button\">Play</gui> button in <app>Banshee</app> or <key>Space</key> to "
+"start streaming a Last.fm radio station. You can also press the <gui style="
+"\"button\">Next</gui> button in <app>Banshee</app>, <key>N</key> or choose "
+"<guiseq><gui style=\"menu\">Playback</gui><gui style=\"menuitem\">Next</"
+"gui></guiseq> to play the next song in your radio station queue."
 msgstr ""
-"Στο μενού περιεχομένου του Banshee, στην αριστερή πλευρά, θα έχετε τώρα μια "
-"ενότητα Last.fm, που περιλαμβάνει τους σταθμούς σας του Last.fm. Θα "
-"χρειαστείτε μια ενεργή σύνδεση διαδικτύου για να ακούσετε το ραδιόφωνο του "
-"Last.fm. Επιλέξτε το ραδιοφωνικό σταθμό που θέλετε να ακούσετε και το "
-"Banshee θα επικοινωνήσει με το Last.fm για να συμπληρώσει τραγούδια για αυτό "
-"το ραδιοφωνικό σταθμό. Πατήστε το κουμπί <gui>Αναπαραγωγή</gui> στο Banshee "
-"ή το <key>Spacebar</key> για να αρχίσετε τη ροή του ραδιοφωνικού σταθμού. "
-"Μπορείτε επίσης να πατήσετε το κουμπί <gui>Επόμενο</gui>, το <key>N</key> ή "
-"να επιλέξετε <guiseq><gui>Αναπαραγωγή</gui><gui>Επόμενο</gui></guiseq> για "
-"να αναπαράγετε το επόμενο τραγούδι στη σειρά του ραδιοφωνικού σταθμού."
+"Στο παράθυρο πηγών του <app>Banshee</app> στα αριστερά, θα έχετε τώρα μια "
+"ενότητα Last.fm, που συμπεριλαμβάνει τους σταθμούς σας του ραδιοφώνου "
+"Last.fm. Θα χρειαστείτε μια ενεργή σύνδεση διαδικτύου για να ακούσετε το "
+"ραδιόφωνο του Last.fm. Επιλέξτε τον ραδιοφωνικό σταθμό που θέλετε να "
+"ακούσετε και το <app>Banshee</app> θα επικοινωνήσει με το Last.fm για να "
+"συμπληρώσει τραγούδια για αυτό το ραδιοφωνικό σταθμό. Πατήστε το κουμπί <gui "
+"style=\"button\">Αναπαραγωγή</gui> στο <app>Banshee</app> ή το <key>πλήκτρο "
+"διαστήματος</key> για να αρχίσετε τη ροή του ραδιοφωνικού σταθμού Last.fm. "
+"Μπορείτε επίσης να πατήσετε το κουμπί <gui style=\"button\">Επόμενο</gui> στο "
+"<app>Banshee</app>, το <key>N</key> ή να επιλέξετε <guiseq><gui "
+"style=\"menu\">Αναπαραγωγή</gui><gui style=\"menuitem\">Επόμενο</gui></guiseq> "
+"για να αναπαράγετε το επόμενο τραγούδι στη σειρά του ραδιοφωνικού σταθμού."
 
-#: C/keyboardshortcuts.page:7(desc) C/advanced.page:27(title)
-#: C/advanced.page:29(title)
-msgid "Keyboard Shortcuts"
+#: C/keyboard-shortcuts.page:7(desc)
+msgid "Keyboard shortcuts"
 msgstr "Συντομεύσεις πληκτρολογίου"
 
-#: C/keyboardshortcuts.page:24(title)
-msgid "Control Banshee using Keyboard Shortcuts"
-msgstr "Έλεγχος του Banshee με χρήση συντομεύσεων πληκτρολογίου"
+#: C/keyboard-shortcuts.page:24(title)
+msgid "Control <app>Banshee</app> using keyboard shortcuts"
+msgstr "Έλεγχος του <app>Banshee</app> με χρήση συντομεύσεων πληκτρολογίου"
 
-#: C/keyboardshortcuts.page:28(title)
-msgid "Playback Control"
+#: C/keyboard-shortcuts.page:27(title)
+msgid "Playback control"
 msgstr "Έλεγχος αναπαραγωγής"
 
-#: C/keyboardshortcuts.page:32(gui) C/keyboardshortcuts.page:53(gui)
-#: C/keyboardshortcuts.page:73(gui) C/keyboardshortcuts.page:90(gui)
-#: C/keyboardshortcuts.page:107(gui)
+#: C/keyboard-shortcuts.page:31(gui) C/keyboard-shortcuts.page:55(gui)
+#: C/keyboard-shortcuts.page:77(gui) C/keyboard-shortcuts.page:94(gui)
+#: C/keyboard-shortcuts.page:111(gui)
 msgid "Key"
 msgstr "Πλήκτρο"
 
-#: C/keyboardshortcuts.page:32(gui) C/keyboardshortcuts.page:53(gui)
-#: C/keyboardshortcuts.page:73(gui) C/keyboardshortcuts.page:90(gui)
-#: C/keyboardshortcuts.page:107(gui)
+#: C/keyboard-shortcuts.page:32(gui) C/keyboard-shortcuts.page:56(gui)
+#: C/keyboard-shortcuts.page:78(gui) C/keyboard-shortcuts.page:95(gui)
+#: C/keyboard-shortcuts.page:112(gui)
 msgid "Action"
 msgstr "Ενέργεια"
 
-#: C/keyboardshortcuts.page:35(p)
-msgid "Space Bar"
+#: C/keyboard-shortcuts.page:35(key)
+msgid "Space"
 msgstr "Πλήκτρο διαστήματος"
 
-#: C/keyboardshortcuts.page:35(p)
+#: C/keyboard-shortcuts.page:36(p)
 msgid "Play or Pause the current song"
 msgstr "Αναπαραγωγή ή παύση του τρέχοντος τραγουδιού"
 
-#: C/keyboardshortcuts.page:38(p) C/keyboardshortcuts.page:76(key)
+#: C/keyboard-shortcuts.page:39(key) C/keyboard-shortcuts.page:81(key)
 msgid "N"
 msgstr "N"
 
-#: C/keyboardshortcuts.page:38(p)
+#: C/keyboard-shortcuts.page:40(p)
 msgid "Play the next song"
 msgstr "Αναπαραγωγή του επόμενου τραγουδιού"
 
-#: C/keyboardshortcuts.page:41(p)
+#: C/keyboard-shortcuts.page:43(key)
 msgid "B"
 msgstr "B"
 
-#: C/keyboardshortcuts.page:41(p)
+#: C/keyboard-shortcuts.page:44(p)
 msgid "Play the previous song"
 msgstr "Αναπαραγωγή του προηγούμενου τραγουδιού"
 
-#: C/keyboardshortcuts.page:49(title) C/keyboardshortcuts.page:69(title)
-msgid "Library Interaction"
+#: C/keyboard-shortcuts.page:51(title)
+msgid "Library interaction"
 msgstr "Αλληλεπίδραση με βιβλιοθήκη"
 
-#: C/keyboardshortcuts.page:56(key) C/keyboardshortcuts.page:76(key)
-#: C/keyboardshortcuts.page:114(key) C/keyboardshortcuts.page:118(key)
-#: C/keyboardshortcuts.page:123(key) C/keyboardshortcuts.page:127(key)
-#: C/keyboardshortcuts.page:132(key) C/keyboardshortcuts.page:137(key)
+#: C/keyboard-shortcuts.page:59(p)
+msgid "<key>/</key>,<keyseq><key>Control</key><key>F</key></keyseq>"
+msgstr "<key>/</key>,<keyseq><key>Control</key><key>F</key></keyseq>"
+
+#: C/keyboard-shortcuts.page:61(p)
+msgid "Move the focus to the search box"
+msgstr "Μεταφορά της εστίασης στο πλαίσιο αναζήτησης"
+
+#: C/keyboard-shortcuts.page:64(key) C/keyboard-shortcuts.page:81(key)
+#: C/keyboard-shortcuts.page:119(key) C/keyboard-shortcuts.page:123(key)
+#: C/keyboard-shortcuts.page:128(key) C/keyboard-shortcuts.page:133(key)
+#: C/keyboard-shortcuts.page:139(key) C/keyboard-shortcuts.page:145(key)
 msgid "Control"
 msgstr "Έλεγχος"
 
-#: C/keyboardshortcuts.page:56(key) C/keyboardshortcuts.page:110(key)
-msgid "F"
-msgstr "F"
+#: C/keyboard-shortcuts.page:64(key)
+msgid "I"
+msgstr "I"
 
-#: C/keyboardshortcuts.page:56(p)
-msgid "Move the focus to the search box"
-msgstr "Μεταφορά της εστίασης στο πεδίο αναζήτησης"
-
-#: C/keyboardshortcuts.page:60(p)
-msgid "<key>/</key>, <keyseq><key>Control</key><key>F</key></keyseq>"
-msgstr "<key>/</key>, <keyseq><key>Control</key><key>F</key></keyseq>"
-
-#: C/keyboardshortcuts.page:61(p)
+#: C/keyboard-shortcuts.page:65(p)
 msgid "Open import media dialog"
 msgstr "Άνοιγμα του διαλόγου εισαγωγής πολυμέσων"
 
-#: C/keyboardshortcuts.page:76(p)
+#: C/keyboard-shortcuts.page:82(p)
 msgid "Create New Playlist"
 msgstr "Δημιουργία νέας λίστας αναπαραγωγής"
 
-#: C/keyboardshortcuts.page:86(title) C/add-podcast.page:26(title)
-msgid "Podcasts"
-msgstr "Φορητές εκπομπές"
-
-#: C/keyboardshortcuts.page:93(key)
+#: C/keyboard-shortcuts.page:98(key)
 msgid "Y"
 msgstr "Y"
 
-#: C/keyboardshortcuts.page:93(p)
+#: C/keyboard-shortcuts.page:99(p)
 msgid "Mark the selected episodes as old"
 msgstr "Σήμανση των επιλεγμένων επεισοδίων ως παλαιών"
 
-#: C/keyboardshortcuts.page:103(title)
+#: C/keyboard-shortcuts.page:107(title)
 msgid "Interface"
 msgstr "Διεπαφή"
 
-#: C/keyboardshortcuts.page:110(p)
+#: C/keyboard-shortcuts.page:115(key)
+msgid "F"
+msgstr "F"
+
+#: C/keyboard-shortcuts.page:116(p)
 msgid "Toggle full-screen mode"
 msgstr "Εναλλαγή κατάστασης πλήρους οθόνης"
 
-#: C/keyboardshortcuts.page:114(key) C/keyboardshortcuts.page:118(key)
+#: C/keyboard-shortcuts.page:119(key) C/keyboard-shortcuts.page:123(key)
 msgid "A"
 msgstr "A"
 
-#: C/keyboardshortcuts.page:114(p)
+#: C/keyboard-shortcuts.page:120(p)
 msgid "Select all songs in playlist view"
 msgstr "Επιλέξτε όλα τα τραγούδια στην προβολή λίστας αναπαραγωγής"
 
-#: C/keyboardshortcuts.page:118(key)
+#: C/keyboard-shortcuts.page:123(key)
 msgid "Shift"
 msgstr "Shift"
 
-#: C/keyboardshortcuts.page:119(p)
+#: C/keyboard-shortcuts.page:125(p)
 msgid "Unselect all songs in playlist view"
 msgstr "Αποεπιλογή όλων των τραγουδιών στην προβολή λίστας αναπαραγωγής"
 
-#: C/keyboardshortcuts.page:123(key)
+#: C/keyboard-shortcuts.page:128(key)
 msgid "W"
 msgstr "W"
 
-#: C/keyboardshortcuts.page:123(p)
-msgid "Hide Banshee Window (Requires Notification Area Plug-in Enabled"
+#: C/keyboard-shortcuts.page:129(p)
+msgid ""
+"Hide <app>Banshee</app> Window (Requires Notification Area Plug-in Enabled)"
 msgstr ""
-"Απόκρυψη του παραθύρου του Banshee (Απαιτεί ενεργοποίηση του πρόσθετου "
-"περιοχής ειδοποιήσεων)"
+"Απόκρυψη του παραθύρου του <app>Banshee</app> (Απαιτεί ενεργοποίηση του "
+"πρόσθετου περιοχής ειδοποιήσεων)"
 
-#: C/keyboardshortcuts.page:127(key)
+#: C/keyboard-shortcuts.page:133(key)
 msgid "Left Mouse Button"
 msgstr "Αριστερό κουμπί του ποντικιού"
 
-#: C/keyboardshortcuts.page:128(p)
+#: C/keyboard-shortcuts.page:135(p)
 msgid "Play Previous Song (Requires Notification Area Plug-in Enabled"
 msgstr ""
 "Αναπαραγωγή προηγούμενου τραγουδιού (Απαιτεί ενεργοποίηση του πρόσθετου "
 "περιοχής ειδοποιήσεων)"
 
-#: C/keyboardshortcuts.page:132(key)
+#: C/keyboard-shortcuts.page:139(key)
 msgid "Right Mouse Button"
 msgstr "Δεξί κουμπί του ποντικιού"
 
-#: C/keyboardshortcuts.page:133(p)
+#: C/keyboard-shortcuts.page:141(p)
 msgid "Play Next Song (Requires Notification Area Plug-in Enabled"
 msgstr ""
 "Αναπαραγωγή επόμενου τραγουδιού (Απαιτεί ενεργοποίηση του πρόσθετου περιοχής "
 "ειδοποιήσεων)"
 
-#: C/keyboardshortcuts.page:137(key)
+#: C/keyboard-shortcuts.page:145(key)
 msgid "Middle Mouse Button"
 msgstr "Μεσαίο κουμπί του ποντικιού"
 
-#: C/keyboardshortcuts.page:138(p)
+#: C/keyboard-shortcuts.page:147(p)
 msgid "Toggle Play / Pause (Requires Notification Area Plug-in Enabled"
 msgstr ""
 "Εναλλαγή αναπαραγωγής / παύσης (Απαιτεί ενεργοποίηση του πρόσθετου περιοχής "
 "ειδοποιήσεων)"
 
-#: C/itunes-import.page:8(desc)
-msgid ""
-"Import music and categorizations from the <app>iTunes</app> media player."
-msgstr ""
-"Εισαγωγή μουσική και κατηγοριοποίησης από την εφαρμογή αναπαραγωγής "
-"πολυμέσων <app>iTunes</app>."
-
-#: C/itunes-import.page:12(title)
-msgid "Import your <app>iTunes</app> library"
-msgstr "Εισαγωγή της βιβλιοθήκης σας του <app>iTunes</app>"
-
 #: C/introduction.page:8(desc)
-msgid "Introduction to the <app>Banshee Media Player</app>."
-msgstr "Εισαγωγή στην <app>Αναπαραγωγή πολυμέσων Banshee</app>."
+msgid "Introduction to the <app>Banshee</app> media player."
+msgstr "Εισαγωγή στην αναπαραγωγή πολυμέσων του <app>Banshee</app>."
 
-#: C/introduction.page:24(title)
+#: C/introduction.page:26(title)
 msgid "Introduction"
 msgstr "Εισαγωγή"
 
-#: C/introduction.page:26(p)
-#| msgid ""
-#| "<app>Banshee</app> is a media player that allows you to play your music, "
-#| "videos, and other media media as well sync it with portable devices to "
-#| "take your media on the go."
+#: C/introduction.page:28(p)
 msgid ""
 "<app>Banshee</app> is a media player that allows you to play your music, "
-"videos, and other media as well sync it with portable devices to take your "
-"media on the go."
+"videos and other media, as well as sync it with portable devices to take "
+"your media on the go."
 msgstr ""
 "Το <app>Banshee</app> είναι μια εφαρμογή αναπαραγωγής πολυμέσων που σας "
 "επιτρέπει να αναπαράγετε τη μουσική σας, τα βίντεό σας και άλλα πολυμέσα "
 "καθώς και να τα συγχρονίζετε με άλλες φορητές συσκευές για να τα έχετε μαζί "
 "σας."
 
-#: C/introduction.page:31(p)
+#: C/introduction.page:32(p)
 msgid ""
 "<app>Banshee</app> includes features to import your media, manage its "
 "metadata, and play your music and videos."
@@ -1719,81 +2244,83 @@ msgstr ""
 
 #: C/introduction.page:35(p)
 msgid ""
-"Banshee also helps you sync your music and videos to popular portable "
-"devices, such as digital audio players and smartphones. Banshee supports "
-"popular devices including most iPods, Sandisk and Creative MP3 players, and "
-"Android powered phones."
+"<app>Banshee</app> also helps you sync your music and videos to popular "
+"portable devices, such as digital audio players and smartphones. "
+"<app>Banshee</app> supports popular devices including most iPods, Sandisk "
+"and Creative MP3 players, and Android powered phones."
 msgstr ""
-"Το Banshee σας βοηθά επίσης να συγχρονίσετε τη μουσική και τα βίντεό σας με "
-"δημοφιλείς φορητές συσκευές, όπως αναπαραγωγείς ψηφιακής μουσικής και έξυνπα "
-"κινητά. Το Banshee υποστηρίζει δημοφιλείς συσκευές περιλαμβανομένων των "
-"περισσότερων iPod, τους αναπαραγωγείς MP3 της Sandisk και της Creative και "
-"κινητά με λειτουργικό Android."
+"Το <app>Banshee</app> σας βοηθά επίσης να συγχρονίσετε τη μουσική και τα "
+"βίντεό σας με δημοφιλείς φορητές συσκευές, όπως αναπαραγωγείς ψηφιακού ήχου "
+"και έξυπνα κινητά. Το <app>Banshee</app> υποστηρίζει δημοφιλείς συσκευές "
+"περιλαμβανομένων των περισσότερων iPod και τους αναπαραγωγούς Creative MP3 "
+"και Sandisk καθώς και κινητά με λειτουργικό Android."
 
-#: C/index.page:24(title)
-msgid "Add, Remove &amp; Play"
-msgstr "Προσθήκη, Αφαίρεση &amp; Αναπαραγωγή"
+#: C/index.page:31(title)
+msgid "<app>Banshee</app> media player"
+msgstr "Αναπαραγωγείς πολυμέσων <app>Banshee</app>"
 
-#: C/index.page:28(title)
-msgid "Manage &amp; Sort"
-msgstr "Διαχείριση &amp; Ταξινόμηση"
+#: C/index.page:34(title)
+msgid "Add, remove &amp; play"
+msgstr "Προσθήκη, αφαίρεση &amp; αναπαραγωγή"
 
-#: C/index.page:32(title)
+#: C/index.page:38(title)
+msgid "Manage &amp; sort"
+msgstr "Διαχείριση &amp; ταξινόμηση"
+
+#: C/index.page:42(title)
 msgid "Sync your media with a portable music player"
 msgstr "Συγχρονισμός των πολυμέσων σας με φορητή συσκευή μουσικής"
 
-#: C/index.page:36(title)
-msgid "Add additional functionality to Banshee"
-msgstr "Προσθήκη επιπλέον λειτουργιών στο Banshee"
+#: C/index.page:46(title)
+msgid "Add additional functionality to <app>Banshee</app>"
+msgstr "Προσθήκη επιπλέον λειτουργιών στο <app>Banshee</app>"
 
-#: C/index.page:40(title)
+#: C/index.page:50(title)
 msgid "Advanced options and help"
 msgstr "Προχωρημένες επιλογές και βοήθεια"
 
-#: C/index.page:44(title)
-msgid "Common Problems"
-msgstr "Συνήθη προβλήματα"
-
-#: C/import.page:8(desc)
-msgid "Add music and videos from your computer to your Banshee library."
+#: C/import.page:7(desc)
+msgid ""
+"Add music and videos from your computer to your <app>Banshee</app> library."
 msgstr ""
 "Προσθήκη μουσικής και βίντεο από τον υπολογιστή σας στη βιβλιοθήκη σας του "
-"Banshee."
+"<app>Banshee</app>."
 
-#: C/import.page:15(name)
+#: C/import.page:16(name)
 msgid "Shaun McCance"
 msgstr "Shaun McCance"
 
-#: C/import.page:16(email)
+#: C/import.page:17(email)
 msgid "shaunm@gnome.org"
 msgstr "shaunm@gnome.org"
 
-#: C/import.page:21(title)
+#: C/import.page:26(title)
 msgid "Import music &amp; videos"
 msgstr "Εισαγωγή μουσικής &amp; βίντεο"
 
-#: C/import.page:23(p)
+#: C/import.page:28(p)
 msgid ""
-"You can import music and videos stored on your computer into Banshee. "
-"Imported files appear in your sources and can be edited and managed like any "
-"other media in Banshee."
+"You can import music and videos stored on your computer into <app>Banshee</"
+"app>. Imported files appear in your sources and can be edited and managed "
+"like any other media in <app>Banshee</app>."
 msgstr ""
 "Μπορείτε να εισάγετε μουσική και βίντεο αποθηκευμένα στον υπολογιστή σας στο "
-"Banshee. Τα εισαχθέντα αρχεία εμφανίζονται στις πηγές σας και μπορείτε να τα "
-"επεξεργασθείτε και να τα διαχειριστείτε σαν οποιοδήποτε άλλο μέσο στο "
-"Banshee."
+"<app>Banshee</app>. Τα εισαχθέντα αρχεία εμφανίζονται στις πηγές σας και "
+"μπορείτε να τα επεξεργαστείτε και να τα διαχειριστείτε όπως οποιοδήποτε άλλο "
+"μέσο στο <app>Banshee</app>."
 
-#: C/import.page:27(p)
+#: C/import.page:32(p)
 msgid ""
-"To import music or video files on your computer, choose <guiseq><gui>Media</"
-"gui><gui>Import Media</gui></guiseq>. A dialog will appear with a number of "
-"choices."
+"To import music or video files on your computer, choose <guiseq><gui style="
+"\"menu\">Media</gui><gui style=\"menuitem\">Import Media</gui></guiseq>. A "
+"dialog wil appear with a number of choices."
 msgstr ""
-"Για να εισάγετε τα αρχεία σας μουσικής ή βίντεο του υπολογιστή σας, επιλέξτε "
-"<guiseq><gui>Πολυμέσα</gui><gui>Εισαγωγή πολυμέσων</gui></guiseq>. Θα "
-"εμφανισθεί ένα παράθυρο διαλόγου με έναν αριθμό επιλογών."
+"Για να εισάγετε αρχεία μουσικής ή βίντεο στον υπολογιστή σας, επιλέξτε "
+"<guiseq><gui style=\"menu\">Πολυμέσα</gui><gui style=\"menuitem\">Εισαγωγή "
+"πολυμέσων</gui></guiseq>. Θα εμφανισθεί ένας διάλογος με έναν αριθμό "
+"επιλογών."
 
-#: C/import.page:31(p)
+#: C/import.page:37(p)
 msgid ""
 "Plugins may add additional import choices. See <link xref=\"#plugins\"/> "
 "below."
@@ -1801,11 +2328,11 @@ msgstr ""
 "Τα πρόσθετα μπορεί να προσθέσουν επιπλέον επιλογές εισαγωγής. Δείτε το <link "
 "xref=\"#plugins\"/> παρακάτω."
 
-#: C/import.page:37(gui)
+#: C/import.page:43(gui)
 msgid "Local Folders"
 msgstr "Τοπικοί φάκελοι"
 
-#: C/import.page:38(p)
+#: C/import.page:44(p)
 msgid ""
 "Choose this option to import all music and video files within a specified "
 "folder, including all subfolders. You will be prompted with a dialog to "
@@ -1815,11 +2342,11 @@ msgstr ""
 "του καθορισμένου φακέλου και όλων των υποφακέλων. Θα εμφανισθεί ένα παράθυρο "
 "διαλόγου για να επιλέξετε φάκελο εισαγωγής."
 
-#: C/import.page:43(gui)
+#: C/import.page:49(gui)
 msgid "Local Files"
 msgstr "Τοπικά αρχεία"
 
-#: C/import.page:44(p)
+#: C/import.page:50(p)
 msgid ""
 "Choose this option to import only the specific file or files you select. You "
 "will be prompted with a dialog to choose the file or files to import."
@@ -1828,11 +2355,11 @@ msgstr ""
 "αρχεία που επιλέγετε. Θα εμφανισθεί ένας διάλογος για να επιλέξετε το αρχείο "
 "ή τα αρχεία προς εισαγωγή."
 
-#: C/import.page:49(gui)
+#: C/import.page:55(gui)
 msgid "Home Folder"
 msgstr "Προσωπικός φάκελος"
 
-#: C/import.page:50(p)
+#: C/import.page:56(p)
 msgid ""
 "Choose this option to import all music and video files in your entire home "
 "folder, including files in any subfolders."
@@ -1841,16 +2368,11 @@ msgstr ""
 "από όλο τον προσωπικό σας φάκελο, συμπεριλαμβανομένων των αρχείων σε "
 "υποφακέλους."
 
-#: C/import.page:54(gui)
+#: C/import.page:60(gui)
 msgid "Videos From Photos Folder"
 msgstr "Βίντεο από το φάκελο φωτογραφίες"
 
-#: C/import.page:55(p)
-#| msgid ""
-#| "Many digital cameras can take short vidoes, and photo-management "
-#| "applications often download these videos directly into your Photos "
-#| "folder. Choose this option to import any videos that have been stored in "
-#| "your Photos folder."
+#: C/import.page:61(p)
 msgid ""
 "Many digital cameras can take short videos, and photo-management "
 "applications often download these videos directly into your Photos folder. "
@@ -1862,7 +2384,7 @@ msgstr ""
 "φάκελό σας Φωτογραφίες. Επιλέξτε αυτή την επιλογή για να εισάγετε τυχόν "
 "βίντεο που έχουν αποθηκευτεί στο φάκελο Φωτογραφίες."
 
-#: C/import.page:63(p)
+#: C/import.page:69(p)
 msgid ""
 "You can safely import from a folder you have already imported from without "
 "worrying about duplicate entries in your library."
@@ -1871,29 +2393,31 @@ msgstr ""
 "κάνει εισαγωγή χωρίς να ανησυχείτε για τυχόν διπλές εγγραφές στη βιβλιοθήκη "
 "σας."
 
-#: C/import.page:68(title)
-msgid "Import from a Playlist"
+#: C/import.page:74(title)
+msgid "Import from a playlist"
 msgstr "Εισαγωγή από λίστα αναπαραγωγής"
 
-#: C/import.page:69(p)
+#: C/import.page:76(p)
 msgid ""
 "You can also import music from playlists. Most playlist files end in "
-"<em>m3u</em>. To import from a playlist, from the Banshee menu choose "
-"<guiseq><gui>Media</gui><gui>Import Playlist</gui></guiseq> and locate the "
-"playlist file in your folder, select it and press <gui>Import</gui>."
+"<em>m3u</em>. To import from a playlist, from the <app>Banshee</app> menu "
+"choose <guiseq><gui style=\"menu\">Media</gui><gui style=\"menuitem\">Import "
+"Playlist</gui></guiseq> and locate the playlist file in your folder, select "
+"it and press <gui style=\"button\">Import</gui>."
 msgstr ""
 "Μπορείτε επίσης να εισάγετε μουσική από λίστες αναπαραγωγής. Τα περισσότερα "
-"αρχεία λίστας αναπαραγωγής έχουν κατάληξη <em>m3u</em>. Για να εισάγετε από "
-"μια λίστα αναπαραγωγής, από το μενού του Banshee επιλέξτε "
-"<guiseq><gui>Πολυμέσα</gui><gui>Εισαγωγή λίστας αναπαραγωγής</gui></guiseq>, "
-"εντοπίστε το αρχείο της λίστας στο φάκελό σας, επιλέξτε το και πατήστε "
-"<gui>Εισαγωγή</gui>."
+"αρχεία λίστας αναπαραγωγής λήγουν σε <em>m3u</em>. Για να εισάγετε από μια "
+"λίστα αναπαραγωγής, από το μενού του <app>Banshee</app> επιλέξτε "
+"<guiseq><gui style=\"menu\">Πολυμέσα</gui><gui style=\"menuitem\">Εισαγωγή "
+"λίστας αναπαραγωγής</gui></guiseq>, εντοπίστε το αρχείο της λίστας "
+"αναπαραγωγής στον φάκελό σας, επιλέξτε το και πατήστε <gui "
+"style=\"button\">Εισαγωγή</gui>."
 
-#: C/import.page:78(title)
-msgid "Additional Import Sources"
+#: C/import.page:86(title)
+msgid "Additional import sources"
 msgstr "Επιπλέον πηγές εισαγωγής"
 
-#: C/import.page:79(p)
+#: C/import.page:88(p)
 msgid ""
 "Plugins may add additional import choices. The following additional sources "
 "will be available if the appropriate plugins are enabled:"
@@ -1903,137 +2427,117 @@ msgstr ""
 "ενεργοποιημένα:"
 
 #: C/extensions.page:8(desc)
-msgid "Add additional functionality to Banshee."
-msgstr "Προσθήκη επιπλέον λειτουργιών στο Banshee."
+msgid "Add additional functionality to <app>Banshee</app>."
+msgstr "Προσθήκη επιπλέον λειτουργιών στο <app>Banshee</app>."
 
 #: C/extensions.page:23(title)
-msgid "Banshee Extensions"
-msgstr "Επεκτάσεις του Banshee"
+msgid "<app>Banshee</app> extensions"
+msgstr "Επεκτάσεις του <app>Banshee</app>"
 
 #: C/extensions.page:27(title)
-msgid "Official Banshee Extensions"
-msgstr "Επίσημες επεκτάσεις του Banshee"
+msgid "Official <app>Banshee</app> extensions"
+msgstr "Επίσημες επεκτάσεις του <app>Banshee</app>"
 
-#: C/extensions.page:29(title)
-msgid "Manage extensions for Banshee"
-msgstr "Διαχείριση επεκτάσεων του Banshee"
+#: C/extensions.page:30(title)
+msgid "Manage extensions for <app>Banshee</app>"
+msgstr "Διαχείριση επεκτάσεων του <app>Banshee</app>"
 
-#: C/extensions.page:34(title)
-msgid "Community Banshee Extensions"
-msgstr "Επεκτάσεις από την κοινότητα για το Banshee"
-
-#: C/extensions.page:36(title)
-msgid "Add community built extensions for Banshee"
-msgstr "Προσθήκη επεκτάσεων φτιαγμένων από την κοινότητα για το Banshee"
-
-#: C/emusic.page:8(desc)
-msgid "Import music purchased from eMusic."
-msgstr "Εισαγωγή μουσικής αγορασμένης από το eMusic."
-
-#: C/emusic.page:12(title)
-msgid "Import your eMusic tracks"
-msgstr "Εισαγωγή των κομματιών σας από το eMusic"
-
-#: C/amazon.page:9(desc)
+#: C/amazon.page:8(desc)
 msgid "Sync and purchase music from the Amazon MP3 Store."
 msgstr "Συγχρονισμός και αγορά μουσικής από το κατάστημα MP3 του Amazon."
 
-#: C/amazon.page:24(title)
-msgid "Amazon MP3 Store"
+#: C/amazon.page:28(title)
+msgid "Amazon MP3 store"
 msgstr "Κατάστημα Amazon MP3"
 
-#: C/amazon.page:26(p)
+#: C/amazon.page:30(p)
 msgid ""
-"Banshee supports downloading and importing music from the Amazon MP3 store. "
-"You can manually import Amazon music files, purchase music in your web "
-"browser or buy music inside of Banshee. Amazon only offers music for sale as "
-"an MP3 in certain countries and depending on your location, you may not be "
-"able to buy Amazon MP3s."
+"<app>Banshee</app> supports downloading and importing music from the Amazon "
+"MP3 store. You can manually import Amazon music files, purchase music in "
+"your web browser or buy music inside of <app>Banshee</app>. Amazon only "
+"offers music for sale as an MP3 in certain countries and depending on your "
+"location, you may not be able to buy Amazon MP3s."
 msgstr ""
-"Το Banshee υποστηρίζει μεταφόρτωση και εισαγωγή μουσικής από το κατάστημα "
-"Amazon MP3. Μπορείτε να εισάγετε χειροκίνητα μουσικά αρχεία του Amazon, να "
-"αγοράσετε μουσική από τον περιηγητή ιστού σας ή να αγοράσετε μουσική μέσα "
-"από το Banshee. Το Amazon προσφέρει μουσική προς πώληση ως MP3 μόνο σε "
-"ορισμένες χώρες και ανάλογα με την τοποθεσία σας μπορεί να μην είναι δυνατή "
-"η αγορά MP3 από το Amazon."
+"Το <app>Banshee</app> υποστηρίζει μεταφόρτωση και εισαγωγή μουσικής από το "
+"κατάστημα Amazon MP3. Μπορείτε να εισάγετε χειροκίνητα μουσικά αρχεία του "
+"Amazon, να αγοράσετε μουσική από τον περιηγητή ιστού σας ή να αγοράσετε "
+"μουσική μέσα από το <app>Banshee</app>. Το Amazon προσφέρει μουσική προς "
+"πώληση ως MP3 μόνο σε ορισμένες χώρες και ανάλογα με την τοποθεσία σας, "
+"μπορεί να μην είναι δυνατή η αγορά MP3 από το Amazon."
 
-#: C/amazon.page:34(p)
+#: C/amazon.page:37(p)
 msgid ""
-"Banshee uses an Amazon affiliate code for all music purchases. All money "
-"made via this affiliate code is donated to the GNOME Foundation."
+"<app>Banshee</app> uses an Amazon affiliate code for all music purchases. "
+"All money made via this affiliate code is donated to the GNOME Foundation."
 msgstr ""
-"Το Banshee χρησιμοποιεί ένα κωδικό συνεργάτη για όλες τις αγορές μουσικής. "
-"Όλα τα χρήματα που συγκεντρώνονται μέσω αυτού του κωδικού δωρίζονται στο "
-"GNOME Foundation."
+"Το <app>Banshee</app> χρησιμοποιεί ένα κωδικό συνεργάτη του Amazon για όλες "
+"τις αγορές μουσικής. Όλα τα χρήματα που συγκεντρώνονται μέσω αυτού του "
+"κωδικού δωρίζονται στο GNOME Foundation."
 
-#: C/amazon.page:40(title)
+#: C/amazon.page:43(title)
 msgid "Purchase Amazon MP3s in your web browser"
 msgstr "Αγορά MP3 από το Amazon στον περιηγητή ιστού σας"
 
-#: C/amazon.page:42(p)
+#: C/amazon.page:45(p)
 msgid ""
-"Music purchased from Amazon's MP3 store can be automatically downloaded and "
-"imported into Banshee. Banshee associates itself with the .amz file Amazon "
-"provides for MP3 purchases. When you buy music on Amazon, your web browser "
-"will download the .amz file and Banshee will automatically open it and begin "
-"the download and import the music."
+"Music purchased from the Amazon MP3 store can be automatically downloaded "
+"and imported into <app>Banshee</app>. <app>Banshee</app> associates itself "
+"with the .amz file Amazon provides for MP3 purchases. When you buy music on "
+"Amazon, your web browser will download the .amz file and <app>Banshee</app> "
+"will automatically open it and begin the download and import the music."
 msgstr ""
 "Η μουσική που αγοράστηκε από το κατάστημα MP3 του Amazon μπορεί να "
-"μεταφορτωθεί αυτόματα και να εισαχθεί στο Banshee. Το Banshee συσχετίζεται "
-"με το αρχείο .amz που παρέχει το Amazon για αγορές MP3. Όταν αγοράζετε "
-"μουσική στο Amazon, ο περιηγητής ιστού σας θα μεταφορτώσει το αρχείο .amz "
-"και το Banshee θα το ανοίξει αυτόματα και θα αρχίσει τη μεταφόρτωση και "
-"εισαγωγή της μουσικής."
+"μεταφορτωθεί αυτόματα και να εισαχθεί στο <app>Banshee</app>. Το "
+"<app>Banshee</app> συσχετίζεται με το αρχείο .amz που παρέχει το Amazon για "
+"αγορές MP3. Όταν αγοράζετε μουσική στο Amazon, ο περιηγητής ιστού σας θα "
+"μεταφορτώσει το αρχείο .amz και το <app>Banshee</app> θα το ανοίξει αυτόματα "
+"και θα αρχίσει τη μεταφόρτωση και εισαγωγή της μουσικής."
 
-#: C/amazon.page:51(title)
-msgid "Buy Amazon MP3s in Banshee"
-msgstr "Αγορά MP3 του Amazon στο Banshee"
+#: C/amazon.page:54(title)
+msgid "Buy Amazon MP3s in <app>Banshee</app>"
+msgstr "Αγορά MP3 του Amazon στο <app>Banshee</app>"
 
-#: C/amazon.page:53(p)
-#| msgid ""
-#| "You can also search for songs on Amazon within Banshee. Choose the Amazon "
-#| "MP3 Store from the Banshee menu on the left. This will load the Amazon "
-#| "MP3 Store just as if you were in a web browser. You can search Amazon for "
-#| "the music you wish to buy and after logging in to Amazon, buy music with "
-#| "one click. Banshee will automatically download and import the your "
-#| "purchase into the library."
+#: C/amazon.page:56(p)
 msgid ""
-"You can also search for songs on Amazon within Banshee. Choose the Amazon "
-"MP3 Store from the Banshee menu on the left. This will load the Amazon MP3 "
-"Store just as if you were in a web browser. You can search Amazon for the "
-"music you wish to buy and after logging in to Amazon, buy music with one "
-"click. Banshee will automatically download and import your purchase into the "
-"library."
+"You can also search for songs on Amazon within <app>Banshee</app>. Choose "
+"the Amazon MP3 Store from the <app>Banshee</app> menu on the left. This will "
+"load the Amazon MP3 Store just as if you were in a web browser. You can "
+"search Amazon for the music you wish to buy and after logging in to Amazon, "
+"buy music with one click. <app>Banshee</app> will automatically download and "
+"import your purchase into the library."
 msgstr ""
-"Μπορείτε επίσης να αναζητήσετε τραγούδια στο Amazon μέσα από το Banshee. "
-"Επιλέξτε το κατάστημα Amazon MP3 από το μενού του Banshee αριστερά. Αυτό θα "
-"φορτώσει το κατάστημα Amazon MP3 ακριβώς σαν να ήσασταν σε περιηγητή ιστού. "
-"Μπορείτε να αναζητήσετε στο Amazon τη μουσική που επιθυμείτε να αγοράσετε "
-"και μετά τη σύνδεση στο Amazon, να την αγοράσετε με ένα κλικ. Το Banshee θα "
+"Μπορείτε επίσης να αναζητήσετε τραγούδια στο Amazon μέσα από το "
+"<app>Banshee</app>. Επιλέξτε το κατάστημα Amazon MP3 από το μενού του "
+"<app>Banshee</app> αριστερά. Αυτό θα φορτώσει το κατάστημα Amazon MP3 "
+"ακριβώς σαν να ήσασταν σε περιηγητή ιστού. Μπορείτε να αναζητήσετε στο "
+"Amazon τη μουσική που επιθυμείτε να αγοράσετε και μετά τη σύνδεση στο "
+"Amazon, να την αγοράσετε με ένα πάτημα. Το <app>Banshee</app> θα "
 "μεταφορτώσει και θα εισάγει αυτόματα τις αγορές σας στη βιβλιοθήκη."
 
-#: C/amazon.page:63(title)
+#: C/amazon.page:66(title)
 msgid "Import Amazon MP3s manually"
 msgstr "Εισαγωγή MP3 του Amazon χειροκίνητα"
 
-#: C/amazon.page:65(p)
+#: C/amazon.page:68(p)
 msgid ""
 "When music is purchased from Amazon in a web browser, a file with the "
 "extension .amz is downloaded and saved to your hard drive. To import music "
-"purchased manually from Amazon, in Banshee choose <guiseq><gui>Media</"
-"gui><gui>Import Media</gui></guiseq> from the menu and select the *.amz file "
-"to be imported. Banshee will then open this file and connect to the Amazon "
-"MP3 store to begin the download."
+"purchased manually from Amazon, in <app>Banshee</app> choose <guiseq><gui "
+"style=\"menu\">Media</gui><gui style=\"menuitem\">Import Media</gui></"
+"guiseq> from the menu and select the *.amz file to be imported. "
+"<app>Banshee</app> will then open this file and connect to the Amazon MP3 "
+"store to begin the download."
 msgstr ""
 "Όταν γίνεται αγορά μουσικής από το Amazon με περιηγητή ιστού, μεταφορτώνεται "
-"και αποθηκεύεται στον υπολογιστή σας ένα αρχείο με επέκταση .amz. Για να "
-"εισάγετε χειροκίνητα μουσική που αγοράσθηκε από το Amazon, στο μενού του "
-"Banshee επιλέξτε <guiseq><gui>Πολυμέσα</gui><gui>Εισαγωγή πολυμέσων</gui></"
-"guiseq> και επιλέξτε το αρχείο *.amz που θα εισαχθεί. Το Banshee θα ανοίξει "
-"αυτό το αρχείο και θα συνδεθεί στο κατάστημα Amazon MP3 για να ξεκινήσει τη "
+"και αποθηκεύεται στον σκληρό σας δίσκο ένα αρχείο με επέκταση .amz. Για να "
+"εισάγετε χειροκίνητα μουσική που αγοράσθηκε από το Amazon, στο "
+"<app>Banshee</app>, επιλέξτε <guiseq><gui style=\"menu\">Πολυμέσα</gui><gui "
+"style=\"menuitem\">Εισαγωγή πολυμέσων</gui></guiseq> από το μενού και επιλέξτε "
+"το αρχείο *.amz που θα εισαχθεί. Το <app>Banshee</app> θα ανοίξει αυτό το "
+"αρχείο και θα συνδεθεί στο κατάστημα Amazon MP3 για να ξεκινήσει τη "
 "μεταφόρτωση."
 
-#: C/amazon.page:74(p)
+#: C/amazon.page:78(p)
 msgid ""
 "Amazon .amz files are only active for a short time. If you do not download "
 "your music quickly, the file will expire and you cannot download your music "
@@ -2048,221 +2552,158 @@ msgstr ""
 "μεταφορτώσετε και να εισάγετε τυχόν αγορές σας από το Amazon εντός μίας ώρας "
 "από την αγορά."
 
-#: C/advanced.page:8(desc)
-msgid "Get help for advanced actions."
-msgstr "Βοήθεια για προχωρημένες ενέργειες"
-
-#: C/advanced.page:23(title)
-msgid "Advanced Options and Help"
-msgstr "Επιλογές για προχωρημένους και βοήθεια"
-
-#: C/add-radio.page:11(desc)
-msgid "Add, remove and play internet radio stations in Banshee."
-msgstr ""
-"Προσθήκη, αφαίρεση και αναπαραγωγή σταθμών διαδικτυακού ραδιοφώνου στο "
-"Banshee."
-
-#: C/add-radio.page:26(title)
-msgid "Internet Radio"
-msgstr "Διαδικτυακό ραδιόφωνο"
-
-#: C/add-radio.page:29(title)
-msgid "What is Internet Radio?"
-msgstr "Τι είναι το διαδικτυακό ραδιόφωνο;"
-
-#: C/add-radio.page:31(p)
-#| msgid ""
-#| "Internet radio stations are similar to regular radio stations, allowing "
-#| "an individual or organization to stream music live over the internet. "
-#| "Internet radio stations can be a simultaneous stream of a regular radio "
-#| "station, an amateur broadasting their own station, or commercial internet "
-#| "radio stations that include live DJs and even commercials."
-msgid ""
-"Internet radio stations are similar to regular radio stations, allowing an "
-"individual or organization to stream music live over the internet. Internet "
-"radio stations can be a simultaneous stream of a regular radio station, an "
-"amateur broadcasting their own station, or commercial internet radio "
-"stations that include live DJs and even commercials."
-msgstr ""
-"Οι διαδικτυακοί ραδιοφωνικοί σταθμοί είναι παρόμοιοι με τους κανονικούς, "
-"επιτρέποντας σε ένα άτομο ή οργανισμό να μεταδώσει ζωντανά μουσική μέσω του "
-"διαδικτύου. Οι διαδικτυακοί ραδιοφωνικοί σταθμοί μπορεί να είναι μια "
-"ταυτόχρονη ροή ενός κανονικού ραδιοφωνικού σταθμού, ένας ερασιτέχνης που "
-"μεταδίδει το δικό του σταθμό ή εμπορικοί διαδικτυακοί σταθμοί με παραγωγούς, "
-"ζωντανό πρόγραμμα και διαφημίσεις."
-
-#: C/add-radio.page:41(title)
-msgid "Add Radio Station"
-msgstr "Προσθήκη ραδιοφωνικού σταθμού"
-
-#: C/add-radio.page:43(p)
-msgid ""
-"To add an internet radio station to Banshee, press <gui>Add Station</gui> in "
-"the upper right hand corner of Banshee or, from the menu, choose "
-"<guiseq><gui>Menu</gui><gui>Add Station</gui></guiseq>."
-msgstr ""
-"Για να προσθέσετε ένα ραδιοφωνικό σταθμό στο Banshee, πατήστε <gui>Προσθήκη "
-"σταθμού</gui> στην πάνω δεξιά γωνία του Banshee ή από το μενού επιλέξτε "
-"<guiseq><gui>Μενού</gui><gui>Προσθήκη σταθμού</gui></guiseq>."
-
-#: C/add-radio.page:48(p)
-msgid ""
-"From the internet radio station's webpage, copy the link to their stream URL "
-"in your web browser. In most browsers, you can right click on the link and "
-"press <gui>Copy Link</gui>."
-msgstr ""
-"Από την ιστοσελίδα του διαδικτυακού ραδιοφωνικού σταθμού, αντιγράψτε το URL "
-"της ροής του στον περιηγητή ιστού σας. Στους περισσότερους περιηγητές "
-"μπορείτε να κάνετε δεξί κλικ στο σύνδεσμο και να πατήσετε <gui>Αντιγραφή "
-"δεσμού</gui>."
-
-#: C/add-radio.page:54(p)
-msgid ""
-"Banshee will prompt you to enter the <gui>Station Genre</gui>. Choose the "
-"kind of music the internet radio station plays from the available drop down "
-"selections. You will then need to enter the <gui>Station Name</gui>. Enter a "
-"name for the radio station. Then press tab or use your mouse to select the "
-"<gui>Stream URL:</gui> dialog to paste the URL of the radio station. Using "
-"your mouse right click and choose <gui>Paste</gui> or press "
-"<keyseq><key>Control</key>+<key>V</key></keyseq>."
-msgstr ""
-"Το Banshee θα σας ζητήσει να εισάγετε το <gui>Είδος σταθμού</gui>. Επιλέξτε "
-"το είδος της μουσικής που παίζει ο σταθμός από τις διαθέσιμες επιλογές. Στη "
-"συνέχεια θα πρέπει εισάγετε το <gui>Όνομα σταθμού</gui>. Εισάγετε ένα όνομα "
-"για το σταθμό. Μετά πατήστε το tab ή με το ποντίκι σας επιλέξτε το διάλογο "
-"<gui>URL ροής:</gui> για να επικολλήσετε το URL του ραδιοφωνικού σταθμού. Με "
-"χρήση του ποντικιού σας κάντε δεξί κλικ και επιλέξτε <gui>Επικόλληση</gui> ή "
-"πατήστε <keyseq><key>Control</key>+<key>V</key></keyseq>."
-
-#: C/add-radio.page:62(p)
-msgid ""
-"You can optionally also fill out the fields for <gui>Station Creator</gui>, "
-"<gui>Description</gui>, and <gui>Rating</gui>."
-msgstr ""
-"Μπορείτε προαιρετικά να συμπληρώσετε τα πεδία για <gui>Δημιουργό σταθμού</"
-"gui>, <gui>Περιγραφή</gui> και <gui>Βαθμολογία</gui>."
-
-#: C/add-radio.page:66(p)
-msgid ""
-"Then press <gui>Save</gui> to save the internet radio station in Banshee."
-msgstr ""
-"Μετά πατήστε <gui>Αποθήκευση</gui> για να αποθηκεύσετε τον διαδικτυακό "
-"σταθμό στο Banshee."
-
-#: C/add-podcast.page:11(desc)
-msgid "Add, remove and play podcasts in Banshee."
-msgstr "Προσθήκη, αφαίρεση και αναπαραγωγή φορητών εκπομπών στο Banshee."
-
-#: C/add-podcast.page:29(title)
-msgid "What is a Podcast?"
-msgstr "Τι είναι η φορητή εκπομπή (Podcast);"
-
-#: C/add-podcast.page:31(p)
-msgid ""
-"Podcasts are recorded programs, similar to radio programs, that are "
-"available on the internet and allow you to subscribe. When you subscribe to "
-"a podcast in Banshee, each time a new program is released, Banshee will "
-"automatically download the podcast and allow you to listen to it."
-msgstr ""
-"Οι φορητές εκπομπές είναι ηχογραφημένα προγράμματα, παρόμοια με τα "
-"ραδιοφωνικά, που είναι διαθέσιμα στο διαδίκτυο και σας επιτρέπουν να γίνετε "
-"συνδρομητής. Όταν γίνετε συνδρομητής σε μια φορητή εκπομπή στο Banshee, κάθε "
-"φορά που παράγεται ένα καινούριο πρόγραμμα, το Banshee θα μεταφορτώσει "
-"αυτόματα την εκπομπή για να την ακούσετε."
-
-#: C/add-podcast.page:36(p)
-msgid ""
-"There are podcasts on almost any subject including music, movies, Linux, and "
-"more. Search the internet using your favorite search engine with a search "
-"term such as \"movie podcast\" and you will be presented with many options "
-"to choose from."
-msgstr ""
-"Υπάρχουν φορητές εκπομπές για σχεδόν κάθε θέμα, περιλαμβανομένων μουσικής, "
-"ταινιών, Linux και άλλων. Αναζητήστε στο διαδίκτυο με χρήση της αγαπημένης "
-"σας μηχανής αναζήτησης με έναν όρο αναζήτησης όπως \"movie podcast\" και θα "
-"εμφανιστούν πολλές επιλογές για να διαλέξετε."
-
-#: C/add-podcast.page:44(title)
-msgid "Add a Podcast"
-msgstr "Προσθήκη φορητής εκπομπής (podcast)"
-
-#: C/add-podcast.page:46(p)
-msgid ""
-"To add a Podcast to Banshee you will first need to visit the podcast's home "
-"page on the internet in your browser. Almost all podcasts will have a button "
-"or link displayed to subscribe to the podcast. Copy the link to the "
-"podcast's subscription. In most web browsers, you can right click on the "
-"link and choose <gui>Copy link</gui>."
-msgstr ""
-"Για να προσθέσετε μια φορητή εκπομπή στο Banshee θα χρειαστεί πρώτα να "
-"επισκεφτείτε την ιστοσελίδα της φορητής εκπομπής στο διαδίκτυο με τον "
-"περιηγητή ιστού σας. Σχεδόν όλες οι φορητές εκπομπές θα έχουν ένα κουμπί ή "
-"σύνδεσμο για να εγγραφείτε στη φορητή εκπομπή. Αντιγράψτε το δεσμό στη "
-"συνδρομή σας της φορητής εκπομπής. Στους περισσότερους περιηγητές ιστού "
-"μπορείτε να κάνετε δεξί κλικ στο δεσμό και να επιλέξετε <gui>Αντιγραφή "
-"δεσμού</gui>."
-
-#: C/add-podcast.page:53(p)
-msgid ""
-"In Banshee, press and choose <gui>Subscribe to Podcasts</gui> in the upper "
-"right hand corner, from the menu choose <guiseq><gui>Media</gui><gui> "
-"Subscribe to Podcast</gui></guiseq> or use the keyboard shortcut "
-"<keyseq><key>Shift</key><key>Control</key><key>F</key></keyseq>."
-msgstr ""
-"Στο Banshee, πατήστε και επιλέξτε <gui>Συνδρομή σε φορητές εκπομπές</gui>, "
-"στην πάνω δεξιά γωνία από το μενού επιλέξτε <guiseq><gui>Πολυμέσα</gui><gui> "
-"Συνδρομή στη φορητή εκπομπή</gui></guiseq> ή χρησιμοποιήστε τη συντόμευση "
-"πληκτρολογίου <keyseq><key>Shift</key><key>Control</key><key>F</key></"
-"keyseq>."
-
-#: C/add-podcast.page:59(p)
-msgid ""
-"Banshee will then allow you to choose how you want to download new podcasts "
-"from a drop down menu. Your choices include:"
-msgstr ""
-"Το Banshee θα σας επιτρέψει τότε να επιλέξετε πως θέλετε να μεταφορτώνονται "
-"οι νέες φορητές εκπομπές από ένα αναπτυσσόμενο μενού. Οι επιλογές σας "
-"περιλαμβάνουν:"
-
-#: C/add-podcast.page:63(p)
-msgid ""
-"Download the Most Recent Episode (This will automatically download the last "
-"episode that was released)."
-msgstr ""
-"Μεταφόρτωση του πιο πρόσφατου επεισοδίου (Αυτό θα μεταφορτώσει αυτόματα το "
-"τελευταίο επεισόδιο που κυκλοφόρησε)."
-
-#: C/add-podcast.page:65(p)
-msgid "Download All Episodes (This will download all episodes)."
-msgstr ""
-"Μεταφόρτωση όλων των επεισοδίων (Αυτό θα μεταφορτώσει όλα τα επεισόδια)."
-
-#: C/add-podcast.page:66(p)
-msgid ""
-"Let Me Decide Which Episodes to Download (This will allow you to choose "
-"which episodes you would like to download)."
-msgstr ""
-"Αφήστε με να αποφασίσω ποια επεισόδια θα μεταφορτωθούν (Αυτό θα σας "
-"επιτρέψει να επιλέξετε ποια επεισόδια θα θέλατε να μεταφορτώσετε)."
-
-#: C/add-podcast.page:70(p)
-msgid "After you have added a Podcast feed, Banshee will display:"
-msgstr "Αφού προσθέσετε μια ροή φορητής εκπομπής, το Banshee θα εμφανίσει:"
-
-#: C/add-podcast.page:73(p)
-msgid "<gui>Name</gui>: (Name of the specific episode)"
-msgstr "<gui>Όνομα</gui>: (Όνομα του συγκεκριμένου επεισοδίου)"
-
-#: C/add-podcast.page:74(p)
-msgid "<gui>Podcast</gui>: (Name of the Podcast)"
-msgstr "<gui>Φορητή εκπομπή</gui>: (Όνομα της φορητής εκπομπής)"
-
-#: C/add-podcast.page:75(p)
-msgid "<gui>Published</gui> (Date the episode was published or released)"
-msgstr ""
-"<gui>Κυκλοφόρησε</gui> (Ημερομηνία κυκλοφορίας ή δημοσίευσης του επεισοδίου)"
-
 #. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2
 #: C/index.page:0(None)
 msgid "translator-credits"
-msgstr "Michael Kotsarinis <mk73628@gmail.com>, 2010"
+msgstr ""
+"Ελληνική μεταφραστική ομάδα GNOME\n"
+" Δημήτρης Σπίγγος <dmtrs32@gmail.com>, 2013\n"
+" Michael Kotsarinis <mk73628@gmail.com>, 2010\n"
+"Για περισσότερες πληροφορίες http://gnome.gr"
+
+#~ msgid "@@image: 'figures/banshee.png'; md5=THIS FILE DOESN'T EXIST"
+#~ msgstr "@@image: 'figures/banshee.png'; md5=THIS FILE DOESN'T EXIST"
+
+#~ msgid "Introduction to the Banshee User Interface"
+#~ msgstr "Εισαγωγή στη διεπαφή χρήστη του Banshee"
+
+#~ msgid ""
+#~ "To change Now Playing to hide the Banshee user interface and use the full "
+#~ "screen mode, you can press the <key>F</key>, press the <gui>Fullscreen</"
+#~ "gui> button in the upper right hand corner of Banshee, or choose "
+#~ "<guiseq><gui>View</gui><gui>Fullscreen</gui></guiseq> to start Fullscreen "
+#~ "mode."
+#~ msgstr ""
+#~ "Για να αλλάξετε την τρέχουσα αναπαραγωγή για να αποκρυφτεί η διεπαφή "
+#~ "χρήστη του Banshee και να χρησιμοποιηθεί η κατάσταση πλήρους οθόνης, "
+#~ "πατήστε το <key>F</key> ή το κουμπί <gui>Πλήρης οθόνη</gui> στην πάνω "
+#~ "δεξιά γωνία του Banshee ή επιλέξτε <guiseq><gui>Προβολή</gui><gui>Πλήρης "
+#~ "οθόνη</gui></guiseq> για να αρχίσετε την κατάσταση πλήρους οθόνης."
+
+#~ msgid "Podcast"
+#~ msgstr "Φορητών εκπομπών (podcast)"
+
+#~ msgid "Sync Your Entire Library"
+#~ msgstr "Συγχρονισμός ολόκληρης της βιβλιοθήκης σας"
+
+#~ msgid ""
+#~ "For more information on performing more complex search queries, see the "
+#~ "<link xref=\"adv-search\"/> page."
+#~ msgstr ""
+#~ "Για περισσότερες πληροφορίες για την εκτέλεση πιο σύνθετων ερωτημάτων "
+#~ "αναζήτησης, δείτε τη σελίδα <link xref=\"adv-search\"/>."
+
+#~ msgid ""
+#~ "Import music and categorizations from the <app>Rhythmbox</app> music "
+#~ "player."
+#~ msgstr "Εισάγετε μουσική και κατηγοριοποιήσεις από το <app>Rhythmbox</app>."
+
+#~ msgid "Import your <app>Rhythmbox</app> library"
+#~ msgstr "Εισάγετε τη βιβλιοθήκη σας του <app>Rhythmbox</app>"
+
+#~ msgid "Music Metadata"
+#~ msgstr "Μεταδεδομένα μουσικής"
+
+#~ msgid "Manage or change your albums cover art."
+#~ msgstr "Διαχείριση ή αλλαγή των εξωφύλλων των δίσκων σας."
+
+#~ msgid "Cover art"
+#~ msgstr "Εξώφυλλο"
+
+#~ msgid ""
+#~ "Import music and categorizations from the <app>iTunes</app> media player."
+#~ msgstr ""
+#~ "Εισαγωγή μουσική και κατηγοριοποίησης από την εφαρμογή αναπαραγωγής "
+#~ "πολυμέσων <app>iTunes</app>."
+
+#~ msgid "Import your <app>iTunes</app> library"
+#~ msgstr "Εισαγωγή της βιβλιοθήκης σας του <app>iTunes</app>"
+
+#~ msgid "Community Banshee Extensions"
+#~ msgstr "Επεκτάσεις από την κοινότητα για το Banshee"
+
+#~ msgid "Add community built extensions for Banshee"
+#~ msgstr "Προσθήκη επεκτάσεων φτιαγμένων από την κοινότητα για το Banshee"
+
+#~ msgid "Import music purchased from eMusic."
+#~ msgstr "Εισαγωγή μουσικής αγορασμένης από το eMusic."
+
+#~ msgid "Import your eMusic tracks"
+#~ msgstr "Εισαγωγή των κομματιών σας από το eMusic"
+
+#~ msgid "Get help for advanced actions."
+#~ msgstr "Βοήθεια για προχωρημένες ενέργειες."
+
+#~ msgid "Advanced Options and Help"
+#~ msgstr "Επιλογές για προχωρημένους και βοήθεια"
+
+#~ msgid ""
+#~ "From the internet radio station's webpage, copy the link to their stream "
+#~ "URL in your web browser. In most browsers, you can right click on the "
+#~ "link and press <gui>Copy Link</gui>."
+#~ msgstr ""
+#~ "Από την ιστοσελίδα του διαδικτυακού ραδιοφωνικού σταθμού, αντιγράψτε το "
+#~ "URL της ροής του στον περιηγητή ιστού σας. Στους περισσότερους περιηγητές "
+#~ "μπορείτε να κάνετε δεξί κλικ στο σύνδεσμο και να πατήσετε <gui>Αντιγραφή "
+#~ "δεσμού</gui>."
+
+#~ msgid ""
+#~ "Banshee will prompt you to enter the <gui>Station Genre</gui>. Choose the "
+#~ "kind of music the internet radio station plays from the available drop "
+#~ "down selections. You will then need to enter the <gui>Station Name</gui>. "
+#~ "Enter a name for the radio station. Then press tab or use your mouse to "
+#~ "select the <gui>Stream URL</gui> field to paste the URL of the radio "
+#~ "station. Using your mouse right click and choose <gui>Paste</gui> or "
+#~ "press <keyseq><key>Control</key><key>V</key></keyseq>."
+#~ msgstr ""
+#~ "Το Banshee θα σας ζητήσει να εισάγετε το <gui>Είδος σταθμού</gui>. "
+#~ "Επιλέξτε το είδος της μουσικής που παίζει ο ραδιοφωνικός σταθμός από τις "
+#~ "διαθέσιμες επιλογές. Στη συνέχεια θα πρέπει εισάγετε το <gui>Όνομα "
+#~ "σταθμού</gui>. Εισάγετε ένα όνομα για τον ραδιοφωνικό σταθμό. Μετά "
+#~ "πατήστε τον στηλοθέτη ή με το ποντίκι σας επιλέξτε το πεδίο <gui>URL "
+#~ "ροής</gui> για να επικολλήσετε το URL του ραδιοφωνικού σταθμού. Με χρήση "
+#~ "του ποντικιού σας δεξιοπατήστε και επιλέξτε <gui>Επικόλληση</gui> ή "
+#~ "πατήστε <keyseq><key>Control</key>+<key>V</key></keyseq>."
+
+#~ msgid ""
+#~ "Banshee will then allow you to choose how you want to download new "
+#~ "podcasts from a drop down menu. Your choices include:"
+#~ msgstr ""
+#~ "Το Banshee θα σας επιτρέψει τότε να επιλέξετε πως θέλετε να "
+#~ "μεταφορτώνονται οι νέες φορητές εκπομπές από ένα αναπτυσσόμενο μενού. Οι "
+#~ "επιλογές σας περιλαμβάνουν:"
+
+#~ msgid ""
+#~ "Download the Most Recent Episode (This will automatically download the "
+#~ "last episode that was released)."
+#~ msgstr ""
+#~ "Μεταφόρτωση του πιο πρόσφατου επεισοδίου (Αυτό θα μεταφορτώσει αυτόματα "
+#~ "το τελευταίο επεισόδιο που κυκλοφόρησε)."
+
+#~ msgid "Download All Episodes (This will download all episodes)."
+#~ msgstr ""
+#~ "Μεταφόρτωση όλων των επεισοδίων (Αυτό θα μεταφορτώσει όλα τα επεισόδια)."
+
+#~ msgid ""
+#~ "Let Me Decide Which Episodes to Download (This will allow you to choose "
+#~ "which episodes you would like to download)."
+#~ msgstr ""
+#~ "Αφήστε με να αποφασίσω ποια επεισόδια θα μεταφορτωθούν (Αυτό θα σας "
+#~ "επιτρέψει να επιλέξετε ποια επεισόδια θα θέλατε να μεταφορτώσετε)."
+
+#~ msgid "After you have added a Podcast feed, Banshee will display:"
+#~ msgstr "Αφού προσθέσετε μια ροή φορητής εκπομπής, το Banshee θα εμφανίσει:"
+
+#~ msgid "<gui>Name</gui>: (Name of the specific episode)"
+#~ msgstr "<gui>Όνομα</gui>: (Όνομα του συγκεκριμένου επεισοδίου)"
+
+#~ msgid "<gui>Podcast</gui>: (Name of the Podcast)"
+#~ msgstr "<gui>Φορητή εκπομπή</gui>: (Όνομα της φορητής εκπομπής)"
+
+#~ msgid "<gui>Published</gui> (Date the episode was published or released)"
+#~ msgstr ""
+#~ "<gui>Κυκλοφόρησε</gui> (Ημερομηνία κυκλοφορίας ή δημοσίευσης του "
+#~ "επεισοδίου)"
+
+#~ msgid "Common Problems"
+#~ msgstr "Συνήθη προβλήματα"
