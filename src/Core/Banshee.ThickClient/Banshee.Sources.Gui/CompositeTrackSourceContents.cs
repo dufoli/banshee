@@ -231,18 +231,18 @@ namespace Banshee.Sources.Gui
                 genre_view_widget.Parent.Visible = GenreFilterVisible.Get ();
             };
 
+            artist_view = new ArtistListView ();
+            albumartist_view = new ArtistListView ();
             if (ArtistFilterType.Get ().Equals ("artist")) {
-                SetupFilterView (artist_view = new ArtistListView ());
+                SetupFilterView (artist_view);
                 artist_view.Parent.Shown += delegate {
                     artist_view.Parent.Visible = ArtistFilterVisible.Get ();
                 };
-                albumartist_view = new ArtistListView ();
             } else {
-                SetupFilterView (albumartist_view = new ArtistListView ());
+                SetupFilterView (albumartist_view);
                 albumartist_view.Parent.Shown += delegate {
                     albumartist_view.Parent.Visible = ArtistFilterVisible.Get ();
                 };
-                artist_view = new ArtistListView ();
             }
 
             SetupFilterView (year_view = new YearListView ());
