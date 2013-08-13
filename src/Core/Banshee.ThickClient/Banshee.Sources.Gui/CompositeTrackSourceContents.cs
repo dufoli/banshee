@@ -183,9 +183,15 @@ namespace Banshee.Sources.Gui
 
         private void OnArtistFilterChanged (object o, ChangedArgs args)
         {
-            Widget new_artist_view = args.Current.Value == 0 ? artist_view : albumartist_view;
-            Widget old_artist_view = args.Current.Value == 1 ? artist_view : albumartist_view;
+            var new_artist_view = args.Current.Value == 0 ? artist_view : albumartist_view;
+            var old_artist_view = args.Current.Value == 1 ? artist_view : albumartist_view;
 
+            SwapView (old_artist_view, new_artist_view);
+            ArtistFilterType.Set (args.Current.Value == 1 ? "albumartist" : "artist");
+        }
+
+        private void SwapView<T> (ListView<T> oldView, ListView<T> newView)
+        {
             List<ScrolledWindow> new_filter_list = new List<ScrolledWindow> ();
             List<ScrolledWindow> old_filter_list = new List<ScrolledWindow> (filter_scrolled_windows);
 
@@ -193,15 +199,15 @@ namespace Banshee.Sources.Gui
             {
                 bool contains = false;
                 foreach (Widget child in fw.AllChildren) {
-                    if (child == old_artist_view) {
+                    if (child == oldView) {
                         contains = true;
                     }
                 }
 
                 if (contains) {
-                    Widget view_widget = (Widget)new_artist_view;
+                    Widget view_widget = (Widget)newView;
                     if (view_widget.Parent == null) {
-                        SetupFilterView (new_artist_view as ArtistListView);
+                        SetupFilterView (newView);
                     }
 
                     ScrolledWindow win = (ScrolledWindow)view_widget.Parent;
@@ -217,8 +223,6 @@ namespace Banshee.Sources.Gui
             ClearFilterSelections ();
 
             Layout ();
-
-            ArtistFilterType.Set (args.Current.Value == 1 ? "albumartist" : "artist");
         }
 
         protected override void InitializeViews ()
