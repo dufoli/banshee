@@ -560,10 +560,15 @@ namespace Migo.Syndication
 
         public void Save (bool notify)
         {
+            Save (notify, true);
+        }
+
+        public void Save (bool notify, bool download_items)
+        {
             Provider.Save (this);
             CheckForItemsToArchive ();
 
-            if (LastBuildDate > LastAutoDownload) {
+            if (download_items && (LastBuildDate > LastAutoDownload)) {
                 CheckForItemsToDownload ();
             }
 
@@ -609,7 +614,8 @@ namespace Migo.Syndication
 
             if (any) {
                 LastAutoDownload = DateTime.Now;
-                Save ();
+                // We don't want Save to call CheckForItemsToDownload again
+                Save (true, false);
             }
         }
 
