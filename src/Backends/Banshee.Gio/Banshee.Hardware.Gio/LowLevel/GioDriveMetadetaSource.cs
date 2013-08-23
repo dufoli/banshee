@@ -33,9 +33,9 @@ namespace Banshee.Hardware.Gio
 {
     public class GioDriveMetadetaSource : GioMetadataSource
     {
-        Drive Drive { get; set; }
+        IDrive Drive { get; set; }
 
-        public GioDriveMetadetaSource (Drive drive)
+        public GioDriveMetadetaSource (IDrive drive)
         {
             Drive = drive;
         }

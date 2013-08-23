@@ -42,7 +42,7 @@ namespace Banshee.Hardware.Gio
         const string FileSystemSize = "filesystem::size";
         const string FileSystemReadOnly = "filesystem::readonly";
 
-        public GLib.Volume Volume {
+        public GLib.IVolume Volume {
             get; set;
         }
 
@@ -147,7 +147,7 @@ namespace Banshee.Hardware.Gio
         }
 
 
-        public RawVolume (GLib.Volume volume, Manager manager, GioVolumeMetadataSource gioMetadata, UdevMetadataSource udevMetadata)
+        public RawVolume (GLib.IVolume volume, Manager manager, GioVolumeMetadataSource gioMetadata, UdevMetadataSource udevMetadata)
             : base (manager, gioMetadata, udevMetadata)
         {
             Volume = volume;

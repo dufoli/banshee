@@ -111,7 +111,7 @@ namespace Banshee.Hardware.Gio
         }
 
 
-        void VolumeRemoved (GLib.Volume volume)
+        void VolumeRemoved (GLib.IVolume volume)
         {
             var h = DeviceRemoved;
             if (h != null) {
@@ -131,7 +131,7 @@ namespace Banshee.Hardware.Gio
 
         public IEnumerable<IDevice> GetAllDevices ()
         {
-            foreach (GLib.Volume vol in monitor.Volumes) {
+            foreach (GLib.IVolume vol in monitor.Volumes) {
                 var device = GudevDeviceFromGioVolume (vol);
                 if (device == null) {
                     continue;
@@ -157,7 +157,7 @@ namespace Banshee.Hardware.Gio
         }
 
 
-        public GUdev.Device GudevDeviceFromGioDrive (GLib.Drive drive)
+        public GUdev.Device GudevDeviceFromGioDrive (GLib.IDrive drive)
         {
             GUdev.Device device = null;
 
@@ -173,7 +173,7 @@ namespace Banshee.Hardware.Gio
             return device;
         }
 
-        public GUdev.Device GudevDeviceFromGioVolume (GLib.Volume volume)
+        public GUdev.Device GudevDeviceFromGioVolume (GLib.IVolume volume)
         {
             GUdev.Device device = null;
 
@@ -199,7 +199,7 @@ namespace Banshee.Hardware.Gio
             return device;
         }
 
-        public GUdev.Device GudevDeviceFromGioMount (GLib.Mount mount)
+        public GUdev.Device GudevDeviceFromGioMount (GLib.IMount mount)
         {
             if (mount == null) {
                 return null;

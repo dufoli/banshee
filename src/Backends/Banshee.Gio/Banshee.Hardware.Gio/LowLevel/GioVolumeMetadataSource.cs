@@ -32,11 +32,11 @@ namespace Banshee.Hardware.Gio
 {
     public class GioVolumeMetadataSource : GioMetadataSource
     {
-        GLib.Volume Volume {
+        GLib.IVolume Volume {
             get; set;
         }
 
-        public GioVolumeMetadataSource (GLib.Volume volume)
+        public GioVolumeMetadataSource (GLib.IVolume volume)
         {
             Volume = volume;
         }
