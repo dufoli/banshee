@@ -173,6 +173,7 @@ namespace Banshee.Gui.Widgets
             cr.Rectangle (0, image.Height, image.Width, reflect);
             cr.Pattern = mask;
             cr.Fill ();
+            mask.Destroy ();
 
             ((IDisposable)cr).Dispose ();
             return surface;
