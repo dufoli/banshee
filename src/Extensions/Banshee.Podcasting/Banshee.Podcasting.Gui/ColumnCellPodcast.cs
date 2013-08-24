@@ -129,7 +129,7 @@ namespace Banshee.Podcasting.Gui
             // Render the second line first since we have that state already
             if (feed.DbId > 0) {
                 context.Context.MoveTo (x, y + fl_height);
-                context.Context.Color = text_color;
+                context.Context.SetSourceColor (text_color);
                 PangoCairoHelper.ShowLayout (context.Context, layout);
             }
 
@@ -143,7 +143,7 @@ namespace Banshee.Podcasting.Gui
 
             context.Context.MoveTo (x, y);
             text_color.A = 1;
-            context.Context.Color = text_color;
+            context.Context.SetSourceColor (text_color);
             PangoCairoHelper.ShowLayout (context.Context, layout);
         }
 

@@ -268,9 +268,9 @@ namespace Banshee.Sources.Gui
             // Draw the count
             if (!hide_count) {
                 if (view != null) {
-                    cr.Color = state == StateFlags.Normal || (view != null && state == StateFlags.Prelight)
+                    cr.SetSourceColor (state == StateFlags.Normal || (view != null && state == StateFlags.Prelight)
                         ? view.Theme.TextMidColor
-                        : CairoExtensions.GdkRGBAToCairoColor (view.Theme.Widget.StyleContext.GetColor (state));
+                        : CairoExtensions.GdkRGBAToCairoColor (view.Theme.Widget.StyleContext.GetColor (state)));
 
                     cr.MoveTo (
                         cell_area.X + cell_area.Width - count_layout_width - 2,

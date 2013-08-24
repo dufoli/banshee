@@ -83,7 +83,7 @@ namespace Banshee.Collection.Gui
             Cairo.Color color = CairoExtensions.GdkRGBAToCairoColor (context.Widget.StyleContext.GetColor (StateFlags.Selected));
             context.Widget.StyleContext.Restore ();
             color.A = (!context.Opaque) ? 0.3 : 1.0;
-            context.Context.Color = color;
+            context.Context.SetSourceColor (color);
 
             PangoCairoHelper.ShowLayout (context.Context, context.Layout);
         }

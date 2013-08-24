@@ -136,7 +136,7 @@ namespace Banshee.Collection.Gui
             // Render the second line first since we have that state already
             if (!String.IsNullOrEmpty (album.ArtistName)) {
                 context.Context.MoveTo (x, y + fl_height);
-                context.Context.Color = text_color;
+                context.Context.SetSourceColor (text_color);
                 PangoCairoHelper.ShowLayout (context.Context, layout);
             }
 
@@ -150,7 +150,7 @@ namespace Banshee.Collection.Gui
 
             context.Context.MoveTo (x, y);
             text_color.A = 1;
-            context.Context.Color = text_color;
+            context.Context.SetSourceColor (text_color);
             PangoCairoHelper.ShowLayout (context.Context, layout);
         }
 

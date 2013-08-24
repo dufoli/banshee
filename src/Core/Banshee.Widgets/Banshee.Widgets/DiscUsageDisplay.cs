@@ -125,7 +125,7 @@ namespace Banshee.Widgets
             cr.LineWidth = base_line_width / 1.5;
 
             cr.Arc(x, y, radius, 0, 2 * Math.PI);
-            cr.Pattern = bg_gradient;
+            cr.SetSource (bg_gradient);
             cr.Fill();
 
             /*cr.LineTo(x, y);
@@ -144,31 +144,31 @@ namespace Banshee.Widgets
                     cr.Arc(x, y, radius, 0, 2 * Math.PI);
                 }
 
-                cr.Pattern = Fraction >= 1.0 ? fg_gradient_full : fg_gradient;
+                cr.SetSource (Fraction >= 1.0 ? fg_gradient_full : fg_gradient);
                 cr.FillPreserve();
 
-                cr.Color = stroke_color;
+                cr.SetSourceColor (stroke_color);
                 cr.Stroke();
             }
 
             cr.Arc(x, y, radius / 2.75, 0, 2 * Math.PI);
-            cr.Color = fill_color_c;
+            cr.SetSourceColor (fill_color_c);
             cr.FillPreserve();
-            cr.Color = new Cairo.Color(1, 1, 1, 0.75);
+            cr.SetSourceColor (new Cairo.Color(1, 1, 1, 0.75));
             cr.FillPreserve();
 
             cr.LineWidth = base_line_width / 1.5;
 
-            cr.Color = stroke_color;
+            cr.SetSourceColor (stroke_color);
             cr.Stroke();
 
             cr.Arc(x, y, radius / 5.5, 0, 2 * Math.PI);
-            cr.Color = fill_color_c;
+            cr.SetSourceColor (fill_color_c);
             cr.FillPreserve();
 
             cr.LineWidth = base_line_width / 2;
 
-            cr.Color = inner_stroke_color;
+            cr.SetSourceColor (inner_stroke_color);
             cr.Stroke();
 
             cr.Arc(x, y, radius, 0, 2 * Math.PI);
@@ -177,11 +177,11 @@ namespace Banshee.Widgets
             if(Capacity <= 0) {
                 // this sucks balls
                 cr.Rectangle(0, 0, Allocation.Width, Allocation.Height);
-                cr.Color = text_bg_color;
+                cr.SetSourceColor (text_bg_color);
                 cr.FillPreserve();
 
                 cr.SelectFontFace("Sans", FontSlant.Normal, FontWeight.Bold);
-                cr.Color = text_color;
+                cr.SetSourceColor (text_color);
                 cr.SetFontSize(Allocation.Width * 0.2);
                 DrawText(cr, Mono.Unix.Catalog.GetString("Insert\nDisc"), 3);
             }

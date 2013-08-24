@@ -67,11 +67,11 @@ namespace Banshee.NowPlaying
         protected override bool OnDrawn (Cairo.Context cr)
         {
             // We want to draw on RenderWindow so we need another Cairo.Context
-            Cairo.Context cr_window = Gdk.CairoHelper.Create (RenderWindow);
-            cr_window.SetSourceRGB (0.0, 0.0, 0.0);
-            cr_window.Rectangle (0, 0, Allocation.Width, Allocation.Height);
-            cr_window.Paint ();
-            ((IDisposable)cr_window).Dispose ();
+            using (var cr_window = Gdk.CairoHelper.Create (RenderWindow)) {
+                cr_window.SetSourceRGB (0.0, 0.0, 0.0);
+                cr_window.Rectangle (0, 0, Allocation.Width, Allocation.Height);
+                cr_window.Paint ();
+            }
 
             if (RenderWindow == null || !RenderWindow.IsVisible) {
                 return true;
