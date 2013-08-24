@@ -143,39 +143,39 @@ namespace Banshee.Gui.Widgets
         {
             Surface surface = window_cr.Target.CreateSimilar (window_cr.Target.Content,
                 image.Width, image.Height + reflect);
-            Cairo.Context cr = new Context (surface);
+            using (var cr = new Context (surface)) {
 
-            cr.Save ();
+                cr.Save ();
 
-            cr.SetSource (image);
-            cr.Paint ();
+                cr.SetSource (image);
+                cr.Paint ();
 
-            cr.Rectangle (0, image.Height, image.Width, reflect);
-            cr.Clip ();
+                cr.Rectangle (0, image.Height, image.Width, reflect);
+                cr.Clip ();
 
-            Matrix matrix = new Matrix ();
-            matrix.InitScale (1, -1);
-            matrix.Translate (0, -(2 * image.Height) + 1);
-            cr.Transform (matrix);
+                Matrix matrix = new Matrix ();
+                matrix.InitScale (1, -1);
+                matrix.Translate (0, -(2 * image.Height) + 1);
+                cr.Transform (matrix);
 
-            cr.SetSource (image);
-            cr.Paint ();
+                cr.SetSource (image);
+                cr.Paint ();
 
-            cr.Restore ();
+                cr.Restore ();
 
-            Color bg_transparent = BackgroundColor;
-            bg_transparent.A = 0.65;
+                Color bg_transparent = BackgroundColor;
+                bg_transparent.A = 0.65;
 
-            LinearGradient mask = new LinearGradient (0, image.Height, 0, image.Height + reflect);
-            mask.AddColorStop (0, bg_transparent);
-            mask.AddColorStop (1, BackgroundColor);
+                LinearGradient mask = new LinearGradient (0, image.Height, 0, image.Height + reflect);
+                mask.AddColorStop (0, bg_transparent);
+                mask.AddColorStop (1, BackgroundColor);
 
-            cr.Rectangle (0, image.Height, image.Width, reflect);
-            cr.Pattern = mask;
-            cr.Fill ();
-            mask.Destroy ();
+                cr.Rectangle (0, image.Height, image.Width, reflect);
+                cr.SetSource (mask);
+                cr.Fill ();
+                mask.Destroy ();
 
-            ((IDisposable)cr).Dispose ();
+            }
             return surface;
         }
 
