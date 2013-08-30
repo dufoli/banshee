@@ -312,7 +312,7 @@ msgstr ""
 "mostrarà quan espai ocupen els fitxers d'àudio, vídeo, altres i l'espai "
 "lliure. En la part inferior el Banshee mostrarà quants elements totals estan "
 "emmagatzemats en el reproductor de música portable, a quantes hores o dies "
-"de reproducció es equivalent, i l'espai total utilitzat."
+"de reproducció és equivalent, i l'espai total utilitzat."
 
 #: C/sync.page:100(title)
 msgid "Sync Your Entire Library"
@@ -565,7 +565,7 @@ msgstr "<em>per defecte</em>, <em>espai en blanc</em>"
 
 #: C/search.page:65(p)
 msgid "Search for two terms with a space between the two words or terms."
-msgstr "Cerca dos termes amb un espai entre les dos paraules o termes."
+msgstr "Cerca dos termes amb un espai entre les dues paraules o termes."
 
 #: C/search.page:69(p)
 msgid "OR, or, <key>|</key>, <key>,</key>"
@@ -766,7 +766,7 @@ msgid ""
 "available, and the Podcast browser lists all Podcasts in order of newest "
 "first."
 msgstr ""
-"Podcasts mostra tots els Podcasts als que esteu subscrits, tots els Podcasts "
+"Podcasts mostra tots els Podcasts als quals esteu subscrits, tots els Podcasts "
 "mostra els disponibles, i les llistes de navegació de Podcast mostren tots els Podcast ordenats pels "
 "més recents."
 
@@ -886,7 +886,7 @@ msgid ""
 "list you wish those files to be in the queue."
 msgstr ""
 "La cua de reproducció s'organitza per l'ordre que s'afegeixen les cançons. "
-"Les primeres cançons o àlbums que afegiu a la cua seran els primers en ser "
+"Les primeres cançons o àlbums que afegiu a la cua seran els primers a ser "
 "reproduïts. Podeu tornar a ordenar la vostra cua de reproducció utilitzant "
 "el ratolí per arrossegar i deixar anar una cançó o cançons a la llista. "
 "Escolliu la cançó o cançons que voleu tornar a ordenar, i deixeu-les anar "
@@ -1108,7 +1108,7 @@ msgstr ""
 "<gui>Música</gui>. Quan arrossegueu sobre <gui>Música</gui>, apareixerà una "
 "nova opció <gui><em>Llista de reproducció nova</em></gui>, podeu deixar anar "
 "les cançons sobre <gui><em>Llista de reproducció nova</em></gui> per afegir-"
-"les a la llista de reproducció. Podeu repetir aquest procés fins afegir "
+"les a la llista de reproducció. Podeu repetir aquest procés fins a afegir "
 "totes les cançons que voleu a la llista de reproducció."
 
 #: C/manage-playlists.page:56(p)
@@ -1366,7 +1366,7 @@ msgid ""
 "gui> button to complete the process."
 msgstr ""
 "Per a habilitar al Banshee a enviar informes de les cançons que escolteu a "
-"l'ordinador a Last.fm, entreu al Last.fm des les preferències <gui>Específic "
+"l'ordinador a Last.fm, entreu al Last.fm des de les preferències <gui>Específic "
 "de la font</gui> al Banshee. Introduïu el nom d'usuari i premeu el botó "
 "<gui>Entra a Last.fm</gui>. El sistema us portarà a la pàgina web Last.fm "
 "perquè autoritzeu l'accés al Banshee. Premeu l'enllaç <gui>Yes, allow "
@@ -1416,7 +1416,7 @@ msgstr ""
 "Units, Regne Unit i Alemanya. Els residents d'altres països hauran de pagar "
 "un compte premium amb Last.fm per escoltar la ràdio. Els membres premium, en "
 "tots els països, disposen també de les característiques premium: escoltar "
-"llistes de reproducció i emissores musicals a les que heu entrat o heu "
+"llistes de reproducció i emissores musicals a les quals heu entrat o heu "
 "etiquetat."
 
 #: C/lastfm.page:80(p)
@@ -1712,8 +1712,8 @@ msgid ""
 "choices."
 msgstr ""
 "Per a importar fitxers de música o vídeo, escolliu <guiseq><gui>Elements "
-"multimèdia</gui><gui>Importa elements multimèdia</gui></guiseq>. Una diàleg "
-"apareixerà amb diversos opcions."
+"multimèdia</gui><gui>Importa elements multimèdia</gui></guiseq>. Un diàleg "
+"apareixerà amb diverses opcions."
 
 #: C/import.page:31(p)
 msgid ""
@@ -1734,7 +1734,7 @@ msgid ""
 "choose a folder to import from."
 msgstr ""
 "Escolliu aquesta opció per a importar tots els fitxers de música i vídeo "
-"d'una carpeta específica, incloent-hi totes els subcarpetes. Una capsa de "
+"d'una carpeta específica, incloent-hi totes les subcarpetes. Una capsa de "
 "diàleg us demanarà des de quina carpeta voleu importar."
 
 #: C/import.page:43(gui)
@@ -2152,7 +2152,7 @@ msgstr "<gui>Podcast</gui>: (nom del Podcast)"
 
 #: C/add-podcast.page:75(p)
 msgid "<gui>Published</gui> (Date the episode was published or released)"
-msgstr "<gui>Publicat</gui> (data en que l'episodi es va publicar)"
+msgstr "<gui>Publicat</gui> (data en què l'episodi es va publicar)"
 
 #. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2
 #: C/index.page:0(None)
