@@ -3835,7 +3835,7 @@ msgstr "C_opyright:"
 
 #: ../src/Core/Banshee.ThickClient/Banshee.Gui.TrackEditor/ExtraTrackDetailsPage.cs:100
 msgid "Set all licenses to this value"
-msgstr "Dóna aquest valor a tots les llicències"
+msgstr "Dóna aquest valor a totes les llicències"
 
 #: ../src/Core/Banshee.ThickClient/Banshee.Gui.TrackEditor/ExtraTrackDetailsPage.cs:101
 msgid "_License URI:"
@@ -3859,7 +3859,7 @@ msgstr "Lletres"
 
 #: ../src/Core/Banshee.ThickClient/Banshee.Gui.TrackEditor/PageNavigationEntry.cs:74
 msgid "Advance to the next track and edit its title"
-msgstr "Avança fins la propera cançó i edita el seu títol"
+msgstr "Avança fins a la propera cançó i edita el seu títol"
 
 #: ../src/Core/Banshee.ThickClient/Banshee.Gui.TrackEditor/SortingPage.cs:42
 msgid "Sorting"
@@ -4453,7 +4453,7 @@ msgstr "Disponible"
 #: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:123
 #: ../src/Dap/Banshee.Dap.Mtp/Banshee.Dap.Mtp/MtpSource.cs:141
 msgid "Serial number"
-msgstr "Número de serie"
+msgstr "Número de sèrie"
 
 #. AddDapProperty (Catalog.GetString ("Produced on"), ipod_device.ProductionInfo.DisplayDate);
 #. AddDapProperty (Catalog.GetString ("Firmware"), ipod_device.FirmwareVersion);
@@ -4563,7 +4563,7 @@ msgid ""
 "Begin synchronizing the device as soon as the device is plugged in or the "
 "libraries change."
 msgstr ""
-"Comença a sincronitzar el dispositiu tant aviat el dispositiu es connecti o "
+"Comença a sincronitzar el dispositiu tan aviat el dispositiu es connecti o "
 "quan les biblioteques canviïn."
 
 #: ../src/Dap/Banshee.Dap/Banshee.Dap/DapSync.cs:139
@@ -6507,7 +6507,7 @@ msgstr ""
 
 #: ../src/Extensions/Banshee.OpticalDisc/Banshee.OpticalDisc.AudioCd/AudioCdService.cs:119
 msgid "_Eject when done importing"
-msgstr "_Expulsa després de l'importació"
+msgstr "_Expulsa després de la importació"
 
 #: ../src/Extensions/Banshee.OpticalDisc/Banshee.OpticalDisc.AudioCd/AudioCdService.cs:120
 msgid "When an audio CD has been imported, automatically eject it."
@@ -7046,7 +7046,7 @@ msgstr "Subscriviu-vos a podcasts nous"
 #: ../src/Extensions/Banshee.Podcasting/Banshee.Podcasting.Gui/PodcastManager/Dialog/PodcastSubscribeDialog.cs:103
 msgid ""
 "Please enter the URL of the podcast to which you would like to subscribe."
-msgstr "Introduïu l'URL del podcast al que voleu subscriviu-vos."
+msgstr "Introduïu l'URL del podcast al qual voleu subscriviu-vos."
 
 #: ../src/Extensions/Banshee.Podcasting/Banshee.Podcasting.Gui/PodcastManager/Dialog/SyncPreferenceComboBox.cs:41
 msgid "Download all episodes"
@@ -7408,7 +7408,7 @@ msgstr "Aquest usuari no se li permet escoltar la ràdio durant hores puntes d'�
 
 #: ../src/Libraries/Lastfm/Lastfm/RadioConnection.cs:310
 msgid "Radio station not found"
-msgstr "No s'ha trobat la emissora de ràdio"
+msgstr "No s'ha trobat l'emissora de ràdio"
 
 #: ../src/Libraries/Lastfm/Lastfm/RadioConnection.cs:312
 msgid "This application is not allowed to make requests to the web services"
