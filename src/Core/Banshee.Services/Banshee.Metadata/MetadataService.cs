@@ -84,8 +84,7 @@ namespace Banshee.Metadata
                 return;
             }
 
-            if (String.IsNullOrEmpty (track.AlbumTitle) || track.AlbumTitle == AlbumInfo.UnknownAlbumTitle ||
-                String.IsNullOrEmpty (track.ArtistName) || track.ArtistName == ArtistInfo.UnknownArtistName) {
+            if (String.IsNullOrEmpty (track.AlbumTitle) || String.IsNullOrEmpty (track.ArtistName)) {
                 // Do not try to fetch album art for these
                 return;
             }
