@@ -34,8 +34,8 @@ namespace Banshee.Collection
 {
     public class ArtistInfo : CacheableItem
     {
-        public static readonly string UnknownArtistName = Catalog.GetString ("Unknown Artist");
-        public static readonly string UnknownArtistNameUntranslated = "Unknown Artist";
+        public const string UnknownArtistNameUntranslated = "Unknown Artist";
+        public static readonly string UnknownArtistName = Catalog.GetString (UnknownArtistNameUntranslated);
 
         private string name;
         private string name_sort;
