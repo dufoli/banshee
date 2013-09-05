@@ -46,8 +46,8 @@ namespace Banshee.Collection
         public const string ExportVersion = "1.0";
         public static readonly double PlaybackSkippedThreshold = 0.5;
 
-        public const string UnknownTitleUntranslated = "Unknown Title";
-        public static readonly string UnknownTitle = Catalog.GetString (UnknownTitleUntranslated);
+        public static readonly string UnknownTitle = Catalog.GetString ("Unknown Title");
+        public static readonly string UnknownTitleUntranslated = "Unknown Title";
 
         public class ExportableAttribute : Attribute
         {
