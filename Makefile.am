@@ -112,7 +112,7 @@ csharp:
     csharp -lib:bin/ -pkg:glib-sharp-2.0 -pkg:gtk-sharp-2.0 -pkg:gconf-sharp-2.0 -pkg:dbus-sharp -pkg:taglib-sharp -pkg:ipod-sharp -pkg:mono-addins $(addprefix "-reference:", $(wildcard bin/*.dll)); \
 	popd;
 
-test:
+test: all
 	@pushd tests; \
 	make test \
 	popd;
