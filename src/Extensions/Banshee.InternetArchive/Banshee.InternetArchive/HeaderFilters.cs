@@ -41,7 +41,8 @@ namespace Banshee.InternetArchive
     {
         private SearchSource source;
 
-        private ComboBox sort_combo, media_type_combo;
+        private ComboBoxText sort_combo;
+        private ComboBox media_type_combo;
         private TreeStore media_type_store;
         private Banshee.Widgets.SearchEntry search_entry;
         private Button search_button;
@@ -143,7 +144,7 @@ namespace Banshee.InternetArchive
                 string prev_query = entry.Query.EndsWith (":") ? null : entry.Query;
                 entry.Query = String.Format ("{0}:{1}", filter_fields[entry.ActiveFilterID].Id, prev_query);
 
-                var editable = entry.InnerEntry as Editable;
+                var editable = entry as IEditable;
                 if (editable != null) {
                     editable.Position = entry.Query.Length;
                 }
@@ -154,7 +155,7 @@ namespace Banshee.InternetArchive
 
         private void BuildSortCombo ()
         {
-            var combo = sort_combo = ComboBox.NewText ();
+            var combo = sort_combo = new ComboBoxText ();
 
             foreach (var sort in sorts) {
                 combo.AppendText (sort.Name);

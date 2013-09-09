@@ -47,7 +47,7 @@ namespace Banshee.Addins.Gui
             var hbox = new HBox () { Spacing = 6 };
 
             var filter_label = new Label (Catalog.GetString ("Show:"));
-            var filter_combo = ComboBox.NewText ();
+            var filter_combo = new ComboBoxText ();
             filter_combo.AppendText (Catalog.GetString ("All"));
             filter_combo.AppendText (Catalog.GetString ("Enabled"));
             filter_combo.AppendText (Catalog.GetString ("Not Enabled"));
@@ -129,7 +129,7 @@ namespace Banshee.Addins.Gui
                     bool enabled = (bool) model.GetValue (iter, 1);
                     addin.Enabled = !enabled;
                     model.SetValue (iter, 1, addin.Enabled);
-                    model.Foreach (delegate (TreeModel current_model, TreePath path, TreeIter current_iter) {
+                    model.Foreach (delegate (ITreeModel current_model, TreePath path, TreeIter current_iter) {
                         var an = current_model.GetValue (current_iter, 3) as Addin;
                         if (an != null) {
                             current_model.SetValue (current_iter, 1, an.Enabled);
@@ -152,7 +152,7 @@ namespace Banshee.Addins.Gui
             PackStart (hbox, false, false, 0);
             PackStart (tree_scroll, true, true, 0);
             ShowAll ();
-            search_entry.InnerEntry.GrabFocus ();
+            search_entry.GrabFocus ();
 
             txt_cell.WrapWidth = 300;
         }

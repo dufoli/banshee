@@ -37,23 +37,23 @@ using Banshee.Collection.Database;
 
 namespace Banshee.Gui.TrackEditor
 {
-    public class LicenseEntry : ComboBoxEntry, ICanUndo, IEditorField
+    public class LicenseEntry : ComboBox, ICanUndo, IEditorField
     {
         private ListStore license_model;
         private EditorEditableUndoAdapter<Entry> undo_adapter = new EditorEditableUndoAdapter<Entry> ();
 
-        public LicenseEntry ()
+        public LicenseEntry () : base (true)
         {
             license_model = new ListStore (typeof (string));
             Model = license_model;
-            TextColumn = 0;
+            EntryTextColumn = 0;
 
             EntryCompletion c = new EntryCompletion ();
             c.Model = license_model;
-            c.TextColumn = TextColumn;
+            c.TextColumn = EntryTextColumn;
             c.PopupCompletion = true;
             c.InlineCompletion = true;
-            //c.InlineSelection = true; // requires 2.12
+            c.InlineSelection = true;
             c.PopupSingleMatch = false;
             Entry.Completion = c;
 

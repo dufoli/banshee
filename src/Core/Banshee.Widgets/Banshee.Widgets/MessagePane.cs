@@ -105,7 +105,7 @@ namespace Banshee.Widgets
             label.Markup = tip;
             label.SetAlignment (0.0f, 0.5f);
             label.LineWrap = true;
-            label.ModifyFg (StateType.Normal, label.Style.Foreground (StateType.Insensitive));
+            label.OverrideColor (StateFlags.Normal, label.StyleContext.GetColor (StateFlags.Insensitive));
             label.Show ();
             Attach (label, 1, 2, row, row + 1, AttachOptions.Expand | AttachOptions.Fill, 0, 0, 0);
         }
@@ -130,7 +130,7 @@ namespace Banshee.Widgets
             }
 
             Attach (widget, 1, 2, row, row + 1, xoptions, yoptions, 0, 0);
-            widget.ModifyBg (StateType.Normal, Style.Base (StateType.Normal));
+            widget.OverrideBackgroundColor (StateFlags.Normal, StyleContext.GetBackgroundColor (StateFlags.Normal));
         }
 
         public void Clear ()

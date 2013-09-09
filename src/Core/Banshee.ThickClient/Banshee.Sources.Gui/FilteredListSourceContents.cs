@@ -60,12 +60,18 @@ namespace Banshee.Sources.Gui
         private List<object> filter_views = new List<object> ();
         protected List<ScrolledWindow> filter_scrolled_windows = new List<ScrolledWindow> ();
 
+        protected static readonly int DEFAULT_PANE_TOP_POSITION = 375;
+        protected static readonly int DEFAULT_PANE_LEFT_POSITION = 275;
+
         private Dictionary<object, double> model_positions = new Dictionary<object, double> ();
 
         private Paned container;
         private Widget browser_container;
         private InterfaceActionService action_service;
         private ActionGroup browser_view_actions;
+
+        private readonly SchemaEntry<int> pane_top_position;
+        private readonly SchemaEntry<int> pane_left_position;
 
         private static string menu_xml = @"
             <ui>
@@ -83,9 +89,14 @@ namespace Banshee.Sources.Gui
             </ui>
         ";
 
-        public FilteredListSourceContents (string name)
+        public FilteredListSourceContents (string name,
+                                           SchemaEntry<int> pane_top_position,
+                                           SchemaEntry<int> pane_left_position)
         {
             this.name = name;
+            this.pane_top_position = pane_top_position;
+            this.pane_left_position = pane_left_position;
+
             InitializeViews ();
 
             string position = Layout ();
@@ -217,6 +228,8 @@ namespace Banshee.Sources.Gui
             //Hyena.Log.Information ("ListBrowser LayoutLeft");
             Reset ();
 
+            SchemaEntry<int> current_entry = top ? pane_top_position : pane_left_position;
+
             container = GetPane (!top);
             Paned filter_box = GetPane (top);
             filter_box.PositionSet = true;
@@ -247,17 +260,22 @@ namespace Banshee.Sources.Gui
             container.Pack2 (main_scrolled_window, true, false);
             browser_container = filter_box;
 
-            container.Position = top ? 375 : 275;
-            PersistentPaneController.Control (container, ControllerName (top, -1));
+            if (current_entry.Equals (SchemaEntry<int>.Zero)) {
+                throw new InvalidOperationException (String.Format ("No SchemaEntry found for {0} position of {1}",
+                                                                    top ? "top" : "left", this.GetType ().FullName));
+            }
+            container.Position = current_entry.DefaultValue;
+            PersistentPaneController.Control (container, current_entry);
             ShowPack ();
         }
 
         private string ControllerName (bool top, int filter)
         {
-            if (filter == -1)
-                return String.Format ("{0}.browser.{1}", name, top ? "top" : "left");
-            else
-                return String.Format ("{0}.browser.{1}.{2}", name, top ? "top" : "left", filter);
+            if (filter < 0) {
+                throw new ArgumentException ("filter should be positive", "filter");
+            }
+
+            return String.Format ("{0}.browser.{1}.{2}", name, top ? "top" : "left", filter);
         }
 
         private Paned GetPane (bool hpane)

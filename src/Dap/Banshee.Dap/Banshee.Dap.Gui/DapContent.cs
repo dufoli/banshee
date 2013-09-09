@@ -69,14 +69,16 @@ namespace Banshee.Dap.Gui
             dap.Properties.PropertyChanged += OnPropertyChanged;
         }
 
-        public override void Dispose ()
+        protected override void Dispose (bool disposing)
         {
-            foreach (var opt in library_opts.Values) {
-                opt.Dispose ();
+            if (disposing) {
+                foreach (var opt in library_opts.Values) {
+                    opt.Dispose ();
+                }
+                library_opts.Clear ();
             }
-            library_opts.Clear ();
-
-            base.Dispose ();
+            
+            base.Dispose (disposing);
         }
 
         private void BuildWidgets ()

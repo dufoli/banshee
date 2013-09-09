@@ -58,7 +58,6 @@ namespace Banshee.Sources.Gui
         private SourceRowRenderer source_renderer;
         private CellRendererText header_renderer;
         private Theme theme;
-        private Cairo.Context cr;
 
         private Stage<TreeIter> notify_stage = new Stage<TreeIter> (2000);
 
@@ -225,9 +224,9 @@ namespace Banshee.Sources.Gui
 
 #region Gtk.Widget Overrides
 
-        protected override void OnStyleSet (Style old_style)
+        protected override void OnStyleUpdated ()
         {
-            base.OnStyleSet (old_style);
+            base.OnStyleUpdated ();
             theme = Hyena.Gui.Theming.ThemeEngine.CreateTheme (this);
 
             var light_text = Hyena.Gui.Theming.GtkTheme.GetCairoTextMidColor (this);
@@ -340,7 +339,7 @@ namespace Banshee.Sources.Gui
             return true;
         }
 
-        protected override bool OnExposeEvent (Gdk.EventExpose evnt)
+        protected override bool OnDrawn (Cairo.Context cr)
         {
             if (need_resort) {
                 need_resort = false;
@@ -359,18 +358,12 @@ namespace Banshee.Sources.Gui
                 QueueDraw ();
             }
 
-            try {
-                cr = Gdk.CairoHelper.Create (evnt.Window);
-                base.OnExposeEvent (evnt);
-                if (Hyena.PlatformDetection.IsMeeGo) {
-                    theme.DrawFrameBorder (cr, new Gdk.Rectangle (0, 0,
-                        Allocation.Width, Allocation.Height));
-                }
-                return true;
-            } finally {
-                CairoExtensions.DisposeContext (cr);
-                cr = null;
+            base.OnDrawn (cr);
+            if (Hyena.PlatformDetection.IsMeeGo) {
+                theme.DrawFrameBorder (cr, new Gdk.Rectangle (0, 0,
+                    Allocation.Width, Allocation.Height));
             }
+            return true;
         }
 
         private bool IncrementPathForKeyPress (Gdk.EventKey press, TreePath path)
@@ -415,7 +408,7 @@ namespace Banshee.Sources.Gui
         private bool OnCursorChangedTimeout ()
         {
             TreeIter iter;
-            TreeModel model;
+            ITreeModel model;
 
             current_timeout = -1;
 
@@ -470,13 +463,13 @@ namespace Banshee.Sources.Gui
             QueueDraw ();
         }
 
-        internal void Expand (Source src)
+        internal new void Expand (Source src)
         {
             Expand (store.FindSource (src));
             src.Expanded = true;
         }
 
-        private void Expand (TreeIter iter)
+        private new void Expand (TreeIter iter)
         {
             using (var path = store.GetPath (iter)) {
                 ExpandRow (path, true);
@@ -592,10 +585,6 @@ namespace Banshee.Sources.Gui
 
         internal TreeIter HighlightedIter {
             get { return highlight_iter; }
-        }
-
-        internal Cairo.Context Cr {
-            get { return cr; }
         }
 
         internal Theme Theme {

@@ -60,16 +60,15 @@ namespace Banshee.Gui.TrackEditor
             entry.AcceptsTab = false;
             entry.Show ();
             entry.Buffer.Changed += OnChanged;
-
-            entry.SizeRequested += OnTextViewSizeRequested;
         }
 
-        private void OnTextViewSizeRequested (object o, SizeRequestedArgs args)
+        protected override void OnGetPreferredHeight (out int minimum_height, out int natural_height)
         {
-            Pango.FontMetrics metrics = PangoContext.GetMetrics (entry.Style.FontDescription, PangoContext.Language);
+            Pango.FontMetrics metrics = PangoContext.GetMetrics (
+                entry.StyleContext.GetFont (StateFlags.Normal), PangoContext.Language);
             int line_height = ((int)(metrics.Ascent + metrics.Descent) + 512) >> 10; // PANGO_PIXELS(d)
             metrics.Dispose ();
-            HeightRequest = (line_height + 2) * 2;
+            minimum_height = natural_height = (line_height + 2) * 2;
         }
 
         public void DisconnectUndo ()

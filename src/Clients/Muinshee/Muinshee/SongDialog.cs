@@ -50,7 +50,16 @@ namespace Muinshee
 {
     public class SongDialog : BaseDialog
     {
-        public SongDialog (PlaylistSource queue) : base (queue, Catalog.GetString ("Play Song"), "song")
+        const string CONFIG_NAMESPACE = BaseDialog.CONFIG_NAMESPACE_PREFIX + ".song";
+        static readonly SchemaEntry<int> WidthSchema = WindowConfiguration.NewWidthSchema (CONFIG_NAMESPACE, BaseDialog.DEFAULT_WIDTH);
+        static readonly SchemaEntry<int> HeightSchema = WindowConfiguration.NewHeightSchema (CONFIG_NAMESPACE, BaseDialog.DEFAULT_HEIGHT);
+        static readonly SchemaEntry<int> XPosSchema = WindowConfiguration.NewXPosSchema (CONFIG_NAMESPACE);
+        static readonly SchemaEntry<int> YPosSchema = WindowConfiguration.NewYPosSchema (CONFIG_NAMESPACE);
+        static readonly SchemaEntry<bool> MaximizedSchema = WindowConfiguration.NewMaximizedSchema (CONFIG_NAMESPACE);
+
+        public SongDialog (PlaylistSource queue) :
+            base (queue, Catalog.GetString ("Play Song"),
+                  new WindowConfiguration (WidthSchema, HeightSchema, XPosSchema, YPosSchema, MaximizedSchema))
         {
         }
 

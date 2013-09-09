@@ -63,7 +63,7 @@ namespace Banshee.IO
 
                 var extensions = GetOrderedExtensions (
                     "/Banshee/Platform/IOProvider",
-                    ProviderSchema.Get (),
+                    ProviderConfiguration.ProviderSchema.Get (),
                     "Banshee.IO.Gio.Provider", "Banshee.IO.Unix.Provider", "Banshee.IO.SystemIO.Provider"
                 );
 
@@ -119,15 +119,5 @@ namespace Banshee.IO
 
             return uri;
         }
-
-        internal static readonly SchemaEntry<string> ProviderSchema = new SchemaEntry<string> (
-            "core", "io_provider",
-            "Banshee.IO.Gio.Provider",
-            "Set the IO provider backend in Banshee",
-            "Can be either \"Banshee.IO.SystemIO.Provider\" (.NET System.IO), " +
-                "\"Banshee.IO.Gio.Provider\" (GIO), or " +
-                "\"Banshee.IO.Unix.Provider\" (Native Unix/POSIX), or " +
-                "takes effect on Banshee start (restart necessary)"
-        );
     }
 }

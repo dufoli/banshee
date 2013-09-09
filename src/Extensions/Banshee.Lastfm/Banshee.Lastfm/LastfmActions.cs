@@ -128,13 +128,15 @@ namespace Banshee.Lastfm
             UpdateActions ();
         }
 
-        public override void Dispose ()
+        protected override void Dispose (bool disposing)
         {
-            Actions.UIManager.RemoveUi (actions_id);
-            Actions.RemoveActionGroup (this);
-            lastfm.Connection.StateChanged -= HandleConnectionStateChanged;
-            ServiceManager.PlayerEngine.DisconnectEvent (OnPlayerEvent);
-            base.Dispose ();
+            if (disposing) {
+                Actions.UIManager.RemoveUi (actions_id);
+                Actions.RemoveActionGroup (this);
+                lastfm.Connection.StateChanged -= HandleConnectionStateChanged;
+                ServiceManager.PlayerEngine.DisconnectEvent (OnPlayerEvent);
+            }
+            base.Dispose (disposing);
         }
 
 #region Action Handlers

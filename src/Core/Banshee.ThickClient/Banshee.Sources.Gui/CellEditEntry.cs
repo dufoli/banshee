@@ -31,7 +31,7 @@ using Gtk;
 
 namespace Banshee.Sources.Gui
 {
-    internal class CellEditEntry : Entry, CellEditable
+    internal class CellEditEntry : Entry, ICellEditable
     {
         public string path;
         private bool fired_edit_done = false;

@@ -118,7 +118,7 @@ namespace Banshee.Sources.Gui
                 } catch {}
             };
 
-            Position (view.GdkWindow);
+            Position (view.Window);
             HasFocus = true;
             Show ();
         }

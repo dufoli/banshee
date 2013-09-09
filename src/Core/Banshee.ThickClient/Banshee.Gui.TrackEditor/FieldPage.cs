@@ -66,8 +66,6 @@ namespace Banshee.Gui.TrackEditor
             public System.Action Sync;
         }
 
-        private object tooltip_host;
-
         private List<FieldSlot> field_slots = new List<FieldSlot> ();
         public IEnumerable<FieldSlot> FieldSlots {
             get { return field_slots; }
@@ -76,7 +74,6 @@ namespace Banshee.Gui.TrackEditor
         public FieldPage ()
         {
             Spacing = EditorUtilities.RowSpacing;
-            tooltip_host = TooltipSetter.CreateHost ();
         }
 
         public void Initialize (TrackEditorDialog dialog)
@@ -161,7 +158,7 @@ namespace Banshee.Gui.TrackEditor
             if (MultipleTracks && (options & FieldOptions.NoSync) == 0 && (options & FieldOptions.NoShowSync) == 0) {
                 slot.SyncButton = new SyncButton ();
                 if (syncTooltip != null) {
-                    TooltipSetter.Set (tooltip_host, slot.SyncButton, syncTooltip);
+                    slot.SyncButton.TooltipText = syncTooltip;
                 }
 
                 slot.SyncButton.Clicked += delegate { slot.Sync (); };

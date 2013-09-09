@@ -84,14 +84,14 @@ namespace Banshee.CairoGlyphs
             cr.LineJoin = LineJoin.Round;
 
             // inner 'b' note
-            cr.Color = innerColor;
+            cr.SetSourceColor (innerColor);
             cr.MoveTo (0, 2);
             cr.LineTo (2, 0);
             cr.Arc (4, 8, 2, Math.PI, Math.PI * 3);
             cr.Stroke ();
 
             // outer 'cut' circle
-            cr.Color = outerColor;
+            cr.SetSourceColor (outerColor);
             cr.Arc (4, 8, 4, Math.PI * 1.5, Math.PI * 1.12);
             cr.Stroke ();
 

@@ -56,10 +56,14 @@ namespace Banshee.NowPlaying
             SetupWidget ();
         }
 
-        protected override bool OnExposeEvent (Gdk.EventExpose evnt)
+        protected override bool OnDrawn (Cairo.Context cr)
         {
-            evnt.Window.DrawRectangle (Style.BlackGC, true, Allocation);
-            return base.OnExposeEvent (evnt);
+            cr.Save ();
+            cr.SetSourceRGB (0.0, 0.0, 0.0);
+            cr.Rectangle (0, 0, Allocation.Width, Allocation.Height);
+            cr.Fill ();
+            cr.Restore ();
+            return base.OnDrawn (cr);
         }
 
         protected override bool OnKeyPressEvent (Gdk.EventKey evnt)
@@ -154,7 +158,7 @@ namespace Banshee.NowPlaying
         private void ConfigureWindow ()
         {
             Gdk.Screen screen = Screen;
-            int monitor = screen.GetMonitorAtWindow (parent.GdkWindow);
+            int monitor = screen.GetMonitorAtWindow (parent.Window);
             Gdk.Rectangle bounds = screen.GetMonitorGeometry (monitor);
             Move (bounds.X, bounds.Y);
             Resize (bounds.Width, bounds.Height);
@@ -174,7 +178,7 @@ namespace Banshee.NowPlaying
 
             base.OnRealized ();
 
-            GdkWindow.OverrideRedirect = true;
+            Window.OverrideRedirect = true;
 
             Screen.SizeChanged += OnScreenSizeChanged;
         }
@@ -220,12 +224,12 @@ namespace Banshee.NowPlaying
             // If our parent window is ever somehow activated while we are
             // visible, this will ensure we merge back into the parent
             if (parent.IsActive) {
-                parent.GdkWindow.SkipPagerHint = false;
-                parent.GdkWindow.SkipTaskbarHint = false;
+                parent.Window.SkipPagerHint = false;
+                parent.Window.SkipTaskbarHint = false;
                 parent.RemoveNotification ("is-active", ParentActiveNotification);
             } else {
-                parent.GdkWindow.SkipPagerHint = true;
-                parent.GdkWindow.SkipTaskbarHint = true;
+                parent.Window.SkipPagerHint = true;
+                parent.Window.SkipTaskbarHint = true;
             }
         }
 
@@ -269,7 +273,7 @@ namespace Banshee.NowPlaying
                 int cursor_x, cursor_y;
                 int window_x, window_y;
 
-                controls.GdkWindow.Screen.Display.GetPointer (out cursor_x, out cursor_y);
+                controls.Window.Screen.Display.GetPointer (out cursor_x, out cursor_y);
                 controls.GetPosition (out window_x, out window_y);
 
                 Gdk.Rectangle box = new Gdk.Rectangle (window_x, window_y,
@@ -345,29 +349,19 @@ namespace Banshee.NowPlaying
         private void ShowCursor ()
         {
             cursor_is_hidden = false;
-            GdkWindow.Cursor = null;
+            Window.Cursor = null;
         }
 
         private void HideCursor ()
         {
-            if (GdkWindow == null) {
+            if (Window == null) {
                 return;
             }
 
-            Gdk.Pixmap pixmap = Gdk.Pixmap.CreateBitmapFromData (GdkWindow, "0x0", 1, 1);
-            if (pixmap == null) {
-                return;
-            }
+            Gdk.Cursor cursor = new Gdk.Cursor (Gdk.CursorType.BlankCursor);
 
-            UpdateHiddenCursorPosition ();
-            cursor_is_hidden = true;
+            Window.Cursor = cursor;
 
-            Gdk.Color color = new Gdk.Color (0, 0, 0);
-            Gdk.Cursor cursor = new Gdk.Cursor (pixmap, pixmap, color, color, 0, 0);
-
-            GdkWindow.Cursor = cursor;
-
-            pixmap.Dispose ();
             cursor.Dispose ();
         }
 

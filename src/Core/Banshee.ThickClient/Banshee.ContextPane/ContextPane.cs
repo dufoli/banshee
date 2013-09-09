@@ -48,8 +48,6 @@ namespace Banshee.ContextPane
 {
     public class ContextPane : Gtk.HBox
     {
-        private object tooltip_host = TooltipSetter.CreateHost ();
-
         private Gtk.Notebook notebook;
         private VBox vbox;
         private bool large = false;
@@ -116,11 +114,11 @@ namespace Banshee.ContextPane
             HBox hbox = new HBox ();
             var max = new Button (new Image (IconThemeUtils.LoadIcon ("context-pane-maximize", 7)));
             max.Clicked += (o, a) => { large = !large; expand_handler (large); };
-            TooltipSetter.Set (tooltip_host, max, Catalog.GetString ("Make the context pane larger or smaller"));
+            max.TooltipText = Catalog.GetString ("Make the context pane larger or smaller");
 
             var close = new Button (new Image (IconThemeUtils.LoadIcon ("context-pane-close", 7)));
             close.Clicked += (o, a) => ShowAction.Activate ();
-            TooltipSetter.Set (tooltip_host, close, Catalog.GetString ("Hide context pane"));
+            close.TooltipText = Catalog.GetString ("Hide context pane");
 
             max.Relief = close.Relief = ReliefStyle.None;
             hbox.PackStart (max, false, false, 0);
@@ -268,7 +266,7 @@ namespace Banshee.ContextPane
                 DrawIndicator = false,
                 Relief = ReliefStyle.None
             };
-            TooltipSetter.Set (tooltip_host, toggle_button, page.Name);
+            toggle_button.TooltipText = page.Name;
             toggle_button.Clicked += (s, e) => {
                 if (pane_pages.ContainsKey (page)) {
                     if (page.State == ContextState.Loaded) {

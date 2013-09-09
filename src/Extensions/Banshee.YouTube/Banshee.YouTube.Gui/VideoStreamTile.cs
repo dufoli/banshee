@@ -102,10 +102,10 @@ namespace Banshee.YouTube.Gui
             rating.AlwaysShowEmptyStars = true;
 
             try {
-                StyleSet += delegate {
-                    primary_label.ModifyFg (StateType.Normal, Style.Text (StateType.Normal));
-                    secondary_label.ModifyFg (StateType.Normal, Hyena.Gui.GtkUtilities.ColorBlend (
-                        Style.Foreground (StateType.Normal), Style.Background (StateType.Normal)));
+                StyleUpdated += delegate {
+                    primary_label.OverrideColor (StateFlags.Normal, StyleContext.GetColor (StateFlags.Normal));
+                    secondary_label.OverrideColor (StateFlags.Normal, Hyena.Gui.GtkUtilities.ColorBlend (
+                        StyleContext.GetColor (StateFlags.Normal), StyleContext.GetBackgroundColor (StateFlags.Normal)));
                 };
             } catch (Exception e) {
                 Log.DebugException (e);

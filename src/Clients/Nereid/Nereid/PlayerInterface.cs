@@ -58,6 +58,13 @@ namespace Nereid
 {
     public class PlayerInterface : BaseClientWindow, IClientWindow, IDBusObjectName, IService, IDisposable, IHasSourceView
     {
+        const string CONFIG_NAMESPACE = "player_window";
+        static readonly SchemaEntry<int> WidthSchema = WindowConfiguration.NewWidthSchema (CONFIG_NAMESPACE, 1024);
+        static readonly SchemaEntry<int> HeightSchema = WindowConfiguration.NewHeightSchema (CONFIG_NAMESPACE, 700);
+        static readonly SchemaEntry<int> XPosSchema = WindowConfiguration.NewXPosSchema (CONFIG_NAMESPACE);
+        static readonly SchemaEntry<int> YPosSchema = WindowConfiguration.NewYPosSchema (CONFIG_NAMESPACE);
+        static readonly SchemaEntry<bool> MaximizedSchema = WindowConfiguration.NewMaximizedSchema (CONFIG_NAMESPACE);
+
         // Major Layout Components
         private VBox primary_vbox;
         private Table header_table;
@@ -104,7 +111,9 @@ namespace Nereid
             }
         }
 
-        public PlayerInterface () : base (Catalog.GetString ("Banshee Media Player"), "player_window", 1024, 700)
+        public PlayerInterface () :
+            base (Catalog.GetString ("Banshee Media Player"),
+                  new WindowConfiguration (WidthSchema, HeightSchema, XPosSchema, YPosSchema, MaximizedSchema))
         {
             // if (PlatformDetection.IsMeeGo) {
             //     Gdk.Window.AddFilterForAll (OnGdkEventFilter);
@@ -146,11 +155,13 @@ namespace Nereid
 
 #region System Overrides
 
-        public override void Dispose ()
+        protected override void Dispose (bool disposing)
         {
             lock (this) {
-                Hide ();
-                base.Dispose ();
+                if (disposing) {
+                    Hide ();
+                }
+                base.Dispose (disposing);
                 Gtk.Application.Quit ();
             }
         }
@@ -198,6 +209,7 @@ namespace Nereid
         {
             header_table = new Table (2, 2, false);
             header_table.Show ();
+            header_table.Vexpand = false;
             primary_vbox.PackStart (header_table, false, false, 0);
 
             main_menu = new MainMenu ();
@@ -299,9 +311,9 @@ namespace Nereid
                 };
                 source_scroll.Add (source_view);
 
-                var color = new Gdk.Color ((byte)0xe6, (byte)0xe6, (byte)0xe6);
-                Gdk.Colormap.System.AllocColor (ref color, true, true);
-                source_view.ModifyBase (StateType.Normal, color);
+                var color = new Gdk.RGBA ();
+                color.Parse ("e6e6e6");
+                source_view.OverrideBackgroundColor (StateFlags.Normal, color);
             } else {
                 Hyena.Widgets.ScrolledWindow window;
                 if (ApplicationContext.CommandLine.Contains ("smooth-scroll")) {
@@ -426,7 +438,8 @@ namespace Nereid
 
             // UI events
             view_container.SearchEntry.Changed += OnSearchEntryChanged;
-            views_pane.SizeRequested += delegate {
+            // TODO: Check that this still works, it was using SizeRequested
+            views_pane.SizeAllocated += delegate {
                 SourceViewWidth.Set (views_pane.Position);
             };
 
@@ -447,7 +460,8 @@ namespace Nereid
             };
 
             if (!PlatformDetection.IsMeeGo) {
-                header_toolbar.ExposeEvent += OnToolbarExposeEvent;
+                // FIXME: confirm that this is not needed anymore
+                //header_toolbar.ExposeEvent += OnToolbarExposeEvent;
             }
         }
 
@@ -735,7 +749,7 @@ namespace Nereid
             var src = ServiceManager.SourceManager.ActiveSource;
             var search_entry = src.Properties.Get<SearchEntry> ("Nereid.SearchEntry") ?? view_container.SearchEntry;
             if (focus_search && search_entry.Visible && !source_view.EditingRow) {
-                search_entry.InnerEntry.GrabFocus ();
+                search_entry.GrabFocus ();
                 search_entry.HasFocus = true;
                 return true;
             }

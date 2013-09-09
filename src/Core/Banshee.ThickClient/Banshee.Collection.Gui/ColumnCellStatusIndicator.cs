@@ -42,7 +42,7 @@ using Banshee.ServiceStack;
 
 namespace Banshee.Collection.Gui
 {
-    class ColumnCellStatusIndicatorAccessible : ColumnCellAccessible, Atk.ImageImplementor
+    class ColumnCellStatusIndicatorAccessible : ColumnCellAccessible, Atk.IImageImplementor
     {
         private string image_description;
 
@@ -229,7 +229,7 @@ namespace Banshee.Collection.Gui
             LoadPixbufs ();
         }
 
-        public override void Render (CellContext context, StateType state, double cellWidth, double cellHeight)
+        public override void Render (CellContext context, StateFlags state, double cellWidth, double cellHeight)
         {
             TrackInfo track = BoundTrack;
             if (track == null) {

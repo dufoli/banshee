@@ -74,7 +74,7 @@ namespace Banshee.Collection.Gui
             if (image != null) {
                 if (fill) {
                     CairoExtensions.RoundedRectangle (cr, x, y, width, height, radius, corners);
-                    cr.Color = fillColor;
+                    cr.SetSourceColor (fillColor);
                     cr.Fill ();
                 }
 
@@ -85,12 +85,12 @@ namespace Banshee.Collection.Gui
                 CairoExtensions.RoundedRectangle (cr, x, y, width, height, radius, corners);
 
                 if (fill) {
-                    var grad = new LinearGradient (x, y, x, y + height);
-                    grad.AddColorStop (0, fillColor);
-                    grad.AddColorStop (1, CairoExtensions.ColorShade (fillColor, 1.3));
-                    cr.Pattern = grad;
-                    cr.Fill ();
-                    grad.Destroy ();
+                    using (var grad = new LinearGradient (x, y, x, y + height)) {
+                        grad.AddColorStop (0, fillColor);
+                        grad.AddColorStop (1, CairoExtensions.ColorShade (fillColor, 1.3));
+                        cr.SetSource (grad);
+                        cr.Fill ();
+                    }
                 }
 
                 Banshee.CairoGlyphs.BansheeLineLogo.Render (cr,
@@ -112,12 +112,12 @@ namespace Banshee.Collection.Gui
                 cr.Antialias = Antialias.None;
 
                 CairoExtensions.RoundedRectangle (cr, x + 1.5, y + 1.5, width - 3, height - 3, radius, corners);
-                cr.Color = cover_border_light_color;
+                cr.SetSourceColor (cover_border_light_color);
                 cr.Stroke ();
             }
 
             CairoExtensions.RoundedRectangle (cr, x + 0.5, y + 0.5, width - 1, height - 1, radius, corners);
-            cr.Color = cover_border_dark_color;
+            cr.SetSourceColor (cover_border_dark_color);
             cr.Stroke ();
 
             if (dispose && image != null) {

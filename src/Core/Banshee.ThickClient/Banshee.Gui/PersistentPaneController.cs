@@ -35,6 +35,8 @@ namespace Banshee.Gui
 {
     public class PersistentPaneController
     {
+        public const string NamespacePrefix = "interface.panes";
+
         private static Dictionary<string, PersistentPaneController> controllers = new Dictionary<string, PersistentPaneController> ();
 
         private string @namespace;
@@ -47,7 +49,7 @@ namespace Banshee.Gui
 
         public static void Control (Paned pane, string name)
         {
-            Control (pane, String.Format ("interface.panes.{0}", name), "position", pane.Position);
+            Control (pane, String.Format ("{0}.{1}", NamespacePrefix, name), "position", pane.Position);
         }
 
         public static void Control (Paned pane, SchemaEntry<int> entry)
@@ -84,7 +86,7 @@ namespace Banshee.Gui
                 }
 
                 pane = value;
-                pane.Position = ConfigurationClient.Get<int> (@namespace, key, fallback);
+                pane.Position = ConfigurationClient.Instance.Get<int> (@namespace, key, fallback);
                 //pane.MoveHandle += OnPaneMoved;
                 //pane.AcceptPosition += delegate { Console.WriteLine ("accept pos called, pos = {0}", pane.Position); };
                 pane.SizeAllocated += OnPaneMoved;
@@ -112,7 +114,7 @@ namespace Banshee.Gui
                 return true;
             } else {
                 if (pane.Position != last_position) {
-                    ConfigurationClient.Set<int> (@namespace, key, pane.Position);
+                    ConfigurationClient.Instance.Set<int> (@namespace, key, pane.Position);
                     last_position = pane.Position;
                 }
                 timer_id = 0;

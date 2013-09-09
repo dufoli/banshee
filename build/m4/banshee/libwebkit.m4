@@ -9,7 +9,7 @@ AC_DEFUN([BANSHEE_CHECK_LIBWEBKIT],
 	if test "x$enable_webkit" = "xyes"; then
 		have_libwebkit=no
 		PKG_CHECK_MODULES(LIBWEBKIT,
-			webkit-1.0 >= $WEBKIT_MIN_VERSION
+			webkitgtk-3.0 >= $WEBKIT_MIN_VERSION
 			libsoup-2.4 >= $SOUP_MIN_VERSION,
 			have_libwebkit=yes, have_libwebkit=no)
 		AC_SUBST(LIBWEBKIT_LIBS)

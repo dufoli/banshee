@@ -53,14 +53,14 @@ namespace Banshee.Gui.Widgets
         {
         }
 
-        public override void Dispose ()
+        protected override void Dispose (bool disposing)
         {
             var disposable = idle_album as IDisposable;
             if (disposable != null) {
                 disposable.Dispose ();
             }
 
-            base.Dispose ();
+            base.Dispose (disposing);
         }
 
         protected override int ArtworkSizeRequest {
@@ -80,7 +80,7 @@ namespace Banshee.Gui.Widgets
             idle_album = idle_album ?? PixbufImageSurface.Create (Banshee.Gui.IconThemeUtils.LoadIcon (
                 ArtworkSizeRequest, MissingAudioIconName), true);
 
-            ArtworkRenderer.RenderThumbnail (cr, idle_album, false, Allocation.X, Allocation.Y,
+            ArtworkRenderer.RenderThumbnail (cr, idle_album, false, 0, 0,
                 ArtworkSizeRequest, ArtworkSizeRequest,
                 false, 0, true, BackgroundColor);
         }

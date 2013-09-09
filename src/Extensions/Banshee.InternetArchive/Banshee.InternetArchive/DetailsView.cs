@@ -147,13 +147,13 @@ namespace Banshee.InternetArchive
                 Box.PackStart (arrow, false, false, 0);
                 Box.PackStart (label, true, true, 0);
 
-                State = StateType.Selected;
+                this.SetStateFlags (StateFlags.Selected, true);
 
                 bool changing_style = false;
-                StyleSet += (o, a) => {
+                StyleUpdated += (o, a) => {
                     if (!changing_style) {
                         changing_style = true;
-                        ModifyBg (StateType.Normal, Style.Background (StateType.Selected));
+                        OverrideBackgroundColor (StateFlags.Normal, StyleContext.GetBackgroundColor (StateFlags.Selected));
                         changing_style = false;
                     }
                 };
@@ -214,9 +214,9 @@ namespace Banshee.InternetArchive
             table.ValueRenderer.Scale = Pango.Scale.Medium;
 
             // Keep the table from needing to vertically scroll
-            table.Child.SizeRequested += (o, a) => {
+            /*table.Child.SizeRequested += (o, a) => {
                 table.SetSizeRequest (a.Requisition.Width, a.Requisition.Height);
-            };
+            };*/
 
             AddToTable (table, Catalog.GetString ("Creator:"), details.Creator);
             AddToTable (table, Catalog.GetString ("Venue:"), details.Venue);
@@ -330,13 +330,11 @@ namespace Banshee.InternetArchive
             frame.Child = sw;
             frame.ShowAll ();
 
-            sw.Child.ModifyBg (StateType.Normal, Style.Base (StateType.Normal));
-            sw.Child.ModifyFg (StateType.Normal, Style.Text (StateType.Normal));
-            sw.Child.ModifyText (StateType.Normal, Style.Text (StateType.Normal));
-            StyleSet += delegate {
-                sw.Child.ModifyBg (StateType.Normal, Style.Base (StateType.Normal));
-                sw.Child.ModifyFg (StateType.Normal, Style.Text (StateType.Normal));
-                sw.Child.ModifyText (StateType.Normal, Style.Text (StateType.Normal));
+            sw.Child.OverrideBackgroundColor (StateFlags.Normal, StyleContext.GetBackgroundColor (StateFlags.Normal));
+            sw.Child.OverrideColor (StateFlags.Normal, StyleContext.GetColor (StateFlags.Normal));
+            StyleUpdated += delegate {
+                sw.Child.OverrideBackgroundColor (StateFlags.Normal, StyleContext.GetBackgroundColor (StateFlags.Normal));
+                sw.Child.OverrideColor (StateFlags.Normal, StyleContext.GetColor (StateFlags.Normal));
             };
 
             PackStart (frame, true, true, 0);
@@ -483,7 +481,7 @@ namespace Banshee.InternetArchive
             file_list.ColumnController = file_columns;
             file_list.SetModel (files_model);
 
-            var format_list = ComboBox.NewText ();
+            var format_list = new ComboBoxText ();
             format_list.RowSeparatorFunc = (model, iter) => {
                 return (string)model.GetValue (iter, 0) == "---";
             };

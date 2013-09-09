@@ -104,7 +104,7 @@ namespace Banshee.Gui.TrackEditor
             if (view.IsRealized && model != null) {
                 var width = GetValueWidth ();
 
-                model.Foreach ((TreeModel m, TreePath path, TreeIter iter) => {
+                model.Foreach ((ITreeModel m, TreePath path, TreeIter iter) => {
                     if ((Pango.EllipsizeMode) model.GetValue (iter, 3) != Pango.EllipsizeMode.End) {
                         model.SetValue (iter, 5, width);
                     }
@@ -116,7 +116,7 @@ namespace Banshee.Gui.TrackEditor
         public CellRendererText NameRenderer { get { return name_renderer; } }
         public CellRendererText ValueRenderer { get { return value_renderer; } }
 
-        private bool RowSeparatorFunc (TreeModel model, TreeIter iter)
+        private bool RowSeparatorFunc (ITreeModel model, TreeIter iter)
         {
             return (bool)model.GetValue (iter, 2);
         }
@@ -163,10 +163,10 @@ namespace Banshee.Gui.TrackEditor
             }
         }
 
-        protected override void OnStyleSet (Style previous_style)
+        protected override void OnStyleUpdated ()
         {
-            base.OnStyleSet (previous_style);
-            name_renderer.CellBackgroundGdk = Style.Background (StateType.Normal);
+            base.OnStyleUpdated ();
+            name_renderer.CellBackgroundRgba = StyleContext.GetBackgroundColor (StateFlags.Normal);
         }
 
         public void Initialize (TrackEditorDialog dialog)

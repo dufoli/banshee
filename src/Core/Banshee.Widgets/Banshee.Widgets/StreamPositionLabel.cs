@@ -81,9 +81,9 @@ namespace Banshee.Widgets
 
         private bool first_style_set = false;
 
-        protected override void OnStyleSet (Style old_style)
+        protected override void OnStyleUpdated ()
         {
-            base.OnStyleSet (old_style);
+            base.OnStyleUpdated ();
 
             if (first_style_set) {
                 BuildLayouts ();
@@ -93,56 +93,92 @@ namespace Banshee.Widgets
             first_style_set = true;
         }
 
-        protected override void OnSizeRequested (ref Gtk.Requisition requisition)
+        protected override void OnGetPreferredHeight (out int minimum_height, out int natural_height)
         {
+            minimum_height = natural_height = 0;
             if (!IsRealized || layout == null) {
                 return;
             }
 
             int width, height;
             layout.GetPixelSize (out width, out height);
-
-            requisition.Width = width;
-            requisition.Height = height;
+            minimum_height = natural_height = height;
         }
 
-        protected override bool OnExposeEvent (Gdk.EventExpose evnt)
+        protected override void OnGetPreferredWidth (out int minimum_width, out int natural_width)
+        {
+            minimum_width = natural_width = 0;
+            if (!IsRealized || layout == null) {
+                return;
+            }
+
+            int width, height;
+            layout.GetPixelSize (out width, out height);
+            minimum_width = natural_width = width;
+        }
+
+        protected override bool OnDrawn (Cairo.Context cr)
         {
             int bar_width = (int)((double)Allocation.Width * buffering_progress);
             bool render_bar = false;
 
+            var border = StyleContext.GetBorder (StateFlags);
             if (bar_width > 0 && IsBuffering) {
-                bar_width -= 2 * Style.XThickness;
+                bar_width -= border.Left + border.Right;
                 render_bar = true;
 
-                Gtk.Style.PaintBox (Style, GdkWindow, StateType.Normal, ShadowType.In, evnt.Area, this, null,
-                    Allocation.X, Allocation.Y, Allocation.Width, Allocation.Height);
+                StyleContext.Save ();
+                StyleContext.AddClass ("trough");
+                StyleContext.RenderBackground (cr, 0, 0, Allocation.Width, Allocation.Height);
+                StyleContext.RenderFrame (cr, 0, 0, Allocation.Width, Allocation.Height);
+                StyleContext.Restore ();
 
                 if (bar_width > 0) {
-                    Gtk.Style.PaintBox (Style, GdkWindow, StateType.Selected, ShadowType.EtchedOut,
-                        evnt.Area, this, "bar",
-                        Allocation.X + Style.XThickness, Allocation.Y + Style.YThickness,
-                        bar_width, Allocation.Height - 2 * Style.YThickness);
+                    StyleContext.Save ();
+                    StyleContext.AddClass ("progressbar");
+                    StyleContext.RenderActivity (cr,
+                        border.Left, border.Top,
+                        bar_width, Allocation.Height - (border.Top + border.Bottom));
+                    StyleContext.Restore ();
                 }
             }
 
             int width, height;
             layout.GetPixelSize (out width, out height);
 
-            int x = Allocation.X + ((Allocation.Width - width) / 2);
-            int y = Allocation.Y + ((Allocation.Height - height) / 2);
-            Gdk.Rectangle rect = evnt.Area;
+            int x = (Allocation.Width - width) / 2;
+            int y = (Allocation.Height - height) / 2;
+            Gdk.Rectangle rect = new Gdk.Rectangle (0, 0, Allocation.Width, Allocation.Height);
 
             if (render_bar) {
-                width = bar_width + Style.XThickness;
-                rect = new Gdk.Rectangle (evnt.Area.X, evnt.Area.Y, width, evnt.Area.Height);
-                Gtk.Style.PaintLayout (Style, GdkWindow, StateType.Selected, true, rect, this, null, x, y, layout);
+                // First render the text that is on the progressbar
+                int full_bar_width = bar_width + border.Left;
+                rect.Width = full_bar_width;
 
+                cr.Save ();
+                Gdk.CairoHelper.Rectangle (cr, rect);
+                cr.Clip ();
+                StyleContext.Save ();
+                // The entry class is need so that the text get the "selected" color
+                StyleContext.AddClass ("entry");
+                StyleContext.AddClass ("progressbar");
+                StyleContext.RenderLayout (cr, x, y, layout);
+                StyleContext.Restore ();
+                cr.Restore ();
+
+                // Adjust the rectangle so that the rest of the text is rendered as expected
                 rect.X += rect.Width;
-                rect.Width = evnt.Area.Width - rect.Width;
+                rect.Width = Allocation.Width - rect.Width;
             }
 
-            Gtk.Style.PaintLayout (Style, GdkWindow, StateType.Normal, false, rect, this, null, x, y, layout);
+            cr.Save ();
+            Gdk.CairoHelper.Rectangle (cr, rect);
+            cr.Clip ();
+            StyleContext.Save ();
+            StyleContext.AddClass ("trough");
+            StyleContext.RenderLayout (cr, x, y, layout);
+            StyleContext.Restore ();
+            cr.Restore ();
 
             return true;
         }

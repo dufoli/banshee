@@ -263,7 +263,7 @@ namespace Banshee.Dap.Mtp
             get { return !(IsAdding || IsDeleting); }
         }
 
-        private static SafeUri empty_file = new SafeUri (Paths.Combine (Paths.ApplicationCache, "mtp.mp3"));
+        private SafeUri empty_file = new SafeUri (Paths.Combine (Paths.ApplicationCache, "mtp.mp3"));
         protected override void OnTracksDeleted ()
         {
             // Hack to get the disk usage indicate to be accurate, which seems to

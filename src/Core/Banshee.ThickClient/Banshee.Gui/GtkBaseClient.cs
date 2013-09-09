@@ -46,23 +46,19 @@ namespace Banshee.Gui
     {
         static GtkBaseClient () {
             Application.InitializePaths ();
-            user_gtkrc = Path.Combine (Paths.ApplicationData, "gtkrc");
+            user_css = Path.Combine (Paths.ApplicationData, "gtk.css");
         }
 
         private static Type client_type;
 
-        private static string user_gtkrc;
+        private static string user_css;
+
+        private Gtk.CssProvider custom_provider;
 
         public static void Startup<T> (string [] args) where T : GtkBaseClient
         {
             Hyena.Log.InformationFormat ("Running Banshee {0}: [{1}]", Application.Version,
                 Application.BuildDisplayInfo);
-
-            // This could go into GtkBaseClient, but it's probably something we
-            // should really only support at each client level
-            if (File.Exists (user_gtkrc) && !ApplicationContext.CommandLine.Contains ("no-gtkrc")) {
-                Gtk.Rc.AddDefaultFile (user_gtkrc);
-            }
 
             // Boot the client
             Banshee.Gui.GtkBaseClient.Startup<T> ();
@@ -120,12 +116,22 @@ namespace Banshee.Gui
 
             Gtk.Application.Init ();
 
-            if (ApplicationContext.CommandLine.Contains ("debug-gtkrc")) {
-                Log.Information ("Note: gtkrc files will be checked for reload every 5 seconds!");
+            // This could go into GtkBaseClient, but it's probably something we
+            // should really only support at each client level
+            if (File.Exists (user_css) && !ApplicationContext.CommandLine.Contains ("no-gtkcss")) {
+                custom_provider = new Gtk.CssProvider ();
+                custom_provider.LoadFromPath (user_css);
+                Gtk.StyleContext.AddProviderForScreen (Gdk.Screen.Default, (Gtk.IStyleProvider)custom_provider,
+                                                       600 /* GTK_STYLE_PROVIDER_PRIORITY_APPLICATION*/ );
+            }
+
+            if (ApplicationContext.CommandLine.Contains ("debug-gtkcss")) {
+                Log.Information ("Note: gtk.css file will be checked for reload every 5 seconds!");
                 GLib.Timeout.Add (5000, delegate {
-                    if (Gtk.Rc.ReparseAll ()) {
-                        Gtk.Rc.ResetStyles (Gtk.Settings.Default);
-                        Log.Information ("gtkrc has been reloaded");
+                    if (custom_provider != null) {
+                        custom_provider.LoadFromPath (user_css);
+                        Gtk.StyleContext.ResetWidgets (Gdk.Screen.Default);
+                        Log.Information ("gtk.css has been reloaded");
                     }
                     return true;
                 });

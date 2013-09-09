@@ -47,7 +47,7 @@ namespace Banshee.Widgets
         private bool is_hovering;
         private bool selectable;
         private UriOpenHandler open_handler;
-        private Gdk.Color link_color;
+        private Gdk.RGBA link_color;
 
         private bool interior_focus;
         private int focus_width;
@@ -71,18 +71,17 @@ namespace Banshee.Widgets
             label = new Label(text);
             label.Show();
 
-            link_color = label.Style.Background(StateType.Selected);
+            link_color = label.StyleContext.GetBackgroundColor (StateFlags.Selected);
             ActAsLink = true;
 
             Add(label);
         }
 
-        protected override void OnStyleSet (Style previous_style)
+        protected override void OnStyleUpdated ()
         {
-            base.OnStyleSet (previous_style);
+            base.OnStyleUpdated ();
 
             CheckButton check = new CheckButton ();
-            check.EnsureStyle ();
 
             interior_focus = GtkUtilities.StyleGetProperty<bool> (check, "interior-focus", false);
             focus_width = GtkUtilities.StyleGetProperty<int> (check, "focus-line-width", -1);
@@ -102,44 +101,62 @@ namespace Banshee.Widgets
             }
         }
 
-        protected override bool OnExposeEvent(Gdk.EventExpose evnt)
+        protected override bool OnDrawn (Cairo.Context cr)
         {
             if(!IsDrawable) {
                 return false;
             }
 
-            if(evnt.Window == GdkWindow && HasFocus) {
+            if(CairoHelper.ShouldDrawWindow (cr, Window) && HasFocus) {
                 int layout_width = 0, layout_height = 0;
                 label.Layout.GetPixelSize(out layout_width, out layout_height);
-                Style.PaintFocus (Style, GdkWindow, State, evnt.Area, this, "checkbutton",
-                    0, 0, layout_width + 2 * padding, layout_height + 2 * padding);
+                StyleContext.Save ();
+                StyleContext.AddClass ("check");
+                StyleContext.RenderFocus (cr, 0, 0, layout_width + 2 * padding, layout_height + 2 * padding);
+                StyleContext.Restore ();
             }
 
             if(Child != null) {
-                PropagateExpose(Child, evnt);
+                PropagateDraw(Child, cr);
             }
 
             return false;
         }
 
-        protected override void OnSizeRequested (ref Requisition requisition)
+        protected override void OnGetPreferredHeight (out int minimum_height, out int natural_height)
         {
             if (label == null) {
-                base.OnSizeRequested (ref requisition);
+                base.OnGetPreferredHeight (out minimum_height, out natural_height);
                 return;
             }
 
-            requisition.Width = 0;
-            requisition.Height = 0;
+            minimum_height = natural_height = 0;
 
-            Requisition child_requisition = label.SizeRequest ();
-            requisition.Width = Math.Max (requisition.Width, child_requisition.Width);
-            requisition.Height += child_requisition.Height;
+            int label_min_height, label_natural_height;
+            label.GetPreferredHeight (out label_min_height, out label_natural_height);
+            minimum_height += label_min_height;
+            natural_height += label_natural_height;
 
-            requisition.Width += ((int)BorderWidth + padding) * 2;
-            requisition.Height += ((int)BorderWidth + padding) * 2;
+            natural_height += ((int)BorderWidth + padding) * 2;
+            minimum_height += ((int)BorderWidth + padding) * 2;
+        }
 
-            base.OnSizeRequested (ref requisition);
+        protected override void OnGetPreferredWidth (out int minimum_width, out int natural_width)
+        {
+            if (label == null) {
+                base.OnGetPreferredWidth (out minimum_width, out natural_width);
+                return;
+            }
+
+            minimum_width = natural_width = 0;
+
+            int label_min_width, label_natural_width;
+            label.GetPreferredWidth (out label_min_width, out label_natural_width);
+            minimum_width = Math.Max (minimum_width, label_min_width);
+            natural_width = Math.Max (natural_width, label_natural_width);
+
+            minimum_width += ((int)BorderWidth + padding) * 2;
+            natural_width += ((int)BorderWidth + padding) * 2;
         }
 
         protected override void OnSizeAllocated (Gdk.Rectangle allocation)
@@ -196,14 +213,14 @@ namespace Banshee.Widgets
         protected override bool OnEnterNotifyEvent(Gdk.EventCrossing evnt)
         {
             is_hovering = true;
-            GdkWindow.Cursor = hand_cursor;
+            Window.Cursor = hand_cursor;
             return false;
         }
 
         protected override bool OnLeaveNotifyEvent(Gdk.EventCrossing evnt)
         {
             is_hovering = false;
-            GdkWindow.Cursor = null;
+            Window.Cursor = null;
             return false;
         }
 
@@ -272,10 +289,10 @@ namespace Banshee.Widgets
 
                 if(act_as_link) {
                     label.Selectable = false;
-                    label.ModifyFg(Gtk.StateType.Normal, link_color);
+                    label.OverrideColor (StateFlags.Normal, link_color);
                 } else {
                     label.Selectable = selectable;
-                    label.ModifyFg(Gtk.StateType.Normal, label.Style.Foreground(Gtk.StateType.Normal));
+                    label.OverrideColor (StateFlags.Normal, label.StyleContext.GetColor (StateFlags.Normal));
                 }
 
                 label.QueueDraw();

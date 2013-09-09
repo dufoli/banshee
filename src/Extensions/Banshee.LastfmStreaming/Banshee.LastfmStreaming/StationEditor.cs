@@ -48,7 +48,7 @@ namespace Banshee.LastfmStreaming.Radio
         private LastfmSource lastfm;
         private StationSource source;
 
-        private Gtk.ComboBox type_combo;
+        private Gtk.ComboBoxText type_combo;
         private Gtk.Entry arg_entry;
         private Gtk.Label arg_label;
 
@@ -74,8 +74,10 @@ namespace Banshee.LastfmStreaming.Radio
             AddStockButton (Stock.Cancel, ResponseType.Cancel);
             AddStockButton (Stock.Ok, ResponseType.Ok, true);
 
+            int minimum_width, natural_width;
+            GetPreferredWidth (out minimum_width, out natural_width);
             SetGeometryHints (this, new Gdk.Geometry () {
-                    MinWidth = SizeRequest ().Width,
+                    MinWidth = minimum_width,
                     MaxWidth = Gdk.Screen.Default.Width,
                     MinHeight = -1,
                     MaxHeight = -1
@@ -96,7 +98,7 @@ namespace Banshee.LastfmStreaming.Radio
                     Xalign = 0.0f
                 }, 0, 1, 1, 2, AttachOptions.Fill, AttachOptions.Shrink, 0, 0);
 
-            table.Attach (type_combo = ComboBox.NewText (),
+            table.Attach (type_combo = new ComboBoxText (),
                 1, 2, 0, 1, AttachOptions.Fill | AttachOptions.Expand, AttachOptions.Shrink, 0, 0);
 
             table.Attach (arg_entry = new Entry (),
@@ -106,7 +108,7 @@ namespace Banshee.LastfmStreaming.Radio
             VBox.Spacing = 12;
             VBox.ShowAll ();
 
-            type_combo.RemoveText (0);
+            type_combo.Remove (0);
             int active_type = 0;
             int i = 0;
             foreach (StationType type in StationType.Types) {

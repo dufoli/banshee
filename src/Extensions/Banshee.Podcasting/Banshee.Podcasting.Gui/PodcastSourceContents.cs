@@ -47,6 +47,7 @@ using Banshee.Collection.Database;
 using Banshee.Collection.Gui;
 
 using Banshee.Podcasting.Data;
+using Banshee.Gui;
 
 
 namespace Banshee.Podcasting.Gui
@@ -56,8 +57,17 @@ namespace Banshee.Podcasting.Gui
         private Grid track_view;
         private PodcastFeedView feed_view;
         private PodcastUnheardFilterView unheard_view;
+        private static readonly string name = "podcast";
 
-        public PodcastSourceContents () : base ("podcast")
+        public static readonly SchemaEntry<int> PaneLeftPosition = new SchemaEntry<int> (
+            String.Format ("{0}.{1}.browser.left", PersistentPaneController.NamespacePrefix, name),
+            "position",
+            DEFAULT_PANE_LEFT_POSITION,
+            "Podcast Browser Pane Container Position",
+            "The position of the podcast browser pane container"
+        );
+
+        public PodcastSourceContents () : base (name, SchemaEntry<int>.Zero, PaneLeftPosition)
         {
         }
 

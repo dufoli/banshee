@@ -92,13 +92,8 @@ namespace Banshee.WebSource
                 AttachOptions.Shrink,
                 0, 0);
 
-            //search_entry.EmptyMessage = String.Format (Catalog.GetString ("Search the Amazon MP3 Store"));
             search_entry.SetSizeRequest (260, -1);
-            // FIXME: dummy option to make the "search" icon show up;
-            // we should probably fix this in the SearchEntry, but also
-            // add real filter options for searching Amazon MP3 (artist,
-            // album, genre, etc.)
-            search_entry.AddFilterOption (0, name);
+            search_entry.ShowSearchIcon = true;
             search_entry.Show ();
             search_entry.Activated += (o, e) => {
                 view.GoSearch (search_entry.Query);

@@ -36,7 +36,6 @@ namespace Banshee.Equalizer.Gui
         private uint band;
         private Scale scale;
         private Label label;
-        private object tooltip_host;
 
         public event EventHandler ValueChanged;
 
@@ -61,8 +60,6 @@ namespace Banshee.Equalizer.Gui
 
             PackStart (scale, false, false, 0);
             PackStart (label, false, false, 0);
-
-            tooltip_host = Hyena.Gui.TooltipSetter.CreateHost ();
         }
 
         private void OnValueChanged (object o, EventArgs args)
@@ -72,7 +69,7 @@ namespace Banshee.Equalizer.Gui
                 handler(this, new EventArgs ());
             }
 
-            Hyena.Gui.TooltipSetter.Set (tooltip_host, scale, ((int)Math.Round (scale.Value / 10.0)).ToString ());
+            scale.TooltipText = ((int)Math.Round (scale.Value / 10.0)).ToString ();
         }
 
         public int Value {

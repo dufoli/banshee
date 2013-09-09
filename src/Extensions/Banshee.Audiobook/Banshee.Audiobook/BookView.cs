@@ -129,14 +129,16 @@ namespace Banshee.Audiobook
             );
         }
 
-        public override void Dispose ()
+        protected override void Dispose (bool disposing)
         {
-            if (cover != null) {
-                cover.Dispose ();
-                cover = null;
+            if (disposing) {
+                if (cover != null) {
+                    cover.Dispose ();
+                    cover = null;
+                }
             }
 
-            base.Dispose ();
+            base.Dispose (disposing);
         }
 
 #region ISourceContents
@@ -149,7 +151,7 @@ namespace Banshee.Audiobook
             library = source as AudiobookLibrarySource;
             if (library != null) {
                 track_list.SetModel (library.TrackModel);
-                library.Actions["AudiobookResume"].ConnectProxy (resume_button);
+                resume_button.RelatedAction = library.Actions["AudiobookResume"];
             }
 
             return library != null;

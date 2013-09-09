@@ -47,7 +47,7 @@ namespace Banshee.Equalizer
 {
     public class EqualizerManager : IEnumerable<EqualizerSetting>, IEnumerable
     {
-        private static string legacy_xml_path = System.IO.Path.Combine (
+        private string legacy_xml_path = System.IO.Path.Combine (
             Paths.ApplicationData, "equalizers.xml");
 
         private static EqualizerManager instance;

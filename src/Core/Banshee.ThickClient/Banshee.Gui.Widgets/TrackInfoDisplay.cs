@@ -121,8 +121,7 @@ namespace Banshee.Gui.Widgets
             }
 
             Connected = true;
-
-            WidgetFlags |= WidgetFlags.NoWindow;
+            HasWindow = false;
         }
 
         private bool connected;
@@ -156,25 +155,27 @@ namespace Banshee.Gui.Widgets
             );
         }
 
-        public override void Dispose ()
+        protected override void Dispose (bool disposing)
         {
-            if (idle_timeout_id > 0) {
-                GLib.Source.Remove (idle_timeout_id);
+            if (disposing) {
+                if (idle_timeout_id > 0) {
+                    GLib.Source.Remove (idle_timeout_id);
+                }
+
+                Connected = false;
+
+                stage.Iteration -= OnStageIteration;
+                stage = null;
+
+                InvalidateCache ();
             }
 
-            Connected = false;
-
-            stage.Iteration -= OnStageIteration;
-            stage = null;
-
-            InvalidateCache ();
-
-            base.Dispose ();
+            base.Dispose (disposing);
         }
 
         protected override void OnRealized ()
         {
-            GdkWindow = Parent.GdkWindow;
+            Window = Parent.Window;
             base.OnRealized ();
         }
 
@@ -197,12 +198,12 @@ namespace Banshee.Gui.Widgets
             }
         }
 
-        protected override void OnStyleSet (Style previous)
+        protected override void OnStyleUpdated ()
         {
-            base.OnStyleSet (previous);
+            base.OnStyleUpdated ();
 
-            text_color = CairoExtensions.GdkColorToCairoColor (Style.Foreground (StateType.Normal));
-            BackgroundColor = CairoExtensions.GdkColorToCairoColor (Style.Background (StateType.Normal));
+            text_color = CairoExtensions.GdkRGBAToCairoColor (StyleContext.GetColor (StateFlags.Normal));
+            BackgroundColor = CairoExtensions.GdkRGBAToCairoColor (StyleContext.GetBackgroundColor (StateFlags.Normal));
             text_light_color = Hyena.Gui.Theming.GtkTheme.GetCairoTextMidColor (this);
 
             ResetMissingImages ();
@@ -241,29 +242,18 @@ namespace Banshee.Gui.Widgets
         {
         }
 
-        protected override bool OnExposeEvent (Gdk.EventExpose evnt)
+        protected override bool OnDrawn (Cairo.Context cr)
         {
             bool idle = incoming_track == null && current_track == null;
             if (!Visible || !IsMapped || (idle && !CanRenderIdle)) {
                 return true;
             }
 
-            Cairo.Context cr = Gdk.CairoHelper.Create (evnt.Window);
-
-            foreach (Gdk.Rectangle damage in evnt.Region.GetRectangles ()) {
-                cr.Rectangle (damage.X, damage.Y, damage.Width, damage.Height);
-                cr.Clip ();
-
-                if (idle) {
-                    RenderIdle (cr);
-                } else {
-                    RenderAnimation (cr);
-                }
-
-                cr.ResetClip ();
+            if (idle) {
+                RenderIdle (cr);
+            } else {
+                RenderAnimation (cr);
             }
-
-            CairoExtensions.DisposeContext (cr);
 
             return true;
         }
@@ -341,7 +331,7 @@ namespace Banshee.Gui.Widgets
         protected virtual void RenderCoverArt (Cairo.Context cr, ImageSurface image)
         {
             ArtworkRenderer.RenderThumbnail (cr, image, false,
-                Allocation.X, Allocation.Y + ArtworkOffset,
+                0, ArtworkOffset,
                 ArtworkSizeRequest, ArtworkSizeRequest,
                 !IsMissingImage (image), 0.0,
                 IsMissingImage (image), BackgroundColor);

@@ -66,7 +66,7 @@ namespace Banshee.Windows
                 return;
             }
 
-            ThumbnailToolbarManager.Register (gdk_win32_drawable_get_handle (window.GdkWindow.Handle), cb);
+            ThumbnailToolbarManager.Register (gdk_win32_drawable_get_handle (window.Window.Handle), cb);
         }
 
         [DllImport ("libgdk-win32-2.0-0.dll")]

@@ -1,7 +1,7 @@
 dnl Granularly define the version components
 dnl Remember to also update the Display Version
 m4_define([banshee_version_major], [2])
-m4_define([banshee_version_minor], [7])
+m4_define([banshee_version_minor], [9])
 m4_define([banshee_version_micro], [0])
 
 dnl this can sometimes differ manually
@@ -69,14 +69,14 @@ dnl Mono and gmcs
 SHAMROCK_CHECK_MONO_MODULE(2.8.2)
 SHAMROCK_FIND_MONO_2_0_COMPILER_OR_HIGHER
 SHAMROCK_FIND_MONO_RUNTIME
-SHAMROCK_CHECK_MONO_2_0_GAC_ASSEMBLIES([Mono.Cairo Mono.Posix ICSharpCode.SharpZipLib])
+SHAMROCK_CHECK_MONO_2_0_GAC_ASSEMBLIES([
+	Mono.Posix
+	ICSharpCode.SharpZipLib
+])
 
-dnl Check for GNOME >= 2.28 to see if we should remove
-dnl 'Media Player' from the app Name, bgo#596242, except
-dnl in MeeGo where GNOME >= 2.28, but we want the full name
-PKG_CHECK_MODULES(GNOME_2_28, gnome-desktop-2.0 >= 2.28, HAVE_GNOME_2_28=yes, HAVE_GNOME_2_28=no)
+dnl In MeeGo we want the full name, but not in GNOME 3 (see bgo#596242)
 PKG_CHECK_MODULES(MEEGO_PANEL, meego-panel, HAVE_MEEGO_PANEL=yes, HAVE_MEEGO_PANEL=no)
-if test "x$HAVE_GNOME_2_28" = "xno" -o "x$HAVE_MEEGO_PANEL" = "xyes"; then
+if "x$HAVE_MEEGO_PANEL" = "xyes"; then
 	BANSHEE_DESKTOP_NAME="_Name=Banshee Media Player"
 else
 	BANSHEE_DESKTOP_NAME="_Name=Banshee"
@@ -90,10 +90,6 @@ else
 fi
 AC_SUBST(MEEGO_PANELS_DIR)
 
-
-dnl Check for gdk-x11 >= 2.22 for NotificationArea extension, bgo#638477
-PKG_CHECK_MODULES(GDK_2_22, gdk-x11-2.0 >= 2.22, have_gdk_2_22=yes, have_gdk_2_22=no)
-AM_CONDITIONAL(HAVE_GDK_2_22, test "x$have_gdk_2_22" = "xyes")
 
 dnl DBus Sharp libraries
 BANSHEE_CHECK_DBUS_SHARP
@@ -116,7 +112,7 @@ BANSHEE_CHECK_LIBWEBKIT
 dnl gdata (optional through --disable-youtube)
 BANSHEE_CHECK_YOUTUBE
 
-dnl gtk#-beans and gio#
+dnl gio#
 BANSHEE_CHECK_GIO_SHARP
 
 dnl Moonlight (optional through --enable-moonlight)
@@ -202,8 +198,10 @@ AC_SUBST(ENABLE_RELEASE)
 if test "x$enable_release" = "xyes"; then
 	GMCS_FLAGS="-define:RELEASE"
 else
-	GMCS_FLAGS="-warnaserror"
+	GMCS_FLAGS=""
 fi
+#FIXME: add "-warnaserror" back above!
+
 AC_SUBST(GMCS_FLAGS)
 
 AM_CONDITIONAL(HYENA_PKG_CONFIG, false)
@@ -371,7 +369,7 @@ ${PACKAGE}-${VERSION}
     C Compiler:            ${CC}
     Mono C# Compiler:      ${MCS} ${GMCS_FLAGS}
     Mono Runtime:          ${MONO}
-    Gtk#:                  ${gtk_version}
+    Gtk#:                  ${gtk_sharp_version}
 
   Video/Graphics:
     Graphics System:       ${GRAPHICS_SUBSYSTEM}
@@ -393,8 +391,8 @@ ${PACKAGE}-${VERSION}
     Web Browser:           ${have_libwebkit} (webkit-1.0 >= $WEBKIT_MIN_VERSION, libsoup-2.4 >= $SOUP_MIN_VERSION)
       + GNOME Proxy        ${have_libsoup_gnome} (libsoup-gnome-2.4 >= $SOUP_GNOME_MIN_VERSION)
     DAAP:                  ${enable_daap}
-    GIO Backend:           ${enable_gio} (gio-sharp >= $GIOSHARP_REQUIRED, gtk-sharp-beans >= $GNOMESHARP_REQUIRED)
-    GIO Hardware:          ${enable_gio_hardware} (gudev-sharp >= $GUDEVSHARP_REQUIRED, gkeyfile-sharp >= $GKEYFILESHARP_REQUIRED)
+    GIO Backend:           ${enable_gio} (gio-sharp >= $GIOSHARP_REQUIRED)
+    GIO Hardware:          ${enable_gio_hardware} (gudev-sharp >= $GUDEVSHARP_REQUIRED)
     YouTube:               ${enable_youtube} (gdata-sharp >= $GDATASHARP_REQUIRED_VERSION)
     Sound Menu:            ${enable_soundmenu}
     Ubuntu One Store:      ${enable_ubuntuone} (ubuntuone-sharp >= $UBUNTUONESHARP_REQUIRED)

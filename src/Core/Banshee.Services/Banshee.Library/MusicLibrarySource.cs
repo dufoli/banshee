@@ -56,8 +56,10 @@ namespace Banshee.Library
             Banshee.Base.FileNamePattern.MusicPattern = music_filename_pattern;
         }
 
+        public static readonly string SourceName = Catalog.GetString ("Music");
+
         // Catalog.GetString ("Music Library")
-        public MusicLibrarySource () : base (Catalog.GetString ("Music"), "Library", 40)
+        public MusicLibrarySource () : base (SourceName, "Library", 40)
         {
             MediaTypes = TrackMediaAttributes.Music | TrackMediaAttributes.AudioStream;
             NotMediaTypes = TrackMediaAttributes.Podcast | TrackMediaAttributes.VideoStream | TrackMediaAttributes.AudioBook;

@@ -78,21 +78,15 @@ namespace Banshee.Dap.Gui
             theme = new GtkTheme (this);
         }
 
-        protected override bool OnExposeEvent (Gdk.EventExpose evnt)
+        protected override bool OnDrawn (Cairo.Context cr)
         {
-            Cairo.Context cr = Gdk.CairoHelper.Create (evnt.Window);
-
-            try {
-                DrawFrame (cr, evnt.Area);
-                return base.OnExposeEvent (evnt);
-            } finally {
-                CairoExtensions.DisposeContext (cr);
-            }
+            DrawFrame (cr);
+            return base.OnDrawn (cr);
         }
 
-        private void DrawFrame (Cairo.Context cr, Gdk.Rectangle clip)
+        private void DrawFrame (Cairo.Context cr)
         {
-            Gdk.Rectangle rect = new Gdk.Rectangle (Allocation.X, Allocation.Y,
+            Gdk.Rectangle rect = new Gdk.Rectangle (0, 0,
                 Allocation.Width, Allocation.Height);
             theme.Context.ShowStroke = true;
             theme.DrawFrameBackground (cr, rect, true);

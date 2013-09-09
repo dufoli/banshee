@@ -713,8 +713,8 @@ namespace Banshee.Sources
         }
 
         public virtual int CurrentStatusFormat {
-            get { return ConfigurationClient.Get<int> (String.Format ("sources.{0}", ParentConfigurationId), "status_format", 0); }
-            set { ConfigurationClient.Set<int> (String.Format ("sources.{0}", ParentConfigurationId), "status_format", value); }
+            get { return ConfigurationClient.Instance.Get<int> (String.Format ("sources.{0}", ParentConfigurationId), "status_format", 0); }
+            set { ConfigurationClient.Instance.Set<int> (String.Format ("sources.{0}", ParentConfigurationId), "status_format", value); }
         }
 
         public SchemaEntry<T> CreateSchema<T> (string name)

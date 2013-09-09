@@ -12,20 +12,17 @@ AC_DEFUN([BANSHEE_CHECK_LIBBANSHEE],
 	LIBBANSHEE_LIBS=""
 	LIBBANSHEE_CFLAGS=""
 
-	GRAPHICS_SUBSYSTEM="Unknown"
-	GTK_TARGET=$(pkg-config --variable=target gtk+-2.0)
+	PKG_CHECK_MODULES(GTK, gtk+-3.0 >= 3.0)
+	SHAMROCK_CONCAT_MODULE(LIBBANSHEE, GTK)
 
-	if test x$GTK_TARGET = xx11; then
-		PKG_CHECK_MODULES(GDK_X11, gdk-x11-2.0 >= 2.8)
-		SHAMROCK_CONCAT_MODULE(LIBBANSHEE, GDK_X11)
-		GRAPHICS_SUBSYSTEM="X11"
-	elif test x$GTK_TARGET = xquartz; then
-		PKG_CHECK_MODULES(GDK_QUARTZ, gdk-quartz-2.0 >= 2.14)
-		SHAMROCK_CONCAT_MODULE(LIBBANSHEE, GDK_QUARTZ)
-		GRAPHICS_SUBSYSTEM="Quartz"
-	else
-		PKG_CHECK_MODULES(GTK, gtk+-2.0 >= 2.8)
-	fi
+	GTK_TARGETS=$(pkg-config --variable=targets gtk+-3.0)
+	for GTK_TARGET in $GTK_TARGETS; do
+		if test x$GTK_TARGET = xx11; then
+			GRAPHICS_SUBSYSTEM_X11="yes"
+		elif test x$GTK_TARGET = xquartz; then
+			GRAPHICS_SUBSYSTEM_QUARTZ="yes"
+		fi
+	done
 
 	AC_ARG_ENABLE(clutter, AS_HELP_STRING([--enable-clutter],
 		[Enable support for clutter video sink]), , enable_clutter="no")
@@ -39,8 +36,8 @@ AC_DEFUN([BANSHEE_CHECK_LIBBANSHEE],
 			[Define if the video sink should be Clutter])
 	fi
 
-	AM_CONDITIONAL(HAVE_X11, test "x$GRAPHICS_SUBSYSTEM" = "xX11")
-	AM_CONDITIONAL(HAVE_QUARTZ, test "x$GRAPHICS_SUBSYSTEM" = "xQuartz")
+	AM_CONDITIONAL(HAVE_X11, test "x$GRAPHICS_SUBSYSTEM_X11" = "xyes")
+	AM_CONDITIONAL(HAVE_QUARTZ, test "x$GRAPHICS_SUBSYSTEM_QUARTZ" = "xyes")
 	AM_CONDITIONAL(HAVE_CLUTTER, test "x$enable_clutter" = "xyes")
 
 	AC_SUBST(GRAPHICS_SUBSYSTEM)

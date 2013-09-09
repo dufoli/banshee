@@ -44,7 +44,7 @@ namespace Banshee.InternetRadio
         private Entry description_entry;
         private Entry stream_entry;
         private Entry creator_entry;
-        private ComboBoxEntry genre_entry;
+        private ComboBoxText genre_entry;
         private RatingEntry rating_entry;
         private Alignment error_container;
         private Label error;
@@ -68,11 +68,10 @@ namespace Banshee.InternetRadio
                 : Catalog.GetString ("Edit radio station");
 
             BorderWidth = 6;
-            HasSeparator = false;
             DefaultResponse = ResponseType.Ok;
             Modal = true;
 
-            VBox.Spacing = 6;
+            ContentArea.Spacing = 6;
 
             HBox split_box = new HBox ();
             split_box.Spacing = 12;
@@ -103,7 +102,7 @@ namespace Banshee.InternetRadio
             table.RowSpacing = 6;
             table.ColumnSpacing = 6;
 
-            genre_entry = ComboBoxEntry.NewText ();
+            genre_entry = ComboBoxText.NewWithEntry ();
 
             foreach (string genre in ServiceManager.DbConnection.QueryEnumerable<string> ("SELECT DISTINCT Genre FROM CoreTracks ORDER BY Genre")) {
                 if (!String.IsNullOrEmpty (genre)) {
@@ -138,7 +137,7 @@ namespace Banshee.InternetRadio
             split_box.PackStart (main_box, true, true, 0);
             split_box.Show ();
 
-            VBox.PackStart (split_box, true, true, 0);
+            ContentArea.PackStart (split_box, true, true, 0);
 
             Button cancel_button = new Button (Stock.Cancel);
             cancel_button.CanDefault = false;

@@ -79,12 +79,14 @@ namespace Banshee.NowPlaying
             screensaver = new ScreensaverManager ();
         }
 
-        public override void Dispose ()
+        protected override void Dispose (bool disposing)
         {
-            base.Dispose ();
-            fullscreen_adapter.SuggestUnfullscreen -= OnAdapterSuggestUnfullscreen;
-            fullscreen_adapter.Dispose ();
-            screensaver.Dispose ();
+            if (disposing) {
+                fullscreen_adapter.SuggestUnfullscreen -= OnAdapterSuggestUnfullscreen;
+                fullscreen_adapter.Dispose ();
+                screensaver.Dispose ();
+            }
+            base.Dispose (disposing);
         }
 
         private void MoveVideoExternal (bool hidden)
@@ -139,7 +141,7 @@ namespace Banshee.NowPlaying
             }
 
             previous_fullscreen_handler = service.ViewActions.Fullscreen;
-            primary_window_is_fullscreen = (primary_window.GdkWindow.State & Gdk.WindowState.Fullscreen) != 0;
+            primary_window_is_fullscreen = (primary_window.Window.State & Gdk.WindowState.Fullscreen) != 0;
             service.ViewActions.Fullscreen = FullscreenHandler;
             DisableFullscreenAction ();
         }

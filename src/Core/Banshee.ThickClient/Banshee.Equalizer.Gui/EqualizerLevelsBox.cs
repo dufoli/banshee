@@ -61,8 +61,8 @@ namespace Banshee.Equalizer.Gui
             Label label = new Label ();
             label.Xalign = 1.0f;
             label.Markup = String.Format ("<small>{0}</small>", GLib.Markup.EscapeText (value));
-            label.ModifyFg (StateType.Normal, Hyena.Gui.GtkUtilities.ColorBlend (
-                Style.Foreground (StateType.Normal), Style.Background (StateType.Normal)));
+            label.OverrideColor (StateFlags.Normal, Hyena.Gui.GtkUtilities.ColorBlend (
+                StyleContext.GetColor (StateFlags.Normal), StyleContext.GetBackgroundColor (StateFlags.Normal)));
             label.Show ();
             return label;
         }

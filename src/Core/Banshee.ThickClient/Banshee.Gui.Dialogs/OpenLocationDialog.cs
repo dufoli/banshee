@@ -38,7 +38,7 @@ namespace Banshee.Gui.Dialogs
 {
     public class OpenLocationDialog : BansheeDialog
     {
-        private ComboBoxEntry address_entry;
+        private ComboBoxText address_entry;
 
         private List<string> history = new List<string>();
 
@@ -48,7 +48,7 @@ namespace Banshee.Gui.Dialogs
                 Spacing = 6
             };
 
-            address_entry = ComboBoxEntry.NewText();
+            address_entry = ComboBoxText.NewWithEntry ();
             address_entry.Entry.Activated += (o, e) => Respond (ResponseType.Ok);
 
             var browse_button = new Button(Catalog.GetString("Browse..."));

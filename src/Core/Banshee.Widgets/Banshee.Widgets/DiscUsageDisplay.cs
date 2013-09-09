@@ -67,15 +67,19 @@ namespace Banshee.Widgets
             AppPaintable = true;
         }
 
-        protected override void OnStyleSet(Gtk.Style style)
+        protected override void OnStyleUpdated ()
         {
-            fill_color_a = CairoExtensions.GdkColorToCairoColor(Style.Background(StateType.Selected));
-            fill_color_b = CairoExtensions.GdkColorToCairoColor(Style.Foreground(StateType.Selected));
-            fill_color_c = CairoExtensions.GdkColorToCairoColor(Style.Background(StateType.Normal));
-            stroke_color = CairoExtensions.GdkColorToCairoColor(Style.Foreground(StateType.Normal), 0.6);
-            inner_stroke_color = CairoExtensions.GdkColorToCairoColor(Style.Foreground(StateType.Normal), 0.4);
-            text_color = CairoExtensions.GdkColorToCairoColor(Style.Foreground(StateType.Normal), 0.8);
-            text_bg_color = CairoExtensions.GdkColorToCairoColor(Style.Background(StateType.Normal), 0.6);
+            Gdk.RGBA rgba = StyleContext.GetBackgroundColor (StateFlags.Selected);
+            fill_color_a = new Color (rgba.Red, rgba.Green, rgba.Blue, rgba.Alpha);
+            rgba = StyleContext.GetColor (StateFlags.Selected);
+            fill_color_b = new Color (rgba.Red, rgba.Green, rgba.Blue, rgba.Alpha);
+            rgba = StyleContext.GetColor (StateFlags.Normal);
+            stroke_color = new Color (rgba.Red, rgba.Green, rgba.Blue, 0.6);
+            inner_stroke_color = new Color (rgba.Red, rgba.Green, rgba.Blue, 0.4);
+            text_color = new Color (rgba.Red, rgba.Green, rgba.Blue, 0.8);
+            rgba = StyleContext.GetBackgroundColor (StateFlags.Normal);
+            text_bg_color = new Color (rgba.Red, rgba.Green, rgba.Blue, 0.6);
+            fill_color_c = new Color (rgba.Red, rgba.Green, rgba.Blue, rgba.Alpha);
         }
 
         protected override void OnSizeAllocated(Gdk.Rectangle rect)
@@ -104,31 +108,24 @@ namespace Banshee.Widgets
             base.OnSizeAllocated(rect);
         }
 
-        protected override bool OnExposeEvent(Gdk.EventExpose evnt)
+        protected override bool OnDrawn (Cairo.Context cr)
         {
             if(!IsRealized) {
                 return false;
             }
 
-            Cairo.Context cr = Gdk.CairoHelper.Create(GdkWindow);
+            DrawWidget (cr);
 
-            foreach(Gdk.Rectangle rect in evnt.Region.GetRectangles()) {
-                cr.Rectangle(rect.X, rect.Y, rect.Width, rect.Height);
-                cr.Clip();
-                Draw(cr);
-            }
-
-            CairoExtensions.DisposeContext (cr);
             return false;
         }
 
-        private void Draw(Cairo.Context cr)
+        private void DrawWidget (Cairo.Context cr)
         {
             cr.Antialias = Antialias.Subpixel;
             cr.LineWidth = base_line_width / 1.5;
 
             cr.Arc(x, y, radius, 0, 2 * Math.PI);
-            cr.Pattern = bg_gradient;
+            cr.SetSource (bg_gradient);
             cr.Fill();
 
             /*cr.LineTo(x, y);
@@ -147,31 +144,31 @@ namespace Banshee.Widgets
                     cr.Arc(x, y, radius, 0, 2 * Math.PI);
                 }
 
-                cr.Pattern = Fraction >= 1.0 ? fg_gradient_full : fg_gradient;
+                cr.SetSource (Fraction >= 1.0 ? fg_gradient_full : fg_gradient);
                 cr.FillPreserve();
 
-                cr.Color = stroke_color;
+                cr.SetSourceColor (stroke_color);
                 cr.Stroke();
             }
 
             cr.Arc(x, y, radius / 2.75, 0, 2 * Math.PI);
-            cr.Color = fill_color_c;
+            cr.SetSourceColor (fill_color_c);
             cr.FillPreserve();
-            cr.Color = new Cairo.Color(1, 1, 1, 0.75);
+            cr.SetSourceColor (new Cairo.Color(1, 1, 1, 0.75));
             cr.FillPreserve();
 
             cr.LineWidth = base_line_width / 1.5;
 
-            cr.Color = stroke_color;
+            cr.SetSourceColor (stroke_color);
             cr.Stroke();
 
             cr.Arc(x, y, radius / 5.5, 0, 2 * Math.PI);
-            cr.Color = fill_color_c;
+            cr.SetSourceColor (fill_color_c);
             cr.FillPreserve();
 
             cr.LineWidth = base_line_width / 2;
 
-            cr.Color = inner_stroke_color;
+            cr.SetSourceColor (inner_stroke_color);
             cr.Stroke();
 
             cr.Arc(x, y, radius, 0, 2 * Math.PI);
@@ -180,11 +177,11 @@ namespace Banshee.Widgets
             if(Capacity <= 0) {
                 // this sucks balls
                 cr.Rectangle(0, 0, Allocation.Width, Allocation.Height);
-                cr.Color = text_bg_color;
+                cr.SetSourceColor (text_bg_color);
                 cr.FillPreserve();
 
                 cr.SelectFontFace("Sans", FontSlant.Normal, FontWeight.Bold);
-                cr.Color = text_color;
+                cr.SetSourceColor (text_color);
                 cr.SetFontSize(Allocation.Width * 0.2);
                 DrawText(cr, Mono.Unix.Catalog.GetString("Insert\nDisc"), 3);
             }

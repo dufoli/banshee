@@ -36,8 +36,6 @@ namespace Banshee.Preferences.Gui
 {
     public class SectionBox : Table
     {
-        private object tp_host;
-
         public SectionBox (Section section) : base (1, 2, false)
         {
             ColumnSpacing = 10;
@@ -75,13 +73,9 @@ namespace Banshee.Preferences.Gui
             }
 
             if (!String.IsNullOrEmpty (preference.Description)) {
-                if (tp_host == null) {
-                     tp_host = TooltipSetter.CreateHost ();
-                }
-
-                TooltipSetter.Set (tp_host, widget, preference.Description);
+                widget.TooltipText = preference.Description;
                 if (label != null) {
-                    TooltipSetter.Set (tp_host, label, preference.Description);
+                    label.TooltipText = preference.Description;
                 }
             }
         }

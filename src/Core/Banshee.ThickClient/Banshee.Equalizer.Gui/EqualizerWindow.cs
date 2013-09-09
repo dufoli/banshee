@@ -61,9 +61,8 @@ namespace Banshee.Equalizer.Gui
             TypeHint = Gdk.WindowTypeHint.Dialog;
             SkipPagerHint = true;
             SkipTaskbarHint = true;
-            AppPaintable = true;
 
-            SetDefaultSize (-1, 180);
+            SetDefaultSize (-1, 230);
 
             VBox box = new VBox ();
             header_box = new HBox ();
@@ -103,14 +102,24 @@ namespace Banshee.Equalizer.Gui
 
             box.PackStart (eq_view, true, true, 0);
 
+            var button_box = new ButtonBox (Orientation.Horizontal);
+            button_box.Layout = ButtonBoxStyle.End;
+            button_box.BorderWidth = 12;
+            var button = new Button (Stock.Close) { UseStock = true };
+            button.Clicked += delegate { Destroy (); };
+            button_box.Add (button);
+            box.PackEnd (button_box, false, true, 0);
+
             eq_enabled_checkbox.Active = EqualizerManager.Instance.IsActive;
             eq_enabled_checkbox.Clicked += OnEnableDisable;
             eq_preset_combo.ActiveEqualizer = EqualizerManager.Instance.SelectedEqualizer;
 
+            int minimum_height, natural_height;
+            GetPreferredHeight (out minimum_height, out natural_height);
             Gdk.Geometry limits = new Gdk.Geometry ();
             limits.MinWidth = -1;
             limits.MaxWidth = -1;
-            limits.MinHeight = SizeRequest ().Height;
+            limits.MinHeight = minimum_height;
             limits.MaxHeight = Gdk.Screen.Default.Height;
             SetGeometryHints (this, limits, Gdk.WindowHints.MaxSize);
 
@@ -131,12 +140,6 @@ namespace Banshee.Equalizer.Gui
         {
             instance = null;
             base.OnDestroyed ();
-        }
-
-        protected override bool OnExposeEvent (Gdk.EventExpose evnt)
-        {
-            GdkWindow.DrawRectangle (Style.BackgroundGC (StateType.Active), true, header_box.Allocation);
-            return base.OnExposeEvent (evnt);
         }
 
         private void OnNewPreset (object o, EventArgs args)

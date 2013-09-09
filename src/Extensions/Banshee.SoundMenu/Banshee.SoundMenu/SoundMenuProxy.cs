@@ -76,15 +76,6 @@ namespace Banshee.SoundMenu
 
         public void Register (bool startup)
         {
-#if HAVE_INDICATESHARP
-            Log.Debug ("Registering with sound indicator through libindicate");
-            var server = Indicate.Server.RefDefault ();
-            server.SetType ("music.banshee");
-            string desktop_file = Paths.Combine (Paths.InstalledApplicationDataRoot,
-                                                 "applications", desktop_name + ".desktop");
-            server.DesktopFile (desktop_file);
-            server.Show ();
-#endif
             if (SoundMenu != null && !startup) {
                 // We don't have to do anything to register on startup
                 try {
@@ -98,10 +89,6 @@ namespace Banshee.SoundMenu
 
         public void Unregister ()
         {
-#if HAVE_INDICATESHARP
-            var server = Indicate.Server.RefDefault ();
-            server.Hide ();
-#endif
             if (SoundMenu != null) {
                 try {
                     SoundMenu.BlacklistMediaPlayer (desktop_name, true);

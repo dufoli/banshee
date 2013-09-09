@@ -40,6 +40,7 @@ namespace Banshee.AmazonMp3.Store
         {
             StoreView = store_view;
 
+            // TODO: Add real filter options for searching Amazon MP3 (artist, album, genre, etc.)
             SearchEntry.EmptyMessage = String.Format (Catalog.GetString ("Search the Amazon MP3 Store"));
 
             NavigationControl.AddLink (Catalog.GetString ("How Your Purchases Support GNOME"), StoreView.GetActionUrl ("about/"));

@@ -63,7 +63,6 @@ namespace Banshee.Sources.Gui
         private bool new_playlist_visible = false;
 
         private Source final_drag_source = null;
-        private uint final_drag_start_time = 0;
 
         private void ConfigureDragAndDrop ()
         {
@@ -92,9 +91,9 @@ namespace Banshee.Sources.Gui
 
             // Scroll if within 20 pixels of the top or bottom
             if (y < 20)
-                Vadjustment.Value -= 30;
+                ((IScrollable)this).Vadjustment.Value -= 30;
             else if ((Allocation.Height - y) < 20)
-                Vadjustment.Value += 30;
+                ((IScrollable)this).Vadjustment.Value += 30;
 
             ShowNewPlaylistUnder (parent_source, active_source);
 
@@ -181,7 +180,6 @@ namespace Banshee.Sources.Gui
                 final_drag_source = store.GetSource (path);
             }
 
-            final_drag_start_time = context.StartTime;
             HideNewPlaylistRow ();
             SetDragDestRow (null, TreeViewDropPosition.Before);
         }
@@ -203,7 +201,7 @@ namespace Banshee.Sources.Gui
             Gtk.SelectionData data, uint info, uint time)
         {
             try {
-                if (final_drag_start_time != context.StartTime || final_drag_source == null) {
+                if (final_drag_source == null) {
                     Gtk.Drag.Finish (context, false, false, time);
                     return;
                 }
@@ -255,7 +253,7 @@ namespace Banshee.Sources.Gui
             switch ((DragDropTargetType)info) {
                 case DragDropTargetType.Source:
                     new DragDropList<Source> (ServiceManager.SourceManager.ActiveSource,
-                        selectionData, context.Targets[0]);
+                        selectionData, context.ListTargets ()[0]);
                     break;
                 default:
                     return;

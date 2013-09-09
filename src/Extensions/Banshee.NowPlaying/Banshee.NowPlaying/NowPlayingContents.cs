@@ -110,23 +110,25 @@ namespace Banshee.NowPlaying
             CheckIdle ();
         }
 
-        public override void Dispose ()
+        protected override void Dispose (bool disposing)
         {
-            video_event.ButtonPressEvent -= OnButtonPress;
-            video_event.ButtonReleaseEvent -= OnButtonRelease;
-            video_event.MotionNotifyEvent -= OnMouseMove;
-            video_event.KeyPressEvent -= OnKeyPress;
+            if (disposing) {
+                video_event.ButtonPressEvent -= OnButtonPress;
+                video_event.ButtonReleaseEvent -= OnButtonRelease;
+                video_event.MotionNotifyEvent -= OnMouseMove;
+                video_event.KeyPressEvent -= OnKeyPress;
 
-            IVideoDisplay ivideo_display = video_display as IVideoDisplay;
-            if (ivideo_display != null) {
-                ivideo_display.IdleStateChanged -= OnVideoDisplayIdleStateChanged;
+                IVideoDisplay ivideo_display = video_display as IVideoDisplay;
+                if (ivideo_display != null) {
+                    ivideo_display.IdleStateChanged -= OnVideoDisplayIdleStateChanged;
+                }
+
+                if (video_display != null) {
+                    video_display = null;
+                }
             }
 
-            if (video_display != null) {
-                video_display = null;
-            }
-
-            base.Dispose ();
+            base.Dispose (disposing);
         }
 
         protected override void OnShown ()

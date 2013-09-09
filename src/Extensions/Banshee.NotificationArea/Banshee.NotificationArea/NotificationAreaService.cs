@@ -64,6 +64,8 @@ namespace Banshee.NotificationArea
         private RatingMenuItem rating_menu_item;
         private BansheeActionGroup actions;
         private bool? actions_supported;
+        private bool? action_icons_supported;
+        private bool? persistence_supported;
 
         private int ui_manager_id;
 
@@ -72,8 +74,6 @@ namespace Banshee.NotificationArea
         private string notify_last_artist;
         private TrackInfo current_track;
         private Notification current_nf;
-
-        private const int icon_size = 42;
 
         public NotificationAreaService ()
         {
@@ -153,7 +153,6 @@ namespace Banshee.NotificationArea
             show_notifications = ShowNotifications;
 
             artwork_manager_service = ServiceManager.Get<ArtworkManager> ();
-            artwork_manager_service.AddCachedSize (icon_size);
         }
 
         public void Dispose ()
@@ -206,18 +205,36 @@ namespace Banshee.NotificationArea
             }
         }
 
+        private bool ActionIconsSupported {
+            get {
+                if (!action_icons_supported.HasValue) {
+                    action_icons_supported = Notifications.Global.Capabilities != null &&
+                        Array.IndexOf (Notifications.Global.Capabilities, "action-icons") > -1;
+                }
+
+                return action_icons_supported.Value;
+            }
+        }
+
+        private bool PersistenceSupported {
+            get {
+                if (!persistence_supported.HasValue) {
+                    persistence_supported = Notifications.Global.Capabilities != null &&
+                        Array.IndexOf (Notifications.Global.Capabilities, "persistence") > -1;
+                }
+
+                return persistence_supported.Value;
+            }
+        }
+
         private bool BuildNotificationArea ()
         {
-            if (Environment.OSVersion.Platform == PlatformID.Unix) {
-                try {
-                    notif_area = new X11NotificationAreaBox ();
-                } catch {
-                }
+            if (PersistenceSupported) {
+                Log.Debug ("Notification daemon supports persistence, no status icon needed");
+                return true;
             }
 
-            if (notif_area == null) {
-                notif_area = new GtkNotificationAreaBox (elements_service.PrimaryWindow);
-            }
+            notif_area = new GtkNotificationAreaBox (elements_service.PrimaryWindow);
 
             if (notif_area == null) {
                 return false;
@@ -339,9 +356,6 @@ namespace Banshee.NotificationArea
             try {
                 if (NotifyOnCloseSchema.Get ()) {
                     Gdk.Pixbuf image = IconThemeUtils.LoadIcon (48, Banshee.ServiceStack.Application.IconName);
-                    if (image != null) {
-                        image = image.ScaleSimple (icon_size, icon_size, Gdk.InterpType.Bilinear);
-                    }
 
                     Notification nf = new Notification (
                         Catalog.GetString ("Still Running"),
@@ -380,7 +394,9 @@ namespace Banshee.NotificationArea
                     break;
             }
 
-            notif_area.OnPlayerEvent (args);
+            if (notif_area != null) {
+                notif_area.OnPlayerEvent (args);
+            }
         }
 
         private void OnRatingChanged (object o, EventArgs args)
@@ -427,19 +443,14 @@ namespace Banshee.NotificationArea
                 return;
             }
 
-            foreach (var window in elements_service.ContentWindows) {
-                if (window.HasToplevelFocus) {
-                    return;
+            // If we have persistent notifications, we show a notification even if the main window has focus
+            // so that the information displayed (track title, etc.) gets updated.
+            if (!PersistenceSupported) {
+                foreach (var window in elements_service.ContentWindows) {
+                    if (window.HasToplevelFocus) {
+                        return;
+                    }
                 }
-            }
-
-            bool is_notification_daemon = false;
-            try {
-                var name = Notifications.Global.ServerInformation.Name;
-                is_notification_daemon = name == "notification-daemon" || name == "Notification Daemon";
-            } catch {
-                // This will be reached if no notification daemon is running
-                return;
             }
 
             string message = GetByFrom (
@@ -448,19 +459,17 @@ namespace Banshee.NotificationArea
 
             string image = null;
 
-            image = is_notification_daemon
-                ? CoverArtSpec.GetPathForSize (current_track.ArtworkId, icon_size)
-                : CoverArtSpec.GetPath (current_track.ArtworkId);
+            image = CoverArtSpec.GetPath (current_track.ArtworkId);
 
             if (!File.Exists (new SafeUri(image))) {
                 if (artwork_manager_service != null) {
                     // artwork does not exist, try looking up the pixbuf to trigger scaling or conversion
-                    Gdk.Pixbuf tmp_pixbuf = is_notification_daemon
-                        ? artwork_manager_service.LookupScalePixbuf (current_track.ArtworkId, icon_size)
-                        : artwork_manager_service.LookupPixbuf (current_track.ArtworkId);
+                    Gdk.Pixbuf tmp_pixbuf = artwork_manager_service.LookupPixbuf (current_track.ArtworkId);
 
                     if (tmp_pixbuf == null) {
-                        image = "audio-x-generic";
+                        // TODO: image should be set to "audio-x-generic", but icon names are not supported by the
+                        // notification daemon in GNOME Shell. See https://bugzilla.gnome.org/show_bug.cgi?id=665957
+                        image = null;
                     } else {
                         tmp_pixbuf.Dispose ();
                     }
@@ -470,18 +479,45 @@ namespace Banshee.NotificationArea
             try {
                 if (current_nf == null) {
                     current_nf = new Notification (current_track.DisplayTrackTitle,
-                        message, image, notif_area.Widget);
+                        message, Banshee.ServiceStack.Application.IconName);
                 } else {
                     current_nf.Summary = current_track.DisplayTrackTitle;
                     current_nf.Body = message;
-                    current_nf.IconName = image;
-                    current_nf.AttachToWidget (notif_area.Widget);
+                    current_nf.IconName = Banshee.ServiceStack.Application.IconName;
+                    if (notif_area != null) {
+                        current_nf.AttachToWidget (notif_area.Widget);
+                    }
                 }
                 current_nf.Urgency = Urgency.Low;
                 current_nf.Timeout = 4500;
+
                 if (!current_track.IsLive && ActionsSupported && interface_action_service.PlaybackActions["NextAction"].Sensitive) {
-                    current_nf.AddAction ("skip-song", Catalog.GetString("Skip this item"), OnSongSkipped);
+                    if (ActionIconsSupported) {
+                        current_nf.AddHint ("action-icons", true);
+
+                        // We need to use an icon name as the action id, so that the notification uses that icon
+                        current_nf.AddAction ("media-skip-backward",
+                            Catalog.GetString("Previous"), OnPreviousTrack);
+
+                        bool is_playing = ServiceManager.PlayerEngine.IsPlaying ();
+                        current_nf.AddAction (is_playing ? "media-playback-pause" : "media-playback-start",
+                            interface_action_service.PlaybackActions["PlayPauseAction"].Label, OnPlayPause);
+                    }
+
+                    current_nf.AddAction ("media-skip-forward",
+                        Catalog.GetString("Skip this item"), OnNextTrack);
                 }
+
+                if (image == null) {
+                    current_nf.RemoveHint ("image-path");
+                } else {
+                    current_nf.AddHint ("image-path", image);
+                }
+
+                if (PersistenceSupported) {
+                    current_nf.AddHint ("resident", true);
+                }
+
                 current_nf.Show ();
             } catch (Exception e) {
                 Hyena.Log.Warning (Catalog.GetString ("Cannot show notification"), e.Message, false);
@@ -524,11 +560,19 @@ namespace Banshee.NotificationArea
             return markup;
         }
 
-        private void OnSongSkipped (object o, ActionArgs args)
+        private void OnPreviousTrack (object o, ActionArgs args)
         {
-            if (args.Action == "skip-song") {
-                ServiceManager.PlaybackController.Next ();
-            }
+            ServiceManager.PlaybackController.Previous ();
+        }
+
+        private void OnPlayPause (object o, ActionArgs args)
+        {
+            ServiceManager.PlayerEngine.TogglePlaying ();
+        }
+
+        private void OnNextTrack (object o, ActionArgs args)
+        {
+            ServiceManager.PlaybackController.Next ();
         }
 
         public bool ShowNotifications {

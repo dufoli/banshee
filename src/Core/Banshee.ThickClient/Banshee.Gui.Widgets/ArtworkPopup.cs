@@ -52,10 +52,14 @@ namespace Banshee.Gui.Widgets
             label.CanFocus = false;
             label.Wrap = true;
 
-            label.ModifyBg(StateType.Normal, new Color(0, 0, 0));
-            label.ModifyFg(StateType.Normal, new Color(160, 160, 160));
-            ModifyBg(StateType.Normal, new Color(0, 0, 0));
-            ModifyFg(StateType.Normal, new Color(160, 160, 160));
+            var bg_color = new RGBA ();
+            bg_color.Red = bg_color.Green = bg_color.Blue = 0;
+            var fg_color = new RGBA ();
+            fg_color.Red = bg_color.Green = bg_color.Blue =  160.0 / 255;
+            label.OverrideBackgroundColor (StateFlags.Normal, bg_color);
+            label.OverrideColor (StateFlags.Normal, fg_color);
+            OverrideBackgroundColor (StateFlags.Normal, bg_color);
+            OverrideColor (StateFlags.Normal, fg_color);
 
             vbox.PackStart(image, true, true, 0);
             vbox.PackStart(label, false, false, 0);

@@ -47,6 +47,7 @@ SOURCES =  \
 	Banshee.IO/IFile.cs \
 	Banshee.IO/IProvider.cs \
 	Banshee.IO/Provider.cs \
+	Banshee.IO/ProviderConfiguration.cs \
 	Banshee.IO/StreamAssist.cs \
 	Banshee.IO/Tests.cs \
 	Banshee.IO/Utilities.cs \

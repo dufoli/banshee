@@ -61,7 +61,7 @@ namespace Banshee.Podcasting.Gui
             get { return archive_check.Active ? 1 : 0; }
         }
 
-        public PodcastSubscribeDialog () : base (Catalog.GetString("Subscribe"), null, DialogFlags.Modal | DialogFlags.NoSeparator)
+        public PodcastSubscribeDialog () : base (Catalog.GetString("Subscribe"), null, DialogFlags.Modal)
         {
             accelGroup = new Gtk.AccelGroup();
             AddAccelGroup (accelGroup);
@@ -73,7 +73,7 @@ namespace Banshee.Podcasting.Gui
             DefaultWidth = 475;
 
             BorderWidth = 6;
-            VBox.Spacing = 12;
+            ContentArea.Spacing = 12;
             ActionArea.Layout = Gtk.ButtonBoxStyle.End;
 
             HBox box = new HBox();
@@ -147,7 +147,7 @@ namespace Banshee.Podcasting.Gui
             AddButton (Catalog.GetString ("Subscribe"), ResponseType.Ok, true);
 
             box.ShowAll ();
-            VBox.Add (box);
+            ContentArea.Add (box);
         }
 
         private void AddButton (string stock_id, Gtk.ResponseType response, bool is_default)

@@ -54,8 +54,6 @@ namespace Banshee.Podcasting.Gui
 
         CheckButton subscribed_check, download_check, archive_check;
 
-        private VBox main_box;
-
         public PodcastFeedPropertiesDialog (PodcastSource source, Feed feed)
         {
             this.source = source;
@@ -63,7 +61,6 @@ namespace Banshee.Podcasting.Gui
             fake_track.Feed = feed;
 
             Title = feed.Title;
-            HasSeparator = false;
             BorderWidth = 12;
             WidthRequest = 525;
             //IconThemeUtils.SetWindowIcon (this);
@@ -91,8 +88,7 @@ namespace Banshee.Podcasting.Gui
 
         private void BuildWindow()
         {
-            VBox.Spacing = 12;
-            main_box = VBox;
+            ContentArea.Spacing = 12;
 
             var save_button = new Button ("gtk-save") { CanDefault = true };
 
@@ -162,7 +158,7 @@ namespace Banshee.Podcasting.Gui
             });
             header_box.PackStart (table, true, true, 0);
 
-            main_box.PackStart (header_box, false, false, 0);
+            ContentArea.PackStart (header_box, false, false, 0);
 
             Add (Catalog.GetString ("Subscription Options"), subscribed_check, download_check, archive_check);
 
@@ -204,7 +200,7 @@ namespace Banshee.Podcasting.Gui
                 vbox.PackStart (align, filled, filled, 0);
             }
 
-            main_box.PackStart (vbox, filled, filled, 0);
+            ContentArea.PackStart (vbox, filled, filled, 0);
         }
 
         private void OnResponse (object sender, ResponseArgs args)

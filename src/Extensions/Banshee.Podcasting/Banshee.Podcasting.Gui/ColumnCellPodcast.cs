@@ -60,7 +60,7 @@ namespace Banshee.Podcasting.Gui
             artwork_manager = ServiceManager.Get<ArtworkManager> ();
         }
 
-        public override void Render (CellContext context, StateType state, double cellWidth, double cellHeight)
+        public override void Render (CellContext context, StateFlags state, double cellWidth, double cellHeight)
         {
             if (BoundObject == null) {
                 return;
@@ -90,7 +90,10 @@ namespace Banshee.Podcasting.Gui
                 image_render_size, image_render_size, !is_default, context.Theme.Context.Radius);
 
             int fl_width = 0, fl_height = 0, sl_width = 0, sl_height = 0;
-            Cairo.Color text_color = context.Theme.Colors.GetWidgetColor (GtkColorClass.Text, state);
+            context.Widget.StyleContext.Save ();
+            context.Widget.StyleContext.AddClass ("entry");
+            Cairo.Color text_color = CairoExtensions.GdkRGBAToCairoColor (context.Widget.StyleContext.GetColor (state));
+            context.Widget.StyleContext.Restore ();
             text_color.A = 0.75;
 
             Pango.Layout layout = context.Layout;
@@ -126,7 +129,7 @@ namespace Banshee.Podcasting.Gui
             // Render the second line first since we have that state already
             if (feed.DbId > 0) {
                 context.Context.MoveTo (x, y + fl_height);
-                context.Context.Color = text_color;
+                context.Context.SetSourceColor (text_color);
                 PangoCairoHelper.ShowLayout (context.Context, layout);
             }
 
@@ -140,7 +143,7 @@ namespace Banshee.Podcasting.Gui
 
             context.Context.MoveTo (x, y);
             text_color.A = 1;
-            context.Context.Color = text_color;
+            context.Context.SetSourceColor (text_color);
             PangoCairoHelper.ShowLayout (context.Context, layout);
         }
 

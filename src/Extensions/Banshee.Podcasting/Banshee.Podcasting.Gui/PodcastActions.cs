@@ -176,12 +176,14 @@ namespace Banshee.Podcasting.Gui
             OnSelectionChanged (null, null);
         }
 
-        public override void Dispose ()
+        protected override void Dispose (bool disposing)
         {
-            ServiceManager.SourceManager.ActiveSourceChanged -= HandleActiveSourceChanged;
-            Actions.UIManager.RemoveUi (actions_id);
-            Actions.RemoveActionGroup (this);
-            base.Dispose ();
+            if (disposing) {
+                ServiceManager.SourceManager.ActiveSourceChanged -= HandleActiveSourceChanged;
+                Actions.UIManager.RemoveUi (actions_id);
+                Actions.RemoveActionGroup (this);
+            }
+            base.Dispose (disposing);
         }
 
 #region State Event Handlers

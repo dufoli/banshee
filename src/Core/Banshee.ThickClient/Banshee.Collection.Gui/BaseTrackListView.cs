@@ -69,7 +69,7 @@ namespace Banshee.Collection.Gui
                 int x, y;
                 GetPointer (out x, out y);
                 bool inside_list = (x >= 0 && y >= 0) && (x < Allocation.Width && y < Allocation.Height);
-                if (inside_list && a.DragResult == DragResult.NoTarget) {
+                if (inside_list && a.Result == DragResult.NoTarget) {
                     PlaylistSource playlist = ServiceManager.SourceManager.ActiveSource as PlaylistSource;
                     if (playlist != null && !IsReorderable) {
                         Hyena.Log.Information (
@@ -215,7 +215,7 @@ namespace Banshee.Collection.Gui
                         sb.Append ("\r\n");
                     }
                     byte [] data = System.Text.Encoding.UTF8.GetBytes (sb.ToString ());
-                    selection_data.Set (context.Targets[0], 8, data, data.Length);
+                    selection_data.Set (context.ListTargets ()[0], 8, data, data.Length);
                 }
             }
         }

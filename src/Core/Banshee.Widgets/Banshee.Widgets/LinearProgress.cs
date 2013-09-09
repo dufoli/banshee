@@ -35,35 +35,34 @@ namespace Banshee.Widgets
     public class LinearProgress : Gtk.DrawingArea
     {
         private double fraction;
-        private static Gdk.GC bar_gc = null;
 
-        public LinearProgress()
+        public LinearProgress ()
         {
             AppPaintable = true;
             fraction = 0;
             QueueDraw();
         }
 
-        protected override bool OnExposeEvent(Gdk.EventExpose evnt)
+        protected override bool OnDrawn (Cairo.Context cr)
         {
-            if(bar_gc == null) {
-                bar_gc = new Gdk.GC(GdkWindow);
-                Gdk.Color color = Hyena.Gui.GtkUtilities.ColorBlend(Style.Background(StateType.Normal),
-                    Style.Foreground(StateType.Normal));
-                bar_gc.Background = color;
-                bar_gc.Foreground = color;
-            }
-
-            DrawGdk();
+            cr.Save ();
+            Gdk.RGBA color = Hyena.Gui.GtkUtilities.ColorBlend (
+                StyleContext.GetBackgroundColor (StateFlags.Normal),
+                StyleContext.GetColor (StateFlags.Normal));
+            cr.SetSourceRGBA (color.Red, color.Green, color.Blue, color.Alpha);
+            DrawCairo (cr);
+            cr.Restore ();
             return false;
         }
 
-        private void DrawGdk()
+        private void DrawCairo (Cairo.Context cr)
         {
             int bar_width = (int)((double)Allocation.Width * fraction - 3.0);
-            GdkWindow.DrawRectangle(bar_gc, false, 0, 0, Allocation.Width - 1, Allocation.Height - 1);
-            if(bar_width > 0) {
-                GdkWindow.DrawRectangle(bar_gc, true, 2, 2, bar_width, Allocation.Height - 4);
+            cr.Rectangle (0, 0, Allocation.Width - 1, Allocation.Height - 1);
+            cr.Stroke ();
+            if (bar_width > 0) {
+                cr.Rectangle (2, 2, bar_width, Allocation.Height - 4);
+                cr.Fill ();
             }
         }
 
@@ -73,7 +72,7 @@ namespace Banshee.Widgets
             }
 
             set {
-                fraction = Math.Max(0.0, Math.Min(1.0, value));
+                fraction = Math.Max (0.0, Math.Min (1.0, value));
                 QueueDraw();
             }
         }

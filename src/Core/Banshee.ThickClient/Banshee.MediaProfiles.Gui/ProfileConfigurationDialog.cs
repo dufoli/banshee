@@ -80,7 +80,6 @@ namespace Banshee.MediaProfiles.Gui
         {
             this.profile = profile;
 
-            HasSeparator = false;
             BorderWidth = 5;
 
             AccelGroup accel_group = new AccelGroup();
@@ -158,12 +157,14 @@ namespace Banshee.MediaProfiles.Gui
                 box.PackStart(scroll, false, false, 0);
             }
 
-            VBox.PackStart(box, false, false, 0);
+            ContentArea.PackStart(box, false, false, 0);
 
             SetSizeRequest(350, -1);
 
             Gdk.Geometry limits = new Gdk.Geometry();
-            limits.MinWidth = SizeRequest().Width;
+            int minimum_width, natural_width;
+            GetPreferredWidth (out minimum_width, out natural_width);
+            limits.MinWidth = minimum_width;
             limits.MaxWidth = Gdk.Screen.Default.Width;
             limits.MinHeight = -1;
             limits.MaxHeight = -1;

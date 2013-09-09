@@ -53,21 +53,23 @@ namespace Banshee.Gui
         {
         }
 
-        private void OnStyleSet (object o, StyleSetArgs args)
+        private void OnStyleUpdated (object o, EventArgs args)
         {
             SourceInvalidateIconPixbuf (ServiceManager.SourceManager.Sources);
 
-            // Ugly hack to avoid stupid themes that set this to 0, causing a huge
+            // Ugly hack to avoid having this being set to 0, causing a huge
             // bug when constructing the "add to playlist" popup menu (BGO #524706)
-            Gtk.Rc.ParseString ("gtk-menu-popup-delay = 225");
+            if (Gtk.Settings.Default.MenuPopupDelay < 1) {
+                Gtk.Settings.Default.MenuPopupDelay = 225;
+            }
 
             OnThemeChanged ();
         }
 
         private void OnPrimaryWindowRealized (object o, EventArgs args)
         {
-            if (primary_window != null && primary_window.GdkWindow != null) {
-                property_store.Set<IntPtr> ("PrimaryWindow.RawHandle", primary_window.GdkWindow.Handle);
+            if (primary_window != null && primary_window.Window != null) {
+                property_store.Set<IntPtr> ("PrimaryWindow.RawHandle", primary_window.Window.Handle);
             } else {
                 property_store.Remove ("PrimaryWindow.RawHandle");
             }
@@ -93,7 +95,7 @@ namespace Banshee.Gui
             get { return primary_window; }
             set {
                 if (primary_window != null) {
-                    primary_window.StyleSet -= OnStyleSet;
+                    primary_window.StyleUpdated -= OnStyleUpdated;
                     primary_window.Realized -= OnPrimaryWindowRealized;
                 }
 
@@ -102,7 +104,7 @@ namespace Banshee.Gui
                 if (primary_window != null) {
                     property_store.Set<BaseClientWindow> ("PrimaryWindow", primary_window);
 
-                    primary_window.StyleSet += OnStyleSet;
+                    primary_window.StyleUpdated += OnStyleUpdated;
                     primary_window.Realized += OnPrimaryWindowRealized;
                 } else {
                     property_store.Remove ("PrimaryWindow");

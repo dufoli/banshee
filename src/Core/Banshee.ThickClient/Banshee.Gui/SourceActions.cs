@@ -420,7 +420,7 @@ namespace Banshee.Gui
         private static bool ConfirmUnmap (IUnmapableSource source)
         {
             string key = "no_confirm_unmap_" + source.GetType ().Name.ToLower ();
-            bool do_not_ask = ConfigurationClient.Get<bool> ("sources", key, false);
+            bool do_not_ask = ConfigurationClient.Instance.Get<bool> ("sources", key, false);
 
             if (do_not_ask) {
                 return true;
@@ -450,7 +450,7 @@ namespace Banshee.Gui
 
             try {
                 if (dialog.Run () == (int)Gtk.ResponseType.Ok) {
-                    ConfigurationClient.Set<bool> ("sources", key, do_not_ask);
+                    ConfigurationClient.Instance.Set<bool> ("sources", key, do_not_ask);
                     return true;
                 }
 
@@ -463,7 +463,7 @@ namespace Banshee.Gui
         private Menu BuildSortMenu (Source source)
         {
             Menu menu = new Menu ();
-            GLib.SList group = null;
+            RadioMenuItem [] group = null;
             foreach (SourceSortType sort_type in source.ChildSortTypes) {
                 RadioMenuItem item = new RadioMenuItem (group, sort_type.Label);
                 group = item.Group;

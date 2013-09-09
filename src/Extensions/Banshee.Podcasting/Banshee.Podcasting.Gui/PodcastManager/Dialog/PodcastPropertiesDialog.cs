@@ -60,8 +60,7 @@ namespace Banshee.Podcasting.Gui
         private void BuildWindow()
         {
             BorderWidth = 6;
-            VBox.Spacing = 12;
-            HasSeparator = false;
+            ContentArea.Spacing = 12;
 
             HBox content_box = new HBox();
             content_box.BorderWidth = 6;
@@ -179,7 +178,7 @@ namespace Banshee.Podcasting.Gui
             ActionArea.Layout = ButtonBoxStyle.End;
 
             content_box.ShowAll ();
-            VBox.Add (content_box);
+            ContentArea.Add (content_box);
 
             Response += OnResponse;
         }

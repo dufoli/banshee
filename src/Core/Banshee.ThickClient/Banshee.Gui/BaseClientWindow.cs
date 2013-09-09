@@ -61,14 +61,14 @@ namespace Banshee.Gui
         {
         }
 
-        public BaseClientWindow (string title, string configNameSpace, int defaultWidth, int defaultHeight) : base (title)
+        public BaseClientWindow (string title, WindowConfiguration windowConfiguration) : base (title)
         {
             elements_service = ServiceManager.Get<GtkElementsService> ();
             action_service = ServiceManager.Get<InterfaceActionService> ();
 
             ConfigureWindow ();
 
-            window_controller = new PersistentWindowController (this, configNameSpace, defaultWidth, defaultHeight, WindowPersistOptions.All);
+            window_controller = new PersistentWindowController (this, windowConfiguration, WindowPersistOptions.All);
             window_controller.Restore ();
 
             elements_service.PrimaryWindow = this;
@@ -86,15 +86,15 @@ namespace Banshee.Gui
             }
         }
 
-        public override void Dispose ()
+        protected override void Dispose (bool disposing)
         {
-            base.Dispose ();
-
             try {
                 Gtk.AccelMap.Save (accel_map_file);
             } catch (Exception e) {
                 Hyena.Log.Exception ("Failed to save custom AccelMap", e);
             }
+
+            base.Dispose (disposing);
         }
 
         protected void InitialShowPresent ()
@@ -212,7 +212,8 @@ namespace Banshee.Gui
             OnTitleChanged ();
         }
 
-        protected void OnToolbarExposeEvent (object o, ExposeEventArgs args)
+        // FIXME: confirm that this is not needed anymore
+        /*protected void OnToolbarExposeEvent (object o, ExposeEventArgs args)
         {
             Toolbar toolbar = (Toolbar)o;
 
@@ -226,6 +227,6 @@ namespace Banshee.Gui
             foreach (Widget child in toolbar.Children) {
                 toolbar.PropagateExpose (child, args.Event);
             }
-        }
+        }*/
     }
 }

@@ -46,7 +46,7 @@ namespace Banshee.Daap
         public DaapLoginDialog(string shareName, bool showUsername) :  base(
             Catalog.GetString("Login to Music Share"),
             null,
-            DialogFlags.Modal | DialogFlags.NoSeparator,
+            DialogFlags.Modal,
             Stock.Cancel,
             ResponseType.Close)
         {
@@ -61,7 +61,7 @@ namespace Banshee.Daap
         private void BuildWindow()
         {
             BorderWidth = 5;
-            VBox.Spacing = 12;
+            ContentArea.Spacing = 12;
             ActionArea.Layout = Gtk.ButtonBoxStyle.End;
 
             HBox box = new HBox();
@@ -124,7 +124,7 @@ namespace Banshee.Daap
             AddButton(Catalog.GetString("Login"), ResponseType.Ok, true);
 
             box.ShowAll();
-            VBox.Add(box);
+            ContentArea.Add(box);
         }
 
         private void AddButton(string stock_id, Gtk.ResponseType response, bool is_default)

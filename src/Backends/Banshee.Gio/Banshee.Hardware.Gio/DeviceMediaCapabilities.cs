@@ -29,7 +29,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using KeyFile;
+using GLib;
 
 using Banshee.Base;
 using Banshee.Hardware;
@@ -143,17 +143,18 @@ namespace Banshee.Hardware.Gio
             private const string StorageGroup = "storage";
             private const string PlaylistGroup = "Playlist";
 
-            private GKeyFile mpi_file;
+            private KeyFile mpi_file;
 
             public GMpiFileInfo (string mediaPlayerId)
             {
                 try {
-                    mpi_file = new GKeyFile ();
-                    mpi_file.ListSeparator = Separator;
+                    mpi_file = new KeyFile ();
+                    mpi_file.SetListSeparator (Separator);
+                    string full_path;
                     mpi_file.LoadFromDirs (String.Format ("{0}.mpi", mediaPlayerId),
                                            new string [] {"/usr/share/media-player-info",
                                                           "/usr/local/share/media-player-info"},
-                                           null, Flags.None);
+                                           out full_path, KeyFileFlags.None);
                 } catch (GLib.GException) {
                     Hyena.Log.WarningFormat ("Failed to load media-player-info file for {0}",
                                              mediaPlayerId);

@@ -44,27 +44,34 @@ using Banshee.Sources.Gui;
 using Banshee.MediaEngine;
 using Banshee.ServiceStack;
 using Banshee.Widgets;
+using Banshee.Configuration;
 
 namespace Banshee.MiniMode
 {
     public class MiniMode : Banshee.Gui.BaseClientWindow
     {
+        const string CONFIG_NAMESPACE = "minimode";
+        static readonly SchemaEntry<int> WidthSchema = WindowConfiguration.NewWidthSchema (CONFIG_NAMESPACE, 0);
+        static readonly SchemaEntry<int> HeightSchema = WindowConfiguration.NewHeightSchema (CONFIG_NAMESPACE, 0);
+        static readonly SchemaEntry<int> XPosSchema = WindowConfiguration.NewXPosSchema (CONFIG_NAMESPACE);
+        static readonly SchemaEntry<int> YPosSchema = WindowConfiguration.NewYPosSchema (CONFIG_NAMESPACE);
+        static readonly SchemaEntry<bool> MaximizedSchema = WindowConfiguration.NewMaximizedSchema (CONFIG_NAMESPACE);
+
         private TrackInfoDisplay track_info_display;
         private ConnectedVolumeButton volume_button;
         private SourceComboBox source_combo_box;
         private ConnectedSeekSlider seek_slider;
-        private object tooltip_host;
 
         private BaseClientWindow default_main_window;
 
-        public MiniMode (BaseClientWindow defaultMainWindow) : base (Catalog.GetString ("Banshee Media Player"), "minimode", 0, 0)
+        public MiniMode (BaseClientWindow defaultMainWindow) :
+            base (Catalog.GetString ("Banshee Media Player"),
+                  new WindowConfiguration (WidthSchema, HeightSchema, XPosSchema, YPosSchema, MaximizedSchema))
         {
             default_main_window = defaultMainWindow;
 
             BorderWidth = 12;
             Resizable = false;
-
-            tooltip_host = TooltipSetter.CreateHost ();
 
             Build ();
             ShowAll ();
@@ -118,8 +125,8 @@ namespace Banshee.MiniMode
             repeat_align.Add (repeat_toggle_button);
             bot.PackEnd (repeat_align, false, false, 0);
 
-            SetTip (fullmode_button, Catalog.GetString ("Switch back to full mode"));
-            SetTip (repeat_toggle_button, Catalog.GetString ("Change repeat playback mode"));
+            fullmode_button.TooltipText = Catalog.GetString ("Switch back to full mode");
+            repeat_toggle_button.TooltipText = Catalog.GetString ("Change repeat playback mode");
 
             Add (vbox);
         }
@@ -128,18 +135,16 @@ namespace Banshee.MiniMode
         {
         }
 
-        private void SetTip (Widget widget, string tip)
-        {
-            TooltipSetter.Set (tooltip_host, widget, tip);
-        }
-
         private void SetHeightLimit ()
         {
             Gdk.Geometry limits = new Gdk.Geometry ();
 
             limits.MinHeight = -1;
             limits.MaxHeight = -1;
-            limits.MinWidth = SizeRequest ().Width;
+
+            int minimum_width, natural_width;
+            GetPreferredWidth (out minimum_width, out natural_width);
+            limits.MinWidth = minimum_width;
             limits.MaxWidth = Gdk.Screen.Default.Width;
 
             SetGeometryHints (this, limits, Gdk.WindowHints.MaxSize | Gdk.WindowHints.MinSize);

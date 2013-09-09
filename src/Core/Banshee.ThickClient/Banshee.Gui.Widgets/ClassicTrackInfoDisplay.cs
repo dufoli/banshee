@@ -57,10 +57,12 @@ namespace Banshee.Gui.Widgets
         {
         }
 
-        public override void Dispose ()
+        protected override void Dispose (bool disposing)
         {
-            base.Dispose ();
-            HidePopup ();
+            if (disposing) {
+                HidePopup ();
+            }
+            base.Dispose (disposing);
         }
 
         protected override int ArtworkSizeRequest {
@@ -87,7 +89,7 @@ namespace Banshee.Gui.Widgets
             attributes.Y = Allocation.Y;
             attributes.Width = Allocation.Width;
             attributes.Height = Allocation.Height;
-            attributes.Wclass = WindowClass.InputOnly;
+            attributes.Wclass = WindowWindowClass.InputOnly;
             attributes.EventMask = (int)(
                 EventMask.PointerMotionMask |
                 EventMask.EnterNotifyMask |
@@ -97,16 +99,15 @@ namespace Banshee.Gui.Widgets
             WindowAttributesType attributes_mask =
                 WindowAttributesType.X | WindowAttributesType.Y | WindowAttributesType.Wmclass;
 
-            event_window = new Gdk.Window (GdkWindow, attributes, attributes_mask);
+            event_window = new Gdk.Window (Window, attributes, attributes_mask);
             event_window.UserData = Handle;
         }
 
         protected override void OnUnrealized ()
         {
-            WidgetFlags ^= WidgetFlags.Realized;
-
+            IsRealized = false;
             event_window.UserData = IntPtr.Zero;
-            Hyena.Gui.GtkWorkarounds.WindowDestroy (event_window);
+            event_window.Destroy ();
             event_window = null;
 
             base.OnUnrealized ();
@@ -133,9 +134,10 @@ namespace Banshee.Gui.Widgets
             }
         }
 
-        protected override void OnSizeRequested (ref Requisition requisition)
+        protected override void OnGetPreferredHeight (out int minimum_height, out int natural_height)
         {
-            requisition.Height = ComputeWidgetHeight ();
+            minimum_height = ComputeWidgetHeight ();
+            natural_height = minimum_height;
         }
 
         private int ComputeWidgetHeight ()
@@ -174,7 +176,7 @@ namespace Banshee.Gui.Widgets
             }
 
             double offset = ArtworkSizeRequest + ArtworkSpacing, y = 0;
-            double x = Allocation.X + offset;
+            double x = offset;
             double width = Allocation.Width - offset;
             int fl_width, fl_height, sl_width, sl_height;
             int pango_width = (int)(width * Pango.Scale.PangoScale);
@@ -203,14 +205,14 @@ namespace Banshee.Gui.Widgets
                 SetSizeRequest (-1, fl_height + sl_height);
             }
 
-            y = Allocation.Y + (Allocation.Height - (fl_height + sl_height)) / 2;
+            y = (Allocation.Height - (fl_height + sl_height)) / 2;
 
             // Render the layouts
             cr.Antialias = Cairo.Antialias.Default;
 
             if (renderTrack) {
                 cr.MoveTo (x, y);
-                cr.Color = TextColor;
+                cr.SetSourceColor (TextColor);
                 PangoCairoHelper.ShowLayout (cr, first_line_layout);
             }
 
