@@ -1,7 +1,7 @@
 AC_DEFUN([BANSHEE_CHECK_GIO_SHARP],
 [
 	GIOSHARP_REQUIRED=2.99
-	GUDEVSHARP_REQUIRED=0.2
+	GUDEVSHARP_REQUIRED=3.0
 	
 	AC_ARG_ENABLE(gio, AC_HELP_STRING([--disable-gio], [Disable GIO for IO operations]), ,enable_gio="yes")
 	AC_ARG_ENABLE(gio_hardware, AC_HELP_STRING([--disable-gio-hardware], [Disable GIO Hardware backend]), ,enable_gio_hardware="yes")
