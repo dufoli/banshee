@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: banshee\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-10 00:43+0200\n"
-"PO-Revision-Date: 2013-09-10 00:44+0200\n"
+"POT-Creation-Date: 2013-09-12 19:29+0200\n"
+"PO-Revision-Date: 2013-09-12 19:30+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -645,6 +645,15 @@ msgstr "Odtwarzacz multimediów Banshee"
 #: ../data/desktop-files/common.desktop.in.h:3
 msgid "Play and organize your media collection"
 msgstr "Odtwarzanie i organizowanie kolekcji multimediów"
+
+#: ../data/desktop-files/common.desktop.in.h:4
+msgid ""
+"Video;Movie;Film;Clip;Series;Player;DVD;Disc;Mp3;Audio;CD;MTP;Podcast;DAAP;"
+"Playlist;Ipod;Multimedia;Collection;Music;Radio;"
+msgstr ""
+"Wideo;Video;Movie;Film;Filmik;Klip;Serial;Odtwarzacz;Player;DVD;Płyta;Dysk;"
+"Disc;Mp3;Dźwięk;Audio;CD;MTP;Podcast;Podkast;DAAP;Lista;odtwarzania;Playlist;"
+"Ipod;Multimedia;Kolekcja;Biblioteka;Muzyka;Music;Radio;"
 
 #: ../libbanshee/banshee-bpmdetector.c:202 ../libbanshee/banshee-ripper.c:270
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:240
