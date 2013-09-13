@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: banshee\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=banshee&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-09-09 12:31+0000\n"
-"PO-Revision-Date: 2013-09-11 09:38+0200\n"
+"POT-Creation-Date: 2013-09-12 15:34+0000\n"
+"PO-Revision-Date: 2013-09-13 08:34+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
-"Language-Team: čeština <gnome-cs-list@gnome.org>\n"
+"Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -639,6 +639,15 @@ msgstr "Multimediální přehrávač Banshee"
 #: ../data/desktop-files/common.desktop.in.h:3
 msgid "Play and organize your media collection"
 msgstr "Přehrávat a organizovat své multimediální kolekce"
+
+#: ../data/desktop-files/common.desktop.in.h:4
+msgid ""
+"Video;Movie;Film;Clip;Series;Player;DVD;Disc;Mp3;Audio;CD;MTP;Podcast;DAAP;"
+"Playlist;Ipod;Multimedia;Collection;Music;Radio;"
+msgstr ""
+"video;videa;filmy;klipy;série;seriály;přehrávač;dvd;disk;mp3;audio;zvuk;cd;"
+"mtp;přenosný přehrávač;podcast;daap;playlist;seznam skladeb;seznam k "
+"přehrání;ipod;multimédia;kolekce;sbírka;hudba;rádio;stanice;"
 
 #: ../libbanshee/banshee-bpmdetector.c:202 ../libbanshee/banshee-ripper.c:270
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:240
