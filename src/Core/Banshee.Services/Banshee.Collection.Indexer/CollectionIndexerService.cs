@@ -31,9 +31,6 @@ using System.Collections.Generic;
 
 using DBus;
 
-using Hyena.Query;
-using Hyena.Data.Sqlite;
-
 using Banshee.Library;
 using Banshee.Sources;
 using Banshee.ServiceStack;
@@ -161,7 +158,7 @@ namespace Banshee.Collection.Indexer
                 List<string> fields = new List<string> ();
 
                 foreach (KeyValuePair<string, System.Reflection.PropertyInfo> field in TrackInfo.GetExportableProperties (
-                    typeof (Banshee.Collection.Database.DatabaseTrackInfo))) {
+                    typeof (DatabaseTrackInfo))) {
                     fields.Add (field.Key);
                 }
 
