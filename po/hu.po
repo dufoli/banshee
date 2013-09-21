@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: banshee master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=banshee&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-09-09 12:31+0000\n"
-"PO-Revision-Date: 2013-09-10 00:04+0200\n"
+"POT-Creation-Date: 2013-09-16 09:51+0000\n"
+"PO-Revision-Date: 2013-09-21 18:47+0200\n"
 "Last-Translator: Balázs Úr <urbalazs at gmail dot com>\n"
 "Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
 "Language: hu\n"
@@ -633,6 +633,14 @@ msgstr "Banshee médialejátszó"
 msgid "Play and organize your media collection"
 msgstr "Médiagyűjteményének lejátszása és rendszerezése"
 
+#: ../data/desktop-files/common.desktop.in.h:4
+msgid ""
+"Video;Movie;Film;Clip;Flick;Series;Media;Player;DVD;Disc;Mp3;Audio;CD;MTP;"
+"Podcast;DAAP;Playlist;Ipod;Multimedia;Collection;Music;Radio;"
+msgstr ""
+"Videó;Mozifilm;Film;Klip;Flick;Sorozat;Média;Lejátszó;DVD;Lemez;Mp3;Hang;CD;MT"
+"P;Podcast;DAAP;Lejátszólista;Ipod;Multimédia;Gyűjtemény;Zene;Rádió;"
+
 #: ../libbanshee/banshee-bpmdetector.c:202 ../libbanshee/banshee-ripper.c:270
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:240
 msgid "Could not create pipeline"
@@ -1168,13 +1176,11 @@ msgstr "D-Bus támogatás teljes letiltása"
 
 #: ../src/Clients/Booter/Booter/Entry.cs:228
 #, csharp-format
-#| msgid "Skip loading a custom gtkrc file ({0}) if it exists"
 msgid "Skip loading a custom gtk.css file ({0}) if it exists"
 msgstr "Egyéni gtk.css fájl ({0}) betöltésének kihagyása, ha van"
 
 #: ../src/Clients/Booter/Booter/Entry.cs:230
 #, csharp-format
-#| msgid "Skip loading a custom gtkrc file ({0}) if it exists"
 msgid "Reload the custom gtk.css file ({0}) every 5 seconds"
 msgstr "Az egyéni gtk.css fájl ({0}) újratöltése 5 másodpercenként"
 
@@ -6182,7 +6188,6 @@ msgstr ""
 "<i>Kilépés</i> menüpontot."
 
 #: ../src/Extensions/Banshee.NotificationArea/Banshee.NotificationArea/NotificationAreaService.cs:500
-#| msgid "Pre_vious"
 msgid "Previous"
 msgstr "Előző"
 
