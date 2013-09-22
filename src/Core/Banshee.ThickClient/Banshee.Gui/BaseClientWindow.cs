@@ -211,22 +211,5 @@ namespace Banshee.Gui
 
             OnTitleChanged ();
         }
-
-        // FIXME: confirm that this is not needed anymore
-        /*protected void OnToolbarExposeEvent (object o, ExposeEventArgs args)
-        {
-            Toolbar toolbar = (Toolbar)o;
-
-            // This forces the toolbar to look like it's just a regular part
-            // of the window since the stock toolbar look makes Banshee look ugly.
-            Style.ApplyDefaultBackground (toolbar.GdkWindow, true, State,
-                args.Event.Area, toolbar.Allocation.X, toolbar.Allocation.Y,
-                toolbar.Allocation.Width, toolbar.Allocation.Height);
-
-            // Manually expose all the toolbar's children
-            foreach (Widget child in toolbar.Children) {
-                toolbar.PropagateExpose (child, args.Event);
-            }
-        }*/
     }
 }
