@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: banshee-master-po-gl-3484\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-13 00:36+0200\n"
-"PO-Revision-Date: 2013-09-13 00:38+0200\n"
+"POT-Creation-Date: 2013-09-23 01:06+0200\n"
+"PO-Revision-Date: 2013-09-23 01:07+0200\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
 "Language-Team: gnome-l10n-gl@gnome.org\n"
 "Language: gl\n"
@@ -635,11 +635,11 @@ msgstr "Reproduzca e organice a súa colección multimedia"
 
 #: ../data/desktop-files/common.desktop.in.h:4
 msgid ""
-"Video;Movie;Film;Clip;Series;Player;DVD;Disc;Mp3;Audio;CD;MTP;Podcast;DAAP;"
-"Playlist;Ipod;Multimedia;Collection;Music;Radio;"
+"Video;Movie;Film;Clip;Flick;Series;Media;Player;DVD;Disc;Mp3;Audio;CD;MTP;"
+"Podcast;DAAP;Playlist;Ipod;Multimedia;Collection;Music;Radio;"
 msgstr ""
-"Vídeo;Filme;Película;Curta;Serie;Reprodutor;DVD;Música;Disco;Mp3;Son;CD;Podc"
-"ast;DAAP;Lista de reprodución;Ipod;Multimedia;Colección;Música;Radio;"
+"Vídeo;Filme;Película;Curta;Series;Reprodutor;DVD;Música;Disco;Mp3;Son;CD;Pod"
+"cast;DAAP;Lista de reprodución;Ipod;Multimedia;Colección;Música;Radio;"
 
 #: ../libbanshee/banshee-bpmdetector.c:202 ../libbanshee/banshee-ripper.c:270
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:240
@@ -1237,7 +1237,7 @@ msgid "Close"
 msgstr "Pechar"
 
 #. Translators: this is a verb (command), not a noun (things)
-#: ../src/Clients/Nereid/Nereid/PlayerInterface.cs:497
+#: ../src/Clients/Nereid/Nereid/PlayerInterface.cs:492
 msgid "Search"
 msgstr "Buscar"
 
