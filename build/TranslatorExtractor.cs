@@ -8,6 +8,7 @@
 //
 
 using System;
+using System.Globalization;
 using System.IO;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -114,6 +115,7 @@ public class TranslatorExtractor
             case "fr": language_name = "French"; break;
             case "el": language_name = "Greek"; break;
             case "en_GB": language_name = "British English"; break;
+		    case "gl": language_name = "Galician"; break;
             case "gu": language_name = "Gujarati"; break;
             case "he": language_name = "Hebrew"; break;
             case "id": language_name = "Indonesian"; break;
@@ -125,7 +127,7 @@ public class TranslatorExtractor
             case "zh_TW": language_name = "Chinese (Taiwan)"; break;
             default: break;
         }
-        
+
         Console.WriteLine("  <language code=\"{0}\" name=\"{1}\">", language_code, language_name);
         List<string> sorted_names = new List<string> (names.Values);
         sorted_names.Sort ();
