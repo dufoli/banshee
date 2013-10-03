@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: banshee\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-16 21:07+0200\n"
-"PO-Revision-Date: 2013-09-16 21:08+0200\n"
+"POT-Creation-Date: 2013-10-03 17:40+0200\n"
+"PO-Revision-Date: 2013-10-03 17:41+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -655,6 +655,25 @@ msgstr ""
 "Dysk;Disc;Mp3;Dźwięk;Audio;CD;MTP;Podcast;Podkast;DAAP;Lista;odtwarzania;"
 "Playlist;Ipod;Ipad;Multimedia;Kolekcja;Biblioteka;Muzyka;Music;Radio;"
 
+#. Writing GNOME below, instead of just "Linux", is inclusive of *BSD OSs
+#: ../data/banshee.appdata.xml.in.h:2
+msgid ""
+"Banshee is an open source multimedia management and playback application for "
+"GNOME, Mac and Windows."
+msgstr ""
+"Banshee to program open source do zarządzania i odtwarzania multimediów dla "
+"systemów GNOME, Mac i Windows."
+
+#: ../data/banshee.appdata.xml.in.h:3
+msgid ""
+"Play your music and videos. Stay entertained and up to date with podcasts "
+"and video podcasts. Sync your Android, iPod, and other devices. We think "
+"you'll love Banshee!"
+msgstr ""
+"Funkcje programu Banshee obejmują odtwarzanie muzyki i nagrań wideo, "
+"podcastów dźwiękowych i wideo oraz synchronizowanie kolekcji z urządzeniami "
+"Android, iPod i wieloma innymi."
+
 #: ../libbanshee/banshee-bpmdetector.c:202 ../libbanshee/banshee-ripper.c:270
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:240
 msgid "Could not create pipeline"
@@ -1255,7 +1274,7 @@ msgid "Close"
 msgstr "Zamknij"
 
 #. Translators: this is a verb (command), not a noun (things)
-#: ../src/Clients/Nereid/Nereid/PlayerInterface.cs:497
+#: ../src/Clients/Nereid/Nereid/PlayerInterface.cs:492
 msgid "Search"
 msgstr "Wyszukaj"
 
