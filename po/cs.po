@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: banshee\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=banshee&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-09-16 09:51+0000\n"
-"PO-Revision-Date: 2013-09-16 19:16+0200\n"
+"POT-Creation-Date: 2013-10-03 18:04+0000\n"
+"PO-Revision-Date: 2013-10-04 10:50+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -649,6 +649,25 @@ msgstr ""
 "mtp;přenosný přehrávač;podcast;daap;playlist;seznam skladeb;seznam k "
 "přehrání;ipod;multimédia;kolekce;sbírka;hudba;rádio;stanice;"
 
+#. Writing GNOME below, instead of just "Linux", is inclusive of *BSD OSs
+#: ../data/banshee.appdata.xml.in.h:2
+msgid ""
+"Banshee is an open source multimedia management and playback application for "
+"GNOME, Mac and Windows."
+msgstr ""
+"Banshee je svobodná aplikace s otevřeným kódem sloužící ke správě a "
+"přehrávání multimédií v GNOME, na Macu a ve Windows."
+
+#: ../data/banshee.appdata.xml.in.h:3
+msgid ""
+"Play your music and videos. Stay entertained and up to date with podcasts "
+"and video podcasts. Sync your Android, iPod, and other devices. We think "
+"you'll love Banshee!"
+msgstr ""
+"Přehrávejte si svoji hudbu a videa. Mějte k dispozici nepřetržitou zábavu s "
+"vždy aktuálními podcasty a videopodcasty. Synchronizujte vše se svými "
+"zařízeními Android, iPod a dalšími. Věříme, že budete Banshee milovat."
+
 #: ../libbanshee/banshee-bpmdetector.c:202 ../libbanshee/banshee-ripper.c:270
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:240
 msgid "Could not create pipeline"
@@ -1246,7 +1265,7 @@ msgid "Close"
 msgstr "Zavřít"
 
 #. Translators: this is a verb (command), not a noun (things)
-#: ../src/Clients/Nereid/Nereid/PlayerInterface.cs:497
+#: ../src/Clients/Nereid/Nereid/PlayerInterface.cs:492
 msgid "Search"
 msgstr "Hledat"
 
