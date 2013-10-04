@@ -31,11 +31,11 @@ using GLib;
 
 namespace Banshee.Hardware.Gio
 {
-    public class GioDriveMetadetaSource : GioMetadataSource
+    public class GioDriveMetadataSource : GioMetadataSource
     {
         IDrive Drive { get; set; }
 
-        public GioDriveMetadetaSource (IDrive drive)
+        public GioDriveMetadataSource (IDrive drive)
         {
             Drive = drive;
         }
