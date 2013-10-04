@@ -14,7 +14,7 @@ SOURCES =  \
 	Banshee.Hardware.Gio/DeviceMediaCapabilities.cs \
 	Banshee.Hardware.Gio/DiscVolume.cs \
 	Banshee.Hardware.Gio/HardwareManager.cs \
-	Banshee.Hardware.Gio/LowLevel/GioDriveMetadetaSource.cs \
+	Banshee.Hardware.Gio/LowLevel/GioDriveMetadataSource.cs \
 	Banshee.Hardware.Gio/LowLevel/GioMetadataSource.cs \
 	Banshee.Hardware.Gio/LowLevel/GioVolumeMetadataSource.cs \
 	Banshee.Hardware.Gio/LowLevel/IMetadataSource.cs \

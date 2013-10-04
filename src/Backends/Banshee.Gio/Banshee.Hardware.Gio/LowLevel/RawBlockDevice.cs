@@ -33,7 +33,7 @@ namespace Banshee.Hardware.Gio
 {
     class RawBlockDevice : RawDevice
     {
-        public RawBlockDevice (GLib.IDrive drive, Manager manager, GioDriveMetadetaSource gioMetadata, UdevMetadataSource udevMetadata)
+        public RawBlockDevice (GLib.IDrive drive, Manager manager, GioDriveMetadataSource gioMetadata, UdevMetadataSource udevMetadata)
             : base (manager, gioMetadata, udevMetadata)
         {
             Drive = drive;

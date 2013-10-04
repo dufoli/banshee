@@ -246,7 +246,7 @@ namespace Banshee.Hardware.Gio
                 }
                 return new RawBlockDevice (Volume.Drive,
                                            Manager,
-                                           new GioDriveMetadetaSource (Volume.Drive),
+                                           new GioDriveMetadataSource (Volume.Drive),
                                            new UdevMetadataSource (device));
             }
         }

@@ -80,7 +80,6 @@
     <Compile Include="Banshee.Hardware.Gio\DeviceMediaCapabilities.cs" />
     <Compile Include="Banshee.Hardware.Gio\DiscVolume.cs" />
     <Compile Include="Banshee.Hardware.Gio\HardwareManager.cs" />
-    <Compile Include="Banshee.Hardware.Gio\LowLevel\GioDriveMetadetaSource.cs" />
     <Compile Include="Banshee.Hardware.Gio\LowLevel\GioMetadataSource.cs" />
     <Compile Include="Banshee.Hardware.Gio\LowLevel\GioVolumeMetadataSource.cs" />
     <Compile Include="Banshee.Hardware.Gio\LowLevel\IMetadataSource.cs" />
@@ -94,6 +93,7 @@
     <Compile Include="Banshee.Hardware.Gio\UsbDevice.cs" />
     <Compile Include="Banshee.Hardware.Gio\UsbVolume.cs" />
     <Compile Include="Banshee.Hardware.Gio\Volume.cs" />
+    <Compile Include="Banshee.Hardware.Gio\LowLevel\GioDriveMetadataSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Banshee.Gio.addin.xml">
