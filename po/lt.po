@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=banshee&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-09-16 09:51+0000\n"
-"PO-Revision-Date: 2013-09-22 17:46+0300\n"
+"POT-Creation-Date: 2013-10-03 18:04+0000\n"
+"PO-Revision-Date: 2013-10-06 20:40+0300\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -639,15 +639,31 @@ msgid "Play and organize your media collection"
 msgstr "Leisti ir tvarkyti mediją"
 
 #: ../data/desktop-files/common.desktop.in.h:4
-#| msgid ""
-#| "Video;Movie;Film;Clip;Series;Player;DVD;Disc;Mp3;Audio;CD;MTP;Podcast;"
-#| "DAAP;Playlist;Ipod;Multimedia;Collection;Music;Radio;"
 msgid ""
 "Video;Movie;Film;Clip;Flick;Series;Media;Player;DVD;Disc;Mp3;Audio;CD;MTP;"
 "Podcast;DAAP;Playlist;Ipod;Multimedia;Collection;Music;Radio;"
 msgstr ""
 "Vaizdo įrašas;Filmas;Klipas;Serialas;Grotuvas;DVD;Diskas;Mp3;Garsas;CD;"
 "Tinklalaidė;DAAP;Grojaraštis;Ipod;Daugialypė terpė;Kolekcija;Muzika;Radijas;"
+
+#. Writing GNOME below, instead of just "Linux", is inclusive of *BSD OSs
+#: ../data/banshee.appdata.xml.in.h:2
+msgid ""
+"Banshee is an open source multimedia management and playback application for "
+"GNOME, Mac and Windows."
+msgstr ""
+"Banshee yra atviro kodo daugialypės terpės tvarkymo ir grojimo programa "
+"GNOME, Mac ir Windows aplinkoms."
+
+#: ../data/banshee.appdata.xml.in.h:3
+msgid ""
+"Play your music and videos. Stay entertained and up to date with podcasts "
+"and video podcasts. Sync your Android, iPod, and other devices. We think "
+"you'll love Banshee!"
+msgstr ""
+"Grokite muziką ir filmus. Linksminkitės bei žinokite naujienas iš "
+"tinklalaidžių. Sinchronizuokite su Android, iPod ir kitais įrenginiais. Mes "
+"manome, kad jums patiks Banshee!"
 
 #: ../libbanshee/banshee-bpmdetector.c:202 ../libbanshee/banshee-ripper.c:270
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:240
@@ -1243,7 +1259,7 @@ msgid "Close"
 msgstr "Užverti"
 
 #. Translators: this is a verb (command), not a noun (things)
-#: ../src/Clients/Nereid/Nereid/PlayerInterface.cs:497
+#: ../src/Clients/Nereid/Nereid/PlayerInterface.cs:492
 msgid "Search"
 msgstr "Ieškoti"
 
