@@ -5,7 +5,7 @@ m4_define([banshee_version_minor], [9])
 m4_define([banshee_version_micro], [0])
 
 dnl this can sometimes differ manually
-m4_define([banshee_display_version], ["2.7"])
+m4_define([banshee_display_version], ["2.9"])
 
 dnl set to 0 when doing an official release
 m4_define([banshee_version_pre_release], [0])
