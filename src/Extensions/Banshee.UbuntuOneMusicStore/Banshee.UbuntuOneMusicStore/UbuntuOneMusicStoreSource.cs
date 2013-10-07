@@ -104,7 +104,6 @@ namespace Banshee.UbuntuOneMusicStore
                 string http_url = uri.Replace ("u1ms://", "http://");
                 custom_view.Store.LoadStoreLink (http_url);
                 GLib.Idle.Add (delegate { ServiceManager.SourceManager.SetActiveSource (this); return false; });
-                    
             }
         }
 
