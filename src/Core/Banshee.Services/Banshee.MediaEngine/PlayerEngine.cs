@@ -148,8 +148,12 @@ namespace Banshee.MediaEngine
 
         public abstract void Pause ();
 
-        public abstract void Seek (uint position, bool accurate_seek = false);
+        public abstract void Seek (uint position, bool accurate_seek);
 
+        public void Seek (uint position)
+        {
+            Seek (position, false);
+        }
 
         public virtual void SetNextTrackUri (SafeUri uri, bool maybeVideo)
         {

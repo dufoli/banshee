@@ -202,6 +202,9 @@ else
 fi
 #FIXME: add "-warnaserror" back above!
 
+#TODO: for simplicity, just remove langversion and use .NET 4.0 moving forward
+GMCS_FLAGS="$GMC_FLAGS -langversion:3"
+
 AC_SUBST(GMCS_FLAGS)
 
 AM_CONDITIONAL(HYENA_PKG_CONFIG, false)

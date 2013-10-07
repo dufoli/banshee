@@ -538,9 +538,14 @@ namespace Banshee.MediaEngine
             }
         }
 
-        public void Seek (uint position, bool accurate_seek = false)
+        public void Seek (uint position, bool accurate_seek)
         {
             active_engine.Seek (position, accurate_seek);
+        }
+
+        public void Seek (uint position)
+        {
+            Seek (position, false);
         }
 
         public void VideoExpose (IntPtr displayContext, bool direct)

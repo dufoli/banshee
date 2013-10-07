@@ -49,7 +49,7 @@ namespace Banshee.MediaEngine
             OnStateChanged (PlayerState.Paused);
         }
 
-        public override void Seek (uint position, bool accurate_seek = false)
+        public override void Seek (uint position, bool accurate_seek)
         {
         }
 

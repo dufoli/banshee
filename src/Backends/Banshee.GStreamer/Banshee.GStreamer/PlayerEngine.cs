@@ -278,7 +278,7 @@ namespace Banshee.GStreamer
             }
         }
 
-        public override void Seek (uint position, bool accurate_seek = false)
+        public override void Seek (uint position, bool accurate_seek)
         {
             bp_set_position (handle, (ulong)position, accurate_seek);
             OnEventChanged (PlayerEvent.Seek);

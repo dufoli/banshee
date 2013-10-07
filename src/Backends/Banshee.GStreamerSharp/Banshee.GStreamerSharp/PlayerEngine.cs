@@ -449,7 +449,7 @@ namespace Banshee.GStreamerSharp
             next_track_set.Set ();
         }
 
-        public override void Seek (uint position, bool accurate_seek = false)
+        public override void Seek (uint position, bool accurate_seek)
         {
             SeekFlags seek_flags = SeekFlags.Flush;
             if (accurate_seek) {
