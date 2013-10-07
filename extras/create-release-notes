@@ -83,7 +83,6 @@ $features
 <ul>
 	<li>libmtp &gt;= 1.1.0</li>
 	<li>mono-zeroconf &gt;= 0.8.0</li>
-	<li>boo &gt;= 0.8.1</li>
 	<li>webkit-1.0 &gt;= 1.2.2</li>
 	<li>gdata-sharp-youtube &gt;= 1.4</li>
 	<li>gio-sharp &gt;= 2.22.3, gtk-sharp-beans &gt;= 2.14.1, gudev-sharp and gkeyfile-sharp</li>

@@ -100,9 +100,6 @@ BANSHEE_CHECK_MONO_ADDINS
 dnl notify-sharp library
 BANSHEE_CHECK_NOTIFY_SHARP
 
-dnl Boo
-BANSHEE_CHECK_BOO
-
 dnl Monodoc (optional through --disable-docs)
 SHAMROCK_CHECK_MONODOC
 
@@ -169,6 +166,9 @@ BANSHEE_CHECK_SOUNDMENU
 
 dnl Ubuntu One Music Store (optional)
 BANSHEE_CHECK_UBUNTUONE
+
+dnl Boo (optional)
+BANSHEE_CHECK_BOO
 
 dnl Gapless, if we have a new-enough playbin2
 ENABLE_GAPLESS="no"
