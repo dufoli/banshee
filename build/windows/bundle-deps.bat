@@ -52,5 +52,4 @@ REM NDesk.DBus
 
 REM TODO not yet used in the Windows build
 REM gio-sharp
-REM gtk-sharp-beans
 REM libwebkit
