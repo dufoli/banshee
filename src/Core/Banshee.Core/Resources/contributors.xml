@@ -1,9 +1,11 @@
 <people>
   <author role="Maintainer">Aaron Bockover</author>
+  <author role="Maintainer">Andrés G. Aragoneses</author>
   <author role="Maintainer">Alexander Kojevnikov</author>
   <author role="Maintainer">Bertrand Lorentz</author>
   <author role="Maintainer">Gabriel Burt</author>
   <contributor>Alan McGovern</contributor>
+  <contributor>Alex Willmy</contributor>
   <contributor>Abner Silva</contributor>
   <contributor>Adam Lofts</contributor>
   <contributor>Age Bosma</contributor>
@@ -86,6 +88,7 @@
   <contributor>Götz Waschk</contributor>
   <contributor>Haitao Feng</contributor>
   <contributor>Hajime Mizuno</contributor>
+  <contributor>Hans Oesterholt</contributor>
   <contributor>Hans Petter Jansson</contributor>
   <contributor>Harold Schreckengost</contributor>
   <contributor>Iain Lane</contributor>
@@ -93,6 +96,7 @@
   <contributor>Ilya Konstantinov</contributor>
   <contributor>Ivan N. Zlatev</contributor>
   <contributor>Jack Deslippe</contributor>
+  <contributor>James Boocock</contributor>
   <contributor>James Otting</contributor>
   <contributor>James Willcox</contributor>
   <contributor>Jan Arne Petersen</contributor>
@@ -130,6 +134,7 @@
   <contributor>Martin Pitt</contributor>
   <contributor>Matt Enright</contributor>
   <contributor>Matt Sturgeon</contributor>
+  <contributor>Michael Farrell</contributor>
   <contributor>Michael Kaiser</contributor>
   <contributor>Michael Martin-Smucker</contributor>
   <contributor>Michael Monreal</contributor>
@@ -141,6 +146,7 @@
   <contributor>Nathan Palmer</contributor>
   <contributor>Neil Loknath</contributor>
   <contributor>Nicholas Doyle</contributor>
+  <contributor>Nicholas Little</contributor>
   <contributor>Nicholas Parker</contributor>
   <contributor>Nicolò Chieffo</contributor>
   <contributor>Nils Naumann</contributor>
@@ -161,6 +167,7 @@
   <contributor>Phil Trimble</contributor>
   <contributor>Pratik Patel</contributor>
   <contributor>Przemysław Grzegorczyk</contributor>
+  <contributor>Rashid Khan</contributor>
   <contributor>Raimo Radczewski</contributor>
   <contributor>Robin Stocker</contributor>
   <contributor>Roderich Schupp</contributor>
@@ -180,6 +187,7 @@
   <contributor>Tobias Arrskog</contributor>
   <contributor>Tobias Mueller</contributor>
   <contributor>Todd Berman</contributor>
+  <contributor>Tomasz Maczynski</contributor>
   <contributor>Travis Glenn Hansen</contributor>
   <contributor>Travis Patterson</contributor>
   <contributor>Travis Reitter</contributor>

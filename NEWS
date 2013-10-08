@@ -66,7 +66,7 @@ Banshee 2.9.0 - 2013-10-08
       * bnc#798267: build: test dmcs before gmcs when trying to find the compiler
       * bgo#577225: RescanPipeline: warn about removal of many tracks
       * bgo#688540: Mtp: Fix file type in sync with libmtp > 1.1.0
-      * bgo#690300: Dap: For TypeUniqueId use device's Serial property, not Uuid
+      * bgo#690300: Dap: Settings of DAP sources are not remembered between syncs
       * bgo#639947: Dap: Use Unicode codes for quotation marks
       * bgo#686584: build: Make gio-hardware be enabled by default
       * bgo#686584: build: make GIO backend be enabled by default
@@ -134,10 +134,10 @@ Contributors For This Release
     of Banshee. Without their help, there would be no release!
 
      Andres G. Aragoneses, Alex Willmy, Aruna Sankaranarayanan, Bertrand
-     Lorentz, Chow Loong Jin, Ekaterina Gerasimova, Joe Hansen, Hans Petter
-     Jansson, James Boocock, Michael Farrell, Nicholas Little, Olivier
-     Dufour, Phil Trimble, Rashid Khan, Samuel Gyger, Sindhu S, Timo Dörr,
-     Tomasz Maczynski
+     Lorentz, Chow Loong Jin, Ekaterina Gerasimova, Hans Petter Jansson,
+     Hans Oesterholt, James Boocock, Michael Farrell, Nicholas Little,
+     Olivier Dufour, Phil Trimble, Rashid Khan, Samuel Gyger, Sindhu S,
+     Timo Dörr, Tomasz Maczynski
 
     The following people contributed updated translations to this release.
     Without them, our project's reach would be much more limited.
@@ -145,7 +145,7 @@ Contributors For This Release
      Aleksej Kabanov, Alexandre Franke, Andika Triwidada, António Lima,
      Aurimas Černius, Balázs Úr, Cheng-Chia Tseng, Daniel Mustieles, Dimitris
      Spingos, dyzdyz010@sina.com, Enrico Nicoletto, Fran Diéguez, Hajime
-     Taira, Jiro Matsuzawa, Jordi Mas, Kjartan Maraas, Marek Černocký, Martin
-     Srebotnjak, Matej Urbančič, Muhammet Kara, Мирослав Николић, Piotr Drąg,
-     Milagros Alessandra Infante Montero, Rafael Ferreira, Rūdolfs Mazurs,
-     Wolfgang Stöggl, Yuri Myasoedov
+     Taira, Jiro Matsuzawa, Joe Hansen, Jordi Mas, Kjartan Maraas, Marek
+     Černocký, Martin Srebotnjak, Matej Urbančič, Muhammet Kara, Мирослав
+     Николић, Piotr Drąg, Milagros Alessandra Infante Montero, Rafael
+     Ferreira, Rūdolfs Mazurs, Wolfgang Stöggl, Yuri Myasoedov
