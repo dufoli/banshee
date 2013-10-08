@@ -1,7 +1,7 @@
 To make a release:
 
 Pre-release:
-* Update src/Core/Banshee.Core/Resources/contributors.xml
+* Update src/Core/Banshee.Core/Resources/contributors.xml (manually)
 * Update AUTHORS (cd extras/ && ./create-authors > ../AUTHORS)
 * Update NEWS
 * Check version in configure.ac (don't forget the display version)
