@@ -36,7 +36,6 @@ INSTALL
 aclocal.m4
 autom4te.cache/
 bin/
-data/desktop-files/*.desktop
 src/Extensions/Banshee.MeeGo/meego-panel-banshee.desktop
 install-sh
 libtool
@@ -50,7 +49,6 @@ src/Clients/Booter/banshee
 src/Clients/Booter/banshee.darwin
 src/Clients/Booter/banshee.linux
 src/Extensions/Banshee.AmazonMp3/bamz
-data/audio-profiles/*.xml
 stamp-h1
 *.userprefs
 Banshee.usertasks
@@ -75,3 +73,7 @@ build/windows/generated_share.wxi
 build/windows/generated_binaries.wxi
 build/windows/*.wixpdb
 build/windows/*.msi
+
+data/desktop-files/*.desktop
+data/audio-profiles/*.xml
+data/banshee.appdata.xml

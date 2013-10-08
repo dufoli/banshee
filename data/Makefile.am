@@ -29,7 +29,7 @@ EXTRA_DIST = \
 	$(appdata_in_files)
 
 CLEANFILES = \
-        $(appdata_DATA)
+	$(appdata_DATA)
 
 DISTCLEANFILES = \
 	$(dbusservice_DATA)
