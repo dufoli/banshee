@@ -66,7 +66,7 @@ Banshee 2.9.0 - 2013-10-08
       * bnc#798267: build: test dmcs before gmcs when trying to find the compiler
       * bgo#577225: RescanPipeline: warn about removal of many tracks
       * bgo#688540: Mtp: Fix file type in sync with libmtp > 1.1.0
-      * bgo#690300: Dap: Settings of DAP sources are not remembered between syncs
+      * bgo#690300: Dap: Settings of DAP sources are not remembered between sessions
       * bgo#639947: Dap: Use Unicode codes for quotation marks
       * bgo#686584: build: Make gio-hardware be enabled by default
       * bgo#686584: build: make GIO backend be enabled by default
