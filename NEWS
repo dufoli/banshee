@@ -3,16 +3,16 @@ Banshee 2.9.0 - 2013-10-08
 ===============================================================================
 
     Banshee 2.9.0 is the culmination of twelve months' work by 19 developers,
-    27 translators and dozens of bug reporters and testers. It is an unstable
-    development release, the first of the 2.9.x releases leading up to
-    our future stable release Banshee 3.0.
+    27 translators and dozens of bug reporters and testers. It is a development
+    release, the first of the 2.9.x releases leading up to our future stable
+    release Banshee 3.0.
 
     New Features:
 
       * GTK3
 
-            This is the first release using the new 3.x version of gtk+, thanks
-            to work that has been done in the gtk# to bind this new version.
+            This is the first release using the 3.x version of GTK+, thanks
+            to work that has been done in Gtk# to bind this version.
 
       * Device synchronization for Symbian
 
