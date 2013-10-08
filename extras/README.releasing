@@ -17,11 +17,13 @@ Release:
     install the tarballs on ftp.gnome.org.
 
 Post-release:
-* Update the website
+* In the master.gnome.org session, do:
+  `cp release-data/banshee-<full_version>.news /ftp/pub/gnome/sources/banshee/<two_digit_version>/ && signal-ftp-sync`
+* Update the website (http://banshee.fm/wp-admin/)
   + Add download/archives/$version page
     - Use `cd extras && ./create-release-notes > foo` script
       + By hand modify 'the previous major release notes...' section
-    - Set sort order, parent, and permalink
+    - Set sort order (negative file of full version, i.e.: -290), parent (Archives), and permalink (i.e.: http://banshee.fm/download/archives/2-9-0/)
   + Update Downloads/Archives page, adding entry for this release
   + Add a new blog post, uncategorized, tag 'news'
 * For stable releases, ssh banshee@banshee.fm, update web/download.banshee.fm/release-info/banshee

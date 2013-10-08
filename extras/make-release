@@ -118,7 +118,7 @@ function upload_release () {
 #	( ssh ${WEB_USER}@${WEB_HOST} ftpadmin install \
 #		release-data/${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2) \
 #		|| bail "Could not install the tarball"
-	echo "Connect by ssh to master.gnome.org and then run this command to install the tarballs to ftp.gnome.org :"
+	echo "Connect by ssh to gnomeuserid@master.gnome.org and then run this command to install the tarballs to ftp.gnome.org :"
 	echo "  ftpadmin install release-data/${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2"
 
 	read -p "Press enter when the tarballs are installed..."
