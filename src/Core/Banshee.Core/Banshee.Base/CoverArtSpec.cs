@@ -83,12 +83,12 @@ namespace Banshee.Base
 
         public static string CreateArtistAlbumId (string artist, string album)
         {
-            if (IsAlbumUnknown (album)) {
+            if (String.IsNullOrEmpty (album)) {
                 // do not attempt to group unknown album tracks together
                 return null;
             }
 
-            if (IsArtistUnknown (artist)) {
+            if (String.IsNullOrEmpty (artist)) {
                 return null;
             }
 
@@ -110,16 +110,6 @@ namespace Banshee.Base
             Hyena.Log.DebugFormat ("Album artwork path set to {0}", root_path);
         }
 
-        static bool IsAlbumUnknown (string album)
-        {
-            return album == null || album == AlbumInfo.UnknownAlbumTitleUntranslated || album == AlbumInfo.UnknownAlbumTitle;
-        }
-
-        static bool IsArtistUnknown (string artist)
-        {
-            return artist == null || artist == ArtistInfo.UnknownArtistNameUntranslated || artist == ArtistInfo.UnknownArtistName;
-        }
-
         private static string root_path = Path.Combine (XdgBaseDirectorySpec.GetUserDirectory (
             "XDG_CACHE_HOME", ".cache"),  "media-art");
 
@@ -138,7 +128,7 @@ namespace Banshee.Base
 
         public static string CreateLegacyArtistAlbumId (string artist, string album)
         {
-            if (IsArtistUnknown (artist) || IsAlbumUnknown (album)) {
+            if (String.IsNullOrEmpty (artist) || String.IsNullOrEmpty (album)) {
                 return null;
             }
 
