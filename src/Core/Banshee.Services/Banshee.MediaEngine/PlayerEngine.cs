@@ -38,7 +38,7 @@ using Banshee.ServiceStack;
 
 namespace Banshee.MediaEngine
 {
-    public abstract class PlayerEngine
+    public abstract class PlayerEngine : IDisposable
     {
         public const int VolumeDelta = 10;
         public const int SkipDelta = 10;
