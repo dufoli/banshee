@@ -30,11 +30,9 @@ using Hyena;
 
 using System;
 using System.IO;
-using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
-using Mono.Unix;
 using Banshee.Collection;
 
 namespace Banshee.Base
@@ -53,7 +51,7 @@ namespace Banshee.Base
 
         public static bool CoverExistsForSize (string aaid, int size)
         {
-            return aaid == null ? false : File.Exists (GetPathForSize (aaid, size));
+            return aaid != null && File.Exists (GetPathForSize (aaid, size));
         }
 
         public static string GetPath (string aaid)
@@ -110,7 +108,7 @@ namespace Banshee.Base
             Hyena.Log.DebugFormat ("Album artwork path set to {0}", root_path);
         }
 
-        private static string root_path = Path.Combine (XdgBaseDirectorySpec.GetUserDirectory (
+        private static readonly string root_path = Path.Combine (XdgBaseDirectorySpec.GetUserDirectory (
             "XDG_CACHE_HOME", ".cache"),  "media-art");
 
         public static string RootPath {
@@ -119,7 +117,7 @@ namespace Banshee.Base
 
         #region Old spec
 
-        private static string legacy_root_path = Path.Combine (XdgBaseDirectorySpec.GetUserDirectory (
+        private static readonly string legacy_root_path = Path.Combine (XdgBaseDirectorySpec.GetUserDirectory (
             "XDG_CACHE_HOME", ".cache"),  "album-art");
 
         public static string LegacyRootPath {
@@ -140,7 +138,7 @@ namespace Banshee.Base
                 : String.Format ("{0}{1}{2}", sm_artist, "-", sm_album);
         }
 
-        private static Regex legacy_filter_regex = new Regex (@"[^A-Za-z0-9]*", RegexOptions.Compiled);
+        private static readonly Regex legacy_filter_regex = new Regex (@"[^A-Za-z0-9]*", RegexOptions.Compiled);
         public static string LegacyEscapePart (string part)
         {
             if (String.IsNullOrEmpty (part)) {
