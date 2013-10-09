@@ -90,6 +90,9 @@ guidelines. If code is in violation, you will be asked to reformat it.
 
       var compare = (a + b * c) != (d - e * f);
 
+  12. Please write `private` accessors even if the language defaults
+    to it in the context you're in.
+
 
 .NET API Naming Guidelines
 ==========================
