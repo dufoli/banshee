@@ -73,7 +73,7 @@ $features
 	<li>Mono 2.8.2 (.NET 2.0 Profile / gmcs)</li>
 	<li>SQlite 3.4</li>
 	<li>Gtk# 2.99.1</li>
-	<li>GStreamer 0.10.26</li>
+	<li>GStreamer 1.0.0</li>
 	<li>GLib 2.22</li>
 	<li>dbus-sharp 0.7</li>
 	<li>dbus-sharp-glib 0.5</li>
