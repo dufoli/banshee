@@ -279,7 +279,7 @@ namespace Banshee.GStreamerSharp
             long index;
             Format format = Util.FormatGetByNick ("chapter");
             playbin.QueryPosition (ref format, out index);
-            playbin.Seek (1.0, format, SeekFlags.Flush, SeekType.Set, index + 1, SeekType.None, 0l);
+            playbin.Seek (1.0, format, SeekFlags.Flush, SeekType.Set, index + 1, SeekType.None, 0L);
         }
 
         public void GoToPreviousChapter (PlayBin2 playbin)
@@ -287,7 +287,7 @@ namespace Banshee.GStreamerSharp
             long index;
             Format format = Util.FormatGetByNick ("chapter");
             playbin.QueryPosition (ref format, out index);
-            playbin.Seek (1.0, format, SeekFlags.Flush, SeekType.Set, index - 1, SeekType.None, 0l);
+            playbin.Seek (1.0, format, SeekFlags.Flush, SeekType.Set, index - 1, SeekType.None, 0L);
         }
     }
 }
