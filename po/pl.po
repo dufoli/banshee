@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: banshee\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-03 17:40+0200\n"
-"PO-Revision-Date: 2013-10-03 17:41+0200\n"
+"POT-Creation-Date: 2013-10-11 15:29+0200\n"
+"PO-Revision-Date: 2013-10-11 15:30+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -362,7 +362,7 @@ msgstr "Obsługa pobierania plików BitTorrent z podcastów."
 #: ../data/addin-xml-strings.cs:163
 #: ../src/Extensions/Banshee.UbuntuOneMusicStore/Banshee.UbuntuOneMusicStore/UbuntuOneMusicStoreSource.cs:52
 #: ../src/Extensions/Banshee.UbuntuOneMusicStore/Banshee.UbuntuOneMusicStore/UbuntuOneMusicStoreSource.cs:53
-#: ../src/Extensions/Banshee.UbuntuOneMusicStore/Banshee.UbuntuOneMusicStore/UbuntuOneMusicStoreSource.cs:134
+#: ../src/Extensions/Banshee.UbuntuOneMusicStore/Banshee.UbuntuOneMusicStore/UbuntuOneMusicStoreSource.cs:133
 msgid "Ubuntu One Music Store"
 msgstr "Ubuntu One Music Store"
 
@@ -674,90 +674,89 @@ msgstr ""
 "podcastów dźwiękowych i wideo oraz synchronizowanie kolekcji z urządzeniami "
 "Android, iPod i wieloma innymi."
 
-#: ../libbanshee/banshee-bpmdetector.c:202 ../libbanshee/banshee-ripper.c:270
+#: ../libbanshee/banshee-bpmdetector.c:203 ../libbanshee/banshee-ripper.c:267
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:240
 msgid "Could not create pipeline"
 msgstr "Nie można utworzyć potoku"
 
-#: ../libbanshee/banshee-bpmdetector.c:208
+#: ../libbanshee/banshee-bpmdetector.c:209
 msgid "Could not create filesrc element"
 msgstr "Nie można utworzyć elementu filesrc"
 
-#: ../libbanshee/banshee-bpmdetector.c:214
-#: ../libbanshee/banshee-transcoder.c:246
-#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:187
-msgid "Could not create decodebin2 plugin"
-msgstr "Nie można utworzyć wtyczki decodebin2"
+#: ../libbanshee/banshee-bpmdetector.c:215
+#: ../libbanshee/banshee-transcoder.c:245
+msgid "Could not create decodebin plugin"
+msgstr "Nie można utworzyć wtyczki decodebin"
 
-#: ../libbanshee/banshee-bpmdetector.c:220
-#: ../libbanshee/banshee-transcoder.c:264
+#: ../libbanshee/banshee-bpmdetector.c:221
+#: ../libbanshee/banshee-transcoder.c:263
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:68
 msgid "Could not create audioconvert plugin"
 msgstr "Nie można utworzyć wtyczki audioconvert"
 
-#: ../libbanshee/banshee-bpmdetector.c:226
+#: ../libbanshee/banshee-bpmdetector.c:227
 msgid "Could not create bpmdetect plugin"
 msgstr "Nie można utworzyć wtyczki bmpdetect"
 
-#: ../libbanshee/banshee-bpmdetector.c:232
+#: ../libbanshee/banshee-bpmdetector.c:233
 msgid "Could not create fakesink plugin"
 msgstr "Nie można utworzyć wtyczki filesink"
 
-#: ../libbanshee/banshee-bpmdetector.c:241
-#: ../libbanshee/banshee-bpmdetector.c:250 ../libbanshee/banshee-ripper.c:311
+#: ../libbanshee/banshee-bpmdetector.c:242
+#: ../libbanshee/banshee-bpmdetector.c:251 ../libbanshee/banshee-ripper.c:308
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:281
 msgid "Could not link pipeline elements"
 msgstr "Nie można powiązać elementów potoku"
 
-#: ../libbanshee/banshee-ripper.c:276
+#: ../libbanshee/banshee-ripper.c:273
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:246
 msgid "Could not initialize element from cdda URI"
 msgstr "Nie można zainicjować elementu z adresem URI cdda"
 
-#: ../libbanshee/banshee-ripper.c:290
+#: ../libbanshee/banshee-ripper.c:287
 msgid "Could not create encoder pipeline"
 msgstr "Nie można utworzyć potoku kodera"
 
-#: ../libbanshee/banshee-ripper.c:296
+#: ../libbanshee/banshee-ripper.c:293
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:266
 msgid "Could not create queue plugin"
 msgstr "Nie można utworzyć wtyczki kolejki"
 
-#: ../libbanshee/banshee-ripper.c:304
+#: ../libbanshee/banshee-ripper.c:301
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:274
 msgid "Could not create filesink plugin"
 msgstr "Nie można utworzyć wtyczki filesink"
 
-#: ../libbanshee/banshee-transcoder.c:240
+#: ../libbanshee/banshee-transcoder.c:239
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:181
 msgid "Could not create source element"
 msgstr "Nie można utworzyć elementu źródłowego"
 
-#: ../libbanshee/banshee-transcoder.c:252
+#: ../libbanshee/banshee-transcoder.c:251
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:63
 msgid "Could not create sink element"
 msgstr "Nie można utworzyć elementu wyjściowego"
 
-#: ../libbanshee/banshee-transcoder.c:258
+#: ../libbanshee/banshee-transcoder.c:257
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:198
 msgid "Could not create sinkbin plugin"
 msgstr "Nie można utworzyć wtyczki sinkbin"
 
-#: ../libbanshee/banshee-transcoder.c:270
+#: ../libbanshee/banshee-transcoder.c:269
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:73
 msgid "Could not create audioresample plugin"
 msgstr "Nie można utworzyć wtyczki audioresample"
 
-#: ../libbanshee/banshee-transcoder.c:276
+#: ../libbanshee/banshee-transcoder.c:275
 msgid "Could not create encoding pipeline"
 msgstr "Nie można utworzyć potoku kodowania"
 
-#: ../libbanshee/banshee-transcoder.c:282
+#: ../libbanshee/banshee-transcoder.c:281
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:85
 msgid "Could not get sink pad from encoder"
 msgstr "Nie można uzyskać elementu sink pad z kodera"
 
-#: ../libbanshee/banshee-transcoder.c:345
+#: ../libbanshee/banshee-transcoder.c:344
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:269
 msgid "Could not construct pipeline"
 msgstr "Nie można zbudować potoku"
@@ -806,12 +805,12 @@ msgstr "Nie można zainicjować biblioteki GStreamer"
 msgid "Unknown Error"
 msgstr "Nieznany błąd"
 
-#: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/PlayerEngine.cs:883
+#: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/PlayerEngine.cs:878
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/PlayerEngine.cs:989
 msgid "_Enable ReplayGain correction"
 msgstr "_Korekcja ReplayGain"
 
-#: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/PlayerEngine.cs:884
+#: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/PlayerEngine.cs:879
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/PlayerEngine.cs:990
 msgid ""
 "For tracks that have ReplayGain data, automatically scale (normalize) "
@@ -820,11 +819,11 @@ msgstr ""
 "Automatyczne dopasowanie (normalizowanie) głośności odtwarzania dla ścieżek "
 "zawierających dane ReplayGain"
 
-#: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/PlayerEngine.cs:889
+#: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/PlayerEngine.cs:883
 msgid "Enable _gapless playback"
 msgstr "Płynne _odtwarzanie"
 
-#: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/PlayerEngine.cs:890
+#: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/PlayerEngine.cs:884
 msgid ""
 "Eliminate the small playback gap on track change. Useful for concept albums "
 "and classical music"
@@ -849,6 +848,10 @@ msgstr "GStreamer# 0.10"
 #, csharp-format
 msgid "Could not create encoding pipeline : {0}"
 msgstr "Nie można utworzyć potoku kodowania: {0}"
+
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:187
+msgid "Could not create decodebin2 plugin"
+msgstr "Nie można utworzyć wtyczki decodebin2"
 
 #. Translators: verb
 #: ../src/Backends/Banshee.Osx/Banshee.OsxBackend/OsxFileChooserDialog.cs:66
@@ -6941,7 +6944,7 @@ msgstr "Uruchom monitorowanie SQL"
 msgid "Stop SQL Monitoring"
 msgstr "Zatrzymaj monitorowanie SQL"
 
-#: ../src/Extensions/Banshee.UbuntuOneMusicStore/Banshee.UbuntuOneMusicStore/UbuntuOneMusicStoreSource.cs:133
+#: ../src/Extensions/Banshee.UbuntuOneMusicStore/Banshee.UbuntuOneMusicStore/UbuntuOneMusicStoreSource.cs:132
 msgid "Track Preview"
 msgstr "Podgląd utworu"
 
