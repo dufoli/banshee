@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: banshee\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=banshee&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-10-03 18:04+0000\n"
-"PO-Revision-Date: 2013-10-04 10:50+0200\n"
+"POT-Creation-Date: 2013-10-10 20:06+0000\n"
+"PO-Revision-Date: 2013-10-11 16:36+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -359,7 +359,7 @@ msgstr "Podpora stahování souborů BitTorrent z podcastů."
 #: ../data/addin-xml-strings.cs:163
 #: ../src/Extensions/Banshee.UbuntuOneMusicStore/Banshee.UbuntuOneMusicStore/UbuntuOneMusicStoreSource.cs:52
 #: ../src/Extensions/Banshee.UbuntuOneMusicStore/Banshee.UbuntuOneMusicStore/UbuntuOneMusicStoreSource.cs:53
-#: ../src/Extensions/Banshee.UbuntuOneMusicStore/Banshee.UbuntuOneMusicStore/UbuntuOneMusicStoreSource.cs:134
+#: ../src/Extensions/Banshee.UbuntuOneMusicStore/Banshee.UbuntuOneMusicStore/UbuntuOneMusicStoreSource.cs:133
 msgid "Ubuntu One Music Store"
 msgstr "Ubuntu One Music Store"
 
@@ -668,90 +668,89 @@ msgstr ""
 "vždy aktuálními podcasty a videopodcasty. Synchronizujte vše se svými "
 "zařízeními Android, iPod a dalšími. Věříme, že budete Banshee milovat."
 
-#: ../libbanshee/banshee-bpmdetector.c:202 ../libbanshee/banshee-ripper.c:270
+#: ../libbanshee/banshee-bpmdetector.c:203 ../libbanshee/banshee-ripper.c:267
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:240
 msgid "Could not create pipeline"
 msgstr "Nelze vytvořit rouru"
 
-#: ../libbanshee/banshee-bpmdetector.c:208
+#: ../libbanshee/banshee-bpmdetector.c:209
 msgid "Could not create filesrc element"
-msgstr "Nelze vytvořit prvek filesrc"
+msgstr "Nelze vytvořit prvek zdrojového souboru (filesrc)"
 
-#: ../libbanshee/banshee-bpmdetector.c:214
-#: ../libbanshee/banshee-transcoder.c:246
-#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:187
-msgid "Could not create decodebin2 plugin"
-msgstr "Nelze vytvořit zásuvný modul decodebin2"
+#: ../libbanshee/banshee-bpmdetector.c:215
+#: ../libbanshee/banshee-transcoder.c:245
+msgid "Could not create decodebin plugin"
+msgstr "Nelze vytvořit zásuvný modul pro dekódování (decodebin)"
 
-#: ../libbanshee/banshee-bpmdetector.c:220
-#: ../libbanshee/banshee-transcoder.c:264
+#: ../libbanshee/banshee-bpmdetector.c:221
+#: ../libbanshee/banshee-transcoder.c:263
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:68
 msgid "Could not create audioconvert plugin"
-msgstr "Nelze vytvořit zásuvný modul audioconvert"
+msgstr "Nelze vytvořit zásuvný modul pro převod zvuku (audioconvert)"
 
-#: ../libbanshee/banshee-bpmdetector.c:226
+#: ../libbanshee/banshee-bpmdetector.c:227
 msgid "Could not create bpmdetect plugin"
-msgstr "Nelze vytvořit zásuvný modul bmpdetect"
+msgstr "Nelze vytvořit zásuvný modul pro detekci tempa (bmpdetect)"
 
-#: ../libbanshee/banshee-bpmdetector.c:232
+#: ../libbanshee/banshee-bpmdetector.c:233
 msgid "Could not create fakesink plugin"
 msgstr "Nelze vytvořit zásuvný modul falešného cíle (fakesink)"
 
-#: ../libbanshee/banshee-bpmdetector.c:241
-#: ../libbanshee/banshee-bpmdetector.c:250 ../libbanshee/banshee-ripper.c:311
+#: ../libbanshee/banshee-bpmdetector.c:242
+#: ../libbanshee/banshee-bpmdetector.c:251 ../libbanshee/banshee-ripper.c:308
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:281
 msgid "Could not link pipeline elements"
 msgstr "Nelze odkazovat na prvky roury"
 
-#: ../libbanshee/banshee-ripper.c:276
+#: ../libbanshee/banshee-ripper.c:273
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:246
 msgid "Could not initialize element from cdda URI"
 msgstr "Nelze inicializovat prvek z URI cdda"
 
-#: ../libbanshee/banshee-ripper.c:290
+#: ../libbanshee/banshee-ripper.c:287
 msgid "Could not create encoder pipeline"
 msgstr "Nelze vytvořit rouru kodéru"
 
-#: ../libbanshee/banshee-ripper.c:296
+#: ../libbanshee/banshee-ripper.c:293
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:266
 msgid "Could not create queue plugin"
-msgstr "Nelze vytvořit zásuvný modul queque"
+msgstr "Nelze vytvořit zásuvný modul pro frontu (queque)"
 
-#: ../libbanshee/banshee-ripper.c:304
+#: ../libbanshee/banshee-ripper.c:301
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:274
 msgid "Could not create filesink plugin"
-msgstr "Nelze vytvořit zásuvný modul filesink"
+msgstr "Nelze vytvořit zásuvný modul pro cílový soubor (filesink)"
 
-#: ../libbanshee/banshee-transcoder.c:240
+#: ../libbanshee/banshee-transcoder.c:239
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:181
 msgid "Could not create source element"
 msgstr "Nelze vytvořit zdrojový prvek"
 
-#: ../libbanshee/banshee-transcoder.c:252
+#: ../libbanshee/banshee-transcoder.c:251
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:63
 msgid "Could not create sink element"
 msgstr "Nelze vytvořit cílový prvek"
 
-#: ../libbanshee/banshee-transcoder.c:258
+#: ../libbanshee/banshee-transcoder.c:257
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:198
 msgid "Could not create sinkbin plugin"
-msgstr "Nelze vytvořit zásuvný modul „sinkbin“"
+msgstr "Nelze vytvořit zásuvný modul pro zpracování cíle (sinkbin)"
 
-#: ../libbanshee/banshee-transcoder.c:270
+#: ../libbanshee/banshee-transcoder.c:269
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:73
 msgid "Could not create audioresample plugin"
-msgstr "Nelze vytvořit zásuvný modul „audioresample“"
+msgstr "Nelze vytvořit zásuvný modul pro převzorkování zvuku (audioresample)"
 
-#: ../libbanshee/banshee-transcoder.c:276
+#: ../libbanshee/banshee-transcoder.c:275
 msgid "Could not create encoding pipeline"
 msgstr "Nelze vytvořit kódovací rouru"
 
-#: ../libbanshee/banshee-transcoder.c:282
+#: ../libbanshee/banshee-transcoder.c:281
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:85
 msgid "Could not get sink pad from encoder"
 msgstr "Nelze získat cílový přípojný bod z kodéru"
 
-#: ../libbanshee/banshee-transcoder.c:345
+#: ../libbanshee/banshee-transcoder.c:344
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:269
 msgid "Could not construct pipeline"
 msgstr "Nelze vytvořit rouru"
@@ -800,12 +799,12 @@ msgstr "Nelze inicializovat knihovnu GStreamer"
 msgid "Unknown Error"
 msgstr "Neznámá chyba"
 
-#: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/PlayerEngine.cs:883
+#: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/PlayerEngine.cs:878
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/PlayerEngine.cs:989
 msgid "_Enable ReplayGain correction"
 msgstr "_Zapnout korekci hlasitosti ReplayGain"
 
-#: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/PlayerEngine.cs:884
+#: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/PlayerEngine.cs:879
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/PlayerEngine.cs:990
 msgid ""
 "For tracks that have ReplayGain data, automatically scale (normalize) "
@@ -814,11 +813,11 @@ msgstr ""
 "Pro stopy, které mají data ReplayGain, automaticky změnit (normalizovat) "
 "hlasitost přehrávání."
 
-#: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/PlayerEngine.cs:889
+#: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/PlayerEngine.cs:883
 msgid "Enable _gapless playback"
 msgstr "Zapnout přehrávání bez _mezer"
 
-#: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/PlayerEngine.cs:890
+#: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/PlayerEngine.cs:884
 msgid ""
 "Eliminate the small playback gap on track change. Useful for concept albums "
 "and classical music"
@@ -843,6 +842,10 @@ msgstr "GStreamer# 0.10"
 #, csharp-format
 msgid "Could not create encoding pipeline : {0}"
 msgstr "Nelze vytvořit kódovací rouru: {0}"
+
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:187
+msgid "Could not create decodebin2 plugin"
+msgstr "Nelze vytvořit zásuvný modul decodebin2"
 
 #. Translators: verb
 #: ../src/Backends/Banshee.Osx/Banshee.OsxBackend/OsxFileChooserDialog.cs:66
@@ -6910,7 +6913,7 @@ msgstr "Zapnout monitorování SQL"
 msgid "Stop SQL Monitoring"
 msgstr "Vypnout monitorování SQL"
 
-#: ../src/Extensions/Banshee.UbuntuOneMusicStore/Banshee.UbuntuOneMusicStore/UbuntuOneMusicStoreSource.cs:133
+#: ../src/Extensions/Banshee.UbuntuOneMusicStore/Banshee.UbuntuOneMusicStore/UbuntuOneMusicStoreSource.cs:132
 msgid "Track Preview"
 msgstr "Náhled stopy"
 
