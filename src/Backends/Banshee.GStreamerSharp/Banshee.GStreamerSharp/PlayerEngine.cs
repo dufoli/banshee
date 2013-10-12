@@ -299,7 +299,11 @@ namespace Banshee.GStreamerSharp
 
             public Pad RequestTeePad ()
             {
-                return audiotee.GetRequestPad ("src%d");
+                var pad = audiotee.GetRequestPad ("src_%d");
+                if (pad == null) {
+                    throw new InvalidOperationException ("Could not retrieve tee pad");
+                }
+                return pad;
             }
         }
 
