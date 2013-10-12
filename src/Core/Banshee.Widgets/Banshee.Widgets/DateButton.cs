@@ -28,7 +28,6 @@
  */
 
 using System;
-using GLib;
 using Gtk;
 
 namespace Banshee.Widgets
