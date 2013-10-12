@@ -115,7 +115,7 @@ namespace Banshee.GStreamerSharp
 
                 // Link the first tee pad to the primary audio sink queue
                 Pad sinkpad = first.GetStaticPad ("sink");
-                Pad pad = audiotee.GetRequestPad ("src%d");
+                Pad pad = RequestTeePad ();
                 audiotee.AllocPad = pad;
                 pad.Link (sinkpad);
                 first = audiotee;
