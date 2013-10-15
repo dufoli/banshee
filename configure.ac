@@ -76,7 +76,7 @@ SHAMROCK_CHECK_MONO_2_0_GAC_ASSEMBLIES([
 
 dnl In MeeGo we want the full name, but not in GNOME 3 (see bgo#596242)
 PKG_CHECK_MODULES(MEEGO_PANEL, meego-panel, HAVE_MEEGO_PANEL=yes, HAVE_MEEGO_PANEL=no)
-if "x$HAVE_MEEGO_PANEL" = "xyes"; then
+if test "x$HAVE_MEEGO_PANEL" = "xyes"; then
 	BANSHEE_DESKTOP_NAME="_Name=Banshee Media Player"
 else
 	BANSHEE_DESKTOP_NAME="_Name=Banshee"
