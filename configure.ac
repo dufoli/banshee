@@ -53,11 +53,13 @@ SHAMROCK_EXPAND_DATADIR
 
 PKG_CHECK_MODULES(GLIB, glib-2.0 >= 2.22)
 
-dnl Default media backend, libbanshee/native dependencies
-BANSHEE_CHECK_GSTREAMER
-
-dnl For the new media backend using gstreamer-sharp
+dnl For the new media backend using gstreamer# (disabled by default for now)
 BANSHEE_CHECK_GSTREAMER_SHARP
+
+if test "x$enable_gst_sharp" != "xyes"; then
+	dnl Default media backend, libbanshee/native dependencies
+	BANSHEE_CHECK_GSTREAMER
+fi
 
 BANSHEE_CHECK_NOW_PLAYING_X11
 
