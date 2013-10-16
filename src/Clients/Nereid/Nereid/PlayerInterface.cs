@@ -158,6 +158,9 @@ namespace Nereid
         protected override void Dispose (bool disposing)
         {
             lock (this) {
+                ServiceManager.SourceManager.ActiveSourceChanged -= OnActiveSourceChanged;
+                ServiceManager.SourceManager.SourceUpdated -= OnSourceUpdated;
+
                 if (disposing) {
                     Hide ();
                 }
