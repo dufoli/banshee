@@ -93,4 +93,36 @@
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
+  <ItemGroup>
+    <None Include="libbanshee\banshee-bpmdetector.c" />
+    <None Include="libbanshee\banshee-gst.c" />
+    <None Include="libbanshee\banshee-player.c" />
+    <None Include="libbanshee\banshee-player-cdda.c" />
+    <None Include="libbanshee\banshee-player-cdda.h" />
+    <None Include="libbanshee\banshee-gst.h" />
+    <None Include="libbanshee\banshee-player-dvd.c" />
+    <None Include="libbanshee\banshee-player-dvd.h" />
+    <None Include="libbanshee\banshee-player-equalizer.c" />
+    <None Include="libbanshee\banshee-player-equalizer.h" />
+    <None Include="libbanshee\banshee-player-missing-elements.c" />
+    <None Include="libbanshee\banshee-player-missing-elements.h" />
+    <None Include="libbanshee\banshee-player-pipeline.c" />
+    <None Include="libbanshee\banshee-player-pipeline.h" />
+    <None Include="libbanshee\banshee-player-private.h" />
+    <None Include="libbanshee\banshee-player-replaygain.c" />
+    <None Include="libbanshee\banshee-player-replaygain.h" />
+    <None Include="libbanshee\banshee-player-video.c" />
+    <None Include="libbanshee\banshee-player-video.h" />
+    <None Include="libbanshee\banshee-player-vis.c" />
+    <None Include="libbanshee\banshee-player-vis.h" />
+    <None Include="libbanshee\banshee-ripper.c" />
+    <None Include="libbanshee\banshee-tagger.c" />
+    <None Include="libbanshee\banshee-tagger.h" />
+    <None Include="libbanshee\banshee-transcoder.c" />
+    <None Include="libbanshee\clutter-gst-shaders.h" />
+    <None Include="libbanshee\clutter-gst-video-sink.c" />
+    <None Include="libbanshee\clutter-gst-video-sink.h" />
+    <None Include="libbanshee\shaders\I420.h" />
+    <None Include="libbanshee\shaders\YV12.h" />
+  </ItemGroup>
 </Project>

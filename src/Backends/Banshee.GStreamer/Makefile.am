@@ -1,3 +1,5 @@
+SUBDIRS = libbanshee
+
 ASSEMBLY = Banshee.GStreamer
 TARGET = library
 LINK = $(REF_BACKEND_GSTREAMER)

@@ -53,8 +53,7 @@ SHAMROCK_EXPAND_DATADIR
 
 PKG_CHECK_MODULES(GLIB, glib-2.0 >= 2.22)
 
-dnl libbanshee/native dependencies (required)
-BANSHEE_CHECK_LIBBANSHEE
+dnl Default media backend, libbanshee/native dependencies
 BANSHEE_CHECK_GSTREAMER
 
 dnl For the new media backend using gstreamer-sharp
@@ -245,8 +244,6 @@ tests/Performance/Makefile
 
 extras/Makefile
 
-libbanshee/Makefile
-
 src/Hyena/Makefile
 src/Hyena/build/Makefile
 src/Hyena/build/pkg-config/Makefile
@@ -281,6 +278,7 @@ src/Backends/Makefile
 src/Backends/Banshee.Gio/Makefile
 src/Backends/Banshee.Gnome/Makefile
 src/Backends/Banshee.GStreamer/Makefile
+src/Backends/Banshee.GStreamer/libbanshee/Makefile
 src/Backends/Banshee.GStreamerSharp/Makefile
 src/Backends/Banshee.Unix/Makefile
 src/Backends/Banshee.Osx/Makefile

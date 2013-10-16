@@ -2,7 +2,6 @@ SUBDIRS = \
 	build \
 	data \
 	help \
-	libbanshee \
 	src \
 	docs \
 	tests \
