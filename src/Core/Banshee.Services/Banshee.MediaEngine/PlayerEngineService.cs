@@ -683,7 +683,12 @@ namespace Banshee.MediaEngine
         }
 
         public PlayerState CurrentState {
-            get { return synthesized_contacting_track != null ? PlayerState.Contacting : active_engine.CurrentState; }
+            get {
+                if (active_engine == null) {
+                    return PlayerState.NotReady;
+                }
+                return synthesized_contacting_track != null ? PlayerState.Contacting : active_engine.CurrentState;
+            }
         }
 
         string IPlayerEngineService.CurrentState {
