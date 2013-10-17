@@ -46,6 +46,12 @@ test:
 		fi; \
 	done;
 
+else
+
+test:
+	echo "Please enable tests via --enable-tests at configuration"
+	exit 1
+
 endif
 
 MAINTAINERCLEANFILES = Makefile.in
