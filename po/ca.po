@@ -178,12 +178,12 @@ msgstr "Botiga eMusic"
 
 #: ../data/addin-xml-strings.cs:64
 msgid "Browse, search, and purchase music and audiobooks from eMusic"
-msgstr "Navegueu, cerqueu i compreu música i audiollibres des de la d'eMusic"
+msgstr "Navegueu, cerqueu i compreu música i audiollibres d'eMusic"
 
 #. ../src/Extensions/Banshee.Emusic/Banshee.Emusic.addin.xml
 #: ../data/addin-xml-strings.cs:68
 msgid "eMusic Import"
-msgstr "Importació eMusic"
+msgstr "Importació d'eMusic"
 
 #: ../data/addin-xml-strings.cs:69
 msgid "Download and import music purchased from eMusic."
@@ -551,8 +551,8 @@ msgid ""
 "Vorbis is an open source, lossy audio codec with high quality output at a "
 "lower file size than MP3."
 msgstr ""
-"El Vorbis és un còdec d'àudio amb pèrdua, de codi obert, que ofereix una "
-"qualitat de sortida alta amb una mida de fitxer més petita que l'MP3."
+"El Vorbis és un còdec d'àudio amb pèrdua, de codi obert, que ofereix una gran "
+"qualitat de sortida amb una mida de fitxer menor que l'MP3."
 
 #
 #: ../data/audio-profiles/vorbis.xml.in.h:3
@@ -1169,7 +1169,7 @@ msgstr "Amaga la interfície d'usuari"
 #: ../src/Clients/Booter/Booter/Entry.cs:207
 msgid "Do not present the user interface, regardless of any other options"
 msgstr ""
-"No presentis la interfície d'usuari, independentment de qualsevol altre opció"
+"No presentis la interfície d'usuari, independentment de qualsevol altra opció"
 
 #: ../src/Clients/Booter/Booter/Entry.cs:208
 msgid "Present the import media dialog box"
@@ -4243,10 +4243,11 @@ msgid "Advanced"
 msgstr "Avançat"
 
 # N.T.: Molt millor amb cometes ja que és un acció que està en majúscules
+# N.T.: Títol d'una caixa de diàleg
 #: ../src/Core/Banshee.ThickClient/Banshee.MediaProfiles.Gui/ProfileConfigurationDialog.cs:175
 #, csharp-format
 msgid "Configuring {0}"
-msgstr "S'està configurant «{0}»"
+msgstr "Configurant «{0}»"
 
 #: ../src/Core/Banshee.ThickClient/Banshee.Playlist.Gui/PlaylistExportDialog.cs:20
 msgid "Export Playlist"
