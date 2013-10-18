@@ -283,7 +283,8 @@ namespace Banshee.Hardware.Osx.LowLevel
 
         // we need to map the volumeUrl's to pathes
         // like file://localhost/Volumes/Mountpoint -> /Volumes/MountPoint
-        public static string UrlToFileSystemPath (string url, uint mode = 0) {
+        public static string UrlToFileSystemPath (string url, uint mode)
+        {
             if (url == null) {
                 throw new ArgumentException ("url cannot be null");
             }
@@ -293,6 +294,11 @@ namespace Banshee.Hardware.Osx.LowLevel
                 NSString path = new NSString (CoreFoundation.CFURLCopyFileSystemPath (nsurl.Handle, mode));
                 return path.ToString ();
             }
+        }
+
+        public static string UrlToFileSystemPath (string url)
+        {
+            return UrlToFileSystemPath (url, 0);
         }
 
         /// <summary>
