@@ -99,11 +99,7 @@ namespace Booter
             } else if (ApplicationContext.CommandLine.Contains ("client")) {
                 BootClient (Path.GetFileNameWithoutExtension (ApplicationContext.CommandLine["client"]));
             } else {
-                if (PlatformDetection.IsMeeGo) {
-                    BootClient ("MeeGo");
-                } else {
-                    BootClient ("Nereid");
-                }
+                BootClient ("Nereid");
             }
         }
 

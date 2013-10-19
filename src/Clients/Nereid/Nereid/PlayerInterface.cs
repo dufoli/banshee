@@ -115,9 +115,6 @@ namespace Nereid
             base (Catalog.GetString ("Banshee Media Player"),
                   new WindowConfiguration (WidthSchema, HeightSchema, XPosSchema, YPosSchema, MaximizedSchema))
         {
-            // if (PlatformDetection.IsMeeGo) {
-            //     Gdk.Window.AddFilterForAll (OnGdkEventFilter);
-            // }
         }
 
         protected override void Initialize ()
@@ -136,11 +133,6 @@ namespace Nereid
 
             interface_constructed = true;
             uint timer = Log.DebugTimerStart ();
-
-            if (PlatformDetection.IsMeeGo) {
-                Decorated = false;
-                Maximize ();
-            }
 
             BuildPrimaryLayout ();
             ConnectEvents ();
@@ -217,7 +209,7 @@ namespace Nereid
 
             main_menu = new MainMenu ();
 
-            if (!PlatformDetection.IsMac && !PlatformDetection.IsMeeGo) {
+            if (!PlatformDetection.IsMac) {
                 main_menu.Show ();
                 header_table.Attach (main_menu, 0, 1, 0, 1,
                     AttachOptions.Expand | AttachOptions.Fill,
@@ -225,18 +217,13 @@ namespace Nereid
             }
 
             Alignment toolbar_alignment = new Alignment (0.0f, 0.0f, 1.0f, 1.0f);
-            toolbar_alignment.TopPadding = PlatformDetection.IsMeeGo ? 0u : 3u;
-            toolbar_alignment.BottomPadding = PlatformDetection.IsMeeGo ? 0u : 3u;
+            toolbar_alignment.TopPadding = 3u;
+            toolbar_alignment.BottomPadding = 3u;
 
             header_toolbar = (Toolbar)ActionService.UIManager.GetWidget ("/HeaderToolbar");
             header_toolbar.ShowArrow = false;
             header_toolbar.ToolbarStyle = ToolbarStyle.BothHoriz;
             header_toolbar.Show ();
-
-            if (PlatformDetection.IsMeeGo) {
-                header_toolbar.IconSize = IconSize.LargeToolbar;
-                header_toolbar.Name = "meego-toolbar";
-            }
 
             toolbar_alignment.Add (header_toolbar);
             toolbar_alignment.Show ();
@@ -245,7 +232,7 @@ namespace Nereid
                 AttachOptions.Expand | AttachOptions.Fill,
                 AttachOptions.Shrink, 0, 0);
 
-            var next_button = new NextButton (ActionService, PlatformDetection.IsMeeGo);
+            var next_button = new NextButton (ActionService);
             next_button.Show ();
             ActionService.PopulateToolbarPlaceholder (header_toolbar, "/HeaderToolbar/NextArrowButton", next_button);
 
@@ -263,35 +250,9 @@ namespace Nereid
             track_info_container.Show ();
             ActionService.PopulateToolbarPlaceholder (header_toolbar, "/HeaderToolbar/TrackInfoDisplay", track_info_container, true);
 
-            if (PlatformDetection.IsMeeGo) {
-                track_info_display.ArtworkSpacing = 5;
-                seek_slider.LeftPadding = 20;
-                seek_slider.RightPadding = 20;
-
-                var menu = (Menu)(ActionService.UIManager.GetWidget ("/ToolbarMenu"));
-                var menu_button = new Hyena.Widgets.MenuButton (new Image (Stock.Preferences, IconSize.LargeToolbar), menu, true);
-                menu_button.Show ();
-                ActionService.PopulateToolbarPlaceholder (header_toolbar, "/HeaderToolbar/ToolbarMenuPlaceholder", menu_button);
-
-                var close_button = new Button (Image.NewFromIconName ("window-close", IconSize.LargeToolbar)) {
-                    TooltipText = Catalog.GetString ("Close")
-                };
-
-                close_button.Clicked += (o, e) => {
-                    if (ServiceManager.PlayerEngine.IsPlaying () &&
-                       (ServiceManager.PlayerEngine.CurrentState != PlayerState.Paused)  &&
-                        ServiceManager.PlayerEngine.CurrentTrack.HasAttribute (TrackMediaAttributes.VideoStream)) {
-                        ServiceManager.PlayerEngine.Pause ();
-                    }
-                    Hide ();
-                };
-                close_button.ShowAll ();
-                ActionService.PopulateToolbarPlaceholder (header_toolbar, "/HeaderToolbar/ClosePlaceholder", close_button);
-            } else {
-                var volume_button = new ConnectedVolumeButton ();
-                volume_button.Show ();
-                ActionService.PopulateToolbarPlaceholder (header_toolbar, "/HeaderToolbar/VolumeButton", volume_button);
-            }
+            var volume_button = new ConnectedVolumeButton ();
+            volume_button.Show ();
+            ActionService.PopulateToolbarPlaceholder (header_toolbar, "/HeaderToolbar/VolumeButton", volume_button);
         }
 
         private void BuildViews ()
@@ -306,28 +267,15 @@ namespace Nereid
             composite_view = new CompositeTrackSourceContents ();
 
             Container source_scroll;
-            if (PlatformDetection.IsMeeGo) {
-                source_scroll = new Gtk.ScrolledWindow () {
-                    HscrollbarPolicy = PolicyType.Never,
-                    VscrollbarPolicy = PolicyType.Automatic,
-                    ShadowType = ShadowType.None
-                };
-                source_scroll.Add (source_view);
-
-                var color = new Gdk.RGBA ();
-                color.Parse ("e6e6e6");
-                source_view.OverrideBackgroundColor (StateFlags.Normal, color);
+            Hyena.Widgets.ScrolledWindow window;
+            if (ApplicationContext.CommandLine.Contains ("smooth-scroll")) {
+                window = new Hyena.Widgets.SmoothScrolledWindow ();
             } else {
-                Hyena.Widgets.ScrolledWindow window;
-                if (ApplicationContext.CommandLine.Contains ("smooth-scroll")) {
-                    window = new Hyena.Widgets.SmoothScrolledWindow ();
-                } else {
-                    window = new Hyena.Widgets.ScrolledWindow ();
-                }
-
-                window.AddWithFrame (source_view);
-                source_scroll = window;
+                window = new Hyena.Widgets.ScrolledWindow ();
             }
+
+            window.AddWithFrame (source_view);
+            source_scroll = window;
 
             composite_view.TrackView.HeaderVisible = false;
             view_container.Content = composite_view;
@@ -376,10 +324,6 @@ namespace Nereid
 
         private void BuildFooter ()
         {
-            if (PlatformDetection.IsMeeGo) {
-                return;
-            }
-
             footer_toolbar = new HBox () { BorderWidth = 2 };
 
             task_status = new Banshee.Gui.Widgets.TaskStatusIcon ();

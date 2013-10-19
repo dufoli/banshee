@@ -68,11 +68,6 @@ namespace Nereid
                 NoShowAll = true
             };
 
-            if (Hyena.PlatformDetection.IsMeeGo) {
-                source_actions_align.RightPadding = 5;
-                source_actions_align.TopPadding = 5;
-            }
-
             footer = new VBox ();
 
             source_actions_box = new EventBox () { Visible = true };
