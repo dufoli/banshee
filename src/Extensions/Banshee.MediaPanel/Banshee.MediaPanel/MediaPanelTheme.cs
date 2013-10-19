@@ -54,7 +54,7 @@ namespace Banshee.MediaPanel
 
         public override void PushContext ()
         {
-            IsPanelWidget = Widget != null && Widget.Name.StartsWith ("meego-panel");
+            IsPanelWidget = Widget != null && Widget.Name.StartsWith ("media-panel");
             IsSourceViewWidget = Widget is Banshee.Sources.Gui.SourceView;
             IsRoundedFrameWidget = Widget is Hyena.Widgets.RoundedFrame;
 
