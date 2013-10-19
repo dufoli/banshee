@@ -108,12 +108,6 @@ namespace Banshee.MediaPanel
                 elements_service.PrimaryWindow.Hide ();
                 return true;
             };
-
-            // Since the Panel is running, we don't actually ever want to quit!
-            Banshee.ServiceStack.Application.ShutdownRequested += () => {
-                elements_service.PrimaryWindow.Hide ();
-                return false;
-            };
         }
 
         public void PresentPrimaryInterface ()
