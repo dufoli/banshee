@@ -61,8 +61,6 @@ if test "x$enable_gst_sharp" != "xyes"; then
 	BANSHEE_CHECK_GSTREAMER
 fi
 
-BANSHEE_CHECK_NOW_PLAYING_X11
-
 dnl User help
 SHAMROCK_CHECK_GNOME_DOC_UTILS(0.17.3)
 
@@ -361,7 +359,6 @@ ${PACKAGE}-${VERSION}
 
   Video/Graphics:
     Graphics System:       ${GRAPHICS_SUBSYSTEM}
-    X11 Video:             ${have_xvidmode}
     Clutter:               ${enable_clutter}
 
   Operating System/Desktop Environment:

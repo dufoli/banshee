@@ -3,7 +3,6 @@ SUBDIRS = \
 	Banshee.Gnome \
 	$(PLAYBACK_BACKEND) \
 	Banshee.Unix \
-	Banshee.NowPlaying.X11 \
 	Banshee.Osx \
 	Banshee.Windows
 
