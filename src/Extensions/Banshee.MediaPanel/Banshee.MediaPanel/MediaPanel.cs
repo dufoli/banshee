@@ -63,7 +63,7 @@ namespace Banshee.MediaPanel
             var timer = Log.DebugTimerStart ();
             Contents = new MediaPanelContents ();
             Contents.ShowAll ();
-            Log.DebugTimerPrint (timer, "MeeGo panel contents created: {0}");
+            Log.DebugTimerPrint (timer, "Media panel contents created: {0}");
 
             if (window_panel != null) {
                 window_panel.Add (Contents);

@@ -23,7 +23,7 @@ internal static class AddinXmlStringCatalog
         var paths = new List<string> (args);
         paths.Sort ();
 
-        var blacklist = new string [] { "GStreamer", "Gnome", "Osx", "Unix", "MeeGo", "Gio", "NowPlaying",
+        var blacklist = new string [] { "GStreamer", "Gnome", "Osx", "Unix", "Gio", "NowPlaying",
             "Hal", "src/Core", "Banshee.Dap/", "RemoteAudio", "Sample", "SqlDebugConsole", "Template", "Windows" };
 
         foreach (var path in paths) {

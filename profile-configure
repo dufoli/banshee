@@ -14,15 +14,6 @@ profiles=(
 		--disable-gio-hardware
 		--disable-gio
 	"
-	"meego
-		--enable-meego
-		--disable-daap
-		--disable-webkit
-		--disable-youtube
-		--disable-boo
-		--disable-ipod
-		--disable-docs
-	"
 )
 
 selected_profile=$1; shift
