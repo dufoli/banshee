@@ -282,8 +282,6 @@ src/Backends/Banshee.GStreamer/libbanshee/Makefile
 src/Backends/Banshee.GStreamerSharp/Makefile
 src/Backends/Banshee.Unix/Makefile
 src/Backends/Banshee.Osx/Makefile
-src/Backends/Banshee.NowPlaying.X11/Makefile
-src/Backends/Banshee.NowPlaying.X11/libbnpx11/Makefile
 src/Backends/Banshee.Windows/Makefile
 
 src/Libraries/Makefile
@@ -358,7 +356,6 @@ ${PACKAGE}-${VERSION}
     Gtk#:                  ${gtk_sharp_version}
 
   Video/Graphics:
-    Graphics System:       ${GRAPHICS_SUBSYSTEM}
     Clutter:               ${enable_clutter}
 
   Operating System/Desktop Environment:
