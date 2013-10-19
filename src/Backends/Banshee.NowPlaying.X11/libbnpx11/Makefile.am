@@ -5,7 +5,7 @@ bnpx11dir = $(pkglibdir)/Backends
 bnpx11_LTLIBRARIES = libbnpx11.la
 
 libbnpx11_la_SOURCES = $(SOURCES)
-libbnpx11_la_CFLAGS = $(BNPX_CFLAGS) $(BNPX_GTK_CFLAGS)
+libbnpx11_la_CFLAGS = $(BNPX_CFLAGS) $(BNPX_GTK_CFLAGS) -Wall
 libbnpx11_la_LIBADD = $(BNPX_LIBS) $(BNPX_GTK_LIBS) -lX11 -lXxf86vm -lXrandr
 libbnpx11_la_LDFLAGS = -avoid-version -module
 

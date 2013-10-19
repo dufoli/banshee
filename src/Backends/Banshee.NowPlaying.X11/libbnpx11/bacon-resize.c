@@ -165,7 +165,7 @@ set_video_widget (BaconResize *resize, GtkWidget *video_widget)
 	int event_basep, error_basep;
 	XRRScreenConfiguration *xr_screen_conf;
 #endif
-	g_return_if_fail (GTK_WIDGET_REALIZED (video_widget));
+	g_return_if_fail (gtk_widget_get_realized (video_widget));
 
 	resize->priv->video_widget = video_widget;
 
@@ -185,7 +185,7 @@ set_video_widget (BaconResize *resize, GtkWidget *video_widget)
 		goto bail;
 
 	/* We don't use the output here, checking whether XRRGetScreenInfo works */
-	xr_screen_conf = XRRGetScreenInfo (GDK_DISPLAY_XDISPLAY (display), GDK_WINDOW_XWINDOW (gdk_screen_get_root_window (screen)));
+	xr_screen_conf = XRRGetScreenInfo (GDK_DISPLAY_XDISPLAY (display), GDK_WINDOW_XID (gdk_screen_get_root_window (screen)));
 	if (xr_screen_conf == NULL)
 		goto bail;
  
@@ -223,7 +223,7 @@ bacon_resize_resize (BaconResize *resize)
 	Display *Display;
 
 	g_return_if_fail (GTK_IS_WIDGET (resize->priv->video_widget));
-	g_return_if_fail (GTK_WIDGET_REALIZED (resize->priv->video_widget));
+	g_return_if_fail (gtk_widget_get_realized (resize->priv->video_widget));
 
 	Display = GDK_WINDOW_XDISPLAY (gtk_widget_get_window (resize->priv->video_widget));
 	if (Display == NULL)
@@ -252,7 +252,7 @@ bacon_resize_resize (BaconResize *resize)
 	gdk_error_trap_push ();
 
 	/* Find the XRandR mode that corresponds to the real size */
-	resize->priv->xr_screen_conf = XRRGetScreenInfo (Display, GDK_WINDOW_XWINDOW (root));
+	resize->priv->xr_screen_conf = XRRGetScreenInfo (Display, GDK_WINDOW_XID (root));
 	xr_sizes = XRRConfigSizes (resize->priv->xr_screen_conf, &xr_nsize);
 	resize->priv->xr_original_size = XRRConfigCurrentConfiguration (resize->priv->xr_screen_conf, &(resize->priv->xr_current_rotation));
 	if (gdk_error_trap_pop ()) {
@@ -273,7 +273,7 @@ bacon_resize_resize (BaconResize *resize)
 	gdk_error_trap_push ();
 	XRRSetScreenConfig (Display,
 			resize->priv->xr_screen_conf,
-			GDK_WINDOW_XWINDOW (root),
+			GDK_WINDOW_XID (root),
 			(SizeID) i,
 			resize->priv->xr_current_rotation,
 			CurrentTime);
@@ -299,7 +299,7 @@ bacon_resize_restore (BaconResize *resize)
 	Display *Display;
 
 	g_return_if_fail (GTK_IS_WIDGET (resize->priv->video_widget));
-	g_return_if_fail (GTK_WIDGET_REALIZED (resize->priv->video_widget));
+	g_return_if_fail (gtk_widget_get_realized (resize->priv->video_widget));
 
 	/* We haven't called bacon_resize_resize before, or it exited
 	 * as we didn't need a resize. */
@@ -328,7 +328,7 @@ bacon_resize_restore (BaconResize *resize)
 	gdk_error_trap_push ();
 	XRRSetScreenConfig (Display,
 			resize->priv->xr_screen_conf,
-			GDK_WINDOW_XWINDOW (root),
+			GDK_WINDOW_XID (root),
 			resize->priv->xr_original_size,
 			resize->priv->xr_current_rotation,
 			CurrentTime);
