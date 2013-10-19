@@ -46,7 +46,7 @@ using Banshee.Gui.Widgets;
 
 namespace Banshee.MediaPanel
 {
-    public class MediaPanelContents : Table, ITrackModelSourceContents
+    public class MediaPanelContents : Grid, ITrackModelSourceContents
     {
         private ArtistListView artist_view;
         private AlbumListView album_view;
@@ -63,7 +63,7 @@ namespace Banshee.MediaPanel
         {
         }
 
-        public MediaPanelContents () : base (2, 2, false)
+        public MediaPanelContents () : base ()
         {
             BorderWidth = 5;
             RowSpacing = 6;
@@ -71,7 +71,6 @@ namespace Banshee.MediaPanel
             RedrawOnAllocate = true;
             AppPaintable = true;
 
-            BuildHeader ();
             BuildLibrary ();
             BuildNowPlaying ();
             ConnectEvents ();
@@ -102,19 +101,6 @@ namespace Banshee.MediaPanel
 
 #region UI Construction
 
-        private void BuildHeader ()
-        {
-            Attach (new Label {
-                    Markup = String.Format ("<span font_desc=\"Droid Sans Bold\" " +
-                        "size=\"x-large\" foreground=\"#606eff\">{0}</span>",
-                        GLib.Markup.EscapeText (Catalog.GetString ("Media"))),
-                    Xalign = 0.0f
-                },
-                0, 2, 0, 1,
-                AttachOptions.Fill | AttachOptions.Expand,
-                AttachOptions.Shrink, 12, 0);
-        }
-
         private void BuildLibrary ()
         {
             var box = new HeaderBox () { Title = Catalog.GetString ("Library") };
@@ -144,20 +130,19 @@ namespace Banshee.MediaPanel
             // Build the Library Views
             var views = new HBox () { Spacing = 5 };
             views.PackStart (SetupView (artist_view = new ArtistListView () {
-                    Name = "meego-panel-artists",
+                    Name = "media-panel-artists",
                     WidthRequest = 150,
                     DoNotRenderNullModel = true
                 }), false, false, 0);
             views.PackStart (SetupView (album_view = new AlbumListView () {
-                    Name = "meego-panel-albums",
+                    Name = "media-panel-albums",
                     DoNotRenderNullModel = true
                 }), true, true, 0);
             box.PackStart (views, true, true, 0);
+            box.Hexpand = box.Vexpand = true;
+            box.Halign = box.Valign = Align.Fill;
 
-            Attach (box, 0, 1, 1, 2,
-                AttachOptions.Expand | AttachOptions.Fill,
-                AttachOptions.Expand | AttachOptions.Fill,
-                0, 0);
+            Attach (box, 0, 0, 1, 1);
         }
 
         private void BuildNowPlaying ()
@@ -173,7 +158,7 @@ namespace Banshee.MediaPanel
             };
 
             track_view = new TerseTrackListView () {
-                Name = "meego-panel-tracks",
+                Name = "media-panel-tracks",
                 WidthRequest = 220
             };
             track_view.ColumnController.Insert (new Column (null, "indicator",
@@ -183,11 +168,10 @@ namespace Banshee.MediaPanel
             box.PackStartHighlighted (seek_slider, false, false, 0, HeaderBox.HighlightFlags.Background);
             box.PackStart (SetupView (track_view), true, true, 0);
             box.PackStartHighlighted (new PlaybackBox (), false, false, 0, HeaderBox.HighlightFlags.TopLine);
+            box.Vexpand = true;
+            box.Valign = Align.Fill;
 
-            Attach (box, 1, 2, 1, 2,
-                AttachOptions.Shrink,
-                AttachOptions.Expand | AttachOptions.Fill,
-                0, 0);
+            Attach (box, 1, 0, 1, 1);
         }
 
         private ScrolledWindow SetupView (Widget view)
@@ -199,33 +183,6 @@ namespace Banshee.MediaPanel
             };
             scrolled.Add (view);
             return scrolled;
-        }
-
-#endregion
-
-#region Background Rendering
-
-        protected override bool OnDrawn (Cairo.Context cr)
-        {
-            if (!Visible || !IsMapped) {
-                return true;
-            }
-
-            RenderBackground (cr);
-            base.OnDrawn (cr);
-
-            return true;
-        }
-
-        private void RenderBackground (Cairo.Context cr)
-        {
-            var grad = new Cairo.LinearGradient (0, 0, 0, Allocation.Height);
-            grad.AddColorStop (0, CairoExtensions.RgbToColor (0xffffff));
-            grad.AddColorStop (1, CairoExtensions.RgbToColor (0xc3c3c3));
-            cr.SetSource (grad);
-            cr.Rectangle (0, 0, Allocation.Width, Allocation.Height);
-            cr.Fill ();
-            grad.Dispose ();
         }
 
 #endregion
