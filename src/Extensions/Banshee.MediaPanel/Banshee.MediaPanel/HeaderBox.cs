@@ -112,9 +112,7 @@ namespace Banshee.MediaPanel
         private void RenderBackground (Cairo.Context cr)
         {
             // Box background
-            CairoExtensions.RoundedRectangle (cr,
-                Allocation.X,
-                Allocation.Y,
+            CairoExtensions.RoundedRectangle (cr, 0, 0,
                 Allocation.Width,
                 Allocation.Height,
                 3);
@@ -124,8 +122,8 @@ namespace Banshee.MediaPanel
             // Box border
             cr.LineWidth = 1.0;
             CairoExtensions.RoundedRectangle (cr,
-                Allocation.X + 0.5,
-                Allocation.Y + 0.5,
+                0.5,
+                0.5,
                 Allocation.Width - 1,
                 Allocation.Height - 1,
                 3);
@@ -133,9 +131,7 @@ namespace Banshee.MediaPanel
             cr.Stroke ();
 
             // Box header background
-            CairoExtensions.RoundedRectangle (cr,
-                Allocation.X + 3,
-                Allocation.Y + 3,
+            CairoExtensions.RoundedRectangle (cr, 3, 3,
                 Allocation.Width - 6,
                 header.Allocation.Height + 3,
                 2, CairoCorners.TopLeft | CairoCorners.TopRight);
@@ -152,9 +148,8 @@ namespace Banshee.MediaPanel
                 }
 
                 if ((flags & HighlightFlags.Background) != 0) {
-                    cr.Rectangle (
-                        Allocation.X + 3,
-                        widget.Allocation.Y - Spacing + 2,
+                    cr.Rectangle (3,
+                        widget.Allocation.Y - Allocation.Y - Spacing + 2,
                         Allocation.Width - 6,
                         widget.Allocation.Height + Spacing + 2);
                     cr.SetSourceColor (CairoExtensions.RgbToColor (0xf6f6f6));
@@ -165,22 +160,15 @@ namespace Banshee.MediaPanel
                 cr.SetSourceColor (CairoExtensions.RgbToColor (0x8f8f8f));
 
                 if ((flags & HighlightFlags.TopLine) != 0) {
-                    cr.MoveTo (
-                        Allocation.X + 0.5,
-                        widget.Allocation.Y + 0.5);
-                    cr.LineTo (
-                        Allocation.X + Allocation.Width - 1,
-                        widget.Allocation.Y + 0.5);
+                    double y = widget.Allocation.Y - Allocation.Y + 0.5;
+                    cr.MoveTo (0.5, y);
+                    cr.LineTo (Allocation.Width - 1, y);
                     cr.Stroke ();
                 }
 
                 if ((flags & HighlightFlags.BottomLine) != 0) {
-                    cr.MoveTo (
-                        Allocation.X + 0.5,
-                        widget.Allocation.Y + widget.Allocation.Height + 0.5);
-                    cr.LineTo (
-                        Allocation.X + Allocation.Width - 1,
-                        widget.Allocation.Y + widget.Allocation.Height + 0.5);
+                    cr.MoveTo (0.5, widget.Allocation.Y - Allocation.Y + widget.Allocation.Height + 0.5);
+                    cr.LineTo (Allocation.Width - 1, widget.Allocation.Y - Allocation.Y + widget.Allocation.Height + 0.5);
                     cr.Stroke ();
                 }
             }
