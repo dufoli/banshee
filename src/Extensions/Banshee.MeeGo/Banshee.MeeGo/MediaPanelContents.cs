@@ -205,42 +205,27 @@ namespace Banshee.MeeGo
 
 #region Background Rendering
 
-        protected override void OnParentSet (Widget previous)
-        {
-            base.OnParentSet (previous);
-
-            if (Parent != null) {
-                Parent.ModifyBg (StateType.Normal, Style.White);
-            }
-        }
-
-        protected override bool OnExposeEvent (Gdk.EventExpose evnt)
+        protected override bool OnDrawn (Cairo.Context cr)
         {
             if (!Visible || !IsMapped) {
                 return true;
             }
 
-            RenderBackground (evnt.Window, evnt.Region);
-            foreach (var child in Children) {
-                PropagateExpose (child, evnt);
-            }
+            RenderBackground (cr);
+            base.OnDrawn (cr);
 
             return true;
         }
 
-        private void RenderBackground (Gdk.Window window, Gdk.Region region)
+        private void RenderBackground (Cairo.Context cr)
         {
-            var cr = Gdk.CairoHelper.Create (window);
-
             var grad = new Cairo.LinearGradient (0, 0, 0, Allocation.Height);
             grad.AddColorStop (0, CairoExtensions.RgbToColor (0xffffff));
             grad.AddColorStop (1, CairoExtensions.RgbToColor (0xc3c3c3));
-            cr.Pattern = grad;
+            cr.SetSource (grad);
             cr.Rectangle (0, 0, Allocation.Width, Allocation.Height);
             cr.Fill ();
-            grad.Destroy ();
-
-            CairoExtensions.DisposeContext (cr);
+            grad.Dispose ();
         }
 
 #endregion

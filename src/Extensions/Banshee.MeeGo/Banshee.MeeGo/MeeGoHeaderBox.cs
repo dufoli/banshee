@@ -97,24 +97,20 @@ namespace Banshee.MeeGo
             }
         }
 
-        protected override bool OnExposeEvent (Gdk.EventExpose evnt)
+        protected override bool OnDrawn (Cairo.Context cr)
         {
             if (!Visible || !IsMapped) {
                 return true;
             }
 
-            RenderBackground (evnt.Window, evnt.Region);
-            foreach (var child in Children) {
-                PropagateExpose (child, evnt);
-            }
+            RenderBackground (cr);
+            base.OnDrawn (cr);
 
             return true;
         }
 
-        private void RenderBackground (Gdk.Window window, Gdk.Region region)
+        private void RenderBackground (Cairo.Context cr)
         {
-            var cr = Gdk.CairoHelper.Create (window);
-
             // Box background
             CairoExtensions.RoundedRectangle (cr,
                 Allocation.X,
@@ -122,7 +118,7 @@ namespace Banshee.MeeGo
                 Allocation.Width,
                 Allocation.Height,
                 3);
-            cr.Color = CairoExtensions.RgbToColor (0xf9f9f9);
+            cr.SetSourceColor (CairoExtensions.RgbToColor (0xf9f9f9));
             cr.Fill ();
 
             // Box border
@@ -133,7 +129,7 @@ namespace Banshee.MeeGo
                 Allocation.Width - 1,
                 Allocation.Height - 1,
                 3);
-            cr.Color = CairoExtensions.RgbToColor (0x8f8f8f);
+            cr.SetSourceColor (CairoExtensions.RgbToColor (0x8f8f8f));
             cr.Stroke ();
 
             // Box header background
@@ -143,7 +139,7 @@ namespace Banshee.MeeGo
                 Allocation.Width - 6,
                 header.Allocation.Height + 3,
                 2, CairoCorners.TopLeft | CairoCorners.TopRight);
-            cr.Color = CairoExtensions.RgbToColor (0xd7d9d6);
+            cr.SetSourceColor (CairoExtensions.RgbToColor (0xd7d9d6));
             cr.Fill ();
 
             // Highlight children
@@ -161,12 +157,12 @@ namespace Banshee.MeeGo
                         widget.Allocation.Y - Spacing + 2,
                         Allocation.Width - 6,
                         widget.Allocation.Height + Spacing + 2);
-                    cr.Color = CairoExtensions.RgbToColor (0xf6f6f6);
+                    cr.SetSourceColor (CairoExtensions.RgbToColor (0xf6f6f6));
                     cr.Fill ();
                 }
 
                 cr.LineWidth = 1;
-                cr.Color = CairoExtensions.RgbToColor (0x8f8f8f);
+                cr.SetSourceColor (CairoExtensions.RgbToColor (0x8f8f8f));
 
                 if ((flags & HighlightFlags.TopLine) != 0) {
                     cr.MoveTo (
@@ -188,8 +184,6 @@ namespace Banshee.MeeGo
                     cr.Stroke ();
                 }
             }
-
-            CairoExtensions.DisposeContext (cr);
         }
     }
 }

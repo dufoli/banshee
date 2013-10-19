@@ -119,10 +119,7 @@ namespace Banshee.MeeGo
 
             Query = String.IsNullOrEmpty (query) ? String.Empty : query + ":";
 
-            Editable editable = InnerEntry as Editable;
-            if (editable != null) {
-                editable.Position = Query.Length;
-            }
+            Position = Query.Length;
         }
 
         public bool SearchSensitive {

@@ -86,7 +86,7 @@ namespace Banshee.MeeGo
                 return;
             }
 
-            cr.Color = TextMidColor;
+            cr.SetSourceColor (TextMidColor);
             cr.LineWidth = 1.0;
             cr.Antialias = Cairo.Antialias.None;
 
@@ -113,14 +113,14 @@ namespace Banshee.MeeGo
             grad.AddColorStop (0.66, CairoExtensions.RgbToColor (0xeeecec));
             grad.AddColorStop (1, CairoExtensions.RgbToColor (0xe1dfdf));
 
-            cr.Pattern = grad;
+            cr.SetSource (grad);
             CairoExtensions.RoundedRectangle (cr, alloc.X, alloc.Y, alloc.Width, alloc.Height, Context.Radius, corners);
             cr.Fill ();
 
-            cr.Color = CairoExtensions.RgbToColor (0x919191);
+            cr.SetSourceColor (CairoExtensions.RgbToColor (0x919191));
             cr.Rectangle (alloc.X, alloc.Bottom, alloc.Width, BorderWidth);
             cr.Fill ();
-            grad.Destroy ();
+            grad.Dispose ();
         }
 
         public override void DrawRowSelection (Cairo.Context cr, int x, int y, int width, int height,
@@ -143,7 +143,7 @@ namespace Banshee.MeeGo
                 filled, false, color, corners, true);
 
             if (stroked) {
-                cr.Color = color;
+                cr.SetSourceColor (color);
                 cr.LineWidth = 1.0;
                 cr.Antialias = Cairo.Antialias.None;
 

@@ -154,56 +154,56 @@ namespace MeeGo.Panel
         
         [GLib.Signal ("unload")]
         public event EventHandler UnloadEvent {
-            add { GLib.Signal.Lookup (this, "unload").AddDelegate (value); }
-            remove { GLib.Signal.Lookup (this, "unload").RemoveDelegate (value); }
+            add { AddSignalHandler ("unload", value); }
+            remove { RemoveSignalHandler ("unload", value); }
         }
 
         [GLib.Signal ("set-size")]
         public event SetSizeHandler SetSizeEvent {
-            add { GLib.Signal.Lookup (this, "set-size", typeof (SetSizeArgs)).AddDelegate (value); }
-            remove { GLib.Signal.Lookup (this, "set-size", typeof (SetSizeArgs)).RemoveDelegate (value); }
+            add { AddSignalHandler ("set-size", value); }
+            remove { RemoveSignalHandler ("set-size", value); }
         }
 
         [GLib.Signal ("set-position")]
         public event SetPositionHandler SetPositionEvent {
-            add { GLib.Signal.Lookup (this, "set-position", typeof (SetPositionArgs)).AddDelegate (value); }
-            remove { GLib.Signal.Lookup (this, "set-position", typeof (SetPositionArgs)).RemoveDelegate (value); }
+            add { AddSignalHandler ("set-position", value); }
+            remove { RemoveSignalHandler ("set-position", value); }
         }
 
         [GLib.Signal ("show-begin")]
         public event EventHandler ShowBeginEvent {
-            add { GLib.Signal.Lookup (this, "show-begin").AddDelegate (value); }
-            remove { GLib.Signal.Lookup (this, "show-begin").RemoveDelegate (value); }
+            add { AddSignalHandler ("show-begin", value); }
+            remove { RemoveSignalHandler ("show-begin", value); }
         }
 
         [GLib.Signal ("show-end")]
         public event EventHandler ShowEndEvent {
-            add { GLib.Signal.Lookup (this, "show-end").AddDelegate (value); }
-            remove { GLib.Signal.Lookup (this, "show-end").RemoveDelegate (value); }
+            add { AddSignalHandler ("show-end", value); }
+            remove { RemoveSignalHandler ("show-end", value); }
         }
 
         [GLib.Signal ("show")]
         public event EventHandler ShowEvent {
-            add { GLib.Signal.Lookup (this, "show").AddDelegate (value); }
-            remove { GLib.Signal.Lookup (this, "show").RemoveDelegate (value); }
+            add { AddSignalHandler ("show", value); }
+            remove { RemoveSignalHandler ("show", value); }
         }
 
         [GLib.Signal ("hide-begin")]
         public event EventHandler HideBeginEvent {
-            add { GLib.Signal.Lookup (this, "hide-begin").AddDelegate (value); }
-            remove { GLib.Signal.Lookup (this, "hide-begin").RemoveDelegate (value); }
+            add { AddSignalHandler ("hide-begin", value); }
+            remove { RemoveSignalHandler ("hide-begin", value); }
         }
 
         [GLib.Signal ("hide-end")]
         public event EventHandler HideEndEvent {
-            add { GLib.Signal.Lookup (this, "hide-end").AddDelegate (value); }
-            remove { GLib.Signal.Lookup (this, "hide-end").RemoveDelegate (value); }
+            add { AddSignalHandler ("hide-end", value); }
+            remove { RemoveSignalHandler ("hide-end", value); }
         }
 
         [GLib.Signal ("hide")]
         public event EventHandler HideEvent {
-            add { GLib.Signal.Lookup (this, "hide").AddDelegate (value); }
-            remove { GLib.Signal.Lookup (this, "hide").RemoveDelegate (value); }
+            add { AddSignalHandler ("hide", value); }
+            remove { RemoveSignalHandler ("hide", value); }
         }
     }
 }
