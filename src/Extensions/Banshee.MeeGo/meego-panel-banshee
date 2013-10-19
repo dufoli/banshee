@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-banshee --hide --redirect-log

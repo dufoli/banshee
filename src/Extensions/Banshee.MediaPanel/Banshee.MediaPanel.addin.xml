@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Addin 
-    id="Banshee.MeeGo"
+    id="Banshee.MediaPanel"
     version="1.0"
     compatVersion="1.0"
     copyright="© 2009-2010 Novell Inc. Licensed under the MIT X11 license."
-    name="MeeGo Support"
-    description="Provides MeeGo integration, including a custom media panel."
+    name="MediaPanel Support"
+    description="Provides a custom media panel to quickly browse and play your media."
     author="Aaron Bockover"
     url="http://banshee.fm/"
-    defaultEnabled="true">
+    defaultEnabled="false">
 
   <Dependencies>
     <Addin id="Banshee.Services" version="1.0"/>
@@ -16,11 +16,11 @@
   </Dependencies>
   
   <Extension path="/Banshee/ServiceManager/Service">
-    <Service class="Banshee.MeeGo.MeeGoService"/>
+    <Service class="Banshee.MediaPanel.MediaPanelService"/>
   </Extension>
 
   <Extension path="/Banshee/ThickClient/GtkBaseClient/PostInitializeGtk">
-    <PostInitializeGtk class="Banshee.MeeGo.MeeGoThemeLoader"/>
+    <PostInitializeGtk class="Banshee.MediaPanel.MediaPanelThemeLoader"/>
   </Extension>
    
 </Addin>

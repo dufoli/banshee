@@ -7,14 +7,14 @@
     <ProjectGuid>{4FBB954A-5CA9-44DC-97DA-7D549AC3EADB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <UseParentDirectoryAsNamespace>true</UseParentDirectoryAsNamespace>
-    <AssemblyName>Banshee.MeeGo</AssemblyName>
+    <AssemblyName>Banshee.MediaPanel</AssemblyName>
     <SchemaVersion>2.0</SchemaVersion>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <SourceAnalysisOverrideSettingsFile>C:\Documents and Settings\Administrator\Application Data\ICSharpCode/SharpDevelop3.0\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
     <Optimize>true</Optimize>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <RootNamespace>Banshee.MeeGo</RootNamespace>
+    <RootNamespace>Banshee.MediaPanel</RootNamespace>
     <AssemblyOriginatorKeyFile>.</AssemblyOriginatorKeyFile>
     <ReleaseVersion>1.3</ReleaseVersion>
   </PropertyGroup>
@@ -83,8 +83,8 @@
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Banshee.MeeGo.addin.xml">
-      <LogicalName>Banshee.MeeGo.addin.xml</LogicalName>
+    <EmbeddedResource Include="Banshee.MediaPanel.addin.xml">
+      <LogicalName>Banshee.MediaPanel.addin.xml</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -104,18 +104,13 @@
     </MonoDevelop>
   </ProjectExtensions>
   <ItemGroup>
-    <Compile Include="MeeGo.Panel\PanelClient.cs" />
-    <Compile Include="MeeGo.Panel\PanelGtk.cs" />
-    <Compile Include="MeeGo.Panel\SetSizeHandler.cs" />
-    <Compile Include="MeeGo.Panel\SetPositionHandler.cs" />
-    <Compile Include="MeeGo.Panel\PanelButtonState.cs" />
-    <Compile Include="Banshee.MeeGo\MeeGoService.cs" />
-    <Compile Include="Banshee.MeeGo\MediaPanelContents.cs" />
-    <Compile Include="Banshee.MeeGo\SearchEntry.cs" />
-    <Compile Include="Banshee.MeeGo\PlaybackBox.cs" />
-    <Compile Include="Banshee.MeeGo\MeeGoTrackInfoDisplay.cs" />
-    <Compile Include="Banshee.MeeGo\MeeGoPanel.cs" />
-    <Compile Include="Banshee.MeeGo\MeeGoTheme.cs" />
-    <Compile Include="Banshee.MeeGo\MeeGoHeaderBox.cs" />
+    <Compile Include="Banshee.MediaPanel\MediaPanelService.cs" />
+    <Compile Include="Banshee.MediaPanel\MediaPanelContents.cs" />
+    <Compile Include="Banshee.MediaPanel\SearchEntry.cs" />
+    <Compile Include="Banshee.MediaPanel\PlaybackBox.cs" />
+    <Compile Include="Banshee.MediaPanel\TrackInfoDisplay.cs" />
+    <Compile Include="Banshee.MediaPanel\MediaPanel.cs" />
+    <Compile Include="Banshee.MediaPanel\MediaPanelTheme.cs" />
+    <Compile Include="Banshee.MediaPanel\HeaderBox.cs" />
   </ItemGroup>
 </Project>

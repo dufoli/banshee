@@ -104,6 +104,10 @@ internal static class AddinXmlStringCatalog
         Catalog.GetString (@"Automatically update music and video libraries.");
         Catalog.GetString (@"Utilities");
 
+        // ../src/Extensions/Banshee.MediaPanel/Banshee.MediaPanel.addin.xml
+        Catalog.GetString (@"MediaPanel Support");
+        Catalog.GetString (@"Provides a custom media panel to quickly browse and play your media.");
+
         // ../src/Extensions/Banshee.MiniMode/Banshee.MiniMode.addin.xml
         Catalog.GetString (@"Mini Mode");
         Catalog.GetString (@"Control Banshee through a small window with only playback controls and track information.");

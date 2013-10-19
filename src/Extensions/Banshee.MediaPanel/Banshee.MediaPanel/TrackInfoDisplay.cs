@@ -1,5 +1,5 @@
 //
-// MeeGoTrackDisplay.cs
+// TrackInfoDisplay.cs
 //
 // Authors:
 //   Aaron Bockover <abockover@novell.com>
@@ -31,17 +31,17 @@ using System.Text.RegularExpressions;
 
 using Banshee.ServiceStack;
 
-namespace Banshee.MeeGo
+namespace Banshee.MediaPanel
 {
-    public class MeeGoTrackInfoDisplay : Banshee.Gui.Widgets.ClassicTrackInfoDisplay
+    public class TrackInfoDisplay : Banshee.Gui.Widgets.ClassicTrackInfoDisplay
     {
         private Regex line_three_split;
 
-        protected MeeGoTrackInfoDisplay (IntPtr raw) : base (raw)
+        protected TrackInfoDisplay (IntPtr raw) : base (raw)
         {
         }
 
-        public MeeGoTrackInfoDisplay () : base ()
+        public TrackInfoDisplay () : base ()
         {
         }
 

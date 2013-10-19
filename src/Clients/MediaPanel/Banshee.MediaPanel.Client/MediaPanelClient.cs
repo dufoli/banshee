@@ -1,10 +1,10 @@
 //
-// PlaybackBox.cs
+// MediaPanelClient.cs
 //
 // Author:
 //   Aaron Bockover <abockover@novell.com>
 //
-// Copyright 2009 Novell, Inc.
+// Copyright 2010 Novell, Inc.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,35 +24,35 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+// The MediaPanel client is just a wrapper around the Nereid client.
+// This is done to allow the user to explicitly start the MediaPanel UI, for
+// example through a shortcut or an icon. Otherwise the MediaPanel UI would
+// show itself depending on whether the extension is enabled or not.
+//
+
 using System;
-using Gtk;
+using System.IO;
+using System.Reflection;
 
-using Banshee.Gui;
-using Banshee.Gui.Widgets;
+using Hyena;
 
-using Banshee.ServiceStack;
-
-namespace Banshee.MeeGo
+namespace Banshee.MediaPanel.Client
 {
-    public class PlaybackBox : Alignment
+    public class MediaPanelClient : Nereid.Client
     {
-        protected PlaybackBox (IntPtr raw) : base (raw)
+        public new static void Main (string [] args)
         {
+            // Normally Mono.Addins would load the MediaPanel extension from the
+            // Extensions directory, so we need to load this reference manually
+            Assembly.LoadFile (Paths.Combine (Path.GetDirectoryName (
+                Assembly.GetEntryAssembly ().Location), "Extensions", "Banshee.MediaPanel.dll"));
+            Startup<MediaPanelClient> (args);
         }
 
-        public PlaybackBox () : base (0.5f, 0.5f, 0.0f, 0.0f)
+        protected override void InitializeGtk ()
         {
-            var box = new HBox ();
-            var action_service = ServiceManager.Get<InterfaceActionService> ();
-
-            TopPadding = 6;
-
-            box.PackStart (action_service.PlaybackActions["PreviousAction"].CreateToolItem (), false, false, 0);
-            box.PackStart (action_service.PlaybackActions["PlayPauseAction"].CreateToolItem (), false, false, 0);
-            box.PackStart (new NextButton (action_service), false, false, 0);
-            box.PackStart (new RepeatActionButton (true), false, false, 0);
-
-            Add (box);
+            base.InitializeGtk ();
+            new Banshee.MediaPanel.MediaPanel ();
         }
     }
 }

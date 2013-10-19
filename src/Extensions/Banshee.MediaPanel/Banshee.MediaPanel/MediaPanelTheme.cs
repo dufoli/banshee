@@ -1,5 +1,5 @@
 // 
-// MeeGoTheme.cs
+// MediaPanelTheme.cs
 // 
 // Author:
 //   Aaron Bockover <abockover@novell.com>
@@ -32,19 +32,19 @@ using Cairo;
 using Hyena.Gui;
 using Hyena.Gui.Theming;
 
-namespace Banshee.MeeGo
+namespace Banshee.MediaPanel
 {
-    public class MeeGoThemeLoader
+    public class MediaPanelThemeLoader
     {
-        public MeeGoThemeLoader ()
+        public MediaPanelThemeLoader ()
         {
-            Hyena.Gui.Theming.ThemeEngine.SetCurrentTheme<MeeGoTheme> ();
+            Hyena.Gui.Theming.ThemeEngine.SetCurrentTheme<MediaPanelTheme> ();
         }
     }
 
-    public class MeeGoTheme : GtkTheme
+    public class MediaPanelTheme : GtkTheme
     {
-        public MeeGoTheme (Widget widget) : base (widget)
+        public MediaPanelTheme (Widget widget) : base (widget)
         {
         }
 

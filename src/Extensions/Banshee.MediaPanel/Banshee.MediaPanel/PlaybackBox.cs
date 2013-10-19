@@ -1,10 +1,10 @@
 //
-// SetPositionHandler.cs
+// PlaybackBox.cs
 //
 // Author:
 //   Aaron Bockover <abockover@novell.com>
 //
-// Copyright 2009-2010 Novell, Inc.
+// Copyright 2009 Novell, Inc.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,19 +25,34 @@
 // THE SOFTWARE.
 
 using System;
+using Gtk;
 
-namespace MeeGo.Panel
+using Banshee.Gui;
+using Banshee.Gui.Widgets;
+
+using Banshee.ServiceStack;
+
+namespace Banshee.MediaPanel
 {
-    public delegate void SetPositionHandler (object o, SetPositionArgs args);
-
-    public class SetPositionArgs : GLib.SignalArgs
+    public class PlaybackBox : Alignment
     {
-        public int X {
-            get { return (int)Args[0]; }
+        protected PlaybackBox (IntPtr raw) : base (raw)
+        {
         }
 
-        public int Y {
-            get { return (int)Args[1]; }
+        public PlaybackBox () : base (0.5f, 0.5f, 0.0f, 0.0f)
+        {
+            var box = new HBox ();
+            var action_service = ServiceManager.Get<InterfaceActionService> ();
+
+            TopPadding = 6;
+
+            box.PackStart (action_service.PlaybackActions["PreviousAction"].CreateToolItem (), false, false, 0);
+            box.PackStart (action_service.PlaybackActions["PlayPauseAction"].CreateToolItem (), false, false, 0);
+            box.PackStart (new NextButton (action_service), false, false, 0);
+            box.PackStart (new RepeatActionButton (true), false, false, 0);
+
+            Add (box);
         }
     }
 }

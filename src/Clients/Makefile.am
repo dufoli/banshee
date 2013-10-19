@@ -4,7 +4,7 @@ SUBDIRS = \
 	Halie \
 	Muinshee \
 	Nereid \
-	MeeGo
+	MediaPanel
 
 MAINTAINERCLEANFILES = Makefile.in
 

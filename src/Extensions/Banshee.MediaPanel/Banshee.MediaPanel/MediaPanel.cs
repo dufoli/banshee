@@ -1,5 +1,5 @@
 //
-// MeeGoPanel.cs
+// MediaPanel.cs
 //
 // Author:
 //   Aaron Bockover <abockover@novell.com>
@@ -28,54 +28,30 @@ using System;
 using Mono.Unix;
 
 using Gtk;
-using MeeGo.Panel;
 
 using Hyena;
 using Banshee.Base;
 using Banshee.ServiceStack;
 
-namespace Banshee.MeeGo
+namespace Banshee.MediaPanel
 {
-    public class MeeGoPanel : IDisposable
+    public class MediaPanel : IDisposable
     {
-        public static MeeGoPanel Instance { get; private set; }
+        public static MediaPanel Instance { get; private set; }
 
-        private PanelGtk embedded_panel;
         private Window window_panel;
 
         public MediaPanelContents Contents { get; private set; }
 
-        public MeeGoPanel ()
+        public  MediaPanel ()
         {
             if (Instance != null) {
-                throw new InvalidOperationException ("Only one MeeGoPanel instance should exist");
+                throw new InvalidOperationException ("Only one MediaPanel instance should exist");
             }
 
             Instance = this;
 
-            var timer = Log.DebugTimerStart ();
-
-            try {
-                Log.Debug ("Attempting to create MeeGo toolbar panel");
-                embedded_panel = new PanelGtk ("banshee", Catalog.GetString ("media"),
-                    null, "media-button", true);
-                embedded_panel.ShowBeginEvent += (o, e) => {
-                    ServiceManager.SourceManager.SetActiveSource (ServiceManager.SourceManager.MusicLibrary);
-                    if (Contents != null) {
-                        Contents.SyncSearchEntry ();
-                    }
-                };
-                while (Gtk.Application.EventsPending ()) {
-                    Gtk.Application.RunIteration ();
-                }
-            } catch (Exception e) {
-                if (!(e is DllNotFoundException)) {
-                    Log.Exception ("Could not bind to MeeGo panel", e);
-                }
-                window_panel = new Gtk.Window ("MeeGo Media Panel");
-            }
-
-            Log.DebugTimerPrint (timer, "MeeGo panel created: {0}");
+            window_panel = new Gtk.Window ("Banshee Media Panel");
         }
 
         public void Dispose ()
@@ -89,9 +65,7 @@ namespace Banshee.MeeGo
             Contents.ShowAll ();
             Log.DebugTimerPrint (timer, "MeeGo panel contents created: {0}");
 
-            if (embedded_panel != null) {
-                embedded_panel.SetChild (Contents);
-            } else if (window_panel != null) {
+            if (window_panel != null) {
                 window_panel.Add (Contents);
                 window_panel.SetDefaultSize (1000, 500);
                 window_panel.WindowPosition = WindowPosition.Center;
@@ -105,8 +79,8 @@ namespace Banshee.MeeGo
 
         public void Hide ()
         {
-            if (embedded_panel != null) {
-                embedded_panel.Hide ();
+            if (window_panel != null) {
+                window_panel.Hide ();
             }
         }
     }

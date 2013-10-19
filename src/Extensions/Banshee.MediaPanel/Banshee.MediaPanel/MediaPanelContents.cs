@@ -44,7 +44,7 @@ using Banshee.MediaEngine;
 using Banshee.Gui;
 using Banshee.Gui.Widgets;
 
-namespace Banshee.MeeGo
+namespace Banshee.MediaPanel
 {
     public class MediaPanelContents : Table, ITrackModelSourceContents
     {
@@ -54,7 +54,7 @@ namespace Banshee.MeeGo
 
         private SourceComboBox source_combo_box;
         private SearchEntry search_entry;
-        private MeeGoTrackInfoDisplay track_info_display;
+        private TrackInfoDisplay track_info_display;
 
         private ISource source;
         private Dictionary<object, double> model_positions = new Dictionary<object, double> ();
@@ -117,7 +117,7 @@ namespace Banshee.MeeGo
 
         private void BuildLibrary ()
         {
-            var box = new MeeGoHeaderBox () { Title = Catalog.GetString ("Library") };
+            var box = new HeaderBox () { Title = Catalog.GetString ("Library") };
 
             // Build the Library Header
             var header = new HBox () {
@@ -133,13 +133,13 @@ namespace Banshee.MeeGo
             };
             app_button.Clicked += (o, e) => {
                 ServiceManager.SourceManager.SetActiveSource (ServiceManager.SourceManager.MusicLibrary);
-                ServiceManager.Get<MeeGoService> ().PresentPrimaryInterface ();
+                ServiceManager.Get<MediaPanelService> ().PresentPrimaryInterface ();
             };
 
             header.PackStart (source_combo_box = new SourceComboBox (), false, false, 0);
             header.PackStart (app_button, false, false, 0);
             header.PackStart (search_entry = new SearchEntry (), true, true, 0);
-            box.PackStartHighlighted (header, false, false, 0, MeeGoHeaderBox.HighlightFlags.Background);
+            box.PackStartHighlighted (header, false, false, 0, HeaderBox.HighlightFlags.Background);
 
             // Build the Library Views
             var views = new HBox () { Spacing = 5 };
@@ -162,12 +162,12 @@ namespace Banshee.MeeGo
 
         private void BuildNowPlaying ()
         {
-            var box = new MeeGoHeaderBox () { Title = Catalog.GetString ("Now Playing") };
+            var box = new HeaderBox () { Title = Catalog.GetString ("Now Playing") };
 
             var seek_slider = new ConnectedSeekSlider (SeekSliderLayout.Horizontal);
             seek_slider.StreamPositionLabel.FormatString = "<small>{0}</small>";
 
-            track_info_display = new MeeGoTrackInfoDisplay () {
+            track_info_display = new TrackInfoDisplay () {
                 HeightRequest = 64,
                 NoShowAll = true
             };
@@ -179,10 +179,10 @@ namespace Banshee.MeeGo
             track_view.ColumnController.Insert (new Column (null, "indicator",
                 new ColumnCellStatusIndicator (null), 0.05, true, 20, 20), 0);
 
-            box.PackStartHighlighted (track_info_display, false, false, 0, MeeGoHeaderBox.HighlightFlags.Background);
-            box.PackStartHighlighted (seek_slider, false, false, 0, MeeGoHeaderBox.HighlightFlags.Background);
+            box.PackStartHighlighted (track_info_display, false, false, 0, HeaderBox.HighlightFlags.Background);
+            box.PackStartHighlighted (seek_slider, false, false, 0, HeaderBox.HighlightFlags.Background);
             box.PackStart (SetupView (track_view), true, true, 0);
-            box.PackStartHighlighted (new PlaybackBox (), false, false, 0, MeeGoHeaderBox.HighlightFlags.TopLine);
+            box.PackStartHighlighted (new PlaybackBox (), false, false, 0, HeaderBox.HighlightFlags.TopLine);
 
             Attach (box, 1, 2, 1, 2,
                 AttachOptions.Shrink,
@@ -287,7 +287,7 @@ namespace Banshee.MeeGo
 
                 if (source != null && source != ServiceManager.SourceManager.MusicLibrary
                      && source.Parent != ServiceManager.SourceManager.MusicLibrary) {
-                     ServiceManager.Get<MeeGoService> ().PresentPrimaryInterface ();
+                    ServiceManager.Get<MediaPanelService> ().PresentPrimaryInterface ();
                 }
             });
         }

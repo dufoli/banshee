@@ -1,5 +1,5 @@
 //
-// MeeGoService.cs
+// MediaPanelService.cs
 //
 // Authors:
 //   Aaron Bockover <abockover@novell.com>
@@ -28,7 +28,6 @@
 
 using System;
 using Gtk;
-using MeeGo.Panel;
 
 using Hyena;
 
@@ -39,15 +38,15 @@ using Banshee.ServiceStack;
 using Banshee.MediaEngine;
 using Banshee.Gui;
 
-namespace Banshee.MeeGo
+namespace Banshee.MediaPanel
 {
-    public class MeeGoService : IExtensionService
+    public class MediaPanelService : IExtensionService
     {
         private GtkElementsService elements_service;
         private InterfaceActionService interface_action_service;
         private SourceManager source_manager;
         private PlayerEngineService player;
-        private MeeGoPanel panel;
+        private MediaPanel panel;
 
         void IExtensionService.Initialize ()
         {
@@ -92,15 +91,14 @@ namespace Banshee.MeeGo
 
         private void Initialize ()
         {
-            // If Banshee is running from the MeeGo client entry assembly,
-            // the MeeGoPanel will have already been created. If not, we
-            // assume we're probably not really running in a MeeGo environment,
-            // so we just create the panel here (which is likely to just be
-            // a separate top-level window for testing).
-            panel = MeeGoPanel.Instance ?? new MeeGoPanel ();
+            // If Banshee is running from the MediaPanel client entry assembly,
+            // the MediaPanel will have already been created. If not, we just 
+            // create the panel here (which is likely to just be a separate 
+            // top-level window for testing).
+            panel = MediaPanel.Instance ?? new MediaPanel ();
 
             if (panel == null) {
-                Log.Warning ("MeeGo extension initialized without a panel");
+                Log.Warning ("MediaPanel extension initialized without a panel");
                 return;
             }
 
@@ -139,7 +137,7 @@ namespace Banshee.MeeGo
         }
 
         string IService.ServiceName {
-            get { return "MeeGoService"; }
+            get { return "MediaPanelService"; }
         }
     }
 }

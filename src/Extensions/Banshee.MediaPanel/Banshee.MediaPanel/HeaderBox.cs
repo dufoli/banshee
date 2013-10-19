@@ -1,5 +1,5 @@
 // 
-// MeeGoHeaderBox.cs
+// HeaderBox.cs
 // 
 // Author:
 //   Aaron Bockover <abockover@novell.com>
@@ -31,9 +31,9 @@ using Gtk;
 
 using Hyena.Gui;
 
-namespace Banshee.MeeGo
+namespace Banshee.MediaPanel
 {
-    public class MeeGoHeaderBox : VBox
+    public class HeaderBox : VBox
     {
         [Flags]
         public enum HighlightFlags
@@ -50,11 +50,11 @@ namespace Banshee.MeeGo
         private Label header_label;
         private string header_label_text;
 
-        protected MeeGoHeaderBox (IntPtr raw) : base (raw)
+        protected HeaderBox (IntPtr raw) : base (raw)
         {
         }
 
-        public MeeGoHeaderBox ()
+        public HeaderBox ()
         {
             BorderWidth = 5;
             Spacing = 5;

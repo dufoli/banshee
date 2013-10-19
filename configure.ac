@@ -73,22 +73,8 @@ SHAMROCK_CHECK_MONO_2_0_GAC_ASSEMBLIES([
 	ICSharpCode.SharpZipLib
 ])
 
-dnl In MeeGo we want the full name, but not in GNOME 3 (see bgo#596242)
-PKG_CHECK_MODULES(MEEGO_PANEL, meego-panel, HAVE_MEEGO_PANEL=yes, HAVE_MEEGO_PANEL=no)
-if test "x$HAVE_MEEGO_PANEL" = "xyes"; then
-	BANSHEE_DESKTOP_NAME="_Name=Banshee Media Player"
-else
-	BANSHEE_DESKTOP_NAME="_Name=Banshee"
-fi
+BANSHEE_DESKTOP_NAME="_Name=Banshee"
 AC_SUBST(BANSHEE_DESKTOP_NAME)
-
-if test "x$HAVE_MEEGO_PANEL" = "xyes"; then
-  MEEGO_PANELS_DIR=`$PKG_CONFIG --variable=meego_panel_panels_dir meego-panel`
-else
-  MEEGO_PANELS_DIR='${datadir}/mutter-meego/panels'
-fi
-AC_SUBST(MEEGO_PANELS_DIR)
-
 
 dnl DBus Sharp libraries
 BANSHEE_CHECK_DBUS_SHARP
@@ -156,9 +142,6 @@ BANSHEE_CHECK_REMOTE_AUDIO
 
 dnl MonoTorrent support (optional)
 BANSHEE_CHECK_TORRENT
-
-dnl MeeGo integration (optional)
-BANSHEE_CHECK_MEEGO
 
 dnl Sound menu integration (optional)
 BANSHEE_CHECK_SOUNDMENU
@@ -263,7 +246,7 @@ src/Clients/Booter/banshee.darwin
 src/Clients/Halie/Makefile
 src/Clients/Muinshee/Makefile
 src/Clients/Nereid/Makefile
-src/Clients/MeeGo/Makefile
+src/Clients/MediaPanel/Makefile
 
 src/Core/Makefile
 src/Core/Banshee.CollectionIndexer/Makefile
@@ -319,7 +302,7 @@ src/Extensions/Banshee.LastfmStreaming/Makefile
 src/Extensions/Banshee.LibraryWatcher/Makefile
 src/Extensions/Banshee.MiniMode/Makefile
 src/Extensions/Banshee.MiroGuide/Makefile
-src/Extensions/Banshee.MeeGo/Makefile
+src/Extensions/Banshee.MediaPanel/Makefile
 src/Extensions/Banshee.Mpris/Makefile
 src/Extensions/Banshee.MultimediaKeys/Makefile
 src/Extensions/Banshee.NotificationArea/Makefile
@@ -361,7 +344,6 @@ ${PACKAGE}-${VERSION}
   Operating System/Desktop Environment:
     GNOME Support:         ${enable_gnome}
     OSX Support:           ${enable_osx}
-    MeeGo Support:         ${enable_meego}
 
   Digital Audio Player (DAP) Support:
     Apple Device:          ${enable_appledevice} (libgpod-sharp)

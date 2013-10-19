@@ -24,7 +24,7 @@ SUBDIRS = \
 	Banshee.OpticalDisc \
 	Banshee.PlayerMigration \
 	Banshee.PlayQueue \
-	Banshee.MeeGo \
+	Banshee.MediaPanel \
 	Banshee.Podcasting \
 	Banshee.Sample \
 	Banshee.SoundMenu \
