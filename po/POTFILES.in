@@ -261,6 +261,7 @@ src/Extensions/Banshee.LastfmStreaming/Banshee.LastfmStreaming/StationEditor.cs
 src/Extensions/Banshee.LastfmStreaming/Banshee.LastfmStreaming/StationSource.cs
 src/Extensions/Banshee.LastfmStreaming/Banshee.LastfmStreaming/StationType.cs
 src/Extensions/Banshee.MediaPanel/Banshee.MediaPanel.addin.xml
+src/Extensions/Banshee.MediaPanel/banshee-media-panel.desktop.in
 src/Extensions/Banshee.MediaPanel/Banshee.MediaPanel/MediaPanelContents.cs
 src/Extensions/Banshee.MediaPanel/Banshee.MediaPanel/MediaPanelService.cs
 src/Extensions/Banshee.MediaPanel/Banshee.MediaPanel/SearchEntry.cs
