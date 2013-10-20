@@ -1,0 +1,12 @@
+[Desktop Entry]
+_Name=Banshee Media Panel
+_GenericName=Banshee Media Panel
+_X-GNOME-FullName=Banshee Media Panel
+_Comment=Play and browse your media collection
+_Keywords=Video;Movie;Film;Clip;Flick;Series;Media;Player;DVD;Disc;Mp3;Audio;CD;MTP;Podcast;DAAP;Playlist;Ipod;Multimedia;Collection;Music;Radio;
+Exec=banshee --redirect-log --client=MediaPanel
+Icon=media-player-banshee
+StartupNotify=true
+Terminal=false
+Type=Application
+Categories=GTK;GNOME;Audio;Music;Player;AudioVideo;X-Ximian-Main;X-Novell-Main;X-Red-Hat-Base;

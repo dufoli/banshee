@@ -36,7 +36,7 @@ INSTALL
 aclocal.m4
 autom4te.cache/
 bin/
-src/Extensions/Banshee.MeeGo/meego-panel-banshee.desktop
+src/Extensions/Banshee.MediaPanel/banshee-media-panel.desktop
 install-sh
 libtool
 ltmain.sh
