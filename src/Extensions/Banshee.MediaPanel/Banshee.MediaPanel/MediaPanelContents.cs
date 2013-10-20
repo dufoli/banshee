@@ -128,17 +128,17 @@ namespace Banshee.MediaPanel
             box.PackStartHighlighted (header, false, false, 0, HeaderBox.HighlightFlags.Background);
 
             // Build the Library Views
-            var views = new HBox () { Spacing = 5 };
-            views.PackStart (SetupView (artist_view = new ArtistListView () {
+            var pane = new Paned (Orientation.Horizontal);
+            pane.Pack1 (SetupView (artist_view = new ArtistListView () {
                     Name = "media-panel-artists",
                     WidthRequest = 150,
                     DoNotRenderNullModel = true
-                }), false, false, 0);
-            views.PackStart (SetupView (album_view = new AlbumListView () {
-                    Name = "media-panel-albums",
-                    DoNotRenderNullModel = true
-                }), true, true, 0);
-            box.PackStart (views, true, true, 0);
+                }), false, false);
+            pane.Pack2 (SetupView (album_view = new AlbumListView () {
+                Name = "media-panel-albums",
+                DoNotRenderNullModel = true
+            }), true, true);
+            box.PackStart (pane, true, true, 0);
             box.Hexpand = box.Vexpand = true;
             box.Halign = box.Valign = Align.Fill;
 
