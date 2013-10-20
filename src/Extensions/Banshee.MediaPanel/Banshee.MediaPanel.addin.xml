@@ -6,9 +6,9 @@
     copyright="© 2009-2010 Novell Inc. Licensed under the MIT X11 license."
     name="MediaPanel Support"
     description="Provides a custom media panel to quickly browse and play your media."
-    author="Aaron Bockover"
+    author="Aaron Bockover, Bertrand Lorentz"
     url="http://banshee.fm/"
-    defaultEnabled="false">
+    defaultEnabled="true">
 
   <Dependencies>
     <Addin id="Banshee.Services" version="1.0"/>
