@@ -77,6 +77,13 @@ namespace Banshee.MediaPanel
             }
         }
 
+        public void Show ()
+        {
+            if (window_panel != null) {
+                window_panel.Show ();
+            }
+        }
+
         public void Hide ()
         {
             if (window_panel != null) {

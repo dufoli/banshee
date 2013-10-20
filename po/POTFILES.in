@@ -12,8 +12,8 @@ data/audio-profiles/vorbis.xml.in
 data/audio-profiles/wavpack.xml.in
 data/audio-profiles/wav.xml.in
 data/audio-profiles/wma.xml.in
-data/desktop-files/common.desktop.in
 data/banshee.appdata.xml.in
+data/desktop-files/common.desktop.in
 src/Backends/Banshee.Gnome/Banshee.GnomeBackend/Brasero.cs
 src/Backends/Banshee.Gnome/Banshee.GnomeBackend/GnomeScreensaverManager.cs
 src/Backends/Banshee.GStreamer/Banshee.GStreamer/AudioCdRipper.cs
@@ -262,6 +262,7 @@ src/Extensions/Banshee.LastfmStreaming/Banshee.LastfmStreaming/StationSource.cs
 src/Extensions/Banshee.LastfmStreaming/Banshee.LastfmStreaming/StationType.cs
 src/Extensions/Banshee.MediaPanel/Banshee.MediaPanel.addin.xml
 src/Extensions/Banshee.MediaPanel/Banshee.MediaPanel/MediaPanelContents.cs
+src/Extensions/Banshee.MediaPanel/Banshee.MediaPanel/MediaPanelService.cs
 src/Extensions/Banshee.MediaPanel/Banshee.MediaPanel/SearchEntry.cs
 src/Extensions/Banshee.MiniMode/Banshee.MiniMode.addin.xml
 src/Extensions/Banshee.MiniMode/Banshee.MiniMode/MiniModeService.cs

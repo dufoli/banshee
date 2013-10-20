@@ -28,6 +28,7 @@
 
 using System;
 using Gtk;
+using Mono.Unix;
 
 using Hyena;
 
@@ -46,6 +47,8 @@ namespace Banshee.MediaPanel
         private InterfaceActionService interface_action_service;
         private SourceManager source_manager;
         private PlayerEngineService player;
+        private Menu view_menu;
+        private MenuItem menu_item;
         private MediaPanel panel;
 
         void IExtensionService.Initialize ()
@@ -91,36 +94,46 @@ namespace Banshee.MediaPanel
 
         private void Initialize ()
         {
+            view_menu = (interface_action_service.UIManager.GetWidget ("/MainMenu/ViewMenu") as MenuItem).Submenu as Menu;
+            menu_item = new MenuItem (Catalog.GetString ("Media _Panel"));
+            menu_item.Activated += delegate { PresentMediaPanel (); };
+            view_menu.Insert (menu_item, 2);
+            menu_item.Show ();
+
             // If Banshee is running from the MediaPanel client entry assembly,
-            // the MediaPanel will have already been created. If not, we just 
-            // create the panel here (which is likely to just be a separate 
-            // top-level window for testing).
-            panel = MediaPanel.Instance ?? new MediaPanel ();
+            // the MediaPanel instance will have already been created.
+            panel = MediaPanel.Instance;
 
-            if (panel == null) {
-                Log.Warning ("MediaPanel extension initialized without a panel");
-                return;
+            if (panel != null) {
+                panel.BuildContents ();
+                PresentMediaPanel ();
             }
-
-            panel.BuildContents ();
-
-            elements_service.PrimaryWindowClose = () => {
-                elements_service.PrimaryWindow.Hide ();
-                return true;
-            };
         }
 
         public void PresentPrimaryInterface ()
         {
-            elements_service.PrimaryWindow.Maximize ();
             elements_service.PrimaryWindow.Present ();
             if (panel != null) {
                 panel.Hide ();
             }
         }
 
+        public void PresentMediaPanel ()
+        {
+            if (panel == null) {
+                panel = new MediaPanel ();
+                panel.BuildContents ();
+            }
+            elements_service.PrimaryWindow.Hide ();
+            panel.Show ();
+        }
+
         public void Dispose ()
         {
+            if (view_menu != null && menu_item != null) {
+                view_menu.Remove (menu_item);
+            }
+
             if (panel != null) {
                 panel.Dispose ();
                 panel = null;
