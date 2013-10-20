@@ -25,8 +25,7 @@ desktopfilesdir = $(datadir)/applications
 desktopfiles_DATA = $(desktopfiles_files)
 
 clean-local:
-	rm -f $(desktopfiles_in_files) \
-		$(desktopfiles_files)
+	rm -f $(desktopfiles_files)
 
 EXTRA_DIST += \
 	$(desktopfiles_in_files)
