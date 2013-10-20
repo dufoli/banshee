@@ -44,8 +44,14 @@ namespace Banshee.MediaPanel.Client
         {
             // Normally Mono.Addins would load the MediaPanel extension from the
             // Extensions directory, so we need to load this reference manually
-            Assembly.LoadFile (Paths.Combine (Path.GetDirectoryName (
-                Assembly.GetEntryAssembly ().Location), "Extensions", "Banshee.MediaPanel.dll"));
+            var assembly_file = Paths.Combine (Path.GetDirectoryName (
+                Assembly.GetEntryAssembly ().Location), "Extensions", "Banshee.MediaPanel.dll");
+            if (!File.Exists (assembly_file)) {
+                // Also look into the current folder, so that we can run uninstalled
+                assembly_file = Paths.Combine (Path.GetDirectoryName (
+                    Assembly.GetEntryAssembly ().Location), "Banshee.MediaPanel.dll");
+            }
+            Assembly.LoadFile (assembly_file);
             Startup<MediaPanelClient> (args);
         }
 
