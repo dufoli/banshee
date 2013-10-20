@@ -69,6 +69,9 @@ run-profiled: check-bootstrap-env $(MO_FILES)
 run-logged: check-bootstrap-env $(MO_FILES)
 	(cd bin; $(MONO) --debug $(BANSHEE_DEV_MONO_OPTIONS) Nereid.exe --debug --uninstalled $(BANSHEE_DEV_OPTIONS) | tee last-run-log)
 
+run-mediapanel: check-bootstrap-env $(MO_FILES)
+	(cd bin; $(MONO) --debug $(BANSHEE_DEV_MONO_OPTIONS) MediaPanel.exe --debug --uninstalled $(BANSHEE_DEV_OPTIONS))
+
 run-muinshee: check-bootstrap-env $(MO_FILES)
 	(cd bin; $(MONO) --debug $(BANSHEE_DEV_MONO_OPTIONS) Muinshee.exe --debug --uninstalled $(BANSHEE_DEV_OPTIONS))
 
