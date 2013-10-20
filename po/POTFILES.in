@@ -260,6 +260,7 @@ src/Extensions/Banshee.LastfmStreaming/Banshee.LastfmStreaming/LastfmStreamingSe
 src/Extensions/Banshee.LastfmStreaming/Banshee.LastfmStreaming/StationEditor.cs
 src/Extensions/Banshee.LastfmStreaming/Banshee.LastfmStreaming/StationSource.cs
 src/Extensions/Banshee.LastfmStreaming/Banshee.LastfmStreaming/StationType.cs
+src/Extensions/Banshee.MediaPanel/Banshee.MediaPanel.addin.xml
 src/Extensions/Banshee.MediaPanel/Banshee.MediaPanel/MediaPanelContents.cs
 src/Extensions/Banshee.MediaPanel/Banshee.MediaPanel/SearchEntry.cs
 src/Extensions/Banshee.MiniMode/Banshee.MiniMode.addin.xml
