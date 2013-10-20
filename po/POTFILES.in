@@ -260,10 +260,8 @@ src/Extensions/Banshee.LastfmStreaming/Banshee.LastfmStreaming/LastfmStreamingSe
 src/Extensions/Banshee.LastfmStreaming/Banshee.LastfmStreaming/StationEditor.cs
 src/Extensions/Banshee.LastfmStreaming/Banshee.LastfmStreaming/StationSource.cs
 src/Extensions/Banshee.LastfmStreaming/Banshee.LastfmStreaming/StationType.cs
-src/Extensions/Banshee.MeeGo/Banshee.MeeGo/MediaPanelContents.cs
-src/Extensions/Banshee.MeeGo/Banshee.MeeGo/MeeGoPanel.cs
-src/Extensions/Banshee.MeeGo/Banshee.MeeGo/SearchEntry.cs
-src/Extensions/Banshee.MeeGo/meego-panel-banshee.desktop.in.in
+src/Extensions/Banshee.MediaPanel/Banshee.MediaPanel/MediaPanelContents.cs
+src/Extensions/Banshee.MediaPanel/Banshee.MediaPanel/SearchEntry.cs
 src/Extensions/Banshee.MiniMode/Banshee.MiniMode.addin.xml
 src/Extensions/Banshee.MiniMode/Banshee.MiniMode/MiniModeService.cs
 src/Extensions/Banshee.MiniMode/Banshee.MiniMode/MiniModeWindow.cs
