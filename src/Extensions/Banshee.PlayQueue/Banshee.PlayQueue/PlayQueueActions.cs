@@ -122,6 +122,7 @@ namespace Banshee.PlayQueue
             if (disposing) {
                 playqueue.Updated -= OnUpdated;
                 ServiceManager.SourceManager.ActiveSourceChanged -= OnSourceUpdated;
+                ServiceManager.PlaybackController.SourceChanged -= OnPlaybackSourceChanged;
             }
             base.Dispose (disposing);
         }
