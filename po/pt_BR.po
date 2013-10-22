@@ -30,9 +30,9 @@ msgstr ""
 "Project-Id-Version: banshee help\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=banshee&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-10-10 20:06+0000\n"
-"PO-Revision-Date: 2013-10-11 07:25-0300\n"
-"Last-Translator: Rafael Ferreira <rafael.f.f1@gmail.com>\n"
+"POT-Creation-Date: 2013-10-20 17:00+0000\n"
+"PO-Revision-Date: 2013-10-21 13:09-0300\n"
+"Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -100,8 +100,8 @@ msgstr "Navegue, pesquise e compre música na loja de MP3 da Amazon."
 #: ../data/addin-xml-strings.cs:30 ../data/addin-xml-strings.cs:35
 #: ../data/addin-xml-strings.cs:65 ../data/addin-xml-strings.cs:70
 #: ../data/addin-xml-strings.cs:85 ../data/addin-xml-strings.cs:95
-#: ../data/addin-xml-strings.cs:100 ../data/addin-xml-strings.cs:115
-#: ../data/addin-xml-strings.cs:165
+#: ../data/addin-xml-strings.cs:100 ../data/addin-xml-strings.cs:119
+#: ../data/addin-xml-strings.cs:169
 msgid "Online Sources"
 msgstr "Fontes online"
 
@@ -124,8 +124,8 @@ msgid "Organize audiobooks, lectures, etc."
 msgstr "Organize livros de áudio, leituras, etc."
 
 #: ../data/addin-xml-strings.cs:40 ../data/addin-xml-strings.cs:75
-#: ../data/addin-xml-strings.cs:90 ../data/addin-xml-strings.cs:135
-#: ../data/addin-xml-strings.cs:145 ../data/addin-xml-strings.cs:150
+#: ../data/addin-xml-strings.cs:90 ../data/addin-xml-strings.cs:139
+#: ../data/addin-xml-strings.cs:149 ../data/addin-xml-strings.cs:154
 msgid "Core"
 msgstr "Núcleo"
 
@@ -141,10 +141,10 @@ msgstr "Customize e estenda o Banshee com scripts feitos na linguagem Boo."
 #: ../data/addin-xml-strings.cs:45 ../data/addin-xml-strings.cs:50
 #: ../data/addin-xml-strings.cs:55 ../data/addin-xml-strings.cs:60
 #: ../data/addin-xml-strings.cs:80 ../data/addin-xml-strings.cs:105
-#: ../data/addin-xml-strings.cs:110 ../data/addin-xml-strings.cs:120
-#: ../data/addin-xml-strings.cs:125 ../data/addin-xml-strings.cs:130
-#: ../data/addin-xml-strings.cs:140 ../data/addin-xml-strings.cs:155
-#: ../data/addin-xml-strings.cs:160 ../data/addin-xml-strings.cs:170
+#: ../data/addin-xml-strings.cs:114 ../data/addin-xml-strings.cs:124
+#: ../data/addin-xml-strings.cs:129 ../data/addin-xml-strings.cs:134
+#: ../data/addin-xml-strings.cs:144 ../data/addin-xml-strings.cs:159
+#: ../data/addin-xml-strings.cs:164 ../data/addin-xml-strings.cs:174
 msgid "Utilities"
 msgstr "Acessórios"
 
@@ -262,12 +262,24 @@ msgstr "Monitor da biblioteca"
 msgid "Automatically update music and video libraries."
 msgstr "Atualiza automaticamente bibliotecas de música e vídeo."
 
-#. ../src/Extensions/Banshee.MiniMode/Banshee.MiniMode.addin.xml
+#. ../src/Extensions/Banshee.MediaPanel/Banshee.MediaPanel.addin.xml
 #: ../data/addin-xml-strings.cs:108
+#| msgid "MTP Media Player Support"
+msgid "MediaPanel Support"
+msgstr "Suporte a painel de mídia"
+
+#: ../data/addin-xml-strings.cs:109
+msgid "Provides a custom media panel to quickly browse and play your media."
+msgstr ""
+"Oferece um painel de mídia personalizado para navegar rapidamente e "
+"reproduzir suas mídias."
+
+#. ../src/Extensions/Banshee.MiniMode/Banshee.MiniMode.addin.xml
+#: ../data/addin-xml-strings.cs:112
 msgid "Mini Mode"
 msgstr "Modo compacto"
 
-#: ../data/addin-xml-strings.cs:109
+#: ../data/addin-xml-strings.cs:113
 msgid ""
 "Control Banshee through a small window with only playback controls and track "
 "information."
@@ -276,74 +288,74 @@ msgstr ""
 "reprodução e informações da faixa."
 
 #. ../src/Extensions/Banshee.MiroGuide/Banshee.MiroGuide.addin.xml
-#: ../data/addin-xml-strings.cs:113
+#: ../data/addin-xml-strings.cs:117
 msgid "Miro Guide Podcast Directory"
 msgstr "Diretório de podcasts do Miro Guide"
 
-#: ../data/addin-xml-strings.cs:114
+#: ../data/addin-xml-strings.cs:118
 msgid "Browse and subscribe to thousands of audio and video podcasts."
 msgstr "Navegue e assine milhares de podcasts de áudio e vídeo."
 
 #. ../src/Extensions/Banshee.Mpris/Banshee.Mpris.addin.xml
-#: ../data/addin-xml-strings.cs:118
+#: ../data/addin-xml-strings.cs:122
 msgid "MPRIS D-Bus interface"
 msgstr "Interface MPRIS D-Bus"
 
-#: ../data/addin-xml-strings.cs:119
+#: ../data/addin-xml-strings.cs:123
 msgid "Control Banshee using the MPRIS D-Bus interface."
 msgstr "Controle o Banshee usando a interface MPRIS D-Bus."
 
 #. ../src/Extensions/Banshee.MultimediaKeys/Banshee.MultimediaKeys.addin.xml
-#: ../data/addin-xml-strings.cs:123
+#: ../data/addin-xml-strings.cs:127
 msgid "Multimedia Keys"
 msgstr "Teclas multimídia"
 
-#: ../data/addin-xml-strings.cs:124
+#: ../data/addin-xml-strings.cs:128
 msgid "Control playback via the multimedia keys on your keyboard."
 msgstr "Controle a reprodução via teclas multimídia em seu teclado."
 
 #. ../src/Extensions/Banshee.NotificationArea/Banshee.NotificationArea.addin.xml
-#: ../data/addin-xml-strings.cs:128
+#: ../data/addin-xml-strings.cs:132
 msgid "Notification Area Icon"
 msgstr "Ícone da área de notificação"
 
-#: ../data/addin-xml-strings.cs:129
+#: ../data/addin-xml-strings.cs:133
 msgid "Display an icon in the notification area for controlling Banshee."
 msgstr "Exibe um ícone na área de notificação para controle do Banshee."
 
 #. ../src/Extensions/Banshee.OpticalDisc/Banshee.OpticalDisc.addin.xml
-#: ../data/addin-xml-strings.cs:133
+#: ../data/addin-xml-strings.cs:137
 msgid "DVD and Audio CD Support"
 msgstr "Suporte a DVD e CD de áudio"
 
-#: ../data/addin-xml-strings.cs:134
+#: ../data/addin-xml-strings.cs:138
 msgid "Watch DVDs, listen to and rip Audio CDs."
 msgstr "Assista a DVDs, ouça e converta CDs de áudio."
 
 #. ../src/Extensions/Banshee.PlayerMigration/Banshee.PlayerMigration.addin.xml
-#: ../data/addin-xml-strings.cs:138
+#: ../data/addin-xml-strings.cs:142
 msgid "Importers for Amarok, Rhythmbox and iTunes"
 msgstr "Importadores para o Amarok, Rhythmbox e iTunes"
 
-#: ../data/addin-xml-strings.cs:139
+#: ../data/addin-xml-strings.cs:143
 msgid "Import your library from Amarok, Rhythmbox or iTunes."
 msgstr "Importe sua biblioteca do Amarok, Rhythmbox ou iTunes."
 
 #. ../src/Extensions/Banshee.PlayQueue/Banshee.PlayQueue.addin.xml
-#: ../data/addin-xml-strings.cs:143
+#: ../data/addin-xml-strings.cs:147
 #: ../src/Extensions/Banshee.PlayQueue/Banshee.PlayQueue/PlayQueueSource.cs:58
 #: ../src/Extensions/Banshee.PlayQueue/Banshee.PlayQueue/PlayQueueSource.cs:79
 msgid "Play Queue"
 msgstr "Fila de reprodução"
 
-#: ../data/addin-xml-strings.cs:144
+#: ../data/addin-xml-strings.cs:148
 msgid "Queue tracks in an ad-hoc playlist, or let the Auto DJ take over."
 msgstr ""
 "Enfileira faixas em uma lista de reprodução ad-hoc, ou deixa o DJ Automático "
 "assumir"
 
 #. ../src/Extensions/Banshee.Podcasting/Banshee.Podcasting.addin.xml
-#: ../data/addin-xml-strings.cs:148
+#: ../data/addin-xml-strings.cs:152
 #: ../src/Dap/Banshee.Dap.AppleDevice/Banshee.Dap.AppleDevice/AppleDeviceSource.cs:207
 #: ../src/Dap/Banshee.Dap/Banshee.Dap/PodcastGroupSource.cs:38
 #: ../src/Extensions/Banshee.InternetArchive/InternetArchive/MediaType.cs:107
@@ -351,73 +363,73 @@ msgstr ""
 msgid "Podcasts"
 msgstr "Podcasts"
 
-#: ../data/addin-xml-strings.cs:149
+#: ../data/addin-xml-strings.cs:153
 msgid "Subscribe to podcasts and stream or download episodes."
 msgstr "Assine podcasts e transmissões ou baixe episódios."
 
 #. ../src/Extensions/Banshee.SoundMenu/Banshee.SoundMenu.addin.xml
-#: ../data/addin-xml-strings.cs:153
+#: ../data/addin-xml-strings.cs:157
 msgid "Sound Menu Integration"
 msgstr "Menu de integração de som"
 
-#: ../data/addin-xml-strings.cs:154
+#: ../data/addin-xml-strings.cs:158
 msgid "Control Banshee from the Sound Menu."
 msgstr "Controle o Banshee a partir do menu de som."
 
 #. ../src/Extensions/Banshee.Torrent/Banshee.Torrent.addin.xml
-#: ../data/addin-xml-strings.cs:158
+#: ../data/addin-xml-strings.cs:162
 msgid "Torrent Downloader"
 msgstr "Baixador de torrent"
 
-#: ../data/addin-xml-strings.cs:159
+#: ../data/addin-xml-strings.cs:163
 msgid "Support downloading BitTorrent files from podcasts."
 msgstr "Suporta o download de arquivos BitTorrent a partir de podcasts."
 
 #. ../src/Extensions/Banshee.UbuntuOneMusicStore/Banshee.UbuntuOneMusicStore.addin.xml
-#: ../data/addin-xml-strings.cs:163
+#: ../data/addin-xml-strings.cs:167
 #: ../src/Extensions/Banshee.UbuntuOneMusicStore/Banshee.UbuntuOneMusicStore/UbuntuOneMusicStoreSource.cs:52
 #: ../src/Extensions/Banshee.UbuntuOneMusicStore/Banshee.UbuntuOneMusicStore/UbuntuOneMusicStoreSource.cs:53
 #: ../src/Extensions/Banshee.UbuntuOneMusicStore/Banshee.UbuntuOneMusicStore/UbuntuOneMusicStoreSource.cs:133
 msgid "Ubuntu One Music Store"
 msgstr "Ubuntu One Music Store"
 
-#: ../data/addin-xml-strings.cs:164
+#: ../data/addin-xml-strings.cs:168
 msgid ""
 "This extension grants access to the Ubuntu One Music Store, powered by "
 "7digital."
 msgstr "Esta extensão dá acesso ao Ubuntu One Music Store, por 7digital."
 
 #. ../src/Extensions/Banshee.UPnPClient/Banshee.UPnPClient.addin.xml
-#: ../data/addin-xml-strings.cs:168
+#: ../data/addin-xml-strings.cs:172
 msgid "UPnP Client"
 msgstr "Cliente UPnP"
 
-#: ../data/addin-xml-strings.cs:169
+#: ../data/addin-xml-strings.cs:173
 msgid ""
 "Browse and play music and videos shared over your local network using UPnP."
 msgstr "Navegue e ouça músicas compartilhadas em sua rede local usando UPnP."
 
 #. ../src/Extensions/Banshee.Wikipedia/Banshee.Wikipedia.addin.xml
-#: ../data/addin-xml-strings.cs:173
+#: ../data/addin-xml-strings.cs:177
 #: ../src/Extensions/Banshee.Wikipedia/Banshee.Wikipedia/ContextPage.cs:44
 msgid "Wikipedia"
 msgstr "Wikipedia"
 
-#: ../data/addin-xml-strings.cs:174
+#: ../data/addin-xml-strings.cs:178
 msgid "View artist information from Wikipedia in the context pane."
 msgstr "Ver informações do artista na Wikipedia no painel de contexto."
 
-#: ../data/addin-xml-strings.cs:175 ../data/addin-xml-strings.cs:180
+#: ../data/addin-xml-strings.cs:179 ../data/addin-xml-strings.cs:184
 msgid "Context Pane"
 msgstr "Painel de contexto"
 
 #. ../src/Extensions/Banshee.YouTube/Banshee.YouTube.addin.xml
-#: ../data/addin-xml-strings.cs:178
+#: ../data/addin-xml-strings.cs:182
 #: ../src/Extensions/Banshee.YouTube/Banshee.YouTube/ContextPage.cs:44
 msgid "YouTube"
 msgstr "YouTube"
 
-#: ../data/addin-xml-strings.cs:179
+#: ../data/addin-xml-strings.cs:183
 msgid "Show related YouTube videos in the context pane."
 msgstr "Exibe vídeos relacionados do YouTube no painel de contexto."
 
@@ -637,31 +649,6 @@ msgstr "Usar uma taxa de bit variável"
 msgid "Audio Quality"
 msgstr "Qualidade de áudio"
 
-#: ../data/desktop-files/common.desktop.in.h:1
-#: ../src/Dap/Banshee.Dap/Banshee.Dap/DapSource.cs:194
-msgid "Media Player"
-msgstr "Reprodutor de mídia"
-
-#: ../data/desktop-files/common.desktop.in.h:2
-#: ../src/Clients/Muinshee/Muinshee/PlayerInterface.cs:86
-#: ../src/Clients/Nereid/Nereid/PlayerInterface.cs:115
-#: ../src/Core/Banshee.ThickClient/Banshee.Gui/BaseClientWindow.cs:199
-#: ../src/Extensions/Banshee.MiniMode/Banshee.MiniMode/MiniModeWindow.cs:68
-msgid "Banshee Media Player"
-msgstr "Reprodutor de mídia Banshee"
-
-#: ../data/desktop-files/common.desktop.in.h:3
-msgid "Play and organize your media collection"
-msgstr "Reproduza e organize a sua coleção de mídia"
-
-#: ../data/desktop-files/common.desktop.in.h:4
-msgid ""
-"Video;Movie;Film;Clip;Flick;Series;Media;Player;DVD;Disc;Mp3;Audio;CD;MTP;"
-"Podcast;DAAP;Playlist;Ipod;Multimedia;Collection;Music;Radio;"
-msgstr ""
-"Vídeo;Filme;Clipe;Flick;Séries;Reprodutor;Player;DVD;Disco;Mp3;Áudio;CD;MTP;"
-"Podcast;DAAP;Lista de reprodução;Ipod;Multimídia;Coleção;Música;Rádio;"
-
 #. Writing GNOME below, instead of just "Linux", is inclusive of *BSD OSs
 #: ../data/banshee.appdata.xml.in.h:2
 msgid ""
@@ -681,93 +668,31 @@ msgstr ""
 "com podcasts de áudio e video. Sincronize seu Android, iPod, e outros "
 "dispositivos. Acreditamos que você irá amar o Banshee!"
 
-#: ../libbanshee/banshee-bpmdetector.c:203 ../libbanshee/banshee-ripper.c:267
-#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:240
-msgid "Could not create pipeline"
-msgstr "Não foi possível criar a linha de processamento"
+#: ../data/desktop-files/common.desktop.in.h:1
+#: ../src/Dap/Banshee.Dap/Banshee.Dap/DapSource.cs:194
+msgid "Media Player"
+msgstr "Reprodutor de mídia"
 
-#: ../libbanshee/banshee-bpmdetector.c:209
-msgid "Could not create filesrc element"
-msgstr "Não foi possível criar o elemento filesrc"
+#: ../data/desktop-files/common.desktop.in.h:2
+#: ../src/Clients/Muinshee/Muinshee/PlayerInterface.cs:86
+#: ../src/Clients/Nereid/Nereid/PlayerInterface.cs:115
+#: ../src/Core/Banshee.ThickClient/Banshee.Gui/BaseClientWindow.cs:199
+#: ../src/Extensions/Banshee.MiniMode/Banshee.MiniMode/MiniModeWindow.cs:68
+msgid "Banshee Media Player"
+msgstr "Reprodutor de mídia Banshee"
 
-#: ../libbanshee/banshee-bpmdetector.c:215
-#: ../libbanshee/banshee-transcoder.c:245
-#| msgid "Could not create decodebin2 plugin"
-msgid "Could not create decodebin plugin"
-msgstr "Não foi possível criar o plug-in decodebin"
+#: ../data/desktop-files/common.desktop.in.h:3
+msgid "Play and organize your media collection"
+msgstr "Reproduza e organize a sua coleção de mídia"
 
-#: ../libbanshee/banshee-bpmdetector.c:221
-#: ../libbanshee/banshee-transcoder.c:263
-#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:68
-msgid "Could not create audioconvert plugin"
-msgstr "Não foi possível criar o plug-in audioconvert"
-
-#: ../libbanshee/banshee-bpmdetector.c:227
-msgid "Could not create bpmdetect plugin"
-msgstr "Não foi possível criar o plug-in bpmdetect"
-
-#: ../libbanshee/banshee-bpmdetector.c:233
-msgid "Could not create fakesink plugin"
-msgstr "Não foi possível criar o plug-in fakesink"
-
-#: ../libbanshee/banshee-bpmdetector.c:242
-#: ../libbanshee/banshee-bpmdetector.c:251 ../libbanshee/banshee-ripper.c:308
-#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:281
-msgid "Could not link pipeline elements"
-msgstr "Não foi possível encadear elementos da linha de processamento"
-
-#: ../libbanshee/banshee-ripper.c:273
-#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:246
-msgid "Could not initialize element from cdda URI"
-msgstr "Não foi possível inicializar o componente do URI CDDA"
-
-#: ../libbanshee/banshee-ripper.c:287
-msgid "Could not create encoder pipeline"
-msgstr "Não foi possível criar a linha de processamento do codificador"
-
-#: ../libbanshee/banshee-ripper.c:293
-#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:266
-msgid "Could not create queue plugin"
-msgstr "Não foi possível criar o plug-in de fila"
-
-#: ../libbanshee/banshee-ripper.c:301
-#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:274
-msgid "Could not create filesink plugin"
-msgstr "Não foi possível criar o plug-in consumidor de arquivo"
-
-#: ../libbanshee/banshee-transcoder.c:239
-#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:181
-msgid "Could not create source element"
-msgstr "Não foi possível criar o elemento fonte"
-
-#: ../libbanshee/banshee-transcoder.c:251
-#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:63
-msgid "Could not create sink element"
-msgstr "Não foi possível criar o elemento sink"
-
-#: ../libbanshee/banshee-transcoder.c:257
-#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:198
-msgid "Could not create sinkbin plugin"
-msgstr "Não foi possível criar plug-in de sinkbin"
-
-#: ../libbanshee/banshee-transcoder.c:269
-#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:73
-msgid "Could not create audioresample plugin"
-msgstr "Não foi possível criar plug-in resample de áudio"
-
-#: ../libbanshee/banshee-transcoder.c:275
-msgid "Could not create encoding pipeline"
-msgstr "Não foi possível criar a linha de processamento de codificação"
-
-#: ../libbanshee/banshee-transcoder.c:281
-#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:85
-msgid "Could not get sink pad from encoder"
-msgstr "Não foi possível obter um bloco dissipador do codificador"
-
-#: ../libbanshee/banshee-transcoder.c:344
-#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:269
-msgid "Could not construct pipeline"
-msgstr "Não foi possível construir a linha de processamento"
+#: ../data/desktop-files/common.desktop.in.h:4
+#: ../src/Extensions/Banshee.MediaPanel/banshee-media-panel.desktop.in.h:3
+msgid ""
+"Video;Movie;Film;Clip;Flick;Series;Media;Player;DVD;Disc;Mp3;Audio;CD;MTP;"
+"Podcast;DAAP;Playlist;Ipod;Multimedia;Collection;Music;Radio;"
+msgstr ""
+"Vídeo;Filme;Clipe;Flick;Séries;Reprodutor;Player;DVD;Disco;Mp3;Áudio;CD;MTP;"
+"Podcast;DAAP;Lista de reprodução;Ipod;Multimídia;Coleção;Música;Rádio;"
 
 #: ../src/Backends/Banshee.Gnome/Banshee.GnomeBackend/Brasero.cs:65
 msgid "Write CD..."
@@ -809,17 +734,17 @@ msgid "Could not initialize GStreamer library"
 msgstr "Não foi possível iniciar a biblioteca do GStreamer"
 
 #: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/PlayerEngine.cs:510
-#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/PlayerEngine.cs:566
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/PlayerEngine.cs:570
 msgid "Unknown Error"
 msgstr "Erro desconhecido"
 
 #: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/PlayerEngine.cs:878
-#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/PlayerEngine.cs:989
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/PlayerEngine.cs:993
 msgid "_Enable ReplayGain correction"
 msgstr "_Habilitar correção ReplayGain"
 
 #: ../src/Backends/Banshee.GStreamer/Banshee.GStreamer/PlayerEngine.cs:879
-#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/PlayerEngine.cs:990
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/PlayerEngine.cs:994
 msgid ""
 "For tracks that have ReplayGain data, automatically scale (normalize) "
 "playback volume"
@@ -843,12 +768,101 @@ msgstr ""
 msgid "Could not create transcoder"
 msgstr "Não foi possível criar o transcodificador"
 
+#: ../src/Backends/Banshee.GStreamer/libbanshee/banshee-bpmdetector.c:203
+#: ../src/Backends/Banshee.GStreamer/libbanshee/banshee-ripper.c:267
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:240
+msgid "Could not create pipeline"
+msgstr "Não foi possível criar a linha de processamento"
+
+#: ../src/Backends/Banshee.GStreamer/libbanshee/banshee-bpmdetector.c:209
+msgid "Could not create filesrc element"
+msgstr "Não foi possível criar o elemento filesrc"
+
+#: ../src/Backends/Banshee.GStreamer/libbanshee/banshee-bpmdetector.c:215
+#: ../src/Backends/Banshee.GStreamer/libbanshee/banshee-transcoder.c:245
+msgid "Could not create decodebin plugin"
+msgstr "Não foi possível criar o plug-in decodebin"
+
+#: ../src/Backends/Banshee.GStreamer/libbanshee/banshee-bpmdetector.c:221
+#: ../src/Backends/Banshee.GStreamer/libbanshee/banshee-transcoder.c:263
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:68
+msgid "Could not create audioconvert plugin"
+msgstr "Não foi possível criar o plug-in audioconvert"
+
+#: ../src/Backends/Banshee.GStreamer/libbanshee/banshee-bpmdetector.c:227
+msgid "Could not create bpmdetect plugin"
+msgstr "Não foi possível criar o plug-in bpmdetect"
+
+#: ../src/Backends/Banshee.GStreamer/libbanshee/banshee-bpmdetector.c:233
+msgid "Could not create fakesink plugin"
+msgstr "Não foi possível criar o plug-in fakesink"
+
+#: ../src/Backends/Banshee.GStreamer/libbanshee/banshee-bpmdetector.c:242
+#: ../src/Backends/Banshee.GStreamer/libbanshee/banshee-bpmdetector.c:251
+#: ../src/Backends/Banshee.GStreamer/libbanshee/banshee-ripper.c:308
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:281
+msgid "Could not link pipeline elements"
+msgstr "Não foi possível encadear elementos da linha de processamento"
+
+#: ../src/Backends/Banshee.GStreamer/libbanshee/banshee-ripper.c:273
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:246
+msgid "Could not initialize element from cdda URI"
+msgstr "Não foi possível inicializar o componente do URI CDDA"
+
+#: ../src/Backends/Banshee.GStreamer/libbanshee/banshee-ripper.c:287
+msgid "Could not create encoder pipeline"
+msgstr "Não foi possível criar a linha de processamento do codificador"
+
+#: ../src/Backends/Banshee.GStreamer/libbanshee/banshee-ripper.c:293
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:266
+msgid "Could not create queue plugin"
+msgstr "Não foi possível criar o plug-in de fila"
+
+#: ../src/Backends/Banshee.GStreamer/libbanshee/banshee-ripper.c:301
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:274
+msgid "Could not create filesink plugin"
+msgstr "Não foi possível criar o plug-in consumidor de arquivo"
+
+#: ../src/Backends/Banshee.GStreamer/libbanshee/banshee-transcoder.c:239
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:181
+msgid "Could not create source element"
+msgstr "Não foi possível criar o elemento fonte"
+
+#: ../src/Backends/Banshee.GStreamer/libbanshee/banshee-transcoder.c:251
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:63
+msgid "Could not create sink element"
+msgstr "Não foi possível criar o elemento sink"
+
+#: ../src/Backends/Banshee.GStreamer/libbanshee/banshee-transcoder.c:257
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:198
+msgid "Could not create sinkbin plugin"
+msgstr "Não foi possível criar plug-in de sinkbin"
+
+#: ../src/Backends/Banshee.GStreamer/libbanshee/banshee-transcoder.c:269
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:73
+msgid "Could not create audioresample plugin"
+msgstr "Não foi possível criar plug-in resample de áudio"
+
+#: ../src/Backends/Banshee.GStreamer/libbanshee/banshee-transcoder.c:275
+msgid "Could not create encoding pipeline"
+msgstr "Não foi possível criar a linha de processamento de codificação"
+
+#: ../src/Backends/Banshee.GStreamer/libbanshee/banshee-transcoder.c:281
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:85
+msgid "Could not get sink pad from encoder"
+msgstr "Não foi possível obter um bloco dissipador do codificador"
+
+#: ../src/Backends/Banshee.GStreamer/libbanshee/banshee-transcoder.c:344
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/Transcoder.cs:269
+msgid "Could not construct pipeline"
+msgstr "Não foi possível construir a linha de processamento"
+
 #: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/AudioCdRipper.cs:259
 #, csharp-format
 msgid "Could not create encoder pipeline : {0}"
 msgstr "Não foi possível criar o codificador do pipeline : {0}"
 
-#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/PlayerEngine.cs:811
+#: ../src/Backends/Banshee.GStreamerSharp/Banshee.GStreamerSharp/PlayerEngine.cs:815
 msgid "GStreamer# 0.10"
 msgstr "GStreamer# 0.10"
 
@@ -931,54 +945,54 @@ msgstr "Download da atualização finalizado"
 msgid "Check for Updates"
 msgstr "Procurar por atualizações"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:155
+#: ../src/Clients/Booter/Booter/Entry.cs:151
 msgid "Help Options"
 msgstr "Opções de ajuda"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:156
+#: ../src/Clients/Booter/Booter/Entry.cs:152
 msgid "Show this help"
 msgstr "Mostra esta ajuda"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:157
+#: ../src/Clients/Booter/Booter/Entry.cs:153
 msgid "Show options for controlling playback"
 msgstr "Mostra as opções para o controle de reprodução"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:158
+#: ../src/Clients/Booter/Booter/Entry.cs:154
 msgid "Show options for querying the playing track"
 msgstr "Mostra as opções de consulta da faixa em reprodução"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:159
+#: ../src/Clients/Booter/Booter/Entry.cs:155
 msgid "Show options for querying the playing engine"
 msgstr "Mostra as opções de consulta do mecanismo de reprodução"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:160
+#: ../src/Clients/Booter/Booter/Entry.cs:156
 msgid "Show options for the user interface"
 msgstr "Mostra as opções para a interface do usuário"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:161
+#: ../src/Clients/Booter/Booter/Entry.cs:157
 msgid "Show options for developers and debugging"
 msgstr "Mostra as opções para desenvolvedores e para depuração"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:162
+#: ../src/Clients/Booter/Booter/Entry.cs:158
 msgid "Show all option groups"
 msgstr "Mostra todos os grupos de opções"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:163
+#: ../src/Clients/Booter/Booter/Entry.cs:159
 msgid "Show version information"
 msgstr "Mostra informações da versão"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:166
+#: ../src/Clients/Booter/Booter/Entry.cs:162
 msgid "Playback Control Options"
 msgstr "Opções do controle de reprodução"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:167
+#: ../src/Clients/Booter/Booter/Entry.cs:163
 msgid ""
 "Play the next track, optionally restarting if the 'restart' value is set"
 msgstr ""
 "Reproduz a próxima faixa, reiniciando opcionalmente se o valor \"reiniciar\" "
 "estiver definido"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:168
+#: ../src/Clients/Booter/Booter/Entry.cs:164
 msgid ""
 "Play the previous track, optionally restarting if the 'restart' value is set"
 msgstr ""
@@ -986,7 +1000,7 @@ msgstr ""
 "\" estiver definido"
 
 # "--previous" é opção de linha de comando.
-#: ../src/Clients/Booter/Booter/Entry.cs:169
+#: ../src/Clients/Booter/Booter/Entry.cs:165
 msgid ""
 "If the current song has been played longer than 4 seconds then restart it, "
 "otherwise the same as --previous"
@@ -994,29 +1008,29 @@ msgstr ""
 "Se a faixa atual foi reproduzida mais de 4 segundos então reinicie, caso "
 "contrário o mesmo que --previous"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:170
+#: ../src/Clients/Booter/Booter/Entry.cs:166
 msgid "Automatically start playing any tracks enqueued on the command line"
 msgstr ""
 "Inicia automaticamente a reprodução de qualquer faixa enfileirada pela linha "
 "de comando"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:171
+#: ../src/Clients/Booter/Booter/Entry.cs:167
 msgid "Start playback"
 msgstr "Inicia a reprodução"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:172
+#: ../src/Clients/Booter/Booter/Entry.cs:168
 msgid "Pause playback"
 msgstr "Pausa reprodução"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:173
+#: ../src/Clients/Booter/Booter/Entry.cs:169
 msgid "Toggle playback"
 msgstr "Alternar reprodução"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:174
+#: ../src/Clients/Booter/Booter/Entry.cs:170
 msgid "Completely stop playback"
 msgstr "Pára completamente a reprodução"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:176
+#: ../src/Clients/Booter/Booter/Entry.cs:172
 msgid ""
 "Enable or disable playback stopping after the currently playing track (value "
 "should be either 'true' or 'false')"
@@ -1024,106 +1038,106 @@ msgstr ""
 "Habilita ou desabilita parar a reprodução depois da faixa atual (o valor "
 "deveria ser \"true\" ou \"false\")"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:177
+#: ../src/Clients/Booter/Booter/Entry.cs:173
 msgid "Set the playback volume (0-100), prefix with +/- for relative values"
 msgstr "Define o volume de reprodução (0-100)"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:178
+#: ../src/Clients/Booter/Booter/Entry.cs:174
 msgid "Seek to a specific point (seconds, float)"
 msgstr "Procura por uma localização específica (segundos, real)"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:179
+#: ../src/Clients/Booter/Booter/Entry.cs:175
 msgid "Set the currently played track's rating (0 to 5)"
 msgstr "Define a classificação da faixa reproduzida atualmente (0 para 5)"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:182
+#: ../src/Clients/Booter/Booter/Entry.cs:178
 msgid "Player Engine Query Options"
 msgstr "Opções de consulta do mecanismo do reprodutor"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:183
+#: ../src/Clients/Booter/Booter/Entry.cs:179
 msgid "Current player state"
 msgstr "Estado atual do reprodutor"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:184
+#: ../src/Clients/Booter/Booter/Entry.cs:180
 msgid "Last player state"
 msgstr "Último estado do reprodutor"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:185
+#: ../src/Clients/Booter/Booter/Entry.cs:181
 msgid "Query whether the player can be paused"
 msgstr "Consulta se o reprodutor pode ser pausado"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:186
+#: ../src/Clients/Booter/Booter/Entry.cs:182
 msgid "Query whether the player can seek"
 msgstr "Consulta se o reprodutor pode procurar"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:187
+#: ../src/Clients/Booter/Booter/Entry.cs:183
 msgid "Player volume"
 msgstr "Volume de reprodução"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:188
+#: ../src/Clients/Booter/Booter/Entry.cs:184
 msgid "Player position in currently playing track"
 msgstr "Posição na faixa sendo reproduzida"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:191
+#: ../src/Clients/Booter/Booter/Entry.cs:187
 msgid "Playing Track Metadata Query Options"
 msgstr "Opções de consulta dos metadados da faixa sendo reproduzida"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:192
+#: ../src/Clients/Booter/Booter/Entry.cs:188
 msgid "URI"
 msgstr "URI"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:193
-#: ../src/Clients/Nereid/Nereid/ViewContainer.cs:138
-#: ../src/Extensions/Banshee.MeeGo/Banshee.MeeGo/SearchEntry.cs:89
+#: ../src/Clients/Booter/Booter/Entry.cs:189
+#: ../src/Clients/Nereid/Nereid/ViewContainer.cs:133
+#: ../src/Extensions/Banshee.MediaPanel/Banshee.MediaPanel/SearchEntry.cs:89
 msgid "Artist Name"
 msgstr "Nome do artista"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:194
-#: ../src/Clients/Nereid/Nereid/ViewContainer.cs:140
-#: ../src/Extensions/Banshee.MeeGo/Banshee.MeeGo/SearchEntry.cs:90
+#: ../src/Clients/Booter/Booter/Entry.cs:190
+#: ../src/Clients/Nereid/Nereid/ViewContainer.cs:135
+#: ../src/Extensions/Banshee.MediaPanel/Banshee.MediaPanel/SearchEntry.cs:90
 msgid "Album Title"
 msgstr "Título do álbum"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:195
-#: ../src/Clients/Nereid/Nereid/ViewContainer.cs:137
-#: ../src/Extensions/Banshee.MeeGo/Banshee.MeeGo/SearchEntry.cs:88
+#: ../src/Clients/Booter/Booter/Entry.cs:191
+#: ../src/Clients/Nereid/Nereid/ViewContainer.cs:132
+#: ../src/Extensions/Banshee.MediaPanel/Banshee.MediaPanel/SearchEntry.cs:88
 msgid "Track Title"
 msgstr "Título da faixa"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:196
+#: ../src/Clients/Booter/Booter/Entry.cs:192
 msgid "Duration"
 msgstr "Duração"
 
 #. Translators: noun
-#: ../src/Clients/Booter/Booter/Entry.cs:197
+#: ../src/Clients/Booter/Booter/Entry.cs:193
 #: ../src/Core/Banshee.Services/Banshee.Query/BansheeQuery.cs:119
 msgid "Track Number"
 msgstr "Número da faixa"
 
 #. Translators: noun
-#: ../src/Clients/Booter/Booter/Entry.cs:198
+#: ../src/Clients/Booter/Booter/Entry.cs:194
 #: ../src/Core/Banshee.Services/Banshee.Query/BansheeQuery.cs:128
 msgid "Track Count"
 msgstr "Número de faixas"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:199
+#: ../src/Clients/Booter/Booter/Entry.cs:195
 #: ../src/Core/Banshee.Services/Banshee.Library/MusicFileNamePattern.cs:149
 #: ../src/Extensions/Banshee.Audiobook/Banshee.Audiobook/AudiobookFileNamePattern.cs:114
 msgid "Disc Number"
 msgstr "Número do disco"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:200
-#: ../src/Clients/Nereid/Nereid/ViewContainer.cs:143
+#: ../src/Clients/Booter/Booter/Entry.cs:196
+#: ../src/Clients/Nereid/Nereid/ViewContainer.cs:138
 #: ../src/Core/Banshee.Services/Banshee.Library/MusicFileNamePattern.cs:113
 #: ../src/Core/Banshee.Services/Banshee.Query/BansheeQuery.cs:179
 #: ../src/Extensions/Banshee.Audiobook/Banshee.Audiobook/AudiobookFileNamePattern.cs:78
 #: ../src/Extensions/Banshee.InternetArchive/Banshee.InternetArchive/SearchView.cs:132
 #: ../src/Extensions/Banshee.InternetArchive/InternetArchive/Field.cs:77
-#: ../src/Extensions/Banshee.MeeGo/Banshee.MeeGo/SearchEntry.cs:92
+#: ../src/Extensions/Banshee.MediaPanel/Banshee.MediaPanel/SearchEntry.cs:92
 msgid "Year"
 msgstr "Ano"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:201
+#: ../src/Clients/Booter/Booter/Entry.cs:197
 #: ../src/Core/Banshee.Services/Banshee.Query/BansheeQuery.cs:232
 #: ../src/Extensions/Banshee.InternetArchive/Banshee.InternetArchive/SearchView.cs:131
 #: ../src/Extensions/Banshee.InternetArchive/InternetArchive/Field.cs:60
@@ -1131,83 +1145,83 @@ msgstr "Ano"
 msgid "Rating"
 msgstr "Avaliação"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:202
+#: ../src/Clients/Booter/Booter/Entry.cs:198
 #: ../src/Core/Banshee.Services/Banshee.Query/BansheeQuery.cs:324
 msgid "Score"
 msgstr "Pontuação"
 
 #. Translators: noun
-#: ../src/Clients/Booter/Booter/Entry.cs:203
+#: ../src/Clients/Booter/Booter/Entry.cs:199
 #: ../src/Core/Banshee.Services/Banshee.Query/BansheeQuery.cs:145
 msgid "Bit Rate"
 msgstr "Taxa de bits"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:206
+#: ../src/Clients/Booter/Booter/Entry.cs:202
 msgid "User Interface Options"
 msgstr "Opções de interface do usuário"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:207
+#: ../src/Clients/Booter/Booter/Entry.cs:203
 msgid "Present the user interface on the active workspace"
 msgstr "Mostra a interface do usuário no espaço de trabalho atual"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:208
+#: ../src/Clients/Booter/Booter/Entry.cs:204
 msgid "Enter the full-screen mode"
 msgstr "Entra ou deixa o modo de tela cheia"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:209
+#: ../src/Clients/Booter/Booter/Entry.cs:205
 msgid "Hide the user interface"
 msgstr "Oculta a interface do usuário"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:210
+#: ../src/Clients/Booter/Booter/Entry.cs:206
 msgid "Do not present the user interface, regardless of any other options"
 msgstr ""
 "Não mostra a interface do usuário, independente de quaisquer outras opções"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:211
+#: ../src/Clients/Booter/Booter/Entry.cs:207
 msgid "Present the import media dialog box"
 msgstr "Apresenta a caixa de diálogo de importação de mídia"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:212
+#: ../src/Clients/Booter/Booter/Entry.cs:208
 msgid "Present the about dialog"
 msgstr "Apresenta a caixa de diálogo \"sobre\""
 
-#: ../src/Clients/Booter/Booter/Entry.cs:213
+#: ../src/Clients/Booter/Booter/Entry.cs:209
 msgid "Present the open location dialog"
 msgstr "Apresenta a caixa de diálogo \"abrir localização\""
 
-#: ../src/Clients/Booter/Booter/Entry.cs:214
+#: ../src/Clients/Booter/Booter/Entry.cs:210
 msgid "Present the preferences dialog"
 msgstr "Apresenta a caixa de diálogo de preferências"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:217
+#: ../src/Clients/Booter/Booter/Entry.cs:213
 msgid "Debugging and Development Options"
 msgstr "Opções de depuração e desenvolvimento"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:218
+#: ../src/Clients/Booter/Booter/Entry.cs:214
 msgid "Enable general debugging features"
 msgstr "Habilita recursos gerais de depuração"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:219
+#: ../src/Clients/Booter/Booter/Entry.cs:215
 msgid "Enable debugging output of SQL queries"
 msgstr "Habilita depuração da saída de consultas SQL"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:220
+#: ../src/Clients/Booter/Booter/Entry.cs:216
 msgid "Enable debugging output of Mono.Addins"
 msgstr "Habilita depuração da saída de Mono.Addins"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:221
+#: ../src/Clients/Booter/Booter/Entry.cs:217
 msgid "Specify an alternate database to use"
 msgstr "Especifica um banco de dados alternativo para uso"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:222
+#: ../src/Clients/Booter/Booter/Entry.cs:218
 msgid "Force fetching of missing cover artwork"
 msgstr "Força a busca das capas de álbuns faltantes"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:223
+#: ../src/Clients/Booter/Booter/Entry.cs:219
 msgid "Specify an alternate key, default is /apps/banshee-1/"
 msgstr "Especifica uma chave alternativa, o padrão é /apps/banshee-1/"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:224
+#: ../src/Clients/Booter/Booter/Entry.cs:220
 msgid ""
 "Optimize instance for running uninstalled; most notably, this will create an "
 "alternate Mono.Addins database in the working directory"
@@ -1215,22 +1229,22 @@ msgstr ""
 "Otimiza a instância para executar desinstalado; muito notavelmente, isso "
 "criará um banco de dados alternativo do Mono.Addins no diretório de trabalho"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:226
+#: ../src/Clients/Booter/Booter/Entry.cs:222
 msgid "Disable DBus support completely"
 msgstr "Desabilita completamente o suporte a DBus"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:228
+#: ../src/Clients/Booter/Booter/Entry.cs:224
 #, csharp-format
 msgid "Skip loading a custom gtk.css file ({0}) if it exists"
 msgstr ""
 "Ignorar carregamento de um arquivo gtk.css ({0}) personalizado, caso exista"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:230
+#: ../src/Clients/Booter/Booter/Entry.cs:226
 #, csharp-format
 msgid "Reload the custom gtk.css file ({0}) every 5 seconds"
 msgstr "Recarregar o arquivo gtk.css ({0}) personalizado, a cada 5 segundos"
 
-#: ../src/Clients/Booter/Booter/Entry.cs:259
+#: ../src/Clients/Booter/Booter/Entry.cs:255
 #, csharp-format
 msgid "The following help arguments are invalid: {0}"
 msgstr "Os seguintes argumentos de ajuda são inválidos: {0}"
@@ -1275,47 +1289,40 @@ msgstr "{0} restante"
 msgid "Play Song"
 msgstr "Reproduzir música"
 
-#: ../src/Clients/Nereid/Nereid/PlayerInterface.cs:274
-#: ../src/Extensions/Banshee.Fixup/Banshee.Fixup/FixSource.cs:79
-#: ../src/Extensions/Banshee.NotificationArea/Banshee.NotificationArea/NotificationAreaService.cs:133
-#: ../src/Extensions/Banshee.SoundMenu/Banshee.SoundMenu/SoundMenuService.cs:111
-msgid "Close"
-msgstr "Fechar"
-
 #. Translators: this is a verb (command), not a noun (things)
-#: ../src/Clients/Nereid/Nereid/PlayerInterface.cs:492
+#: ../src/Clients/Nereid/Nereid/PlayerInterface.cs:439
 msgid "Search"
 msgstr "Pesquisar"
 
-#: ../src/Clients/Nereid/Nereid/ViewContainer.cs:136
-#: ../src/Extensions/Banshee.MeeGo/Banshee.MeeGo/SearchEntry.cs:87
+#: ../src/Clients/Nereid/Nereid/ViewContainer.cs:131
+#: ../src/Extensions/Banshee.MediaPanel/Banshee.MediaPanel/SearchEntry.cs:87
 msgid "Artist, Album, or Title"
 msgstr "Artista, Álbum ou Título"
 
 #. Alias for %album_artist%
-#: ../src/Clients/Nereid/Nereid/ViewContainer.cs:139
+#: ../src/Clients/Nereid/Nereid/ViewContainer.cs:134
 #: ../src/Core/Banshee.Services/Banshee.Library/MusicFileNamePattern.cs:72
 #: ../src/Core/Banshee.Services/Banshee.Library/MusicFileNamePattern.cs:78
 #: ../src/Core/Banshee.Services/Banshee.Query/BansheeQuery.cs:84
 msgid "Album Artist"
 msgstr "Artista do álbum"
 
-#: ../src/Clients/Nereid/Nereid/ViewContainer.cs:141
+#: ../src/Clients/Nereid/Nereid/ViewContainer.cs:136
 #: ../src/Core/Banshee.Services/Banshee.Library/MusicFileNamePattern.cs:93
 #: ../src/Core/Banshee.Services/Banshee.Query/BansheeQuery.cs:194
 msgid "Composer"
 msgstr "Compositor"
 
-#: ../src/Clients/Nereid/Nereid/ViewContainer.cs:142
+#: ../src/Clients/Nereid/Nereid/ViewContainer.cs:137
 #: ../src/Core/Banshee.Services/Banshee.Library/MusicFileNamePattern.cs:98
 #: ../src/Core/Banshee.Services/Banshee.Query/BansheeQuery.cs:187
 #: ../src/Core/Banshee.Services/Banshee.Query/BansheeQuery.cs:366
-#: ../src/Extensions/Banshee.MeeGo/Banshee.MeeGo/SearchEntry.cs:91
+#: ../src/Extensions/Banshee.MediaPanel/Banshee.MediaPanel/SearchEntry.cs:91
 msgid "Genre"
 msgstr "Gênero"
 
 #. Translators: noun
-#: ../src/Clients/Nereid/Nereid/ViewContainer.cs:144
+#: ../src/Clients/Nereid/Nereid/ViewContainer.cs:139
 #: ../src/Core/Banshee.Services/Banshee.Query/BansheeQuery.cs:216
 msgid "Comment"
 msgstr "Comentário"
@@ -2012,7 +2019,7 @@ msgstr "Excluir lista de reprodução"
 #: ../src/Core/Banshee.ThickClient/Banshee.Gui/SourceActions.cs:176
 #: ../src/Core/Banshee.ThickClient/Banshee.Gui/TrackActions.cs:135
 #: ../src/Core/Banshee.ThickClient/Banshee.Gui/TrackActions.cs:462
-#: ../src/Core/Banshee.ThickClient/Banshee.Sources.Gui/SourceView.cs:601
+#: ../src/Core/Banshee.ThickClient/Banshee.Sources.Gui/SourceView.cs:597
 #: ../src/Core/Banshee.ThickClient/Banshee.Sources.Gui/SourceView_DragAndDrop.cs:212
 msgid "New Playlist"
 msgstr "Nova lista de reprodução"
@@ -3515,7 +3522,7 @@ msgstr ""
 #. Translators: this is a verb (command), not a noun (things)
 #: ../src/Core/Banshee.ThickClient/Banshee.Gui/TrackActions.cs:159
 #: ../src/Extensions/Banshee.InternetArchive/Banshee.InternetArchive/HeaderFilters.cs:171
-#: ../src/Extensions/Banshee.MeeGo/Banshee.MeeGo/SearchEntry.cs:112
+#: ../src/Extensions/Banshee.MediaPanel/Banshee.MediaPanel/SearchEntry.cs:112
 #, csharp-format
 msgid "_Search"
 msgstr "Pe_squisar:"
@@ -5081,6 +5088,12 @@ msgstr "Tipo do problema:"
 msgid "Apply Selected Fixes"
 msgstr "Aplicar os reparos selecionados"
 
+#: ../src/Extensions/Banshee.Fixup/Banshee.Fixup/FixSource.cs:79
+#: ../src/Extensions/Banshee.NotificationArea/Banshee.NotificationArea/NotificationAreaService.cs:133
+#: ../src/Extensions/Banshee.SoundMenu/Banshee.SoundMenu/SoundMenuService.cs:111
+msgid "Close"
+msgstr "Fechar"
+
 #: ../src/Extensions/Banshee.Fixup/Banshee.Fixup/GenreDuplicateSolver.cs:46
 msgid "Duplicate Genres"
 msgstr "Gêneros duplicados"
@@ -6165,31 +6178,33 @@ msgstr "URL lastfm://"
 msgid "lastfm://"
 msgstr "lastfm://"
 
-#: ../src/Extensions/Banshee.MeeGo/Banshee.MeeGo/MediaPanelContents.cs:110
-msgid "Media"
-msgstr "Mídia"
+#: ../src/Extensions/Banshee.MediaPanel/banshee-media-panel.desktop.in.h:1
+#| msgid "Banshee Media Player"
+msgid "Banshee Media Panel"
+msgstr "Painel de mídia do Banshee"
 
-#: ../src/Extensions/Banshee.MeeGo/Banshee.MeeGo/MediaPanelContents.cs:120
+#: ../src/Extensions/Banshee.MediaPanel/banshee-media-panel.desktop.in.h:2
+#| msgid "Play and organize your media collection"
+msgid "Play and browse your media collection"
+msgstr "Navegue e reproduza sua coleção de mídia"
+
+#: ../src/Extensions/Banshee.MediaPanel/Banshee.MediaPanel/MediaPanelContents.cs:106
 msgid "Library"
 msgstr "Biblioteca"
 
-#: ../src/Extensions/Banshee.MeeGo/Banshee.MeeGo/MediaPanelContents.cs:132
+#: ../src/Extensions/Banshee.MediaPanel/Banshee.MediaPanel/MediaPanelContents.cs:118
 msgid "Launch the Banshee Media Player"
 msgstr "Lançar o reprodutor de mídia Banshee"
 
-#: ../src/Extensions/Banshee.MeeGo/Banshee.MeeGo/MediaPanelContents.cs:165
+#: ../src/Extensions/Banshee.MediaPanel/Banshee.MediaPanel/MediaPanelContents.cs:150
 #: ../src/Extensions/Banshee.NowPlaying/Banshee.NowPlaying/NowPlayingSource.cs:50
 msgid "Now Playing"
 msgstr "Reproduzindo agora"
 
-#: ../src/Extensions/Banshee.MeeGo/Banshee.MeeGo/MeeGoPanel.cs:60
-#: ../src/Extensions/Banshee.MeeGo/meego-panel-banshee.desktop.in.in.h:1
-msgid "media"
-msgstr "mídia"
-
-#: ../src/Extensions/Banshee.MeeGo/meego-panel-banshee.desktop.in.in.h:2
-msgid "Quick access panel for your media"
-msgstr "Painel de acesso rápido para sua mídia"
+#: ../src/Extensions/Banshee.MediaPanel/Banshee.MediaPanel/MediaPanelService.cs:98
+#| msgid "Media Player"
+msgid "Media _Panel"
+msgstr "_Painel de mídia"
 
 #: ../src/Extensions/Banshee.MiniMode/Banshee.MiniMode/MiniModeService.cs:25
 msgid "_Mini Mode"
@@ -7275,6 +7290,15 @@ msgstr "Conectado ao Last.fm."
 #: ../src/Libraries/Migo/Migo.Syndication/RssParser.cs:103
 msgid "Unknown Podcast"
 msgstr "Podcast desconhecido"
+
+#~ msgid "Media"
+#~ msgstr "Mídia"
+
+#~ msgid "media"
+#~ msgstr "mídia"
+
+#~ msgid "Quick access panel for your media"
+#~ msgstr "Painel de acesso rápido para sua mídia"
 
 #~ msgid "Clear search"
 #~ msgstr "Limpar pesquisa"
