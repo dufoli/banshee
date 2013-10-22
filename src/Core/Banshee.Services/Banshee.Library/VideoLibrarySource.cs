@@ -106,12 +106,12 @@ namespace Banshee.Library
             new SmartPlaylistDefinition (
                 Catalog.GetString ("Favorites"),
                 Catalog.GetString ("Videos rated four and five stars"),
-                "rating>=4"),
+                "rating>=4", true),
 
             new SmartPlaylistDefinition (
                 Catalog.GetString ("Unwatched"),
                 Catalog.GetString ("Videos that haven't been played yet"),
-                "plays=0"),
+                "plays=0", true),
         };
     }
 }
