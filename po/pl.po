@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: banshee\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-20 02:50+0200\n"
-"PO-Revision-Date: 2013-10-20 02:51+0200\n"
+"POT-Creation-Date: 2013-10-23 16:28+0200\n"
+"PO-Revision-Date: 2013-10-23 16:29+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -638,32 +638,6 @@ msgstr "Zmienna gęstość bitowa"
 msgid "Audio Quality"
 msgstr "Jakość dźwięku"
 
-#: ../data/desktop-files/common.desktop.in.h:1
-#: ../src/Dap/Banshee.Dap/Banshee.Dap/DapSource.cs:194
-msgid "Media Player"
-msgstr "Odtwarzacz multimediów"
-
-#: ../data/desktop-files/common.desktop.in.h:2
-#: ../src/Clients/Muinshee/Muinshee/PlayerInterface.cs:86
-#: ../src/Clients/Nereid/Nereid/PlayerInterface.cs:115
-#: ../src/Core/Banshee.ThickClient/Banshee.Gui/BaseClientWindow.cs:199
-#: ../src/Extensions/Banshee.MiniMode/Banshee.MiniMode/MiniModeWindow.cs:68
-msgid "Banshee Media Player"
-msgstr "Odtwarzacz multimediów Banshee"
-
-#: ../data/desktop-files/common.desktop.in.h:3
-msgid "Play and organize your media collection"
-msgstr "Odtwarzanie i organizowanie kolekcji multimediów"
-
-#: ../data/desktop-files/common.desktop.in.h:4
-msgid ""
-"Video;Movie;Film;Clip;Flick;Series;Media;Player;DVD;Disc;Mp3;Audio;CD;MTP;"
-"Podcast;DAAP;Playlist;Ipod;Multimedia;Collection;Music;Radio;"
-msgstr ""
-"Wideo;Video;Movie;Film;Filmik;Klip;Serial;Media;Odtwarzacz;Player;DVD;Płyta;"
-"Dysk;Disc;Mp3;Dźwięk;Audio;CD;MTP;Podcast;Podkast;DAAP;Lista;odtwarzania;"
-"Playlist;Ipod;Ipad;Multimedia;Kolekcja;Biblioteka;Muzyka;Music;Radio;"
-
 #. Writing GNOME below, instead of just "Linux", is inclusive of *BSD OSs
 #: ../data/banshee.appdata.xml.in.h:2
 msgid ""
@@ -682,6 +656,33 @@ msgstr ""
 "Funkcje programu Banshee obejmują odtwarzanie muzyki i nagrań wideo, "
 "podcastów dźwiękowych i wideo oraz synchronizowanie kolekcji z urządzeniami "
 "Android, iPod i wieloma innymi."
+
+#: ../data/desktop-files/common.desktop.in.h:1
+#: ../src/Dap/Banshee.Dap/Banshee.Dap/DapSource.cs:194
+msgid "Media Player"
+msgstr "Odtwarzacz multimediów"
+
+#: ../data/desktop-files/common.desktop.in.h:2
+#: ../src/Clients/Muinshee/Muinshee/PlayerInterface.cs:86
+#: ../src/Clients/Nereid/Nereid/PlayerInterface.cs:115
+#: ../src/Core/Banshee.ThickClient/Banshee.Gui/BaseClientWindow.cs:199
+#: ../src/Extensions/Banshee.MiniMode/Banshee.MiniMode/MiniModeWindow.cs:68
+msgid "Banshee Media Player"
+msgstr "Odtwarzacz multimediów Banshee"
+
+#: ../data/desktop-files/common.desktop.in.h:3
+msgid "Play and organize your media collection"
+msgstr "Odtwarzanie i organizowanie kolekcji multimediów"
+
+#: ../data/desktop-files/common.desktop.in.h:4
+#: ../src/Extensions/Banshee.MediaPanel/banshee-media-panel.desktop.in.h:3
+msgid ""
+"Video;Movie;Film;Clip;Flick;Series;Media;Player;DVD;Disc;Mp3;Audio;CD;MTP;"
+"Podcast;DAAP;Playlist;Ipod;Multimedia;Collection;Music;Radio;"
+msgstr ""
+"Wideo;Video;Movie;Film;Filmik;Klip;Serial;Media;Odtwarzacz;Player;DVD;Płyta;"
+"Dysk;Disc;Mp3;Dźwięk;Audio;CD;MTP;Podcast;Podkast;DAAP;Lista;odtwarzania;"
+"Playlist;Ipod;Ipad;Multimedia;Kolekcja;Biblioteka;Muzyka;Music;Radio;"
 
 #: ../src/Backends/Banshee.Gnome/Banshee.GnomeBackend/Brasero.cs:65
 msgid "Write CD..."
@@ -6192,6 +6193,14 @@ msgstr "Odnośnik URL lastfm://"
 msgid "lastfm://"
 msgstr "lastfm://"
 
+#: ../src/Extensions/Banshee.MediaPanel/banshee-media-panel.desktop.in.h:1
+msgid "Banshee Media Panel"
+msgstr "Panel multimediów Banshee"
+
+#: ../src/Extensions/Banshee.MediaPanel/banshee-media-panel.desktop.in.h:2
+msgid "Play and browse your media collection"
+msgstr "Odtwarzanie i przeglądanie kolekcji multimediów"
+
 #: ../src/Extensions/Banshee.MediaPanel/Banshee.MediaPanel/MediaPanelContents.cs:106
 msgid "Library"
 msgstr "Kolekcja"
@@ -6204,6 +6213,10 @@ msgstr "Uruchom odtwarzacz multimediów Banshee"
 #: ../src/Extensions/Banshee.NowPlaying/Banshee.NowPlaying/NowPlayingSource.cs:50
 msgid "Now Playing"
 msgstr "Teraz odtwarzany"
+
+#: ../src/Extensions/Banshee.MediaPanel/Banshee.MediaPanel/MediaPanelService.cs:98
+msgid "Media _Panel"
+msgstr "_Panel multimediów"
 
 #: ../src/Extensions/Banshee.MiniMode/Banshee.MiniMode/MiniModeService.cs:25
 msgid "_Mini Mode"
