@@ -208,11 +208,6 @@ bp_pipeline_bus_callback (GstBus *bus, GstMessage *message, gpointer userdata)
         } 
         
         case GST_MESSAGE_ELEMENT: {
-            const GstStructure *messageStruct;
-            messageStruct = gst_message_get_structure (message);
-            if (GST_MESSAGE_SRC (message) == GST_OBJECT (player->playbin) && gst_structure_has_name (messageStruct, "playbin2-stream-changed")) {
-                bp_next_track_starting (player);
-            }
             _bp_missing_elements_process_message (player, message);
             _bp_dvd_elements_process_message (player, message);
             break;
