@@ -291,9 +291,6 @@ _bp_pipeline_construct (BansheePlayer *player)
 
     g_return_val_if_fail (player->playbin != NULL, FALSE);
 
-    // FIXME: Connect a proxy about-to-finish callback that will generate a next-track-starting callback.
-    // This can be removed once playbin generates its own next-track signal.
-    // bgo#584987 - this is included in >= 0.10.26
     g_signal_connect (player->playbin, "about-to-finish", G_CALLBACK (bp_about_to_finish_callback), player);
 
     g_signal_connect (player->playbin, "notify::volume", G_CALLBACK (bp_volume_changed_callback), player);
