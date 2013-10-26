@@ -62,18 +62,8 @@ namespace Banshee.GStreamerSharp
         public void Initialize ()
         {
             Element videosink;
-            
-            if (VideoPipelineSetup != null) {
-                videosink = VideoPipelineSetup ();
-                if (videosink != null && videosink is Element) {
-                    playbin ["video-sink"] = videosink;
-                    video_display_context_type = VideoDisplayContextType.Custom;
-                    return;
-                }
-            }
-
             video_display_context_type = VideoDisplayContextType.GdkWindow;
-            
+
             videosink = ElementFactory.Make ("gconfvideosink", "videosink");
             if (videosink == null) {
                 videosink = ElementFactory.Make ("autovideosink", "videosink");
@@ -101,9 +91,6 @@ namespace Banshee.GStreamerSharp
         }
         public delegate void PrepareWindowHandler ();
         public event PrepareWindowHandler PrepareWindow;
-        
-        public delegate Element VideoPipelineSetupHandler ();
-        public event VideoPipelineSetupHandler VideoPipelineSetup;
 
         public delegate void VideoGeometryHandler (int width, int height, int fps_n, int fps_d, int par_n, int par_d);
         public event VideoGeometryHandler VideoGeometry;
