@@ -38,7 +38,8 @@ namespace Banshee.MediaPanel
     {
         public MediaPanelThemeLoader ()
         {
-            Hyena.Gui.Theming.ThemeEngine.SetCurrentTheme<MediaPanelTheme> ();
+            //FIXME: this theme is heavily broken in Ubuntu's GTK3
+            //Hyena.Gui.Theming.ThemeEngine.SetCurrentTheme<MediaPanelTheme> ();
         }
     }
 
