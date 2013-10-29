@@ -741,13 +741,11 @@ namespace Banshee.GStreamerSharp
         public override void Play ()
         {
             playbin.SetState (Gst.State.Playing);
-            OnStateChanged (PlayerState.Playing);
         }
 
         public override void Pause ()
         {
             playbin.SetState (Gst.State.Paused);
-            OnStateChanged (PlayerState.Paused);
         }
 
         public override void Close (bool fullShutdown)
