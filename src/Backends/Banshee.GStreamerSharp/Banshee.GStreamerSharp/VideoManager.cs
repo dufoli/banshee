@@ -27,7 +27,6 @@
 //
 
 using System;
-using System.Threading;
 using System.Runtime.InteropServices;
 using Mono.Unix;
 
@@ -125,35 +124,34 @@ namespace Banshee.GStreamerSharp
 
             video_sink = playbin.VideoSink;
 
-            Monitor.Enter (video_mutex);
+            lock (video_mutex) {
 
-            if (video_sink == null) {
-                xoverlay = null;
-                Monitor.Exit (video_mutex);
-                return false;
-            }
-
-            xoverlay_element = video_sink is Bin
-                ? ((Bin)video_sink).GetByInterface (new XOverlayAdapter ().GType)
-                : video_sink;
-
-            xoverlay = new XOverlayAdapter (xoverlay_element.Handle);
-
-            if (!PlatformDetection.IsWindows) {
-                // We can't rely on aspect ratio from dshowvideosink
-                if (xoverlay != null && xoverlay_element.HasProperty ("force-aspect-ratio")) {
-                    xoverlay_element ["force-aspect-ratio"] = true;
+                if (video_sink == null) {
+                    xoverlay = null;
+                    return false;
                 }
+
+                xoverlay_element = video_sink is Bin
+                    ? ((Bin)video_sink).GetByInterface (new XOverlayAdapter ().GType)
+                    : video_sink;
+
+                xoverlay = new XOverlayAdapter (xoverlay_element.Handle);
+
+                if (!PlatformDetection.IsWindows) {
+                    // We can't rely on aspect ratio from dshowvideosink
+                    if (xoverlay != null && xoverlay_element.HasProperty ("force-aspect-ratio")) {
+                        xoverlay_element ["force-aspect-ratio"] = true;
+                    }
+                }
+
+                if (xoverlay != null && xoverlay_element.HasProperty ("handle-events")) {
+                    xoverlay_element ["handle-events"] = false;
+                }
+
+                found_xoverlay = (xoverlay != null) ? true : false;
+
+                return found_xoverlay;
             }
-
-            if (xoverlay != null && xoverlay_element.HasProperty ("handle-events")) {
-                xoverlay_element ["handle-events"] = false;
-            }
-
-            found_xoverlay = (xoverlay != null) ? true : false;
-
-            Monitor.Exit (video_mutex);
-            return found_xoverlay;
         }
 
         public void ParseStreamInfo ()
