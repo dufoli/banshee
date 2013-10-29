@@ -364,10 +364,10 @@ namespace Banshee.GStreamerSharp
 
             cdda_manager = new CddaManager (playbin);
             dvd_manager = new DvdManager (playbin);
-            // FIXME: Disable video stuff until GLib# 3 is used instead of the sopy bundled in GStreamerSharp
-            //video_manager = new VideoManager (playbin);
-            //video_manager.PrepareWindow += OnVideoPrepareWindow;
-            //video_manager.Initialize ();
+
+            video_manager = new VideoManager (playbin);
+            video_manager.PrepareWindow += OnVideoPrepareWindow;
+            video_manager.Initialize ();
 
             dvd_manager.FindNavigation (playbin);
             OnStateChanged (PlayerState.Ready);

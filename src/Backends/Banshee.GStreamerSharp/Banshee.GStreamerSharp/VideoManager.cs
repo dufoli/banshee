@@ -51,7 +51,7 @@ namespace Banshee.GStreamerSharp
         VideoDisplayContextType video_display_context_type;
         IntPtr video_window;
         ulong video_window_xid;
-        XOverlay xoverlay;
+        XOverlayAdapter xoverlay;
         object video_mutex = new object ();
 
         public VideoManager (PlayBin2 playbin)
@@ -77,14 +77,13 @@ namespace Banshee.GStreamerSharp
             }
             
             playbin ["video-sink"] = videosink;
-            
-            playbin.Bus.SyncHandler = (bus, message) => {return bus.SyncSignalHandler (message); };
+
+            // FIXME: the 2 lines below (SyncHandler and ElementAdded), if uncommented, cause hangs (and commenting
+            //        them makes a 2nd video not play in the proper window, but it's better to have the latter bug)
+            //playbin.Bus.SyncHandler = (bus, message) => {return bus.SyncSignalHandler (message); };
             playbin.Bus.SyncMessage += OnSyncMessage;
-                
-            if (videosink is Bin) {
-                ((Bin)videosink).ElementAdded += OnVideoSinkElementAdded;
-            }
-            
+            //if (videosink is Bin) { ((Bin)videosink).ElementAdded += OnVideoSinkElementAdded; }
+
             if (PrepareWindow != null) {
                 PrepareWindow ();
             }
@@ -133,12 +132,12 @@ namespace Banshee.GStreamerSharp
                 Monitor.Exit (video_mutex);
                 return false;
             }
-           
+
             xoverlay_element = video_sink is Bin
-                ? ((Bin)video_sink).GetByInterface (typeof(XOverlay))
+                ? ((Bin)video_sink).GetByInterface (new XOverlayAdapter ().GType)
                 : video_sink;
-            
-            xoverlay = xoverlay_element as XOverlay;
+
+            xoverlay = new XOverlayAdapter (xoverlay_element.Handle);
 
             if (!PlatformDetection.IsWindows) {
                 // We can't rely on aspect ratio from dshowvideosink
