@@ -159,6 +159,9 @@ namespace Banshee.GStreamerSharp
                     ? ((Bin)video_sink).GetByInterface (new XOverlayAdapter ().GType)
                     : video_sink;
 
+                if (xoverlay_element == null) {
+                    return false;
+                }
                 xoverlay = new XOverlayAdapter (xoverlay_element.Handle);
 
                 if (!PlatformDetection.IsWindows) {
