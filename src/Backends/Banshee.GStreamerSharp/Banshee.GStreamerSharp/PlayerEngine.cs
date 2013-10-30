@@ -748,6 +748,7 @@ namespace Banshee.GStreamerSharp
         public override void Play ()
         {
             playbin.SetState (Gst.State.Playing);
+            video_manager.InvalidateOverlay ();
             video_manager.MaybePrepareOverlay ();
         }
 

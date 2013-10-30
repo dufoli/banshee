@@ -79,8 +79,8 @@ namespace Banshee.GStreamerSharp
             
             playbin ["video-sink"] = videosink;
 
-            // FIXME: the 2 lines below (SyncHandler and ElementAdded), if uncommented, cause hangs (and commenting
-            //        them makes a 2nd video not play in the proper window, but it's better to have the latter bug)
+            // FIXME: the 2 lines below (SyncHandler and ElementAdded), if uncommented, cause hangs, and they
+            //        don't seem to be useful at this point anyway, remove?
             //playbin.Bus.SyncHandler = (bus, message) => {return bus.SyncSignalHandler (message); };
             playbin.Bus.SyncMessage += OnSyncMessage;
             //if (videosink is Bin) { ((Bin)videosink).ElementAdded += OnVideoSinkElementAdded; }
@@ -123,6 +123,13 @@ namespace Banshee.GStreamerSharp
         private void OnVideoSinkElementAdded (object o, ElementAddedArgs args)
         {
             FindXOverlay ();
+        }
+
+        internal void InvalidateOverlay ()
+        {
+            lock (video_mutex) {
+                xoverlay = null;
+            }
         }
 
         internal bool MaybePrepareOverlay ()
