@@ -444,6 +444,13 @@ namespace Banshee.GStreamerSharp
                 // pick up the pieces.
                 return;
             }
+
+            // If there isn't a next track for us, release the block on the about-to-finish callback.
+            if (uri == null) {
+                next_track_set.Set ();
+                return;
+            }
+
             playbin.Uri = uri.AbsoluteUri;
 
             if (maybeVideo) {
