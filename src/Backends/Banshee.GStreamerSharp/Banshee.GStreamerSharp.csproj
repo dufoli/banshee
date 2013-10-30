@@ -80,4 +80,7 @@
     <Compile Include="Banshee.GStreamerSharp\DvdManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <None Include="Banshee.GStreamerSharp.dll.config" />
+  </ItemGroup>
 </Project>
