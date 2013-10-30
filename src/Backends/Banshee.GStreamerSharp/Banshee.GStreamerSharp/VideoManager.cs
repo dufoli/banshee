@@ -1,10 +1,12 @@
 //
 // VideoManager.cs
 //
-// Author:
+// Authors:
 //  Olivier Dufour <olivier.duff@gmail.com>
+//  Andrés G. Aragoneses <knocte@gmail.com>
 //
 // Copyright (C) 2011 Olivier Dufour
+// Copyright (C) 2013 Andrés G. Aragoneses
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -49,7 +51,7 @@ namespace Banshee.GStreamerSharp
         PlayBin2 playbin;
         VideoDisplayContextType video_display_context_type;
         IntPtr video_window;
-        ulong video_window_xid;
+        ulong? video_window_xid;
         XOverlayAdapter xoverlay;
         object video_mutex = new object ();
 
@@ -106,7 +108,7 @@ namespace Banshee.GStreamerSharp
 
             if (message.Type != MessageType.Element)
                 return;
-            
+
             if (message.Structure == null || message.Structure.Name != "prepare-xwindow-id") {
                 return;
             }
@@ -114,13 +116,28 @@ namespace Banshee.GStreamerSharp
             bool found_xoverlay = FindXOverlay ();
 
             if (found_xoverlay) {
-                xoverlay.XwindowId = video_window_xid;
+                xoverlay.XwindowId = video_window_xid.Value;
             }
         }
 
         private void OnVideoSinkElementAdded (object o, ElementAddedArgs args)
         {
             FindXOverlay ();
+        }
+
+        internal bool MaybePrepareOverlay ()
+        {
+            if (!video_window_xid.HasValue) {
+                //this is not a video
+                return false;
+            }
+
+            if (xoverlay == null && !FindXOverlay ()) {
+                return false;
+            }
+
+            xoverlay.XwindowId = video_window_xid.Value;
+            return true;
         }
 
         private bool FindXOverlay ()
@@ -245,12 +262,9 @@ namespace Banshee.GStreamerSharp
                 return;
             }
 
-            if (xoverlay == null && !FindXOverlay ()) {
-                return;
+            if (MaybePrepareOverlay () && xoverlay != null) {
+                xoverlay.Expose ();
             }
-
-            xoverlay.XwindowId = video_window_xid;
-            xoverlay.Expose ();
         }
 
         public void WindowRealize (IntPtr window)
