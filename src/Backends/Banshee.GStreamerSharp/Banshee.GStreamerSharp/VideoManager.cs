@@ -83,10 +83,17 @@ namespace Banshee.GStreamerSharp
             playbin.Bus.SyncMessage += OnSyncMessage;
             //if (videosink is Bin) { ((Bin)videosink).ElementAdded += OnVideoSinkElementAdded; }
 
-            if (PrepareWindow != null) {
-                PrepareWindow ();
+            RaisePrepareWindow ();
+        }
+
+        private void RaisePrepareWindow ()
+        {
+            var handler = PrepareWindow;
+            if (handler != null) {
+                handler ();
             }
         }
+
         public delegate void PrepareWindowHandler ();
         public event PrepareWindowHandler PrepareWindow;
 
@@ -225,8 +232,10 @@ namespace Banshee.GStreamerSharp
 
         private void RaiseVideoGeometry (int width, int height, int fps_n, int fps_d, int par_n, int par_d)
         {
-            if (VideoGeometry != null)
-                VideoGeometry (width, height, fps_n, fps_d, par_n, par_d);
+            var handler = VideoGeometry;
+            if (handler != null) {
+                handler (width, height, fps_n, fps_d, par_n, par_d);
+            }
         }
 
         public void WindowExpose (IntPtr window, bool direct)
