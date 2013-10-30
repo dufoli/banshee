@@ -263,8 +263,7 @@ namespace Banshee.GStreamerSharp
         [DllImport ("libgdk-3.so.0") /* willfully unmapped */]
         private static extern IntPtr gdk_x11_window_get_xid (IntPtr drawable);
 
-        //FIXME: find the new 3.0 GDK library name in Windows
-        [DllImport ("libgdk-win32-2.0-0.dll")]
+        [DllImport ("libgdk-3-0.dll")]
         private static extern IntPtr gdk_win32_drawable_get_handle (IntPtr drawable);
 
         public VideoDisplayContextType VideoDisplayContextType {
