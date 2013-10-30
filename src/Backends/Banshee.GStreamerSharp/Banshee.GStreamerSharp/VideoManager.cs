@@ -259,8 +259,8 @@ namespace Banshee.GStreamerSharp
             }
         }
 
-        //FIXME: map this, to allow running in MacOS?
-        [DllImport ("libgdk-3.so.0") /* willfully unmapped */]
+
+        [DllImport ("libgdk-3-0.dll")]
         private static extern IntPtr gdk_x11_window_get_xid (IntPtr drawable);
 
         [DllImport ("libgdk-3-0.dll")]
