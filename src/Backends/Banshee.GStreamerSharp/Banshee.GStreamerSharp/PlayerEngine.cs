@@ -247,26 +247,28 @@ namespace Banshee.GStreamerSharp
 
             public int [] BandRange {
                 get {
-                    throw new NotImplementedException ();
-//                    int min = -1;
-//                    int max = -1;
-//
-//                    //http://gstreamer.freedesktop.org/data/doc/gstreamer/head/gst-plugins-good-plugins/html/gst-plugins-good-plugins-equalizer-10bands.html
-//                    PropertyInfo pspec = new PropertyInfo();
-//
-//
-//                    if (equalizer.HasProperty ("band0::gain")) {
-//                        pspec = equalizer.GetPropertyInfo ("band0::gain");
-//                    } else if (equalizer.HasProperty ("band0")) {
-//                        pspec = equalizer.GetPropertyInfo ("band0");
-//                    }
-//
-//                    if (pspec.Name != null) {
-//                        min = (int)((double)pspec.Min);
-//                        max = (int)((double)pspec.Max);
-//                    }
-//
-//                    return new int [] { min, max };
+                    // http://gstreamer.freedesktop.org/data/doc/gstreamer/head/gst-plugins-good-plugins/html/gst-plugins-good-plugins-equalizer-10bands.html#GstIirEqualizer10Bands--band0
+                    return new [] { -24, 12 };
+
+                    /* TODO: should we check for band0::gain like it was done before? if yes, use paramspec.min|max retrieval
+                    int min = -1;
+                    int max = -1;
+
+                    //http://gstreamer.freedesktop.org/data/doc/gstreamer/head/gst-plugins-good-plugins/html/gst-plugins-good-plugins-equalizer-10bands.html
+                    PropertyInfo pspec = new PropertyInfo();
+
+
+                    if (equalizer.HasProperty ("band0::gain")) {
+                        pspec = equalizer.GetPropertyInfo ("band0::gain");
+                    } else if (equalizer.HasProperty ("band0")) {
+                        pspec = equalizer.GetPropertyInfo ("band0");
+                    }
+
+                    if (pspec.Name != null) {
+                        min = (int)((double)pspec.Min);
+                        max = (int)((double)pspec.Max);
+                    }
+                    */
                 }
             }
 
