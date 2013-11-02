@@ -1,4 +1,4 @@
-﻿﻿//
+﻿//
 // Visualization.cs
 //
 // Authors:
@@ -49,7 +49,7 @@ namespace Banshee.GStreamerSharp
         Adapter vis_buffer;
         bool active;
         bool vis_thawing;
-        IntPtr vis_fft;
+        Gst.FFT.FFTF32 vis_fft;
         GstFFTF32Complex[] vis_fft_buffer;
         float[] vis_fft_sample_buffer;
         uint wanted_size;
@@ -69,18 +69,6 @@ namespace Banshee.GStreamerSharp
           Blackman
         }
 
-        [DllImport ("libgstfft-1.0-0.dll")]
-        private static extern IntPtr gst_fft_f32_new (int len, bool inverse);
-
-        [DllImport ("libgstfft-1.0-0.dll")]
-        private static extern void gst_fft_f32_window (IntPtr self, [MarshalAs (UnmanagedType.LPArray)] float [] timedata, FFTWindow window);
-
-        [DllImport ("libgstfft-1.0-0.dll")]
-        private static extern void gst_fft_f32_fft (IntPtr self, [MarshalAs (UnmanagedType.LPArray)] float [] timedata, [MarshalAs (UnmanagedType.LPArray, ArraySubType=UnmanagedType.Struct)] GstFFTF32Complex [] freqdata);
-
-        [DllImport ("libgstfft-1.0-0.dll")]
-        private static extern void gst_fft_f32_free (IntPtr self);
-
         public Visualization (Bin audiobin, Pad teepad)
         {
             // The basic pipeline we're constructing is:
@@ -91,7 +79,7 @@ namespace Banshee.GStreamerSharp
             Pad pad;
 
             vis_buffer = null;
-            vis_fft = gst_fft_f32_new (SLICE_SIZE * 2, false);
+            vis_fft = new Gst.FFT.FFTF32 (SLICE_SIZE * 2, false);
             vis_fft_buffer = new GstFFTF32Complex [SLICE_SIZE + 1];
             vis_fft_sample_buffer = new float [SLICE_SIZE];
             
@@ -139,7 +127,8 @@ namespace Banshee.GStreamerSharp
             // Don't go to PAUSED when we freeze the pipeline.
             fakesink ["async"] = false;
 
-            audiobin.Add (audiosinkqueue, resampler, converter, fakesink);
+            //FIXME BEFORE PUSHING NEW GST# BACKEND: this line below is commented to make playback work :(
+            //audiobin.Add (audiosinkqueue, resampler, converter, fakesink);
             
             pad = audiosinkqueue.GetStaticPad ("sink");
             teepad.Link (pad);
@@ -155,12 +144,6 @@ namespace Banshee.GStreamerSharp
         
             // Disable the pipeline till we hear otherwise from managed land.
             Blocked = true;
-        }
-
-        ~Visualization ()
-        {
-            if (vis_fft != IntPtr.Zero)
-                gst_fft_f32_free (vis_fft);
         }
 
         public bool Active
@@ -337,7 +320,7 @@ namespace Banshee.GStreamerSharp
             }
         
             if (active)
-                return PadProbeReturn.Ok;
+                return PadProbeReturn.Pass;
 
             switch (padEvent.Type) {
                 case EventType.Eos:
@@ -351,7 +334,7 @@ namespace Banshee.GStreamerSharp
                     break;
             }
 
-            return PadProbeReturn.Ok;
+            return PadProbeReturn.Pass;
         }
     }
 }

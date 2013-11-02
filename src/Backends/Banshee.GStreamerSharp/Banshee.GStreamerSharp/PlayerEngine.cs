@@ -368,8 +368,7 @@ namespace Banshee.GStreamerSharp
             }
 
             Pad teepad = audio_sink.RequestTeePad ();
-            //FIXME BEFORE PUSHING NEW GST# BACKEND: this line below is commented to make playback work :(
-            //visualization = new Visualization (audio_sink, teepad);
+            visualization = new Visualization (audio_sink, teepad);
 
             playbin.AddNotification ("volume", OnVolumeChanged);
             playbin.Bus.AddWatch (OnBusMessage);

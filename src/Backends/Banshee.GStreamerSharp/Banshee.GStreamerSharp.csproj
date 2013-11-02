@@ -37,7 +37,7 @@
     <Reference Include="Mono.Posix">
       <HintPath>..\..\..\bin\bin\Mono.Posix.dll</HintPath>
     </Reference>
-    <Reference Include="gstreamer-sharp, Version=1.0.6.0, Culture=neutral, PublicKeyToken=5cbf79803e97ff61">
+    <Reference Include="gstreamer-sharp, Version=0.99.0.0, Culture=neutral, PublicKeyToken=5cbf79803e97ff61">
       <Private>False</Private>
     </Reference>
   </ItemGroup>
