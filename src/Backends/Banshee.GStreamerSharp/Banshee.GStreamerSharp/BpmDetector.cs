@@ -87,7 +87,10 @@ namespace Banshee.GStreamerSharp
                         return;
                     }
 
-                    var caps = args.NewPad.Caps;
+                    var caps = args.NewPad.QueryCaps ();
+                    if (caps == null)
+                        return;
+
                     var str = caps[0];
                     if (!str.Name.Contains ("audio"))
                         return;
