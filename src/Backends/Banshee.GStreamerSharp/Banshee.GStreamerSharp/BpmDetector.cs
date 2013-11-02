@@ -114,20 +114,24 @@ namespace Banshee.GStreamerSharp
 
                 foreach (var name in tag_list.Tags) {
                     if (name == "beats-per-minute") {
-                        if (tag_list.GetTagSize (name) < 1) continue;
-                        var tag = tag_list.GetTag (name);
-                        foreach (var val in tag) {
-                            if (val is double) {
-                                double bpm = (double)val;
-                                int rounded = (int) Math.Round (bpm);
-                                if (!bpm_histogram.ContainsKey(rounded)) {
-                                    bpm_histogram[rounded] = 1;
-                                } else {
-                                    bpm_histogram[rounded]++;
-                                }
-                            }
-                            break;
+                        if (tag_list.GetTagSize (name) < 1) {
+                            continue;
                         }
+                        tag_list.Foreach (delegate(TagList list, string tagname) {
+                            for (uint i = 0; i < tag_list.GetTagSize (tagname); i++) {
+                                GLib.Value val = tag_list.GetValueIndex (tagname, i);
+                                if (val.Val is double) {
+                                    double bpm = (double)val;
+                                    int rounded = (int)Math.Round (bpm);
+                                    if (!bpm_histogram.ContainsKey (rounded)) {
+                                        bpm_histogram [rounded] = 1;
+                                    } else {
+                                        bpm_histogram [rounded]++;
+                                    }
+                                }
+                                val.Dispose ();
+                            }
+                        });
                     }
                 }
                 break;
