@@ -128,8 +128,9 @@ namespace Banshee.GStreamerSharp
             fakesink ["async"] = false;
 
             //FIXME BEFORE PUSHING NEW GST# BACKEND: this line below is commented to make playback work :(
-            //audiobin.Add (audiosinkqueue, resampler, converter, fakesink);
-            
+            //audiobin.Add (audiosinkqueue);
+            audiobin.Add (resampler, converter, fakesink);
+
             pad = audiosinkqueue.GetStaticPad ("sink");
             teepad.Link (pad);
             
