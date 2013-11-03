@@ -123,8 +123,7 @@ namespace Banshee.GStreamerSharp
             // Don't go to PAUSED when we freeze the pipeline.
             fakesink ["async"] = false;
 
-            //FIXME BEFORE PUSHING NEW GST# BACKEND: this line below is commented to make playback work :(
-            audiobin.Add (audiosinkqueue, resampler, converter);
+            audiobin.Add (audiosinkqueue, resampler, converter, fakesink);
 
             pad = audiosinkqueue.GetStaticPad ("sink");
             Pad teepad = audiobin.RequestTeePad ();
@@ -154,7 +153,7 @@ namespace Banshee.GStreamerSharp
         private Caps caps = Caps.FromString (
             "audio/x-raw, " +
             //FIXME: is this correct way to port this? https://github.com/GNOME/banshee/commit/e40923df1bc55129832dff5ca2c782f5040b412f#diff-7c442526ef990528be03ffbca9921ec3R38
-            "format = (string) F32LE, " +
+            "format = (string) " + Gst.Audio.GlobalAudio.AudioFormatToString (Gst.Audio.AudioFormat.F32) + ", " +
             "rate = (int) 44100, " +
             "channels = (int) 2");
 
@@ -209,7 +208,8 @@ namespace Banshee.GStreamerSharp
 
         private void PCMHandoff (object o, GLib.SignalArgs args)
         {
-            Console.WriteLine ("_________________I'm in here bitch");
+
+            //FIXME BEFORE PUSHING NEW GST# BACKEND: this line below is commented to make playback work :(
             throw new NotImplementedException ();
             /*
             Gst.Buffer data;
