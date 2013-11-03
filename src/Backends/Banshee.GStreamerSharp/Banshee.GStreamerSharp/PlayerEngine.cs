@@ -714,11 +714,10 @@ namespace Banshee.GStreamerSharp
             SafeUri suburi;
             int dot;
             // Always enable rendering of subtitles
-            int flags;
-            flags = (int)playbin.Flags;
+            uint flags;
+            flags = (uint)playbin["flags"];
             flags |= (1 << 2);//GST_PLAY_FLAG_TEXT
-            //FIXME BEFORE PUSHING NEW GST# BACKEND: this line below is commented to make VIDEO playback work :(
-            //playbin ["flags"] = flags;//ObjectFlags?
+            playbin ["flags"] = flags;
 
             Log.Debug ("[subtitle]: looking for subtitles for video file");
             scheme = uri.Scheme;
