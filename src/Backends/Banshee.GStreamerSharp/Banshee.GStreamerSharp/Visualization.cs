@@ -109,7 +109,7 @@ namespace Banshee.GStreamerSharp
             audiosinkqueue ["leaky"] = GST_QUEUE_LEAK_DOWNSTREAM;
             audiosinkqueue ["max-size-buffers"] = 0;
             audiosinkqueue ["max-size-bytes"] = 0;
-            audiosinkqueue ["max-size-time"] = (long)Constants.SECOND * 5;
+            audiosinkqueue ["max-size-time"] = ((long)Constants.SECOND) * 5L;
 
             fakesink.Connect ("handoff", PCMHandoff);
 
