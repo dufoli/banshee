@@ -52,7 +52,6 @@ namespace Banshee.GStreamerSharp
         Gst.FFT.FFTF32 vis_fft;
         GstFFTF32Complex[] vis_fft_buffer;
         float[] vis_fft_sample_buffer;
-        uint wanted_size;
 
         [StructLayout(LayoutKind.Sequential)]
         struct GstFFTF32Complex {
@@ -69,7 +68,7 @@ namespace Banshee.GStreamerSharp
           Blackman
         }
 
-        public Visualization (Bin audiobin, Pad teepad)
+        internal Visualization (PlayerEngine.AudioSinkBin audiobin)
         {
             // The basic pipeline we're constructing is:
             // .audiotee ! queue ! audioresample ! audioconvert ! fakesink
@@ -92,9 +91,6 @@ namespace Banshee.GStreamerSharp
             resampler = ElementFactory.Make ("audioresample", "vis-resample");
             converter = ElementFactory.Make ("audioconvert", "vis-convert");
             Element fakesink = ElementFactory.Make ("fakesink", "vis-sink");
-
-            // channels * slice size * float size = size of chunks we want
-            wanted_size = (uint)(2 * SLICE_SIZE * sizeof(float));
 
             if (audiosinkqueue == null || resampler == null || converter == null || fakesink == null) {
                 Log.Debug ("Could not construct visualization pipeline, a fundamental element could not be created");
@@ -119,32 +115,32 @@ namespace Banshee.GStreamerSharp
             fakesink ["sync"] = true;
             // Drop buffers if they come in too late.  This is mainly used when
             // thawing the vis pipeline.
-            fakesink ["max-lateness"] = (long)(Constants.SECOND / 120);
+            fakesink ["max-lateness"] = ((long)Constants.SECOND / 120L);
             // Deliver buffers one frame early.  This allows for rendering
             // time.  (TODO: It would be great to calculate this on-the-fly so
             // we match the rendering time.
-            fakesink ["ts-offset"] = -(long)(Constants.SECOND / 60);
+            fakesink ["ts-offset"] = -((long)Constants.SECOND / 60L);
             // Don't go to PAUSED when we freeze the pipeline.
             fakesink ["async"] = false;
 
             //FIXME BEFORE PUSHING NEW GST# BACKEND: this line below is commented to make playback work :(
-            //audiobin.Add (audiosinkqueue);
-            audiobin.Add (resampler, converter, fakesink);
+            audiobin.Add (audiosinkqueue, resampler, converter);
 
             pad = audiosinkqueue.GetStaticPad ("sink");
+            Pad teepad = audiobin.RequestTeePad ();
             teepad.Link (pad);
-            
+
+            teepad.Dispose ();
+            pad.Dispose ();
+
             Element.Link (audiosinkqueue, resampler, converter);
-            
+
             converter.LinkFiltered (fakesink, caps);
-            
+
             vis_buffer = new Adapter ();
             vis_resampler = resampler;
             vis_thawing = false;
             active = false;
-        
-            // Disable the pipeline till we hear otherwise from managed land.
-            Blocked = true;
         }
 
         public bool Active
@@ -157,10 +153,10 @@ namespace Banshee.GStreamerSharp
 
         private Caps caps = Caps.FromString (
             "audio/x-raw, " +
+            //FIXME: is this correct way to port this? https://github.com/GNOME/banshee/commit/e40923df1bc55129832dff5ca2c782f5040b412f#diff-7c442526ef990528be03ffbca9921ec3R38
+            "format = (string) F32LE, " +
             "rate = (int) 44100, " +
-            "channels = (int) 2, " +
-            "endianness = (int) BYTE_ORDER, " +
-            "width = (int) 32");
+            "channels = (int) 2");
 
         ulong? block_probe = null;
         private bool Blocked
@@ -213,9 +209,11 @@ namespace Banshee.GStreamerSharp
 
         private void PCMHandoff (object o, GLib.SignalArgs args)
         {
+            Console.WriteLine ("_________________I'm in here bitch");
             throw new NotImplementedException ();
             /*
             Gst.Buffer data;
+            uint wanted_size;
 
             if (OnDataAvailable == null) {
                 return;
@@ -309,6 +307,9 @@ namespace Banshee.GStreamerSharp
 
         PadProbeReturn EventProbe (Pad pad, PadProbeInfo info)
         {
+            if (info.Type == PadProbeType.EventDownstream)
+                return PadProbeReturn.Pass;
+
             var padEvent = info.Event;
             switch (padEvent.Type) {
                 case EventType.FlushStart:
@@ -318,21 +319,6 @@ namespace Banshee.GStreamerSharp
                 case EventType.CustomDownstream:
                     vis_thawing = true;
                 break;
-            }
-        
-            if (active)
-                return PadProbeReturn.Pass;
-
-            switch (padEvent.Type) {
-                case EventType.Eos:
-                case EventType.CustomDownstreamOob:
-                    Blocked = false;
-                    break;
-
-                case EventType.Segment:
-                case EventType.CustomDownstream:
-                    Blocked = true;
-                    break;
             }
 
             return PadProbeReturn.Pass;

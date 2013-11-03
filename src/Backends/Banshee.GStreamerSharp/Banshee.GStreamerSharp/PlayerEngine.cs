@@ -367,8 +367,7 @@ namespace Banshee.GStreamerSharp
                 Volume = (ushort)PlayerEngineService.VolumeSchema.Get ();
             }
 
-            Pad teepad = audio_sink.RequestTeePad ();
-            visualization = new Visualization (audio_sink, teepad);
+            visualization = new Visualization (audio_sink);
 
             playbin.AddNotification ("volume", OnVolumeChanged);
             playbin.Bus.AddWatch (OnBusMessage);
